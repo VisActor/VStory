@@ -1,0 +1,29 @@
+{
+  "extends": "@internal/ts-config/tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@visactor/vstory": ["../../packages/vstory/src"]
+    },
+    "target": "ES2016",
+    "useDefineForClassFields": true,
+    "module": "ES2015",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true
+  },
+  "references": [
+    {
+      "path": "../../packages/vstory"
+    }
+  ],
+  "include": ["src", "scripts"]
+}

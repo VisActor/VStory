@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+  "rushVersion": "5.94.1",
+  "pnpmVersion": "7.32.1",
+  "nodeSupportedVersionRange": ">=14.15.0 <15.0.0 || >=16.13.0 <17.0.0 || >=18.15.0 <19.0.0",
+  "suppressNodeLtsWarning": true,
+  "ensureConsistentVersions": true,
+  "projectFolderMinDepth": 1,
+  "projectFolderMaxDepth": 2,
+  "allowMostlyStandardPackageNames": false,
+  "gitPolicy": {
+    "versionBumpCommitMessage": "Bump versions [skip ci]",
+    "changeLogUpdateCommitMessage": "Update changelogs [skip ci]"
+  },
+  "repository": {
+    "url": "https://github.com/visactor/vstory",
+    "defaultBranch": "main",
+    "defaultRemote": "origin"
+  },
+  "allowedProjectTags": ["tool", "share", "package", "doc"],
+  "projects": [
+    {
+      "packageName": "@visactor/vstory",
+      "projectFolder": "packages/vstory",
+      "tags": ["package"],
+      "shouldPublish": true,
+      "versionPolicyName": "vstoryMain"
+    },
+    {
+      "packageName": "@internal/bundler",
+      "projectFolder": "tools/bundler",
+      "tags": ["tool"],
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@internal/eslint-config",
+      "projectFolder": "share/eslint-config",
+      "tags": ["share"],
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@internal/ts-config",
+      "projectFolder": "share/ts-config",
+      "tags": ["share"],
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@internal/jest-config",
+      "projectFolder": "share/jest-config",
+      "tags": ["share"],
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@internal/docs",
+      "projectFolder": "docs",
+      "tags": ["doc"],
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@internal/bugserver-trigger",
+      "projectFolder": "tools/bugserver-trigger",
+      "tags": ["tool"],
+      "shouldPublish": false
+    }
+  ]
+}
