@@ -6,6 +6,7 @@ import { scene2, scene2Characters } from './scene2';
 import { scene3, scene3Characters } from './scene3';
 import { scene4, scene4Characters } from './scene4';
 import { scene5, scene5Characters } from './scene5';
+import { scene6, scene6Characters } from './scene6';
 import { scene7, scene7Characters } from './scene7';
 import { scene8, scene8Characters } from './scene8';
 
@@ -21,6 +22,7 @@ export const VChartSiteDemo = () => {
         // ...scene3Characters
         // ...scene4Characters,
         // ...scene5Characters,
+        ...scene6Characters,
         ...scene7Characters,
         ...scene8Characters
       ],
@@ -28,11 +30,12 @@ export const VChartSiteDemo = () => {
         {
           id: 'default-chapter',
           scenes: [
-            // scene1, //
+            // scene1,
             // scene2,
             // scene3
             // scene4,
             // scene5,
+            scene6,
             scene7,
             scene8
           ]
