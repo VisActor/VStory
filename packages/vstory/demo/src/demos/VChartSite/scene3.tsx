@@ -1189,7 +1189,7 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           action: 'disappear',
-          startTime: 3500,
+          startTime: 6500,
           duration: 700,
           payload: {
             animation: {
