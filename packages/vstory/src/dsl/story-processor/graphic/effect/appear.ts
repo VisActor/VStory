@@ -11,7 +11,7 @@ export interface IMoveInParams extends IAnimationParams {
     /**
      * @default left
      */
-    from?: 'left' | 'right' | 'top' | 'bottom' | 'top-right' | 'top-left' | 'bottom-left' | 'bottom-right';
+    from?: IMoveInParams['from'];
     /**
      * @default true
      * @description 若为true: 多个图形的move距离不同, duration相同, 使多个图形同时抵达目标位置;  若为false: 多个图形move的距离相同, duration相同, 即可使多个图形达到相同的速度, 以保持图形的相对位置不变.
