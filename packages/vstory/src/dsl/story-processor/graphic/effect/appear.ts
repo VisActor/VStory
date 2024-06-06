@@ -137,22 +137,22 @@ export function moveIn(graphic: IGraphic, params: IMoveInParams) {
         fromY = -height;
         break;
       case 'top-right':
-        // 从右上进入
+        // 从右上进入 ↗️
         fromY = -height;
         fromX = graphic.parent.width;
         break;
       case 'top-left':
-        // 从右上进入
+        // 从左上进入 ↖️
         fromY = -height;
         fromX = -width;
         break;
       case 'bottom-left':
-        // 从右上进入
+        // 从左下进入 ↙️
         fromY = graphic.parent.height + height;
         fromX = -width;
         break;
       case 'bottom-right':
-        // 从右上进入
+        // 从右下进入 ↘️
         fromY = graphic.parent.height + height;
         fromX = graphic.parent.width;
         break;
@@ -178,22 +178,22 @@ export function moveIn(graphic: IGraphic, params: IMoveInParams) {
         fromY += -distance;
         break;
       case 'top-right':
-        // 从右上进入
+        // 从右上进入 ↗️
         fromX += distance;
         fromY += -distance;
         break;
       case 'top-left':
-        // 从右上进入
+        // 从左上进入 ↖️
         fromX += -distance;
         fromY += -distance;
         break;
       case 'bottom-left':
-        // 从右上进入
+        // 从左下进入 ↙️
         fromY += distance;
         fromX += -distance;
         break;
       case 'bottom-right':
-        // 从右上进入
+        // 从右下进入 ↘️
         fromX += distance;
         fromY += distance;
         break;
