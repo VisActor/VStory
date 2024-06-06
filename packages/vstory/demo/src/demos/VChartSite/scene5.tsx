@@ -6,6 +6,7 @@ import scene5Atom from '../../assets/scene5/atom.png';
 import scene5ChartImage from '../../assets/scene5/chart.png';
 import scene5EnText from '../../assets/scene5/text-en.png';
 import scene5ZhText from '../../assets/scene5/text-zh.png';
+import { easeInOutQuad } from './util';
 
 const chartSpec = {
   type: 'sequence',
@@ -1201,7 +1202,7 @@ export const scene5: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               move: {
                 from: 'top'
@@ -1221,7 +1222,7 @@ export const scene5: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               move: {
                 from: 'top'
@@ -1241,7 +1242,7 @@ export const scene5: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               move: {
                 from: 'bottom'
@@ -1261,7 +1262,7 @@ export const scene5: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               move: {
                 from: 'top'
@@ -1281,7 +1282,7 @@ export const scene5: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               move: {
                 from: 'top'
@@ -1301,7 +1302,7 @@ export const scene5: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               move: {
                 from: 'top'
@@ -1321,7 +1322,7 @@ export const scene5: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               effect: 'fade'
             }
@@ -1334,7 +1335,7 @@ export const scene5: ISceneSpec = {
           action: 'disappear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               effect: 'fade'
             }
@@ -1352,7 +1353,7 @@ export const scene5: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               move: {
                 from: 'bottom'
@@ -1372,7 +1373,7 @@ export const scene5: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 700,
               move: {
                 from: 'bottom'

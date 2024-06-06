@@ -1,3 +1,4 @@
+import type { IMoveInParams } from '../../story-processor/graphic/effect/appear';
 import type { IAction, IAnimationParams, IActionPayload } from '../index';
 
 export interface IGraphicAppearPayLoad extends IActionPayload {
@@ -28,9 +29,7 @@ export interface IGraphicAppearPayLoad extends IActionPayload {
     /**
      * 移动行为
      */
-    move?: {
-      from?: 'top' | 'right' | 'bottom' | 'left';
-    };
+    move?: IMoveInParams['move'];
   };
 }
 
