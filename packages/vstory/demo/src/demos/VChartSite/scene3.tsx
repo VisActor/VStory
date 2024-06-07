@@ -10,6 +10,8 @@ import Scene3ChartImage2 from '../../assets/scene3/chart-2.png';
 import Scene3ChartImage3 from '../../assets/scene3/chart-3.png';
 import Scene3ChartImage4 from '../../assets/scene3/chart-4.png';
 import Scene3ChartImage5 from '../../assets/scene3/chart-5.png';
+
+import { easeInOutQuad } from './util';
 // @ts-ignore
 export const scene3Characters: ICharacterSpec[] = [
   {
@@ -439,7 +441,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'right'
               }
@@ -458,7 +460,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'right'
               }
@@ -477,7 +479,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'right'
               }
@@ -491,14 +493,15 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 700,
+          duration: 3000,
           action: 'appear',
           payload: {
             animation: {
-              duration: 700,
-              easing: 'easeInOutQuad',
+              duration: 3000,
+              easing: easeInOutQuad,
               move: {
-                from: 'right'
+                from: 'right',
+                isVariableSpeed: false
               }
             }
           }
@@ -510,14 +513,15 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 700,
+          duration: 3000,
           action: 'appear',
           payload: {
             animation: {
-              duration: 700,
-              easing: 'easeInOutQuad',
+              duration: 3000,
+              easing: easeInOutQuad,
               move: {
-                from: 'right'
+                from: 'right',
+                isVariableSpeed: false
               }
             }
           }
@@ -529,14 +533,15 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 700,
+          duration: 3000,
           action: 'appear',
           payload: {
             animation: {
-              duration: 700,
-              easing: 'easeInOutQuad',
+              duration: 3000,
+              easing: easeInOutQuad,
               move: {
-                from: 'right'
+                from: 'right',
+                isVariableSpeed: false
               }
             }
           }
@@ -548,14 +553,15 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 700,
+          duration: 3000,
           action: 'appear',
           payload: {
             animation: {
-              duration: 700,
-              easing: 'easeInOutQuad',
+              duration: 3000,
+              easing: easeInOutQuad,
               move: {
-                from: 'right'
+                from: 'right',
+                isVariableSpeed: false
               }
             }
           }
@@ -567,14 +573,15 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 700,
+          duration: 3000,
           action: 'appear',
           payload: {
             animation: {
-              duration: 700,
-              easing: 'easeInOutQuad',
+              duration: 3000,
+              easing: easeInOutQuad,
               move: {
-                from: 'right'
+                from: 'right',
+                isVariableSpeed: false
               }
             }
           }
@@ -591,7 +598,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 500,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -610,7 +617,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 500,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -627,7 +634,7 @@ export const scene3: ISceneSpec = {
             },
             animation: {
               duration: 1000,
-              easing: 'easeInOutQuad'
+              easing: easeInOutQuad
             }
           }
         }
@@ -643,7 +650,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 500,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -661,7 +668,7 @@ export const scene3: ISceneSpec = {
             },
             animation: {
               duration: 1000,
-              easing: 'easeInOutQuad'
+              easing: easeInOutQuad
             }
           }
         }
@@ -677,7 +684,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 500,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -694,7 +701,7 @@ export const scene3: ISceneSpec = {
             },
             animation: {
               duration: 1000,
-              easing: 'easeInOutQuad'
+              easing: easeInOutQuad
             }
           }
         }
@@ -710,7 +717,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 500,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -728,7 +735,7 @@ export const scene3: ISceneSpec = {
             },
             animation: {
               duration: 1000,
-              easing: 'easeInOutQuad'
+              easing: easeInOutQuad
             }
           }
         }
@@ -744,7 +751,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 500,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -762,7 +769,7 @@ export const scene3: ISceneSpec = {
             },
             animation: {
               duration: 1000,
-              easing: 'easeInOutQuad'
+              easing: easeInOutQuad
             }
           }
         },
@@ -789,7 +796,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 500,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -1230,7 +1237,7 @@ export const scene3: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad'
+              easing: easeInOutQuad
             }
           }
         }
