@@ -1,8 +1,10 @@
-import { StoryEvent } from '../story/interface/runtime-interface';
-import { Story } from './../story/story';
+import type { StoryEvent } from '../story/interface/runtime-interface';
+import type { Story } from './../story/story';
 import { EditAction } from './edit-action';
 import { EventEmitter } from '@visactor/vutils';
-import { IEditActionInfo, IEditComponent, IEditComponentConstructor, IEditMessage } from './interface';
+import type { IEditActionInfo, IEditComponent, IEditComponentConstructor, IEditMessage } from './interface';
+import type { IGroup } from '@visactor/vrender-core';
+import { createGroup } from '@visactor/vrender-core';
 
 export class Edit {
   readonly editAction: EditAction;
@@ -19,12 +21,24 @@ export class Edit {
 
   protected _currentComponent: IEditComponent;
 
+  protected _editGroup: IGroup;
+
   constructor(public readonly story: Story) {
     this.emitter = new EventEmitter();
     this.editAction = new EditAction(story);
     this.editAction.emitter.on('dispatchAction', this.onAction.bind(this));
     this.story.canvas.getStage().addEventListener('*', this.onStoryEvent.bind(this) as any);
+    this._initEditGroup();
     this._initComponent();
+  }
+
+  _initEditGroup() {
+    this._editGroup = createGroup({});
+    this.story.canvas.getStage().defaultLayer.add(this._editGroup);
+  }
+
+  getEditGroup() {
+    return this._editGroup;
   }
 
   protected _initComponent() {
@@ -62,9 +76,13 @@ export class Edit {
     this.emitter.emit('startEdit', msg);
   }
 
-  triggerEditWithEvent(event: StoryEvent) {}
+  triggerEditWithEvent(event: StoryEvent) {
+    return;
+  }
 
-  triggerEditWithComponent(type: string, actionInfo: IEditActionInfo) {}
+  triggerEditWithComponent(type: string, actionInfo: IEditActionInfo) {
+    return;
+  }
 
   stopEdit() {
     this._currentComponent?.editEnd();

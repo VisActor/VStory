@@ -1,11 +1,12 @@
-import { IGroup, createGroup } from '@visactor/vrender-core';
+import type { IGroup } from '@visactor/vrender-core';
+import { createGroup } from '@visactor/vrender-core';
 import { GraphicText } from './graphic/graphic-text';
-import { IComponentCharacterSpec } from '../dsl-interface';
+import type { IComponentCharacterSpec } from '../dsl-interface';
 import { CharacterBase } from '../base/base';
-import { Graphic } from './graphic/graphic';
+import type { Graphic } from './graphic/graphic';
 import { getLayoutFromWidget } from '../../utils/layout';
-import { StoryEvent } from '../../interface/runtime-interface';
-import { ICharacterPickInfo } from '../runtime-interface';
+import type { StoryEvent } from '../../interface/runtime-interface';
+import type { ICharacterPickInfo } from '../runtime-interface';
 
 export abstract class CharacterComponent extends CharacterBase {
   protected declare _spec: IComponentCharacterSpec;
@@ -28,7 +29,9 @@ export abstract class CharacterComponent extends CharacterBase {
 
   readonly graphicType: string = 'rect';
 
-  protected _parserSpec(): void {}
+  protected _parserSpec(): void {
+    return;
+  }
 
   protected _initGraphics(): void {
     this._group = createGroup({ ...getLayoutFromWidget(this._spec.position), angle: this._spec.options.angle });
@@ -49,7 +52,9 @@ export abstract class CharacterComponent extends CharacterBase {
 
   protected abstract _createGraphic(): Graphic;
 
-  protected _initRuntime(): void {}
+  protected _initRuntime(): void {
+    return;
+  }
 
   show(): void {
     this._group.setAttributes({ visible: true });
@@ -66,21 +71,22 @@ export abstract class CharacterComponent extends CharacterBase {
     return this._graphic.getTextLayoutRatio();
   }
 
-  public clearCharacter(): void {
+  clearCharacter(): void {
     this._group?.parent.removeChild(this._group);
     this._group = null;
   }
 
-  public getGraphicParent() {
+  getGraphicParent() {
     return this._group;
   }
 
-  public checkEvent(event: StoryEvent): false | ICharacterPickInfo {
+  checkEvent(event: StoryEvent): false | ICharacterPickInfo {
     if (!(event.detailPath ?? event.path).some(g => g === this._group)) {
       return false;
     }
     return {
-      part: event.path[event.path.length - 1] === this._graphic.graphic ? 'graphic' : 'text'
+      part: event.path[event.path.length - 1] === this._graphic.graphic ? 'graphic' : 'text',
+      graphicType: this.graphicType
     };
   }
 }
@@ -103,9 +109,13 @@ export abstract class CharacterGraphicComponent extends CharacterBase {
 
   protected abstract _createGraphic(): Graphic;
 
-  protected _initRuntime(): void {}
+  protected _initRuntime(): void {
+    return;
+  }
 
-  protected _parserSpec(): void {}
+  protected _parserSpec(): void {
+    return;
+  }
 
   protected _initGraphics(): void {
     this._group = createGroup({ ...getLayoutFromWidget(this._spec.position), angle: this._spec.options.angle });
@@ -127,11 +137,11 @@ export abstract class CharacterGraphicComponent extends CharacterBase {
     this._graphic?.hide();
   }
 
-  public getGraphicParent() {
+  getGraphicParent() {
     return this._group;
   }
 
-  public clearCharacter(): void {
+  clearCharacter(): void {
     if (this._group) {
       this._group.parent.removeChild(this._group);
       this._graphic = null;

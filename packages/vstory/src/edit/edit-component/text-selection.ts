@@ -1,15 +1,15 @@
-import type { IEditComponent, IEditSelectionInfo } from './../interface';
-import { EditActionEnum } from './../interface';
+import type { IEditSelectionInfo } from '../interface';
+import { EditActionEnum, type IEditActionInfo, type IEditComponent } from '../interface';
+import { StoryEvent } from '../../story/interface/runtime-interface';
 import type { Edit } from '../edit';
 import { BaseSelection } from './base-selection';
 
-export class CommonEditComponent extends BaseSelection implements IEditComponent {
-  readonly level = 2;
+export class TextSelection extends BaseSelection implements IEditComponent {
+  readonly level = 3;
 
   constructor(public readonly edit: Edit) {
     super(edit);
   }
-
   editEnd(): void {
     super.editEnd();
     return;
@@ -21,17 +21,20 @@ export class CommonEditComponent extends BaseSelection implements IEditComponent
     if (!actionInfo.detail) {
       return false;
     }
+    if (actionInfo.detail.graphicType !== 'text') {
+      return false;
+    }
     this.startEdit(actionInfo);
     return true;
   }
 
-  startEdit(actionInfo: IEditSelectionInfo) {
+  startEdit(actionInfo: IEditActionInfo) {
     super.startEdit(actionInfo);
     this.edit.startEdit({
-      type: 'commonEdit',
+      type: 'boxSelection',
       actionInfo: this._actionInfo,
       updateCharacter: (params: any) => {
-        (this._actionInfo as any).character.updateSpec(params);
+        // nothing 不支持任何修改
       }
     });
   }

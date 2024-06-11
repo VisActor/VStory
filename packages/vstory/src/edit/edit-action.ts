@@ -1,9 +1,10 @@
-import { BoxSelection } from './edit-component/box-selection';
+import type { BoxSelection } from './edit-component/box-selection';
 import { EventEmitter } from '@visactor/vutils';
 import { PickEventType } from './const';
-import { Story } from '../story/story';
-import { ContinuousActionType, EditActionEnum, IEditActionInfo } from './interface';
-import { StoryEvent } from '../story/interface/runtime-interface';
+import type { Story } from '../story/story';
+import type { ContinuousActionType, IEditActionInfo } from './interface';
+import { EditActionEnum } from './interface';
+import type { StoryEvent } from '../story/interface/runtime-interface';
 
 export class EditAction {
   readonly emitter: EventEmitter = new EventEmitter();

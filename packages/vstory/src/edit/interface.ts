@@ -1,5 +1,8 @@
-import { Edit } from './edit';
-import { ICharacter, ICharacterPickInfo } from './../story/character/runtime-interface';
+import type { Edit } from './edit';
+import type { ICharacter, ICharacterPickInfo } from './../story/character/runtime-interface';
+import type { IRect } from '../type/space';
+import type { IGraphic } from '@visactor/vrender-core';
+
 export enum EditActionEnum {
   singleSelection = 'singleSelect', // 单选
   multipleSelection = 'multipleSelect' // 多选
@@ -19,9 +22,15 @@ export interface IEditSelectionInfo extends IEditActionInfoBase {
   detail: IEditSelectionDetailChart | IEditSelectionDetailComponent;
 }
 
+export interface VREvent extends Event {
+  pickParams?: {
+    shadowTarget?: IGraphic;
+  };
+}
+
 export interface IEditActionInfoBase {
   type: keyof typeof EditActionEnum | string;
-  event: Event;
+  event: VREvent;
 }
 
 export type IEditActionInfo = IEditActionInfoBase | IEditSelectionInfo;
@@ -30,12 +39,30 @@ export type ContinuousActionType = 'boxSelection' | 'layerZoom' | 'layerMove';
 
 export interface IEditComponent {
   readonly level: number;
+  isEditing: boolean;
 
   // 是否 开始/继续 编辑 返回false的话，会导致当前编辑结束
-  checkAction(actionInfo: IEditActionInfo): boolean;
+  checkAction: (actionInfo: IEditActionInfo) => boolean;
 
   // 编辑结束
-  editEnd(): void;
+  editEnd: () => void;
+}
+
+export type IModelInfoSpecKey = {
+  specKey: string;
+  specIndex: number;
+};
+export type IModelInfo = IModelInfoSpecKey & {
+  id?: string | number; // id in spec, model.userId
+};
+
+export interface ILayoutLine extends Partial<IModelInfo> {
+  orient: 'x' | 'y';
+  type: 'start' | 'middle' | 'end';
+  value: number;
+  start: number;
+  end: number;
+  rect: IRect;
 }
 
 export interface IEditComponentConstructor {
