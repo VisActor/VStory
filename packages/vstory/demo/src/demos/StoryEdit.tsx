@@ -24,11 +24,11 @@ export const StoryEdit = () => {
         {
           type: 'RectComponent',
           id: 'test-graphics-0',
-          zIndex: 0,
+          zIndex: 10,
           position: {
             top: 40,
             left: 50,
-            width: 200,
+            width: 250,
             height: 100
           },
           options: {
@@ -69,9 +69,9 @@ export const StoryEdit = () => {
         {
           type: 'BarChart',
           id: 'test-chart-0',
-          zIndex: 0,
+          zIndex: 9,
           position: {
-            top: 200,
+            top: 100,
             left: 100,
             width: 400,
             height: 400

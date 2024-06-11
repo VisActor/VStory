@@ -1,20 +1,20 @@
 import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
-import { IChartCharacterRuntimeConstructor } from './runtime/interface';
+import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
 import { cloneDeep } from '@visactor/vutils';
 import { VChart } from '@visactor/vchart';
-import { IChartCharacterSpec } from '../dsl-interface';
+import type { IChartCharacterSpec } from '../dsl-interface';
 import { Chart } from './graphic/vchart-graphic';
 import { getLayoutFromWidget } from '../../utils/layout';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
 import { ChartDataTempTransform } from './spec-process/data-temp-transform';
-import { ITicker } from '@visactor/vrender-core';
+import type { ITicker } from '@visactor/vrender-core';
 import { manualTicker } from '../../player/ticker';
-import { IChartTemp } from './temp/interface';
+import type { IChartTemp } from './temp/interface';
 import { SeriesSpecRuntime } from './runtime/series-spec';
-import { StoryEvent } from '../../interface/runtime-interface';
-import { ICharacterPickInfo } from '../runtime-interface';
+import type { StoryEvent } from '../../interface/runtime-interface';
+import type { ICharacterPickInfo } from '../runtime-interface';
 
 const tempSpec = {
   type: 'bar',
@@ -82,6 +82,7 @@ export class CharacterChart extends CharacterVisactor {
       spec: spec,
       ClassType: VChart,
       vchart: null,
+      zIndex: this._spec.zIndex,
       mode: 'desktop-browser',
       dpr: window.devicePixelRatio,
       interactive: false,
@@ -109,14 +110,15 @@ export class CharacterChart extends CharacterVisactor {
   }
 
   protected _afterRender(): void {
-    console.log('afterRender');
+    // console.log('afterRender');
+    return;
   }
   protected _updateVisactorSpec(): void {
-    console.log('_updateVisactorSpec', this._specProcess.getVisSpec());
+    // console.log('_updateVisactorSpec', this._specProcess.getVisSpec());
     this._graphic?.updateSpec(this._specProcess.getVisSpec());
   }
 
-  public clearCharacter(): void {
+  clearCharacter(): void {
     this._graphic.vProduct.release();
     this._graphic.parent.removeChild(this._graphic);
   }
@@ -125,7 +127,7 @@ export class CharacterChart extends CharacterVisactor {
     this._ticker.tickAt(t);
   }
 
-  public checkEvent(event: StoryEvent): false | ICharacterPickInfo {
+  checkEvent(event: StoryEvent): false | ICharacterPickInfo {
     return false;
   }
 }
