@@ -259,6 +259,7 @@ export const scene8Characters: ICharacterSpec[] = [
 
 export const scene8: ISceneSpec = {
   id: 'scene8',
+  delay: 0,
   actions: [
     {
       characterId: 'scene8-background',
