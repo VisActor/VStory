@@ -23,6 +23,7 @@ import { DRAG_ANCHOR_COLOR, SHAPE_SELECT_COLOR } from './constants';
 import type { VRenderPointerEvent } from '../../../interface/type';
 import type { IEditComponent } from '../../interface';
 import { Edit } from '../../edit';
+import { DragComponent } from './transform-drag';
 // import { EditorActionMode } from './enum';
 
 type AnchorDirection = 'top' | 'bottom' | 'left-top' | 'left-bottom' | 'right' | 'left' | 'right-top' | 'right-bottom';
@@ -146,6 +147,10 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
 
   _setCursor: (c: string) => void = null;
 
+  // drag
+  _dragger: DragComponent;
+  private _lastBoxInDrag: IRect;
+
   static defaultAttributes: Partial<TransformAttributes> = {
     // 去掉padding
     // padding: 2,
@@ -230,6 +235,47 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     this.editEndCbs = [];
   }
 
+  addDrag() {
+    if (!this.stage) {
+      return;
+    }
+    this._dragger = new DragComponent(this.stage);
+    this._dragger.dragHandler(this._dragElement);
+    this._dragger.dragEndHandler(this._dragEnd);
+    this._dragger.unDragEndHandler(this._unDragEnd);
+    this._lastBoxInDrag = createRect({
+      pickable: false,
+      stroke: SHAPE_SELECT_COLOR,
+      strokeOpacity: 0.4,
+      visible: false
+    });
+  }
+
+  protected _dragElement = (moveX: number, moveY: number) => {
+    this._lastBoxInDrag.setAttribute('visible', true);
+    const scale = this.stage.defaultLayer?.globalTransMatrix.a ?? 1;
+    this.moveBy(moveX / scale, moveY / scale);
+  };
+  private _dragEnd = () => {
+    this._editorEnd();
+  };
+  private _unDragEnd = () => {
+    this._editorEnd();
+  };
+
+  protected _editorEnd = () => {
+    // this._endHandler(this._editorBox.getTransformAttribute());
+    // this._editorBox.isEditor = false;
+    // this._snapLineX.setAttributes({ visible: false });
+    // this._snapLineY.setAttributes({ visible: false });
+
+    // this._snapTargetBoxX.setAttributes({ visible: false });
+    // this._snapTargetBoxY.setAttributes({ visible: false });
+
+    this._lastBoxInDrag.setAttribute('visible', false);
+    // this._opt.editorEvent.setCursorSyncToTriggerLayer();
+  };
+
   updateSubBounds(bounds: IAABBBoundsLike) {
     // set bounds
     this.rect.setAttributes({
@@ -260,6 +306,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
 
     // drag
     this.addEventListener('pointerdown', this.handleDragMouseDown);
+    this.addDrag();
 
     this.stage.addEventListener('pointermove', this.handleDragMouseMove);
     this.stage.addEventListener('pointerup', this.handleDragMouseUp);
@@ -285,9 +332,9 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     this.dragOffsetX = layerPos.x;
     this.dragOffsetY = layerPos.y;
 
+    const { shadowTarget } = e.pickParams || {};
     // 开启move
-    if (e.pickParams && this.stage) {
-      const { shadowTarget } = e.pickParams || {};
+    if (shadowTarget && this.stage) {
       this.setActiveGraphic(shadowTarget);
       this._rectBeforeScale = { ...this.rect.attribute };
       this._eventPosBeforeScale = layerPos;
@@ -295,6 +342,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
       this.dragStartAngle = this.attribute.angle ?? 0;
     } else {
       this.unTransStartCbs.forEach(cb => cb(e));
+      this._dragger.startDrag(e);
     }
   };
 
@@ -848,9 +896,9 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
 
     this.parent.removeChild(this);
     this.editBorder = null;
-    this.updateCbs = null;
-    this.editEndCbs = null;
-    this.unTransStartCbs = null;
+    this.updateCbs = [];
+    this.editEndCbs = [];
+    this.unTransStartCbs = [];
     super.release();
   }
 }
