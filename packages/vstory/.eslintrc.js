@@ -8,5 +8,16 @@ module.exports = {
     __VERSION__: 'readonly',
     NodeJS: true
   },
+  overrides: [
+    {
+      files: ['**/__tests__/**', '**/*.test.ts'],
+      // 测试文件允许以下规则
+      rules: {
+        '@typescript-eslint/no-empty-function': 'off',
+        'no-console': 'off',
+        'dot-notation': 'off'
+      }
+    }
+  ],
   ignorePatterns: ['scripts/**', 'demo/**']
 };

@@ -9,7 +9,7 @@
     "outDir": "./es",
     "composite": true
   },
-  "include": ["src", "demo", "examples"],
+  "include": ["src", "__tests__", "demo", "examples"],
   "exclude": ["bugserver-config", "src/common/inversify-lite"],
   "references": []
 }
