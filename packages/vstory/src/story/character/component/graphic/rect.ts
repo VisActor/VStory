@@ -20,6 +20,13 @@ export class GraphicRect extends Graphic {
     };
   }
 
+  setAttributes(attr: Record<string, any>): void {
+    if (!this._graphic) {
+      return;
+    }
+    this._graphic.setAttributes(attr);
+  }
+
   init() {
     if (!this._graphic) {
       this._graphic = createRect(

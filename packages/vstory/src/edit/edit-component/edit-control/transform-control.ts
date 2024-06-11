@@ -28,7 +28,7 @@ import { Edit } from '../../edit';
 type AnchorDirection = 'top' | 'bottom' | 'left-top' | 'left-bottom' | 'right' | 'left' | 'right-top' | 'right-bottom';
 
 const fixedAngles = [0, Math.PI / 2, Math.PI, (Math.PI * 3) / 2, Math.PI * 2];
-const maxAngleDifference = (10 / 180) * Math.PI; // 10 degrees
+const maxAngleDifference = (3 / 180) * Math.PI; // 10 degrees
 
 export type TransformAttributes = {
   padding?: number | [number, number, number, number];
@@ -96,6 +96,10 @@ export interface ITransformControl extends IGroup {
   updateSubBounds: (b: IAABBBoundsLike) => void;
   onActive: () => void;
   onInActive: () => void;
+  onUpdate: (cb: (data: IUpdateParams, event?: VRenderPointerEvent) => Partial<IUpdateParams> | false) => void;
+  onEditorEnd: (cb: (event?: VRenderPointerEvent) => void) => void;
+  onEditorStart: (cb: (event?: VRenderPointerEvent) => void) => void;
+  onUnTransStart: (cb: (event: PointerEvent) => void) => void;
 }
 
 export class TransformControl extends AbstractComponent<Required<TransformAttributes>> implements ITransformControl {

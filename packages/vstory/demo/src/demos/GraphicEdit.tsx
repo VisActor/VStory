@@ -41,6 +41,29 @@ export const GraphicEdit = () => {
               ]
             }
           }
+        },
+        {
+          type: 'RectComponent',
+          id: 'rect',
+          zIndex: 0,
+          position: {
+            top: 40,
+            left: 250,
+            width: 200,
+            height: 100
+          },
+          options: {
+            graphic: {
+              fill: 'red',
+              visible: false
+            },
+            text: {
+              text: 'title2',
+              fill: 'black'
+            },
+            angle: 0,
+            shapePoints: []
+          }
         }
       ],
       acts: [
@@ -64,6 +87,21 @@ export const GraphicEdit = () => {
                           move: {
                             from: 'right'
                           }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  characterId: 'rect',
+                  characterActions: [
+                    {
+                      startTime: 1,
+                      duration: 800,
+                      action: 'appear',
+                      payload: {
+                        animation: {
+                          duration: 700
                         }
                       }
                     }
