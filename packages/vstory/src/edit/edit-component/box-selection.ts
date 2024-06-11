@@ -1,15 +1,18 @@
-import { IEditActionInfo, IEditComponent } from './../interface';
+import type { IEditActionInfo, IEditComponent } from './../interface';
 import { StoryEvent } from '../../story/interface/runtime-interface';
-import { Edit } from '../edit';
+import type { Edit } from '../edit';
+import { BaseSelection } from './base-selection';
 
-export class BoxSelection implements IEditComponent {
+export class BoxSelection extends BaseSelection implements IEditComponent {
   readonly level = 1;
 
-  protected _actionInfo: IEditActionInfo;
-  protected _isSelection = false;
-
-  constructor(public readonly edit: Edit) {}
-  editEnd(): void {}
+  constructor(public readonly edit: Edit) {
+    super(edit);
+  }
+  editEnd(): void {
+    super.editEnd();
+    return;
+  }
   checkAction(actionInfo: IEditActionInfo): boolean {
     if (this._isSelection) {
       if (actionInfo.type === 'pointerup') {
@@ -27,16 +30,18 @@ export class BoxSelection implements IEditComponent {
       }
       return true;
     }
-    if (actionInfo.type === 'pointerdown') return true;
+    if (actionInfo.type === 'pointerdown') {
+      return true;
+    }
     return false;
   }
 
   startEdit(actionInfo: IEditActionInfo) {
-    this._actionInfo = actionInfo;
+    super.startEdit(actionInfo);
     this.edit.startEdit({
       type: 'boxSelection',
       actionInfo: this._actionInfo,
-      updateCharacter: (params: {}) => {
+      updateCharacter: (params: any) => {
         // nothing 不支持任何修改
       }
     });
