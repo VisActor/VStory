@@ -9,7 +9,7 @@ import { bounceProcessor } from '../vchart/bounce';
 export const scatterProcessorMap = {
   add: addProcessor,
   addPatch: addProcessor,
-  updateProcessor,
+  update: updateProcessor,
 
   bounce: bounceProcessor,
 

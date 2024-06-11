@@ -5,6 +5,9 @@ import { scene1, scene1Characters } from './scene1';
 import { scene2, scene2Characters } from './scene2';
 import { scene3, scene3Characters } from './scene3';
 import { scene4, scene4Characters } from './scene4';
+import { scene5, scene5Characters } from './scene5';
+import { scene7, scene7Characters } from './scene7';
+import { scene8, scene8Characters } from './scene8';
 
 export const VChartSiteDemo = () => {
   const id = 'storyBar';
@@ -13,10 +16,13 @@ export const VChartSiteDemo = () => {
     // 准备一个图表
     const tempSpec: IStorySpec = {
       characters: [
-        ...scene1Characters, //
-        ...scene2Characters,
-        ...scene3Characters,
-        ...scene4Characters
+        // ...scene1Characters, //
+        // ...scene2Characters,
+        // ...scene3Characters
+        // ...scene4Characters,
+        // ...scene5Characters,
+        ...scene7Characters,
+        ...scene8Characters
       ],
       acts: [
         {
@@ -24,13 +30,16 @@ export const VChartSiteDemo = () => {
           scenes: [
             // scene1, //
             // scene2,
-            scene3,
-            scene4
+            // scene3
+            // scene4,
+            // scene5,
+            scene7,
+            scene8
           ]
         }
       ]
     };
-    console.log(111, tempSpec);
+    console.log('dsl', tempSpec);
     const story = new Story(tempSpec, { dom: id });
     window.story = story;
     story.play();
@@ -67,6 +76,6 @@ export const VChartSiteDemo = () => {
     //   story.getPlayer().tickTo(300 * i++);
     // }, 300);
   }, []);
-
-  return <div style={{ width: '100%', height: '100%' }} id={id}></div>;
+  /** 视频 1920*1080, 等比例缩小 0.75 */
+  return <div style={{ width: '1440px', height: '810px' }} id={id}></div>;
 };

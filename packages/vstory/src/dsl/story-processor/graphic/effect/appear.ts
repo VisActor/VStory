@@ -6,19 +6,19 @@ import { typewriter } from '../effect/typewriter';
 import { canDoGraphicAnimation } from '../util';
 
 export interface IMoveInParams extends IAnimationParams {
-  from?: 'left' | 'right' | 'top' | 'bottom';
+  from?: 'left' | 'right' | 'top' | 'bottom' | 'top-right' | 'top-left' | 'bottom-left' | 'bottom-right';
   move?: {
     /**
      * @default left
      */
-    from?: 'left' | 'right' | 'top' | 'bottom';
+    from?: IMoveInParams['from'];
     /**
      * @default true
      * @description 若为true: 多个图形的move距离不同, duration相同, 使多个图形同时抵达目标位置;  若为false: 多个图形move的距离相同, duration相同, 即可使多个图形达到相同的速度, 以保持图形的相对位置不变.
      */
     isVariableSpeed?: boolean;
     duration?: number;
-    easing?: string;
+    easing?: EasingType;
   };
 }
 
@@ -30,7 +30,7 @@ export interface IWipeInParams extends IAnimationParams {
      */
     from?: 'left' | 'right' | 'top' | 'bottom' | 'stroke';
     duration?: number;
-    easing?: string;
+    easing?: EasingType;
   };
 }
 
@@ -42,7 +42,7 @@ export interface IScaleInParams extends IAnimationParams {
      */
     ratio?: number;
     duration?: number;
-    easing?: string;
+    easing?: EasingType;
   };
 }
 
@@ -54,7 +54,7 @@ export interface IFadeInParams extends IAnimationParams {
      */
     opacity?: number;
     duration?: number;
-    easing?: string;
+    easing?: EasingType;
     /**
      * 作用于全局的透明度
      * @default false
@@ -136,6 +136,26 @@ export function moveIn(graphic: IGraphic, params: IMoveInParams) {
         // 从上往下进入
         fromY = -height;
         break;
+      case 'top-right':
+        // 从右上进入 ↗️
+        fromY = -height;
+        fromX = graphic.parent.width;
+        break;
+      case 'top-left':
+        // 从左上进入 ↖️
+        fromY = -height;
+        fromX = -width;
+        break;
+      case 'bottom-left':
+        // 从左下进入 ↙️
+        fromY = graphic.parent.height + height;
+        fromX = -width;
+        break;
+      case 'bottom-right':
+        // 从右下进入 ↘️
+        fromY = graphic.parent.height + height;
+        fromX = graphic.parent.width;
+        break;
     }
   } else {
     // 速度相同, 相对位置不变, 但不同时出现.
@@ -156,6 +176,26 @@ export function moveIn(graphic: IGraphic, params: IMoveInParams) {
       case 'top':
         // 从上往下进入
         fromY += -distance;
+        break;
+      case 'top-right':
+        // 从右上进入 ↗️
+        fromX += distance;
+        fromY += -distance;
+        break;
+      case 'top-left':
+        // 从左上进入 ↖️
+        fromX += -distance;
+        fromY += -distance;
+        break;
+      case 'bottom-left':
+        // 从左下进入 ↙️
+        fromY += distance;
+        fromX += -distance;
+        break;
+      case 'bottom-right':
+        // 从右下进入 ↘️
+        fromX += distance;
+        fromY += distance;
         break;
     }
   }

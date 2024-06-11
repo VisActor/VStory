@@ -8,7 +8,11 @@ import TextZhImage from '../../assets/scene4/text-zh.png';
 import RectTexture from '../../assets/scene4/matrix.png';
 import DecorationImage from '../../assets/scene4/decoration.png';
 import BgDecorationImage from '../../assets/scene4/bg-decoration.png';
+import { easeInOutQuad } from './util';
 
+const getCurve = (x: number) => {
+  return 0.0694 * x * x - 9.3056 * x + 321.1111; // 回归方程
+};
 export const scene4Characters: ICharacterSpec[] = [
   {
     type: 'ImageComponent',
@@ -114,6 +118,93 @@ export const scene4Characters: ICharacterSpec[] = [
       graphic: {
         image: ChartImage
       }
+    }
+  },
+  {
+    type: 'ScatterChart',
+    id: 'scatter',
+    zIndex: 1,
+    position: {
+      left: 200,
+      top: 320,
+      width: 500,
+      height: 120
+    },
+    options: {
+      panel: {
+        fill: '#ffffff',
+        stroke: 'black',
+        lineWidth: 1
+      },
+      data: [
+        {
+          id: 'data',
+          values: [
+            { x: 104, y: 10, type: 'A' },
+            { x: 98, y: 10, type: 'A' },
+            { x: 93, y: 10, type: 'A' },
+            { x: 90, y: 10, type: 'A' },
+            { x: 76, y: 10, type: 'A' },
+            { x: 70, y: 10, type: 'A' },
+            { x: 63, y: 10, type: 'A' }
+          ]
+        }
+      ],
+      seriesSpec: [
+        {
+          matchInfo: { specIndex: 'all' },
+          spec: {
+            background: 'white',
+            xField: 'x',
+            yField: 'y',
+            seriesField: 'type',
+            point: {
+              style: {
+                size: 8,
+                fill: `#E05F38`
+              }
+            },
+            axes: [
+              {
+                orient: 'bottom',
+                bandPadding: 0
+              }
+            ],
+            animationUpdate: {
+              easing: 'cubicInOut',
+              duration: 1000
+            }
+          }
+        }
+      ],
+      componentSpec: [
+        {
+          specKey: 'axes',
+          matchInfo: { orient: 'bottom', bandPadding: 0, paddingInner: 0, paddingOuter: 0 },
+          spec: {
+            bandPadding: 0,
+            paddingInner: 0,
+            paddingOuter: 0,
+            min: 0,
+            max: 110,
+            type: 'linear',
+            tick: { visible: false },
+            label: { visible: false },
+            grid: { visible: false },
+            domainLine: { visible: true, style: { stroke: 'black', lineWidth: 4 } }
+          }
+        },
+        {
+          specKey: 'axes',
+          matchInfo: { orient: 'left' },
+          spec: {
+            visible: false,
+            min: 0,
+            max: 100
+          }
+        }
+      ],
+      attribute: {}
     }
   },
   {
@@ -234,6 +325,22 @@ export const scene4Characters: ICharacterSpec[] = [
         image: BgDecorationImage
       }
     }
+  },
+  {
+    type: 'ImageComponent',
+    id: 'scene4-bg-decoration',
+    zIndex: 1,
+    position: {
+      left: 180,
+      top: 680,
+      width: 1200,
+      height: 140
+    },
+    options: {
+      graphic: {
+        image: BgDecorationImage
+      }
+    }
   }
 ];
 
@@ -250,7 +357,7 @@ export const scene4: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
 
               duration: 700,
               move: {
@@ -271,7 +378,7 @@ export const scene4: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
 
               duration: 700,
               move: {
@@ -293,7 +400,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'top'
               }
@@ -313,7 +420,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
 
               move: {
                 from: 'top'
@@ -334,7 +441,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'top'
               }
@@ -354,7 +461,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               effect: 'fade'
             }
           }
@@ -371,7 +478,34 @@ export const scene4: ISceneSpec = {
             },
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad'
+              easing: easeInOutQuad
+            }
+          }
+        },
+        {
+          // TODO: startOffset
+          startTime: 2500,
+          duration: 700,
+          action: 'disappear',
+          payload: {
+            graphic: {
+              width: 500,
+              height: 120
+            },
+            animation: {
+              duration: 700
+            }
+          }
+        },
+        {
+          // TODO: startOffset
+          startTime: 5000,
+          duration: 500,
+          action: 'appear',
+          payload: {
+            animation: {
+              duration: 500,
+              effect: 'fade'
             }
           }
         }
@@ -388,7 +522,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -407,7 +541,7 @@ export const scene4: ISceneSpec = {
             },
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad'
+              easing: easeInOutQuad
             }
           }
         }
@@ -424,7 +558,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -443,7 +577,7 @@ export const scene4: ISceneSpec = {
             },
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad'
+              easing: easeInOutQuad
             }
           }
         }
@@ -460,7 +594,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -480,7 +614,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'top'
               }
@@ -500,7 +634,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'bottom'
               }
@@ -520,7 +654,7 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               move: {
                 from: 'right'
               }
@@ -540,7 +674,64 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 700,
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
+              effect: 'fade'
+            }
+          }
+        }
+      ]
+    },
+    {
+      characterId: 'scatter',
+      characterActions: [
+        {
+          action: 'appear',
+          startTime: 2500,
+          duration: 500,
+          payload: {
+            animation: {
+              duration: 500,
+              easing: 'cubicOut',
+              fade: {
+                opacity: 1,
+                isBaseOpacity: true,
+                easing: 'linear'
+              }
+            }
+          }
+        },
+        {
+          action: 'update',
+          startTime: 3500,
+          duration: 1000,
+          payload: {
+            id: 'data',
+            data: [
+              { x: 104, y: 10, type: 'A' },
+              { x: 98, y: 10, type: 'A' },
+              { x: 93, y: 10, type: 'A' },
+              { x: 90, y: 10, type: 'A' },
+              { x: 76, y: 10, type: 'A' },
+              { x: 70, y: 10, type: 'A' },
+              { x: 63, y: 10, type: 'A' }
+            ].map(v => {
+              return {
+                sourceValue: v,
+                targetValue: {
+                  ...v,
+                  y: getCurve(v.x)
+                }
+              };
+            })
+          }
+        },
+        {
+          action: 'disappear',
+          startTime: 5000,
+          duration: 500,
+          payload: {
+            animation: {
+              duration: 500,
               effect: 'fade'
             }
           }
@@ -549,3 +740,47 @@ export const scene4: ISceneSpec = {
     }
   ]
 };
+
+scene4.actions.forEach(({ characterActions }) => {
+  characterActions.push({
+    action: 'disappear',
+    startTime: 6000,
+    duration: 500,
+    payload: {
+      animation: {
+        duration: 500,
+        effect: 'fade'
+      }
+    }
+  });
+});
+
+scene4.actions.push({
+  characterId: 'scene3-background',
+  characterActions: [
+    {
+      action: 'style',
+      startTime: 6000,
+      duration: 500,
+      payload: {
+        graphic: {
+          scaleY: 0
+        },
+        animation: {
+          duration: 500
+        }
+      }
+    },
+    {
+      action: 'disappear',
+      startTime: 6000,
+      duration: 500,
+      payload: {
+        animation: {
+          duration: 500,
+          effect: 'fade'
+        }
+      }
+    }
+  ]
+});
