@@ -1,10 +1,10 @@
 import { isNumber } from '@visactor/vutils';
-import { StoryCanvas } from '../canvas/canvas';
-import { IActSpec, IAction } from '../interface';
-import { IPlayer } from '../interface/player';
+import type { StoryCanvas } from '../canvas/canvas';
+import type { IActSpec, IAction } from '../interface';
+import type { IPlayer } from '../interface/player';
 import { processorMap, ActionProcessor } from '../../dsl/story-processor';
 import { Encoder } from './encode';
-import { ICharacter } from '../character';
+import type { ICharacter } from '../character';
 
 export class Ticker {
   cb?: (delta: number) => void;
@@ -29,12 +29,13 @@ export class Ticker {
 
 type IChapterInstanceItem = {
   id: string;
-  scenes: Array<
-    {
+  scenes: Array<{
+    scene: {
       character: ICharacter;
       action: IAction;
-    }[]
-  >;
+    }[];
+    delay: number;
+  }>;
   characters: ICharacter[];
 };
 
@@ -65,13 +66,13 @@ export class Player implements IPlayer {
     const scenes: IChapterInstanceItem['scenes'] = [];
     const characterSet: Set<ICharacter> = new Set();
     c.scenes.forEach(item => {
-      const scene: IChapterInstanceItem['scenes'][0] = [];
+      const scene: IChapterInstanceItem['scenes'][0] = { scene: [], delay: item.delay ?? 0 };
       item.actions.forEach(({ characterActions, characterId }) => {
         const _actions = characterActions.slice();
         _actions.sort((a, b) => a.startTime - b.startTime);
         _actions.forEach(action => {
           const character = characters[characterId];
-          scene.push({
+          scene.scene.push({
             character,
             action: action
           });
@@ -105,7 +106,6 @@ export class Player implements IPlayer {
   tickTo(t: number) {
     const lastTime = this._currTime;
     if (lastTime > t) {
-      console.log('abcdefg');
       // 如果时间回退，那就重新走一遍
       this.reset();
       this._currTime = 0;
@@ -116,29 +116,32 @@ export class Player implements IPlayer {
     let baseStartTime = 0;
     for (let i = 0; i < this._currAct.scenes.length; i++) {
       const scene = this._currAct.scenes[i];
-      scene.forEach(({ character, action }) => {
-        const { startTime: st } = action;
-        const startTime = st + baseStartTime;
-        if (startTime > t) {
-          return;
-        }
-        characterSet.add(character);
-        // 之前没走过，现在走
-        if (startTime > lastTime && startTime <= t) {
-          const { type } = character.spec;
-          this._actionProcessor.doAction(type, action.action, [character, {}, action]);
-        }
-        character.show();
-      });
+      baseStartTime += scene.delay;
+      if (baseStartTime <= t) {
+        scene.scene.forEach(({ character, action }) => {
+          const { startTime: st } = action;
+          const startTime = st + baseStartTime;
+          if (startTime > t) {
+            return;
+          }
+          characterSet.add(character);
+          // 之前没走过，现在走
+          if (startTime > lastTime && startTime <= t) {
+            const { type } = character.spec;
+            this._actionProcessor.doAction(type, action.action, [character, {}, action]);
+          }
+          character.show();
+        });
+      }
       let sceneTime = 0;
-      scene.forEach(({ action }) => {
+      scene.scene.forEach(({ action }) => {
         const { startTime, duration } = action;
         sceneTime = Math.max(startTime + duration, startTime);
       });
       baseStartTime += sceneTime;
-      if (baseStartTime > t) {
-        break;
-      }
+      // if (baseStartTime > t) {
+      //   break;
+      // }
     }
 
     // roleSet.forEach(r => {
@@ -180,7 +183,7 @@ export class Player implements IPlayer {
             if (blob) {
               resolve(blob);
             } else {
-              console.log('no blob');
+              // console.log('no blob');
               reject('no blob');
             }
           }, `image/png`);
@@ -198,5 +201,7 @@ export class Player implements IPlayer {
     this._ticker._tick(this._currTime);
   }
 
-  release(): void {}
+  release(): void {
+    return;
+  }
 }

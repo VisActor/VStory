@@ -1,5 +1,5 @@
-import { Action } from '../../dsl/types';
-import { ICharacterSpec } from '../character';
+import type { Action } from '../../dsl/types';
+import type { ICharacterSpec } from '../character';
 
 export interface IAction {
   startTime: number;
@@ -20,6 +20,7 @@ export interface IActionsLink {
 
 export type ISceneSpec = {
   id: string;
+  delay?: number; // 入场延迟，可以是正数或者负数
   actions: IActionsLink[];
 };
 
