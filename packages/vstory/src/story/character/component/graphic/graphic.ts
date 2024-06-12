@@ -1,8 +1,8 @@
 import type { IGraphic } from '@visactor/vrender-core';
-import type { IPointLike } from '@visactor/vutils';
+import type { IAABBBounds, IPointLike } from '@visactor/vutils';
 import { isValid } from '@visactor/vutils';
-import { CharacterComponent } from '../character';
-import { IComponentCharacterSpec, IWidgetData } from '../..';
+import type { CharacterComponent } from '../character';
+import type { IComponentCharacterSpec, IWidgetData } from '../..';
 import { getLayoutFromWidget } from '../../../utils/layout';
 
 export interface IGraphicConstructor {
@@ -18,7 +18,7 @@ export abstract class Graphic {
   get graphic() {
     return this._graphic;
   }
-  protected _group: IGraphic<any>;
+  // protected _group: IGraphic<any>;
 
   constructor(type: string, character: CharacterComponent) {
     this.type = type;
@@ -27,7 +27,7 @@ export abstract class Graphic {
 
   abstract init(): void;
 
-  getBounds() {
+  getBounds(): IAABBBounds {
     return this._graphic.AABBBounds;
   }
 
@@ -50,6 +50,13 @@ export abstract class Graphic {
       stroke: '#000000',
       shapePoints: [] as IPointLike[]
     };
+  }
+
+  setAttributes(attr: Record<string, any>): void {
+    if (!this._graphic) {
+      return;
+    }
+    this._graphic.setAttributes(attr);
   }
 
   show(): void {

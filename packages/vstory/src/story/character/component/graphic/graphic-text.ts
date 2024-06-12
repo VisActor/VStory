@@ -1,7 +1,8 @@
 import { getLayoutFromWidget } from '../../../utils/layout';
-import { IWidgetData } from '../../dsl-interface';
-import { CharacterGraphics } from '../character';
-import { IText, createText, ITextGraphicAttribute, TextAlignType, TextBaselineType } from '@visactor/vrender-core';
+import type { IWidgetData } from '../../dsl-interface';
+import type { CharacterGraphics } from '../character';
+import type { IText, ITextGraphicAttribute, TextAlignType, TextBaselineType } from '@visactor/vrender-core';
+import { createText } from '@visactor/vrender-core';
 
 export const MAX_LAYOUT_SIZE = 999999;
 
@@ -124,13 +125,13 @@ export class GraphicText {
 
   private _updateGraphicCharacterSize() {
     if (!this._character.graphic.getGraphicAttribute().isResized) {
-      const layoutRatio = this._character.graphic.getTextLayoutRatio();
-      const textHeight = this._graphic.AABBBounds.height();
-      const minGraphicHeight = this._character.graphic.getInitialAttributes().height;
-      const graphicHeight = Math.max(textHeight / (layoutRatio.bottom - layoutRatio.top), minGraphicHeight);
-      this._character.graphic.applyLayoutData({
-        height: graphicHeight
-      });
+      // const layoutRatio = this._character.graphic.getTextLayoutRatio();
+      // const textHeight = this._graphic.AABBBounds.height();
+      // const minGraphicHeight = this._character.graphic.getInitialAttributes().height;
+      // const graphicHeight = Math.max(textHeight / (layoutRatio.bottom - layoutRatio.top), minGraphicHeight);
+      // this._character.graphic.applyLayoutData({
+      //   height: graphicHeight
+      // });
       this.applyLayoutData(this._character.graphic.getPositionData());
     }
   }

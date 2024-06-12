@@ -1,14 +1,15 @@
 import type { IEditSelectionInfo } from '../interface';
 import { EditActionEnum, type IEditActionInfo, type IEditComponent } from '../interface';
-import { StoryEvent } from '../../story/interface/runtime-interface';
 import type { Edit } from '../edit';
 import { BaseSelection } from './base-selection';
-import type { TransformAttributes, ITransformControl } from './edit-control/transform-control';
+import type { TransformAttributes, ITransformControl, IUpdateParams } from './edit-control/transform-control';
+import { TransformControl } from './edit-control/transform-control';
+import type { VRenderPointerEvent } from '../../interface/type';
 import { RichTextTransformControl } from './edit-control/richtext-transform-control';
 
-export class RichTextSelection extends BaseSelection implements IEditComponent {
+export class RectSelection extends BaseSelection implements IEditComponent {
   readonly level = 3;
-  readonly type: string = 'richtext';
+  readonly type: string = 'rect';
 
   constructor(public readonly edit: Edit) {
     super(edit);
@@ -43,6 +44,12 @@ export class RichTextSelection extends BaseSelection implements IEditComponent {
     return true;
   }
 
+  protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
+    if (this._activeCharacter) {
+      this._activeCharacter.setAttributes(data);
+    }
+  }
+
   checkActionWhileNoEditing(actionInfo: IEditSelectionInfo): boolean {
     if (actionInfo.type === EditActionEnum.singleSelection && actionInfo.detail.graphicType === this.type) {
       this.startEdit(actionInfo);
@@ -51,16 +58,5 @@ export class RichTextSelection extends BaseSelection implements IEditComponent {
     }
 
     return false;
-  }
-
-  startEdit(actionInfo: IEditActionInfo) {
-    super.startEdit(actionInfo);
-    this.edit.startEdit({
-      type: 'boxSelection',
-      actionInfo: this._actionInfo,
-      updateCharacter: (params: any) => {
-        // nothing 不支持任何修改
-      }
-    });
   }
 }
