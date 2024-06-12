@@ -34,7 +34,8 @@ export class Edit {
 
   _initEditGroup() {
     this._editGroup = createGroup({});
-    this.story.canvas.getStage().defaultLayer.add(this._editGroup);
+    const editLayer = this.story.canvas.getStage().createLayer();
+    editLayer.add(this._editGroup);
   }
 
   getEditGroup() {

@@ -59,15 +59,4 @@ export class RectSelection extends BaseSelection implements IEditComponent {
 
     return false;
   }
-
-  startEdit(actionInfo: IEditActionInfo) {
-    super.startEdit(actionInfo);
-    this.edit.startEdit({
-      type: 'boxSelection',
-      actionInfo: this._actionInfo,
-      updateCharacter: (params: any) => {
-        // nothing 不支持任何修改
-      }
-    });
-  }
 }

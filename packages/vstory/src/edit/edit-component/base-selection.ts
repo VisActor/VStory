@@ -81,14 +81,14 @@ export abstract class BaseSelection implements IEditComponent {
 
   inActiveLayoutComponent() {
     if (!this._layoutComponent) {
-      this._layoutComponent = this.createLayoutComponent();
-    }
-    if (!this._layoutComponent) {
       return;
     }
 
-    this._layoutComponent.onInActive();
-    this.detachComponent(this._layoutComponent);
+    // this._layoutComponent.onInActive();
+    // this.detachComponent(this._layoutComponent);
+    // TODO 直接release
+    this._layoutComponent.release();
+    this._layoutComponent = null;
   }
 
   updateComponent() {

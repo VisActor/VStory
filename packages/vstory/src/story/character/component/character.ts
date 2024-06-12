@@ -54,8 +54,10 @@ export abstract class CharacterComponent extends CharacterBase {
     this.hide();
   }
 
-  setAttributes(attr: Record<string, any>) {
-    this._graphic.setAttributes(attr);
+  setAttributes(attr: Record<string, any>): void {
+    this.group.setAttributes(attr);
+    this._graphic.setAttributes({ ...attr, x: 0, y: 0, angle: 0 });
+    this._text.updateAttribute({});
   }
 
   protected abstract _createGraphic(): Graphic;

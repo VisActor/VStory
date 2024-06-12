@@ -5,6 +5,7 @@ import { Story } from '../../../src/story/story';
 import { Edit } from '../../../src/edit/edit';
 import '../../../src/story/index';
 import { loadAllSelection } from '../../../src/edit/edit-component';
+import img from '../assets/scene3/chart-3.png';
 
 loadAllSelection();
 
@@ -64,6 +65,22 @@ export const GraphicEdit = () => {
             angle: 0,
             shapePoints: []
           }
+        },
+        {
+          type: 'ImageComponent',
+          id: `image`,
+          zIndex: 1,
+          position: {
+            top: 225,
+            left: 260,
+            width: 200,
+            height: 160
+          },
+          options: {
+            graphic: {
+              image: img
+            }
+          }
         }
       ],
       acts: [
@@ -83,7 +100,6 @@ export const GraphicEdit = () => {
                       payload: {
                         animation: {
                           duration: 700,
-                          easing: 'easeInOutQuad',
                           move: {
                             from: 'right'
                           }
@@ -94,6 +110,21 @@ export const GraphicEdit = () => {
                 },
                 {
                   characterId: 'rect',
+                  characterActions: [
+                    {
+                      startTime: 1,
+                      duration: 800,
+                      action: 'appear',
+                      payload: {
+                        animation: {
+                          duration: 700
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  characterId: 'image',
                   characterActions: [
                     {
                       startTime: 1,

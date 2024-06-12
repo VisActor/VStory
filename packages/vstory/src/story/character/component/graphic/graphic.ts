@@ -1,5 +1,5 @@
 import type { IGraphic } from '@visactor/vrender-core';
-import type { IPointLike } from '@visactor/vutils';
+import type { IAABBBounds, IPointLike } from '@visactor/vutils';
 import { isValid } from '@visactor/vutils';
 import type { CharacterComponent } from '../character';
 import type { IComponentCharacterSpec, IWidgetData } from '../..';
@@ -27,7 +27,7 @@ export abstract class Graphic {
 
   abstract init(): void;
 
-  getBounds() {
+  getBounds(): IAABBBounds {
     return this._graphic.AABBBounds;
   }
 
@@ -52,8 +52,11 @@ export abstract class Graphic {
     };
   }
 
-  setAttributes(attr: Record<string, any>) {
-    throw new Error('请重载setAttributes函数');
+  setAttributes(attr: Record<string, any>): void {
+    if (!this._graphic) {
+      return;
+    }
+    this._graphic.setAttributes(attr);
   }
 
   show(): void {

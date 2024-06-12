@@ -1,5 +1,6 @@
 import { CommonEditComponent } from './common';
 import { BoxSelection } from './box-selection';
+import { ImageSelection } from './image-selection';
 import { TextSelection } from './text-selection';
 import { RichTextSelection } from './richtext-selection';
 import { RectSelection } from './rect-selection';
@@ -11,4 +12,5 @@ export function loadAllSelection() {
   Edit.registerEditComponent('richtext', RichTextSelection);
   Edit.registerEditComponent('rect', RectSelection);
   Edit.registerEditComponent('box-selection', BoxSelection);
+  Edit.registerEditComponent('image-selection', ImageSelection);
 }
