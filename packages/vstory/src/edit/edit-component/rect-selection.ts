@@ -1,11 +1,11 @@
 import type { IEditSelectionInfo } from '../interface';
 import { EditActionEnum, type IEditActionInfo, type IEditComponent } from '../interface';
-import { StoryEvent } from '../../story/interface/runtime-interface';
 import type { Edit } from '../edit';
 import { BaseSelection } from './base-selection';
 import type { TransformAttributes, ITransformControl, IUpdateParams } from './edit-control/transform-control';
 import { TransformControl } from './edit-control/transform-control';
 import type { VRenderPointerEvent } from '../../interface/type';
+import { RichTextTransformControl } from './edit-control/richtext-transform-control';
 
 export class RectSelection extends BaseSelection implements IEditComponent {
   readonly level = 3;
@@ -16,7 +16,7 @@ export class RectSelection extends BaseSelection implements IEditComponent {
   }
 
   protected _createLayoutComponent(attributes: Partial<TransformAttributes>): ITransformControl {
-    return new TransformControl(attributes);
+    return new RichTextTransformControl(this, attributes);
   }
 
   editEnd(): void {

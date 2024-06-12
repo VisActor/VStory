@@ -15,7 +15,7 @@ export class RichTextSelection extends BaseSelection implements IEditComponent {
   }
 
   protected _createLayoutComponent(attributes: Partial<TransformAttributes>): ITransformControl {
-    return new RichTextTransformControl(attributes);
+    return new RichTextTransformControl(this, attributes);
   }
 
   editEnd(): void {

@@ -28,6 +28,10 @@ export abstract class BaseSelection implements IEditComponent {
   }
   abstract checkAction(actionInfo: IEditSelectionInfo): boolean;
 
+  getActiveCharacter() {
+    return this._activeCharacter;
+  }
+
   startEdit(actionInfo: IEditActionInfo) {
     this.isEditing = true;
     this._actionInfo = actionInfo;
@@ -64,7 +68,7 @@ export abstract class BaseSelection implements IEditComponent {
   }
 
   protected _createLayoutComponent(attributes: Partial<TransformAttributes>): ITransformControl | undefined {
-    return new TransformControl(attributes);
+    return new TransformControl(this, attributes);
   }
 
   activeLayoutComponent() {

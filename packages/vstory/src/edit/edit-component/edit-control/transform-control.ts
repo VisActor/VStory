@@ -65,6 +65,8 @@ export type IUpdateParams = {
   anchor: [number | string, number | string];
   // relative position of shape point
   shapePoints: IPointLike[];
+  // text
+  text?: string | string[];
 };
 
 const borderAnchors = ['top', 'bottom', 'left', 'right'];
@@ -96,7 +98,6 @@ const anchorCursorMap = {
 export interface ITransformControl extends IGroup {
   updateSubBounds: (b: IAABBBoundsLike) => void;
   onActive: () => void;
-  onInActive: () => void;
   onUpdate: (cb: (data: IUpdateParams, event?: VRenderPointerEvent) => Partial<IUpdateParams> | false) => void;
   onEditorEnd: (cb: (event?: VRenderPointerEvent) => void) => void;
   onEditorStart: (cb: (event?: VRenderPointerEvent) => void) => void;
@@ -147,6 +148,8 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
 
   _setCursor: (c: string) => void = null;
 
+  editComponent: IEditComponent;
+
   // drag
   _dragger: DragComponent;
   private _lastBoxInDrag: IRect;
@@ -193,8 +196,9 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     }
   };
 
-  constructor(attributes: Partial<TransformAttributes>) {
+  constructor(editComponent: IEditComponent, attributes: Partial<TransformAttributes>) {
     super(merge({ shadowRootIdx: 1 }, TransformControl.defaultAttributes, attributes));
+    this.editComponent = editComponent;
     this._editorConfig = {
       move: attributes.move !== false,
       rotate: attributes.rotate !== false,
@@ -293,10 +297,6 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
 
   onActive() {
     this.initEvent();
-  }
-
-  onInActive() {
-    this.releaseEvent();
   }
 
   initEvent() {

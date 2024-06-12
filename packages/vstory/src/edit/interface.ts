@@ -46,6 +46,8 @@ export interface IEditComponent {
 
   // 编辑结束
   editEnd: () => void;
+
+  getActiveCharacter: () => ICharacter | null;
 }
 
 export type IModelInfoSpecKey = {
