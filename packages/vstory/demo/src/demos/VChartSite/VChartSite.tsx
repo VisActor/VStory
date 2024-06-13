@@ -9,6 +9,8 @@ import { scene5, scene5Characters } from './scene5';
 import { scene6, scene6Characters } from './scene6';
 import { scene7, scene7Characters } from './scene7';
 import { scene8, scene8Characters } from './scene8';
+import { scene9, scene9Characters } from './scene9';
+import { scene10, scene10Characters } from './scene10';
 
 export const VChartSiteDemo = () => {
   const id = 'storyBar';
@@ -18,24 +20,27 @@ export const VChartSiteDemo = () => {
     const tempSpec: IStorySpec = {
       characters: [
         ...scene1Characters,
-        ...scene2Characters
+        ...scene2Characters,
         // ...scene3Characters,
         // ...scene4Characters,
         // ...scene5Characters,
         // ...scene6Characters,
         // ...scene7Characters,
         // ...scene8Characters
+        ...scene9Characters,
+        ...scene10Characters
       ],
       acts: [
         {
           id: 'default-chapter',
           scenes: [
-            scene1,
-            scene2
-            // scene3, scene4, scene5,
-            // scene6,
+            // scene1, scene2, scene3, scene4,
+            // scene5
+            // scene6
             // scene7,
             // scene8
+            scene9,
+            scene10
           ]
         }
       ]
