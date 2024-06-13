@@ -1,4 +1,5 @@
 export const enum StoryChartType {
+  CHARACTER_CHART = 'CharacterChart',
   BAR = 'BarChart',
   LINE = 'LineChart',
   AREA = 'AreaChart',

@@ -1,8 +1,6 @@
 import type { EasingType, IGraphic } from '@visactor/vrender-core';
 import type { IAnimationParams } from '../../../types';
 import type { IGraphicDisappearPayLoad } from '../../../types/graphic/disappear';
-import { isObject, isString } from '@visactor/vutils';
-import { Wipe } from '../../../../animate/wipeIn';
 import { canDoGraphicAnimation } from '../util';
 
 export interface IFadeOutParams extends IAnimationParams {
@@ -63,6 +61,10 @@ export function fadeOut(graphic: IGraphic, params: IFadeOutParams) {
   const easing = fade.easing ?? params.easing;
   const isBaseOpacity = fade.isBaseOpacity ?? false;
   const opacityKey = isBaseOpacity ? 'baseOpacity' : 'opacity';
+
+  graphic.setAttributes({
+    [opacityKey]: 1
+  });
 
   graphic.animate().to({ [opacityKey]: opacity }, duration, easing as EasingType);
   return true;
@@ -136,7 +138,6 @@ export function moveOut(graphic: IGraphic, params: IMoveOutParams) {
     }
   }
 
-  console.log('debug moveOut', toX, toY);
   graphic.animate().to({ x: toX, y: toY }, duration, easing as EasingType);
   return true;
 }

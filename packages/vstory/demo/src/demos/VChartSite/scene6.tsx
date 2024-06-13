@@ -1,6 +1,14 @@
 import type { ICharacterSpec } from '../../../../src/story/character';
 import type { ISceneSpec } from '../../../../src/story/interface';
-import scene5MainImage from '../../assets/scene6/main-image.png';
+import scene6MainImage1 from '../../assets/scene6/main-image.png';
+import scene6MainImage2 from '../../assets/scene6/main-image2.png';
+import scene6SubImage1 from '../../assets/scene6/chart.png';
+import scene6SubImage2 from '../../assets/scene6/text.png';
+import { easeInOutQuad } from './util';
+
+const scene62Start = 8500;
+const endTimeStart = 14000;
+const endTimeFinished = 15000;
 
 const asiaData: Array<{
   max: number;
@@ -1110,8 +1118,8 @@ const asiaData: Array<{
     }
   ]
 ];
-const duration = 500;
-const chartSpec = {
+const barDuration = 500;
+const barChartSpec = {
   type: 'bar',
   padding: 0,
   data: [
@@ -1167,20 +1175,20 @@ const chartSpec = {
   animationAppear: {
     bar: {
       type: 'growWidthIn',
-      duration
+      duration: barDuration
     },
     axis: {
-      duration,
+      duration: barDuration,
       easing: 'linear'
     }
   },
   animationUpdate: {
     bar: {
-      duration,
+      duration: barDuration,
       easing: 'linear'
     },
     axis: {
-      duration: duration * 0.8,
+      duration: barDuration * 0.8,
       easing: 'linear'
     }
   },
@@ -1203,16 +1211,460 @@ const chartSpec = {
   background: 'rgba(205, 198, 186,0.5)'
 };
 
+const rangeChartSpec = {
+  type: 'common',
+  data: [
+    {
+      id: 'areaData',
+      values: [
+        { year: 1700, exports: 35, imports: 70 },
+        { year: 1710, exports: 59, imports: 81 },
+        { year: 1720, exports: 76, imports: 96 },
+        { year: 1730, exports: 65, imports: 97 },
+        { year: 1740, exports: 67, imports: 93 },
+        { year: 1750, exports: 79, imports: 90 },
+        { year: 1753, exports: 87, imports: 87 },
+        { year: 1760, exports: 115, imports: 79 },
+        { year: 1770, exports: 163, imports: 85 },
+        { year: 1780, exports: 185, imports: 93 }
+      ]
+    }
+  ],
+  series: [
+    {
+      type: 'rangeArea',
+      xField: 'year',
+      yField: ['exports', 'imports'],
+      area: {
+        style: {
+          curveType: 'monotone',
+          fill: data => {
+            if (data.year <= 1755) {
+              return '#F5222D';
+            }
+            return '#FAAD14';
+          }
+        }
+      }
+    },
+    {
+      type: 'line',
+      xField: 'year',
+      yField: 'exports',
+      point: {
+        style: {
+          size: 0
+        }
+      },
+      line: {
+        style: {
+          curveType: 'monotone',
+          stroke: '#F5222D'
+        }
+      }
+    },
+    {
+      type: 'line',
+      xField: 'year',
+      yField: 'imports',
+      point: {
+        style: {
+          size: 0
+        }
+      },
+      line: {
+        style: {
+          curveType: 'monotone',
+          stroke: '#FAAD14'
+        }
+      }
+    }
+  ],
+  markPoint: [
+    {
+      coordinate: {
+        year: 1730,
+        exports: 50
+      },
+      itemContent: {
+        type: 'text',
+        autoRotate: false,
+        text: {
+          text: 'BALANCE AGAINST',
+          style: {
+            fontSize: 14,
+            fontWeight: 'bold',
+            fill: 'rgba(0,0,0,0.45)',
+            textAlign: 'center',
+            textBaseline: 'middle'
+          }
+        }
+      },
+      itemLine: {
+        visible: false
+      }
+    },
+    {
+      coordinate: {
+        year: 1765,
+        exports: 75
+      },
+      itemContent: {
+        offsetX: -40,
+        type: 'text',
+        autoRotate: false,
+        text: {
+          text: ['BALANCE in', 'FAVOUR of ENGLAND'],
+          style: {
+            fontSize: 14,
+            fontWeight: 'bold',
+            fill: 'rgba(0,0,0,0.45)',
+            textAlign: 'left',
+            textBaseline: 'middle'
+          }
+        }
+      },
+      itemLine: {
+        visible: false
+      }
+    }
+  ],
+  axes: [
+    {
+      orient: 'left',
+      label: {
+        visible: true
+      },
+      type: 'linear'
+    },
+    { orient: 'bottom', type: 'linear', min: '1700', max: '1780' }
+  ],
+  crosshair: {
+    xField: {
+      line: {
+        type: 'line'
+      },
+      label: {
+        visible: true
+      }
+    }
+  },
+  padding: 0,
+  animationAppear: {}
+};
+
+const scene6_1 = [
+  // 主图[1,1200]
+  {
+    characterId: 'scene6-img1',
+    characterActions: [
+      {
+        // TODO: startOffset
+        startTime: 1,
+        duration: 1200,
+        action: 'appear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 1200,
+            scale: {
+              ratio: 1
+            }
+          }
+        }
+      },
+      {
+        startTime: 8200,
+        duration: 300,
+        action: 'disappear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 300,
+            effect: 'fade'
+          }
+        }
+      }
+    ]
+  },
+  // 图表[1500, 8200]
+  {
+    characterId: 'scene6-chart',
+    characterActions: [
+      {
+        startTime: 1500,
+        duration: 500,
+        action: 'appear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 500,
+            fade: {
+              opacity: 1
+            },
+            scale: {
+              ratio: 1
+            }
+          }
+        }
+      },
+      ...asiaData.map((data, index) => {
+        // 更新数据
+        return {
+          startTime: 1500 + 500 + index * barDuration,
+          duration: barDuration,
+          action: 'update',
+          payload: {
+            id: 'dataId',
+            values: data.sort((b, a) => a.max - b.max)
+          }
+        };
+      }),
+      {
+        startTime: 2000 + asiaData.length * barDuration,
+        duration: 1200,
+        action: 'disappear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 1200,
+            effect: 'fade',
+            fade: {
+              opacity: 0
+            }
+            // scale: {
+            //   ratio: 0
+            // }
+          }
+        }
+      }
+    ]
+  }
+];
+
+const scene6_2 = [
+  // 主图[8500 + 1000, 14000 + 1000]
+  {
+    characterId: 'scene6-img2',
+    characterActions: [
+      {
+        startTime: scene62Start,
+        duration: 1000,
+        action: 'appear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 1000,
+            effect: 'fade'
+          }
+        }
+      },
+      {
+        startTime: endTimeStart,
+        duration: 1000,
+        action: 'disappear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 1000,
+            effect: 'fade'
+          }
+        }
+      }
+    ]
+  },
+
+  // 左图[8500 + 1000, 14000 + 1000]
+  {
+    characterId: 'scene6-img3',
+    characterActions: [
+      {
+        startTime: scene62Start,
+        duration: 1000,
+        action: 'appear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 1000,
+            move: {
+              from: 'bottom'
+            }
+          }
+        }
+      },
+      {
+        startTime: endTimeStart,
+        duration: 1000,
+        action: 'disappear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 1000,
+            move: {
+              to: 'top'
+            }
+          }
+        }
+      }
+    ]
+  },
+  // 图表[10000, 14000]
+  // TODO: 此图表会导致后续全部报错, 异常, 待处理
+  // {
+  //   characterId: 'scene6-range-chart',
+  //   characterActions: [
+  //     {
+  //       startTime: 10000,
+  //       duration: 1000,
+  //       action: 'appear',
+  //       payload: {
+  //         animation: {
+  //           easing: 'cubicInOut',
+  //           duration: 1000,
+  //           fade: {
+  //             opacity: 1,
+  //             isBaseOpacity: true
+  //           }
+  //         }
+  //       }
+  //     },
+  //     {
+  //       startTime: 13000,
+  //       duration: 1000,
+  //       action: 'disappear',
+  //       payload: {
+  //         animation: {
+  //           easing: 'cubicInOut',
+  //           duration: 1000,
+  //           fade: {
+  //             opacity: 0,
+  //             isBaseOpacity: true
+  //           }
+  //         }
+  //       }
+  //     }
+  //   ]
+  // },
+
+  // 右图[8500 + 1000, 14000 + 1000]
+  {
+    characterId: 'scene6-img4',
+    characterActions: [
+      {
+        startTime: scene62Start,
+        duration: 1000,
+        action: 'appear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 1000,
+            move: {
+              from: 'bottom'
+            }
+          }
+        }
+      },
+      {
+        startTime: endTimeStart,
+        duration: 1000,
+        action: 'disappear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 1000,
+            fade: {
+              opacity: 0
+            }
+          }
+        }
+      }
+    ]
+  },
+
+  // 底部黑边[8200 + 300, 15000]
+  {
+    characterId: 'scene6-bg-bottom',
+    characterActions: [
+      {
+        // TODO: startOffset
+        startTime: 8200,
+        duration: 300,
+        action: 'appear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 300,
+            fade: {
+              opacity: 1
+            }
+          }
+        }
+      },
+      {
+        startTime: endTimeFinished - 5,
+        duration: 5,
+        action: 'disappear',
+        payload: {
+          animation: {
+            duration: 5,
+            easing: easeInOutQuad,
+            fade: {
+              opacity: 0
+            }
+          }
+        }
+      }
+    ]
+  },
+
+  // 顶部灰边[8500 + 1000, 15000]
+  {
+    characterId: 'scene6-bg-top',
+    characterActions: [
+      {
+        // TODO: startOffset
+        startTime: scene62Start,
+        duration: 1000,
+        action: 'appear',
+        payload: {
+          animation: {
+            easing: easeInOutQuad,
+            duration: 600,
+            fade: {
+              opacity: 1
+            }
+          }
+        }
+      },
+      {
+        startTime: endTimeFinished - 5,
+        duration: 5,
+        action: 'disappear',
+        payload: {
+          animation: {
+            duration: 5,
+            easing: easeInOutQuad,
+            fade: {
+              opacity: 0
+            }
+          }
+        }
+      }
+    ]
+  }
+];
+
 export const scene6Characters: ICharacterSpec[] = [
+  // 背景1
   {
     type: 'RectComponent',
-    id: `scene6-background-top`,
-    zIndex: 0,
+    id: `scene6-bg1`,
+    zIndex: 1,
     position: {
       top: 0,
       left: 0,
       width: 1440,
-      height: 760
+      height: 810
     },
     options: {
       graphic: {
@@ -1221,26 +1673,65 @@ export const scene6Characters: ICharacterSpec[] = [
       }
     }
   },
+  // 背景2
   {
     type: 'RectComponent',
-    id: `scene6-background-bottom`,
-    zIndex: 0,
+    id: `scene6-bg2`,
+    zIndex: -1,
     position: {
-      top: 760,
+      top: 0,
       left: 0,
       width: 1440,
-      height: 50
+      height: 810
     },
     options: {
       graphic: {
         stroke: false,
-        fill: '#FFFFFD'
+        fill: '#DBDBDB'
       }
     }
   },
+  // 底部黑边
+  {
+    type: 'RectComponent',
+    id: `scene6-bg-bottom`,
+    zIndex: 1,
+    position: {
+      top: 662,
+      left: 90,
+      width: 1262,
+      height: 148
+    },
+    options: {
+      graphic: {
+        stroke: false,
+        fill: 'rgb(30,34,33)'
+      }
+    }
+  },
+  // 顶部白边
+  {
+    type: 'RectComponent',
+    id: `scene6-bg-top`,
+    zIndex: 0,
+    position: {
+      top: 0,
+      left: 90,
+      width: 1262,
+      height: 68
+    },
+    options: {
+      graphic: {
+        stroke: false,
+        fill: 'rgb(195,195,195)'
+      }
+    }
+  },
+
+  // 四张图片
   {
     type: 'ImageComponent',
-    id: `scene5-main-image`,
+    id: `scene6-img1`,
     zIndex: 1,
     position: {
       top: 160,
@@ -1250,10 +1741,59 @@ export const scene6Characters: ICharacterSpec[] = [
     },
     options: {
       graphic: {
-        image: scene5MainImage
+        image: scene6MainImage1
       }
     }
   },
+  {
+    type: 'ImageComponent',
+    id: 'scene6-img2',
+    zIndex: 1,
+    position: {
+      top: 0,
+      left: 90,
+      width: 1262,
+      height: 876
+    },
+    options: {
+      graphic: {
+        image: scene6MainImage2
+      }
+    }
+  },
+  {
+    type: 'ImageComponent',
+    id: 'scene6-img3',
+    zIndex: 1,
+    position: {
+      top: 240,
+      left: 90,
+      width: 711 * 0.75,
+      height: 570 * 0.75
+    },
+    options: {
+      graphic: {
+        image: scene6SubImage1
+      }
+    }
+  },
+  {
+    type: 'ImageComponent',
+    id: 'scene6-img4',
+    zIndex: 1,
+    position: {
+      top: 300,
+      left: 750,
+      width: 778 * 0.5,
+      height: 551 * 0.5
+    },
+    options: {
+      graphic: {
+        image: scene6SubImage2
+      }
+    }
+  },
+  // 柱状图
   {
     type: 'BarChart',
     id: `scene6-chart`,
@@ -1265,7 +1805,25 @@ export const scene6Characters: ICharacterSpec[] = [
       height: 308
     },
     options: {
-      spec: chartSpec,
+      spec: barChartSpec,
+      panel: {
+        fill: '#ffffff'
+      }
+    }
+  },
+  // 区间面积图
+  {
+    type: 'CharacterChart',
+    id: 'scene6-range-chart',
+    zIndex: 0,
+    position: {
+      top: 280,
+      left: 108,
+      width: 496,
+      height: 303
+    },
+    options: {
+      spec: rangeChartSpec,
       panel: {
         fill: '#ffffff'
       }
@@ -1276,9 +1834,9 @@ export const scene6Characters: ICharacterSpec[] = [
 export const scene6: ISceneSpec = {
   id: 'scene6',
   actions: [
-    // 背景
+    // 背景1 [1, 8500 + 1000]
     {
-      characterId: 'scene6-background-top',
+      characterId: 'scene6-bg1',
       characterActions: [
         {
           // TODO: startOffset
@@ -1287,108 +1845,79 @@ export const scene6: ISceneSpec = {
           action: 'appear',
           payload: {
             animation: {
-              easing: 'easeInOutQuad',
+              easing: easeInOutQuad,
               duration: 0,
-              scale: {
-                ratio: 1
-              }
-            }
-          }
-        }
-      ]
-    },
-    {
-      characterId: 'scene6-background-bottom',
-      characterActions: [
-        {
-          // TODO: startOffset
-          startTime: 1,
-          duration: 0,
-          action: 'appear',
-          payload: {
-            animation: {
-              easing: 'easeInOutQuad',
-              duration: 0,
-              scale: {
-                ratio: 1
-              }
-            }
-          }
-        }
-      ]
-    },
-    // 主图
-    {
-      characterId: 'scene5-main-image',
-      characterActions: [
-        {
-          // TODO: startOffset
-          startTime: 1,
-          duration: 1200,
-          action: 'appear',
-          payload: {
-            animation: {
-              easing: 'cubicInOut',
-              duration: 1200,
-              scale: {
-                ratio: 1
-              }
-            }
-          }
-        }
-      ]
-    },
-    // 图表
-    {
-      characterId: 'scene6-chart',
-      characterActions: [
-        {
-          startTime: 1500,
-          duration: 500,
-          action: 'appear',
-          payload: {
-            animation: {
-              easing: 'cubicInOut',
-              duration: 500,
-              fade: {
-                opacity: 1
-              },
               scale: {
                 ratio: 1
               }
             }
           }
         },
-        ...asiaData.map((data, index) => {
-          // 更新数据
-          return {
-            startTime: 1500 + 500 + index * duration,
-            duration: duration,
-            action: 'update',
-            payload: {
-              id: 'dataId',
-              values: data.sort((b, a) => a.max - b.max)
-            }
-          };
-        }),
         {
-          startTime: 2000 + asiaData.length * duration,
-          duration: 1200,
+          // TODO: startOffset
+          startTime: 8000,
+          duration: 500,
+          action: 'style',
+          payload: {
+            graphic: { x: 90, width: 1262 },
+            animation: {
+              easing: easeInOutQuad,
+              duration: 300
+            }
+          }
+        },
+        {
+          startTime: scene62Start,
+          duration: 1000,
           action: 'disappear',
           payload: {
             animation: {
-              easing: 'cubicInOut',
-              duration: 1200,
+              easing: easeInOutQuad,
+              duration: 600,
               fade: {
                 opacity: 0
-              },
-              scale: {
-                ratio: 0
               }
             }
           }
         }
       ]
-    }
+    },
+    // 背景2 [8000, 15000]
+    {
+      characterId: 'scene6-bg2',
+      characterActions: [
+        {
+          // TODO: startOffset
+          startTime: 8000,
+          duration: 0,
+          action: 'appear',
+          payload: {
+            animation: {
+              easing: easeInOutQuad,
+              duration: 0
+            }
+          }
+        },
+        {
+          startTime: endTimeFinished - 5,
+          duration: 5,
+          action: 'disappear',
+          payload: {
+            animation: {
+              easing: easeInOutQuad,
+              duration: 5,
+              fade: {
+                opacity: 0
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    // 6-1
+    ...scene6_1,
+    // 6-2
+    ...scene6_2
   ]
 };

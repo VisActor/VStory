@@ -31,6 +31,7 @@ import { radarProcessorMap } from './radar';
 import { wordCloudProcessorMap } from './wordCloud';
 import { sunburstProcessorMap } from './sunburst';
 import { treeMapProcessorMap } from './treeMap';
+import { commonProcessorMap } from './common';
 /**
  * 通用的编辑processor
  */
@@ -58,6 +59,7 @@ export const componentProcessor = {
 
 // 图表processor
 export const processorChartMap = {
+  [StoryChartType.CHARACTER_CHART]: commonProcessorMap,
   [StoryChartType.BAR]: {
     // 大多数都是通用的, 可以复用.
     ...editProcessor,
