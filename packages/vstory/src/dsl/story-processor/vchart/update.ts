@@ -1,7 +1,8 @@
-import VChart, { IChartSpec } from '@visactor/vchart';
+import type { IChartSpec } from '@visactor/vchart';
+import type VChart from '@visactor/vchart';
 import { cloneDeep, isArray, isEqual } from '@visactor/vutils';
-import { IChartUpdateAction } from '../../types/chart/update';
-import { ICharacterVisactor } from '../../../story/character/visactor/interface';
+import type { IChartUpdateAction } from '../../types/chart/update';
+import type { ICharacterVisactor } from '../../../story/character/visactor/interface';
 import { isMatch } from './utils';
 
 export const updateProcessor = async (
@@ -18,19 +19,23 @@ export const updateProcessor = async (
   }
 
   const { payload } = action as IChartUpdateAction;
-  const { id: dataId, data } = payload;
+  const { id: dataId, data, values } = payload;
 
-  const rowData = cloneDeep(vchart._dataSet.getDataView(dataId).rawData);
+  if (values) {
+    await instance.updateDataSync(dataId, values);
+  } else {
+    const rowData = cloneDeep(vchart._dataSet.getDataView(dataId).rawData);
 
-  const items = isArray(data) ? data : [data];
+    const items = isArray(data) ? data : [data];
 
-  items.forEach(item => {
-    const { sourceValue, targetValue } = item;
-    const dataIndex = rowData.findIndex(v => isMatch(v, sourceValue));
-    if (dataIndex !== -1) {
-      rowData.splice(dataIndex, 1, targetValue);
-    }
-  });
+    items.forEach(item => {
+      const { sourceValue, targetValue } = item;
+      const dataIndex = rowData.findIndex(v => isMatch(v, sourceValue));
+      if (dataIndex !== -1) {
+        rowData.splice(dataIndex, 1, targetValue);
+      }
+    });
 
-  await instance.updateDataSync(dataId, rowData);
+    await instance.updateDataSync(dataId, rowData);
+  }
 };

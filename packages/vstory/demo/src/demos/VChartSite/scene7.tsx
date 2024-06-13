@@ -49,7 +49,7 @@ export const scene7Characters: ICharacterSpec[] = [
       top: 0,
       left: 0,
       width: 1440,
-      height: 66
+      height: 68
     },
     options: {
       graphic: {

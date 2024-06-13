@@ -10,6 +10,7 @@ export interface IGraphicAppearPayLoad extends IActionPayload {
      */
     fade?: {
       opacity?: number;
+      isBaseOpacity?: boolean;
     };
 
     /**

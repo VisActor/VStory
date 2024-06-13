@@ -7,3 +7,4 @@ export * from './radar';
 export * from './wordCloud';
 export * from './treeMap';
 export * from './sunburst';
+export * from './common';
