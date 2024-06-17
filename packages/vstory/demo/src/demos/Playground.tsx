@@ -1339,7 +1339,7 @@ export function Player(props: IPlayerPropsType) {
 export const Playground = () => {
   const [code, setCode] = useState(defaultCode);
   const stoRef = useRef<NodeJS.Timeout>();
-  const time = 2000;
+  const time = 1000;
 
   const handleChangeCode = useCallback((code: string) => {
     if (stoRef.current) {
