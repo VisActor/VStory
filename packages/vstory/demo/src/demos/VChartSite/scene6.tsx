@@ -1359,7 +1359,6 @@ const scene6_1 = [
     characterId: 'scene6-img1',
     characterActions: [
       {
-        // TODO: startOffset
         startTime: 1,
         duration: 1200,
         action: 'appear',
@@ -1586,7 +1585,6 @@ const scene6_2 = [
     characterId: 'scene6-bg-bottom',
     characterActions: [
       {
-        // TODO: startOffset
         startTime: 8200,
         duration: 300,
         action: 'appear',
@@ -1622,7 +1620,6 @@ const scene6_2 = [
     characterId: 'scene6-bg-top',
     characterActions: [
       {
-        // TODO: startOffset
         startTime: scene62Start,
         duration: 1000,
         action: 'appear',
@@ -1839,14 +1836,13 @@ export const scene6: ISceneSpec = {
       characterId: 'scene6-bg1',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
-          duration: 0,
+          duration: 1,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
-              duration: 0,
+              duration: 1,
               scale: {
                 ratio: 1
               }
@@ -1854,7 +1850,6 @@ export const scene6: ISceneSpec = {
           }
         },
         {
-          // TODO: startOffset
           startTime: 8000,
           duration: 500,
           action: 'style',
@@ -1887,7 +1882,6 @@ export const scene6: ISceneSpec = {
       characterId: 'scene6-bg2',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 8000,
           duration: 0,
           action: 'appear',
@@ -1913,11 +1907,10 @@ export const scene6: ISceneSpec = {
           }
         }
       ]
-    },
-
+    }
     // 6-1
-    ...scene6_1,
-    // 6-2
-    ...scene6_2
+    // ...scene6_1
+    // // 6-2
+    // ...scene6_2
   ]
 };

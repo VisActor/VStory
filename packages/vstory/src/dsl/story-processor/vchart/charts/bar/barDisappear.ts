@@ -42,7 +42,7 @@ export const barDisappearProcessor = async (
   axesDisappearProcessor(chartInstance, spec, { action: 'disappear', payload: undefined });
 
   // 隐藏: 根节点容器
-  // chart.setAttributes({
-  //   visible: false
-  // });
+  chart.setAttributes({
+    visible: false
+  });
 };

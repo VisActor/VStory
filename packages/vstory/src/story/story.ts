@@ -69,10 +69,15 @@ export class Story implements IStory {
     this._player.addAct(spec, this._characters);
   }
 
-  play(actIndex = 0) {
+  play(actIndex: string | number = 0) {
     // player 开始播放
     this._player.setCurrentAct(actIndex);
     this._player.play();
+  }
+
+  pause() {
+    this._player.pause();
+    return this._player.getCurrentAct();
   }
 
   async encodeToVideo(actIndex: number, millsecond: number, fps: number) {

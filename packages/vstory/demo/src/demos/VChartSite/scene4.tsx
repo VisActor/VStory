@@ -351,7 +351,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-title-decoration',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -372,7 +371,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-title',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -393,7 +391,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-subtitle',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -413,7 +410,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-line-left',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -434,7 +430,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-line-left-decoration',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -454,7 +449,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-chart-image',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -467,7 +461,6 @@ export const scene4: ISceneSpec = {
           }
         },
         {
-          // TODO: startOffset
           startTime: 1300,
           duration: 700,
           action: 'style',
@@ -483,7 +476,6 @@ export const scene4: ISceneSpec = {
           }
         },
         {
-          // TODO: startOffset
           startTime: 2500,
           duration: 700,
           action: 'disappear',
@@ -498,7 +490,6 @@ export const scene4: ISceneSpec = {
           }
         },
         {
-          // TODO: startOffset
           startTime: 5000,
           duration: 500,
           action: 'appear',
@@ -515,7 +506,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-text-zh-image',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -530,7 +520,6 @@ export const scene4: ISceneSpec = {
           }
         },
         {
-          // TODO: startOffset
           startTime: 1300,
           duration: 700,
           action: 'style',
@@ -551,7 +540,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-text-zh-line',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -566,7 +554,6 @@ export const scene4: ISceneSpec = {
           }
         },
         {
-          // TODO: startOffset
           startTime: 1300,
           duration: 700,
           action: 'style',
@@ -587,7 +574,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-text-en-image',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -607,7 +593,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-green-rect',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 200,
           duration: 700,
           action: 'appear',
@@ -627,7 +612,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-decoration',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 200,
           duration: 700,
           action: 'appear',
@@ -647,7 +631,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-grey-rect',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 200,
           duration: 700,
           action: 'appear',
@@ -667,7 +650,6 @@ export const scene4: ISceneSpec = {
       characterId: 'scene4-bg-decoration',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 0,
           duration: 700,
           action: 'appear',
@@ -732,7 +714,9 @@ export const scene4: ISceneSpec = {
           payload: {
             animation: {
               duration: 500,
-              effect: 'fade'
+              fade: {
+                isBaseOpacity: true
+              }
             }
           }
         }

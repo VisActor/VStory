@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { act, useEffect } from 'react';
 import { IStorySpec } from '../../../../src/story/interface';
 import { Story } from '../../../../src/story/story';
 import { scene1, scene1Characters } from './scene1';
@@ -11,6 +11,10 @@ import { scene7, scene7Characters } from './scene7';
 import { scene8, scene8Characters } from './scene8';
 import { scene9, scene9Characters } from './scene9';
 import { scene10, scene10Characters } from './scene10';
+import { scene11, scene11Characters } from './scene11';
+import { scene12, scene12Characters } from './scene12';
+import { scene12_2, scene12_2_Characters } from './scene12-2';
+import { scene13, scene13Characters } from './scene13';
 
 export const VChartSiteDemo = () => {
   const id = 'storyBar';
@@ -21,26 +25,37 @@ export const VChartSiteDemo = () => {
       characters: [
         ...scene1Characters,
         ...scene2Characters,
-        // ...scene3Characters,
-        // ...scene4Characters,
-        // ...scene5Characters,
-        // ...scene6Characters,
-        // ...scene7Characters,
-        // ...scene8Characters
+        ...scene3Characters,
+        ...scene4Characters,
+        ...scene5Characters,
+        ...scene6Characters,
+        ...scene7Characters,
+        ...scene8Characters,
         ...scene9Characters,
-        ...scene10Characters
+        ...scene10Characters,
+        ...scene11Characters,
+        ...scene12Characters,
+        ...scene12_2_Characters,
+        ...scene13Characters
       ],
       acts: [
         {
           id: 'default-chapter',
           scenes: [
-            // scene1, scene2, scene3, scene4,
-            // scene5
-            // scene6
-            // scene7,
-            // scene8
+            scene1,
+            scene2,
+            scene3,
+            scene4,
+            scene5,
+            scene6,
+            scene7,
+            scene8,
             scene9,
-            scene10
+            scene10,
+            scene11,
+            scene12,
+            scene12_2,
+            scene13
           ]
         }
       ]
@@ -54,6 +69,25 @@ export const VChartSiteDemo = () => {
     btn1.addEventListener('click', () => {
       story.play();
     });
+
+    {
+      let paused = false;
+      let actIndex: string | number = 0;
+      document.addEventListener('keydown', function (event) {
+        if (event.code === 'Space') {
+          if (paused) {
+            story.play(actIndex);
+            paused = false;
+            console.log(111111, 'continue', actIndex);
+          } else {
+            actIndex = story.pause();
+            paused = true;
+            console.log(111111, 'pause', actIndex);
+          }
+        }
+      });
+    }
+
     const btn2 = document.createElement('button');
     btn2.innerText = 'export';
     btn2.addEventListener('click', () => {
