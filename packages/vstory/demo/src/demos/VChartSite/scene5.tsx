@@ -7,6 +7,7 @@ import scene5ChartImage from '../../assets/scene5/chart.png';
 import scene5EnText from '../../assets/scene5/text-en.png';
 import scene5ZhText from '../../assets/scene5/text-zh.png';
 import { easeInOutQuad } from './util';
+import { Matrix } from '@visactor/vutils';
 
 const chartSpec = {
   type: 'sequence',
@@ -1038,6 +1039,15 @@ const chartSpec = {
   ]
 };
 
+const getTransformPointFunc = (offsetX: number, offsetY: number, scaleX: number, scaleY: number) => {
+  const m = new Matrix().translate(-offsetX, -offsetY).setScale(1 / scaleX, 1 / scaleY);
+  return (x: number, y: number) => {
+    const point = { x: 0, y: 0 };
+    m.transformPoint({ x, y }, point);
+    return point;
+  };
+};
+
 export const scene5Characters: ICharacterSpec[] = [
   {
     type: 'RectComponent',
@@ -1379,3 +1389,52 @@ export const scene5: ISceneSpec = {
     }
   ]
 };
+
+// disappear
+scene5.actions.forEach(({ characterId, characterActions }) => {
+  const duration = 700;
+
+  if (characterId !== 'scene5-background-decoration') {
+    const scaleX = 4;
+    const scaleY = 4;
+    const transformPointFunc = getTransformPointFunc(-450, -180, scaleX, scaleY);
+
+    const character = scene5Characters.find(c => c.id === characterId);
+    if (character) {
+      const { left, top, width, height } = character.position;
+      const { x, y } = transformPointFunc(left, top);
+      const newWidth = width * scaleX;
+      const newHeight = height * scaleY;
+      characterActions.push({
+        startTime: 5400,
+        duration,
+        action: 'style',
+        payload: {
+          graphic: {
+            width: newWidth,
+            height: newHeight,
+            x,
+            y
+          },
+          animation: {
+            easing: 'easeInOutQuad',
+            duration
+          }
+        }
+      });
+    }
+  }
+
+  characterActions.push({
+    startTime: 5400,
+    duration,
+    action: 'disappear',
+    payload: {
+      animation: {
+        easing: 'easeInOutQuad',
+        duration,
+        effect: 'fade'
+      }
+    }
+  });
+});
