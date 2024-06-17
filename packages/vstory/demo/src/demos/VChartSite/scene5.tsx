@@ -1336,6 +1336,42 @@ export const scene5: ISceneSpec = {
       ]
     },
     {
+      characterId: 'scene5-chart',
+      characterActions: [
+        {
+          startTime: 2000,
+          duration: 700,
+          action: 'appear',
+          payload: {
+            animation: {
+              easing: easeInOutQuad,
+              duration: 700,
+              effect: 'fade',
+              fade: {
+                isBaseOpacity: true
+              }
+            }
+          }
+        },
+        {
+          startTime: 4000,
+          duration: 700,
+          action: 'disappear',
+          payload: {
+            animation: {
+              easing: easeInOutQuad,
+              duration: 700,
+              effect: 'fade',
+              fade: {
+                opacity: 0,
+                isBaseOpacity: true
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
       characterId: 'scene5-en-text',
       characterActions: [
         {
@@ -1353,88 +1389,59 @@ export const scene5: ISceneSpec = {
           }
         }
       ]
-    },
-    {
-      characterId: 'scene5-chart',
-      characterActions: [
-        {
-          startTime: 2000,
-          duration: 700,
-          action: 'appear',
-          payload: {
-            animation: {
-              easing: easeInOutQuad,
-              duration: 700,
-              fade: {
-                isBaseOpacity: true
-              }
-            }
-          }
-        },
-        {
-          startTime: 4000,
-          duration: 700,
-          action: 'disappear',
-          payload: {
-            animation: {
-              easing: easeInOutQuad,
-              duration: 700,
-              fade: {
-                isBaseOpacity: true
-              }
-            }
-          }
-        }
-      ]
     }
   ]
 };
 
 // disappear
-scene5.actions.forEach(({ characterId, characterActions }) => {
-  const duration = 700;
+scene5.actions
+  .filter(({ characterId }) => characterId !== 'scene5-chart')
+  .forEach(({ characterId, characterActions }) => {
+    const duration = 700;
 
-  if (characterId !== 'scene5-background-decoration') {
-    const scaleX = 4;
-    const scaleY = 4;
-    const transformPointFunc = getTransformPointFunc(-450, -180, scaleX, scaleY);
+    if (characterId !== 'scene5-background-decoration') {
+      const scaleX = 4;
+      const scaleY = 4;
+      const transformPointFunc = getTransformPointFunc(-450, -180, scaleX, scaleY);
 
-    const character = scene5Characters.find(c => c.id === characterId);
-    if (character) {
-      const { left, top, width, height } = character.position;
-      const { x, y } = transformPointFunc(left, top);
-      const newWidth = width * scaleX;
-      const newHeight = height * scaleY;
-      characterActions.push({
-        startTime: 5400,
-        duration,
-        action: 'style',
-        payload: {
-          graphic: {
-            width: newWidth,
-            height: newHeight,
-            x,
-            y
-          },
-          animation: {
-            easing: 'easeInOutQuad',
-            duration
+      const character = scene5Characters.find(c => c.id === characterId);
+      if (character) {
+        // @ts-ignore
+        const { left, top, width, height } = character.position;
+        const { x, y } = transformPointFunc(left, top);
+        const newWidth = width * scaleX;
+        const newHeight = height * scaleY;
+        characterActions.push({
+          startTime: 5400,
+          duration,
+          action: 'style',
+          payload: {
+            graphic: {
+              width: newWidth,
+              height: newHeight,
+              x,
+              y
+            },
+            animation: {
+              easing: easeInOutQuad,
+              duration
+            }
           }
-        }
-      });
-    }
-  }
-
-  characterActions.push({
-    startTime: 5400,
-    duration,
-    action: 'disappear',
-    payload: {
-      animation: {
-        easing: 'easeInOutQuad',
-        duration,
-        effect: 'fade'
+        });
       }
     }
+    characterActions.push({
+      startTime: 5400,
+      duration,
+      action: 'disappear',
+      payload: {
+        animation: {
+          easing: easeInOutQuad,
+          duration,
+          fade: {
+            opacity: 0
+          }
+        }
+      }
+    });
   });
-});

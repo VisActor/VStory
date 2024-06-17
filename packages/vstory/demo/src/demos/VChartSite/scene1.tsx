@@ -844,6 +844,8 @@ const chartSpecList = [
             valueField: 'value',
             outerRadius: 1,
             innerRadius: 0,
+            gap: 1,
+            sunburst: { style: { stroke: false, lineWidth: 0 } },
             label: {
               visible: false
             }

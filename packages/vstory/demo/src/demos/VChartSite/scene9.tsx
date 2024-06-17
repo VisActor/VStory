@@ -7,7 +7,7 @@ import scene9TextZh from '../../assets/scene9/text-zh.png';
 import scene9Title from '../../assets/scene9/title.png';
 import scene9Chart from '../../assets/scene9/chart.png';
 
-import { easeInOutElastic, easeInOutQuad } from './util';
+import { easeInOutQuad } from './util';
 
 const monthData = {
   Jan: [
@@ -280,7 +280,7 @@ export const scene9Characters: ICharacterSpec[] = [
 
 export const scene9: ISceneSpec = {
   id: 'scene9',
-  delay: 0,
+  delay: -500,
   actions: [
     {
       characterId: 'scene9-background',

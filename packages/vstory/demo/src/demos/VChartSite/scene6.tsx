@@ -1399,7 +1399,8 @@ const scene6_1 = [
             easing: easeInOutQuad,
             duration: 500,
             fade: {
-              opacity: 1
+              opacity: 1,
+              isBaseOpacity: true
             },
             scale: {
               ratio: 1
@@ -1429,11 +1430,9 @@ const scene6_1 = [
             duration: 1200,
             effect: 'fade',
             fade: {
-              opacity: 0
+              opacity: 0,
+              isBaseOpacity: true
             }
-            // scale: {
-            //   ratio: 0
-            // }
           }
         }
       }
@@ -1508,43 +1507,41 @@ const scene6_2 = [
     ]
   },
   // 图表[10000, 14000]
-  // TODO: 此图表会导致后续全部报错, 异常, 待处理
-  // {
-  //   characterId: 'scene6-range-chart',
-  //   characterActions: [
-  //     {
-  //       startTime: 10000,
-  //       duration: 1000,
-  //       action: 'appear',
-  //       payload: {
-  //         animation: {
-  //           easing: 'cubicInOut',
-  //           duration: 1000,
-  //           fade: {
-  //             opacity: 1,
-  //             isBaseOpacity: true
-  //           }
-  //         }
-  //       }
-  //     },
-  //     {
-  //       startTime: 13000,
-  //       duration: 1000,
-  //       action: 'disappear',
-  //       payload: {
-  //         animation: {
-  //           easing: 'cubicInOut',
-  //           duration: 1000,
-  //           fade: {
-  //             opacity: 0,
-  //             isBaseOpacity: true
-  //           }
-  //         }
-  //       }
-  //     }
-  //   ]
-  // },
-
+  {
+    characterId: 'scene6-range-chart',
+    characterActions: [
+      {
+        startTime: 10000,
+        duration: 1000,
+        action: 'appear',
+        payload: {
+          animation: {
+            easing: 'cubicInOut',
+            duration: 1000,
+            fade: {
+              opacity: 1,
+              isBaseOpacity: true
+            }
+          }
+        }
+      },
+      {
+        startTime: 13000,
+        duration: 1000,
+        action: 'disappear',
+        payload: {
+          animation: {
+            easing: 'cubicInOut',
+            duration: 1000,
+            fade: {
+              opacity: 0,
+              isBaseOpacity: true
+            }
+          }
+        }
+      }
+    ]
+  },
   // 右图[8500 + 1000, 14000 + 1000]
   {
     characterId: 'scene6-img4',
@@ -1794,7 +1791,7 @@ export const scene6Characters: ICharacterSpec[] = [
   {
     type: 'BarChart',
     id: `scene6-chart`,
-    zIndex: 0,
+    zIndex: 1,
     position: {
       top: 232,
       left: 728,
@@ -1812,7 +1809,7 @@ export const scene6Characters: ICharacterSpec[] = [
   {
     type: 'CharacterChart',
     id: 'scene6-range-chart',
-    zIndex: 0,
+    zIndex: 2,
     position: {
       top: 280,
       left: 108,
@@ -1830,6 +1827,7 @@ export const scene6Characters: ICharacterSpec[] = [
 
 export const scene6: ISceneSpec = {
   id: 'scene6',
+  delay: -500,
   actions: [
     // 背景1 [1, 8500 + 1000]
     {
@@ -1907,10 +1905,10 @@ export const scene6: ISceneSpec = {
           }
         }
       ]
-    }
+    },
     // 6-1
-    // ...scene6_1
+    ...scene6_1,
     // // 6-2
-    // ...scene6_2
+    ...scene6_2
   ]
 };

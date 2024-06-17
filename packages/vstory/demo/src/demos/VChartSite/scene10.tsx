@@ -213,14 +213,14 @@ export const scene10Characters: ICharacterSpec[] = [
 
 export const scene10: ISceneSpec = {
   id: 'scene10',
-  delay: -1000, // FIXME:
+  delay: -1000,
   actions: [
     {
       characterId: 'scene10-background',
       characterActions: [
         {
           action: 'appear',
-          startTime: 500,
+          startTime: 1,
           duration: 500,
           payload: {
             animation: {

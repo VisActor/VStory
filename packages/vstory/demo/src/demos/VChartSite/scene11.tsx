@@ -1,6 +1,5 @@
 import type { ICharacterSpec } from '../../../../src/story/character';
 import type { ISceneSpec } from '../../../../src/story/interface';
-import scene11Person from '../../assets/scene11/person.png';
 import scene11BgDecoration from '../../assets/scene11/bg-decoration.png';
 import scene11TextEn from '../../assets/scene11/text-en.png';
 import scene11TextZh from '../../assets/scene11/text-zh.png';
@@ -308,13 +307,14 @@ export const scene11Characters: ICharacterSpec[] = [
 
 export const scene11: ISceneSpec = {
   id: 'scene11',
+  delay: -1000,
   actions: [
     {
       characterId: 'scene11-background',
       characterActions: [
         {
           action: 'appear',
-          startTime: 500,
+          startTime: 1,
           duration: 500,
           payload: {
             animation: {
@@ -331,7 +331,7 @@ export const scene11: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 500,
+          startTime: 1,
           duration: 500,
           payload: {
             animation: {
@@ -348,7 +348,7 @@ export const scene11: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 500,
+          startTime: 1,
           duration: 500,
           payload: {
             animation: {
@@ -367,7 +367,7 @@ export const scene11: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 500,
+          startTime: 1,
           duration: 500,
           payload: {
             animation: {
@@ -386,7 +386,7 @@ export const scene11: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 500,
+          startTime: 1,
           duration: 500,
           payload: {
             animation: {
@@ -424,7 +424,7 @@ export const scene11: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1500,
+          startTime: 2000,
           duration: 1000,
           payload: {
             animation: {
@@ -438,7 +438,7 @@ export const scene11: ISceneSpec = {
         },
         {
           action: 'disappear',
-          startTime: 3500,
+          startTime: 4500,
           duration: 1000,
           payload: {
             animation: {

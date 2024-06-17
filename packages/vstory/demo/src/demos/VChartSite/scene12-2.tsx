@@ -505,6 +505,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
 
 export const scene12_2: ISceneSpec = {
   id: 'scene12_2',
+  delay: -1000,
   actions: [
     {
       characterId: 'scene12_2-title',
