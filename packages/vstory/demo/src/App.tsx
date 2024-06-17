@@ -14,6 +14,7 @@ import { DisAppear } from './demos/DisAppear';
 import { StoryEdit } from './demos/StoryEdit';
 import { Appear } from './demos/Appear';
 import { GraphicEdit } from './demos/GraphicEdit';
+import { Playground } from './demos/Playground';
 
 const App = () => {
   const [activeIndex, setActiveIndex] = useLocalStorage('menuIndex', 0);
@@ -69,6 +70,10 @@ const App = () => {
     {
       name: 'GraphicEdit',
       component: GraphicEdit
+    },
+    {
+      name: 'Playground',
+      component: Playground
     }
   ];
   const selectedMenu = menus[activeIndex ?? menus.length - 1];

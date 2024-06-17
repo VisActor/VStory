@@ -42,12 +42,12 @@ export interface IEditComponent {
   isEditing: boolean;
 
   // 是否 开始/继续 编辑 返回false的话，会导致当前编辑结束
-  checkAction: (actionInfo: IEditActionInfo) => boolean;
+  checkAction: (actionInfo: IEditActionInfo | IEditSelectionInfo) => boolean;
 
   // 编辑结束
   editEnd: () => void;
 
-  getActiveCharacter: () => ICharacter | null;
+  getActiveCharacter: () => ICharacter | null | undefined;
 }
 
 export type IModelInfoSpecKey = {

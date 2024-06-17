@@ -14,14 +14,14 @@ export class TextSelection extends BaseSelection implements IEditComponent {
     super.editEnd();
     return;
   }
-  checkAction(actionInfo: IEditSelectionInfo): boolean {
+  checkAction(actionInfo: IEditSelectionInfo | IEditActionInfo): boolean {
     if (actionInfo.type !== EditActionEnum.singleSelection) {
       return false;
     }
-    if (!actionInfo.detail) {
+    if (!(actionInfo as IEditSelectionInfo).detail) {
       return false;
     }
-    if (actionInfo.detail.graphicType !== 'text') {
+    if ((actionInfo as IEditSelectionInfo).detail.graphicType !== 'text') {
       return false;
     }
     this.startEdit(actionInfo);

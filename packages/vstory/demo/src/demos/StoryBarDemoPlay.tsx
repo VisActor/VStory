@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import VChart, { IChartSpec } from '@visactor/vchart';
-import { ManualTicker } from '@visactor/vrender-core';
 import { StoryBar } from '../../../src/dsl/story-chart';
 import { StoryExecutor } from '../../../src/dsl/story-executor';
 

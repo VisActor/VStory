@@ -1,12 +1,12 @@
-import { ICharacterSpec } from './character/dsl-interface';
+import type { ICharacterSpec } from './character/dsl-interface';
 import { isString } from '@visactor/vutils';
-import { IStory, IStoryInitOption } from './interface/runtime-interface';
-import { ICharacter } from './character/runtime-interface';
+import type { IStory, IStoryInitOption } from './interface/runtime-interface';
+import type { ICharacter } from './character/runtime-interface';
 import { StoryCanvas } from './canvas/canvas';
-import { IStorySpec, ICharacterLink, IActSpec } from './interface';
+import type { IStorySpec, ICharacterLink, IActSpec } from './interface';
 import { StoryFactory } from './factory/factory';
 import { defaultTicker, defaultTimeline } from '@visactor/vrender-core';
-import { IPlayer } from './interface/player';
+import type { IPlayer } from './interface/player';
 import { Player } from './player';
 
 defaultTicker.remTimeline(defaultTimeline);
@@ -36,7 +36,6 @@ export class Story implements IStory {
     if (spec) {
       this.load(spec);
     }
-    console.log(this);
   }
 
   load(spec: IStorySpec) {
@@ -49,7 +48,7 @@ export class Story implements IStory {
     });
   }
 
-  public getCharacters(): { [key: string]: ICharacter } {
+  getCharacters(): { [key: string]: ICharacter } {
     return this._characters;
   }
 
@@ -83,5 +82,10 @@ export class Story implements IStory {
 
   getPlayer() {
     return this._player;
+  }
+
+  release() {
+    this._player.release();
+    this._canvas.release();
   }
 }

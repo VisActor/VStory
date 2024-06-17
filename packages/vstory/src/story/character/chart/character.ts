@@ -10,7 +10,6 @@ import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
 import { ChartDataTempTransform } from './spec-process/data-temp-transform';
 import type { ITicker } from '@visactor/vrender-core';
-import { manualTicker } from '../../player/ticker';
 import type { IChartTemp } from './temp/interface';
 import { SeriesSpecRuntime } from './runtime/series-spec';
 import type { StoryEvent } from '../../interface/runtime-interface';
@@ -89,7 +88,7 @@ export class CharacterChart extends CharacterVisactor {
       autoRender: false,
       disableDirtyBounds: true,
       viewBox,
-      ticker: manualTicker,
+      ticker: this._option.canvas.getStage().ticker,
       visibleAll: false,
       ...(this._spec.options.panel ?? {}),
       chartInitOptions: {
