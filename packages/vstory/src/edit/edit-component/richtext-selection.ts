@@ -22,16 +22,19 @@ export class RichTextSelection extends BaseSelection implements IEditComponent {
     super.editEnd();
     return;
   }
-  checkAction(actionInfo: IEditSelectionInfo): boolean {
+  checkAction(actionInfo: IEditSelectionInfo | IEditActionInfo): boolean {
     if (this.isEditing) {
       return this.checkActionWhileEditing(actionInfo);
     }
     return this.checkActionWhileNoEditing(actionInfo);
   }
 
-  checkActionWhileEditing(actionInfo: IEditSelectionInfo): boolean {
+  checkActionWhileEditing(actionInfo: IEditSelectionInfo | IEditActionInfo): boolean {
     // 点到其他内容了，return false
-    if (actionInfo.type === EditActionEnum.singleSelection && actionInfo.detail.graphicType !== this.type) {
+    if (
+      actionInfo.type === EditActionEnum.singleSelection &&
+      (actionInfo as IEditSelectionInfo).detail.graphicType !== this.type
+    ) {
       return false;
     }
 
@@ -43,8 +46,11 @@ export class RichTextSelection extends BaseSelection implements IEditComponent {
     return true;
   }
 
-  checkActionWhileNoEditing(actionInfo: IEditSelectionInfo): boolean {
-    if (actionInfo.type === EditActionEnum.singleSelection && actionInfo.detail.graphicType === this.type) {
+  checkActionWhileNoEditing(actionInfo: IEditSelectionInfo | IEditActionInfo): boolean {
+    if (
+      actionInfo.type === EditActionEnum.singleSelection &&
+      (actionInfo as IEditSelectionInfo).detail.graphicType === this.type
+    ) {
       this.startEdit(actionInfo);
       // graphic
       return true;

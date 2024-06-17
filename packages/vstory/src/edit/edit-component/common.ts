@@ -1,4 +1,4 @@
-import type { IEditComponent, IEditSelectionInfo } from './../interface';
+import type { IEditActionInfo, IEditComponent, IEditSelectionInfo } from './../interface';
 import { EditActionEnum } from './../interface';
 import type { Edit } from '../edit';
 import { BaseSelection } from './base-selection';
@@ -14,18 +14,18 @@ export class CommonEditComponent extends BaseSelection implements IEditComponent
     super.editEnd();
     return;
   }
-  checkAction(actionInfo: IEditSelectionInfo): boolean {
+  checkAction(actionInfo: IEditSelectionInfo | IEditActionInfo): boolean {
     if (actionInfo.type !== EditActionEnum.singleSelection) {
       return false;
     }
-    if (!actionInfo.detail) {
+    if (!(actionInfo as IEditSelectionInfo).detail) {
       return false;
     }
     this.startEdit(actionInfo);
     return true;
   }
 
-  startEdit(actionInfo: IEditSelectionInfo) {
+  startEdit(actionInfo: IEditSelectionInfo | IEditActionInfo) {
     super.startEdit(actionInfo);
     this.edit.startEdit({
       type: 'commonEdit',

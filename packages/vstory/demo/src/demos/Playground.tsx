@@ -1,8 +1,22 @@
-// @ts-nocheck
-import { ICharacterSpec } from '../../../../src/story/character';
-import { ISceneSpec } from '../../../../src/story/interface';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { IStorySpec } from '../../../src/story/interface';
+import { Story } from '../../../src/story/story';
+import { Edit } from '../../../src/edit/edit';
+import '../../../src/story/index';
+import { cloneDeep } from '@visactor/vutils';
+import { CommonEditComponent } from '../../../src/edit/edit-component/common';
+import { BoxSelection } from '../../../src/edit/edit-component/box-selection';
+import { TextSelection } from '../../../src/edit/edit-component/text-selection';
+import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
+import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
+import { Resizable, Enable } from 're-resizable';
 
-const chartSpecList = [
+Edit.registerEditComponent('common', CommonEditComponent);
+Edit.registerEditComponent('text', TextSelection);
+Edit.registerEditComponent('richtext', RichTextSelection);
+Edit.registerEditComponent('box-selection', BoxSelection);
+
+const defaultCode = `const chartSpecList = [
   {
     title: 'Timeline Chart',
     characterType: 'RangeColumnChart',
@@ -867,9 +881,9 @@ const chartSpecList = [
   }
 }));
 
-export const scene1Characters = chartSpecList.map((item, i) => ({
+const scene1Characters = chartSpecList.map((item, i) => ({
   type: item.characterType ?? 'CharacterChart',
-  id: `chart${i}`,
+  id: \`chart\${i}\`,
   zIndex: 1,
   position: {
     top: i < 5 ? 50 : 570,
@@ -887,11 +901,11 @@ export const scene1Characters = chartSpecList.map((item, i) => ({
   }
 }));
 
-export const scene1 = {
+const scene1 = {
   id: 'scene1',
   actions: [
     ...new Array(5).fill(0).map((_, i) => ({
-      characterId: `chart${i}`,
+      characterId: \`chart\${i}\`,
       characterActions: [
         {
           startTime: i * 300 + 500,
@@ -906,7 +920,7 @@ export const scene1 = {
       ]
     })),
     ...new Array(5).fill(0).map((_, i) => ({
-      characterId: `chart${9 - i}`,
+      characterId: \`chart\${9 - i}\`,
       characterActions: [
         {
           startTime: i * 300 + 500,
@@ -921,7 +935,7 @@ export const scene1 = {
       ]
     })),
     {
-      characterId: `title1`,
+      characterId: 'title1',
       characterActions: [
         {
           startTime: 1500,
@@ -938,7 +952,7 @@ export const scene1 = {
       ]
     },
     {
-      characterId: `title2`,
+      characterId: 'title2',
       characterActions: [
         {
           startTime: 2000,
@@ -955,7 +969,7 @@ export const scene1 = {
       ]
     },
     ...new Array(5).fill(0).map((_, i) => ({
-      characterId: `chart${9 - i}`,
+      characterId: \`chart\${9 - i}\`,
       characterActions: [
         {
           startTime: i * 100 + 2500,
@@ -970,7 +984,7 @@ export const scene1 = {
       ]
     })),
     ...new Array(5).fill(0).map((_, i) => ({
-      characterId: `chart${i}`,
+      characterId: \`chart\${i}\`,
       characterActions: [
         {
           startTime: i * 100 + 2500,
@@ -985,7 +999,7 @@ export const scene1 = {
       ]
     })),
     {
-      characterId: `titlesubtitle`,
+      characterId: 'titlesubtitle',
       characterActions: [
         {
           startTime: 2700,
@@ -1002,7 +1016,7 @@ export const scene1 = {
       ]
     },
     ...new Array(10).fill(0).map((_, i) => ({
-      characterId: `chart${9 - i}`,
+      characterId: \`chart\${9 - i}\`,
       characterActions: [
         {
           startTime: 6000,
@@ -1017,7 +1031,7 @@ export const scene1 = {
       ]
     })),
     {
-      characterId: `titlesubtitle`,
+      characterId: 'titlesubtitle',
       characterActions: [
         {
           startTime: 6000,
@@ -1034,4 +1048,335 @@ export const scene1 = {
       ]
     }
   ]
+};
+
+const scene2Characters = [
+  {
+    type: 'TextComponent',
+    id: 'title1',
+    zIndex: 1,
+    position: {
+      top: 300,
+      left: 500,
+      width: 500,
+      height: 200
+    },
+    options: {
+      graphic: { text: 'A BRIEF HISTORY', fontSize: 55, fontWeight: 'bold' }
+    }
+  },
+  {
+    type: 'TextComponent',
+    id: 'title2',
+    zIndex: 1,
+    position: {
+      top: 380,
+      left: 500,
+      width: 400,
+      height: 60
+    },
+    options: {
+      graphic: { text: 'OF CHARTS', fontSize: 55, fontWeight: 'bold' }
+    }
+  },
+  {
+    type: 'RichTextComponent',
+    id: 'titlesubtitle',
+    zIndex: 1,
+    position: {
+      top: 450,
+      left: 600,
+      width: 400,
+      height: 80
+    },
+    options: {
+      graphic: {
+        width: 400,
+        fontSize: 22,
+        fontWeight: 'bold',
+        textConfig: [
+          {
+            text: 'Powered By '
+          },
+          {
+            text: 'VChart',
+            fill: 'blue'
+          }
+        ]
+      }
+    }
+  },
+  {
+    type: 'TextComponent',
+    id: 'scene2-title2',
+    zIndex: 1,
+    position: {
+      top: 50,
+      left: 150,
+      width: 200,
+      height: 20
+    },
+    options: {
+      graphic: {
+        width: 400,
+        fontSize: 12,
+        fill: '#292729',
+        text: 'DEVELOPMENT ROADMAP'
+      }
+    }
+  }
+]
+
+const scene2 = {
+  id: 'scene2',
+  actions: [
+    {
+      characterId: 'title1',
+      characterActions: [
+        {
+          startTime: 0,
+          duration: 800,
+          action: 'moveTo',
+          destination: {
+            x: 250,
+            y: 80
+          },
+          payload: {
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        },
+        {
+          startTime: 0,
+          duration: 800,
+          action: 'style',
+          payload: {
+            graphic: {
+              fontSize: 40
+            },
+            animation: {
+              duration: 800
+            }
+          }
+        }
+      ]
+    },
+    {
+      characterId: 'title2',
+      characterActions: [
+        {
+          startTime: 0,
+          duration: 800,
+          action: 'moveTo',
+          destination: {
+            x: 550,
+            y: 80
+          },
+          payload: {
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        },
+        {
+          startTime: 0,
+          duration: 800,
+          action: 'style',
+          payload: {
+            graphic: {
+              fontSize: 40
+            },
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        }
+      ]
+    },
+    {
+      characterId: 'scene2-title2',
+      characterActions: [
+        {
+          startTime: 800,
+          duration: 800,
+          action: 'appear',
+          payload: {
+            animation: {
+              duration: 800,
+              easing: 'linear',
+              effect: 'fade'
+            }
+          }
+        }
+      ]
+    },
+    {
+      characterId: 'title1',
+      characterActions: [
+        {
+          startTime: 2000,
+          duration: 800,
+          action: 'moveTo',
+          destination: {
+            x: -650,
+            y: 80
+          },
+          payload: {
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        }
+      ]
+    },
+    {
+      characterId: 'title2',
+      characterActions: [
+        {
+          startTime: 2000,
+          duration: 800,
+          action: 'moveTo',
+          destination: {
+            x: -350,
+            y: 80
+          },
+          payload: {
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        }
+      ]
+    },
+    {
+      characterId: 'scene2-title2',
+      characterActions: [
+        {
+          startTime: 2000,
+          duration: 800,
+          action: 'moveTo',
+          destination: {
+            x: -750,
+            y: 80
+          },
+          payload: {
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+scene1Characters.forEach(c => {
+  c.position.left = c.position.left / 3 * 2;
+  c.position.top = c.position.top / 3 * 2;
+});
+scene2Characters.forEach(c => {
+  c.position.left = c.position.left / 3 * 2;
+  c.position.top = c.position.top / 3 * 2;
+});
+
+const tempSpec = {
+    characters: [
+    ...scene1Characters,
+    ...scene2Characters
+    ],
+    acts: [
+    {
+        id: 'default-chapter',
+        scenes: [
+          scene1,
+          scene2
+        ]
+    }
+    ]
+};
+
+return tempSpec;`;
+
+interface IPlayerPropsType {
+  code: string;
+}
+
+export function Player(props: IPlayerPropsType) {
+  const storyRef = useRef<Story>();
+  useEffect(() => {
+    if (!props.code) {
+      return;
+    }
+    if (storyRef.current) {
+      storyRef.current.release();
+    }
+    let json;
+    try {
+      json = JSON.parse(props.code);
+    } catch (err) {
+      try {
+        const func = new Function(props.code);
+        json = func();
+      } catch (err) {
+        return;
+      }
+    }
+    console.log(json);
+    const story = new Story(json, { dom: 'abc' });
+    storyRef.current = story;
+    story.play();
+  }, [props.code]);
+  return <div style={{ width: '100%', height: '100%' }} id="abc"></div>;
+}
+
+export const Playground = () => {
+  const [code, setCode] = useState(defaultCode);
+  const stoRef = useRef<NodeJS.Timeout>();
+  const time = 2000;
+
+  const handleChangeCode = useCallback((code: string) => {
+    if (stoRef.current) {
+      clearTimeout(stoRef.current);
+    }
+    stoRef.current = setTimeout(() => {
+      setCode(code);
+    }, time);
+  }, []);
+
+  return (
+    <div style={{ width: '100%', height: '100%' }}>
+      <div style={{ fontSize: 26, height: 100 }}>VStory Playground</div>
+      <div style={{ width: '100%', height: 600, display: 'flex', padding: '0 16px', boxSizing: 'border-box' }}>
+        <div style={{ flexGrow: 1, border: '1px solid #cecece', height: '100%' }}>
+          <Player code={code} />
+        </div>
+        <Resizable
+          enable={{
+            top: false,
+            right: false,
+            bottom: false,
+            left: true,
+            topRight: false,
+            bottomRight: false,
+            bottomLeft: false,
+            topLeft: false
+          }}
+          defaultSize={{
+            width: 600
+          }}
+        >
+          <div style={{ width: '100%', border: '1px solid #cecece', height: '100%', borderLeft: '2px solid #cecece' }}>
+            <Editor defaultLanguage="javascript" defaultValue={defaultCode} onChange={v => handleChangeCode(v || '')} />
+          </div>
+        </Resizable>
+      </div>
+    </div>
+  );
 };
