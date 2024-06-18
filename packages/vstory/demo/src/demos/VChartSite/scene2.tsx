@@ -8,13 +8,13 @@ export const scene2Characters: ICharacterSpec[] = [
     id: `title1`,
     zIndex: 1,
     position: {
-      top: 300,
-      left: 500,
-      width: 500,
+      top: 290,
+      left: 680,
+      width: 775,
       height: 200
     },
     options: {
-      graphic: { text: 'A BRIEF HISTORY', fontSize: 55, fontWeight: 'bold' }
+      graphic: { text: 'A BRIEF HISTORY', fontSize: 75, fontWeight: 'bold' }
     }
   },
   {
@@ -22,13 +22,13 @@ export const scene2Characters: ICharacterSpec[] = [
     id: `title2`,
     zIndex: 1,
     position: {
-      top: 380,
-      left: 500,
-      width: 400,
+      top: 390,
+      left: 680,
+      width: 600,
       height: 60
     },
     options: {
-      graphic: { text: 'OF CHARTS', fontSize: 55, fontWeight: 'bold' }
+      graphic: { text: 'OF CHARTS', fontSize: 75, fontWeight: 'bold' }
     }
   },
   {
@@ -36,8 +36,8 @@ export const scene2Characters: ICharacterSpec[] = [
     id: `titlesubtitle`,
     zIndex: 1,
     position: {
-      top: 450,
-      left: 600,
+      top: 470,
+      left: 770,
       width: 400,
       height: 80
     },

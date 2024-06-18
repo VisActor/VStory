@@ -14,4 +14,5 @@ export interface IPlayer {
     }
   ): void;
   setCurrentAct(id: number | string): void;
+  getCurrentAct(): number | string;
 }

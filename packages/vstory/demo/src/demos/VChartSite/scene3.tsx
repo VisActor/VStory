@@ -481,7 +481,8 @@ export const scene3: ISceneSpec = {
               duration: 700,
               easing: easeInOutQuad,
               move: {
-                from: 'right'
+                from: 'right',
+                isVariableSpeed: false
               }
             }
           }
@@ -493,11 +494,11 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 3000,
+          duration: 700,
           action: 'appear',
           payload: {
             animation: {
-              duration: 3000,
+              duration: 700,
               easing: easeInOutQuad,
               move: {
                 from: 'right',
@@ -513,11 +514,11 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 3000,
+          duration: 700,
           action: 'appear',
           payload: {
             animation: {
-              duration: 3000,
+              duration: 700,
               easing: easeInOutQuad,
               move: {
                 from: 'right',
@@ -533,11 +534,11 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 3000,
+          duration: 700,
           action: 'appear',
           payload: {
             animation: {
-              duration: 3000,
+              duration: 700,
               easing: easeInOutQuad,
               move: {
                 from: 'right',
@@ -553,11 +554,11 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 3000,
+          duration: 700,
           action: 'appear',
           payload: {
             animation: {
-              duration: 3000,
+              duration: 700,
               easing: easeInOutQuad,
               move: {
                 from: 'right',
@@ -573,11 +574,11 @@ export const scene3: ISceneSpec = {
       characterActions: [
         {
           startTime: 1,
-          duration: 3000,
+          duration: 700,
           action: 'appear',
           payload: {
             animation: {
-              duration: 3000,
+              duration: 700,
               easing: easeInOutQuad,
               move: {
                 from: 'right',
@@ -974,9 +975,6 @@ export const scene3: ISceneSpec = {
             animation: {
               easing: 'cubicInOut',
               duration: 1000,
-              move: {
-                to: 'right'
-              },
               fade: {
                 opacity: 0.1,
                 isBaseOpacity: true

@@ -1,6 +1,5 @@
-import VChart, { ISpec } from '@visactor/vchart';
+import type { VChart, ISpec } from '@visactor/vchart';
 import { merge } from '@visactor/vutils';
-import { getAllSeriesMarksByMarkType } from '../../utils';
 import { IChartAppearAction } from '../../../../types/chart/appear';
 import { transformRectAppear } from './transformRectAppear';
 import { ICharacterVisactor } from '../../../../../story/character/visactor/interface';

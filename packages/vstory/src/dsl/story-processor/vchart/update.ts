@@ -22,7 +22,7 @@ export const updateProcessor = async (
   const { id: dataId, data, values } = payload;
 
   if (values) {
-    await instance.updateDataSync(dataId, values);
+    instance.updateDataSync(dataId, values);
   } else {
     const rowData = cloneDeep(vchart._dataSet.getDataView(dataId).rawData);
 
@@ -36,6 +36,6 @@ export const updateProcessor = async (
       }
     });
 
-    await instance.updateDataSync(dataId, rowData);
+    instance.updateDataSync(dataId, rowData);
   }
 };

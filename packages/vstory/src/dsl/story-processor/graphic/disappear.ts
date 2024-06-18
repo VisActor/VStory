@@ -12,7 +12,6 @@ export const graphicDisappearProcessor = async (
   const { effect } = animation ?? {};
 
   const effects = effect && disappearEffectMap[effect] ? [effect] : Object.keys(disappearEffectMap);
-
   effects.forEach(effect => {
     if (animation.effect === effect || animation[effect]) {
       // 获取执行方法

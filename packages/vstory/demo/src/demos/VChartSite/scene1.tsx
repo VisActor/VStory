@@ -28,7 +28,6 @@ const chartSpecList = [
           ]
         }
       ],
-
       direction: 'horizontal',
       seriesSpec: [
         {
@@ -845,6 +844,8 @@ const chartSpecList = [
             valueField: 'value',
             outerRadius: 1,
             innerRadius: 0,
+            gap: 1,
+            sunburst: { style: { stroke: false, lineWidth: 0 } },
             label: {
               visible: false
             }
@@ -873,7 +874,7 @@ export const scene1Characters = chartSpecList.map((item, i) => ({
   zIndex: 1,
   position: {
     top: i < 5 ? 50 : 570,
-    left: 100 + (i % 5) * 170 + 20,
+    left: 220 + (i % 5) * (110 + 72),
     width: 110,
     height: 110
   },
@@ -1011,7 +1012,8 @@ export const scene1 = {
           payload: {
             animation: {
               duration: 1000
-            }
+            },
+            fade: { isBaseOpacity: true }
           }
         }
       ]

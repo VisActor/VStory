@@ -259,7 +259,7 @@ export const scene8Characters: ICharacterSpec[] = [
 
 export const scene8: ISceneSpec = {
   id: 'scene8',
-  delay: 0,
+  delay: -500,
   actions: [
     {
       characterId: 'scene8-background',
@@ -432,10 +432,10 @@ export const scene8: ISceneSpec = {
   ]
 };
 
-scene8.actions.forEach(({ characterActions }) => {
+scene8.actions.forEach(({ characterId, characterActions }) => {
   characterActions.push({
     action: 'disappear',
-    startTime: 7000,
+    startTime: characterId === 'scene8-background' ? 7500 : 7000,
     duration: 500,
     payload: {
       animation: {

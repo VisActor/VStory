@@ -74,12 +74,24 @@ export function scaleOut(graphic: IGraphic, params: IScaleOutParams) {
   if (!canDoGraphicAnimation(graphic, params)) {
     return false;
   }
+  debugger;
   const { scale = {} } = params;
   const ratio = scale.ratio ?? params.ratio ?? 0;
+  const scaleCenter = scale.scaleCenter ?? params.scaleCenter;
   const duration = scale.duration ?? params.duration;
   const easing = scale.easing ?? params.easing;
-
-  graphic.animate().to({ scaleX: ratio, scaleY: ratio }, duration, easing as EasingType);
+  const originScaleCenter = graphic.attribute.scaleCenter;
+  if (scaleCenter) {
+    graphic.setAttributes({ scaleCenter });
+  }
+  graphic
+    .animate()
+    .to({ scaleX: ratio, scaleY: ratio }, duration, easing as EasingType)
+    .onEnd(() => {
+      if (originScaleCenter) {
+        graphic.setAttributes({ scaleCenter: originScaleCenter });
+      }
+    });
   return true;
 }
 
@@ -155,7 +167,7 @@ export function commonDisappearEffect(
 ) {
   let doAnimation = true;
   switch (effect) {
-    case 'shrink':
+    case 'scale':
       scaleOut(graphic, params);
       break;
     case 'fade':

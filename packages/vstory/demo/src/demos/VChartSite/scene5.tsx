@@ -7,6 +7,7 @@ import scene5ChartImage from '../../assets/scene5/chart.png';
 import scene5EnText from '../../assets/scene5/text-en.png';
 import scene5ZhText from '../../assets/scene5/text-zh.png';
 import { easeInOutQuad } from './util';
+import { Matrix } from '@visactor/vutils';
 
 const chartSpec = {
   type: 'sequence',
@@ -1038,6 +1039,15 @@ const chartSpec = {
   ]
 };
 
+const getTransformPointFunc = (offsetX: number, offsetY: number, scaleX: number, scaleY: number) => {
+  const m = new Matrix().translate(-offsetX, -offsetY).setScale(1 / scaleX, 1 / scaleY);
+  return (x: number, y: number) => {
+    const point = { x: 0, y: 0 };
+    m.transformPoint({ x, y }, point);
+    return point;
+  };
+};
+
 export const scene5Characters: ICharacterSpec[] = [
   {
     type: 'RectComponent',
@@ -1196,7 +1206,6 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-background-top',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -1216,7 +1225,6 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-background-decoration',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -1236,7 +1244,6 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-background-bottom',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -1256,7 +1263,6 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-title-image',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -1276,7 +1282,6 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-zh-text',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 200,
           duration: 700,
           action: 'appear',
@@ -1296,7 +1301,6 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-chart-image',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 400,
           duration: 700,
           action: 'appear',
@@ -1313,41 +1317,9 @@ export const scene5: ISceneSpec = {
       ]
     },
     {
-      characterId: 'scene5-chart',
-      characterActions: [
-        {
-          // TODO: startOffset
-          startTime: 2000,
-          duration: 700,
-          action: 'appear',
-          payload: {
-            animation: {
-              easing: easeInOutQuad,
-              duration: 700,
-              effect: 'fade'
-            }
-          }
-        },
-        {
-          // TODO: startOffset
-          startTime: 4000,
-          duration: 700,
-          action: 'disappear',
-          payload: {
-            animation: {
-              easing: easeInOutQuad,
-              duration: 700,
-              effect: 'fade'
-            }
-          }
-        }
-      ]
-    },
-    {
       characterId: 'scene5-atom',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 1,
           duration: 700,
           action: 'appear',
@@ -1364,10 +1336,45 @@ export const scene5: ISceneSpec = {
       ]
     },
     {
+      characterId: 'scene5-chart',
+      characterActions: [
+        {
+          startTime: 2000,
+          duration: 700,
+          action: 'appear',
+          payload: {
+            animation: {
+              easing: easeInOutQuad,
+              duration: 700,
+              effect: 'fade',
+              fade: {
+                isBaseOpacity: true
+              }
+            }
+          }
+        },
+        {
+          startTime: 4000,
+          duration: 700,
+          action: 'disappear',
+          payload: {
+            animation: {
+              easing: easeInOutQuad,
+              duration: 700,
+              effect: 'fade',
+              fade: {
+                opacity: 0,
+                isBaseOpacity: true
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
       characterId: 'scene5-en-text',
       characterActions: [
         {
-          // TODO: startOffset
           startTime: 300,
           duration: 700,
           action: 'appear',
@@ -1385,3 +1392,56 @@ export const scene5: ISceneSpec = {
     }
   ]
 };
+
+// disappear
+scene5.actions
+  .filter(({ characterId }) => characterId !== 'scene5-chart')
+  .forEach(({ characterId, characterActions }) => {
+    const duration = 700;
+
+    if (characterId !== 'scene5-background-decoration') {
+      const scaleX = 4;
+      const scaleY = 4;
+      const transformPointFunc = getTransformPointFunc(-450, -180, scaleX, scaleY);
+
+      const character = scene5Characters.find(c => c.id === characterId);
+      if (character) {
+        // @ts-ignore
+        const { left, top, width, height } = character.position;
+        const { x, y } = transformPointFunc(left, top);
+        const newWidth = width * scaleX;
+        const newHeight = height * scaleY;
+        characterActions.push({
+          startTime: 5400,
+          duration,
+          action: 'style',
+          payload: {
+            graphic: {
+              width: newWidth,
+              height: newHeight,
+              x,
+              y
+            },
+            animation: {
+              easing: easeInOutQuad,
+              duration
+            }
+          }
+        });
+      }
+    }
+    characterActions.push({
+      startTime: 5400,
+      duration,
+      action: 'disappear',
+      payload: {
+        animation: {
+          easing: easeInOutQuad,
+          duration,
+          fade: {
+            opacity: 0
+          }
+        }
+      }
+    });
+  });

@@ -96,6 +96,10 @@ export class Player implements IPlayer {
     }
   }
 
+  getCurrentAct() {
+    return this._currAct?.id;
+  }
+
   // 清除当前状态，一般用于回放操作
   reset() {
     this._currAct.characters.forEach(item => {
