@@ -1,7 +1,7 @@
-import { ACustomAnimate, createLine, createSymbol, getTextBounds } from '@visactor/vrender-core';
+import { ACustomAnimate, createLine, getTextBounds, registerShadowRootGraphic } from '@visactor/vrender-core';
 import type { IGraphic } from '@visactor/vrender-core';
 import { isArray } from '@visactor/vutils';
-
+registerShadowRootGraphic();
 export class TypeWriter extends ACustomAnimate<{ text: string }> {
   declare valid: boolean;
   declare target: IGraphic;
@@ -19,15 +19,6 @@ export class TypeWriter extends ACustomAnimate<{ text: string }> {
   }
 
   onBind(): void {
-    // const symbol = createSymbol({
-    //   x: this.target.attribute.x,
-    //   y: this.target.attribute.y,
-    //   symbolType: 'circle',
-    //   size: 6,
-    //   fill: 'red'
-    // });
-    // this.target.parent.add(symbol);
-    // console.log(this.target);
     this.fromText = this.from?.text ?? '';
     this.toText = this.to?.text ?? '';
     if (!this.toText || isArray(this.toText)) {
