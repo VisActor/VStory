@@ -2,8 +2,8 @@ import { TemplateChartType } from '../constant';
 import { CartesianSingleSeriesTemp } from './cartesian-single';
 
 export class BarTemp extends CartesianSingleSeriesTemp {
-  static type = TemplateChartType.bar;
-  type = BarTemp.type;
+  static type: string = TemplateChartType.bar;
+  type: string = BarTemp.type;
   // 唯一系列类型
   seriesType = 'bar';
   // 默认是否展示总计标签
@@ -18,6 +18,7 @@ export class BarTemp extends CartesianSingleSeriesTemp {
   }
 
   afterInitializeChart(): void {
+    // eslint-disable-next-line no-console
     console.log('afterInitializeChart');
   }
 }

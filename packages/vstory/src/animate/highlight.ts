@@ -1,6 +1,7 @@
-import { Dict, isArray } from '@visactor/vutils';
+import type { Dict } from '@visactor/vutils';
+import { isArray } from '@visactor/vutils';
 import type { Template } from '../template/base-template';
-import { Data, MaybeArray } from '../type/common';
+import type { Data, MaybeArray } from '../type/common';
 import { getAllSeriesMarksWithoutRoot } from '../util/vchart-api';
 import { GraphicAnimate } from './animate';
 import { Action } from '../scene/action';
@@ -43,7 +44,7 @@ class HighLight extends GraphicAnimate {
           });
           vchart.updateState({
             highlight: {
-              filter: { datums: _dataList, dataKeys: undefined }
+              filter: { datums: _dataList, dataKeys: undefined } as any
             }
           });
         }

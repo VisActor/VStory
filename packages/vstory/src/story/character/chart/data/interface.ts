@@ -1,5 +1,5 @@
-import type { ICommonInitOption } from '../../../core/interface';
-import type { DataSet } from '@visactor/vdataset';
+// import type { ICommonInitOption } from '../../../core/interface';
+// import type { DataSet } from '@visactor/vdataset';
 import { type EventEmitter } from '@visactor/vutils';
 
 export type IDataType = any;
@@ -54,13 +54,13 @@ export interface IDataParser {
 export interface IDataParserConstructor {
   type: string;
   new (
-    dataSet: DataSet,
+    dataSet: any,
     value: any,
     option: {
       updateCall: DataUpdateCall;
       errorCall: DataErrorCall;
       currentData?: IDataParser;
       emitter: EventEmitter;
-    } & ICommonInitOption
+    }
   ): IDataParser;
 }

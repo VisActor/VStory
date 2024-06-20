@@ -13,8 +13,8 @@ export function spec() {
 }
 
 export class TreeMapTemp extends BaseTemp {
-  static type = TemplateChartType.treemap;
-  type = TreeMapTemp.type;
+  static type: string = TemplateChartType.treemap;
+  type: string = TreeMapTemp.type;
   checkDataEnable(data: StandardData, opt?: any): boolean {
     return CommonStandardDataCheck(data);
   }

@@ -1,6 +1,6 @@
-import VChart from '@visactor/vchart';
-import { IOrientType } from '@visactor/vchart/src/typings';
-import { IChartAppearAction } from '../../../../types/chart/appear';
+import type VChart from '@visactor/vchart';
+import type { IChartAppearAction } from '../../../../types/chart/appear';
+import type { IOrientType } from '@visactor/vrender-components';
 
 // 将payload转换为chart内置的动画type
 export const transformRectAppear = (
@@ -59,12 +59,11 @@ const rectGrow = (
           overall: yAxis?.getScale(0).scale(0),
           orient: data > 0 ? 'negative' : 'positive'
         };
-      } else {
-        return {
-          overall: xAxis?.getScale(0).scale(0),
-          orient: data > 0 ? 'negative' : 'positive'
-        };
       }
+      return {
+        overall: xAxis?.getScale(0).scale(0),
+        orient: data > 0 ? 'negative' : 'positive'
+      };
     }
   };
 };
@@ -99,17 +98,17 @@ function isYAxis(orient: IOrientType) {
 const getXYAxis = (instance: VChart) => {
   const axes = instance.getChart().getComponentsByKey('axes');
   const xAxis = axes.find(axis => {
-    const orient = axis.getOrient();
+    const orient = (axis as any).getOrient();
     if (isXAxis(orient)) {
       return true;
     }
-  });
+  }) as any;
   const yAxis = axes.find(axis => {
-    const orient = axis.getOrient();
+    const orient = (axis as any).getOrient();
     if (isYAxis(orient)) {
       return true;
     }
-  });
+  }) as any;
 
   return [xAxis, yAxis];
 };

@@ -1,4 +1,4 @@
-import { IChartCharacterSpec } from '../../dsl-interface';
+import type { IChartCharacterSpec } from '../../dsl-interface';
 import { cloneDeep } from '@visactor/vutils';
 import type { IChartSpecProcess } from './interface';
 import type { ChartDataTempTransform } from './data-temp-transform';
@@ -29,7 +29,7 @@ export class SpecProcess extends SpecProcessBase implements IChartSpecProcess {
   protected _characterSpec: IChartCharacterSpec = cloneDeep(DefaultEditorSpec);
 
   // @ts-ignore
-  protected declare _character: EditorChart;
+  protected declare _character: any;
 
   protected declare _dataTempTransform: ChartDataTempTransform;
 
@@ -38,5 +38,7 @@ export class SpecProcess extends SpecProcessBase implements IChartSpecProcess {
     this._dataTempTransform.updateChartTemp(this._characterSpec.type);
   }
 
-  protected _mergeConfig() {}
+  protected _mergeConfig() {
+    return;
+  }
 }

@@ -1,4 +1,4 @@
-import type { VChart, IChartSpec, IMarkPointSpec, MarkPoint } from '@visactor/vchart';
+import type { VChart, IChartSpec, IMarkPointSpec } from '@visactor/vchart';
 import type { IActionContext, IFlickerAction } from '../../types';
 import type { CreateMarkPointAction } from '../../types/chart/createComponent';
 import { getComponentById } from '../../../util/vchart-api';
@@ -16,7 +16,7 @@ export const createMarkPointProcessor = async (
     coordinate: action.data,
     itemContent: action.payload.itemContent,
     itemLine: action.payload.itemLine
-  });
+  } as any);
   (spec as any).markPoint = markPoint;
   chartInstance.updateSpecSync(spec);
 };
@@ -27,7 +27,7 @@ export const markPointFlickerProcessor = async (
   markPointAction: IFlickerAction & IActionContext
 ) => {
   const { elementId } = markPointAction;
-  const vchartMarkPoint = getComponentById(chartInstance, elementId) as MarkPoint;
+  const vchartMarkPoint = getComponentById(chartInstance, elementId) as any;
   if (vchartMarkPoint && vchartMarkPoint._markerComponent) {
     const marker = vchartMarkPoint._markerComponent._item;
     if (marker) {

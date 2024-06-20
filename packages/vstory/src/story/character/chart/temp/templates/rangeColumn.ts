@@ -1,10 +1,10 @@
 import { TemplateChartType } from '../constant';
 import { CartesianSingleSeriesTemp } from './cartesian-single';
-import { CharacterChart } from '../../character';
+import type { CharacterChart } from '../../character';
 
 export class RangeColumnTemp extends CartesianSingleSeriesTemp {
-  static type = TemplateChartType.rangeColumn;
-  type = RangeColumnTemp.type;
+  static type: string = TemplateChartType.rangeColumn;
+  type: string = RangeColumnTemp.type;
   // 唯一系列类型
   seriesType = 'rangeColumn';
   // 是否消除维度轴的2测留白

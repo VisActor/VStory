@@ -13,8 +13,8 @@ export function spec() {
 }
 
 export class SunburstTemp extends BaseTemp {
-  static type = TemplateChartType.sunburst;
-  type = SunburstTemp.type;
+  static type: string = TemplateChartType.sunburst;
+  type: string = SunburstTemp.type;
   checkDataEnable(data: StandardData, opt?: any): boolean {
     return CommonStandardDataCheck(data);
   }

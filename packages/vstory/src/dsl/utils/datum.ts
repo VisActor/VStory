@@ -1,10 +1,10 @@
 import { isArray } from '@visactor/vutils';
 
-export const isDatumEqual = (source, target) => {
+export const isDatumEqual = (source: any, target: any) => {
   const sourceData = isArray(source) ? source : [source];
   const targetData = target;
 
-  const compareOne = (s, t) => {
+  const compareOne = (s: Record<string, any>, t: Record<string, any>) => {
     const sKeys = Object.keys(s);
     const tKeys = Object.keys(t);
 

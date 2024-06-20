@@ -8,8 +8,8 @@ import { ChartDimensionField, ChartValueField } from '../../const';
 import { PolarSingleSeriesTemp } from './polar-single';
 
 export class RoseTemp extends PolarSingleSeriesTemp {
-  static type = TemplateChartType.rose;
-  type = RoseTemp.type;
+  static type: string = TemplateChartType.rose;
+  type: string = RoseTemp.type;
   protected _getSeriesSpec() {
     return {
       type: 'rose'

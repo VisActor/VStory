@@ -1,4 +1,5 @@
-import VChart, { IChartSpec } from '@visactor/vchart';
+import type { IChartSpec } from '@visactor/vchart';
+import type VChart from '@visactor/vchart';
 import { getAllSeriesMarksWithoutRoot } from '../../../util/vchart-api';
 import { isDatumEqual } from '../../utils/datum';
 import { isNil } from '@visactor/vutils';
@@ -37,7 +38,7 @@ export const danceProcessor = (chartInstance: VChart, spec: IChartSpec, addActio
       element
         .getGraphicItem()
         .animate()
-        .to(v, duration / queue.length, 'easeIn');
+        .to(v, duration / queue.length, 'elasticIn');
     });
   });
 };

@@ -55,3 +55,5 @@ const splitModule = new ContainerModule((bind, unbind, isBound, rebind) => {
   bind(CanvasPickerContribution).toService(VChartPicker);
 });
 container.load(splitModule);
+
+export * from './story';

@@ -13,8 +13,8 @@ export function spec() {
 }
 
 export class PieTemp extends BaseTemp {
-  static type = TemplateChartType.pie;
-  type = PieTemp.type;
+  static type: string = TemplateChartType.pie;
+  type: string = PieTemp.type;
   checkDataEnable(data: StandardData, opt?: any): boolean {
     return CommonStandardDataCheck(data);
   }

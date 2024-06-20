@@ -2,8 +2,8 @@ import { TemplateChartType } from '../constant';
 import { CartesianSingleSeriesTemp } from './cartesian-single';
 
 export class ScatterTemp extends CartesianSingleSeriesTemp {
-  static type = TemplateChartType.scatter;
-  type = ScatterTemp.type;
+  static type: string = TemplateChartType.scatter;
+  type: string = ScatterTemp.type;
   // 唯一系列类型
   seriesType = 'scatter';
   // 是否消除维度轴的2测留白

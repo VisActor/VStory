@@ -3,7 +3,7 @@ import { isString } from '@visactor/vutils';
 import type { IStory, IStoryInitOption } from './interface/runtime-interface';
 import type { ICharacter } from './character/runtime-interface';
 import { StoryCanvas } from './canvas/canvas';
-import type { IStorySpec, ICharacterLink, IActSpec } from './interface';
+import type { IStorySpec, IActSpec } from './interface';
 import { StoryFactory } from './factory/factory';
 import { defaultTicker, defaultTimeline } from '@visactor/vrender-core';
 import type { IPlayer } from './interface/player';
@@ -52,16 +52,17 @@ export class Story implements IStory {
     return this._characters;
   }
 
-  private _createCharacter(spec: ICharacterSpec | ICharacterLink) {
+  private _createCharacter(spec: ICharacterSpec) {
     const option = { story: this, canvas: this._canvas, graphicParent: this._canvas.getStage().defaultLayer };
     if ((<ICharacterSpec>spec).id) {
       if (!this._characters[(<ICharacterSpec>spec).id]) {
         this._characters[(<ICharacterSpec>spec).id] = StoryFactory.createCharacter(<ICharacterSpec>spec, option);
       }
       return this._characters[(<ICharacterSpec>spec).id];
-    } else if ((<ICharacterLink>spec).characterId) {
-      return this._characters[(<ICharacterLink>spec).characterId];
     }
+    //  else if ((<ICharacterLink>spec).characterId) {
+    //   return this._characters[(<ICharacterLink>spec).characterId];
+    // }
     return null;
   }
 

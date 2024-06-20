@@ -6,7 +6,7 @@ import { Graphic } from './graphic';
 export class GraphicLine extends Graphic {
   protected _graphic: ILine;
 
-  getInitialAttributes() {
+  getInitialAttributes(): Record<string, any> {
     return {
       x: 0,
       y: 0,

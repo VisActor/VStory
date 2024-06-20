@@ -1,8 +1,9 @@
-import VChart, { ISpec } from '@visactor/vchart';
+import type { ISpec } from '@visactor/vchart';
+import type VChart from '@visactor/vchart';
 import { getAllSeriesMarksWithoutRoot } from '../../../../util/vchart-api';
 import { isDatumEqual } from '../../../utils/datum';
 import { isValid } from '@visactor/vutils';
-import { IChartStyleAction } from '../../../types/chart/style';
+import type { IChartStyleAction } from '../../../types/chart/style';
 
 export const createMarkStyleProcessorByMarkType =
   (markType: string) => async (chartInstance: VChart, spec: ISpec, updateStyleAction: IChartStyleAction) => {
@@ -18,7 +19,7 @@ export const createMarkStyleProcessorByMarkType =
       const attrs = Object.keys(action.payload);
 
       const encodeHelper = (attribute: string) => {
-        return (datum, element) => {
+        return (datum: any, element: any) => {
           if (isDatumEqual(datum, action.payload.data) && isValid(payload?.[attribute])) {
             return payload[attribute];
           }

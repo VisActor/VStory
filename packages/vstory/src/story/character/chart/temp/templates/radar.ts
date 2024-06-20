@@ -4,8 +4,8 @@ import { TemplateChartType } from '../constant';
 import { PolarSingleSeriesTemp } from './polar-single';
 
 export class RadarTemp extends PolarSingleSeriesTemp {
-  static type = TemplateChartType.radar;
-  type = RadarTemp.type;
+  static type: string = TemplateChartType.radar;
+  type: string = RadarTemp.type;
   checkDataEnable(data: StandardData, opt?: any): boolean {
     return CommonStandardDataCheck(data);
   }

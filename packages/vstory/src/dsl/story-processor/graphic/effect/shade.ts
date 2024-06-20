@@ -1,6 +1,6 @@
 import type { EasingType, IGraphic } from '@visactor/vrender-core';
-import type { IDarkenParams } from '../../../types/common/Darken';
-import type { IBrightenParams } from '../../../types/common/Brighten';
+import type { IDarkenParams } from '../../../types/common/darken';
+import type { IBrightenParams } from '../../../types/common/brighten';
 
 import { Color, isString, rgbToHsl } from '@visactor/vutils';
 

@@ -13,8 +13,8 @@ export function spec() {
 }
 
 export class WordCloudTemp extends BaseTemp {
-  static type = TemplateChartType.wordcloud;
-  type = WordCloudTemp.type;
+  static type: string = TemplateChartType.wordcloud;
+  type: string = WordCloudTemp.type;
   checkDataEnable(data: StandardData, opt?: any): boolean {
     const check = CommonStandardDataCheck(data);
     return check;

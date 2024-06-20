@@ -1,8 +1,8 @@
-import { IChartCharacterSpec } from '../dsl-interface';
+import type { IChartCharacterSpec } from '../dsl-interface';
 import type { EventEmitter } from '@visactor/vutils';
 import type { ICharacter } from '../runtime-interface';
 import type { ISpec, IVChart } from '@visactor/vchart';
-import { IGroup } from '@visactor/vrender-core';
+import type { IGroup } from '@visactor/vrender-core';
 
 export type StandardData = IDataValue | IDataValue[];
 export type IParserValue = any;
@@ -37,6 +37,8 @@ export interface IDataTempTransform {
 
   // 释放
   release: () => void;
+
+  dataParser?: IDataParser;
 }
 
 export interface IDataTempTransformConstructor {
@@ -122,7 +124,7 @@ export interface IVisactorTempConstructor {
 export interface IVisactorGraphic extends IGroup {
   readonly vProduct: IVChart;
 
-  updateSpec(spec: any): void;
+  updateSpec: (spec: any) => void;
 }
 
 // 编辑元素

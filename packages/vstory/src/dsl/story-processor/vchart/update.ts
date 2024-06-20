@@ -30,7 +30,7 @@ export const updateProcessor = async (
 
     items.forEach(item => {
       const { sourceValue, targetValue } = item;
-      const dataIndex = rowData.findIndex(v => isMatch(v, sourceValue));
+      const dataIndex = rowData.findIndex((v: any) => isMatch(v, sourceValue));
       if (dataIndex !== -1) {
         rowData.splice(dataIndex, 1, targetValue);
       }

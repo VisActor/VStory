@@ -3,8 +3,8 @@ import { CartesianSingleSeriesTemp } from './cartesian-single';
 import { getSeriesLabelSpec } from './common';
 
 export class LineTemp extends CartesianSingleSeriesTemp {
-  static type = TemplateChartType.line;
-  type = LineTemp.type;
+  static type: string = TemplateChartType.line;
+  type: string = LineTemp.type;
   // 唯一系列类型
   seriesType = 'line';
   stack = false;

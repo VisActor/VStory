@@ -1,15 +1,15 @@
 import { getLayoutFromWidget } from '../../../utils/layout';
 import type { IWidgetData } from '../../dsl-interface';
-import type { CharacterGraphics } from '../character';
 import type { IText, ITextGraphicAttribute, TextAlignType, TextBaselineType } from '@visactor/vrender-core';
 import { createText } from '@visactor/vrender-core';
+import type { CharacterComponent } from '../character';
 
 export const MAX_LAYOUT_SIZE = 999999;
 
 export class GraphicText {
-  private _character: CharacterGraphics;
+  private _character: CharacterComponent;
   private _graphic: IText;
-  constructor(graphicCharacter: CharacterGraphics) {
+  constructor(graphicCharacter: CharacterComponent) {
     this._character = graphicCharacter;
   }
 

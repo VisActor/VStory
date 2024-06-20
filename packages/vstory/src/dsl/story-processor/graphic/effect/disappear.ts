@@ -74,10 +74,9 @@ export function scaleOut(graphic: IGraphic, params: IScaleOutParams) {
   if (!canDoGraphicAnimation(graphic, params)) {
     return false;
   }
-  debugger;
   const { scale = {} } = params;
   const ratio = scale.ratio ?? params.ratio ?? 0;
-  const scaleCenter = scale.scaleCenter ?? params.scaleCenter;
+  const scaleCenter = (scale as any).scaleCenter ?? (params as any).scaleCenter;
   const duration = scale.duration ?? params.duration;
   const easing = scale.easing ?? params.easing;
   const originScaleCenter = graphic.attribute.scaleCenter;

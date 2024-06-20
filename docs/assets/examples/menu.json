@@ -1,4 +1,21 @@
 {
   "menu": "examples",
-  "children": []
+  "children": [
+    {
+      "path": "site-scene",
+      "title": {
+        "zh": "官网场景",
+        "en": "site-scene"
+      },
+      "children": [
+        {
+          "path": "basic",
+          "title": {
+            "zh": "基本场景",
+            "en": "basic"
+          }
+        }
+      ]
+    }
+  ]
 }

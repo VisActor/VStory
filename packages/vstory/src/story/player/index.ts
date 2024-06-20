@@ -3,7 +3,7 @@ import type { StoryCanvas } from '../canvas/canvas';
 import type { IActSpec, IAction } from '../interface';
 import type { IPlayer } from '../interface/player';
 import { processorMap, ActionProcessor } from '../../dsl/story-processor';
-import { Encoder } from './encode';
+// import { Encoder } from './encode';
 import type { ICharacter } from '../character';
 
 export class Ticker {
@@ -45,7 +45,7 @@ export class Player implements IPlayer {
   protected _currAct: IChapterInstanceItem;
   protected _ticker: Ticker;
   protected _currTime: number;
-  protected _encoder: Encoder;
+  // protected _encoder: Encoder;
   protected _actionProcessor: ActionProcessor;
 
   constructor(c: StoryCanvas) {
@@ -53,7 +53,7 @@ export class Player implements IPlayer {
     this._acts = [];
     this._ticker = new Ticker();
     this._currTime = 0;
-    this._encoder = new Encoder();
+    // this._encoder = new Encoder();
     this._actionProcessor = new ActionProcessor(processorMap);
   }
 
@@ -169,32 +169,33 @@ export class Player implements IPlayer {
     });
   }
 
-  async encodeToVideo(millsecond: number, fps: number) {
-    // if (!this._currChapter) {
-    //   return;
-    // }
-    const frameNum = (millsecond / 1000) * fps;
-    const deltaT = 1000 / fps;
-    this.tickTo(0);
-    const objUrl = await this._encoder.exportVideo(frameNum, fps, async i => {
-      const t = deltaT * i;
-      this.tickTo(t);
-      return new Promise((resolve, reject) => {
-        this._canvas
-          .getStage()
-          .window.getContext()
-          .canvas.nativeCanvas.toBlob((blob: any) => {
-            if (blob) {
-              resolve(blob);
-            } else {
-              // console.log('no blob');
-              reject('no blob');
-            }
-          }, `image/png`);
-      });
-    });
+  async encodeToVideo(millsecond: number, fps: number): Promise<any> {
+    // // if (!this._currChapter) {
+    // //   return;
+    // // }
+    // const frameNum = (millsecond / 1000) * fps;
+    // const deltaT = 1000 / fps;
+    // this.tickTo(0);
+    // const objUrl = await this._encoder.exportVideo(frameNum, fps, async i => {
+    //   const t = deltaT * i;
+    //   this.tickTo(t);
+    //   return new Promise((resolve, reject) => {
+    //     this._canvas
+    //       .getStage()
+    //       .window.getContext()
+    //       .canvas.nativeCanvas.toBlob((blob: any) => {
+    //         if (blob) {
+    //           resolve(blob);
+    //         } else {
+    //           // console.log('no blob');
+    //           reject('no blob');
+    //         }
+    //       }, `image/png`);
+    //   });
+    // });
 
-    return objUrl;
+    // return objUrl;
+    return null;
   }
 
   pause(): void {

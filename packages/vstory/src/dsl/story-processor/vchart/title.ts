@@ -1,5 +1,5 @@
 import type { VChart, IChartSpec, ITitleSpec } from '@visactor/vchart';
-import { CreateTitleAction } from '../../types/CreateComponent';
+import type { CreateTitleAction } from '../../types/chart/createComponent';
 
 export const createTitleProcessor = async (
   chartInstance: VChart,

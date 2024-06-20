@@ -2,8 +2,8 @@ import { TemplateChartType } from '../constant';
 import { CartesianSingleSeriesTemp } from './cartesian-single';
 
 export class AreaTemp extends CartesianSingleSeriesTemp {
-  static type = TemplateChartType.area;
-  type = AreaTemp.type;
+  static type: string = TemplateChartType.area;
+  type: string = AreaTemp.type;
   // 唯一系列类型
   seriesType = 'area';
   // 是否消除维度轴的2测留白

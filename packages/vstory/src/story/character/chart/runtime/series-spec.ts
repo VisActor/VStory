@@ -1,6 +1,6 @@
 import { merge } from '@visactor/vutils';
-import { CharacterChart } from '../character';
-import { IChartCharacterRuntime } from './interface';
+import type { CharacterChart } from '../character';
+import type { IChartCharacterRuntime } from './interface';
 import { ChartSpecMatch } from './utils';
 
 export class SeriesSpecRuntime implements IChartCharacterRuntime {
@@ -27,21 +27,23 @@ export class SeriesSpecRuntime implements IChartCharacterRuntime {
       if (!rawSpec.series) {
         rawSpec.series = [{ ...seriesSpec.spec }];
         return;
+      }
+      // 这里会类型报错，先用any[]规避
+      const s = (rawSpec.series as any[]).find((a, index: number) => {
+        return ChartSpecMatch(a, index, seriesSpec.matchInfo);
+      });
+      if (s) {
+        merge(s, seriesSpec.spec);
       } else {
-        const s = rawSpec.series.find((a: any, index: number) => {
-          return ChartSpecMatch(a, index, seriesSpec.matchInfo);
-        });
-        if (s) {
-          merge(s, seriesSpec.spec);
-        } else {
-          rawSpec.series.push({ ...seriesSpec.spec });
-        }
+        rawSpec.series.push({ ...seriesSpec.spec });
       }
     });
   }
 
   afterInitializeChart() {
-    //
+    return;
   }
-  afterVRenderDraw() {}
+  afterVRenderDraw() {
+    return;
+  }
 }
