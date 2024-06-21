@@ -9,7 +9,7 @@ import { getLayoutFromWidget } from '../../utils/layout';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
 import { ChartDataTempTransform } from './spec-process/data-temp-transform';
-import type { ITicker } from '@visactor/vrender-core';
+import type { ITicker } from '@visactor/vrender';
 import type { IChartTemp } from './temp/interface';
 import { SeriesSpecRuntime } from './runtime/series-spec';
 import type { StoryEvent } from '../../interface/runtime-interface';

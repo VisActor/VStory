@@ -1,5 +1,5 @@
-import type { IImage } from '@visactor/vrender-core';
-import { createImage } from '@visactor/vrender-core';
+import type { IImage } from '@visactor/vrender';
+import { createImage } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import { Graphic } from './graphic';
 

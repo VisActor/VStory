@@ -1,8 +1,9 @@
-import VChart, { ISpec } from '@visactor/vchart';
+import type { ISpec } from '@visactor/vchart';
+import type VChart from '@visactor/vchart';
 
-import { IGraphic } from '@visactor/vrender-core';
-import { ICharacterVisactor } from '../../../../../story/character/visactor/interface';
-import { IGraphicDisappearAction } from '../../../../types/graphic/disappear';
+import type { IGraphic } from '@visactor/vrender';
+import type { ICharacterVisactor } from '../../../../../story/character/visactor/interface';
+import type { IGraphicDisappearAction } from '../../../../types/graphic/disappear';
 import { commonDisappearEffect } from '../../../graphic/effect/disappear';
 import { merge } from '@visactor/vutils';
 

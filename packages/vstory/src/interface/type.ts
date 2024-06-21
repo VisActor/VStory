@@ -1,4 +1,4 @@
-import type { IGraphic, IStage } from '@visactor/vrender-core';
+import type { IGraphic, IStage } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 
 export type IContext = {

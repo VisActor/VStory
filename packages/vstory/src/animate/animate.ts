@@ -1,6 +1,7 @@
-import type { IAnimate as IVRenderAnimate, IGraphic } from '@visactor/vrender-core';
-import { IContext } from '../interface/type';
-import { AbstractTask, ITask, TaskCb } from '../task';
+import type { IAnimate as IVRenderAnimate, IGraphic } from '@visactor/vrender';
+import type { IContext } from '../interface/type';
+import type { ITask, TaskCb } from '../task';
+import { AbstractTask } from '../task';
 
 export class GraphicAnimate extends AbstractTask {
   protected _animate: IVRenderAnimate;
@@ -25,5 +26,7 @@ export class GraphicAnimate extends AbstractTask {
   }
 
   // 覆写这个方法
-  run(context: Partial<IContext>) {}
+  run(context: Partial<IContext>) {
+    return;
+  }
 }

@@ -1,5 +1,5 @@
-import { EasingType, IGraphic } from '@visactor/vrender-core';
-import { IAnimationParams } from '../../../types';
+import type { EasingType, IGraphic } from '@visactor/vrender';
+import type { IAnimationParams } from '../../../types';
 
 export interface IMoveToParams extends IAnimationParams {
   destination: { x: number; y: number };

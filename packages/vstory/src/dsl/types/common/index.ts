@@ -1,4 +1,4 @@
-import type { EasingType } from '@visactor/vrender-core';
+import type { EasingType } from '@visactor/vrender';
 
 export interface IAnimationParams {
   duration: number;

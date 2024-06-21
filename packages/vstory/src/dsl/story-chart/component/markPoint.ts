@@ -1,6 +1,6 @@
 import { StoryComponent } from './base';
 import { StoryChartComponentType } from '../../constant';
-import type { IGroup } from '@visactor/vrender-core';
+import type { IGroup } from '@visactor/vrender';
 import type { GeoMarkPoint as VChartMarkPoint } from '@visactor/vchart';
 
 export class MarkPoint extends StoryComponent {

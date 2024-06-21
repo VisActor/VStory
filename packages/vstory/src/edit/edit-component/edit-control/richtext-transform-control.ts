@@ -10,8 +10,8 @@ import type {
   IRectGraphicAttribute,
   ILineGraphicAttribute,
   IGroup
-} from '@visactor/vrender-core';
-import { createRect, getTheme } from '@visactor/vrender-core';
+} from '@visactor/vrender';
+import { createRect, getTheme } from '@visactor/vrender';
 import type { IAABBBounds, IAABBBoundsLike, IPointLike } from '@visactor/vutils';
 import { AABBBounds, merge, normalizePadding, pi } from '@visactor/vutils';
 import { AbstractComponent } from '@visactor/vrender-components';

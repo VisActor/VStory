@@ -1,8 +1,8 @@
-import { IVisactorGraphic } from '../../visactor/interface';
+import type { IVisactorGraphic } from '../../visactor/interface';
 import type { IBoundsLike } from '@visactor/vutils';
 import type { ISpec, IVChart } from '@visactor/vchart';
-import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender-core';
-import { genNumberType, Group } from '@visactor/vrender-core';
+import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
+import { genNumberType, Group } from '@visactor/vrender';
 
 export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   renderCanvas: HTMLCanvasElement;

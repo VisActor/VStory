@@ -1,5 +1,5 @@
-import type { ILine, ILineGraphicAttribute } from '@visactor/vrender-core';
-import { createLine } from '@visactor/vrender-core';
+import type { ILine, ILineGraphicAttribute } from '@visactor/vrender';
+import { createLine } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import { Graphic } from './graphic';
 

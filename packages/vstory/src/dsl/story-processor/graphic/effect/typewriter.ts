@@ -1,4 +1,4 @@
-import { EasingType, IText } from '@visactor/vrender-core';
+import type { EasingType, IText } from '@visactor/vrender';
 import { TypeWriter } from '../../../../animate/typewirter';
 import { isString } from '@visactor/vutils';
 

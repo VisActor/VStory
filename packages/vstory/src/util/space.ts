@@ -1,5 +1,5 @@
-import type { IRect, graphicCreator, IGraphic, ILayer, ITextAttribute, IText } from '@visactor/vrender-core';
-import { getTextBounds } from '@visactor/vrender-core';
+import type { IRect, graphicCreator, IGraphic, ILayer, ITextAttribute, IText } from '@visactor/vrender';
+import { getTextBounds } from '@visactor/vrender';
 import type { IBoundsLike, Matrix, IPointLike } from '@visactor/vutils';
 import type { ILayoutRect } from '../interface/type';
 import { MinFontSize } from '../constants/attribute';

@@ -7,7 +7,7 @@ import type { ITransformControl, IUpdateParams } from './edit-control/transform-
 import { TransformControl, type TransformAttributes } from './edit-control/transform-control';
 import { throwError } from '../../util/common';
 import type { VRenderPointerEvent } from '../../interface/type';
-import { IGraphic } from '@visactor/vrender-core';
+import { IGraphic } from '@visactor/vrender';
 import type { ICharacter } from '../../story/character';
 
 export abstract class BaseSelection implements IEditComponent {

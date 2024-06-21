@@ -1,8 +1,8 @@
-import type { IText } from '@visactor/vrender-core';
-import { createText } from '@visactor/vrender-core';
+import type { IText } from '@visactor/vrender';
+import { createText } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import { Graphic } from './graphic';
-import { IWidgetData } from '../../dsl-interface';
+import type { IWidgetData } from '../../dsl-interface';
 import { getLayoutFromWidget } from '../../../utils/layout';
 
 export class GraphicPureText extends Graphic {

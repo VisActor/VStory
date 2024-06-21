@@ -1,4 +1,4 @@
-import type { IGroup } from '@visactor/vrender-core';
+import type { IGroup } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import type { StoryCanvas } from '../canvas/canvas';
 import type { IStory, StoryEvent } from '../interface/runtime-interface';

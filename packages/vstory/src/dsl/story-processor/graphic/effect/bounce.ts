@@ -1,4 +1,4 @@
-import type { EasingType, IGraphic } from '@visactor/vrender-core';
+import type { EasingType, IGraphic } from '@visactor/vrender';
 import type { IBounceParams } from '../../../types/common/bounce';
 import { CustomEase } from './../../../../animate/util/util';
 import { Bounce } from '../../../../animate/bounce';

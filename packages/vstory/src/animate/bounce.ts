@@ -1,5 +1,5 @@
-import { ACustomAnimate } from '@visactor/vrender-core';
-import type { EasingType } from '@visactor/vrender-core';
+import { ACustomAnimate } from '@visactor/vrender';
+import type { EasingType } from '@visactor/vrender';
 
 export class Bounce extends ACustomAnimate<any> {
   declare valid: boolean;

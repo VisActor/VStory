@@ -5,7 +5,7 @@ import type { ICharacter } from './character/runtime-interface';
 import { StoryCanvas } from './canvas/canvas';
 import type { IStorySpec, IActSpec } from './interface';
 import { StoryFactory } from './factory/factory';
-import { defaultTicker, defaultTimeline } from '@visactor/vrender-core';
+import { defaultTicker, defaultTimeline } from '@visactor/vrender';
 import type { IPlayer } from './interface/player';
 import { Player } from './player';
 

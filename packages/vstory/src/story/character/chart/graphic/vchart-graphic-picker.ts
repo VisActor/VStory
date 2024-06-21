@@ -1,12 +1,5 @@
 import type { IPoint } from '@visactor/vutils';
-import {
-  inject,
-  injectable,
-  getTheme,
-  CircleRender,
-  getScaledStroke,
-  CIRCLE_NUMBER_TYPE
-} from '@visactor/vrender-core';
+import { inject, injectable, getTheme, CircleRender, getScaledStroke, CIRCLE_NUMBER_TYPE } from '@visactor/vrender';
 import type {
   IGraphicAttribute,
   ICircle,
@@ -16,15 +9,14 @@ import type {
   IGraphicPicker,
   IGraphicRender,
   IPickParams
-} from '@visactor/vrender-core';
-import { CHART_NUMBER_TYPE, Chart } from './vchart-graphic';
+} from '@visactor/vrender';
+import type { Chart } from './vchart-graphic';
+import { CHART_NUMBER_TYPE } from './vchart-graphic';
 
 @injectable()
 export class VChartPicker implements IGraphicPicker {
   type = 'chart';
   numberType: number = CHART_NUMBER_TYPE;
-
-  constructor() {}
 
   contains(chart: any, point: any, params?: IPickParams): boolean | any {
     const vChart = (chart as Chart).vchart;

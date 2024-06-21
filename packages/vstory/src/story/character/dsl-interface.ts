@@ -1,5 +1,5 @@
-import { ITextGraphicAttribute } from '@visactor/vrender-core';
-import { DirectionType } from './chart/const';
+import type { ITextGraphicAttribute } from '@visactor/vrender';
+import type { DirectionType } from './chart/const';
 
 export type IPercent = `${number}%`;
 export type WidgetNumber = number; // | IPercent;

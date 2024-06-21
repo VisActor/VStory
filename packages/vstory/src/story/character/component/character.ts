@@ -1,5 +1,5 @@
-import type { IGroup } from '@visactor/vrender-core';
-import { createGroup } from '@visactor/vrender-core';
+import type { IGroup } from '@visactor/vrender';
+import { createGroup } from '@visactor/vrender';
 import { GraphicText } from './graphic/graphic-text';
 import type { IComponentCharacterSpec } from '../dsl-interface';
 import { CharacterBase } from '../base/base';

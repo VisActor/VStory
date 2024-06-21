@@ -1,5 +1,5 @@
-import type { IRect } from '@visactor/vrender-core';
-import { createRect } from '@visactor/vrender-core';
+import type { IRect } from '@visactor/vrender';
+import { createRect } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import { Graphic } from './graphic';
 

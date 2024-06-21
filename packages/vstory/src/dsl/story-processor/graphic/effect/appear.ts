@@ -1,4 +1,4 @@
-import type { EasingType, IGraphic } from '@visactor/vrender-core';
+import type { EasingType, IGraphic } from '@visactor/vrender';
 import type { IAnimationParams } from '../../../types';
 import { isObject, isString } from '@visactor/vutils';
 import { Wipe } from '../../../../animate/wipeIn';

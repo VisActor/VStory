@@ -1,4 +1,4 @@
-import type { IStage } from '@visactor/vrender-core';
+import type { IStage } from '@visactor/vrender';
 
 export class DragComponent {
   private _state: 'startDrag' | 'dragging' | 'stopDrag' | 'none' = 'none';

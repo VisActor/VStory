@@ -11,10 +11,10 @@ import { RichTextSelection } from '../../../src/edit/edit-component/richtext-sel
 import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
 import { Resizable, Enable } from 're-resizable';
 
-Edit.registerEditComponent('common', CommonEditComponent);
-Edit.registerEditComponent('text', TextSelection);
-Edit.registerEditComponent('richtext', RichTextSelection);
-Edit.registerEditComponent('box-selection', BoxSelection);
+// Edit.registerEditComponent('common', CommonEditComponent);
+// Edit.registerEditComponent('text', TextSelection);
+// Edit.registerEditComponent('richtext', RichTextSelection);
+// Edit.registerEditComponent('box-selection', BoxSelection);
 
 const defaultCode = `const chartSpecList = [
   {

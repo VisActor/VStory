@@ -8,8 +8,8 @@ import type {
   IRenderService,
   IThemeAttribute,
   IGraphic
-} from '@visactor/vrender-core';
-import { injectable, DefaultCanvasRectRender } from '@visactor/vrender-core';
+} from '@visactor/vrender';
+import { injectable, DefaultCanvasRectRender } from '@visactor/vrender';
 import type { Chart } from './vchart-graphic';
 import { CHART_NUMBER_TYPE } from './vchart-graphic';
 
@@ -39,7 +39,7 @@ export class VChartRender extends DefaultCanvasRectRender implements IGraphicRen
       themeAttribute: IThemeAttribute
     ) => boolean
   ) {
-    let { baseOpacity = 1 } = chart.attribute;
+    const { baseOpacity = 1 } = chart.attribute;
     if (baseOpacity <= 0) {
       return;
     }

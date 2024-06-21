@@ -1,9 +1,10 @@
-import { IAnimate as IVRenderAnimate, InputText } from '@visactor/vrender-core';
+import type { IAnimate as IVRenderAnimate } from '@visactor/vrender';
+import { InputText } from '@visactor/vrender';
 import { GraphicAnimate } from '../animate/animate';
-import { Title } from '@visactor/vrender-components';
-import { IContext } from '../interface/type';
+import type { Title } from '@visactor/vrender-components';
+import type { IContext } from '../interface/type';
 import { Action } from '../scene/action';
-import { TaskCb } from '../task';
+import type { TaskCb } from '../task';
 
 export function textWriter(title: Title, duration: number) {
   const _textWriter = new TextWriter(title, duration);

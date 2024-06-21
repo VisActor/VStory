@@ -1,4 +1,4 @@
-import type { IGroup, IGraphic } from '@visactor/vrender-core';
+import type { IGroup, IGraphic } from '@visactor/vrender';
 
 export const flickerEffect = (group: IGroup) => {
   if (!group || group.childrenCount === 0) {

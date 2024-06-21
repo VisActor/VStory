@@ -3,8 +3,8 @@ import type { Story } from './../story/story';
 import { EditAction } from './edit-action';
 import { EventEmitter } from '@visactor/vutils';
 import type { IEditActionInfo, IEditComponent, IEditComponentConstructor, IEditMessage } from './interface';
-import type { IGroup } from '@visactor/vrender-core';
-import { createGroup } from '@visactor/vrender-core';
+import type { IGroup } from '@visactor/vrender';
+import { createGroup } from '@visactor/vrender';
 
 export class Edit {
   readonly editAction: EditAction;

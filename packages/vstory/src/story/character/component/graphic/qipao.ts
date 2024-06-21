@@ -1,5 +1,5 @@
-import type { ISymbol } from '@visactor/vrender-core';
-import { createSymbol } from '@visactor/vrender-core';
+import type { ISymbol } from '@visactor/vrender';
+import { createSymbol } from '@visactor/vrender';
 import { Graphic } from './graphic';
 
 export class GraphicQipao extends Graphic {
@@ -26,7 +26,6 @@ export class GraphicQipao extends Graphic {
           ...(this._character.spec.options?.graphic ?? {})
         })
       });
-      console.log(this._graphic);
       this._graphic.name = `graphic-qipao-${this._character.id}`;
       this._character.getGraphicParent().add(this._graphic);
     }

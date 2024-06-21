@@ -1,6 +1,6 @@
 import type VChart from '@visactor/vchart';
-import { IContext } from '../interface/type';
-import { IGraphic } from '@visactor/vrender-core';
+import type { IContext } from '../interface/type';
+import { IGraphic } from '@visactor/vrender';
 import { TaskManager } from '../task';
 import { forEachGraphicItem } from '../util/vrender-api';
 

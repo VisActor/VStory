@@ -1,7 +1,7 @@
 import { isValid, merge } from '@visactor/vutils';
 import type { ICharacterInitOption, ICharacterPickInfo } from '../runtime-interface';
 import type { ICharacter, ICharacterSpec } from '..';
-import type { IGroup } from '@visactor/vrender-core';
+import type { IGroup } from '@visactor/vrender';
 import type { StoryEvent } from '../../interface';
 
 export abstract class CharacterBase implements ICharacter {

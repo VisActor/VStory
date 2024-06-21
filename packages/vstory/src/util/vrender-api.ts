@@ -1,4 +1,4 @@
-import { IGraphic, IGroup } from '@visactor/vrender-core';
+import type { IGraphic, IGroup } from '@visactor/vrender';
 
 export function forEachGraphicItem(group: IGraphic, cb: (node: IGraphic) => boolean | void) {
   if (!group) {

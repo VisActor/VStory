@@ -1,4 +1,4 @@
-import type { EasingType } from '@visactor/vrender-core';
+import type { EasingType } from '@visactor/vrender';
 import type { IGraphicStyleAction } from '../../types/graphic/style';
 import type { ICharacter } from '../../../story/character';
 import { getCharacterGraphic } from './util';

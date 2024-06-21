@@ -2,7 +2,7 @@ import type { IChartCharacterSpec } from '../dsl-interface';
 import type { EventEmitter } from '@visactor/vutils';
 import type { ICharacter } from '../runtime-interface';
 import type { ISpec, IVChart } from '@visactor/vchart';
-import type { IGroup } from '@visactor/vrender-core';
+import type { IGroup } from '@visactor/vrender';
 
 export type StandardData = IDataValue | IDataValue[];
 export type IParserValue = any;

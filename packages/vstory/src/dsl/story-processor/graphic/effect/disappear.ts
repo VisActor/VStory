@@ -1,4 +1,4 @@
-import type { EasingType, IGraphic } from '@visactor/vrender-core';
+import type { EasingType, IGraphic } from '@visactor/vrender';
 import type { IAnimationParams } from '../../../types';
 import type { IGraphicDisappearPayLoad } from '../../../types/graphic/disappear';
 import { canDoGraphicAnimation } from '../util';

@@ -1,7 +1,7 @@
 import type { Edit } from './edit';
 import type { ICharacter, ICharacterPickInfo } from './../story/character/runtime-interface';
 import type { IRect } from '../type/space';
-import type { IGraphic } from '@visactor/vrender-core';
+import type { IGraphic } from '@visactor/vrender';
 
 export enum EditActionEnum {
   singleSelection = 'singleSelect', // 单选

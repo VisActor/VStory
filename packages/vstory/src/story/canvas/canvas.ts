@@ -1,7 +1,7 @@
 import type { Story } from '../story';
-import type { IStage } from '@visactor/vrender-core';
-import { createStage, vglobal, container, preLoadAllModule, ManualTicker } from '@visactor/vrender-core';
-import { loadBrowserEnv } from '@visactor/vrender-kits';
+import type { IStage } from '@visactor/vrender';
+import { createStage, vglobal, container, preLoadAllModule, ManualTicker } from '@visactor/vrender';
+import { loadBrowserEnv } from '@visactor/vrender';
 import type { StoryEvent } from '../interface/runtime-interface';
 import type { ICharacter } from '../character/runtime-interface';
 

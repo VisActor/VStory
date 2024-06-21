@@ -1,7 +1,7 @@
 import { getLayoutFromWidget } from '../../../utils/layout';
 import type { IWidgetData } from '../../dsl-interface';
-import type { IText, ITextGraphicAttribute, TextAlignType, TextBaselineType } from '@visactor/vrender-core';
-import { createText } from '@visactor/vrender-core';
+import type { IText, ITextGraphicAttribute, TextAlignType, TextBaselineType } from '@visactor/vrender';
+import { createText } from '@visactor/vrender';
 import type { CharacterComponent } from '../character';
 
 export const MAX_LAYOUT_SIZE = 999999;

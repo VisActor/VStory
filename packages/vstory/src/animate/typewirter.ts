@@ -1,5 +1,5 @@
-import { ACustomAnimate, createLine, getTextBounds, registerShadowRootGraphic } from '@visactor/vrender-core';
-import type { IGraphic } from '@visactor/vrender-core';
+import { ACustomAnimate, createLine, getTextBounds, registerShadowRootGraphic } from '@visactor/vrender';
+import type { IGraphic } from '@visactor/vrender';
 import { isArray } from '@visactor/vutils';
 registerShadowRootGraphic();
 export class TypeWriter extends ACustomAnimate<{ text: string }> {

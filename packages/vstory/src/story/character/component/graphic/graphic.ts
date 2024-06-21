@@ -1,4 +1,4 @@
-import type { IGraphic } from '@visactor/vrender-core';
+import type { IGraphic } from '@visactor/vrender';
 import type { IAABBBounds, IPointLike } from '@visactor/vutils';
 import { isValid } from '@visactor/vutils';
 import type { CharacterComponent } from '../character';

@@ -1,6 +1,6 @@
-import type { IGraphic } from '@visactor/vrender-core';
+import type { IGraphic } from '@visactor/vrender';
 import type { ICharacter } from '../../../story/character';
-import { IAnimationParams } from '../../types';
+import type { IAnimationParams } from '../../types';
 
 export function getCharacterGraphic(character: ICharacter) {
   return character.getGraphicParent().getChildren() as IGraphic[];

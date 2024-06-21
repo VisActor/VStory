@@ -11,8 +11,8 @@ import type {
   ILineGraphicAttribute,
   IGroup,
   IGraphicAttribute
-} from '@visactor/vrender-core';
-import { createRect } from '@visactor/vrender-core';
+} from '@visactor/vrender';
+import { createRect } from '@visactor/vrender';
 import type { IAABBBounds, IAABBBoundsLike, IPointLike } from '@visactor/vutils';
 import { AABBBounds, merge, normalizePadding, pi } from '@visactor/vutils';
 import { AbstractComponent } from '@visactor/vrender-components';

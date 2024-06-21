@@ -1,4 +1,4 @@
-import { IGraphic } from '@visactor/vrender-core';
+import type { IGraphic } from '@visactor/vrender';
 
 export interface IStoryInitOption {
   dom: string | HTMLDivElement; // dom id

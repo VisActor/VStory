@@ -6,7 +6,5 @@ module.exports = {
   name: 'VStory',
   umdOutputFilename: 'index',
   external: [],
-  globals: {
-    '@visactor/vutils': 'VUtils'
-  }
+  globals: {}
 };

@@ -1,11 +1,12 @@
 import type { IContext } from 'src/interface/type';
 import { Template } from '../template/base-template';
-import { INode, IStage, container, createStage, preLoadAllModule } from '@visactor/vrender-core';
+import type { INode, IStage } from '@visactor/vrender';
+import { container, createStage, preLoadAllModule, loadBrowserEnv } from '@visactor/vrender';
 import { calculateSize } from '../util/size';
 import { CreateUID } from '../util/common';
-import { loadBrowserEnv } from '@visactor/vrender-kits';
 import { AbstractComponent } from '@visactor/vrender-components';
-import { ITask, TaskManager } from '../task';
+import type { ITask } from '../task';
+import { TaskManager } from '../task';
 import { Action, Wait } from './action';
 
 export class Scene {
@@ -125,5 +126,7 @@ export class Scene {
     }
   }
 
-  release() {}
+  release() {
+    return;
+  }
 }

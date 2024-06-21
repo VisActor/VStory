@@ -1,7 +1,7 @@
-import type { IRichText, IRichTextAttribute } from '@visactor/vrender-core';
-import { createRichText } from '@visactor/vrender-core';
+import type { IRichText, IRichTextAttribute } from '@visactor/vrender';
+import { createRichText } from '@visactor/vrender';
 import { Graphic } from './graphic';
-import { IWidgetData } from '../../dsl-interface';
+import type { IWidgetData } from '../../dsl-interface';
 import { getLayoutFromWidget } from '../../../utils/layout';
 
 export class GraphicRichText extends Graphic {

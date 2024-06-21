@@ -1,4 +1,4 @@
-import type { EasingType, IGraphic } from '@visactor/vrender-core';
+import type { EasingType, IGraphic } from '@visactor/vrender';
 import type { IDarkenParams } from '../../../types/common/darken';
 import type { IBrightenParams } from '../../../types/common/brighten';
 

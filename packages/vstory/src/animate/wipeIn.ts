@@ -1,5 +1,5 @@
-import { ACustomAnimate } from '@visactor/vrender-core';
-import type { EasingType, ILinearGradient } from '@visactor/vrender-core';
+import { ACustomAnimate } from '@visactor/vrender';
+import type { EasingType, ILinearGradient } from '@visactor/vrender';
 
 export enum Direction {
   LEFT_TO_RIGHT = 0,
