@@ -14,7 +14,6 @@ cover: http://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vrender/base-arc.png
 ## 代码演示
 
 ```javascript livedemo template=vstory
-console.log('abc');
 const chartSpecList = [
   {
     title: 'Timeline Chart',
@@ -1295,67 +1294,7 @@ const tempSpec = {
   ]
 };
 
-debugger;
 const vstory = new VStory.Story(tempSpec, { dom: CONTAINER_ID });
 window.vstory = vstory;
 vstory.play();
 ```
-
-const vstoryRoutes: RouteObject[] = [
-{
-path: '/vstory',
-element: (
-<Suspense>
-<VStory />
-</Suspense>
-),
-},
-{
-path: '/vstory/example',
-element: (
-<Suspense>
-<VStoryExample />
-</Suspense>
-),
-},
-{
-path: '/vstory/demo',
-shouldRevalidate: () => true,
-loader: loaders.demoLoader,
-element: (
-<Suspense>
-<VStoryDemo />
-</Suspense>
-),
-children: [
-{
-path: '*',
-element: (
-<Suspense>
-<VStoryDemo />
-</Suspense>
-),
-},
-],
-},
-{
-path: '/vstory/guide',
-loader: loaders.guideLoader,
-shouldRevalidate: () => true,
-element: (
-<Suspense>
-<VStoryGuide />
-</Suspense>
-),
-children: [
-{
-path: '*',
-element: (
-<Suspense>
-<VStoryGuide />
-</Suspense>
-),
-},
-],
-},
-];

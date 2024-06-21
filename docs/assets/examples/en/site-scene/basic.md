@@ -14,7 +14,6 @@ cover: http://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vrender/base-arc.png
 ## 代码演示
 
 ```javascript livedemo template=vstory
-console.log('abc');
 const chartSpecList = [
   {
     title: 'Timeline Chart',
