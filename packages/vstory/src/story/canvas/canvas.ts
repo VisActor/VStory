@@ -50,6 +50,7 @@ export class StoryCanvas {
       autoRender: false,
       disableDirtyBounds: true,
       ticker: new ManualTicker([]),
+      pluginList: ['RichTextEditPlugin'],
       dpr: window.devicePixelRatio,
       event: {
         clickInterval: 300

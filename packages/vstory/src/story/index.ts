@@ -2,7 +2,7 @@ import { CharacterComponentQipao } from './character/component/characters/charac
 import { CharacterComponentRect } from './character/component/characters/character-rect';
 import { StoryFactory } from './factory/factory';
 import { CharacterChart } from './character/chart/character';
-import { ContainerModule, GraphicRender, container } from '@visactor/vrender';
+import { AutoEnablePlugins, ContainerModule, GraphicRender, RichTextEditPlugin, container } from '@visactor/vrender';
 import { CanvasPickerContribution } from '@visactor/vrender';
 import { ChartRender, VChartRender } from './character/chart/graphic/vchart-graphic-render';
 import { BarChartCharacter } from './character/chart/characters/bar';
@@ -30,6 +30,11 @@ const splitModule = new ContainerModule((bind: any) => {
   bind(GraphicRender).toService(ChartRender);
   bind(VChartPicker).to(VChartPicker).inSingletonScope();
   bind(CanvasPickerContribution).toService(VChartPicker);
+});
+
+const editPlugin = new ContainerModule(bind => {
+  bind(RichTextEditPlugin).toSelf();
+  bind(AutoEnablePlugins).toService(RichTextEditPlugin);
 });
 
 let _register = false;
@@ -62,6 +67,7 @@ export function registerCharacter() {
   StoryFactory.registerCharacter(StoryGraphicType.IMAGE, CharacterComponentImage);
 
   container.load(splitModule);
+  container.load(editPlugin);
 }
 
 registerCharacter();
