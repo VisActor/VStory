@@ -42,6 +42,8 @@ export class CharacterChart extends CharacterVisactor {
     SeriesSpecRuntime as unknown as IChartCharacterRuntimeConstructor
   ];
 
+  readonly visActorType = 'chart';
+
   protected declare _specProcess: SpecProcess;
   protected _ticker: ITicker;
 
@@ -127,6 +129,13 @@ export class CharacterChart extends CharacterVisactor {
   }
 
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {
-    return false;
+    if (!(event.detailPath ?? event.path).some(g => g === this._graphic)) {
+      return false;
+    }
+    const chartPath = event.detailPath[event.detailPath.length - 1];
+    return {
+      part: chartPath?.[chartPath.length - 1]?.type,
+      graphicType: chartPath?.[chartPath.length - 1]?.type
+    };
   }
 }

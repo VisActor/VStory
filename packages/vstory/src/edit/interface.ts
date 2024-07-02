@@ -5,7 +5,13 @@ import type { IGraphic } from '@visactor/vrender';
 
 export enum EditActionEnum {
   singleSelection = 'singleSelect', // 单选
-  multipleSelection = 'multipleSelect' // 多选
+  multipleSelection = 'multipleSelect', // 多选
+  unSelection = 'unSelect', // 为选中
+
+  pointerOverCharacter = 'pointerOverCharacter', // 悬浮到角色上
+  pointerOutCharacter = 'pointerOutCharacter', // 从角色上悬浮出去，从角色的 a子模块到 b子模块也会触发
+
+  richTextPluginEdit = 'richTextPluginEdit' // 富文本插件的编辑消息
 }
 
 export interface IEditSelectionDetailChart extends ICharacterPickInfo {
@@ -38,6 +44,7 @@ export type IEditActionInfo = IEditActionInfoBase | IEditSelectionInfo;
 export type ContinuousActionType = 'boxSelection' | 'layerZoom' | 'layerMove';
 
 export interface IEditComponent {
+  readonly type: string;
   readonly level: number;
   isEditing: boolean;
 

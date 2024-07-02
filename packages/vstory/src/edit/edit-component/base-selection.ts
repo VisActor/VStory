@@ -1,17 +1,15 @@
 import type { IEditSelectionInfo } from '../interface';
 import { EditActionEnum, type IEditActionInfo, type IEditComponent } from '../interface';
-import { StoryEvent } from '../../story/interface/runtime-interface';
 import type { Edit } from '../edit';
-import type { AbstractComponent } from '@visactor/vrender-components';
 import type { ITransformControl, IUpdateParams } from './edit-control/transform-control';
 import { TransformControl, type TransformAttributes } from './edit-control/transform-control';
 import { throwError } from '../../util/common';
 import type { VRenderPointerEvent } from '../../interface/type';
-import { IGraphic } from '@visactor/vrender';
 import type { ICharacter } from '../../story/character';
 
 export abstract class BaseSelection implements IEditComponent {
   declare readonly level: number;
+  declare readonly editCharacterType: string;
 
   protected _actionInfo: IEditActionInfo;
   protected _isSelection = false;
@@ -20,13 +18,62 @@ export abstract class BaseSelection implements IEditComponent {
   protected _activeCharacter?: ICharacter | null;
 
   constructor(public readonly edit: Edit) {}
+  declare type: string;
+
   editEnd(): void {
     this.isEditing = false;
     this._actionInfo = null;
-    this._activeCharacter = null;
     this.inActiveLayoutComponent();
+    this._activeCharacter = null;
   }
-  abstract checkAction(actionInfo: IEditSelectionInfo): boolean;
+
+  checkAction(actionInfo: IEditActionInfo | IEditSelectionInfo): boolean {
+    if (this.isEditing) {
+      return this.checkActionWhileEditing(actionInfo);
+    }
+    return this.checkActionWhileNoEditing(actionInfo);
+  }
+
+  enableEditCharacter(character: ICharacter) {
+    return character.type === this.editCharacterType;
+  }
+
+  checkActionWhileEditing(actionInfo: IEditActionInfo | IEditSelectionInfo): boolean {
+    if (actionInfo.type === EditActionEnum.unSelection) {
+      return false;
+    }
+    if (actionInfo.type === EditActionEnum.unSelection) {
+      return false;
+    }
+    if (actionInfo.type === EditActionEnum.singleSelection) {
+      // 选中其他内容了，return false
+      if (!this.enableEditCharacter(actionInfo.character)) {
+        return false;
+      } else if (actionInfo.character !== this._activeCharacter) {
+        // 选中同类型其他元素
+        // 先停止当前的
+        this.editEnd();
+        // 在开始新元素的编辑
+        this.startEdit(actionInfo);
+        return true;
+      }
+    }
+    if (this.isEditing) {
+      return true;
+    }
+
+    return true;
+  }
+
+  checkActionWhileNoEditing(actionInfo: IEditActionInfo | IEditSelectionInfo): boolean {
+    if (actionInfo.type === EditActionEnum.singleSelection && this.enableEditCharacter(actionInfo.character)) {
+      this.startEdit(actionInfo);
+      // graphic
+      return true;
+    }
+
+    return false;
+  }
 
   getActiveCharacter() {
     return this._activeCharacter;
@@ -61,10 +108,6 @@ export abstract class BaseSelection implements IEditComponent {
 
     component.onUpdate(this.handlerTransformChange.bind(this));
     return component;
-  }
-
-  protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent) {
-    return;
   }
 
   protected _createLayoutComponent(attributes: Partial<TransformAttributes>): ITransformControl | undefined {
@@ -113,5 +156,11 @@ export abstract class BaseSelection implements IEditComponent {
   detachComponent(layoutComponent: ITransformControl) {
     const g = this.edit.getEditGroup();
     g.removeChild(layoutComponent);
+  }
+
+  protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
+    if (this._activeCharacter) {
+      this._activeCharacter.setAttributes(data);
+    }
   }
 }

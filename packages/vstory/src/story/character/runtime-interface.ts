@@ -10,6 +10,8 @@ export interface ICharacterPickInfo {
 }
 export interface ICharacter {
   id: string;
+  type: string;
+  visActorType: string;
   spec: ICharacterSpec;
 
   init: () => void;

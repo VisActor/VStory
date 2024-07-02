@@ -9,6 +9,9 @@ export const MAX_LAYOUT_SIZE = 999999;
 export class GraphicText {
   private _character: CharacterComponent;
   private _graphic: IRichText;
+  get graphic() {
+    return this._graphic;
+  }
   constructor(graphicCharacter: CharacterComponent) {
     this._character = graphicCharacter;
   }

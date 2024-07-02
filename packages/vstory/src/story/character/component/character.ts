@@ -9,6 +9,7 @@ import type { StoryEvent } from '../../interface/runtime-interface';
 import type { ICharacterPickInfo } from '../runtime-interface';
 
 export abstract class CharacterComponent extends CharacterBase {
+  visActorType: 'component';
   protected declare _spec: IComponentCharacterSpec;
   get spec() {
     return this._spec;
@@ -20,6 +21,10 @@ export abstract class CharacterComponent extends CharacterBase {
   protected declare _text: GraphicText;
   get text() {
     return this._text;
+  }
+
+  get textGraphic() {
+    return this._text.graphic;
   }
 
   protected declare _group: IGroup;

@@ -5,11 +5,13 @@ import { Edit } from '../../../src/edit/edit';
 import '../../../src/story/index';
 import { cloneDeep } from '@visactor/vutils';
 import { CommonEditComponent } from '../../../src/edit/edit-component/common';
+import { ChartSelection } from '../../../src/edit/edit-component/chart-selection';
 import { BoxSelection } from '../../../src/edit/edit-component/box-selection';
 import { TextSelection } from '../../../src/edit/edit-component/text-selection';
 import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
 
 Edit.registerEditComponent('common', CommonEditComponent);
+Edit.registerEditComponent('chart', ChartSelection);
 Edit.registerEditComponent('text', TextSelection);
 Edit.registerEditComponent('richtext', RichTextSelection);
 Edit.registerEditComponent('box-selection', BoxSelection);
@@ -55,7 +57,7 @@ export const StoryEdit = () => {
           },
           options: {
             graphic: {
-              fill: 'red',
+              fill: 'blue',
               visible: false
             },
             text: {
