@@ -121,9 +121,10 @@ export class CharacterChart extends CharacterVisactor {
     if (!(event.detailPath ?? event.path).some(g => g === this._graphic)) {
       return false;
     }
-    if (!this._graphic.pointInVChart((event as any).canvasX, (event as any).canvasY)) {
-      return false;
-    }
+    // 超出vchart viewBox 外的图表元素，依然会绘制并且能被选中
+    // if (!this._graphic.pointInVChart((event as any).canvasX, (event as any).canvasY)) {
+    //   return false;
+    // }
     const chartPath = event.detailPath[event.detailPath.length - 1];
     return {
       part: chartPath?.[chartPath.length - 1]?.type,
