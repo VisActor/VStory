@@ -26,7 +26,7 @@ export class RichTextMixin {
 
   _releaseRichControl(character: ICharacter, text: IRichText) {
     this._richTextControl?.release();
-    if (character) {
+    if (text) {
       text.removeEventListener('pointerdown', this._textClickHandlerTemp);
     }
     this._richTextControl = null;

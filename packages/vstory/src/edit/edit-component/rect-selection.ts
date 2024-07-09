@@ -1,7 +1,5 @@
-import { RichTextControl } from './edit-control/richtext-control';
 import type { IEditActionInfo } from '../interface';
 import { type IEditComponent } from '../interface';
-import type { IRichText } from '@visactor/vrender-core';
 import { RichTextSelectionCommon } from './richtext-selection-common';
 
 export class RectSelection extends RichTextSelectionCommon implements IEditComponent {

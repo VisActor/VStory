@@ -5,7 +5,7 @@ import type { ITransformControl, IUpdateParams } from './edit-control/transform-
 import { TransformControl, type TransformAttributes } from './edit-control/transform-control';
 import { throwError } from '../../util/common';
 import type { VRenderPointerEvent } from '../../interface/type';
-import type { ICharacter } from '../../story/character';
+import type { ICharacter } from '../../story/character/runtime-interface';
 
 export abstract class BaseSelection implements IEditComponent {
   declare readonly level: number;
