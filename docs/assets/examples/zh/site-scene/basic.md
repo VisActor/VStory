@@ -1413,7 +1413,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/text-zh.png'
+          image: '/vstory/assets/scene3/text-zh.png'
         }
       }
     },
@@ -1429,7 +1429,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/text-zh.png'
+          image: '/vstory/assets/scene3/text-zh.png'
         }
       }
     },
@@ -1445,7 +1445,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/chart-1.png'
+          image: '/vstory/assets/scene3/chart-1.png'
         }
       }
     },
@@ -1461,7 +1461,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/chart-2.png'
+          image: '/vstory/assets/scene3/chart-2.png'
         }
       }
     },
@@ -1477,7 +1477,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/chart-3.png'
+          image: '/vstory/assets/scene3/chart-3.png'
         }
       }
     },
@@ -1493,7 +1493,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/chart-4.png'
+          image: '/vstory/assets/scene3/chart-4.png'
         }
       }
     },
@@ -1509,7 +1509,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/chart-5.png'
+          image: '/vstory/assets/scene3/chart-5.png'
         }
       }
     },
@@ -1525,7 +1525,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/text-en.png'
+          image: '/vstory/assets/scene3/text-en.png'
         }
       }
     },
@@ -1560,7 +1560,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/title-image.png'
+          image: '/vstory/assets/scene3/title-image.png'
         }
       }
     },
@@ -1593,7 +1593,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene3/decoration.png'
+          image: '/vstory/assets/scene3/decoration.png'
         }
       }
     },
@@ -1779,7 +1779,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene4/title-decoration.png'
+          image: '/vstory/assets/scene4/title-decoration.png'
         }
       }
     },
@@ -1859,7 +1859,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene4/blocks.png'
+          image: '/vstory/assets/scene4/blocks.png'
         }
       }
     },
@@ -1875,7 +1875,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene4/chart.png'
+          image: '/vstory/assets/scene4/chart.png'
         }
       }
     },
@@ -2053,7 +2053,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene4/text-zh.png'
+          image: '/vstory/assets/scene4/text-zh.png'
         }
       }
     },
@@ -2069,7 +2069,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene4/text-en.png'
+          image: '/vstory/assets/scene4/text-en.png'
         }
       }
     },
@@ -2086,7 +2086,7 @@ const spec = {
       options: {
         graphic: {
           fill: 'rgba(124, 128,118,0.8)',
-          background: '/src/assets/scene4/matrix.png',
+          background: '/vstory/assets/scene4/matrix.png',
           stroke: false
         }
       }
@@ -2103,7 +2103,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene4/decoration.png'
+          image: '/vstory/assets/scene4/decoration.png'
         }
       }
     },
@@ -2136,7 +2136,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene4/bg-decoration.png'
+          image: '/vstory/assets/scene4/bg-decoration.png'
         }
       }
     },
@@ -2152,7 +2152,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene4/bg-decoration.png'
+          image: '/vstory/assets/scene4/bg-decoration.png'
         }
       }
     },
@@ -2202,7 +2202,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene5/title-image.png'
+          image: '/vstory/assets/scene5/title-image.png'
         }
       }
     },
@@ -2218,7 +2218,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene5/bg-decoration.png',
+          image: '/vstory/assets/scene5/bg-decoration.png',
           scale: 0.6
         }
       }
@@ -2235,7 +2235,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene5/atom.png'
+          image: '/vstory/assets/scene5/atom.png'
         }
       }
     },
@@ -2251,7 +2251,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene5/text-zh.png'
+          image: '/vstory/assets/scene5/text-zh.png'
         }
       }
     },
@@ -2267,7 +2267,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene5/text-en.png'
+          image: '/vstory/assets/scene5/text-en.png'
         }
       }
     },
@@ -2283,7 +2283,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene5/chart.png'
+          image: '/vstory/assets/scene5/chart.png'
         }
       }
     },
@@ -3410,7 +3410,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene6/main-image.png'
+          image: '/vstory/assets/scene6/main-image.png'
         }
       }
     },
@@ -3426,7 +3426,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene6/main-image2.png'
+          image: '/vstory/assets/scene6/main-image2.png'
         }
       }
     },
@@ -3442,7 +3442,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene6/chart.png'
+          image: '/vstory/assets/scene6/chart.png'
         }
       }
     },
@@ -3458,7 +3458,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene6/text.png'
+          image: '/vstory/assets/scene6/text.png'
         }
       }
     },
@@ -3832,7 +3832,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene7/text-zh.png'
+          image: '/vstory/assets/scene7/text-zh.png'
         }
       }
     },
@@ -3848,7 +3848,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene7/title.png'
+          image: '/vstory/assets/scene7/title.png'
         }
       }
     },
@@ -3864,7 +3864,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene7/chart.png'
+          image: '/vstory/assets/scene7/chart.png'
         }
       }
     },
@@ -3880,7 +3880,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene7/text-en.png'
+          image: '/vstory/assets/scene7/text-en.png'
         }
       }
     },
@@ -3896,7 +3896,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene7/pie.png'
+          image: '/vstory/assets/scene7/pie.png'
         }
       }
     },
@@ -4006,7 +4006,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene8/bg-decoration.png'
+          image: '/vstory/assets/scene8/bg-decoration.png'
         }
       }
     },
@@ -4022,7 +4022,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene8/title.png'
+          image: '/vstory/assets/scene8/title.png'
         }
       }
     },
@@ -4038,7 +4038,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene8/text.png'
+          image: '/vstory/assets/scene8/text.png'
         }
       }
     },
@@ -4054,7 +4054,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene8/chart.png'
+          image: '/vstory/assets/scene8/chart.png'
         }
       }
     },
@@ -4070,7 +4070,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene8/image1.png'
+          image: '/vstory/assets/scene8/image1.png'
         }
       }
     },
@@ -4086,7 +4086,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene8/image2.png'
+          image: '/vstory/assets/scene8/image2.png'
         }
       }
     },
@@ -4390,7 +4390,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene9/bg-decoration.png'
+          image: '/vstory/assets/scene9/bg-decoration.png'
         }
       }
     },
@@ -4406,7 +4406,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene9/person.png'
+          image: '/vstory/assets/scene9/person.png'
         }
       }
     },
@@ -4422,7 +4422,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene9/chart.png',
+          image: '/vstory/assets/scene9/chart.png',
           fillOpacity: 0.9
         }
       }
@@ -4439,7 +4439,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene9/title.png'
+          image: '/vstory/assets/scene9/title.png'
         }
       }
     },
@@ -4455,7 +4455,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene9/text-zh.png'
+          image: '/vstory/assets/scene9/text-zh.png'
         }
       }
     },
@@ -4471,7 +4471,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene9/text-en.png'
+          image: '/vstory/assets/scene9/text-en.png'
         }
       }
     },
@@ -4604,7 +4604,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene10/person.png'
+          image: '/vstory/assets/scene10/person.png'
         }
       }
     },
@@ -4620,7 +4620,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene10/title.png'
+          image: '/vstory/assets/scene10/title.png'
         }
       }
     },
@@ -4636,7 +4636,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene10/bg-decoration.png'
+          image: '/vstory/assets/scene10/bg-decoration.png'
         }
       }
     },
@@ -4652,7 +4652,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene10/text-zh.png'
+          image: '/vstory/assets/scene10/text-zh.png'
         }
       }
     },
@@ -4668,7 +4668,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene10/text-en.png'
+          image: '/vstory/assets/scene10/text-en.png'
         }
       }
     },
@@ -4684,7 +4684,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene10/chart.png'
+          image: '/vstory/assets/scene10/chart.png'
         }
       }
     },
@@ -4914,7 +4914,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene11/bg-decoration.png'
+          image: '/vstory/assets/scene11/bg-decoration.png'
         }
       }
     },
@@ -4930,7 +4930,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene11/title.png'
+          image: '/vstory/assets/scene11/title.png'
         }
       }
     },
@@ -4946,7 +4946,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene11/text-en.png'
+          image: '/vstory/assets/scene11/text-en.png'
         }
       }
     },
@@ -4962,7 +4962,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene11/text-zh.png'
+          image: '/vstory/assets/scene11/text-zh.png'
         }
       }
     },
@@ -4978,7 +4978,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene11/chart.png'
+          image: '/vstory/assets/scene11/chart.png'
         }
       }
     },
@@ -5239,7 +5239,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene12/title.png'
+          image: '/vstory/assets/scene12/title.png'
         }
       }
     },
@@ -5255,7 +5255,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene12/chart.png'
+          image: '/vstory/assets/scene12/chart.png'
         }
       }
     },
@@ -5271,7 +5271,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene12/bg-decoration.png'
+          image: '/vstory/assets/scene12/bg-decoration.png'
         }
       }
     },
@@ -5287,7 +5287,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene12/text-zh.png'
+          image: '/vstory/assets/scene12/text-zh.png'
         }
       }
     },
@@ -5303,7 +5303,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene12/text-en.png'
+          image: '/vstory/assets/scene12/text-en.png'
         }
       }
     },
@@ -6392,7 +6392,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene12-2/title.png'
+          image: '/vstory/assets/scene12-2/title.png'
         }
       }
     },
@@ -6408,7 +6408,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene12-2/chart.png'
+          image: '/vstory/assets/scene12-2/chart.png'
         }
       }
     },
@@ -6424,7 +6424,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene12-2/text-zh.png'
+          image: '/vstory/assets/scene12-2/text-zh.png'
         }
       }
     },
@@ -6440,7 +6440,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene12-2/text-en.png'
+          image: '/vstory/assets/scene12-2/text-en.png'
         }
       }
     },
@@ -7073,7 +7073,7 @@ const spec = {
       },
       options: {
         graphic: {
-          image: '/src/assets/scene13/logo.png'
+          image: '/vstory/assets/scene13/logo.png'
         }
       }
     }
@@ -13249,7 +13249,7 @@ const spec = {
   ]
 };
 
-const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 0.6, scaleY: 0.6 } });
+const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 0.5, scaleY: 0.5 } });
 window.vstory = vstory;
 vstory.play();
 ```

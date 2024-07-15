@@ -13249,7 +13249,7 @@ const spec = {
   ]
 };
 
-const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 0.6, scaleY: 0.6 } });
+const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 0.5, scaleY: 0.5 } });
 window.vstory = vstory;
 vstory.play();
 ```
