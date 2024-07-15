@@ -1329,7 +1329,7 @@ export function Player(props: IPlayerPropsType) {
       }
     }
     console.log(json);
-    const story = new Story(json, { dom: 'abc' });
+    const story = new Story(json, { dom: 'abc', playerOption: { scaleX: 0.5, scaleY: 0.5 } });
     storyRef.current = story;
     story.play();
   }, [props.code]);

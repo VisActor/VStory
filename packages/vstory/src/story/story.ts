@@ -31,7 +31,7 @@ export class Story implements IStory {
       this,
       isString(option.dom) ? (document.getElementById(option.dom) as HTMLDivElement) : option.dom
     );
-    this._player = new Player(this._canvas);
+    this._player = new Player(this._canvas, option.playerOption);
 
     if (spec) {
       this.load(spec);

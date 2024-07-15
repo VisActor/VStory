@@ -48,11 +48,15 @@ export class Player implements IPlayer {
   // protected _encoder: Encoder;
   protected _actionProcessor: ActionProcessor;
 
-  constructor(c: StoryCanvas) {
+  constructor(c: StoryCanvas, options?: { scaleX?: number; scaleY?: number }) {
     this._canvas = c;
     this._acts = [];
     this._ticker = new Ticker();
     this._currTime = 0;
+    c.getStage().defaultLayer.setAttributes({
+      scaleX: options?.scaleX ?? 1,
+      scaleY: options?.scaleY ?? 1
+    });
     // this._encoder = new Encoder();
     this._actionProcessor = new ActionProcessor(processorMap);
   }
