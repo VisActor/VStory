@@ -10,6 +10,7 @@ export interface IChartAppearPayLoad extends IActionPayload {
      */
     effect: string;
   };
+  fade?: { isBaseOpacity?: boolean };
 }
 
 export interface IChartAppearAction extends IAction {

@@ -1,15 +1,20 @@
-import VChart, { ISpec } from '@visactor/vchart';
-import { IChartAppearAction } from '../../../../types/chart/appear';
-import { ICharacterVisactor } from '../../../../../story/character/visactor/interface';
+import type { ISpec } from '@visactor/vchart';
+import type VChart from '@visactor/vchart';
+import type { IChartAppearAction } from '../../../../types/chart/appear';
+import type { ICharacterVisactor } from '../../../../../story/character/visactor/interface';
 import { axesDisappearProcessor, titleDisappearProcessor } from '../../components';
 import { areaDisappearProcessor, lineDisappearProcessor, symbolDisappearProcessor } from '../../marks';
 import { graphicDisappearProcessor } from '../../../graphic/disappear';
+import { commonDisappearByBaseOpacity } from '../common/commonDisappear';
 
 export const radarDisappearProcessor = async (
   chartInstance: ICharacterVisactor,
   spec: ISpec,
   action: IChartAppearAction
 ) => {
+  if (commonDisappearByBaseOpacity(chartInstance, spec, action)) {
+    return;
+  }
   const chart = chartInstance.getGraphicParent();
   const vchart = chart?._vchart;
   const instance: VChart = vchart ? vchart : chartInstance;
