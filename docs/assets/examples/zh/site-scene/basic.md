@@ -4,7 +4,7 @@ group: site-scene
 title: basic
 keywords: basic
 order: 1-0
-cover: http://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vrender/base-arc.png
+cover: http://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/screenshot-20240715-204217.png
 ---
 
 # 官网场景
