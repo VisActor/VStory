@@ -1,5 +1,5 @@
 import type { IVisactorGraphic } from '../../visactor/interface';
-import type { IBoundsLike } from '@visactor/vutils';
+import type { AABBBounds, IBoundsLike } from '@visactor/vutils';
 import type { ISpec, IVChart } from '@visactor/vchart';
 import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Group } from '@visactor/vrender';
@@ -32,6 +32,8 @@ export class Chart extends Group implements IVisactorGraphic {
   protected _vchart: IVChart;
   // 是否试一次空render，目的是只生成场景树，不会真实渲染
   // protected _emptyRenderCall: boolean;
+  protected declare _AABBBounds: AABBBounds;
+  declare valid: boolean;
   get vchart() {
     return this._vchart;
   }
@@ -40,6 +42,43 @@ export class Chart extends Group implements IVisactorGraphic {
   }
 
   drawTag = false;
+  protected _boundsChangeTag: boolean = true;
+
+  doUpdateAABBBounds(full?: boolean): AABBBounds {
+    if (!this._vchart) {
+      return super.doUpdateAABBBounds();
+    }
+    const stage = this._vchart.getStage();
+    // console.log(
+    //   'vchart graphic doUpdateAABBBounds',
+    //   stage.defaultLayer.getChildByName('root').AABBBounds.clone().translate(this.attribute.x, this.attribute.y)
+    // );
+    return stage.defaultLayer.getChildByName('root').AABBBounds.clone().translate(this.attribute.x, this.attribute.y);
+  }
+
+  shouldUpdateAABBBounds(): boolean {
+    if (super.shouldUpdateAABBBounds()) {
+      return true;
+    }
+    if (this._boundsChangeTag) {
+      this._boundsChangeTag = false;
+      return true;
+    }
+    return false;
+  }
+
+  protected tryUpdateAABBBounds(full?: boolean): AABBBounds {
+    if (!this.shouldUpdateAABBBounds()) {
+      return this._AABBBounds;
+    }
+    if (!this.valid) {
+      this._AABBBounds.clear();
+      return this._AABBBounds;
+    }
+
+    const bounds = this.doUpdateAABBBounds(full);
+    return bounds;
+  }
 
   constructor(params: IChartGraphicAttribute) {
     super(params);
@@ -153,6 +192,7 @@ export class Chart extends Group implements IVisactorGraphic {
   }
 
   private _updateViewBox(_viewBox: IBoundsLike) {
+    this._boundsChangeTag = true;
     const viewBox = { ..._viewBox };
     //
     viewBox.x2 -= viewBox.x1;

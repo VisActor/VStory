@@ -9,13 +9,13 @@ import type { ContinuousActionType, IEditActionInfo } from './interface';
 import { EditActionEnum } from './interface';
 import type { StoryEvent } from '../story/interface/runtime-interface';
 
-const IgnoreEvent = {
+const IgnoreEvent: { [key: string]: boolean } = {
   mousemove: true,
   mouseout: true,
   mouseover: true
 };
 
-const PointerOverEvent = {
+const PointerOverEvent: { [key: string]: boolean } = {
   pointerover: true,
   pointerout: true,
   pointermove: true

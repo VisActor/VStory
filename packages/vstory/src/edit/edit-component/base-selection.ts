@@ -168,7 +168,7 @@ export abstract class BaseSelection implements IEditComponent {
 
   protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
     if (this._activeCharacter) {
-      this._activeCharacter.setAttributes(data);
+      this._activeCharacter.setAttributes({ position: data });
     }
   }
 }

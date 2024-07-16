@@ -1,6 +1,6 @@
 import { merge } from '@visactor/vutils';
-import { CharacterChart } from '../character';
-import { IChartCharacterRuntime } from './interface';
+import type { CharacterChart } from '../character';
+import type { IChartCharacterRuntime } from './interface';
 
 export class CommonSpecRuntime implements IChartCharacterRuntime {
   type = 'CommonSpec';
@@ -19,9 +19,4 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
     }
     merge(rawSpec, { color: options.color, theme: options.theme, padding: options.padding, title: options.title });
   }
-
-  afterInitializeChart() {
-    //
-  }
-  afterVRenderDraw() {}
 }
