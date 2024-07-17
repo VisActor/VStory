@@ -22,6 +22,7 @@ import { VChartPicker } from './character/chart/graphic/vchart-graphic-picker';
 import { StoryGraphicType } from '../dsl/constant';
 import { CharacterComponentLine } from './character/component/characters/character-line';
 import { CharacterComponentImage } from './character/component/characters/character-image';
+import { CharacterComponentShape } from './character/component/characters/character-shape';
 
 const splitModule = new ContainerModule((bind: any) => {
   // chart渲染器注入
@@ -60,6 +61,7 @@ export function registerCharacter() {
   StoryFactory.registerCharacter(StoryGraphicType.QIPAO, CharacterComponentQipao);
   StoryFactory.registerCharacter(StoryGraphicType.LINE, CharacterComponentLine);
   StoryFactory.registerCharacter(StoryGraphicType.IMAGE, CharacterComponentImage);
+  StoryFactory.registerCharacter(StoryGraphicType.SHAPE, CharacterComponentShape);
 
   container.load(splitModule);
 }

@@ -127,26 +127,10 @@ export const commonMarkProcessor = {
   bounce: bounceProcessor
 };
 
-export const processorMarkMap = {
-  [StoryGraphicType.RECT]: {
-    ...commonMarkProcessor
-  },
-  [StoryGraphicType.QIPAO]: {
-    ...commonMarkProcessor
-  },
-  [StoryGraphicType.TEXT]: {
-    ...commonMarkProcessor
-  },
-  [StoryGraphicType.RICH_TEXT]: {
-    ...commonMarkProcessor
-  },
-  [StoryGraphicType.LINE]: {
-    ...commonMarkProcessor
-  },
-  [StoryGraphicType.IMAGE]: {
-    ...commonMarkProcessor
-  }
-};
+export const processorMarkMap = {};
+Object.values(StoryGraphicType).forEach(type => {
+  processorMarkMap[type] = commonMarkProcessor;
+});
 
 // TODO: 按需引用, 所有processor
 export const processorMap = {
