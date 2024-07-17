@@ -149,7 +149,13 @@ export function moveOut(graphic: IGraphic, params: IMoveOutParams) {
     }
   }
 
-  graphic.animate().to({ x: toX, y: toY }, duration, easing as EasingType);
+  graphic
+    .animate()
+    .to({ x: toX, y: toY }, duration, easing as EasingType)
+    // 最终不显示
+    .onEnd(() => {
+      graphic.setAttributes({ visible: false, visibleAll: false } as any);
+    });
   return true;
 }
 
