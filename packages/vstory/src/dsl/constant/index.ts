@@ -15,7 +15,7 @@ export const enum StoryChartType {
 }
 export enum StoryGraphicType {
   RECT = 'RectComponent',
-  // Shape = 'SymbolComponent',
+  SHAPE = 'ShapeComponent',
   LINE = 'LineComponent',
   ARC = 'ArcComponent',
   // AREA = 'AreaComponent',
