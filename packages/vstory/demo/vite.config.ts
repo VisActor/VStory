@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import * as path from 'path';
 import react from '@vitejs/plugin-react';
-import localConf from './vite.config.local.ts';
+import localConf from './vite.config.local';
 
 // https://vitejs.dev/config/
 export default defineConfig({
