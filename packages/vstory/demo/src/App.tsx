@@ -16,6 +16,7 @@ import { Appear } from './demos/Appear';
 import { GraphicEdit } from './demos/GraphicEdit';
 import { Playground } from './demos/Playground';
 import { Pictogram } from './demos/infographics/Pictogram';
+import { UnitVizSimple } from './demos/infographics/UnitVizSimple';
 
 const App = () => {
   const [activeIndex, setActiveIndex] = useLocalStorage('menuIndex', 0);
@@ -79,6 +80,10 @@ const App = () => {
     {
       name: 'Infographic-Pictogram',
       component: Pictogram
+    },
+    {
+      name: 'Infographic-UnitVizSimple',
+      component: UnitVizSimple
     }
   ];
   const selectedMenu = menus[activeIndex ?? menus.length - 1];
