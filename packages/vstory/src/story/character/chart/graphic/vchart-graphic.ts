@@ -41,19 +41,23 @@ export class Chart extends Group implements IVisactorGraphic {
     return this._vchart;
   }
 
+  private _chartViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
+  private _BoundsViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
+  private _offset: { x: number; y: number } = { x: 0, y: 0 };
+
   drawTag = false;
   protected _boundsChangeTag: boolean = true;
+
+  private _getVChartRootMarkBounds() {
+    const stage = this._vchart.getStage();
+    return stage.defaultLayer.getChildByName('root').AABBBounds.clone();
+  }
 
   doUpdateAABBBounds(full?: boolean): AABBBounds {
     if (!this._vchart) {
       return super.doUpdateAABBBounds();
     }
-    const stage = this._vchart.getStage();
-    // console.log(
-    //   'vchart graphic doUpdateAABBBounds',
-    //   stage.defaultLayer.getChildByName('root').AABBBounds.clone().translate(this.attribute.x, this.attribute.y)
-    // );
-    return stage.defaultLayer.getChildByName('root').AABBBounds.clone().translate(this.attribute.x, this.attribute.y);
+    return this._getVChartRootMarkBounds().translate(this.attribute.x, this.attribute.y);
   }
 
   shouldUpdateAABBBounds(): boolean {
@@ -183,17 +187,35 @@ export class Chart extends Group implements IVisactorGraphic {
     });
   }
 
-  updateSpec(spec: ISpec, forceMerge = false, morphConfig = false) {
-    this._vchart.updateSpecSync(spec, forceMerge, morphConfig as any);
-  }
-
-  protected updateViewBox(viewBox: IBoundsLike) {
-    this._updateViewBox(viewBox);
-  }
-
-  private _updateViewBox(_viewBox: IBoundsLike) {
+  updateSpec(spec: ISpec, viewBox?: IBoundsLike, forceMerge = false, morphConfig = false) {
     this._boundsChangeTag = true;
-    const viewBox = { ..._viewBox };
+    viewBox && this.updateViewBox(viewBox);
+    this._vchart.updateSpecSync(spec, forceMerge, { reuse: false, morph: morphConfig });
+    this._updateViewBox();
+  }
+
+  updateViewBox(viewBox: IBoundsLike) {
+    // 图表的设置大小
+    this._chartViewBox = { ...viewBox };
+    this._updateViewBox();
+  }
+
+  private _updateViewBox() {
+    if (!this._vchart) {
+      return;
+    }
+    this._boundsChangeTag = true;
+    const rootBounds = this._getVChartRootMarkBounds();
+    this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1, -rootBounds.y1);
+    this._BoundsViewBox = rootBounds;
+
+    const viewBox = { ...this._chartViewBox };
+    this.setAttributes({
+      x: viewBox.x1 + rootBounds.x1,
+      y: viewBox.y1 + rootBounds.y1,
+      width: rootBounds.x2 - rootBounds.x1,
+      height: rootBounds.y2 - rootBounds.y1
+    });
     //
     viewBox.x2 -= viewBox.x1;
     viewBox.y2 -= viewBox.y1;
@@ -201,6 +223,13 @@ export class Chart extends Group implements IVisactorGraphic {
     viewBox.y1 = 0;
     this._vchart.resize(viewBox.x2 - viewBox.x1, viewBox.y2 - viewBox.y1);
     this._vchart.updateViewBox(viewBox);
+    const renderViewBox = { ...rootBounds };
+    renderViewBox.x2 -= renderViewBox.x1;
+    renderViewBox.y2 -= renderViewBox.y1;
+    renderViewBox.x1 = 0;
+    renderViewBox.y1 = 0;
+    // @ts-ignore
+    this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);
   }
 
   release() {

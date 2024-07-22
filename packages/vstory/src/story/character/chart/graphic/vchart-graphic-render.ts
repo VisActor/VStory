@@ -6,8 +6,7 @@ import type {
   IGraphicRenderDrawParams,
   IMarkAttribute,
   IRenderService,
-  IThemeAttribute,
-  IGraphic
+  IThemeAttribute
 } from '@visactor/vrender';
 import { injectable, DefaultCanvasRectRender } from '@visactor/vrender';
 import type { Chart } from './vchart-graphic';

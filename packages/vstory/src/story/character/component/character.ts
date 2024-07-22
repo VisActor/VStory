@@ -98,6 +98,10 @@ export abstract class CharacterComponent extends CharacterBase {
     return this._group;
   }
 
+  getLayoutBounds() {
+    return this._group.AABBBounds;
+  }
+
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {
     if (!(event.detailPath ?? event.path).some(g => g === this._group)) {
       return false;

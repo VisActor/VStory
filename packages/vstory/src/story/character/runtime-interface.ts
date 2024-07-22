@@ -1,5 +1,5 @@
 import type { IGroup } from '@visactor/vrender';
-import type { IPointLike } from '@visactor/vutils';
+import type { IBoundsLike, IPointLike } from '@visactor/vutils';
 import type { StoryCanvas } from '../canvas/canvas';
 import type { IStory, IStoryCanvas, StoryEvent } from '../interface/runtime-interface';
 import type { ICharacterSpec } from './dsl-interface';
@@ -14,13 +14,14 @@ export interface ICharacter {
   type: string;
   visActorType: string;
   spec: ICharacterSpec;
+  graphic: Graphic | IGroup;
 
   init: () => void;
   reset: () => void;
   show: () => void;
   hide: () => void;
   getGraphicParent: () => IGroup;
-  graphic: Graphic | IGroup;
+  getLayoutBounds: () => IBoundsLike;
   tickTo: (t: number) => void;
 
   checkEvent: (event: StoryEvent) => false | (ICharacterPickInfo & any);

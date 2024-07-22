@@ -5,7 +5,6 @@ import { cloneDeep, isValid } from '@visactor/vutils';
 import { VChart } from '@visactor/vchart';
 import type { IChartCharacterSpec } from '../dsl-interface';
 import { Chart } from './graphic/vchart-graphic';
-import { getLayoutFromWidget } from '../../utils/layout';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
 import { ChartDataTempTransform } from './spec-process/data-temp-transform';
@@ -14,6 +13,7 @@ import type { IChartTemp } from './temp/interface';
 import { SeriesSpecRuntime } from './runtime/series-spec';
 import type { StoryEvent } from '../../interface/runtime-interface';
 import type { ICharacterPickInfo } from '../runtime-interface';
+import { getLayoutFromWidget } from '../../utils/layout';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
