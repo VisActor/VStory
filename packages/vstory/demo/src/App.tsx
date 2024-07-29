@@ -16,6 +16,7 @@ import { Appear } from './demos/Appear';
 import { GraphicEdit } from './demos/GraphicEdit';
 import { Playground } from './demos/Playground';
 import { Pictogram } from './demos/infographics/Pictogram';
+import { UnitVizLegacyLayoutAlgo } from './demos/infographics/UnitVizLegacyLayoutAlgo';
 import { UnitVizSimple } from './demos/infographics/UnitVizSimple';
 
 const App = () => {
@@ -84,6 +85,10 @@ const App = () => {
     {
       name: 'Infographic-UnitVizSimple',
       component: UnitVizSimple
+    },
+    {
+      name: 'Infographic-UnitVizSimple-LegacyLayoutAlgo',
+      component: UnitVizLegacyLayoutAlgo
     }
   ];
   const selectedMenu = menus[activeIndex ?? menus.length - 1];
