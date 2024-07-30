@@ -1,7 +1,7 @@
 import type { Graphic } from '../graphic/graphic';
 import { GraphicRect } from '../graphic/rect';
 import { CharacterComponent } from '../character';
-import { StoryGraphicType } from '../../../../dsl/constant';
+import { StoryGraphicType } from '../../../../constants/character';
 
 export class CharacterComponentRect extends CharacterComponent {
   readonly graphicType: string = 'rect';

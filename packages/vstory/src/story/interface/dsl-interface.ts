@@ -2,9 +2,9 @@ import type { Action } from '../../dsl/types';
 import type { ICharacterSpec } from '../character';
 
 export interface IAction {
-  startTime: number;
+  startTime?: number;
   action: string;
-  duration: number;
+  duration?: number;
   payload?: Action['payload'];
 }
 

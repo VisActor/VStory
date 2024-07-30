@@ -1,7 +1,7 @@
 import type { IGroup } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import type { StoryCanvas } from '../canvas/canvas';
-import type { IStory, StoryEvent } from '../interface/runtime-interface';
+import type { IStory, IStoryCanvas, StoryEvent } from '../interface/runtime-interface';
 import type { ICharacterSpec } from './dsl-interface';
 
 export interface ICharacterPickInfo {
@@ -17,6 +17,7 @@ export interface ICharacter {
   show: () => void;
   hide: () => void;
   getGraphicParent: () => IGroup;
+  graphic: IGroup;
   tickTo: (t: number) => void;
 
   checkEvent: (event: StoryEvent) => false | (ICharacterPickInfo & any);
@@ -28,7 +29,7 @@ export interface ICharacter {
 
 export interface ICharacterInitOption {
   story: IStory;
-  canvas: StoryCanvas;
+  canvas: IStoryCanvas;
   graphicParent: IGroup;
 }
 

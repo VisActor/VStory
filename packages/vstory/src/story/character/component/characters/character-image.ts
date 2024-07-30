@@ -1,6 +1,6 @@
 import type { Graphic } from '../graphic/graphic';
 import { CharacterComponent } from '../character';
-import { StoryGraphicType } from '../../../../dsl/constant';
+import { StoryGraphicType } from '../../../../constants/character';
 import { GraphicImage } from '../graphic/image';
 
 export class CharacterComponentImage extends CharacterComponent {

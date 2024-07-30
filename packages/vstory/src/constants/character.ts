@@ -1,19 +1,7 @@
 export const enum StoryChartType {
-  // CHARACTER_CHART = 'CharacterChart',
-  // BAR = 'BarChart',
-  // LINE = 'LineChart',
-  // AREA = 'AreaChart',
-  // HISTOGRAM = 'HistogramChart',
-  // PIE = 'PieChart',
-  // ROSE = 'RoseChart',
-  // RADAR = 'RadarChart',
-  // RANGE_COLUMN = 'RangeColumnChart',
-  // SCATTER = 'ScatterChart',
-  // WORD_CLOUD = 'WordCloudChart',
-  // TREE_MAP = 'TreeMapChart',
-  // SUNBURST = 'SunburstChart',
   VCHART = 'VChart'
 }
+
 export enum StoryGraphicType {
   RECT = 'RectComponent',
   SHAPE = 'ShapeComponent',

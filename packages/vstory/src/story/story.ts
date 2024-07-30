@@ -1,13 +1,14 @@
 import type { ICharacterSpec } from './character/dsl-interface';
 import { isString } from '@visactor/vutils';
-import type { IStory, IStoryInitOption } from './interface/runtime-interface';
+import type { ICharacterTree, IStory, IStoryCanvas, IStoryInitOption } from './interface/runtime-interface';
 import type { ICharacter } from './character/runtime-interface';
 import { StoryCanvas } from './canvas/canvas';
 import type { IStorySpec, IActSpec } from './interface';
 import { StoryFactory } from './factory/factory';
 import { defaultTicker, defaultTimeline } from '@visactor/vrender';
-import type { IPlayer } from './interface/player';
-import { Player } from './player';
+import { CharacterTree } from './character-tree/character-tree';
+import type { IPlayer } from '../player/interface/player';
+import { Player } from '../player/player';
 
 defaultTicker.remTimeline(defaultTimeline);
 
@@ -18,12 +19,12 @@ export class Story implements IStory {
 
   readonly id: string;
 
-  protected _canvas: StoryCanvas;
+  protected _canvas: IStoryCanvas;
+
+  protected _characterTree: ICharacterTree;
   get canvas() {
     return this._canvas;
   }
-
-  protected _characters: { [key: string]: ICharacter } = {};
 
   constructor(spec: IStorySpec, option: IStoryInitOption) {
     this.id = 'test-mvp_' + Story._id_++;
@@ -31,58 +32,42 @@ export class Story implements IStory {
       this,
       isString(option.dom) ? (document.getElementById(option.dom) as HTMLDivElement) : option.dom
     );
-    this._player = new Player(this._canvas, option.playerOption);
+    this._player = new Player(this, option.playerOption);
 
+    this._characterTree = new CharacterTree(this);
     if (spec) {
       this.load(spec);
     }
   }
 
   load(spec: IStorySpec) {
-    spec.characters.forEach(e => {
-      this._createCharacter(e);
-    });
-    // @ts-ignore
-    spec.acts.forEach(e => {
-      this._createAct(e);
-    });
+    this._characterTree.initCharacters(spec.characters);
+    this._player.initActs(spec.acts);
   }
 
   getCharacters(): { [key: string]: ICharacter } {
-    return this._characters;
+    return this._characterTree.getCharacters();
   }
 
-  private _createCharacter(spec: ICharacterSpec) {
-    const option = { story: this, canvas: this._canvas, graphicParent: this._canvas.getStage().defaultLayer };
-    if ((<ICharacterSpec>spec).id) {
-      if (!this._characters[(<ICharacterSpec>spec).id]) {
-        this._characters[(<ICharacterSpec>spec).id] = StoryFactory.createCharacter(<ICharacterSpec>spec, option);
-      }
-      return this._characters[(<ICharacterSpec>spec).id];
-    }
-    //  else if ((<ICharacterLink>spec).characterId) {
-    //   return this._characters[(<ICharacterLink>spec).characterId];
-    // }
-    return null;
+  getCharactersById(key: string) {
+    return this._characterTree.getCharactersById(key);
   }
 
-  private _createAct(spec: IActSpec) {
-    this._player.addAct(spec, this._characters);
-  }
+  // private _createAct(spec: IActSpec) {
+  //   this._player.addAct(spec, this._characters);
+  // }
 
-  play(actIndex: string | number = 0) {
+  play(actIndexOrId: string | number = 0) {
     // player 开始播放
-    this._player.setCurrentAct(actIndex);
     this._player.play();
   }
 
   pause() {
     this._player.pause();
-    return this._player.getCurrentAct();
+    return;
   }
 
-  async encodeToVideo(actIndex: number, millsecond: number, fps: number) {
-    this._player.setCurrentAct(actIndex);
+  async encodeToVideo(actIndexOrId: number, millsecond: number, fps: number) {
     return this._player.encodeToVideo(millsecond, fps);
   }
 
