@@ -1,33 +1,16 @@
 import type VChart from '@visactor/vchart';
-import type { IChartAppearAction } from '../interface/appear-action';
+import type { IChartAppearAction } from '../../interface/appear-action';
 
-export const transformSymbolAppear = (
+export const commonGrow = (
   instance: VChart,
   animation: IChartAppearAction['payload']['animation'],
-  option: { markIndex: number; disappear: boolean }
-) => {
-  switch (animation.effect) {
-    case 'grow': {
-      return symbolGrow(instance, animation, option);
-    }
-    case 'fade': {
-      return symbolFade(instance, animation, option);
-    }
-    default: {
-      return symbolFade(instance, animation, option);
-    }
-  }
-};
-
-const symbolGrow = (
-  instance: VChart,
-  animation: IChartAppearAction['payload']['animation'],
+  typeList: string[],
   option: { markIndex: number; disappear: boolean }
 ) => {
   const { duration, loop, oneByOne, easing } = animation;
   const { disappear } = option;
 
-  const type = disappear ? 'scaleOut' : 'scaleIn';
+  const type = disappear ? typeList[1] : typeList[0];
 
   return {
     type,
@@ -38,7 +21,7 @@ const symbolGrow = (
   };
 };
 
-const symbolFade = (
+export const commonFade = (
   instance: VChart,
   animation: IChartAppearAction['payload']['animation'],
   option: { markIndex: number; disappear: boolean }

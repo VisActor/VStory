@@ -111,6 +111,7 @@ export const BarLineSeries = () => {
                     {
                       startTime: 10,
                       action: 'appear',
+                      selector: '*',
                       payload: {
                         style: {},
                         animation: {

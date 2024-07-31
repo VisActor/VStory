@@ -1,4 +1,4 @@
-import type { ISeries, IVChart } from '@visactor/vchart';
+import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
 import { merge } from '@visactor/vutils';
 import type { ICharacter } from '../../../story/character';
 import type { IAction } from '../../../story/interface';
@@ -27,9 +27,46 @@ export class VChartAppearActionProcessor extends ActionProcessorItem {
 
   run(character: ICharacter, actionSpec: IAction): void {
     const vchart = character.graphic._vchart as IVChart;
+    // series & mark
     const seriesList = vchart.getChart().getAllSeries();
     seriesList.forEach(series => {
       this.commonSeriesAppear(vchart, series, actionSpec);
+    });
+    // component
+    const components = vchart.getChart().getAllComponents();
+    components.forEach(component => {
+      this.componentAppear(vchart, component, actionSpec);
+    });
+  }
+
+  protected componentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
+    if (component.type === 'label') {
+      this.labelComponentAppear(vchart, component, actionSpec);
+    } else if (component.specKey === 'legends') {
+      this.legendsComponentAppear(vchart, component, actionSpec);
+    }
+  }
+
+  protected labelComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
+    const vrenderComponents = component.getVRenderComponents();
+    vrenderComponents.forEach(group => {
+      return;
+    });
+  }
+  protected legendsComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
+    const vrenderComponents = component.getVRenderComponents();
+
+    vrenderComponents.forEach(group => {
+      const appearTransformFunc = (transformMap.appear as any).legends;
+      const { payload } = actionSpec;
+      const mergePayload = merge(
+        {},
+        (VChartAppearActionProcessor as any).legendsPayload || {},
+        payload
+      ) as IChartAppearAction['payload'];
+      appearTransformFunc(group, mergePayload.animation, {
+        disappear: false
+      });
     });
   }
 
@@ -76,4 +113,6 @@ export class VChartAppearActionProcessor extends ActionProcessorItem {
   };
   static linePayload: IChartAppearAction['payload'] = VChartAppearActionProcessor.rectPayload;
   static symbolPayload: IChartAppearAction['payload'] = VChartAppearActionProcessor.rectPayload;
+  static textPayload: IChartAppearAction['payload'] = VChartAppearActionProcessor.rectPayload;
+  static legendsPayload: IChartAppearAction['payload'] = VChartAppearActionProcessor.rectPayload;
 }

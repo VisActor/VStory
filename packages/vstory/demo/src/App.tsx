@@ -17,6 +17,7 @@ import { Playground } from './demos/Playground';
 import { Pictogram } from './demos/infographics/Pictogram';
 import { LV_BAR1 } from './demos/lv/bar1';
 import { BarLineSeries } from './demos/BarLineSeries';
+import { wordcloud } from './demos/wordcloud';
 
 type MenusType = (
   | {
@@ -92,6 +93,10 @@ const App = () => {
     {
       name: 'BarLineSeries',
       component: BarLineSeries
+    },
+    {
+      name: 'wordcloud',
+      component: wordcloud
     },
     {
       name: 'lv_chart',

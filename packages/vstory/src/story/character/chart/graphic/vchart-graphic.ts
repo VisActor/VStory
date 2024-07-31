@@ -52,7 +52,7 @@ export class Chart extends Group implements IVisactorGraphic {
         // viewBox: params.vi
         dpr: params.dpr,
         interactive: params.interactive,
-        animation: params.animation,
+        animation: false,
         autoFit: false,
         disableTriggerEvent: params.disableTriggerEvent,
         disableDirtyBounds: params.disableDirtyBounds,
