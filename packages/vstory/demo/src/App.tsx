@@ -1,14 +1,12 @@
 import React, { Component, useCallback, useState } from 'react';
 import { Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
-import { SimpleBar } from './demos/SimpleBar';
-import { RankingBar } from './demos/RankingBar';
 import { StoryBarDemo } from './demos/StoryBarDemo';
-import { StorySceneDemo } from './demos/StoryScene';
-import { AreaWithTag } from './demos/AreaWithTag';
-import { StoryLineDemo } from './demos/StoryLineDemo';
+// import { StorySceneDemo } from './demos/StoryScene';
+// import { AreaWithTag } from './demos/AreaWithTag';
+// import { StoryLineDemo } from './demos/StoryLineDemo';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { StoryPieDemo } from './demos/StoryPieDemo';
+// import { StoryPieDemo } from './demos/StoryPieDemo';
 import { GraphicActionDemo } from './demos/graphicAction';
 import { VChartSiteDemo } from './demos/VChartSite/VChartSite';
 import { DisAppear } from './demos/DisAppear';
@@ -18,6 +16,8 @@ import { GraphicEdit } from './demos/GraphicEdit';
 import { Playground } from './demos/Playground';
 import { Pictogram } from './demos/infographics/Pictogram';
 import { LV_BAR1 } from './demos/lv/bar1';
+import { BarLineSeries } from './demos/BarLineSeries';
+import { wordcloud } from './demos/wordcloud';
 
 type MenusType = (
   | {
@@ -39,25 +39,17 @@ const App = () => {
   const [activeName, setActiveName] = useLocalStorage('menuName', '');
   const menus = [
     {
-      name: 'SimpleBar',
-      component: SimpleBar
-    },
-    {
-      name: 'RankingBar',
-      component: RankingBar
-    },
-    {
       name: 'Bar',
       component: StoryBarDemo
     },
-    {
-      name: 'Line',
-      component: StoryLineDemo
-    },
-    {
-      name: 'Pie',
-      component: StoryPieDemo
-    },
+    // {
+    //   name: 'Line',
+    //   component: StoryLineDemo
+    // },
+    // {
+    //   name: 'Pie',
+    //   component: StoryPieDemo
+    // },
     // {
     //   name: 'StoryScene',
     //   component: StorySceneDemo
@@ -97,6 +89,14 @@ const App = () => {
     {
       name: 'Infographic-Pictogram',
       component: Pictogram
+    },
+    {
+      name: 'BarLineSeries',
+      component: BarLineSeries
+    },
+    {
+      name: 'wordcloud',
+      component: wordcloud
     },
     {
       name: 'lv_chart',

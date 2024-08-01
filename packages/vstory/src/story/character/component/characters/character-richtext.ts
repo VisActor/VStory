@@ -1,7 +1,7 @@
 import type { Graphic } from '../graphic/graphic';
 import { GraphicRichText } from '../graphic/richtext';
 import { CharacterComponent } from '../character';
-import { StoryGraphicType } from '../../../../dsl/constant';
+import { StoryGraphicType } from '../../../../constants/character';
 
 export class CharacterComponentRichText extends CharacterComponent {
   readonly graphicType: string = 'richtext';

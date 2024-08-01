@@ -60,52 +60,52 @@ export const componentProcessor = {
 
 // 图表processor
 export const processorChartMap = {
-  [StoryChartType.CHARACTER_CHART]: commonProcessorMap,
-  // [StoryChartType.CHARACTER_CHART]: characterProcessorMap,
-  [StoryChartType.BAR]: {
-    // 大多数都是通用的, 可以复用.
-    ...editProcessor,
-    ...viewProcessor,
-    // 通用的, 但实现不同的, 可以直接覆盖
-    createMarkPoint: createMarkPointProcessor,
-    createTitle: createTitleProcessor,
-    // 不通用的, 可直接覆盖, 重新定义
-    barStyle: createMarkStyleProcessorByMarkType('rect'),
-    appear: barAppearProcessor,
-    disappear: barDisappearProcessor,
-    dance: danceProcessor
-  },
-  [StoryChartType.LINE]: {
-    ...editProcessor,
-    ...viewProcessor,
-    ...componentProcessor,
-    lineStyle: lineStyleProcessor,
-    appear: lineAppearProcessor,
-    symbolStyle: createMarkStyleProcessorByMarkType('symbol')
-  },
-  [StoryChartType.PIE]: {
-    ...editProcessor,
-    ...viewProcessor,
-    ...componentProcessor,
-    arcStyle: createMarkStyleProcessorByMarkType('arc'),
-    appear: pieAppearProcessor,
-    disappear: pieDisappearProcessor
-  },
-  [StoryChartType.AREA]: {
-    ...editProcessor,
-    ...viewProcessor,
-    ...componentProcessor,
-    appear: areaAppearProcessor,
-    disappear: areaDisappearProcessor,
-    arcStyle: createMarkStyleProcessorByMarkType('arc')
-  },
-  [StoryChartType.RANGE_COLUMN]: rangeColumnProcessorMap,
-  [StoryChartType.SCATTER]: scatterProcessorMap,
-  [StoryChartType.ROSE]: roseProcessorMap,
-  [StoryChartType.RADAR]: radarProcessorMap,
-  [StoryChartType.WORD_CLOUD]: wordCloudProcessorMap,
-  [StoryChartType.TREE_MAP]: treeMapProcessorMap,
-  [StoryChartType.SUNBURST]: sunburstProcessorMap
+  // [StoryChartType.CHARACTER_CHART]: commonProcessorMap,
+  // // [StoryChartType.CHARACTER_CHART]: characterProcessorMap,
+  // [StoryChartType.BAR]: {
+  //   // 大多数都是通用的, 可以复用.
+  //   ...editProcessor,
+  //   ...viewProcessor,
+  //   // 通用的, 但实现不同的, 可以直接覆盖
+  //   createMarkPoint: createMarkPointProcessor,
+  //   createTitle: createTitleProcessor,
+  //   // 不通用的, 可直接覆盖, 重新定义
+  //   barStyle: createMarkStyleProcessorByMarkType('rect'),
+  //   appear: barAppearProcessor,
+  //   disappear: barDisappearProcessor,
+  //   dance: danceProcessor
+  // },
+  // [StoryChartType.LINE]: {
+  //   ...editProcessor,
+  //   ...viewProcessor,
+  //   ...componentProcessor,
+  //   lineStyle: lineStyleProcessor,
+  //   appear: lineAppearProcessor,
+  //   symbolStyle: createMarkStyleProcessorByMarkType('symbol')
+  // },
+  // [StoryChartType.PIE]: {
+  //   ...editProcessor,
+  //   ...viewProcessor,
+  //   ...componentProcessor,
+  //   arcStyle: createMarkStyleProcessorByMarkType('arc'),
+  //   appear: pieAppearProcessor,
+  //   disappear: pieDisappearProcessor
+  // },
+  // [StoryChartType.AREA]: {
+  //   ...editProcessor,
+  //   ...viewProcessor,
+  //   ...componentProcessor,
+  //   appear: areaAppearProcessor,
+  //   disappear: areaDisappearProcessor,
+  //   arcStyle: createMarkStyleProcessorByMarkType('arc')
+  // },
+  // [StoryChartType.RANGE_COLUMN]: rangeColumnProcessorMap,
+  // [StoryChartType.SCATTER]: scatterProcessorMap,
+  // [StoryChartType.ROSE]: roseProcessorMap,
+  // [StoryChartType.RADAR]: radarProcessorMap,
+  // [StoryChartType.WORD_CLOUD]: wordCloudProcessorMap,
+  // [StoryChartType.TREE_MAP]: treeMapProcessorMap,
+  // [StoryChartType.SUNBURST]: sunburstProcessorMap
 };
 
 // 组件processor
@@ -127,7 +127,7 @@ export const commonMarkProcessor = {
   bounce: bounceProcessor
 };
 
-export const processorMarkMap = {};
+export const processorMarkMap: Record<string, any> = {};
 Object.values(StoryGraphicType).forEach(type => {
   processorMarkMap[type] = commonMarkProcessor;
 });
