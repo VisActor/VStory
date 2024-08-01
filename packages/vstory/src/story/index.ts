@@ -7,7 +7,7 @@ import { ChartRender, VChartRender } from './character/chart/graphic/vchart-grap
 import { CharacterComponentText } from './character/component/characters/character-text';
 import { CharacterComponentRichText } from './character/component/characters/character-richtext';
 import { VChartPicker } from './character/chart/graphic/vchart-graphic-picker';
-import { StoryGraphicType } from '../constants/character';
+import { StoryComponentType } from '../constants/character';
 import { CharacterComponentLine } from './character/component/characters/character-line';
 import { CharacterComponentImage } from './character/component/characters/character-image';
 import { CharacterComponentShape } from './character/component/characters/character-shape';
@@ -33,13 +33,13 @@ export function registerCharacter() {
   // StoryFactory.registerCharacter('BarChart', CharacterChart);
   // StoryFactory.registerCharacter('CharacterChart', CharacterChart);
   // StoryFactory.registerCharacter('LineChart', CharacterChart);
-  StoryFactory.registerCharacter(StoryGraphicType.RECT, CharacterComponentRect);
-  StoryFactory.registerCharacter(StoryGraphicType.TEXT, CharacterComponentText);
-  StoryFactory.registerCharacter(StoryGraphicType.RICH_TEXT, CharacterComponentRichText);
-  StoryFactory.registerCharacter(StoryGraphicType.QIPAO, CharacterComponentQipao);
-  StoryFactory.registerCharacter(StoryGraphicType.LINE, CharacterComponentLine);
-  StoryFactory.registerCharacter(StoryGraphicType.IMAGE, CharacterComponentImage);
-  StoryFactory.registerCharacter(StoryGraphicType.SHAPE, CharacterComponentShape);
+  StoryFactory.registerCharacter(StoryComponentType.RECT, CharacterComponentRect);
+  StoryFactory.registerCharacter(StoryComponentType.TEXT, CharacterComponentText);
+  StoryFactory.registerCharacter(StoryComponentType.RICH_TEXT, CharacterComponentRichText);
+  StoryFactory.registerCharacter(StoryComponentType.QIPAO, CharacterComponentQipao);
+  StoryFactory.registerCharacter(StoryComponentType.LINE, CharacterComponentLine);
+  StoryFactory.registerCharacter(StoryComponentType.IMAGE, CharacterComponentImage);
+  StoryFactory.registerCharacter(StoryComponentType.SHAPE, CharacterComponentShape);
 
   container.load(splitModule);
 }

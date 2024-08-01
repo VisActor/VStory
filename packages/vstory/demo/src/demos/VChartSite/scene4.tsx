@@ -15,7 +15,7 @@ const getCurve = (x: number) => {
 };
 export const scene4Characters: ICharacterSpec[] = [
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-title-decoration',
     zIndex: 1,
     position: {
@@ -31,7 +31,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: 'scene4-title',
     zIndex: 1,
     position: {
@@ -50,7 +50,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: 'scene4-subtitle',
     zIndex: 1,
     position: {
@@ -69,7 +69,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'LineComponent',
+    type: 'Line',
     id: 'scene4-line-left',
     zIndex: 1,
     position: {
@@ -89,7 +89,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-line-left-decoration',
     zIndex: 1,
     position: {
@@ -105,7 +105,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-chart-image',
     zIndex: 1,
     position: {
@@ -208,7 +208,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'LineComponent',
+    type: 'Line',
     id: 'scene4-text-zh-line',
     zIndex: 1,
     position: {
@@ -228,7 +228,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-text-zh-image',
     zIndex: 1,
     position: {
@@ -244,7 +244,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-text-en-image',
     zIndex: 1,
     position: {
@@ -260,7 +260,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: 'scene4-green-rect',
     zIndex: 1,
     position: {
@@ -278,7 +278,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-decoration',
     zIndex: 1,
     position: {
@@ -294,7 +294,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: 'scene4-grey-rect',
     zIndex: 1,
     position: {
@@ -311,7 +311,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-bg-decoration',
     zIndex: 1,
     position: {
@@ -327,7 +327,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-bg-decoration',
     zIndex: 1,
     position: {

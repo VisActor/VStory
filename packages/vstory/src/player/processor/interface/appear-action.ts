@@ -33,4 +33,50 @@ export interface IChartAppearAction extends IAction {
   payload: IChartAppearPayLoad;
 }
 
+// components
+export interface IFadeInParams extends IAnimationParams {
+  opacity?: number;
+  fade?: {
+    /**
+     * @default 1
+     */
+    opacity?: number;
+    duration?: number;
+    easing?: EasingType;
+    /**
+     * 作用于全局的透明度
+     * @default false
+     */
+    isBaseOpacity?: string;
+  };
+}
+
+export interface IScaleInParams extends IAnimationParams {
+  ratio?: number;
+  scale?: {
+    /**
+     * @default 1
+     */
+    ratio?: number;
+    duration?: number;
+    easing?: EasingType;
+  };
+}
+
+export interface IWipeInParams extends IAnimationParams {
+  from?: 'left' | 'right' | 'top' | 'bottom' | 'stroke';
+  wipe?: {
+    /**
+     * @default left
+     */
+    from?: 'left' | 'right' | 'top' | 'bottom' | 'stroke';
+    duration?: number;
+    easing?: EasingType;
+  };
+}
+
+export interface IComponentAppearPayLoad extends IActionPayload {
+  animation: IFadeInParams | IScaleInParams | IWipeInParams;
+}
+
 export type AppearOption = Omit<IChartAppearAction, 'action' | 'data'>;

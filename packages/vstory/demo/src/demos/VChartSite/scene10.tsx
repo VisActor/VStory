@@ -80,7 +80,7 @@ const chartSpec = {
 
 export const scene10Characters: ICharacterSpec[] = [
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene10-background`,
     zIndex: 0,
     position: {
@@ -97,7 +97,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-person`,
     zIndex: 1,
     position: {
@@ -113,7 +113,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-title`,
     zIndex: 1,
     position: {
@@ -129,7 +129,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-bg-decoration`,
     zIndex: 0,
     position: {
@@ -145,7 +145,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-text-zh`,
     zIndex: 0,
     position: {
@@ -161,7 +161,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-text-en`,
     zIndex: 0,
     position: {
@@ -177,7 +177,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-chart-image`,
     zIndex: 0,
     position: {

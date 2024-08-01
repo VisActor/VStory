@@ -56,12 +56,17 @@ export class Player implements IPlayer {
 
   // 清除当前状态，一般用于回放操作
   reset() {
+    this._scheduler.clearState();
     return;
   }
 
   tickTo(t: number) {
     // console.log(t);
     const lastTime = this._currTime;
+    const totalTime = this._scheduler.getTotalTime();
+    while (t > totalTime) {
+      t -= totalTime;
+    }
     if (lastTime > t) {
       this.reset();
       this._currTime = 0;

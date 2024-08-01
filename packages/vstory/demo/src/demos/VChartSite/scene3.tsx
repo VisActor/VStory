@@ -15,7 +15,7 @@ import { easeInOutQuad } from './util';
 // @ts-ignore
 export const scene3Characters: ICharacterSpec[] = [
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `scene3-title1`,
     zIndex: 1,
     position: {
@@ -29,7 +29,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'LineComponent',
+    type: 'Line',
     id: `scene3-line-top`,
     zIndex: 1,
     position: {
@@ -49,7 +49,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'LineComponent',
+    type: 'Line',
     id: `scene3-line-bottom`,
     zIndex: 1,
     position: {
@@ -69,7 +69,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `scene3-title-Nicole`,
     zIndex: 1,
     position: {
@@ -83,7 +83,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-text-image-top`,
     zIndex: 1,
     position: {
@@ -99,7 +99,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-text-image-top`,
     zIndex: 1,
     position: {
@@ -115,7 +115,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-1`,
     zIndex: 1,
     position: {
@@ -131,7 +131,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-2`,
     zIndex: 1,
     position: {
@@ -147,7 +147,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-3`,
     zIndex: 1,
     position: {
@@ -163,7 +163,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-4`,
     zIndex: 1,
     position: {
@@ -179,7 +179,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-5`,
     zIndex: 1,
     position: {
@@ -195,7 +195,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-text-image-bottom`,
     zIndex: 1,
     position: {
@@ -211,7 +211,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `scene3-title-1486`,
     zIndex: 1,
     position: {
@@ -225,7 +225,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-title-image`,
     zIndex: 1,
     position: {
@@ -241,7 +241,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene3-background`,
     zIndex: 0,
     position: {
@@ -258,7 +258,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-background-decoration`,
     zIndex: 0,
     position: {

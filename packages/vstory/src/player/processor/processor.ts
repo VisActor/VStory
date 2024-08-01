@@ -58,6 +58,7 @@ export class ActionProcessor implements IActionProcessor {
 
     const processor = this.getProcessor(character.spec.type, action.action);
 
+    logger('error', `获取processor失败，请检查 ${character.spec.type} 是否支持 ${action.action}`);
     return processor.getStartTimeAndDuration(action);
 
     // characterActions.forEach(action => {
