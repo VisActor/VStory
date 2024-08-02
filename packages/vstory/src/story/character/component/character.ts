@@ -7,6 +7,7 @@ import type { Graphic } from './graphic/graphic';
 import { getLayoutFromWidget } from '../../utils/layout';
 import type { StoryEvent } from '../../interface/runtime-interface';
 import type { ICharacterPickInfo } from '../runtime-interface';
+import { ComponentGroup } from './character-group/component-group-graphic';
 
 export abstract class CharacterComponent extends CharacterBase {
   protected declare _spec: IComponentCharacterSpec;
@@ -34,7 +35,7 @@ export abstract class CharacterComponent extends CharacterBase {
   }
 
   protected _initGraphics(): void {
-    this._group = createGroup({
+    this._group = new ComponentGroup({
       ...getLayoutFromWidget(this._spec.position),
       angle: this._spec.options.angle,
       zIndex: this._spec.zIndex

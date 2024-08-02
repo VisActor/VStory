@@ -1,7 +1,8 @@
 import { ACTION_TYPE } from '../../constants/action';
 import { StoryChartType, StoryComponentType } from '../../constants/character';
 import { VChartAppearActionProcessor } from './chart/vchart';
-import { RectAppearActionProcessor } from './component/rect/rect';
+import { LineAppearActionProcessor } from './component/line/line-appear';
+import { RectAppearActionProcessor } from './component/rect/rect-appear';
 
 export const processorChartMap = {
   [StoryChartType.VCHART]: {
@@ -12,6 +13,9 @@ export const processorChartMap = {
 export const processorComponentMap = {
   [StoryComponentType.RECT]: {
     [ACTION_TYPE.APPEAR]: new RectAppearActionProcessor()
+  },
+  [StoryComponentType.LINE]: {
+    [ACTION_TYPE.APPEAR]: new LineAppearActionProcessor()
   }
 };
 

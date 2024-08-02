@@ -1,10 +1,10 @@
 lockfileVersion: 5.4
 
 overrides:
-  '@visactor/vrender': 0.19.20-alpha.2
-  '@visactor/vrender-core': 0.19.20-alpha.2
-  '@visactor/vrender-kits': 0.19.20-alpha.2
-  '@visactor/vrender-components': 0.19.20-alpha.2
+  '@visactor/vrender': 0.19.20-alpha.3
+  '@visactor/vrender-core': 0.19.20-alpha.3
+  '@visactor/vrender-kits': 0.19.20-alpha.3
+  '@visactor/vrender-components': 0.19.20-alpha.3
 
 importers:
 
@@ -76,10 +76,10 @@ importers:
       '@types/react': ^18.0.0
       '@types/react-dom': ^18.0.0
       '@visactor/vchart': 1.11.5
-      '@visactor/vrender': 0.19.20-alpha.2
-      '@visactor/vrender-components': 0.19.20-alpha.2
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender': 0.19.20-alpha.3
+      '@visactor/vrender-components': 0.19.20-alpha.3
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vutils': ~0.18.4
       '@vitejs/plugin-react': 3.1.0
       canvas: 2.11.2
@@ -96,10 +96,10 @@ importers:
       vite: 3.2.6
     dependencies:
       '@visactor/vchart': 1.11.5
-      '@visactor/vrender': 0.19.20-alpha.2
-      '@visactor/vrender-components': 0.19.20-alpha.2
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender': 0.19.20-alpha.3
+      '@visactor/vrender-components': 0.19.20-alpha.3
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vutils': 0.18.8
     devDependencies:
       '@douyinfe/semi-ui': 2.62.1_nnrd3gsncyragczmpvfhocinkq
@@ -1971,6 +1971,7 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: true
 
   /@jest/core/26.6.3_canvas@2.11.2:
     resolution: {integrity: sha512-xvV1kKbhfUqFVuZ8Cyo+JPpipAHHAV3kcDBftiduK8EICXmTFddryy3P7NfZt8Pv37rA9nEJBKCCkglCPt/Xjw==}
@@ -2010,7 +2011,6 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
-    dev: true
 
   /@jest/environment/24.9.0:
     resolution: {integrity: sha512-5A1QluTPhvdIPFYnO3sZC3smkNeXPVELz7ikPbhUj0bQjB07EoE9qtLrem14ZUYWdVayYbsjVwIiL4WBIMV4aQ==}
@@ -2156,6 +2156,7 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: true
 
   /@jest/test-sequencer/26.6.3_canvas@2.11.2:
     resolution: {integrity: sha512-YHlVIjP5nfEyjlrSr8t/YdNfU/1XEt7c5b4OxcXCjyRhjzLYu/rO69/WHPuYcbCWkz8kAeZVZp2N2+IOLLEPGw==}
@@ -2172,7 +2173,6 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
-    dev: true
 
   /@jest/transform/24.9.0:
     resolution: {integrity: sha512-TcQUmyNRxV94S0QpMOnZl0++6RMiqpbH/ZMccFB/amku6Uwvyb1cjYX7xkp5nGNkbX4QPH/FcB6q1HBTHynLmQ==}
@@ -2293,7 +2293,6 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
-    dev: true
 
   /@mdx-js/mdx/3.0.1:
     resolution: {integrity: sha512-eIQ4QTrOWyL3LWEe/bu6Taqzq2HQvHcyTMaOrI95P2/LmJE7AsfPfgJGuFLPVqBUE1BC1rik3VIhU+s9u72arA==}
@@ -3224,9 +3223,9 @@ packages:
       '@visactor/vgrammar-venn': 0.13.10
       '@visactor/vgrammar-wordcloud': 0.13.10
       '@visactor/vgrammar-wordcloud-shape': 0.13.10
-      '@visactor/vrender-components': 0.19.20-alpha.2
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender-components': 0.19.20-alpha.3
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vscale': 0.18.9
       '@visactor/vutils': 0.18.9
       '@visactor/vutils-extension': 1.11.5
@@ -3267,9 +3266,9 @@ packages:
       '@visactor/vdataset': 0.18.9
       '@visactor/vgrammar-coordinate': 0.13.10
       '@visactor/vgrammar-util': 0.13.10
-      '@visactor/vrender-components': 0.19.20-alpha.2
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender-components': 0.19.20-alpha.3
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vscale': 0.18.9
       '@visactor/vutils': 0.18.9
     dev: false
@@ -3279,8 +3278,8 @@ packages:
     dependencies:
       '@visactor/vgrammar-core': 0.13.10
       '@visactor/vgrammar-util': 0.13.10
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vutils': 0.18.9
     dev: false
 
@@ -3298,8 +3297,8 @@ packages:
     dependencies:
       '@visactor/vgrammar-core': 0.13.10
       '@visactor/vgrammar-util': 0.13.10
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vutils': 0.18.9
     dev: false
 
@@ -3314,8 +3313,8 @@ packages:
     dependencies:
       '@visactor/vgrammar-core': 0.13.10
       '@visactor/vgrammar-util': 0.13.10
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vutils': 0.18.9
     dev: false
 
@@ -3324,8 +3323,8 @@ packages:
     dependencies:
       '@visactor/vgrammar-core': 0.13.10
       '@visactor/vgrammar-util': 0.13.10
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vscale': 0.18.9
       '@visactor/vutils': 0.18.9
     dev: false
@@ -3335,41 +3334,41 @@ packages:
     dependencies:
       '@visactor/vgrammar-core': 0.13.10
       '@visactor/vgrammar-util': 0.13.10
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vutils': 0.18.9
     dev: false
 
-  /@visactor/vrender-components/0.19.20-alpha.2:
-    resolution: {integrity: sha512-Clk9lFbdMDF1vOAyf4S/MBjCzLKurYSZZZLAzzTqRIimjFoaiZ0EqsspID4lscmmlBn4ENv396cusw4Aeoi3Kw==}
+  /@visactor/vrender-components/0.19.20-alpha.3:
+    resolution: {integrity: sha512-Fl7o5EwRBZOSQYOwW/WkojlUrEjnThKWI3LSzQL6F5zDyhmdp77aFLrmd6ZRD/nNFlr/vDjwQHwWXZwJhIDzyg==}
     dependencies:
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
       '@visactor/vscale': 0.18.9
       '@visactor/vutils': 0.18.12
     dev: false
 
-  /@visactor/vrender-core/0.19.20-alpha.2:
-    resolution: {integrity: sha512-N0SN+lW5pFtBrUIl74n6VK//poLw4pdKga4EHsAJpPwDZUHLQdHG/69sMx9BMt60vKXgD5EnagH5uoh3DiJPkA==}
+  /@visactor/vrender-core/0.19.20-alpha.3:
+    resolution: {integrity: sha512-4tOkbKWeVZ8D+PHjc4ZUriQslz6uWMycTpdp0UfFSv9r7F7hAoVrEMk7bXM3YMG6pgxaPM8ZkX9p3KpQF04yKQ==}
     dependencies:
       '@visactor/vutils': 0.18.12
       color-convert: 2.0.1
     dev: false
 
-  /@visactor/vrender-kits/0.19.20-alpha.2:
-    resolution: {integrity: sha512-Jg7r1ebMHjDWRaSJTneZBtNHkk9vVZp2YWtPbsLEmgrNso0bdSnA9O5RVooQ47UPhNjcdr4PnN+DApHcezFULA==}
+  /@visactor/vrender-kits/0.19.20-alpha.3:
+    resolution: {integrity: sha512-YUvR0DSYALGB35cBiNA4trd7u0HEi2AXkCcXZkoCFSLcUeQDqPHPsLFRRyKjR6BvEyhB+Jg/hKdw95r9b2myjw==}
     dependencies:
       '@resvg/resvg-js': 2.4.1
-      '@visactor/vrender-core': 0.19.20-alpha.2
+      '@visactor/vrender-core': 0.19.20-alpha.3
       '@visactor/vutils': 0.18.12
       roughjs: 4.5.2
     dev: false
 
-  /@visactor/vrender/0.19.20-alpha.2:
-    resolution: {integrity: sha512-FdBRAbs5ibctEzvMJnY3VK+IopHaJ0iF/gdktCXCISKuaVESke3L8GVPkZ0+CD7LA5ZPryf61KgYDKaJGPPE1g==}
+  /@visactor/vrender/0.19.20-alpha.3:
+    resolution: {integrity: sha512-c3G8nroyRzozSQ4MxTBgR5k3um0pKskZ3CZN4vex/rIoFL2kQWFK6ABMiG1wJZb2ZaGa1jEtb0HMdQte/KT5TA==}
     dependencies:
-      '@visactor/vrender-core': 0.19.20-alpha.2
-      '@visactor/vrender-kits': 0.19.20-alpha.2
+      '@visactor/vrender-core': 0.19.20-alpha.3
+      '@visactor/vrender-kits': 0.19.20-alpha.3
     dev: false
 
   /@visactor/vscale/0.18.9:
@@ -3470,7 +3469,6 @@ packages:
 
   /abbrev/1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
-    dev: true
 
   /abs-svg-path/0.1.1:
     resolution: {integrity: sha512-d8XPSGjfyzlXC3Xx891DJRyZfqk5JU0BJrDQcsWomFIV1/BIzPW5HDH5iDdWpqWaav0YVIEzT1RHTwWr0FFshA==}
@@ -3644,7 +3642,6 @@ packages:
 
   /aproba/2.0.0:
     resolution: {integrity: sha512-lYe4Gx7QT+MKGbDsA+Z+he/Wtef0BiwDOlK/XkBrdfsh9J/jPPXbX0tE9x9cl27Tmu5gg3QUbUrQYa/y+KOHPQ==}
-    dev: true
 
   /archy/1.0.0:
     resolution: {integrity: sha512-Xg+9RwCg/0p32teKdGMPTPnVXKD0w3DfHnFTficozsAgsvq2XenPJq/MYpzzQ/v8zrOyJn6Ds39VA4JIDwFfqw==}
@@ -3657,7 +3654,6 @@ packages:
     dependencies:
       delegates: 1.0.0
       readable-stream: 3.6.2
-    dev: true
 
   /arg/4.1.3:
     resolution: {integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==}
@@ -4323,7 +4319,6 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
-    dev: true
 
   /capture-exit/2.0.0:
     resolution: {integrity: sha512-PiT/hQmTonHhl/HFGN+Lx3JJUznrVYJ3+AQsnthneZbvW7x+f08Tk7yLJTLEOUvBTbduLeeBkxEaYXUOUrRq6g==}
@@ -4438,7 +4433,6 @@ packages:
   /chownr/2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
-    dev: true
 
   /ci-info/2.0.0:
     resolution: {integrity: sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==}
@@ -4690,7 +4684,6 @@ packages:
 
   /console-control-strings/1.1.0:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
-    dev: true
 
   /convert-source-map/1.9.0:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
@@ -4948,7 +4941,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       mimic-response: 2.1.0
-    dev: true
 
   /deep-eql/4.1.3:
     resolution: {integrity: sha512-WaEtAOpRA1MQ0eohqZjpGD8zdI0Ovsm8mmFhaDN8dvDZzyoUMcYDnf5Y6iu7HTXxf8JDS23qWa4a+hKCDyOPzw==}
@@ -5026,7 +5018,6 @@ packages:
 
   /delegates/1.0.0:
     resolution: {integrity: sha512-bd2L678uiWATM6m5Z1VzNCErI3jiGzt6HGY8OVICs40JQq/HALfbyNJmp0UDakEY4pMMaN0Ly5om/B1VI/+xfQ==}
-    dev: true
 
   /dequal/2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
@@ -5041,7 +5032,6 @@ packages:
   /detect-libc/2.0.3:
     resolution: {integrity: sha512-bwy0MGW55bG41VqxxypOsdSdGqLwXPI/focwgTYCFMbdUiBAxLg9CFzG08sz2aqzknwiX7Hkl0bQENjg8iLByw==}
     engines: {node: '>=8'}
-    dev: true
 
   /detect-newline/2.1.0:
     resolution: {integrity: sha512-CwffZFvlJffUg9zZA0uqrjQayUTC8ob94pnr5sFwaVv3IOmkfUHcWH+jXaQK3askE51Cqe8/9Ql/0uXNwqZ8Zg==}
@@ -6270,7 +6260,6 @@ packages:
     engines: {node: '>= 8'}
     dependencies:
       minipass: 3.3.6
-    dev: true
 
   /fs-mkdirp-stream/1.0.0:
     resolution: {integrity: sha512-+vSd9frUnapVC2RZYfL3FCB2p3g4TBhaUmrsWlSudsGdnxIuUvBB2QM1VZeBtc49QFwrp+wQLrDs3+xxDgI5gQ==}
@@ -6333,7 +6322,6 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wide-align: 1.1.5
-    dev: true
 
   /gensync/1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
@@ -6767,7 +6755,6 @@ packages:
 
   /has-unicode/2.0.1:
     resolution: {integrity: sha512-8Rf9Y83NBReMnx0gFzA8JImQACstCYWUplepDa9xprwwtmgEZUF0h/i5xSA625zB/I37EtrswSST6OXxwaaIJQ==}
-    dev: true
 
   /has-value/0.3.1:
     resolution: {integrity: sha512-gpG936j8/MzaeID5Yif+577c17TxaDmhuyVgSwtnL/q8UUTySg8Mecb+8Cf1otgLoD7DDH75axp86ER7LFsf3Q==}
@@ -7497,6 +7484,7 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: true
 
   /jest-cli/26.6.3_canvas@2.11.2:
     resolution: {integrity: sha512-GF9noBSa9t08pSyl3CY4frMrqp+aQXFGFkf5hEPbh/pIUFYWMK6ZLTfbmadxJVcJrdRoChlWQsA2VkJcDFK8hg==}
@@ -7522,7 +7510,6 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
-    dev: true
 
   /jest-config/24.9.0:
     resolution: {integrity: sha512-RATtQJtVYQrp7fvWg6f5y3pEFj9I+H8sWw4aKxnDZ96mob5i5SD6ZEGWgMLXQ4LE8UurrjbdlLWdUeo+28QpfQ==}
@@ -7581,6 +7568,7 @@ packages:
       - canvas
       - supports-color
       - utf-8-validate
+    dev: true
 
   /jest-config/26.6.3_canvas@2.11.2:
     resolution: {integrity: sha512-t5qdIj/bCj2j7NFVHb2nFB4aUdfucDn3JRKgrZnplb8nieAirAzRSHP8uDEd+qV6ygzg9Pz4YG7UTJf94LPSyg==}
@@ -7614,7 +7602,6 @@ packages:
       - canvas
       - supports-color
       - utf-8-validate
-    dev: true
 
   /jest-diff/24.9.0:
     resolution: {integrity: sha512-qMfrTs8AdJE2iqrTp0hzh7kTd2PQWrsFyj9tORoKmu32xjPjeE4NyjVRDz8ybYwqS2ik8N4hsIpiVTyFeo2lBQ==}
@@ -7729,6 +7716,7 @@ packages:
       - canvas
       - supports-color
       - utf-8-validate
+    dev: true
 
   /jest-environment-jsdom/26.6.2_canvas@2.11.2:
     resolution: {integrity: sha512-jgPqCruTlt3Kwqg5/WVFyHIOJHsiAvhcp2qiR2QQstuG9yWox5+iHpU3ZrcBxW14T4fe5Z68jAfLRh7joCSP2Q==}
@@ -7746,7 +7734,6 @@ packages:
       - canvas
       - supports-color
       - utf-8-validate
-    dev: true
 
   /jest-environment-node/24.9.0:
     resolution: {integrity: sha512-6d4V2f4nxzIzwendo27Tr0aFm+IXWa0XEUnaH6nU0FMaozxovt+sfRvh4J47wL1OvF83I3SSTu0XK+i4Bqe7uA==}
@@ -7887,6 +7874,7 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: true
 
   /jest-jasmine2/26.6.3_canvas@2.11.2:
     resolution: {integrity: sha512-kPKUrQtc8aYwBV7CqBg5pu+tmYXlvFlSFYn18ev4gPFtrRzB15N2gW/Roew3187q2w2eHuu0MU9TJz6w0/nPEg==}
@@ -7916,7 +7904,6 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
-    dev: true
 
   /jest-leak-detector/24.9.0:
     resolution: {integrity: sha512-tYkFIDsiKTGwb2FG1w8hX9V0aUb2ot8zY/2nFg087dUageonw1zrLMP4W6zsRO59dPkTSKie+D4rhMuP9nRmrA==}
@@ -8125,6 +8112,7 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: true
 
   /jest-runner/26.6.3_canvas@2.11.2:
     resolution: {integrity: sha512-atgKpRHnaA2OvByG/HpGA4g6CSPS/1LK0jK3gATJAoptC1ojltpmVlYC3TYgdmGp+GLuhzpH30Gvs36szSL2JQ==}
@@ -8156,7 +8144,6 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
-    dev: true
 
   /jest-runtime/24.9.0:
     resolution: {integrity: sha512-8oNqgnmF3v2J6PVRM2Jfuj8oX3syKmaynlDMMKQ4iyzbQzIG6th5ub/lM2bCMTmoTKM3ykcUYI2Pw9xwNtjMnw==}
@@ -8228,6 +8215,7 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: true
 
   /jest-runtime/26.6.3_canvas@2.11.2:
     resolution: {integrity: sha512-lrzyR3N8sacTAMeonbqpnSka1dHNux2uk0qqDXVkMv2c/A3wYnvQ4EXuI013Y6+gSKSCxdaczvf4HF0mVXHRdw==}
@@ -8267,7 +8255,6 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
-    dev: true
 
   /jest-serializer/24.9.0:
     resolution: {integrity: sha512-DxYipDr8OvfrKH3Kel6NdED3OXxjvxXZ1uIY2I9OFbGg+vUkkg7AGvi65qbhbWNPvDckXmzMPbK3u3HaDO49bQ==}
@@ -8415,6 +8402,7 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: true
 
   /jest/26.6.3_canvas@2.11.2:
     resolution: {integrity: sha512-lGS5PXGAzR4RF7V5+XObhqz2KZIDUA1yD0DG6pBVmy10eh0ZIXQImRuzocsI/N2XZ1GrLFwTS27In2i2jlpq1Q==}
@@ -8430,7 +8418,6 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
-    dev: true
 
   /js-string-escape/1.0.1:
     resolution: {integrity: sha512-Smw4xcfIQ5LVjAOuJCvN/zIodzA/BBSsluuoSykP+lUvScIi4U6RJLfwHet5cxFnCswUjISV8oAXaqaJDY3chg==}
@@ -8528,6 +8515,7 @@ packages:
       - bufferutil
       - supports-color
       - utf-8-validate
+    dev: true
 
   /jsdom/16.7.0_canvas@2.11.2:
     resolution: {integrity: sha512-u9Smc2G1USStM+s/x1ru5Sxrl6mPYCbByG1U/hUmqaVsm4tbNyS7CicOSRyuGQYZhTu0h84qkZZQ/I+dzizSVw==}
@@ -8570,7 +8558,6 @@ packages:
       - bufferutil
       - supports-color
       - utf-8-validate
-    dev: true
 
   /jsesc/0.5.0:
     resolution: {integrity: sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==}
@@ -9613,7 +9600,6 @@ packages:
   /mimic-response/2.1.0:
     resolution: {integrity: sha512-wXqjST+SLt7R009ySCglWBCFpjUygmCIfD790/kVbiGmUgfYGuB14PiTd5DwVxSV4NcYHjzMkoj5LjQZwTQLEA==}
     engines: {node: '>=8'}
-    dev: true
 
   /minimatch/3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -9643,12 +9629,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       yallist: 4.0.0
-    dev: true
 
   /minipass/5.0.0:
     resolution: {integrity: sha512-3FnjYuehv9k6ovOEbyOswadCDPX1piCfhV8ncmYtHOjuPwylVWsghTLo7rabjC3Rx5xD4HDx8Wm1xnMF7S5qFQ==}
     engines: {node: '>=8'}
-    dev: true
 
   /minizlib/2.1.2:
     resolution: {integrity: sha512-bAxsR8BVfj60DWXHE3u30oHzfl4G7khkSuPW+qvpd7jFRHm7dLxOjUk1EHACJ/hxLY8phGJ0YhYHZo7jil7Qdg==}
@@ -9656,7 +9640,6 @@ packages:
     dependencies:
       minipass: 3.3.6
       yallist: 4.0.0
-    dev: true
 
   /mixin-deep/1.3.2:
     resolution: {integrity: sha512-WRoDn//mXBiJ1H40rqa3vH0toePwSsGb45iInWlTySa+Uu4k3tYUSxa2v1KqAiLtvlrSzaExqS1gtk96A9zvEA==}
@@ -9766,7 +9749,6 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
-    dev: true
 
   /node-int64/0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
@@ -9792,7 +9774,6 @@ packages:
     hasBin: true
     dependencies:
       abbrev: 1.1.1
-    dev: true
 
   /normalize-package-data/2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
@@ -9858,7 +9839,6 @@ packages:
       console-control-strings: 1.1.0
       gauge: 3.0.2
       set-blocking: 2.0.0
-    dev: true
 
   /number-is-nan/1.0.1:
     resolution: {integrity: sha512-4jbtZXNAsfZbAHiiqjLPBiCl16dES1zI4Hpzzxw61Tk+loF+sBDBKx1ICKKKwIqQ7M0mFn1TmkN7euSncWgHiQ==}
@@ -11399,7 +11379,6 @@ packages:
 
   /simple-concat/1.0.1:
     resolution: {integrity: sha512-cSFtAPtRhljv69IK0hTVZQ+OfE9nePi/rtJmw5UjHeVyVroEqJXP1sFztKUy1qU+xvz3u/sfYJLa947b7nAN2Q==}
-    dev: true
 
   /simple-get/3.1.1:
     resolution: {integrity: sha512-CQ5LTKGfCpvE1K0n2us+kuMPbk/q0EKl82s4aheV9oXjFEz6W/Y7oQFVJuU6QG77hRT4Ghb5RURteF5vnWjupA==}
@@ -11407,7 +11386,6 @@ packages:
       decompress-response: 4.2.1
       once: 1.4.0
       simple-concat: 1.0.1
-    dev: true
 
   /simple-statistics/7.8.3:
     resolution: {integrity: sha512-JFvMY00t6SBGtwMuJ+nqgsx9ylkMiJ5JlK9bkj8AdvniIe5615wWQYkKHXe84XtSuc40G/tlrPu0A5/NlJvv8A==}
@@ -11863,7 +11841,6 @@ packages:
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
-    dev: true
 
   /terminal-link/2.1.1:
     resolution: {integrity: sha512-un0FmiRUQNr5PJqy9kP7c40F5BOfpGlYTrxonDChEZB7pzZxRNp/bt+ymiy9/npwXya9KH99nJ/GXFIiUkYGFQ==}
@@ -12075,7 +12052,6 @@ packages:
 
   /tr46/0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
-    dev: true
 
   /tr46/1.0.1:
     resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
@@ -12108,7 +12084,7 @@ packages:
       bs-logger: 0.2.6
       buffer-from: 1.1.2
       fast-json-stable-stringify: 2.1.0
-      jest: 26.6.3
+      jest: 26.6.3_canvas@2.11.2
       jest-util: 26.6.2
       json5: 2.2.3
       lodash: 4.17.21
@@ -12826,7 +12802,6 @@ packages:
 
   /webidl-conversions/3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
-    dev: true
 
   /webidl-conversions/4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
@@ -12858,7 +12833,6 @@ packages:
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
-    dev: true
 
   /whatwg-url/6.5.0:
     resolution: {integrity: sha512-rhRZRqx/TLJQWUpQ6bmrt2UV4f0HCQ463yQuONJqC6fO2VoEb1pTYddbe59SkYq87aoM5A3bdhMZiUiVws+fzQ==}
@@ -12936,7 +12910,6 @@ packages:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     dependencies:
       string-width: 4.2.3
-    dev: true
 
   /word-wrap/1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}

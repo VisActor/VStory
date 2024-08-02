@@ -57,6 +57,7 @@ export class Player implements IPlayer {
   // 清除当前状态，一般用于回放操作
   reset() {
     this._scheduler.clearState();
+    this._story.canvas.getStage().getTimeline().clear();
     return;
   }
 
@@ -68,9 +69,14 @@ export class Player implements IPlayer {
       t -= totalTime;
     }
     if (lastTime > t) {
-      this.reset();
-      this._currTime = 0;
-      this.tickTo(0);
+      // 先结束这一块内容，设置到totalTime，让动画结束
+      if (lastTime < totalTime) {
+        t = totalTime + 0.01;
+      } else {
+        this.reset();
+        this._currTime = 0;
+        this.tickTo(0);
+      }
     }
 
     const actions = this._scheduler.getActionsInRange(lastTime, t);

@@ -12,14 +12,19 @@ import { CharacterComponentLine } from './character/component/characters/charact
 import { CharacterComponentImage } from './character/component/characters/character-image';
 import { CharacterComponentShape } from './character/component/characters/character-shape';
 import { VChartCharacter } from './character/chart/characters/vchart';
+import { ComponentGroupRender } from './character/component/character-group/component-group-graphic-render';
 
-const splitModule = new ContainerModule((bind: any) => {
+const splitModule = new ContainerModule(bind => {
   // chart渲染器注入
   bind(VChartRender).toSelf().inSingletonScope();
   bind(ChartRender).toService(VChartRender);
   bind(GraphicRender).toService(ChartRender);
   bind(VChartPicker).to(VChartPicker).inSingletonScope();
   bind(CanvasPickerContribution).toService(VChartPicker);
+
+  // component渲染器注入
+  bind(ComponentGroupRender).toSelf().inSingletonScope();
+  bind(GraphicRender).toService(ComponentGroupRender);
 });
 
 let _register = false;

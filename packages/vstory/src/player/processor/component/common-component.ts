@@ -6,7 +6,7 @@ import { ActionProcessorItem } from '../processor-item';
 import type { EasingType, IGraphic } from '@visactor/vrender-core';
 import type { IFadeInParams, IScaleInParams, IWipeInParams } from '../interface/appear-action';
 import { canDoGraphicAnimation } from './utils';
-import { Wipe } from '../../../animate/wipeIn';
+// import { Wipe } from '../../../animate/wipeIn';
 
 // export const appearEffectMap = {
 //   fade: fadeIn,
@@ -15,7 +15,12 @@ import { Wipe } from '../../../animate/wipeIn';
 //   wipe: wipeIn
 // };
 
-export function fadeIn(graphic: IGraphic, params: IFadeInParams): boolean {
+function fadeIn(character: ICharacter, animation: IFadeInParams, effect: string) {
+  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
+  graphics.forEach(graphic => _fadeIn(graphic, animation as any));
+}
+
+function _fadeIn(graphic: IGraphic, params: IFadeInParams): boolean {
   if (!canDoGraphicAnimation(graphic, params)) {
     return false;
   }
@@ -35,7 +40,12 @@ export function fadeIn(graphic: IGraphic, params: IFadeInParams): boolean {
   return true;
 }
 
-export function scaleIn(graphic: IGraphic, params: IScaleInParams): boolean {
+function scaleIn(character: ICharacter, animation: IFadeInParams, effect: string) {
+  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
+  graphics.forEach(graphic => _scaleIn(graphic, animation as any));
+}
+
+function _scaleIn(graphic: IGraphic, params: IScaleInParams): boolean {
   if (!canDoGraphicAnimation(graphic, params)) {
     return false;
   }
@@ -53,34 +63,37 @@ export function scaleIn(graphic: IGraphic, params: IScaleInParams): boolean {
   return true;
 }
 
-const Direction = {
-  left: 0,
-  right: 1,
+const Direction: any = {
+  right: 0,
+  left: 1,
   top: 2,
-  bottom: 3,
-  stroke: 4
+  bottom: 3
 };
 
-export function wipeIn(graphic: IGraphic, params: IWipeInParams) {
+function wipeIn(character: ICharacter, animation: IFadeInParams, effect: string) {
+  const graphic = getCharacterParentGraphic(character);
+  _wipeIn(graphic, animation as any);
+}
+function _wipeIn(graphic: IGraphic, params: IWipeInParams) {
   if (!canDoGraphicAnimation(graphic, params)) {
     return false;
   }
 
   const { wipe = {} } = params;
-  const from = wipe.from ?? params.from ?? 'left';
+  const from = wipe.from ?? params.from ?? 'right';
   const duration = wipe.duration ?? params.duration;
   const easing = wipe.easing ?? params.easing;
 
-  const { fill } = graphic.attribute;
-  if (isString(fill)) {
-    graphic.animate().play(
-      new Wipe({}, {}, duration, easing as EasingType, {
-        direction: Direction[from]
-      })
-    );
-  } else if (isObject(fill)) {
-    // 渐变色支持
-  }
+  graphic.setAttributes({
+    wipeDirection: Direction[from],
+    wipeRatio: 0
+  } as any);
+  graphic
+    .animate()
+    .to({ wipeRatio: 1 }, duration, easing)
+    .onEnd(() => {
+      graphic.setAttributes({ wipeRatio: 1 } as any);
+    });
   return true;
 }
 
@@ -116,27 +129,28 @@ export class CommonAppearActionProcessor extends ActionProcessorItem {
         effectFunc = wipeIn;
         break;
     }
+    effectFunc(character, animation as any, effect);
     // 获取相关图形
-    const graphics = this.getCharacterByEffect(character, effect);
+    // const graphics = this.getCharacterByEffect(character, effect);
     // 执行appearEffect
-    graphics.forEach(graphic => effectFunc(graphic, animation as any));
+    // graphics.forEach(graphic => effectFunc(graphic, animation as any));
   }
+}
 
-  protected getCharacterParentGraphic(character: ICharacter) {
-    return character.getGraphicParent();
-  }
+function getCharacterParentGraphic(character: ICharacter) {
+  return character.getGraphicParent();
+}
 
-  protected getCharacterGraphic(character: ICharacter) {
-    return character.getGraphicParent().getChildren() as IGraphic[];
-  }
+function getCharacterGraphic(character: ICharacter) {
+  return character.getGraphicParent().getChildren() as IGraphic[];
+}
 
-  protected getCharacterByEffect(character: ICharacter, effect: 'move' | string) {
-    // 图表仅操作父节点.
-    // @ts-ignore
-    if (character._graphic.type === 'chart') {
-      return [this.getCharacterParentGraphic(character)];
-    }
-    // move效果, 一定是对parent的操作
-    return effect === 'move' ? [this.getCharacterParentGraphic(character)] : this.getCharacterGraphic(character);
+function getCharacterByEffect(character: ICharacter, effect: 'move' | string) {
+  // 图表仅操作父节点.
+  // @ts-ignore
+  if (character._graphic.type === 'chart') {
+    return [getCharacterParentGraphic(character)];
   }
+  // move效果, 一定是对parent的操作
+  return effect === 'move' ? [getCharacterParentGraphic(character)] : getCharacterGraphic(character);
 }

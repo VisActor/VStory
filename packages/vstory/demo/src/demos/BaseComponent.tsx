@@ -34,6 +34,31 @@ export const BaseComponent = () => {
               }
             }
           };
+        }),
+        ...new Array(3).fill(0).map((_, i) => {
+          return {
+            type: 'Line',
+            id: 'line' + i,
+            zIndex: 10,
+            position: {
+              top: 80,
+              left: 20 + i * 50,
+              width: 30,
+              height: 30
+            },
+            options: {
+              graphic: {
+                stroke: 'red',
+                lineWith: 10,
+                points: [
+                  { x: 0, y: 0 },
+                  { x: 30, y: 30 }
+                ]
+                // background: '/assets/scene4/matrix.png',
+                // stroke: false
+              }
+            }
+          };
         })
       ],
       acts: [
@@ -46,6 +71,23 @@ export const BaseComponent = () => {
                 ...new Array(3).fill(0).map((_, i) => {
                   return {
                     characterId: 'rect' + i,
+                    characterActions: [
+                      {
+                        startTime: i * 1000,
+                        action: 'appear',
+                        payload: {
+                          animation: {
+                            duration: 700,
+                            effect: ['fadeIn', 'scaleIn', 'wipeIn'][i]
+                          }
+                        }
+                      }
+                    ]
+                  };
+                }),
+                ...new Array(3).fill(0).map((_, i) => {
+                  return {
+                    characterId: 'line' + i,
                     characterActions: [
                       {
                         startTime: i * 1000,
