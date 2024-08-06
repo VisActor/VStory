@@ -115,6 +115,19 @@ export const BarLineSeries = () => {
                       payload: {
                         style: {},
                         animation: {
+                          duration: 5000,
+                          easing: 'linear'
+                        } as any
+                      }
+                    },
+                    {
+                      startTime: 5500,
+                      action: 'disappear',
+                      selector: '*',
+                      payload: {
+                        style: {},
+                        animation: {
+                          // effect: 'fade',
                           duration: 10000,
                           easing: 'linear'
                         } as any

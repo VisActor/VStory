@@ -1,13 +1,15 @@
 import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
-import { merge } from '@visactor/vutils';
+import { isFunction, isNumberClose, merge } from '@visactor/vutils';
 import type { ICharacter } from '../../../story/character';
 import type { IAction } from '../../../story/interface';
 import { ActionProcessorItem } from '../processor-item';
 import { transformMap } from './transformMap';
 import type { IChartAppearAction } from '../interface/appear-action';
+import type { AxisBaseAttributes } from '@visactor/vrender-components';
+import type { IGroup } from '@visactor/vrender-core';
 
-export class VChartAppearActionProcessor extends ActionProcessorItem {
-  name: 'appear';
+export class VChartVisibilityActionProcessor extends ActionProcessorItem {
+  name: 'appearOrDisAppear';
 
   constructor() {
     super();
@@ -40,41 +42,82 @@ export class VChartAppearActionProcessor extends ActionProcessorItem {
   }
 
   protected componentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
-    if (component.type === 'label') {
+    if (component.specKey === 'label') {
       this.labelComponentAppear(vchart, component, actionSpec);
     } else if (component.specKey === 'legends') {
       this.legendsComponentAppear(vchart, component, actionSpec);
+    } else if (component.specKey === 'axes') {
+      this.axisComponentAppear(vchart, component, actionSpec);
+    } else if (component.specKey === 'title') {
+      this.titleComponentAppear(vchart, component, actionSpec);
     }
   }
 
   protected labelComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
     const vrenderComponents = component.getVRenderComponents();
+    const appearTransformFunc = (transformMap.appear as any).label;
+    const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
     vrenderComponents.forEach(group => {
-      return;
+      this.runTransformFunc(group as any, appearTransformFunc, actionSpec, defaultPayload);
     });
   }
+
   protected legendsComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
     const vrenderComponents = component.getVRenderComponents();
-
+    const appearTransformFunc = (transformMap.appear as any).legends;
+    const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
     vrenderComponents.forEach(group => {
-      const appearTransformFunc = (transformMap.appear as any).legends;
-      const { payload } = actionSpec;
-      const mergePayload = merge(
-        {},
-        (VChartAppearActionProcessor as any).legendsPayload || {},
-        payload
-      ) as IChartAppearAction['payload'];
-      appearTransformFunc(group, mergePayload.animation, {
-        disappear: false
-      });
+      this.runTransformFunc(group as any, appearTransformFunc, actionSpec, defaultPayload);
     });
   }
 
-  protected seriesTypeToMarkType(seriesType: string) {
-    if (seriesType === 'bar') {
-      return 'rect';
+  protected axisComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
+    const vrenderComponents = component.getVRenderComponents();
+    const axis = vrenderComponents[0];
+    const axisGrid = vrenderComponents[1];
+    const axisOrient = (axis.attribute as AxisBaseAttributes).orient;
+    const axisItems = (axis.attribute as AxisBaseAttributes).items ?? [[]];
+    const orient = axisOrient === 'left' || axisOrient === 'right' ? 'height' : 'width';
+    const gridOrient = axisOrient === 'left' || axisOrient === 'right' ? 'width' : 'height';
+    const direction = isNumberClose(axisItems[0][0].value, 1) ? 'positive' : 'negative';
+    const appearTransformFunc = (transformMap.appear as any).axis;
+    const defaultPayload = (VChartVisibilityActionProcessor as any).defaultPayload;
+
+    if (axis) {
+      this.runTransformFunc(axis as any, appearTransformFunc, actionSpec, defaultPayload, { orient, direction });
     }
-    return seriesType;
+    if (axisGrid) {
+      this.runTransformFunc(axisGrid as any, appearTransformFunc, actionSpec, defaultPayload, {
+        orient: gridOrient,
+        direction
+      });
+    }
+  }
+
+  protected titleComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
+    const vrenderComponents = component.getVRenderComponents();
+    const appearTransformFunc = (transformMap.appear as any).title;
+    const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
+    vrenderComponents.forEach(group => {
+      this.runTransformFunc(group as any, appearTransformFunc, actionSpec, defaultPayload);
+    });
+  }
+
+  private runTransformFunc(
+    instance: IGroup,
+    appearTransformFunc: any,
+    actionSpec: IAction,
+    defaultPayload: IAction['payload'] = {},
+    actionOption: Record<string, any> = {}
+  ) {
+    if (appearTransformFunc) {
+      const { payload } = actionSpec;
+      const mergePayload = merge({}, defaultPayload, payload) as IChartAppearAction['payload'];
+      appearTransformFunc(instance, mergePayload.animation, {
+        disappear: actionSpec.action === 'disappear',
+        ...actionOption
+      });
+    }
   }
 
   protected commonSeriesAppear(vchart: IVChart, series: ISeries, actionSpec: IAction) {
@@ -84,9 +127,10 @@ export class VChartAppearActionProcessor extends ActionProcessorItem {
     }
     const { payload } = actionSpec;
     marks.forEach((mark, markIndex) => {
+      const defaultMarkPayload = (VChartVisibilityActionProcessor as any)[`${mark.type}Payload`];
       const mergePayload = merge(
         {},
-        (VChartAppearActionProcessor as any)[`${mark.type}Payload`] || {},
+        isFunction(defaultMarkPayload) ? defaultMarkPayload(series.type) : defaultMarkPayload || {},
         payload
       ) as IChartAppearAction['payload'];
       const product = mark.getProduct();
@@ -95,14 +139,26 @@ export class VChartAppearActionProcessor extends ActionProcessorItem {
         appearTransform &&
         appearTransform(vchart as any, mergePayload.animation, {
           index: markIndex,
-          disappear: false
+          disappear: actionSpec.action === 'disappear'
         });
       // @ts-ignore
       product && product.animate.run(config || {});
     });
   }
 
-  static rectPayload: IChartAppearAction['payload'] = {
+  static rectPayload = (seriesType: string) => {
+    return {
+      animation: {
+        effect: seriesType === 'treemap' ? 'centerGrow' : 'grow',
+        duration: 2000,
+        easing: 'cubicOut',
+        oneByOne: false,
+        loop: false
+      }
+    };
+  };
+
+  static defaultPayload: IChartAppearAction['payload'] = {
     animation: {
       effect: 'grow',
       duration: 2000,
@@ -111,8 +167,18 @@ export class VChartAppearActionProcessor extends ActionProcessorItem {
       loop: false
     }
   };
-  static linePayload: IChartAppearAction['payload'] = VChartAppearActionProcessor.rectPayload;
-  static symbolPayload: IChartAppearAction['payload'] = VChartAppearActionProcessor.rectPayload;
-  static textPayload: IChartAppearAction['payload'] = VChartAppearActionProcessor.rectPayload;
-  static legendsPayload: IChartAppearAction['payload'] = VChartAppearActionProcessor.rectPayload;
+
+  static arcPayload: IChartAppearAction['payload'] = {
+    animation: {
+      effect: 'growAngle',
+      duration: 2000,
+      easing: 'cubicOut',
+      oneByOne: false,
+      loop: false
+    }
+  };
+
+  static linePayload: IChartAppearAction['payload'] = VChartVisibilityActionProcessor.defaultPayload;
+  static symbolPayload: IChartAppearAction['payload'] = VChartVisibilityActionProcessor.defaultPayload;
+  static textPayload: IChartAppearAction['payload'] = VChartVisibilityActionProcessor.defaultPayload;
 }
