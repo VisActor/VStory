@@ -16,8 +16,8 @@ import { canDoGraphicAnimation } from './utils';
 // };
 
 function fadeIn(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach(graphic => _fadeIn(graphic, animation as any));
+  const graphic = getCharacterParentGraphic(character);
+  _fadeIn(graphic, animation as any);
 }
 
 function _fadeIn(graphic: IGraphic, params: IFadeInParams): boolean {
@@ -28,14 +28,12 @@ function _fadeIn(graphic: IGraphic, params: IFadeInParams): boolean {
   const opacity = fade.opacity ?? params.opacity ?? 1;
   const duration = fade.duration ?? params.duration;
   const easing = fade.easing ?? params.easing;
-  const isBaseOpacity = fade.isBaseOpacity ?? false;
-  const opacityKey = isBaseOpacity ? 'baseOpacity' : 'opacity';
-
+  // TODO VRender处理opacity为0
   graphic.setAttributes({
-    [opacityKey]: 0
-  });
+    baseOpacity: 0.001
+  } as any);
 
-  graphic.animate().to({ [opacityKey]: opacity }, duration, easing as EasingType);
+  graphic.animate().to({ baseOpacity: opacity }, duration, easing as EasingType);
 
   return true;
 }

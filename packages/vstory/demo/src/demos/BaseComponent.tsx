@@ -124,6 +124,28 @@ export const BaseComponent = () => {
               }
             }
           };
+        }),
+        ...new Array(4).fill(0).map((_, i) => {
+          return {
+            type: 'Timeline',
+            id: 'timeline' + i,
+            zIndex: 10,
+            position: {
+              top: 350,
+              left: 20 + i * 130,
+              width: 100,
+              height: 50
+            },
+            options: {
+              graphic: {
+                times: [
+                  { label: '2001', desc: '' },
+                  { label: '2002', desc: '' },
+                  { label: '2003', desc: '' }
+                ]
+              }
+            }
+          };
         })
       ],
       acts: [
@@ -212,6 +234,23 @@ export const BaseComponent = () => {
                           animation: {
                             duration: 700,
                             effect: ['fadeIn', 'scaleIn', 'wipeIn', 'typewriter'][i]
+                          }
+                        }
+                      }
+                    ]
+                  };
+                }),
+                ...new Array(4).fill(0).map((_, i) => {
+                  return {
+                    characterId: 'timeline' + i,
+                    characterActions: [
+                      {
+                        startTime: i * 1000,
+                        action: 'appear',
+                        payload: {
+                          animation: {
+                            duration: 2000,
+                            effect: ['fadeIn', 'scaleIn', 'wipeIn', 'default'][i]
                           }
                         }
                       }

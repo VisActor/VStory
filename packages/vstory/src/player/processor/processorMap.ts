@@ -6,6 +6,7 @@ import { LineAppearActionProcessor } from './component/line/line-appear';
 import { RectAppearActionProcessor } from './component/rect/rect-appear';
 import { ShapeAppearActionProcessor } from './component/shape/shape-appear';
 import { TextAppearActionProcessor } from './component/text/text-appear';
+import { TimelineAppearActionProcessor } from './component/timeline/timeline-appear';
 
 export const processorChartMap = {
   [StoryChartType.VCHART]: {
@@ -28,6 +29,9 @@ export const processorComponentMap = {
   },
   [StoryComponentType.TEXT]: {
     [ACTION_TYPE.APPEAR]: new TextAppearActionProcessor()
+  },
+  [StoryComponentType.TIMELINE]: {
+    [ACTION_TYPE.APPEAR]: new TimelineAppearActionProcessor()
   }
 };
 
