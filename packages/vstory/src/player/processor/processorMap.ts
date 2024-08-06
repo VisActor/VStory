@@ -1,12 +1,13 @@
 import { ACTION_TYPE } from '../../constants/action';
 import { StoryChartType, StoryComponentType } from '../../constants/character';
-import { VChartAppearActionProcessor } from './chart/vchart';
+import { VChartVisibilityActionProcessor } from './chart/vchart';
 import { LineAppearActionProcessor } from './component/line/line-appear';
 import { RectAppearActionProcessor } from './component/rect/rect-appear';
 
 export const processorChartMap = {
   [StoryChartType.VCHART]: {
-    [ACTION_TYPE.APPEAR]: new VChartAppearActionProcessor()
+    [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor()
   }
 };
 

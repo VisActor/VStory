@@ -1,4 +1,8 @@
+import { runAxisAppear } from './component/axisAppear';
+import { runLabelAppear } from './component/labelAppear';
 import { runLegendsAppear } from './component/legendsAppear';
+import { runTitleAppear } from './component/titleAppear';
+import { transformArcAppear } from './seriesmark/transformArcAppear';
 import { transformLineAppear } from './seriesmark/transformLineAppear';
 import { transformRectAppear } from './seriesmark/transformRectAppear';
 import { transformSymbolAppear } from './seriesmark/transformSymbolAppear';
@@ -11,7 +15,11 @@ export const transformMap = {
     line: transformLineAppear,
     symbol: transformSymbolAppear,
     text: transformTextAppear,
+    arc: transformArcAppear,
     // component
-    legends: runLegendsAppear
+    legends: runLegendsAppear,
+    label: runLabelAppear,
+    axis: runAxisAppear,
+    title: runTitleAppear
   }
 };

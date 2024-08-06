@@ -4,18 +4,32 @@ import type { IChartAppearAction } from '../../interface/appear-action';
 export const commonGrow = (
   instance: IGroup,
   animation: IChartAppearAction['payload']['animation'],
-  option: { disappear: boolean }
+  option: { disappear: boolean; orient?: 'width' | 'height' }
 ) => {
   const { duration, easing } = animation;
-  const { disappear } = option;
+  const { disappear, orient = 'width' } = option;
 
   instance = instance.getChildAt(0) as IGroup;
   const width = instance.AABBBounds.width();
   const height = instance.AABBBounds.height();
-  const opacityMap = disappear ? { from: width, to: 0 } : { from: 0, to: width };
-
-  instance.setAttributes({ width: opacityMap.from, height, clip: true });
-  instance.animate().to({ width: opacityMap.to }, duration, easing);
+  if (orient === 'width') {
+    const opacityMap = disappear ? { from: width, to: 0 } : { from: 0, to: width };
+    instance.setAttributes({
+      width: opacityMap.from,
+      height,
+      clip: true
+    });
+    instance.animate().to({ width: opacityMap.to }, duration, easing);
+  } else {
+    const opacityMap = disappear ? { from: height, to: 0 } : { from: 0, to: height };
+    // TODO: 轴 bounds 不准确
+    instance.setAttributes({
+      width: width * 2,
+      height: opacityMap.from,
+      clip: true
+    });
+    instance.animate().to({ height: opacityMap.to }, duration, easing);
+  }
 };
 
 export const commonFade = (
