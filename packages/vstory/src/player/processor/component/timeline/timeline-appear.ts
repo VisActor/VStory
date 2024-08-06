@@ -15,7 +15,7 @@ function defaultAppear(character: ICharacter, animation: ITypeWriterParams, effe
 function _defaultAppear(graphic: Timeline, params: any) {
   if (graphic && graphic.type !== 'text') {
     const { duration, easing } = params;
-    graphic.appearAnimate({ duration: duration - 1000, easing });
+    graphic.appearAnimate({ duration: duration, easing });
   }
 }
 

@@ -160,11 +160,11 @@ export const BaseComponent = () => {
                     characterId: 'rect' + i,
                     characterActions: [
                       {
-                        startTime: i * 1000,
+                        startTime: i * 1700,
                         action: 'appear',
                         payload: {
                           animation: {
-                            duration: 700,
+                            duration: 1600,
                             effect: ['fadeIn', 'scaleIn', 'wipeIn'][i]
                           }
                         }
@@ -177,11 +177,11 @@ export const BaseComponent = () => {
                     characterId: 'line' + i,
                     characterActions: [
                       {
-                        startTime: i * 1000,
+                        startTime: i * 1700,
                         action: 'appear',
                         payload: {
                           animation: {
-                            duration: 700,
+                            duration: 1600,
                             effect: ['fadeIn', 'scaleIn', 'wipeIn'][i]
                           }
                         }
@@ -194,11 +194,11 @@ export const BaseComponent = () => {
                     characterId: 'shape' + i,
                     characterActions: [
                       {
-                        startTime: i * 1000,
+                        startTime: i * 1700,
                         action: 'appear',
                         payload: {
                           animation: {
-                            duration: 700,
+                            duration: 1600,
                             effect: ['fadeIn', 'scaleIn', 'wipeIn'][i]
                           }
                         }
@@ -211,11 +211,11 @@ export const BaseComponent = () => {
                     characterId: 'image' + i,
                     characterActions: [
                       {
-                        startTime: i * 1000,
+                        startTime: i * 1700,
                         action: 'appear',
                         payload: {
                           animation: {
-                            duration: 700,
+                            duration: 1600,
                             effect: ['fadeIn', 'scaleIn', 'wipeIn'][i]
                           }
                         }
@@ -228,11 +228,11 @@ export const BaseComponent = () => {
                     characterId: 'text' + i,
                     characterActions: [
                       {
-                        startTime: i * 1000,
+                        startTime: i * 1700,
                         action: 'appear',
                         payload: {
                           animation: {
-                            duration: 700,
+                            duration: 1600,
                             effect: ['fadeIn', 'scaleIn', 'wipeIn', 'typewriter'][i]
                           }
                         }
@@ -245,11 +245,11 @@ export const BaseComponent = () => {
                     characterId: 'timeline' + i,
                     characterActions: [
                       {
-                        startTime: i * 1000,
+                        startTime: i * 1700,
                         action: 'appear',
                         payload: {
                           animation: {
-                            duration: 2000,
+                            duration: 1600,
                             effect: ['fadeIn', 'scaleIn', 'wipeIn', 'default'][i]
                           }
                         }
