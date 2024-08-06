@@ -1,3 +1,4 @@
 export const ACTION_TYPE = {
-  APPEAR: 'appear'
+  APPEAR: 'appear',
+  DISAPPEAR: 'disappear'
 };
