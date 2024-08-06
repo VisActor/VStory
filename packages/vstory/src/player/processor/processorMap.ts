@@ -1,8 +1,11 @@
 import { ACTION_TYPE } from '../../constants/action';
 import { StoryChartType, StoryComponentType } from '../../constants/character';
 import { VChartAppearActionProcessor } from './chart/vchart';
+import { ImageAppearActionProcessor } from './component/image/image-appear';
 import { LineAppearActionProcessor } from './component/line/line-appear';
 import { RectAppearActionProcessor } from './component/rect/rect-appear';
+import { ShapeAppearActionProcessor } from './component/shape/shape-appear';
+import { TextAppearActionProcessor } from './component/text/text-appear';
 
 export const processorChartMap = {
   [StoryChartType.VCHART]: {
@@ -16,6 +19,15 @@ export const processorComponentMap = {
   },
   [StoryComponentType.LINE]: {
     [ACTION_TYPE.APPEAR]: new LineAppearActionProcessor()
+  },
+  [StoryComponentType.SHAPE]: {
+    [ACTION_TYPE.APPEAR]: new ShapeAppearActionProcessor()
+  },
+  [StoryComponentType.IMAGE]: {
+    [ACTION_TYPE.APPEAR]: new ImageAppearActionProcessor()
+  },
+  [StoryComponentType.TEXT]: {
+    [ACTION_TYPE.APPEAR]: new TextAppearActionProcessor()
   }
 };
 

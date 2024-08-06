@@ -75,6 +75,7 @@ export interface IWipeInParams extends IAnimationParams {
   };
 }
 
+export type ITypeWriterParams = IAnimationParams;
 export interface IComponentAppearPayLoad extends IActionPayload {
   animation: IFadeInParams | IScaleInParams | IWipeInParams;
 }

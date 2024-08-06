@@ -120,20 +120,21 @@ export class CommonAppearActionProcessor extends ActionProcessorItem {
     const { animation } = actionSpec.payload ?? {};
     const { effect = 'fadeIn' } = animation ?? ({} as any);
 
-    let effectFunc = fadeIn;
+    const effectFunc = this.getEffectFunc(effect);
+
+    effectFunc(character, animation as any, effect);
+  }
+
+  getEffectFunc(effect: string) {
     switch (effect) {
       case 'scaleIn':
-        effectFunc = scaleIn;
-        break;
+        return scaleIn;
       case 'wipeIn':
-        effectFunc = wipeIn;
-        break;
+        return wipeIn;
+      case 'fadeIn':
+        return fadeIn;
     }
-    effectFunc(character, animation as any, effect);
-    // 获取相关图形
-    // const graphics = this.getCharacterByEffect(character, effect);
-    // 执行appearEffect
-    // graphics.forEach(graphic => effectFunc(graphic, animation as any));
+    return fadeIn;
   }
 }
 
