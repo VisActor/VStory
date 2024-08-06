@@ -6,7 +6,7 @@ import { easeInOutQuad } from './util';
 
 export const scene13Characters: ICharacterSpec[] = [
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene13-background`,
     zIndex: 2,
     position: {
@@ -23,7 +23,7 @@ export const scene13Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene13-logo`,
     zIndex: 2,
     position: {

@@ -45,7 +45,7 @@ export class CharacterTree implements ICharacterTree {
         if (!this._characters[(<ICharacterSpec>spec).id]) {
           this._characters[(<ICharacterSpec>spec).id] = StoryFactory.createCharacter(<ICharacterSpec>spec, option);
         }
-        return this._characters[(<ICharacterSpec>spec).id];
+        // return this._characters[(<ICharacterSpec>spec).id];
       }
     });
   }

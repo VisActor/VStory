@@ -1230,7 +1230,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'title1',
       zIndex: 1,
       position: {
@@ -1248,7 +1248,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'title2',
       zIndex: 1,
       position: {
@@ -1266,7 +1266,7 @@ const spec = {
       }
     },
     {
-      type: 'RichTextComponent',
+      type: 'RichText',
       id: 'titlesubtitle',
       zIndex: 1,
       position: {
@@ -1293,7 +1293,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene2-title2',
       zIndex: 1,
       position: {
@@ -1312,7 +1312,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene3-title1',
       zIndex: 1,
       position: {
@@ -1331,7 +1331,7 @@ const spec = {
       }
     },
     {
-      type: 'LineComponent',
+      type: 'Line',
       id: 'scene3-line-top',
       zIndex: 1,
       position: {
@@ -1357,7 +1357,7 @@ const spec = {
       }
     },
     {
-      type: 'LineComponent',
+      type: 'Line',
       id: 'scene3-line-bottom',
       zIndex: 1,
       position: {
@@ -1383,7 +1383,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene3-title-Nicole',
       zIndex: 1,
       position: {
@@ -1402,7 +1402,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-text-image-top',
       zIndex: 1,
       position: {
@@ -1418,7 +1418,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-text-image-top',
       zIndex: 1,
       position: {
@@ -1434,7 +1434,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-1',
       zIndex: 1,
       position: {
@@ -1450,7 +1450,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-2',
       zIndex: 1,
       position: {
@@ -1466,7 +1466,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-3',
       zIndex: 1,
       position: {
@@ -1482,7 +1482,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-4',
       zIndex: 1,
       position: {
@@ -1498,7 +1498,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-5',
       zIndex: 1,
       position: {
@@ -1514,7 +1514,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-text-image-bottom',
       zIndex: 1,
       position: {
@@ -1530,7 +1530,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene3-title-1486',
       zIndex: 1,
       position: {
@@ -1549,7 +1549,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-title-image',
       zIndex: 1,
       position: {
@@ -1565,7 +1565,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene3-background',
       zIndex: 0,
       position: {
@@ -1582,7 +1582,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-background-decoration',
       zIndex: 0,
       position: {
@@ -1768,7 +1768,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-title-decoration',
       zIndex: 1,
       position: {
@@ -1784,7 +1784,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene4-title',
       zIndex: 1,
       position: {
@@ -1803,7 +1803,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene4-subtitle',
       zIndex: 1,
       position: {
@@ -1822,7 +1822,7 @@ const spec = {
       }
     },
     {
-      type: 'LineComponent',
+      type: 'Line',
       id: 'scene4-line-left',
       zIndex: 1,
       position: {
@@ -1848,7 +1848,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-line-left-decoration',
       zIndex: 1,
       position: {
@@ -1864,7 +1864,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-chart-image',
       zIndex: 1,
       position: {
@@ -2016,7 +2016,7 @@ const spec = {
       }
     },
     {
-      type: 'LineComponent',
+      type: 'Line',
       id: 'scene4-text-zh-line',
       zIndex: 1,
       position: {
@@ -2042,7 +2042,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-text-zh-image',
       zIndex: 1,
       position: {
@@ -2058,7 +2058,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-text-en-image',
       zIndex: 1,
       position: {
@@ -2074,7 +2074,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene4-green-rect',
       zIndex: 1,
       position: {
@@ -2092,7 +2092,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-decoration',
       zIndex: 1,
       position: {
@@ -2108,7 +2108,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene4-grey-rect',
       zIndex: 1,
       position: {
@@ -2125,7 +2125,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-bg-decoration',
       zIndex: 1,
       position: {
@@ -2141,7 +2141,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-bg-decoration',
       zIndex: 1,
       position: {
@@ -2157,7 +2157,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene5-background-top',
       zIndex: 0,
       position: {
@@ -2174,7 +2174,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene5-background-bottom',
       zIndex: 0,
       position: {
@@ -2191,7 +2191,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-title-image',
       zIndex: 1,
       position: {
@@ -2207,7 +2207,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-background-decoration',
       zIndex: 0,
       position: {
@@ -2224,7 +2224,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-atom',
       zIndex: 0,
       position: {
@@ -2240,7 +2240,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-zh-text',
       zIndex: 0,
       position: {
@@ -2256,7 +2256,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-en-text',
       zIndex: 0,
       position: {
@@ -2272,7 +2272,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-chart-image',
       zIndex: 0,
       position: {
@@ -3331,7 +3331,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene6-bg1',
       zIndex: 1,
       position: {
@@ -3348,7 +3348,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene6-bg2',
       zIndex: -1,
       position: {
@@ -3365,7 +3365,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene6-bg-bottom',
       zIndex: 1,
       position: {
@@ -3382,7 +3382,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene6-bg-top',
       zIndex: 0,
       position: {
@@ -3399,7 +3399,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene6-img1',
       zIndex: 1,
       position: {
@@ -3415,7 +3415,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene6-img2',
       zIndex: 1,
       position: {
@@ -3431,7 +3431,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene6-img3',
       zIndex: 1,
       position: {
@@ -3447,7 +3447,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene6-img4',
       zIndex: 1,
       position: {
@@ -3768,7 +3768,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene7-background-top',
       zIndex: 0,
       position: {
@@ -3786,7 +3786,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene7-background-middle',
       zIndex: 0,
       position: {
@@ -3803,7 +3803,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene7-background-bottom',
       zIndex: 0,
       position: {
@@ -3821,7 +3821,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-zh-text',
       zIndex: 0,
       position: {
@@ -3837,7 +3837,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-title',
       zIndex: 0,
       position: {
@@ -3853,7 +3853,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-chart-image',
       zIndex: 0,
       position: {
@@ -3869,7 +3869,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-en-text',
       zIndex: 0,
       position: {
@@ -3885,7 +3885,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-pie-image',
       zIndex: 0,
       position: {
@@ -3978,7 +3978,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene8-background',
       zIndex: 0,
       position: {
@@ -3995,7 +3995,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-bg-decoration',
       zIndex: 0,
       position: {
@@ -4011,7 +4011,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-title',
       zIndex: 0,
       position: {
@@ -4027,7 +4027,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-text',
       zIndex: 0,
       position: {
@@ -4043,7 +4043,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-chart-image',
       zIndex: 0,
       position: {
@@ -4059,7 +4059,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-image1',
       zIndex: 0,
       position: {
@@ -4075,7 +4075,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-image2',
       zIndex: 0,
       position: {
@@ -4362,7 +4362,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene9-background',
       zIndex: 0,
       position: {
@@ -4379,7 +4379,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-bg-decoration',
       zIndex: 0,
       position: {
@@ -4395,7 +4395,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-person',
       zIndex: 1,
       position: {
@@ -4411,7 +4411,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-chart-image',
       zIndex: 0,
       position: {
@@ -4428,7 +4428,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-title',
       zIndex: 0,
       position: {
@@ -4444,7 +4444,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-text-zh',
       zIndex: 0,
       position: {
@@ -4460,7 +4460,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-text-en',
       zIndex: 0,
       position: {
@@ -4576,7 +4576,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene10-background',
       zIndex: 0,
       position: {
@@ -4593,7 +4593,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-person',
       zIndex: 1,
       position: {
@@ -4609,7 +4609,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-title',
       zIndex: 1,
       position: {
@@ -4625,7 +4625,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-bg-decoration',
       zIndex: 0,
       position: {
@@ -4641,7 +4641,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-text-zh',
       zIndex: 0,
       position: {
@@ -4657,7 +4657,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-text-en',
       zIndex: 0,
       position: {
@@ -4673,7 +4673,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-chart-image',
       zIndex: 0,
       position: {
@@ -4886,7 +4886,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene11-background',
       zIndex: 0,
       position: {
@@ -4903,7 +4903,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-bg-decoration',
       zIndex: 0,
       position: {
@@ -4919,7 +4919,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-title',
       zIndex: 0,
       position: {
@@ -4935,7 +4935,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-text-en',
       zIndex: 0,
       position: {
@@ -4951,7 +4951,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-text-zh',
       zIndex: 0,
       position: {
@@ -4967,7 +4967,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-chart-image',
       zIndex: 0,
       position: {
@@ -5178,7 +5178,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene12-background',
       zIndex: 0,
       position: {
@@ -5211,7 +5211,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene12-background-bottom',
       zIndex: 0,
       position: {
@@ -5228,7 +5228,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-title',
       zIndex: 0,
       position: {
@@ -5244,7 +5244,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-chart-image',
       zIndex: 1,
       position: {
@@ -5260,7 +5260,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-bg-decoration',
       zIndex: 0,
       position: {
@@ -5276,7 +5276,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-text-zh',
       zIndex: 0,
       position: {
@@ -5292,7 +5292,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-text-en',
       zIndex: 0,
       position: {
@@ -6381,7 +6381,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12_2-title',
       zIndex: 0,
       position: {
@@ -6397,7 +6397,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12_2-chart-image',
       zIndex: 1,
       position: {
@@ -6413,7 +6413,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12_2-text-zh',
       zIndex: 0,
       position: {
@@ -6429,7 +6429,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12_2-text-en',
       zIndex: 0,
       position: {
@@ -7045,7 +7045,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene13-background',
       zIndex: 2,
       position: {
@@ -7062,7 +7062,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene13-logo',
       zIndex: 2,
       position: {

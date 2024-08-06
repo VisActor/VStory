@@ -4,7 +4,7 @@ import { ISceneSpec } from '../../../../src/story/interface';
 
 export const scene2Characters: ICharacterSpec[] = [
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `title1`,
     zIndex: 1,
     position: {
@@ -18,7 +18,7 @@ export const scene2Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `title2`,
     zIndex: 1,
     position: {
@@ -32,7 +32,7 @@ export const scene2Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RichTextComponent',
+    type: 'RichText',
     id: `titlesubtitle`,
     zIndex: 1,
     position: {
@@ -59,7 +59,7 @@ export const scene2Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `scene2-title2`,
     zIndex: 1,
     position: {

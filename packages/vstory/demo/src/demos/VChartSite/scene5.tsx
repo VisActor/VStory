@@ -1050,7 +1050,7 @@ const getTransformPointFunc = (offsetX: number, offsetY: number, scaleX: number,
 
 export const scene5Characters: ICharacterSpec[] = [
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene5-background-top`,
     zIndex: 0,
     position: {
@@ -1067,7 +1067,7 @@ export const scene5Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene5-background-bottom`,
     zIndex: 0,
     position: {
@@ -1084,7 +1084,7 @@ export const scene5Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene5-title-image`,
     zIndex: 1,
     position: {
@@ -1100,7 +1100,7 @@ export const scene5Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene5-background-decoration`,
     zIndex: 0,
     position: {
@@ -1117,7 +1117,7 @@ export const scene5Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene5-atom`,
     zIndex: 0,
     position: {
@@ -1133,7 +1133,7 @@ export const scene5Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene5-zh-text`,
     zIndex: 0,
     position: {
@@ -1149,7 +1149,7 @@ export const scene5Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene5-en-text`,
     zIndex: 0,
     position: {
@@ -1165,7 +1165,7 @@ export const scene5Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene5-chart-image`,
     zIndex: 0,
     position: {

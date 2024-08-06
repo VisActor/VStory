@@ -14,17 +14,18 @@ export const enum StoryChartType {
   // SUNBURST = 'SunburstChart',
   VCHART = 'VChart'
 }
-export enum StoryGraphicType {
-  RECT = 'RectComponent',
-  SHAPE = 'ShapeComponent',
-  LINE = 'LineComponent',
-  ARC = 'ArcComponent',
+export enum StoryComponentType {
+  RECT = 'Rect',
+  SHAPE = 'Shape',
+  LINE = 'Line',
+  ARC = 'Arc',
   // AREA = 'AreaComponent',
-  PATH = 'PathComponent',
-  TEXT = 'TextComponent',
-  RICH_TEXT = 'RichTextComponent',
-  QIPAO = 'QipaoComponent',
-  IMAGE = 'ImageComponent'
+  PATH = 'Path',
+  TEXT = 'Text',
+  RICH_TEXT = 'RichText',
+  QIPAO = 'Qipao',
+  IMAGE = 'Image',
+  TIMELINE = 'Timeline'
 }
 
 export const enum StoryChartComponentType {

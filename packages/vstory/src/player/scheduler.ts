@@ -41,36 +41,29 @@ class ActionItem implements IActionItem {
 export class Scheduler implements IScheduler {
   protected _actionProcessor: IActionProcessor;
   protected _actsInfo: IActInfo[];
+  protected _runnedAct: Set<IActionItem>;
 
   constructor(actionProcessor: IActionProcessor) {
     this._actionProcessor = actionProcessor;
+    this._runnedAct = new Set();
   }
 
-  // static formatTimeInAction(time: number, action: IActInfo): number {
-  //   const { duration } = action;
-  //   if (time < startTime) {
-  //     return time;
-  //   }
-  //   if (startTime + duration <= 0) {
-  //     return time;
-  //   }
-  //   while (time > startTime + duration) {
-  //     time -= startTime + duration;
-  //   }
-  //   return time;
-  // }
+  clearState(): void {
+    this._runnedAct.clear();
+  }
+
+  getTotalTime(): number {
+    return this._actsInfo.reduce((t, actInfo) => Math.max(t, actInfo.startTime + actInfo.duration), 0);
+  }
 
   findActByTime(t: number) {
     // 规范化t
-    const totalTime = this._actsInfo.reduce((t, actInfo) => Math.max(t, actInfo.startTime + actInfo.duration), 0);
+    const totalTime = this.getTotalTime();
     if (totalTime <= 0) {
       return {
         actInfo: this._actsInfo[0],
         t: 0
       };
-    }
-    while (t > totalTime) {
-      t -= totalTime;
     }
     for (let i = 0; i < this._actsInfo.length; i++) {
       const actInfo = this._actsInfo[i];
@@ -108,12 +101,14 @@ export class Scheduler implements IScheduler {
       const { startTime: sceneStartTime } = sceneInfo;
       sceneInfo.actionList.forEach(actionInfo => {
         const startTime = sceneStartTime + actionInfo.startTime;
-        if (startTime >= formatFromTime && startTime < formatToTime) {
-          actions.push(actionInfo);
+        if (startTime < formatToTime) {
+          if (!this._runnedAct.has(actionInfo)) {
+            this._runnedAct.add(actionInfo);
+            actions.push(actionInfo);
+          }
         }
       });
     });
-
     return actions;
   }
 

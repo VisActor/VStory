@@ -42,7 +42,7 @@ const chartSpec = {
 // FIXME: 1801 的上中下两块背景都需要从上一页继承下来
 export const scene7Characters: ICharacterSpec[] = [
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene7-background-top`,
     zIndex: 0,
     position: {
@@ -60,7 +60,7 @@ export const scene7Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene7-background-middle`,
     zIndex: 0,
     position: {
@@ -77,7 +77,7 @@ export const scene7Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene7-background-bottom`,
     zIndex: 0,
     position: {
@@ -95,7 +95,7 @@ export const scene7Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene7-zh-text`,
     zIndex: 0,
     position: {
@@ -111,7 +111,7 @@ export const scene7Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene7-title`,
     zIndex: 0,
     position: {
@@ -127,7 +127,7 @@ export const scene7Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene7-chart-image`,
     zIndex: 0,
     position: {
@@ -143,7 +143,7 @@ export const scene7Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene7-en-text`,
     zIndex: 0,
     position: {
@@ -159,7 +159,7 @@ export const scene7Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene7-pie-image`,
     zIndex: 0,
     position: {

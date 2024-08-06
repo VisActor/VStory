@@ -1,4 +1,4 @@
-import { StoryChartComponentType, StoryChartType, StoryGraphicType } from '../../constant';
+import { StoryChartComponentType, StoryChartType, StoryComponentType } from '../../constant';
 
 import { addProcessor } from '../vchart/add';
 import { createMarkStyleProcessorByMarkType } from '../vchart/style/style';
@@ -128,7 +128,7 @@ export const commonMarkProcessor = {
 };
 
 export const processorMarkMap: Record<string, any> = {};
-Object.values(StoryGraphicType).forEach(type => {
+Object.values(StoryComponentType).forEach(type => {
   processorMarkMap[type] = commonMarkProcessor;
 });
 

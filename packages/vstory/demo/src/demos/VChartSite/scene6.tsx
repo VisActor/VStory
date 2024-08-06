@@ -1651,7 +1651,7 @@ const scene6_2 = [
 export const scene6Characters: ICharacterSpec[] = [
   // 背景1
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene6-bg1`,
     zIndex: 1,
     position: {
@@ -1669,7 +1669,7 @@ export const scene6Characters: ICharacterSpec[] = [
   },
   // 背景2
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene6-bg2`,
     zIndex: -1,
     position: {
@@ -1687,7 +1687,7 @@ export const scene6Characters: ICharacterSpec[] = [
   },
   // 底部黑边
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene6-bg-bottom`,
     zIndex: 1,
     position: {
@@ -1705,7 +1705,7 @@ export const scene6Characters: ICharacterSpec[] = [
   },
   // 顶部白边
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene6-bg-top`,
     zIndex: 0,
     position: {
@@ -1724,7 +1724,7 @@ export const scene6Characters: ICharacterSpec[] = [
 
   // 四张图片
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene6-img1`,
     zIndex: 1,
     position: {
@@ -1740,7 +1740,7 @@ export const scene6Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene6-img2',
     zIndex: 1,
     position: {
@@ -1756,7 +1756,7 @@ export const scene6Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene6-img3',
     zIndex: 1,
     position: {
@@ -1772,7 +1772,7 @@ export const scene6Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene6-img4',
     zIndex: 1,
     position: {

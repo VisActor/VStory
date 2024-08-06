@@ -18,6 +18,7 @@ import { Pictogram } from './demos/infographics/Pictogram';
 import { LV_BAR1 } from './demos/lv/bar1';
 import { BarLineSeries } from './demos/BarLineSeries';
 import { wordcloud } from './demos/wordcloud';
+import { BaseComponent } from './demos/BaseComponent';
 
 type MenusType = (
   | {
@@ -97,6 +98,10 @@ const App = () => {
     {
       name: 'wordcloud',
       component: wordcloud
+    },
+    {
+      name: 'BaseComponent',
+      component: BaseComponent
     },
     {
       name: 'lv_chart',

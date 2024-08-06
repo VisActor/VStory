@@ -11,7 +11,7 @@ export const DisAppear = () => {
     try {
       const bgCharacters = [
         {
-          type: 'ImageComponent',
+          type: 'Image',
           id: 'bg-1',
           zIndex: -1,
           position: {
@@ -27,7 +27,7 @@ export const DisAppear = () => {
           }
         },
         {
-          type: 'LineComponent',
+          type: 'Line',
           id: 'bg-2',
           zIndex: -1,
           position: {
@@ -47,7 +47,7 @@ export const DisAppear = () => {
           }
         },
         {
-          type: 'LineComponent',
+          type: 'Line',
           id: 'bg-3',
           zIndex: -1,
           position: {
