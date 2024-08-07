@@ -17,10 +17,14 @@ import { canDoGraphicAnimation } from './utils';
 
 function fadeIn(character: ICharacter, animation: IFadeInParams, effect: string) {
   const graphic = getCharacterParentGraphic(character);
-  _fadeIn(graphic, animation as any);
+  _fade(graphic, animation as any, true);
+}
+function fadeOut(character: ICharacter, animation: IFadeInParams, effect: string) {
+  const graphic = getCharacterParentGraphic(character);
+  _fade(graphic, animation as any, false);
 }
 
-function _fadeIn(graphic: IGraphic, params: IFadeInParams): boolean {
+function _fade(graphic: IGraphic, params: IFadeInParams, appear: boolean): boolean {
   if (!canDoGraphicAnimation(graphic, params)) {
     return false;
   }
@@ -28,22 +32,33 @@ function _fadeIn(graphic: IGraphic, params: IFadeInParams): boolean {
   const opacity = fade.opacity ?? params.opacity ?? 1;
   const duration = fade.duration ?? params.duration;
   const easing = fade.easing ?? params.easing;
+
   // TODO VRender处理opacity为0
+  let from = 0.001;
+  let to = opacity;
+  if (!appear) {
+    [from, to] = [to, from];
+  }
+
   graphic.setAttributes({
-    baseOpacity: 0.001
+    baseOpacity: from
   } as any);
 
-  graphic.animate().to({ baseOpacity: opacity }, duration, easing as EasingType);
+  graphic.animate().to({ baseOpacity: to }, duration, easing as EasingType);
 
   return true;
 }
 
 function scaleIn(character: ICharacter, animation: IFadeInParams, effect: string) {
   const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach(graphic => _scaleIn(graphic, animation as any));
+  graphics.forEach(graphic => _scale(graphic, animation as any, true));
+}
+function scaleOut(character: ICharacter, animation: IFadeInParams, effect: string) {
+  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
+  graphics.forEach(graphic => _scale(graphic, animation as any, false));
 }
 
-function _scaleIn(graphic: IGraphic, params: IScaleInParams): boolean {
+function _scale(graphic: IGraphic, params: IScaleInParams, appear: boolean): boolean {
   if (!canDoGraphicAnimation(graphic, params)) {
     return false;
   }
@@ -52,11 +67,17 @@ function _scaleIn(graphic: IGraphic, params: IScaleInParams): boolean {
   const duration = scale.duration ?? params.duration;
   const easing = scale.easing ?? params.easing;
 
+  let from = 0;
+  let to = ratio;
+  if (!appear) {
+    [from, to] = [to, from];
+  }
+
   graphic.setAttributes({
-    scaleX: 0,
-    scaleY: 0
+    scaleX: from,
+    scaleY: from
   });
-  graphic.animate().to({ scaleX: ratio, scaleY: ratio }, duration, easing as EasingType);
+  graphic.animate().to({ scaleX: to, scaleY: to }, duration, easing as EasingType);
 
   return true;
 }
@@ -70,9 +91,13 @@ const Direction: any = {
 
 function wipeIn(character: ICharacter, animation: IFadeInParams, effect: string) {
   const graphic = getCharacterParentGraphic(character);
-  _wipeIn(graphic, animation as any);
+  _wipe(graphic, animation as any, true);
 }
-function _wipeIn(graphic: IGraphic, params: IWipeInParams) {
+function wipeOut(character: ICharacter, animation: IFadeInParams, effect: string) {
+  const graphic = getCharacterParentGraphic(character);
+  _wipe(graphic, animation as any, false);
+}
+function _wipe(graphic: IGraphic, params: IWipeInParams, appear: boolean) {
   if (!canDoGraphicAnimation(graphic, params)) {
     return false;
   }
@@ -82,21 +107,27 @@ function _wipeIn(graphic: IGraphic, params: IWipeInParams) {
   const duration = wipe.duration ?? params.duration;
   const easing = wipe.easing ?? params.easing;
 
+  let fromRatio = 0;
+  let toRatio = 1;
+  if (!appear) {
+    [fromRatio, toRatio] = [toRatio, fromRatio];
+  }
+
   graphic.setAttributes({
     wipeDirection: Direction[from],
-    wipeRatio: 0
+    wipeRatio: fromRatio
   } as any);
   graphic
     .animate()
-    .to({ wipeRatio: 1 }, duration, easing)
+    .to({ wipeRatio: toRatio }, duration, easing)
     .onEnd(() => {
-      graphic.setAttributes({ wipeRatio: 1 } as any);
+      graphic.setAttributes({ wipeRatio: toRatio } as any);
     });
   return true;
 }
 
 export class CommonAppearActionProcessor extends ActionProcessorItem {
-  name: 'appear';
+  name: 'appearOrDisAppear';
 
   constructor() {
     super();
@@ -116,21 +147,21 @@ export class CommonAppearActionProcessor extends ActionProcessorItem {
 
   run(character: ICharacter, actionSpec: IAction): void {
     const { animation } = actionSpec.payload ?? {};
-    const { effect = 'fadeIn' } = animation ?? ({} as any);
+    const { effect = 'fade' } = animation ?? ({} as any);
 
-    const effectFunc = this.getEffectFunc(effect);
+    const effectFunc = this.getEffectFunc(effect, actionSpec.action === 'appear');
 
     effectFunc(character, animation as any, effect);
   }
 
-  getEffectFunc(effect: string) {
+  getEffectFunc(effect: string, appear: boolean) {
     switch (effect) {
-      case 'scaleIn':
-        return scaleIn;
-      case 'wipeIn':
-        return wipeIn;
-      case 'fadeIn':
-        return fadeIn;
+      case 'scale':
+        return appear ? scaleIn : scaleOut;
+      case 'wipe':
+        return appear ? wipeIn : wipeOut;
+      case 'fade':
+        return appear ? fadeIn : fadeOut;
     }
     return fadeIn;
   }
