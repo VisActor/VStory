@@ -6,6 +6,7 @@ import { ActionProcessorItem } from '../processor-item';
 import type { EasingType, IGraphic } from '@visactor/vrender-core';
 import type { IFadeInParams, IScaleInParams, IWipeInParams } from '../interface/appear-action';
 import { canDoGraphicAnimation } from './utils';
+import type { IComponentStyleAction } from '../interface/style-action';
 // import { Wipe } from '../../../animate/wipeIn';
 
 // export const appearEffectMap = {
@@ -126,7 +127,7 @@ function _wipe(graphic: IGraphic, params: IWipeInParams, appear: boolean) {
   return true;
 }
 
-export class CommonAppearActionProcessor extends ActionProcessorItem {
+export class CommonVisibilityActionProcessor extends ActionProcessorItem {
   name: 'appearOrDisAppear';
 
   constructor() {
@@ -134,11 +135,11 @@ export class CommonAppearActionProcessor extends ActionProcessorItem {
   }
 
   getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
-    const { startTime: globalStartTime = 0, duration: globalDuration } = action;
+    const { startTime: globalStartTime = 0 } = action;
     const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
 
     const st = globalStartTime + startTime;
-    const d = globalDuration ?? duration;
+    const d = duration;
     return {
       startTime: st,
       duration: d
@@ -164,6 +165,41 @@ export class CommonAppearActionProcessor extends ActionProcessorItem {
         return appear ? fadeIn : fadeOut;
     }
     return fadeIn;
+  }
+}
+
+export class CommonStyleActionProcessor extends ActionProcessorItem {
+  name: 'style';
+
+  constructor() {
+    super();
+  }
+
+  getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
+    const { startTime: globalStartTime = 0 } = action;
+    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+
+    const st = globalStartTime + startTime;
+    const d = duration;
+    return {
+      startTime: st,
+      duration: d
+    };
+  }
+
+  run(character: ICharacter, actionSpec: IComponentStyleAction): void {
+    const { animation, graphic: graphicStyle, text: textStyle } = actionSpec.payload ?? {};
+
+    const { duration, easing } = animation;
+    const graphic = getCharacterGraphic(character)[0];
+    const text = getCharacterGraphic(character)[1];
+
+    if (graphic && graphicStyle) {
+      graphic.animate().to(graphicStyle, duration, easing as EasingType);
+    }
+    if (text && textStyle) {
+      graphic.animate().to(textStyle, duration, easing as EasingType);
+    }
   }
 }
 

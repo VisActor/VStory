@@ -1,6 +1,6 @@
-import { CommonAppearActionProcessor } from '../common-component';
+import { CommonVisibilityActionProcessor } from '../common-component';
 
-export class ImageVisibilityActionProcessor extends CommonAppearActionProcessor {
+export class ImageVisibilityActionProcessor extends CommonVisibilityActionProcessor {
   name: 'appearOrDisAppear';
   constructor() {
     super();

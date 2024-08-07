@@ -1,5 +1,5 @@
 import type { IGraphic } from '@visactor/vrender-core';
-import type { IAnimationParams } from '../interface/appear-action';
+import type { IAnimationParams } from '../interface/common-action';
 
 /**
  * 判断图元是否需要执行动画

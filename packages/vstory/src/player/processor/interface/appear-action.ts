@@ -1,21 +1,7 @@
-import type { EasingType } from '@visactor/vrender';
+import type { EasingType } from '@visactor/vrender-core';
+import type { IAction, IActionPayload, IAnimationParams } from './common-action';
 
-export interface IAction {
-  action: string;
-  payload: Record<string, any>;
-}
-
-export interface IAnimationParams {
-  duration: number;
-  easing?: EasingType;
-  loop?: number | boolean;
-}
-
-export interface IActionPayload {
-  animation?: IAnimationParams;
-}
-
-export interface IChartAppearPayLoad extends IActionPayload {
+export interface IChartVisibilityPayload extends IActionPayload {
   animation: IAnimationParams & {
     oneByOne: boolean;
     /**
@@ -28,9 +14,8 @@ export interface IChartAppearPayLoad extends IActionPayload {
   fade?: { isBaseOpacity?: boolean };
 }
 
-export interface IChartAppearAction extends IAction {
-  action: 'appear';
-  payload: IChartAppearPayLoad;
+export interface IChartVisibilityAction extends IAction<IChartVisibilityPayload> {
+  action: 'appear' | 'disappear';
 }
 
 // components
@@ -80,4 +65,8 @@ export interface IComponentAppearPayLoad extends IActionPayload {
   animation: IFadeInParams | IScaleInParams | IWipeInParams;
 }
 
-export type AppearOption = Omit<IChartAppearAction, 'action' | 'data'>;
+export interface IComponentVisibilityAction extends IAction<IComponentAppearPayLoad> {
+  action: 'appear' | 'disappear';
+}
+
+export type AppearOption = Omit<IChartVisibilityAction, 'action' | 'data'>;

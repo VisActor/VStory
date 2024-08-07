@@ -23,44 +23,44 @@ export const VChartSiteDemo = () => {
     // 准备一个图表
     const tempSpec: IStorySpec = {
       characters: [
-        ...scene1Characters,
-        ...scene2Characters,
-        ...scene3Characters,
-        ...scene4Characters,
-        ...scene5Characters,
-        ...scene6Characters,
-        ...scene7Characters,
-        ...scene8Characters,
-        ...scene9Characters,
-        ...scene10Characters,
-        ...scene11Characters,
-        ...scene12Characters,
-        ...scene12_2_Characters,
-        ...scene13Characters
+        // ...scene1Characters,
+        // ...scene2Characters,
+        // ...scene3Characters,
+        // ...scene4Characters,
+        // ...scene5Characters,
+        // ...scene6Characters,
+        // ...scene7Characters,
+        ...scene8Characters
+        // ...scene9Characters,
+        // ...scene10Characters,
+        // ...scene11Characters,
+        // ...scene12Characters,
+        // ...scene12_2_Characters,
+        // ...scene13Characters
       ],
       acts: [
         {
           id: 'default-chapter',
           scenes: [
-            scene1,
-            scene2,
-            scene3,
-            scene4,
-            scene5,
-            scene6,
-            scene7,
-            scene8,
-            scene9,
-            scene10,
-            scene11,
-            scene12,
-            scene12_2,
-            scene13
+            // scene1,
+            // scene2,
+            // scene3,
+            // scene4,
+            // scene5,
+            // scene6,
+            // scene7,
+            scene8
+            // scene9,
+            // scene10,
+            // scene11,
+            // scene12,
+            // scene12_2,
+            // scene13
           ]
         }
       ]
     };
-    console.log('dsl', tempSpec);
+    // console.log('dsl', tempSpec);
     const story = new Story(tempSpec, { dom: id, playerOption: { scaleX: 0.5, scaleY: 0.5 } });
     window.story = story;
     story.play();

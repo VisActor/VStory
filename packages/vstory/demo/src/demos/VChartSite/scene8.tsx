@@ -239,7 +239,7 @@ export const scene8Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ScatterChart',
+    type: 'VChart',
     id: `scene8-chart`,
     zIndex: 0,
     position: {
