@@ -1,10 +1,10 @@
-import type { IChartAppearAction } from '../../interface/appear-action';
+import type { IChartVisibilityAction } from '../../interface/appear-action';
 import { commonFade, commonGrow } from './commonAppear';
 import type { IGroup } from '@visactor/vrender-core';
 
 export const runLegendsAppear = (
   instance: IGroup,
-  animation: IChartAppearAction['payload']['animation'],
+  animation: IChartVisibilityAction['payload']['animation'],
   option: { disappear: boolean }
 ) => {
   switch (animation.effect) {

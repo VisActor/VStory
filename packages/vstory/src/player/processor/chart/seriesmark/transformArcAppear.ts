@@ -1,10 +1,10 @@
 import type VChart from '@visactor/vchart';
-import type { IChartAppearAction } from '../../interface/appear-action';
+import type { IChartVisibilityAction } from '../../interface/appear-action';
 
 // 将payload转换为chart内置的动画type
 export const transformArcAppear = (
   instance: VChart,
-  animation: IChartAppearAction['payload']['animation'],
+  animation: IChartVisibilityAction['payload']['animation'],
   option: {
     disappear: boolean;
     markIndex: number;
@@ -31,7 +31,7 @@ export const transformArcAppear = (
 
 const arcGrowRadius = (
   instance: VChart,
-  animation: IChartAppearAction['payload']['animation'],
+  animation: IChartVisibilityAction['payload']['animation'],
   option: {
     disappear: boolean;
     markIndex: number;
@@ -52,7 +52,7 @@ const arcGrowRadius = (
 
 const arcGrowAngle = (
   instance: VChart,
-  animation: IChartAppearAction['payload']['animation'],
+  animation: IChartVisibilityAction['payload']['animation'],
   option: {
     disappear: boolean;
     markIndex: number;
@@ -76,7 +76,7 @@ const arcGrowAngle = (
 
 const arcFade = (
   instance: VChart,
-  animation: IChartAppearAction['payload']['animation'],
+  animation: IChartVisibilityAction['payload']['animation'],
   option: {
     disappear: boolean;
     markIndex: number;

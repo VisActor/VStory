@@ -36,6 +36,23 @@ export interface IFadeInParams extends IAnimationParams {
   };
 }
 
+export interface IMoveParams extends IAnimationParams {
+  pos?: 'left' | 'right' | 'top' | 'bottom' | 'top-right' | 'top-left' | 'bottom-left' | 'bottom-right';
+  move?: {
+    /**
+     * @default left
+     */
+    pos?: IMoveParams['pos'];
+    /**
+     * @default true
+     * @description 若为true: 多个图形的move距离不同, duration相同, 使多个图形同时抵达目标位置;  若为false: 多个图形move的距离相同, duration相同, 即可使多个图形达到相同的速度, 以保持图形的相对位置不变.
+     */
+    isVariableSpeed?: boolean;
+    duration?: number;
+    easing?: EasingType;
+  };
+}
+
 export interface IScaleInParams extends IAnimationParams {
   ratio?: number;
   scale?: {

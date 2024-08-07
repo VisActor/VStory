@@ -1,9 +1,9 @@
 import type { IGroup } from '@visactor/vrender-core';
-import type { IChartAppearAction } from '../../interface/appear-action';
+import type { IChartVisibilityAction } from '../../interface/appear-action';
 
 export const commonGrow = (
   instance: IGroup,
-  animation: IChartAppearAction['payload']['animation'],
+  animation: IChartVisibilityAction['payload']['animation'],
   option: { disappear: boolean; orient?: 'width' | 'height' }
 ) => {
   const { duration, easing } = animation;
@@ -34,7 +34,7 @@ export const commonGrow = (
 
 export const commonFade = (
   instance: IGroup,
-  animation: IChartAppearAction['payload']['animation'],
+  animation: IChartVisibilityAction['payload']['animation'],
   option: { disappear: boolean }
 ) => {
   const { duration, easing } = animation;

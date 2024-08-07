@@ -1,5 +1,5 @@
 import { TypeWriter } from '../../../../animate/typewirter';
-import type { IChartAppearAction } from '../../interface/appear-action';
+import type { IChartVisibilityAction } from '../../interface/appear-action';
 import { commonFade, commonGrow } from './commonAppear';
 import { typewriter as textTypeWriter } from '../../../../dsl/story-processor/graphic/effect/typewriter';
 
@@ -8,7 +8,7 @@ import { isArray } from '@visactor/vutils';
 
 export const runTitleAppear = (
   instance: IGroup,
-  animation: IChartAppearAction['payload']['animation'],
+  animation: IChartVisibilityAction['payload']['animation'],
   option: { disappear: boolean }
 ) => {
   switch (animation.effect) {

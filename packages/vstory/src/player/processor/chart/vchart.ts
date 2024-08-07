@@ -4,7 +4,7 @@ import type { ICharacter } from '../../../story/character';
 import type { IAction } from '../../../story/interface';
 import { ActionProcessorItem } from '../processor-item';
 import { transformMap } from './transformMap';
-import type { IChartAppearAction } from '../interface/appear-action';
+import type { IChartVisibilityAction } from '../interface/appear-action';
 import type { AxisBaseAttributes } from '@visactor/vrender-components';
 import type { IGroup } from '@visactor/vrender-core';
 
@@ -16,11 +16,11 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   }
 
   getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
-    const { startTime: globalStartTime = 0, duration: globalDuration } = action;
+    const { startTime: globalStartTime = 0 } = action;
     const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
 
     const st = globalStartTime + startTime;
-    const d = globalDuration ?? duration;
+    const d = duration;
     return {
       startTime: st,
       duration: d
@@ -107,12 +107,12 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     instance: IGroup,
     appearTransformFunc: any,
     actionSpec: IAction,
-    defaultPayload: IAction['payload'] = {},
+    defaultPayload: IAction['payload'] = {} as any,
     actionOption: Record<string, any> = {}
   ) {
     if (appearTransformFunc) {
       const { payload } = actionSpec;
-      const mergePayload = merge({}, defaultPayload, payload) as IChartAppearAction['payload'];
+      const mergePayload = merge({}, defaultPayload, payload) as IChartVisibilityAction['payload'];
       appearTransformFunc(instance, mergePayload.animation, {
         disappear: actionSpec.action === 'disappear',
         ...actionOption
@@ -132,7 +132,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
         {},
         isFunction(defaultMarkPayload) ? defaultMarkPayload(series.type) : defaultMarkPayload || {},
         payload
-      ) as IChartAppearAction['payload'];
+      ) as IChartVisibilityAction['payload'];
       const product = mark.getProduct();
       const appearTransform = (transformMap.appear as any)[mark.type];
       const config =
@@ -158,7 +158,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     };
   };
 
-  static defaultPayload: IChartAppearAction['payload'] = {
+  static defaultPayload: IChartVisibilityAction['payload'] = {
     animation: {
       effect: 'grow',
       duration: 2000,
@@ -168,7 +168,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     }
   };
 
-  static arcPayload: IChartAppearAction['payload'] = {
+  static arcPayload: IChartVisibilityAction['payload'] = {
     animation: {
       effect: 'growAngle',
       duration: 2000,
@@ -178,7 +178,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     }
   };
 
-  static linePayload: IChartAppearAction['payload'] = VChartVisibilityActionProcessor.defaultPayload;
-  static symbolPayload: IChartAppearAction['payload'] = VChartVisibilityActionProcessor.defaultPayload;
-  static textPayload: IChartAppearAction['payload'] = VChartVisibilityActionProcessor.defaultPayload;
+  static linePayload: IChartVisibilityAction['payload'] = VChartVisibilityActionProcessor.defaultPayload;
+  static symbolPayload: IChartVisibilityAction['payload'] = VChartVisibilityActionProcessor.defaultPayload;
+  static textPayload: IChartVisibilityAction['payload'] = VChartVisibilityActionProcessor.defaultPayload;
 }

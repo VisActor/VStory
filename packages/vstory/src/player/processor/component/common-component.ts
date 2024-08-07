@@ -7,6 +7,13 @@ import type { EasingType, IGraphic } from '@visactor/vrender-core';
 import type { IFadeInParams, IScaleInParams, IWipeInParams } from '../interface/appear-action';
 import { canDoGraphicAnimation } from './utils';
 import type { IComponentStyleAction } from '../interface/style-action';
+import {
+  getCharacterByEffect,
+  getCharacterGraphic,
+  getCharacterParentGraphic,
+  moveIn,
+  moveOut
+} from '../common-processor';
 // import { Wipe } from '../../../animate/wipeIn';
 
 // export const appearEffectMap = {
@@ -163,6 +170,8 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
         return appear ? wipeIn : wipeOut;
       case 'fade':
         return appear ? fadeIn : fadeOut;
+      case 'move':
+        return appear ? moveIn : moveOut;
     }
     return fadeIn;
   }
@@ -201,22 +210,4 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
       graphic.animate().to(textStyle, duration, easing as EasingType);
     }
   }
-}
-
-function getCharacterParentGraphic(character: ICharacter) {
-  return character.getGraphicParent();
-}
-
-function getCharacterGraphic(character: ICharacter) {
-  return character.getGraphicParent().getChildren() as IGraphic[];
-}
-
-function getCharacterByEffect(character: ICharacter, effect: 'move' | string) {
-  // 图表仅操作父节点.
-  // @ts-ignore
-  if (character._graphic.type === 'chart') {
-    return [getCharacterParentGraphic(character)];
-  }
-  // move效果, 一定是对parent的操作
-  return effect === 'move' ? [getCharacterParentGraphic(character)] : getCharacterGraphic(character);
 }
