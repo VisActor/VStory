@@ -155,68 +155,85 @@ export const BaseComponent = () => {
             {
               id: 'scene0',
               actions: [
-                ...new Array(3).fill(0).map((_, i) => {
+                ...new Array(6).fill(0).map((_, i) => {
                   return {
-                    characterId: 'rect' + i,
+                    characterId: 'rect' + (i % 3),
                     characterActions: [
                       {
                         startTime: i * 1700,
-                        action: 'appear',
+                        action: i / 3 >= 1 ? 'disappear' : 'appear',
                         payload: {
                           animation: {
                             duration: 1600,
-                            effect: ['fadeIn', 'scaleIn', 'wipeIn'][i]
+                            effect: ['fade', 'scale', 'wipe'][i % 3]
                           }
                         }
                       }
                     ]
                   };
                 }),
-                ...new Array(3).fill(0).map((_, i) => {
+                ...new Array(6).fill(0).map((_, i) => {
                   return {
-                    characterId: 'line' + i,
+                    characterId: 'line' + (i % 3),
                     characterActions: [
                       {
                         startTime: i * 1700,
-                        action: 'appear',
+                        action: i / 3 >= 1 ? 'disappear' : 'appear',
                         payload: {
                           animation: {
                             duration: 1600,
-                            effect: ['fadeIn', 'scaleIn', 'wipeIn'][i]
+                            effect: ['fade', 'scale', 'wipe'][i % 3]
                           }
                         }
                       }
                     ]
                   };
                 }),
-                ...new Array(3).fill(0).map((_, i) => {
+                ...new Array(6).fill(0).map((_, i) => {
                   return {
-                    characterId: 'shape' + i,
+                    characterId: 'shape' + (i % 3),
                     characterActions: [
                       {
                         startTime: i * 1700,
-                        action: 'appear',
+                        action: i / 3 >= 1 ? 'disappear' : 'appear',
                         payload: {
                           animation: {
                             duration: 1600,
-                            effect: ['fadeIn', 'scaleIn', 'wipeIn'][i]
+                            effect: ['fade', 'scale', 'wipe'][i % 3]
                           }
                         }
                       }
                     ]
                   };
                 }),
-                ...new Array(3).fill(0).map((_, i) => {
+                ...new Array(6).fill(0).map((_, i) => {
                   return {
-                    characterId: 'image' + i,
+                    characterId: 'image' + (i % 3),
                     characterActions: [
                       {
                         startTime: i * 1700,
-                        action: 'appear',
+                        action: i / 3 >= 1 ? 'disappear' : 'appear',
                         payload: {
                           animation: {
                             duration: 1600,
-                            effect: ['fadeIn', 'scaleIn', 'wipeIn'][i]
+                            effect: ['fade', 'scale', 'wipe'][i % 3]
+                          }
+                        }
+                      }
+                    ]
+                  };
+                }),
+                ...new Array(8).fill(0).map((_, i) => {
+                  return {
+                    characterId: 'text' + (i % 4),
+                    characterActions: [
+                      {
+                        startTime: i * 1700,
+                        action: i / 4 >= 1 ? 'disappear' : 'appear',
+                        payload: {
+                          animation: {
+                            duration: 1600,
+                            effect: ['fade', 'scale', 'wipe', 'typewriter'][i % 4]
                           }
                         }
                       }
@@ -225,32 +242,15 @@ export const BaseComponent = () => {
                 }),
                 ...new Array(4).fill(0).map((_, i) => {
                   return {
-                    characterId: 'text' + i,
+                    characterId: 'timeline' + (i % 4),
                     characterActions: [
                       {
                         startTime: i * 1700,
-                        action: 'appear',
+                        action: i / 4 >= 1 ? 'disappear' : 'appear',
                         payload: {
                           animation: {
                             duration: 1600,
-                            effect: ['fadeIn', 'scaleIn', 'wipeIn', 'typewriter'][i]
-                          }
-                        }
-                      }
-                    ]
-                  };
-                }),
-                ...new Array(4).fill(0).map((_, i) => {
-                  return {
-                    characterId: 'timeline' + i,
-                    characterActions: [
-                      {
-                        startTime: i * 1700,
-                        action: 'appear',
-                        payload: {
-                          animation: {
-                            duration: 1600,
-                            effect: ['fadeIn', 'scaleIn', 'wipeIn', 'default'][i]
+                            effect: ['fade', 'scale', 'wipe', 'default'][i % 4]
                           }
                         }
                       }

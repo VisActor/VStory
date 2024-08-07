@@ -28,7 +28,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IAction): void {
-    const vchart = character.graphic._vchart as IVChart;
+    const vchart = (character.graphic as any)._vchart as IVChart;
     // series & mark
     const seriesList = vchart.getChart().getAllSeries();
     seriesList.forEach(series => {

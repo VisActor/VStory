@@ -19,17 +19,17 @@ function _defaultAppear(graphic: Timeline, params: any) {
   }
 }
 
-export class TimelineAppearActionProcessor extends CommonAppearActionProcessor {
-  name: 'appear';
+export class TimelineVisibilityActionProcessor extends CommonAppearActionProcessor {
+  name: 'appearOrDisAppear';
   constructor() {
     super();
   }
 
-  getEffectFunc(effect: string = 'default') {
+  getEffectFunc(effect: string = 'default', appear: boolean) {
     switch (effect) {
       case 'default':
         return defaultAppear;
     }
-    return super.getEffectFunc(effect);
+    return super.getEffectFunc(effect, appear);
   }
 }
