@@ -28,9 +28,16 @@ export interface IChartAppearPayLoad extends IActionPayload {
   fade?: { isBaseOpacity?: boolean };
 }
 
+export type IChartDisappearPayLoad = IChartAppearPayLoad;
+
 export interface IChartAppearAction extends IAction {
   action: 'appear';
   payload: IChartAppearPayLoad;
+}
+
+export interface IChartDisAppearAction extends IAction {
+  action: 'disappear';
+  payload: IChartDisappearPayLoad;
 }
 
 // components

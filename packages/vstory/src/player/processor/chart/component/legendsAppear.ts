@@ -1,21 +1,3 @@
-import type { IChartAppearAction } from '../../interface/appear-action';
-import { commonFade, commonGrow } from './commonAppear';
-import type { IGroup } from '@visactor/vrender-core';
+import { runAppearOrDisAppear } from './commonAppear';
 
-export const runLegendsAppear = (
-  instance: IGroup,
-  animation: IChartAppearAction['payload']['animation'],
-  option: { disappear: boolean }
-) => {
-  switch (animation.effect) {
-    case 'grow': {
-      return commonGrow(instance, animation, option);
-    }
-    case 'fade': {
-      return commonFade(instance, animation, option);
-    }
-    default: {
-      return commonFade(instance, animation, option);
-    }
-  }
-};
+export const runLegendsAppear = runAppearOrDisAppear;

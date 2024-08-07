@@ -4,7 +4,7 @@ import type { ICharacter } from '../../../story/character';
 import type { IAction } from '../../../story/interface';
 import { ActionProcessorItem } from '../processor-item';
 import { transformMap } from './transformMap';
-import type { IChartAppearAction } from '../interface/appear-action';
+import type { IChartAppearAction, IChartDisAppearAction } from '../interface/appear-action';
 import type { AxisBaseAttributes } from '@visactor/vrender-components';
 import type { IGroup } from '@visactor/vrender-core';
 
@@ -27,7 +27,14 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     };
   }
 
-  run(character: ICharacter, actionSpec: IAction): void {
+  run(character: ICharacter, actionSpec: IChartAppearAction | IChartDisAppearAction): void {
+    if (actionSpec.payload?.animation?.effect === 'fade') {
+      const appearTransformFunc = (transformMap.appear as any).chart;
+      const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
+      this.runTransformFunc(character.graphic as IGroup, appearTransformFunc, actionSpec, defaultPayload);
+      return;
+    }
+
     const vchart = (character.graphic as any)._vchart as IVChart;
     // series & mark
     const seriesList = vchart.getChart().getAllSeries();
