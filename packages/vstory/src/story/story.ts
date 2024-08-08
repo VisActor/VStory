@@ -9,6 +9,7 @@ import { defaultTicker, defaultTimeline } from '@visactor/vrender';
 import { CharacterTree } from './character-tree/character-tree';
 import type { IPlayer } from '../player/interface/player';
 import { Player } from '../player/player';
+import { logger } from '../util/output';
 
 defaultTicker.remTimeline(defaultTimeline);
 
@@ -22,6 +23,9 @@ export class Story implements IStory {
   protected _canvas: IStoryCanvas;
 
   protected _characterTree: ICharacterTree;
+
+  protected _spec: IStorySpec;
+
   get canvas() {
     return this._canvas;
   }
@@ -35,9 +39,8 @@ export class Story implements IStory {
     this._player = new Player(this, option.playerOption);
 
     this._characterTree = new CharacterTree(this);
-    if (spec) {
-      this.load(spec);
-    }
+    this._spec = spec;
+    this._spec && this.load(this._spec);
   }
 
   load(spec: IStorySpec) {
@@ -57,9 +60,15 @@ export class Story implements IStory {
   //   this._player.addAct(spec, this._characters);
   // }
 
-  play(actIndexOrId: string | number = 0) {
+  play(loop: boolean = true) {
     // player 开始播放
+    this._spec && this.load(this._spec);
     this._player.play();
+    if (loop) {
+      this._player.once('onstop', () => {
+        this.play(loop);
+      });
+    }
   }
 
   pause() {

@@ -102,12 +102,17 @@ export class ActionProcessor implements IActionProcessor {
   doAction(name: string, actionName: string, character: ICharacter, actionSpec: IAction): void {
     const processor = this.getProcessor(name, actionName);
     if (processor) {
-      // eslint-disable-next-line no-console
-      logger('info', `Execute action => ${actionName}, character => ${name}`); // TODO: remove log
-      const actionResult = processor.run(character, actionSpec);
-      // eslint-disable-next-line no-console
-      logger('info', `Action Executed:`, actionResult); // TODO: remove log
-      return actionResult;
+      try {
+        // eslint-disable-next-line no-console
+        logger('info', `Execute action => ${actionName}, character => ${name}`); // TODO: remove log
+        const actionResult = processor.run(character, actionSpec);
+        // eslint-disable-next-line no-console
+        logger('info', `Action Executed:`, actionResult); // TODO: remove log
+        return actionResult;
+      } catch (err) {
+        logger('error', `Action Executed Error: ${err}`);
+        return null;
+      }
     }
     // eslint-disable-next-line no-console
     logger('error', `Action not found: character => ${name}, action => ${actionName} `); // TODO: remove log

@@ -48,6 +48,11 @@ export class Scheduler implements IScheduler {
     this._runnedAct = new Set();
   }
 
+  init(acts: IActSpec[]) {
+    this.clearState();
+    this.initActs(acts);
+  }
+
   clearState(): void {
     this._runnedAct.clear();
   }
@@ -112,7 +117,7 @@ export class Scheduler implements IScheduler {
     return actions;
   }
 
-  initActs(acts: IActSpec[]) {
+  protected initActs(acts: IActSpec[]) {
     // act与act之间是串联的
     let startTime = 0;
     this._actsInfo = acts.map(act => {

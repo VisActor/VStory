@@ -8,9 +8,10 @@ export const commonFade = (
 ) => {
   const { duration, easing } = animation;
   const { disappear } = option;
+  const currOpacity = instance.attribute.baseOpacity;
   const opacityMap = disappear ? { from: 1, to: 0 } : { from: 0, to: 1 };
 
-  instance.setAttributes({ baseOpacity: opacityMap.from });
+  instance.setAttributes({ baseOpacity: currOpacity ?? opacityMap.from });
   instance.animate().to({ baseOpacity: opacityMap.to }, duration, easing);
 };
 export const commonGrow = (

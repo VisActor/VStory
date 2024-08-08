@@ -30,13 +30,13 @@ export const VChartSiteDemo = () => {
         // ...scene5Characters,
         // ...scene6Characters,
         // ...scene7Characters,
-        // ...scene8Characters,
-        // ...scene9Characters,
+        // ...scene8Characters
+        // ...scene9Characters
         // ...scene10Characters,
         // ...scene11Characters,
-        // ...scene12Characters,
-        ...scene12_2_Characters
-        // ...scene13Characters
+        // ...scene12Characters
+        // ...scene12_2_Characters
+        ...scene13Characters
       ],
       acts: [
         {
@@ -49,13 +49,13 @@ export const VChartSiteDemo = () => {
             // scene5,
             // scene6,
             // scene7,
-            // scene8,
-            // scene9,
+            // scene8
+            // scene9
             // scene10,
             // scene11,
-            // scene12,
-            scene12_2
-            // scene13
+            // scene12
+            // scene12_2
+            scene13
           ]
         }
       ]

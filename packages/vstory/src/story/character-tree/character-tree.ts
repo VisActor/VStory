@@ -34,6 +34,8 @@ export class CharacterTree implements ICharacterTree {
   }
 
   initCharacters(specs: ICharacterSpec[]): void {
+    this.releaseOldCharacters();
+    this._characters = {};
     const option = {
       story: this._story,
       canvas: this._story.canvas,
@@ -47,6 +49,13 @@ export class CharacterTree implements ICharacterTree {
         }
         // return this._characters[(<ICharacterSpec>spec).id];
       }
+    });
+  }
+
+  releaseOldCharacters() {
+    Object.keys(this._characters).forEach(k => {
+      const c = this._characters[k];
+      c.release();
     });
   }
 }

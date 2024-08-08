@@ -48,7 +48,7 @@ export const scene13: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
+          startTime: 0,
           duration: 1000,
           payload: {
             animation: {
@@ -65,11 +65,12 @@ export const scene13: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
+          startTime: 0,
           duration: 1000,
           payload: {
             animation: {
-              duration: 1000,
+              duration: 2000,
+              effect: 'scale',
               easing: easeInOutQuad,
               fade: { opacity: 1 }
             }
