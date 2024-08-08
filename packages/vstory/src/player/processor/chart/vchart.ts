@@ -72,7 +72,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   protected legendsComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
     const vrenderComponents = component.getVRenderComponents();
     const appearTransformFunc = (transformMap.appear as any).legends;
-    const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
+    const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     vrenderComponents.forEach(group => {
       this.runTransformFunc(group as any, appearTransformFunc, actionSpec, defaultPayload);
     });
@@ -104,7 +104,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   protected titleComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
     const vrenderComponents = component.getVRenderComponents();
     const appearTransformFunc = (transformMap.appear as any).title;
-    const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
+    const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     vrenderComponents.forEach(group => {
       this.runTransformFunc(group as any, appearTransformFunc, actionSpec, defaultPayload);
     });
@@ -117,7 +117,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     defaultPayload: IAction['payload'] = {},
     actionOption: Record<string, any> = {}
   ) {
-    if (appearTransformFunc) {
+    if (instance && appearTransformFunc) {
       const { payload } = actionSpec;
       const mergePayload = merge({}, defaultPayload, payload) as IChartAppearAction['payload'];
       appearTransformFunc(instance, mergePayload.animation, {
@@ -168,6 +168,16 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   static defaultPayload: IChartAppearAction['payload'] = {
     animation: {
       effect: 'grow',
+      duration: 2000,
+      easing: 'cubicOut',
+      oneByOne: false,
+      loop: false
+    }
+  };
+
+  static fadePayload: IChartAppearAction['payload'] = {
+    animation: {
+      effect: 'fade',
       duration: 2000,
       easing: 'cubicOut',
       oneByOne: false,
