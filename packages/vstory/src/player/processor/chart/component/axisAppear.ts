@@ -11,7 +11,6 @@ export const runAxisAppear = (
 ) => {
   switch (animation.effect) {
     case 'grow': {
-      // return commonGrow(instance, animation, option);
       return axisGrow(instance, animation, option);
     }
     case 'fade': {

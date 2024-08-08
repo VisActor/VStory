@@ -15,7 +15,7 @@ export interface IChartVisibilityPayload extends IActionPayload {
 }
 
 export interface IChartVisibilityAction extends IAction<IChartVisibilityPayload> {
-  action: 'appear' | 'disappear';
+  action: 'appear';
 }
 
 // components

@@ -1,5 +1,6 @@
 import { runChartAppear } from './common/chartAppear';
 import { runAxisAppear } from './component/axisAppear';
+import { runAppearOrDisAppear } from './component/commonAppear';
 import { runLabelAppear } from './component/labelAppear';
 import { runLegendsAppear } from './component/legendsAppear';
 import { runTitleAppear } from './component/titleAppear';
@@ -22,7 +23,7 @@ export const transformMap = {
     label: runLabelAppear,
     axis: runAxisAppear,
     title: runTitleAppear,
-    // chart
-    chart: runChartAppear
+    // chart:
+    chart: runAppearOrDisAppear
   }
 };

@@ -50,10 +50,9 @@ const labelFade = (
   const { duration, easing } = animation;
   const { disappear } = option;
   const opacityMap = disappear ? { from: 1, to: 0 } : { from: 0, to: 1 };
-
   instance.getElementsByType('text').forEach((text: IGraphic) => {
     text.setAttributes({ opacity: opacityMap.from });
-    text.animate().to({ opacity: 1 }, duration, easing);
+    text.animate().to({ opacity: opacityMap.to }, duration, easing);
   });
 
   instance.getElementsByType('richtext').forEach((text: IGraphic) => {

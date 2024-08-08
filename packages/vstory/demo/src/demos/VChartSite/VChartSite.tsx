@@ -35,7 +35,7 @@ export const VChartSiteDemo = () => {
         // ...scene10Characters,
         // ...scene11Characters,
         // ...scene12Characters,
-        // ...scene12_2_Characters,
+        ...scene12_2_Characters
         // ...scene13Characters
       ],
       acts: [
@@ -54,7 +54,7 @@ export const VChartSiteDemo = () => {
             // scene10,
             // scene11,
             // scene12,
-            // scene12_2,
+            scene12_2
             // scene13
           ]
         }
