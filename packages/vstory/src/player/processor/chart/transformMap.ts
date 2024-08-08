@@ -24,6 +24,6 @@ export const transformMap = {
     axis: runAxisAppear,
     title: runTitleAppear,
     // chart:
-    chart: runAppearOrDisAppear
+    chart: runChartAppear
   }
 };
