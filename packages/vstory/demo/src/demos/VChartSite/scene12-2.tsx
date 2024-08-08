@@ -518,7 +518,8 @@ export const scene12_2: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -535,7 +536,8 @@ export const scene12_2: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -552,7 +554,8 @@ export const scene12_2: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -569,7 +572,8 @@ export const scene12_2: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
