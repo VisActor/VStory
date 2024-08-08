@@ -40,7 +40,24 @@ export const commonFade = (
   const { duration, easing } = animation;
   const { disappear } = option;
   const opacityMap = disappear ? { from: 1, to: 0 } : { from: 0, to: 1 };
-
   instance.setAttributes({ baseOpacity: opacityMap.from });
   instance.animate().to({ baseOpacity: opacityMap.to }, duration, easing);
+};
+
+export const runAppearOrDisAppear = (
+  instance: IGroup,
+  animation: IChartAppearAction['payload']['animation'],
+  option: { disappear: boolean }
+) => {
+  switch (animation.effect) {
+    case 'grow': {
+      return commonGrow(instance, animation, option);
+    }
+    case 'fade': {
+      return commonFade(instance, animation, option);
+    }
+    default: {
+      return commonFade(instance, animation, option);
+    }
+  }
 };

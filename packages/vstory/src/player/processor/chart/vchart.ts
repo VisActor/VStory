@@ -4,7 +4,7 @@ import type { ICharacter } from '../../../story/character';
 import type { IAction } from '../../../story/interface';
 import { ActionProcessorItem } from '../processor-item';
 import { transformMap } from './transformMap';
-import type { IChartAppearAction } from '../interface/appear-action';
+import type { IChartAppearAction, IChartDisAppearAction } from '../interface/appear-action';
 import type { AxisBaseAttributes } from '@visactor/vrender-components';
 import type { IGroup } from '@visactor/vrender-core';
 
@@ -27,7 +27,14 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     };
   }
 
-  run(character: ICharacter, actionSpec: IAction): void {
+  run(character: ICharacter, actionSpec: IChartAppearAction | IChartDisAppearAction): void {
+    if (actionSpec.payload?.animation?.effect === 'fade') {
+      const appearTransformFunc = (transformMap.appear as any).chart;
+      const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
+      this.runTransformFunc(character.graphic as IGroup, appearTransformFunc, actionSpec, defaultPayload);
+      return;
+    }
+
     const vchart = (character.graphic as any)._vchart as IVChart;
     // series & mark
     const seriesList = vchart.getChart().getAllSeries();
@@ -65,7 +72,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   protected legendsComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
     const vrenderComponents = component.getVRenderComponents();
     const appearTransformFunc = (transformMap.appear as any).legends;
-    const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
+    const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     vrenderComponents.forEach(group => {
       this.runTransformFunc(group as any, appearTransformFunc, actionSpec, defaultPayload);
     });
@@ -97,7 +104,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   protected titleComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
     const vrenderComponents = component.getVRenderComponents();
     const appearTransformFunc = (transformMap.appear as any).title;
-    const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
+    const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     vrenderComponents.forEach(group => {
       this.runTransformFunc(group as any, appearTransformFunc, actionSpec, defaultPayload);
     });
@@ -110,7 +117,7 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     defaultPayload: IAction['payload'] = {},
     actionOption: Record<string, any> = {}
   ) {
-    if (appearTransformFunc) {
+    if (instance && appearTransformFunc) {
       const { payload } = actionSpec;
       const mergePayload = merge({}, defaultPayload, payload) as IChartAppearAction['payload'];
       appearTransformFunc(instance, mergePayload.animation, {
@@ -161,6 +168,16 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   static defaultPayload: IChartAppearAction['payload'] = {
     animation: {
       effect: 'grow',
+      duration: 2000,
+      easing: 'cubicOut',
+      oneByOne: false,
+      loop: false
+    }
+  };
+
+  static fadePayload: IChartAppearAction['payload'] = {
+    animation: {
+      effect: 'fade',
       duration: 2000,
       easing: 'cubicOut',
       oneByOne: false,

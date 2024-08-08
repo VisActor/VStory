@@ -23,7 +23,8 @@ export const transformRectAppear = (
         center: true
       });
     }
-    case 'fade': {
+    case 'fade':
+    default: {
       return commonFade(instance, animation, {
         ...option
       });
