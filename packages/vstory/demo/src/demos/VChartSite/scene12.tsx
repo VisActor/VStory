@@ -526,7 +526,7 @@ export const scene12Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TreeMapChart',
+    type: 'VChart',
     id: `scene12-treemap-chart`,
     zIndex: 1,
     position: {

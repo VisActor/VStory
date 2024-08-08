@@ -1,5 +1,6 @@
 import type { IChartVisibilityAction } from '../../interface/appear-action';
-import { commonFade, commonGrow } from './commonAppear';
+import { commonFade } from '../common/commonAppear';
+import { commonGrow } from './commonAppear';
 import type { IGroup } from '@visactor/vrender-core';
 
 export const runLegendsAppear = (

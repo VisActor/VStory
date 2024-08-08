@@ -31,16 +31,3 @@ export const commonGrow = (
     instance.animate().to({ height: opacityMap.to }, duration, easing);
   }
 };
-
-export const commonFade = (
-  instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
-  option: { disappear: boolean }
-) => {
-  const { duration, easing } = animation;
-  const { disappear } = option;
-  const opacityMap = disappear ? { from: 1, to: 0 } : { from: 0, to: 1 };
-
-  instance.setAttributes({ baseOpacity: opacityMap.from });
-  instance.animate().to({ baseOpacity: opacityMap.to }, duration, easing);
-};

@@ -1,13 +1,9 @@
-import { TypeWriter } from '../../../../animate/typewirter';
 import type { IChartVisibilityAction } from '../../interface/appear-action';
-import { commonGrow } from './commonAppear';
-import { typewriter as textTypeWriter } from '../../../../dsl/story-processor/graphic/effect/typewriter';
+import type { IGroup, ILine, IText } from '@visactor/vrender-core';
+import { commonFade, commonGrow } from './commonAppear';
 
-import type { IGroup, IText } from '@visactor/vrender-core';
-import { isArray } from '@visactor/vutils';
-import { commonFade } from '../common/commonAppear';
-
-export const runTitleAppear = (
+// TODO: 区分直角坐标系和极坐标系
+export const runChartAppear = (
   instance: IGroup,
   animation: IChartVisibilityAction['payload']['animation'],
   option: { disappear: boolean }
@@ -19,7 +15,6 @@ export const runTitleAppear = (
     case 'fade': {
       return commonFade(instance, animation, option);
     }
-
     default: {
       return commonFade(instance, animation, option);
     }

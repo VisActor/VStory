@@ -289,7 +289,7 @@ export const scene11Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'WordCloudChart',
+    type: 'VChart',
     id: `scene11-wordcloud-chart`,
     zIndex: 0,
     position: {

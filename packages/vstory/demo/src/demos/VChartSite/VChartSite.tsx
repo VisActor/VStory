@@ -30,7 +30,7 @@ export const VChartSiteDemo = () => {
         // ...scene5Characters,
         // ...scene6Characters,
         // ...scene7Characters,
-        ...scene8Characters
+        // ...scene8Characters,
         // ...scene9Characters,
         // ...scene10Characters,
         // ...scene11Characters,
@@ -49,7 +49,7 @@ export const VChartSiteDemo = () => {
             // scene5,
             // scene6,
             // scene7,
-            scene8
+            // scene8,
             // scene9,
             // scene10,
             // scene11,

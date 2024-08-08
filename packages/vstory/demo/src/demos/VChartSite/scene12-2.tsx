@@ -487,7 +487,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'SunburstChart',
+    type: 'VChart',
     id: `scene12_2-sunburst-chart`,
     zIndex: 1,
     position: {

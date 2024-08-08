@@ -6,7 +6,7 @@ import { ActionProcessorItem } from '../processor-item';
 import { transformMap } from './transformMap';
 import type { IChartVisibilityAction } from '../interface/appear-action';
 import type { AxisBaseAttributes } from '@visactor/vrender-components';
-import type { IGroup } from '@visactor/vrender-core';
+import type { IGraphic, IGroup } from '@visactor/vrender-core';
 
 export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   name: 'appearOrDisAppear';
@@ -29,6 +29,8 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
 
   run(character: ICharacter, actionSpec: IAction): void {
     const vchart = (character.graphic as any)._vchart as IVChart;
+    // chart & panel
+    this.chartVisibility(character.graphic as any, actionSpec);
     // series & mark
     const seriesList = vchart.getChart().getAllSeries();
     seriesList.forEach(series => {
@@ -39,6 +41,12 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     components.forEach(component => {
       this.componentAppear(vchart, component, actionSpec);
     });
+  }
+
+  protected chartVisibility(chartGraphic: IGraphic, actionSpec: IAction) {
+    const appearTransformFunc = (transformMap.appear as any).chart;
+    const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
+    this.runTransformFunc(chartGraphic as any, appearTransformFunc, actionSpec, defaultPayload);
   }
 
   protected componentAppear(vchart: IVChart, component: IComponent, actionSpec: IAction) {
