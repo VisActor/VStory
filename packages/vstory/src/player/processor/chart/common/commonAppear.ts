@@ -9,9 +9,9 @@ export const commonFade = (
   const { duration, easing } = animation;
   const { disappear } = option;
   const currOpacity = instance.attribute.baseOpacity;
-  const opacityMap = disappear ? { from: 1, to: 0 } : { from: 0, to: 1 };
+  const opacityMap = disappear ? { from: currOpacity ?? 1, to: 0 } : { from: 0, to: currOpacity ?? 1 };
 
-  instance.setAttributes({ baseOpacity: currOpacity ?? opacityMap.from });
+  instance.setAttributes({ baseOpacity: opacityMap.from });
   instance.animate().to({ baseOpacity: opacityMap.to }, duration, easing);
 };
 export const commonGrow = (
@@ -21,8 +21,12 @@ export const commonGrow = (
 ) => {
   const { duration, easing } = animation;
   const { disappear } = option;
-  const opacityMap = disappear ? { from: 1, to: 0 } : { from: 0, to: 1 };
+  const currScaleX = instance.attribute.scaleX;
+  const currScaleY = instance.attribute.scaleY;
+  const opacityMap = disappear
+    ? { fromX: currScaleX ?? 1, fromY: currScaleY ?? 1, toX: 0, toY: 0 }
+    : { fromX: 0, fromY: 0, toX: currScaleX ?? 1, toY: currScaleY ?? 1 };
 
-  instance.setAttributes({ scaleX: opacityMap.from, scaleY: opacityMap.from });
-  instance.animate().to({ scaleX: opacityMap.to, scaleY: opacityMap.to }, duration, easing);
+  instance.setAttributes({ scaleX: opacityMap.fromX, scaleY: opacityMap.fromY });
+  instance.animate().to({ scaleX: opacityMap.toX, scaleY: opacityMap.toY }, duration, easing);
 };

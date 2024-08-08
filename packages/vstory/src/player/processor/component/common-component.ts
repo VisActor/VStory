@@ -40,19 +40,15 @@ function _fade(graphic: IGraphic, params: IFadeInParams, appear: boolean): boole
   const opacity = fade.opacity ?? params.opacity ?? 1;
   const duration = fade.duration ?? params.duration;
   const easing = fade.easing ?? params.easing;
+  const currOpacity = (graphic.attribute as any).baseOpacity;
 
-  // TODO VRender处理opacity为0
-  let from = 0.001;
-  let to = opacity;
-  if (!appear) {
-    [from, to] = [to, from];
-  }
+  const opacityMap = appear ? { from: 0, to: currOpacity ?? 1 } : { from: currOpacity ?? 1, to: 0 };
 
   graphic.setAttributes({
-    baseOpacity: from
+    baseOpacity: opacityMap.from
   } as any);
 
-  graphic.animate().to({ baseOpacity: to }, duration, easing as EasingType);
+  graphic.animate().to({ baseOpacity: opacityMap.to }, duration, easing as EasingType);
 
   return true;
 }
@@ -75,17 +71,14 @@ function _scale(graphic: IGraphic, params: IScaleInParams, appear: boolean): boo
   const duration = scale.duration ?? params.duration;
   const easing = scale.easing ?? params.easing;
 
-  let from = 0;
-  let to = ratio;
-  if (!appear) {
-    [from, to] = [to, from];
-  }
+  const currScaleX = graphic.attribute.scaleX;
+  const currScaleY = graphic.attribute.scaleY;
+  const opacityMap = appear
+    ? { fromX: 0, fromY: 0, toX: currScaleX ?? ratio, toY: currScaleY ?? ratio }
+    : { fromX: currScaleX ?? ratio, fromY: currScaleY ?? ratio, toX: 0, toY: 0 };
 
-  graphic.setAttributes({
-    scaleX: from,
-    scaleY: from
-  });
-  graphic.animate().to({ scaleX: to, scaleY: to }, duration, easing as EasingType);
+  graphic.setAttributes({ scaleX: opacityMap.fromX, scaleY: opacityMap.fromY });
+  graphic.animate().to({ scaleX: opacityMap.toX, scaleY: opacityMap.toY }, duration, easing);
 
   return true;
 }
