@@ -12,21 +12,27 @@ import { EventEmitter } from '@visactor/vutils';
 export class Ticker {
   cb?: (delta: number) => void;
   rafIdx = 0;
+  running: boolean;
   start(cb: (t: number) => void) {
     this.stop();
     this.cb = cb;
+    this.running = true;
     this._tick(0);
   }
 
   _tick = (lt: number) => {
+    if (!this.running) {
+      return;
+    }
     const ct = Date.now();
-    this.cb && this.cb(lt === 0 ? 0 : ct - lt);
     this.rafIdx = requestAnimationFrame(() => this._tick(ct));
+    this.cb && this.cb(lt === 0 ? 0 : ct - lt);
   };
 
   stop() {
     this.rafIdx && cancelAnimationFrame(this.rafIdx);
     this.rafIdx = 0;
+    this.running = false;
   }
 }
 

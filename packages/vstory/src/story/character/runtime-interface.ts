@@ -26,6 +26,7 @@ export interface ICharacter {
   updateSpec: (spec: Omit<Partial<ICharacterSpec>, 'id' | 'type'>) => void;
 
   setAttributes: (attr: Record<string, any>) => void;
+  release: () => void;
 }
 
 export interface ICharacterInitOption {

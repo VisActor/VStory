@@ -110,4 +110,8 @@ export class CharacterChart extends CharacterVisactor {
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {
     return false;
   }
+
+  release(): void {
+    this.option.graphicParent.removeChild(this._graphic as any);
+  }
 }

@@ -100,6 +100,10 @@ export abstract class CharacterComponent extends CharacterBase {
       graphicType: this.graphicType
     };
   }
+
+  release() {
+    this.option.graphicParent.removeChild(this._group);
+  }
 }
 
 // export abstract class CharacterGraphicComponent extends CharacterBase {
