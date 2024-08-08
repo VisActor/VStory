@@ -128,7 +128,7 @@ export const BarLineSeries = () => {
                         style: {},
                         animation: {
                           // effect: 'fade',
-                          duration: 10000,
+                          duration: 1000,
                           easing: 'linear'
                         } as any
                       }

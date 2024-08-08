@@ -7,6 +7,7 @@ import { ActionProcessor } from './processor/processor';
 import { processorMap } from './processor/processorMap';
 import type { IScheduler } from './interface/scheduler';
 import { Scheduler } from './scheduler';
+import { EventEmitter } from '@visactor/vutils';
 
 export class Ticker {
   cb?: (delta: number) => void;
@@ -29,7 +30,7 @@ export class Ticker {
   }
 }
 
-export class Player implements IPlayer {
+export class Player extends EventEmitter implements IPlayer {
   protected _story: IStory;
   protected _ticker: Ticker;
   protected _currTime: number;
@@ -38,6 +39,7 @@ export class Player implements IPlayer {
   protected _scheduler: IScheduler;
 
   constructor(story: IStory, options?: { scaleX?: number; scaleY?: number }) {
+    super();
     this._story = story;
     this._ticker = new Ticker();
     this._currTime = 0;
@@ -51,32 +53,25 @@ export class Player implements IPlayer {
   }
 
   initActs(acts: IActSpec[]) {
-    this._scheduler.initActs(acts);
+    this._scheduler.init(acts);
   }
 
   // 清除当前状态，一般用于回放操作
   reset() {
     this._scheduler.clearState();
     this._story.canvas.getStage().getTimeline().clear();
+    this._currTime = 0;
     return;
   }
 
   tickTo(t: number) {
     // console.log(t);
     const lastTime = this._currTime;
-    const totalTime = this._scheduler.getTotalTime();
-    while (t > totalTime) {
-      t -= totalTime;
-    }
+    // 如果时间倒退，那就重置，从头开始（需要上层场景树也重置）
     if (lastTime > t) {
-      // 先结束这一块内容，设置到totalTime，让动画结束
-      if (lastTime < totalTime) {
-        t = totalTime + 0.01;
-      } else {
-        this.reset();
-        this._currTime = 0;
-        this.tickTo(0);
-      }
+      this.reset();
+      // this._currTime = 0;
+      // this.tickTo(0);
     }
 
     const actions = this._scheduler.getActionsInRange(lastTime, t);
@@ -103,7 +98,17 @@ export class Player implements IPlayer {
     this._currTime = 0;
     this.reset();
     this._ticker.start(t => {
-      this.tickTo(this._currTime + t);
+      let nextT = this._currTime + t;
+      const totalTime = this._scheduler.getTotalTime();
+      // 时间超过总时长之后，停止ticker执行
+      if (nextT >= totalTime) {
+        nextT = totalTime;
+        this.tickTo(nextT);
+        this._ticker.stop();
+        this.emit('onstop');
+      } else {
+        this.tickTo(nextT);
+      }
     });
   }
 

@@ -34,6 +34,7 @@ export class CharacterTree implements ICharacterTree {
   }
 
   initCharacters(specs: ICharacterSpec[]): void {
+    this._characters = {};
     const option = {
       story: this._story,
       canvas: this._story.canvas,
