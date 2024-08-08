@@ -1,12 +1,11 @@
-import type { Action } from '../../dsl/types';
+import type {
+  IChartVisibilityAction,
+  IComponentVisibilityAction
+} from '../../player/processor/interface/appear-action';
+import type { IComponentStyleAction } from '../../player/processor/interface/style-action';
 import type { ICharacterSpec } from '../character';
 
-export interface IAction {
-  startTime?: number;
-  action: string;
-  duration?: number;
-  payload?: Action['payload'];
-}
+export type IAction = IComponentStyleAction | IComponentVisibilityAction | IChartVisibilityAction;
 
 export interface IStorySpec {
   acts: IActSpec[]; // 作品的章节

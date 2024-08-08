@@ -1,5 +1,5 @@
 import type { EasingType, IGraphic, IText } from '@visactor/vrender-core';
-import { CommonAppearActionProcessor } from '../common-component';
+import { CommonVisibilityActionProcessor } from '../common-component';
 import { isString } from '@visactor/vutils';
 import { TypeWriter } from '../../../../animate/typewirter';
 import type { ICharacter } from '../../../../story/character';
@@ -19,7 +19,7 @@ function _defaultAppear(graphic: Timeline, params: any) {
   }
 }
 
-export class TimelineVisibilityActionProcessor extends CommonAppearActionProcessor {
+export class TimelineVisibilityActionProcessor extends CommonVisibilityActionProcessor {
   name: 'appearOrDisAppear';
   constructor() {
     super();

@@ -239,7 +239,7 @@ export const scene8Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ScatterChart',
+    type: 'VChart',
     id: `scene8-chart`,
     zIndex: 0,
     position: {
@@ -358,8 +358,9 @@ export const scene8: ISceneSpec = {
             animation: {
               duration: 1500,
               easing: easeInOutElastic,
+              effect: 'move',
               move: {
-                from: 'bottom-left'
+                pos: 'bottom-left'
               }
             }
           }
@@ -377,7 +378,8 @@ export const scene8: ISceneSpec = {
             animation: {
               duration: 1500,
               easing: easeInOutElastic,
-              move: { from: 'top-right' }
+              effect: 'move',
+              move: { pos: 'top-right' }
             }
           }
         }
@@ -394,7 +396,8 @@ export const scene8: ISceneSpec = {
             animation: {
               duration: 1500,
               easing: easeInOutElastic,
-              move: { from: 'bottom-right' }
+              effect: 'move',
+              move: { pos: 'bottom-right' }
             }
           }
         }

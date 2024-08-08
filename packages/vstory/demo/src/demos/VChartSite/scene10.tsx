@@ -193,7 +193,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RadarChart',
+    type: 'VChart',
     id: `scene10-radar-chart`,
     zIndex: 3,
     position: {
@@ -243,6 +243,7 @@ export const scene10: ISceneSpec = {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
+              effect: 'move',
               move: {
                 from: 'right'
               }
@@ -396,6 +397,7 @@ scene10.actions.forEach(({ characterId, characterActions }) => {
         animation: {
           duration: 500,
           easing: easeInOutQuad,
+          effect: 'move',
           move: {
             to: 'bottom'
           },

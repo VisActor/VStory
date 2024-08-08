@@ -60,6 +60,7 @@ export class ActionProcessor implements IActionProcessor {
 
     if (!processor) {
       logger('error', `获取processor失败，请检查 ${character.spec.type} 是否支持 ${action.action}`);
+      return null;
     }
     return processor.getStartTimeAndDuration(action);
 

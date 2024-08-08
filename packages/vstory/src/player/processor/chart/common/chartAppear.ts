@@ -1,15 +1,16 @@
-import type VChart from '@visactor/vchart';
 import type { IChartVisibilityAction } from '../../interface/appear-action';
-import { commonFade, commonGrow } from './commonTransformMarkAppear';
+import type { IGroup, ILine, IText } from '@visactor/vrender-core';
+import { commonFade, commonGrow } from './commonAppear';
 
-export const transformSymbolAppear = (
-  instance: VChart,
+// TODO: 区分直角坐标系和极坐标系
+export const runChartAppear = (
+  instance: IGroup,
   animation: IChartVisibilityAction['payload']['animation'],
-  option: { markIndex: number; disappear: boolean }
+  option: { disappear: boolean }
 ) => {
   switch (animation.effect) {
     case 'grow': {
-      return commonGrow(instance, animation, ['scaleIn', 'scaleOut'], option);
+      return commonGrow(instance, animation, option);
     }
     case 'fade': {
       return commonFade(instance, animation, option);

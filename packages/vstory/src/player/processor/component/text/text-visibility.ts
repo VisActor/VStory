@@ -1,5 +1,5 @@
 import type { EasingType, IGraphic, IText } from '@visactor/vrender-core';
-import { CommonAppearActionProcessor } from '../common-component';
+import { CommonVisibilityActionProcessor } from '../common-component';
 import { isString } from '@visactor/vutils';
 import { TypeWriter } from '../../../../animate/typewirter';
 import type { ICharacter } from '../../../../story/character';
@@ -30,7 +30,7 @@ function _typewriter(graphic: IText, params: any, appear: boolean) {
   }
 }
 
-export class TextVisibilityActionProcessor extends CommonAppearActionProcessor {
+export class TextVisibilityActionProcessor extends CommonVisibilityActionProcessor {
   name: 'appearOrDisAppear';
   constructor() {
     super();

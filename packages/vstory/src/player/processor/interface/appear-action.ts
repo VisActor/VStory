@@ -1,21 +1,7 @@
-import type { EasingType } from '@visactor/vrender';
+import type { EasingType } from '@visactor/vrender-core';
+import type { IAction, IActionPayload, IAnimationParams } from './common-action';
 
-export interface IAction {
-  action: string;
-  payload: Record<string, any>;
-}
-
-export interface IAnimationParams {
-  duration: number;
-  easing?: EasingType;
-  loop?: number | boolean;
-}
-
-export interface IActionPayload {
-  animation?: IAnimationParams;
-}
-
-export interface IChartAppearPayLoad extends IActionPayload {
+export interface IChartVisibilityPayload extends IActionPayload {
   animation: IAnimationParams & {
     oneByOne: boolean;
     /**
@@ -28,16 +14,8 @@ export interface IChartAppearPayLoad extends IActionPayload {
   fade?: { isBaseOpacity?: boolean };
 }
 
-export type IChartDisappearPayLoad = IChartAppearPayLoad;
-
-export interface IChartAppearAction extends IAction {
+export interface IChartVisibilityAction extends IAction<IChartVisibilityPayload> {
   action: 'appear';
-  payload: IChartAppearPayLoad;
-}
-
-export interface IChartDisAppearAction extends IAction {
-  action: 'disappear';
-  payload: IChartDisappearPayLoad;
 }
 
 // components
@@ -55,6 +33,23 @@ export interface IFadeInParams extends IAnimationParams {
      * @default false
      */
     isBaseOpacity?: string;
+  };
+}
+
+export interface IMoveParams extends IAnimationParams {
+  pos?: 'left' | 'right' | 'top' | 'bottom' | 'top-right' | 'top-left' | 'bottom-left' | 'bottom-right';
+  move?: {
+    /**
+     * @default left
+     */
+    pos?: IMoveParams['pos'];
+    /**
+     * @default true
+     * @description 若为true: 多个图形的move距离不同, duration相同, 使多个图形同时抵达目标位置;  若为false: 多个图形move的距离相同, duration相同, 即可使多个图形达到相同的速度, 以保持图形的相对位置不变.
+     */
+    isVariableSpeed?: boolean;
+    duration?: number;
+    easing?: EasingType;
   };
 }
 
@@ -87,4 +82,8 @@ export interface IComponentAppearPayLoad extends IActionPayload {
   animation: IFadeInParams | IScaleInParams | IWipeInParams;
 }
 
-export type AppearOption = Omit<IChartAppearAction, 'action' | 'data'>;
+export interface IComponentVisibilityAction extends IAction<IComponentAppearPayLoad> {
+  action: 'appear' | 'disappear';
+}
+
+export type AppearOption = Omit<IChartVisibilityAction, 'action' | 'data'>;

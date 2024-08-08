@@ -1,3 +1,4 @@
+import { runChartAppear } from './common/chartAppear';
 import { runAxisAppear } from './component/axisAppear';
 import { runAppearOrDisAppear } from './component/commonAppear';
 import { runLabelAppear } from './component/labelAppear';
