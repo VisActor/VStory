@@ -6,7 +6,8 @@ const chartSpecList = [
   {
     title: 'Timeline Chart',
     characterType: 'RangeColumnChart',
-    options: {
+    spec: {
+      type: 'rangeColumn',
       title: {
         text: 'Timeline Chart',
         orient: 'bottom',
@@ -16,6 +17,37 @@ const chartSpecList = [
           lineHeight: 10
         }
       },
+      direction: 'horizontal',
+      minField: 'value',
+      maxField: 'value2',
+      yField: 'type',
+      bar: {
+        maxWidth: 2,
+        style: {
+          maxWidth: 2
+        }
+      },
+      label: {
+        style: {
+          visible: false
+        }
+      },
+      axes: [
+        {
+          orient: 'bottom',
+          domainLine: { visible: true },
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
+        },
+        {
+          orient: 'left',
+          domainLine: { visible: false },
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
+        }
+      ],
       padding: 12,
       data: [
         {
@@ -27,57 +59,15 @@ const chartSpecList = [
             { type: 'd', value: 0.6, value2: 0.2 }
           ]
         }
-      ],
-      direction: 'horizontal',
-      seriesSpec: [
-        {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            minField: 'value',
-            maxField: 'value2',
-            yField: 'type',
-            bar: {
-              maxWidth: 2,
-              style: {
-                maxWidth: 2
-              }
-            },
-            label: {
-              style: {
-                visible: false
-              }
-            }
-          }
-        }
-      ],
-      componentSpec: [
-        {
-          specKey: 'axes',
-          matchInfo: { orient: 'bottom' },
-          spec: {
-            domainLine: { visible: true },
-            tick: { visible: false },
-            label: { visible: false },
-            grid: { visible: false }
-          }
-        },
-        {
-          specKey: 'axes',
-          matchInfo: { orient: 'left' },
-          spec: {
-            domainLine: { visible: false },
-            tick: { visible: false },
-            label: { visible: false },
-            grid: { visible: false }
-          }
-        }
       ]
     }
   },
   {
     title: 'Bar Chart',
     characterType: 'BarChart',
-    options: {
+    spec: {
+      type: 'bar',
+      color: ['#4CC9E4', '#4954E6'],
       title: {
         text: 'BarChart',
         orient: 'bottom',
@@ -88,6 +78,36 @@ const chartSpecList = [
         }
       },
       padding: 12,
+      xField: ['x', 'type'],
+      yField: 'y',
+      seriesField: 'type',
+      bar: {
+        style: {
+          fill: {
+            gradient: 'linear',
+            stops: [
+              {
+                offset: 1
+              },
+              {
+                offset: 0,
+                opacity: 0.6
+              }
+            ]
+          }
+        },
+        state: {
+          selected: {
+            stroke: '#000',
+            strokeWidth: 1
+          }
+        }
+      },
+      label: {
+        style: {
+          visible: false
+        }
+      },
       data: [
         {
           id: 'data',
@@ -125,70 +145,27 @@ const chartSpecList = [
           ]
         }
       ],
-      seriesSpec: [
+      axes: [
         {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            xField: ['x', 'type'],
-            yField: 'y',
-            seriesField: 'type',
-            bar: {
-              style: {
-                fill: {
-                  gradient: 'linear',
-                  stops: [
-                    {
-                      offset: 1
-                    },
-                    {
-                      offset: 0,
-                      opacity: 0.6
-                    }
-                  ]
-                }
-              },
-              state: {
-                selected: {
-                  stroke: '#000',
-                  strokeWidth: 1
-                }
-              }
-            },
-            label: {
-              style: {
-                visible: false
-              }
-            }
-          }
-        }
-      ],
-      componentSpec: [
-        {
-          specKey: 'axes',
-          matchInfo: { orient: 'bottom' },
-          spec: {
-            tick: { visible: false },
-            label: { visible: false },
-            grid: { visible: false }
-          }
+          orient: 'bottom',
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
         },
         {
-          specKey: 'axes',
-          matchInfo: { orient: 'left' },
-          spec: {
-            tick: { visible: false },
-            label: { visible: false },
-            grid: { visible: false }
-          }
+          orient: 'left',
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
         }
-      ],
-      color: ['#4CC9E4', '#4954E6']
+      ]
     }
   },
   {
     title: 'Line/Area Chart',
     characterType: 'AreaChart',
-    options: {
+    spec: {
+      type: 'area',
       title: {
         text: 'Line/Area Chart',
         orient: 'bottom',
@@ -197,6 +174,12 @@ const chartSpecList = [
           fontSize: 10,
           lineHeight: 10
         }
+      },
+      xField: 'x',
+      yField: 'y',
+      seriesField: 'type',
+      point: {
+        visible: false
       },
       padding: 12,
       data: [
@@ -215,45 +198,27 @@ const chartSpecList = [
           ]
         }
       ],
-      seriesSpec: [
+      axes: [
         {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            xField: 'x',
-            yField: 'y',
-            seriesField: 'type',
-            point: {
-              visible: false
-            }
-          }
-        }
-      ],
-      componentSpec: [
-        {
-          specKey: 'axes',
-          matchInfo: { orient: 'bottom' },
-          spec: {
-            tick: { visible: false },
-            label: { visible: false },
-            grid: { visible: false }
-          }
+          orient: 'bottom',
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
         },
         {
-          specKey: 'axes',
-          matchInfo: { orient: 'left' },
-          spec: {
-            tick: { visible: false },
-            label: { visible: false },
-            grid: { visible: false }
-          }
+          orient: 'left',
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
         }
       ]
     }
   },
   {
     title: 'Pie Chart',
-    characterType: 'PieChart',
-    options: {
+    characterType: 'Pie',
+    spec: {
+      type: 'pie',
       title: {
         text: 'Pie Chart',
         orient: 'bottom',
@@ -264,6 +229,7 @@ const chartSpecList = [
         }
       },
       padding: 12,
+      animation: false,
       data: [
         {
           id: 'data1',
@@ -283,18 +249,16 @@ const chartSpecList = [
           ]
         }
       ],
-      seriesSpec: [
-        {
-          matchInfo: { specIndex: 'all' },
-          spec: { valueField: 'value', categoryField: 'name', radius: 1, innerRadius: 0 }
-        }
-      ]
+      valueField: 'value',
+      categoryField: 'name',
+      radius: 1,
+      innerRadius: 0
     }
   },
   {
     title: 'Scatter Chart',
-    characterType: 'ScatterChart',
-    options: {
+    spec: {
+      type: 'scatter',
       title: {
         text: 'Scatter Chart',
         orient: 'bottom',
@@ -321,47 +285,35 @@ const chartSpecList = [
           ]
         }
       ],
-      componentSpec: [
+      axes: [
         {
-          specKey: 'axes',
-          matchInfo: { orient: 'bottom' },
-          spec: {
-            tick: { visible: false },
-            label: { visible: false },
-            grid: { visible: false }
-          }
+          orient: 'bottom',
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
         },
         {
-          specKey: 'axes',
-          matchInfo: { orient: 'left' },
-          spec: {
-            tick: { visible: false },
-            label: { visible: false },
-            grid: { visible: false }
-          }
+          orient: 'left',
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
         }
       ],
-      seriesSpec: [
-        {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            xField: 'x',
-            yField: 'y',
-            seriesField: 'type',
-            point: {
-              style: {
-                size: 4
-              }
-            }
-          }
+      xField: 'x',
+      yField: 'y',
+      seriesField: 'type',
+      point: {
+        style: {
+          size: 4
         }
-      ]
+      }
     }
   },
   {
     title: 'Rose Chart',
     characterType: 'RoseChart',
-    options: {
+    spec: {
+      type: 'rose',
       title: {
         text: 'Rose Chart',
         orient: 'bottom',
@@ -391,48 +343,41 @@ const chartSpecList = [
           ]
         }
       ],
-      seriesSpec: [
+      valueField: 'value',
+      seriesField: 'name',
+      categoryField: 'name',
+      radius: 1,
+      innerRadius: 0,
+      axes: [
         {
-          matchInfo: { specIndex: 'all' },
-          spec: { valueField: 'value', seriesField: 'name', categoryField: 'name', radius: 1, innerRadius: 0 }
-        }
-      ],
-      componentSpec: [
-        {
-          specKey: 'axes',
-          matchInfo: { orient: 'radius' },
-          spec: {
-            domainLine: { visible: false, smooth: false },
-            label: {
-              visible: false
-            },
-            tick: {
-              visible: false
-            },
-            grid: { visible: false }
-          }
+          orient: 'radius',
+          domainLine: { visible: false, smooth: false },
+          label: {
+            visible: false
+          },
+          tick: {
+            visible: false
+          },
+          grid: { visible: false }
         },
         {
-          specKey: 'axes',
-          matchInfo: { orient: 'angle' },
-          spec: {
-            domainLine: { visible: false, smooth: false },
-            label: {
-              visible: false
-            },
-            tick: {
-              visible: false
-            },
-            grid: { visible: false }
-          }
+          orient: 'angle',
+          domainLine: { visible: false, smooth: false },
+          label: {
+            visible: false
+          },
+          tick: {
+            visible: false
+          },
+          grid: { visible: false }
         }
       ]
     }
   },
   {
     title: 'Radar Chart',
-    characterType: 'RadarChart',
-    options: {
+    spec: {
+      type: 'radar',
       title: {
         text: 'Radar Chart',
         orient: 'bottom',
@@ -530,62 +475,52 @@ const chartSpecList = [
           ]
         }
       ],
-      seriesSpec: [
-        {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            categoryField: 'theta',
-            valueField: 'value',
-            seriesField: 'type',
-            line: {
-              style: {
-                strokeWidth: 2
-              }
-            },
-            legends: {
-              visible: false
-            },
-            label: {
-              visible: false
-            },
-            animationAppear: {
-              preset: 'clipIn'
-            },
-            point: {
-              style: {
-                size: 2,
-                strokeWidth: 1
-              }
-            },
-            startAngle: 90
-          }
+      categoryField: 'theta',
+      valueField: 'value',
+      seriesField: 'type',
+      line: {
+        style: {
+          strokeWidth: 2
         }
-      ],
-      componentSpec: [
+      },
+      legends: {
+        visible: false
+      },
+      label: {
+        visible: false
+      },
+      animationAppear: {
+        preset: 'clipIn'
+      },
+      point: {
+        style: {
+          size: 2,
+          strokeWidth: 1
+        }
+      },
+      startAngle: 90,
+      axes: [
         {
-          specKey: 'axes',
-          matchInfo: { orient: 'radius' },
-          spec: {
-            domainLine: { visible: true, smooth: false },
-            label: {
-              visible: false
-            },
-            tick: {
-              visible: false
-            },
-            grid: { visible: true }
-          }
+          orient: 'radius',
+          domainLine: { visible: false, smooth: false },
+          label: {
+            visible: false
+          },
+          tick: {
+            visible: false
+          },
+          grid: { visible: false }
         },
         {
-          specKey: 'axes',
-          matchInfo: { orient: 'angle' },
-          spec: {
-            domainLine: { visible: false, smooth: false },
-            label: {
-              visible: false
-            },
-            grid: { visible: false }
-          }
+          orient: 'angle',
+          domainLine: { visible: false, smooth: false },
+          label: {
+            visible: false
+          },
+          tick: {
+            visible: false
+          },
+          grid: { visible: false }
         }
       ]
     }
@@ -593,7 +528,8 @@ const chartSpecList = [
   {
     title: 'Word Cloud',
     characterType: 'WordCloudChart',
-    options: {
+    spec: {
+      type: 'wordCloud',
       title: {
         text: 'Word Cloud',
         orient: 'bottom',
@@ -636,27 +572,21 @@ const chartSpecList = [
           ]
         }
       ],
-      seriesSpec: [
-        {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            valueField: 'sum_count',
-            seriesField: 'challenge_name',
-            nameField: 'challenge_name',
-            wordCloudConfig: {
-              drawOutOfBound: 'clip'
-            },
-            maskShape: 'circle',
-            fontSizeRange: [5, 8]
-          }
-        }
-      ]
+      valueField: 'sum_count',
+      seriesField: 'challenge_name',
+      nameField: 'challenge_name',
+      wordCloudConfig: {
+        drawOutOfBound: 'clip'
+      },
+      maskShape: 'circle',
+      fontSizeRange: [5, 8]
     }
   },
   {
     title: 'TreeMap Chart',
     characterType: 'TreeMapChart',
-    options: {
+    spec: {
+      type: 'treemap',
       title: {
         text: 'TreeMap Chart',
         orient: 'bottom',
@@ -730,32 +660,26 @@ const chartSpecList = [
           ]
         }
       ],
-      seriesSpec: [
-        {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            categoryField: 'name',
-            valueField: 'value',
-            legends: { visible: false },
-            nodePadding: 1,
-            nonLeaf: {
-              visible: false
-            },
-            nonLeafLabel: {
-              visible: false
-            },
-            label: {
-              visible: false
-            }
-          }
-        }
-      ]
+      categoryField: 'name',
+      valueField: 'value',
+      legends: { visible: false },
+      nodePadding: 1,
+      nonLeaf: {
+        visible: false
+      },
+      nonLeafLabel: {
+        visible: false
+      },
+      label: {
+        visible: false
+      }
     }
   },
   {
     title: 'Sunburst Chart',
     characterType: 'SunburstChart',
-    options: {
+    spec: {
+      type: 'sunburst',
       title: {
         text: 'Sunburst Chart',
         orient: 'bottom',
@@ -834,24 +758,17 @@ const chartSpecList = [
           ]
         }
       ],
-      seriesSpec: [
-        {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            offsetX: 0,
-            offsetY: 0,
-            categoryField: 'name',
-            valueField: 'value',
-            outerRadius: 1,
-            innerRadius: 0,
-            gap: 1,
-            sunburst: { style: { stroke: false, lineWidth: 0 } },
-            label: {
-              visible: false
-            }
-          }
-        }
-      ]
+      offsetX: 0,
+      offsetY: 0,
+      categoryField: 'name',
+      valueField: 'value',
+      outerRadius: 1,
+      innerRadius: 0,
+      gap: 1,
+      sunburst: { style: { stroke: false, lineWidth: 0 } },
+      label: {
+        visible: false
+      }
     }
   }
 ].map(item => ({
@@ -868,8 +785,8 @@ const chartSpecList = [
   }
 }));
 
-export const scene1Characters = chartSpecList.map((item, i) => ({
-  type: item.characterType ?? 'CharacterChart',
+export const chartCharacters = chartSpecList.map((item, i) => ({
+  type: 'VChart',
   id: `chart${i}`,
   zIndex: 1,
   position: {
@@ -887,6 +804,65 @@ export const scene1Characters = chartSpecList.map((item, i) => ({
     ...(item.options ?? {})
   }
 }));
+
+export const scene1Characters = [
+  ...chartCharacters,
+  {
+    type: 'Text',
+    id: `title1`,
+    zIndex: 1,
+    position: {
+      top: 290,
+      left: 680,
+      width: 775,
+      height: 200
+    },
+    options: {
+      graphic: { text: 'A BRIEF HISTORY', fontSize: 75, fontWeight: 'bold' }
+    }
+  },
+  {
+    type: 'Text',
+    id: `title2`,
+    zIndex: 1,
+    position: {
+      top: 390,
+      left: 680,
+      width: 600,
+      height: 60
+    },
+    options: {
+      graphic: { text: 'OF CHARTS', fontSize: 75, fontWeight: 'bold' }
+    }
+  },
+  {
+    type: 'RichText',
+    id: `titlesubtitle`,
+    zIndex: 1,
+    position: {
+      top: 470,
+      left: 770,
+      width: 400,
+      height: 80
+    },
+    options: {
+      graphic: {
+        width: 400,
+        fontSize: 22,
+        fontWeight: 'bold',
+        textConfig: [
+          {
+            text: 'Powered By '
+          },
+          {
+            text: 'VChart',
+            fill: 'blue'
+          }
+        ]
+      }
+    }
+  }
+];
 
 export const scene1 = {
   id: 'scene1',
@@ -955,53 +931,53 @@ export const scene1 = {
         }
       ]
     },
-    ...new Array(5).fill(0).map((_, i) => ({
-      characterId: `chart${9 - i}`,
-      characterActions: [
-        {
-          startTime: i * 100 + 2500,
-          duration: 2000,
-          action: 'bounce',
-          payload: {
-            animation: {
-              duration: 2000
-            }
-          }
-        }
-      ]
-    })),
-    ...new Array(5).fill(0).map((_, i) => ({
-      characterId: `chart${i}`,
-      characterActions: [
-        {
-          startTime: i * 100 + 2500,
-          duration: 2000,
-          action: 'bounce',
-          payload: {
-            animation: {
-              duration: 2000
-            }
-          }
-        }
-      ]
-    })),
-    {
-      characterId: `titlesubtitle`,
-      characterActions: [
-        {
-          startTime: 2700,
-          duration: 500,
-          action: 'appear',
-          payload: {
-            animation: {
-              duration: 200,
-              easing: 'linear',
-              effect: 'fade'
-            }
-          }
-        }
-      ]
-    },
+    // ...new Array(5).fill(0).map((_, i) => ({
+    //   characterId: `chart${9 - i}`,
+    //   characterActions: [
+    //     {
+    //       startTime: i * 100 + 2500,
+    //       duration: 2000,
+    //       action: 'bounce',
+    //       payload: {
+    //         animation: {
+    //           duration: 2000
+    //         }
+    //       }
+    //     }
+    //   ]
+    // })),
+    // ...new Array(chartCount).fill(0).map((_, i) => ({
+    //   characterId: `chart${i}`,
+    //   characterActions: [
+    //     {
+    //       startTime: i * 100 + 2500,
+    //       duration: 2000,
+    //       action: 'bounce',
+    //       payload: {
+    //         animation: {
+    //           duration: 2000
+    //         }
+    //       }
+    //     }
+    //   ]
+    // })),
+    // {
+    //   characterId: `titlesubtitle`,
+    //   characterActions: [
+    //     {
+    //       startTime: 2700,
+    //       duration: 500,
+    //       action: 'appear',
+    //       payload: {
+    //         animation: {
+    //           duration: 200,
+    //           easing: 'linear',
+    //           effect: 'fade'
+    //         }
+    //       }
+    //     }
+    //   ]
+    // },
     ...new Array(10).fill(0).map((_, i) => ({
       characterId: `chart${9 - i}`,
       characterActions: [
@@ -1017,23 +993,23 @@ export const scene1 = {
           }
         }
       ]
-    })),
-    {
-      characterId: `titlesubtitle`,
-      characterActions: [
-        {
-          startTime: 6000,
-          duration: 1000,
-          action: 'disappear',
-          payload: {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: 'fade'
-            }
-          }
-        }
-      ]
-    }
+    }))
+    // {
+    //   characterId: `titlesubtitle`,
+    //   characterActions: [
+    //     {
+    //       startTime: 6000,
+    //       duration: 1000,
+    //       action: 'disappear',
+    //       payload: {
+    //         animation: {
+    //           duration: 1000,
+    //           easing: 'linear',
+    //           effect: 'fade'
+    //         }
+    //       }
+    //     }
+    //   ]
+    // }
   ]
 };

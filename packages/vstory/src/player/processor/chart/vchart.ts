@@ -90,11 +90,11 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
     const vrenderComponents = component.getVRenderComponents();
     const axis = vrenderComponents[0];
     const axisGrid = vrenderComponents[1];
-    const axisOrient = (axis.attribute as AxisBaseAttributes).orient;
-    const axisItems = (axis.attribute as AxisBaseAttributes).items ?? [[]];
+    const axisOrient = (axis?.attribute as AxisBaseAttributes)?.orient;
+    const axisItems = (axis?.attribute as AxisBaseAttributes)?.items ?? [[]];
     const orient = axisOrient === 'left' || axisOrient === 'right' ? 'height' : 'width';
     const gridOrient = axisOrient === 'left' || axisOrient === 'right' ? 'width' : 'height';
-    const direction = isNumberClose(axisItems[0][0].value, 1) ? 'positive' : 'negative';
+    const direction = isNumberClose(axisItems[0]?.[0]?.value, 1) ? 'positive' : 'negative';
     const appearTransformFunc = (transformMap.appear as any).axis;
     const defaultPayload = (VChartVisibilityActionProcessor as any).defaultPayload;
 

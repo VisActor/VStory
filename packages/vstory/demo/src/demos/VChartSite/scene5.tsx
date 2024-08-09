@@ -1181,7 +1181,7 @@ export const scene5Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'CharacterChart',
+    type: 'VChart',
     id: `scene5-chart`,
     zIndex: 0,
     position: {

@@ -27,48 +27,41 @@ export const wordcloud = () => {
           },
           options: {
             spec: {
-              type: 'wordCloud',
-              nameField: 'name',
-              valueField: 'value',
-              wordCloudConfig: {
-                zoomToFit: {
-                  enlarge: true,
-                  fontSizeLimitMax: 20
+              type: 'pie',
+              title: {
+                text: 'Pie Chart',
+                orient: 'bottom',
+                align: 'center',
+                textStyle: {
+                  fontSize: 10,
+                  lineHeight: 10
                 }
               },
-              data: {
-                name: 'baseData',
-                values: [
-                  {
-                    name: '螺蛳粉',
-                    value: 957
-                  },
-                  {
-                    name: '钵钵鸡',
-                    value: 942
-                  },
-                  {
-                    name: '板栗',
-                    value: 842
-                  },
-                  {
-                    name: '胡辣汤',
-                    value: 828
-                  },
-                  {
-                    name: '关东煮',
-                    value: 665
-                  },
-                  {
-                    name: '羊肉汤',
-                    value: 627
-                  },
-                  {
-                    name: '热干面',
-                    value: 574
-                  }
-                ]
-              }
+              padding: 12,
+              animation: false,
+              data: [
+                {
+                  id: 'data1',
+                  values: [
+                    {
+                      value: 348,
+                      name: '中介渠道: 34.8%'
+                    },
+                    {
+                      value: 152,
+                      name: '会员: 15.2%'
+                    },
+                    {
+                      value: 500,
+                      name: '散客: 50%'
+                    }
+                  ]
+                }
+              ],
+              valueField: 'value',
+              categoryField: 'name',
+              radius: 1,
+              innerRadius: 0
             }
           }
         }
