@@ -931,53 +931,53 @@ export const scene1 = {
         }
       ]
     },
-    // ...new Array(5).fill(0).map((_, i) => ({
-    //   characterId: `chart${9 - i}`,
-    //   characterActions: [
-    //     {
-    //       startTime: i * 100 + 2500,
-    //       duration: 2000,
-    //       action: 'bounce',
-    //       payload: {
-    //         animation: {
-    //           duration: 2000
-    //         }
-    //       }
-    //     }
-    //   ]
-    // })),
-    // ...new Array(chartCount).fill(0).map((_, i) => ({
-    //   characterId: `chart${i}`,
-    //   characterActions: [
-    //     {
-    //       startTime: i * 100 + 2500,
-    //       duration: 2000,
-    //       action: 'bounce',
-    //       payload: {
-    //         animation: {
-    //           duration: 2000
-    //         }
-    //       }
-    //     }
-    //   ]
-    // })),
-    // {
-    //   characterId: `titlesubtitle`,
-    //   characterActions: [
-    //     {
-    //       startTime: 2700,
-    //       duration: 500,
-    //       action: 'appear',
-    //       payload: {
-    //         animation: {
-    //           duration: 200,
-    //           easing: 'linear',
-    //           effect: 'fade'
-    //         }
-    //       }
-    //     }
-    //   ]
-    // },
+    ...new Array(5).fill(0).map((_, i) => ({
+      characterId: `chart${9 - i}`,
+      characterActions: [
+        {
+          startTime: i * 100 + 2500,
+          duration: 2000,
+          action: 'bounce',
+          payload: {
+            animation: {
+              duration: 2000
+            }
+          }
+        }
+      ]
+    })),
+    ...new Array(10).fill(0).map((_, i) => ({
+      characterId: `chart${i}`,
+      characterActions: [
+        {
+          startTime: i * 100 + 2500,
+          duration: 2000,
+          action: 'bounce',
+          payload: {
+            animation: {
+              duration: 2000
+            }
+          }
+        }
+      ]
+    })),
+    {
+      characterId: `titlesubtitle`,
+      characterActions: [
+        {
+          startTime: 2700,
+          duration: 500,
+          action: 'appear',
+          payload: {
+            animation: {
+              duration: 200,
+              easing: 'linear',
+              effect: 'fade'
+            }
+          }
+        }
+      ]
+    },
     ...new Array(10).fill(0).map((_, i) => ({
       characterId: `chart${9 - i}`,
       characterActions: [

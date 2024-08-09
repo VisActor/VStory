@@ -124,68 +124,68 @@ export const scene2: ISceneSpec = {
     {
       characterId: `title1`,
       characterActions: [
-        // {
-        //   startTime: 0,
-        //   duration: 800,
-        //   action: 'moveTo',
-        //   destination: {
-        //     x: 250,
-        //     y: 80
-        //   },
-        //   payload: {
-        //     animation: {
-        //       duration: 800,
-        //       easing: 'quadInOut'
-        //     }
-        //   }
-        // },
-        // {
-        //   startTime: 0,
-        //   duration: 800,
-        //   action: 'style',
-        //   payload: {
-        //     graphic: {
-        //       fontSize: 40
-        //     },
-        //     animation: {
-        //       duration: 800
-        //     }
-        //   }
-        // }
+        {
+          startTime: 0,
+          duration: 800,
+          action: 'moveTo',
+          destination: {
+            x: 250,
+            y: 80
+          },
+          payload: {
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        },
+        {
+          startTime: 0,
+          duration: 800,
+          action: 'style',
+          payload: {
+            graphic: {
+              fontSize: 40
+            },
+            animation: {
+              duration: 800
+            }
+          }
+        }
       ]
     },
     {
       characterId: `title2`,
       characterActions: [
-        // {
-        //   startTime: 0,
-        //   duration: 800,
-        //   action: 'moveTo',
-        //   destination: {
-        //     x: 550,
-        //     y: 80
-        //   },
-        //   payload: {
-        //     animation: {
-        //       duration: 800,
-        //       easing: 'quadInOut'
-        //     }
-        //   }
-        // },
-        // {
-        //   startTime: 0,
-        //   duration: 800,
-        //   action: 'style',
-        //   payload: {
-        //     graphic: {
-        //       fontSize: 40
-        //     },
-        //     animation: {
-        //       duration: 800,
-        //       easing: 'quadInOut'
-        //     }
-        //   }
-        // }
+        {
+          startTime: 0,
+          duration: 800,
+          action: 'moveTo',
+          destination: {
+            x: 550,
+            y: 80
+          },
+          payload: {
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        },
+        {
+          startTime: 0,
+          duration: 800,
+          action: 'style',
+          payload: {
+            graphic: {
+              fontSize: 40
+            },
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        }
       ]
     },
     {
@@ -209,10 +209,8 @@ export const scene2: ISceneSpec = {
       characterId: `title1`,
       characterActions: [
         {
-          startTime: 6000,
-          duration: 800,
-          // action: 'moveTo',
-          action: 'disappear',
+          startTime: 2000,
+          action: 'moveTo',
           destination: {
             x: -650,
             y: 80
@@ -230,10 +228,8 @@ export const scene2: ISceneSpec = {
       characterId: `title2`,
       characterActions: [
         {
-          startTime: 6000,
-          duration: 800,
-          // action: 'moveTo',
-          action: 'disappear',
+          startTime: 2000,
+          action: 'moveTo',
           destination: {
             x: -350,
             y: 80
@@ -247,26 +243,26 @@ export const scene2: ISceneSpec = {
         }
       ]
     },
-    // {
-    //   characterId: `scene2-title2`,
-    //   characterActions: [
-    //     // {
-    //     //   startTime: 2000,
-    //     //   duration: 800,
-    //     //   action: 'moveTo',
-    //     //   destination: {
-    //     //     x: -750,
-    //     //     y: 80
-    //     //   },
-    //     //   payload: {
-    //     //     animation: {
-    //     //       duration: 800,
-    //     //       easing: 'quadInOut'
-    //     //     }
-    //     //   }
-    //     // }
-    //   ]
-    // },
+    {
+      characterId: `scene2-title2`,
+      characterActions: [
+        {
+          startTime: 2000,
+          duration: 800,
+          action: 'moveTo',
+          destination: {
+            x: -750,
+            y: 80
+          },
+          payload: {
+            animation: {
+              duration: 800,
+              easing: 'quadInOut'
+            }
+          }
+        }
+      ]
+    },
     {
       characterId: 'timeline',
       characterActions: [
@@ -280,10 +276,9 @@ export const scene2: ISceneSpec = {
             }
           }
         },
-        // TODO: replace to moveTo
         {
           startTime: 6000,
-          action: 'disappear',
+          action: 'moveTo',
           payload: {
             animation: {
               duration: 500
