@@ -76,6 +76,45 @@ export const scene2Characters: ICharacterSpec[] = [
         text: 'DEVELOPMENT ROADMAP'
       }
     }
+  },
+  {
+    type: 'Timeline',
+    id: 'timeline',
+    zIndex: 10,
+    position: {
+      top: 500,
+      left: 100,
+      width: 1200,
+      height: 100
+    },
+    options: {
+      graphic: {
+        times: [
+          { label: '1486', desc: '' },
+          { label: '1644', desc: '' },
+          { label: '1765', desc: '' },
+          { label: '1786', desc: '' },
+          { label: '1801', desc: '' },
+          { label: '1833', desc: '' },
+          { label: '1856', desc: '' },
+          { label: '1877', desc: '' },
+          { label: '1976', desc: '' },
+          { label: '1990s', desc: '' }
+        ],
+        lineStyle: {
+          lineDash: [1, 1]
+        },
+        labelStyle: {
+          fontSize: 28,
+          fontWeight: 'bold'
+        },
+        activeLabelStyle: {
+          fontSize: 28,
+          fontWeight: 'bold',
+          dy: 20
+        }
+      }
+    }
   }
 ];
 
@@ -171,7 +210,6 @@ export const scene2: ISceneSpec = {
       characterActions: [
         {
           startTime: 2000,
-          duration: 800,
           action: 'moveTo',
           destination: {
             x: -650,
@@ -191,7 +229,6 @@ export const scene2: ISceneSpec = {
       characterActions: [
         {
           startTime: 2000,
-          duration: 800,
           action: 'moveTo',
           destination: {
             x: -350,
@@ -221,6 +258,30 @@ export const scene2: ISceneSpec = {
             animation: {
               duration: 800,
               easing: 'quadInOut'
+            }
+          }
+        }
+      ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 2000,
+          action: 'appear',
+          payload: {
+            animation: {
+              duration: 4000,
+              effect: 'default'
+            }
+          }
+        },
+        {
+          startTime: 6000,
+          action: 'moveTo',
+          payload: {
+            animation: {
+              duration: 500
             }
           }
         }

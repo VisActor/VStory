@@ -175,7 +175,7 @@ export const scene7Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'PieChart',
+    type: 'VChart',
     id: `scene7-chart`,
     zIndex: 0,
     position: {

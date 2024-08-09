@@ -1789,7 +1789,7 @@ export const scene6Characters: ICharacterSpec[] = [
   },
   // 柱状图
   {
-    type: 'BarChart',
+    type: 'VChart',
     id: `scene6-chart`,
     zIndex: 1,
     position: {
@@ -1807,7 +1807,7 @@ export const scene6Characters: ICharacterSpec[] = [
   },
   // 区间面积图
   {
-    type: 'CharacterChart',
+    type: 'VChart',
     id: 'scene6-range-chart',
     zIndex: 2,
     position: {

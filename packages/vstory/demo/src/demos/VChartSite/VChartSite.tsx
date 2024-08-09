@@ -23,8 +23,8 @@ export const VChartSiteDemo = () => {
     // 准备一个图表
     const tempSpec: IStorySpec = {
       characters: [
-        // ...scene1Characters,
-        // ...scene2Characters,
+        ...scene1Characters,
+        ...scene2Characters
         // ...scene3Characters,
         // ...scene4Characters,
         // ...scene5Characters,
@@ -34,16 +34,16 @@ export const VChartSiteDemo = () => {
         // ...scene9Characters
         // ...scene10Characters
         // ...scene11Characters
-        ...scene12Characters,
-        ...scene12_2_Characters
+        // ...scene12Characters,
+        // ...scene12_2_Characters
         // ...scene13Characters
       ],
       acts: [
         {
           id: 'default-chapter',
           scenes: [
-            // scene1,
-            // scene2,
+            scene1,
+            scene2
             // scene3,
             // scene4,
             // scene5,
@@ -53,8 +53,8 @@ export const VChartSiteDemo = () => {
             // scene9
             // scene10
             // scene11
-            scene12,
-            scene12_2
+            // scene12,
+            // scene12_2
             // scene13
           ]
         }
