@@ -8,3 +8,10 @@ interface IComponentStylePayLoad extends IActionPayload {
 export interface IComponentStyleAction extends IAction<IComponentStylePayLoad> {
   action: 'style';
 }
+
+interface IComponentMoveToPayLoad extends IActionPayload {
+  destination: { x: number; y: number };
+}
+export interface IComponentMoveToAction extends IAction<IComponentMoveToPayLoad> {
+  action: 'moveTo';
+}

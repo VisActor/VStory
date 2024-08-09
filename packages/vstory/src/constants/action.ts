@@ -1,5 +1,6 @@
 export const ACTION_TYPE = {
   APPEAR: 'appear',
   DISAPPEAR: 'disappear',
-  STYLE: 'style'
+  STYLE: 'style',
+  MOVETO: 'moveTo'
 };

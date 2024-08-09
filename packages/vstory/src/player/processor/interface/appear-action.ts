@@ -36,6 +36,10 @@ export interface IFadeInParams extends IAnimationParams {
   };
 }
 
+export interface IMoveToParams extends IAnimationParams {
+  destination: { x: number; y: number };
+}
+
 export interface IMoveParams extends IAnimationParams {
   pos?: 'left' | 'right' | 'top' | 'bottom' | 'top-right' | 'top-left' | 'bottom-left' | 'bottom-right';
   move?: {

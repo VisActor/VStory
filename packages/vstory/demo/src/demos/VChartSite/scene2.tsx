@@ -128,11 +128,11 @@ export const scene2: ISceneSpec = {
           startTime: 0,
           duration: 800,
           action: 'moveTo',
-          destination: {
-            x: 250,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: 250,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
@@ -161,11 +161,11 @@ export const scene2: ISceneSpec = {
           startTime: 0,
           duration: 800,
           action: 'moveTo',
-          destination: {
-            x: 550,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: 550,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
@@ -211,11 +211,11 @@ export const scene2: ISceneSpec = {
         {
           startTime: 2000,
           action: 'moveTo',
-          destination: {
-            x: -650,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: -650,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
@@ -230,11 +230,11 @@ export const scene2: ISceneSpec = {
         {
           startTime: 2000,
           action: 'moveTo',
-          destination: {
-            x: -350,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: -350,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
@@ -250,11 +250,11 @@ export const scene2: ISceneSpec = {
           startTime: 2000,
           duration: 800,
           action: 'moveTo',
-          destination: {
-            x: -750,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: -750,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
@@ -280,6 +280,10 @@ export const scene2: ISceneSpec = {
           startTime: 6000,
           action: 'moveTo',
           payload: {
+            destination: {
+              x: 550,
+              y: 80
+            },
             animation: {
               duration: 500
             }
