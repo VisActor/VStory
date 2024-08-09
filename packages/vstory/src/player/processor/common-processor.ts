@@ -8,12 +8,12 @@ export function moveOut(character: ICharacter, animation: IMoveParams, effect: s
   const graphic = getCharacterParentGraphic(character);
   _moveOut(graphic, animation as any);
 }
-export function _moveOut(graphic: IGraphic, params: IMoveOutParams) {
+export function _moveOut(graphic: IGraphic, params: IMoveParams) {
   if (!canDoGraphicAnimation(graphic, params)) {
     return false;
   }
   const { move = {} } = params;
-  const to = move.to ?? params.to ?? 1;
+  const to = move.pos ?? params.pos ?? 1;
   const duration = move.duration ?? params.duration;
   const easing = move.easing ?? params.easing;
   const isVariableSpeed = move.isVariableSpeed ?? true;

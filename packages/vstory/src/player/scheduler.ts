@@ -130,8 +130,8 @@ export class Scheduler implements IScheduler {
   protected _getActInfo(act: IActSpec, actStartTime: number): IActInfo {
     let sceneStartTime = 0;
     const sceneInfoList = act.scenes.map(scene => {
-      const sceneInfo = this._getSceneInfo(scene, sceneStartTime);
-      sceneStartTime = sceneInfo.startTime + (scene.delay ?? 0) + sceneInfo.duration;
+      const sceneInfo = this._getSceneInfo(scene, sceneStartTime + (scene.delay ?? 0));
+      sceneStartTime = sceneInfo.startTime + sceneInfo.duration;
       return sceneInfo;
     });
     const startTime = sceneInfoList.reduce((st, info) => Math.min(info.startTime, st), 0);

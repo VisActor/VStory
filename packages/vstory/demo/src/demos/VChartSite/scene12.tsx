@@ -574,7 +574,8 @@ export const scene12: ISceneSpec = {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
-              move: { from: 'bottom' }
+              effect: 'move',
+              move: { pos: 'bottom' }
             }
           }
         }
@@ -608,7 +609,8 @@ export const scene12: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'bottom' }
+              effect: 'move',
+              move: { pos: 'bottom' }
             }
           }
         }
@@ -712,7 +714,8 @@ scene12.actions.forEach(({ characterId, characterActions }) => {
         animation: {
           duration: 1000,
           easing: easeInOutQuad,
-          move: { to: 'left', isVariableSpeed: false }
+          effect: 'move',
+          move: { pos: 'left', isVariableSpeed: false }
         }
       }
     });

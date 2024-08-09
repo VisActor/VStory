@@ -245,7 +245,7 @@ export const scene10: ISceneSpec = {
               easing: easeInOutQuad,
               effect: 'move',
               move: {
-                from: 'right'
+                pos: 'right'
               }
             }
           }
@@ -348,7 +348,7 @@ export const scene10: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              effect: 'grow',
+              effect: 'fade',
               fade: {
                 isBaseOpacity: true
               }
@@ -363,6 +363,7 @@ export const scene10: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
+              effect: 'fade',
               fade: {
                 isBaseOpacity: true
               }
@@ -399,7 +400,7 @@ scene10.actions.forEach(({ characterId, characterActions }) => {
           easing: easeInOutQuad,
           effect: 'move',
           move: {
-            to: 'bottom'
+            pos: 'bottom'
           },
           fade: {
             opacity: 0
