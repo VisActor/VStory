@@ -49,10 +49,21 @@ export class Player extends EventEmitter implements IPlayer {
     this._story = story;
     this._ticker = new Ticker();
     this._currTime = 0;
-    this._story.canvas.getStage().defaultLayer.setAttributes({
-      scaleX: options?.scaleX ?? 1,
-      scaleY: options?.scaleY ?? 1
-    });
+    const stage = this._story.canvas.getStage();
+    const scaleX = options?.scaleX ?? 1;
+    const scaleY = options?.scaleY ?? 1;
+
+    stage.window.setViewBoxTransform(scaleX, 0, 0, scaleY, 0, 0);
+
+    // stage.defaultLayer.setAttributes({
+    //   scaleX,
+    //   scaleY
+    // });
+    // const b = stage.defaultLayer.AABBBounds;
+    // const width = b.width() * scaleX;
+    // const height = b.height() * scaleY;
+    // (stage as any).setViewBox({ x1: 0, x2: width, y1: 0, y2: height }, false);
+    // const b = this._story.canvas.getStage().defaultLayer.AABBBounds;
     // this._encoder = new Encoder();
     this._actionProcessor = new ActionProcessor(story, processorMap);
     this._scheduler = new Scheduler(this._actionProcessor);

@@ -1,134 +1,16 @@
-import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
-import { isObject, isString, merge } from '@visactor/vutils';
 import type { ICharacter } from '../../../story/character';
 import type { IAction } from '../../../story/interface';
 import { ActionProcessorItem } from '../processor-item';
 import type { EasingType, IGraphic } from '@visactor/vrender-core';
-import type { IFadeInParams, IScaleInParams, IWipeInParams } from '../interface/appear-action';
-import { canDoGraphicAnimation } from './utils';
-import type { IComponentStyleAction } from '../interface/style-action';
-import {
-  getCharacterByEffect,
-  getCharacterGraphic,
-  getCharacterParentGraphic,
-  moveIn,
-  moveOut
-} from '../common-processor';
-// import { Wipe } from '../../../animate/wipeIn';
-
-// export const appearEffectMap = {
-//   fade: fadeIn,
-//   scale: scaleIn,
-//   // move: moveIn,
-//   wipe: wipeIn
-// };
-
-function fadeIn(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphic = getCharacterParentGraphic(character);
-  _fade(graphic, animation as any, true);
-}
-function fadeOut(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphic = getCharacterParentGraphic(character);
-  _fade(graphic, animation as any, false);
-}
-
-function _fade(graphic: IGraphic, params: IFadeInParams, appear: boolean): boolean {
-  if (!canDoGraphicAnimation(graphic, params)) {
-    return false;
-  }
-  const { fade = {} } = params;
-  const opacity = fade.opacity ?? params.opacity ?? 1;
-  const duration = fade.duration ?? params.duration;
-  const easing = fade.easing ?? params.easing;
-  const currOpacity = (graphic.attribute as any).baseOpacity;
-
-  const opacityMap = appear ? { from: 0, to: currOpacity ?? 1 } : { from: currOpacity ?? 1, to: 0 };
-
-  graphic.setAttributes({
-    baseOpacity: opacityMap.from
-  } as any);
-
-  graphic.animate().to({ baseOpacity: opacityMap.to }, duration, easing as EasingType);
-
-  return true;
-}
-
-function scaleIn(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach(graphic => _scale(graphic, animation as any, true));
-}
-function scaleOut(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach(graphic => _scale(graphic, animation as any, false));
-}
-
-function _scale(graphic: IGraphic, params: IScaleInParams, appear: boolean): boolean {
-  if (!canDoGraphicAnimation(graphic, params)) {
-    return false;
-  }
-  const { scale = {} } = params;
-  const ratio = scale.ratio ?? params.ratio ?? 1;
-  const duration = scale.duration ?? params.duration;
-  const easing = scale.easing ?? params.easing;
-
-  const currScaleX = graphic.attribute.scaleX;
-  const currScaleY = graphic.attribute.scaleY;
-  const opacityMap = appear
-    ? { fromX: 0, fromY: 0, toX: currScaleX ?? ratio, toY: currScaleY ?? ratio }
-    : { fromX: currScaleX ?? ratio, fromY: currScaleY ?? ratio, toX: 0, toY: 0 };
-
-  graphic.setAttributes({ scaleX: opacityMap.fromX, scaleY: opacityMap.fromY });
-  graphic.animate().to({ scaleX: opacityMap.toX, scaleY: opacityMap.toY }, duration, easing);
-
-  return true;
-}
-
-const Direction: any = {
-  right: 0,
-  left: 1,
-  top: 2,
-  bottom: 3
-};
-
-function wipeIn(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphic = getCharacterParentGraphic(character);
-  _wipe(graphic, animation as any, true);
-}
-function wipeOut(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphic = getCharacterParentGraphic(character);
-  _wipe(graphic, animation as any, false);
-}
-function _wipe(graphic: IGraphic, params: IWipeInParams, appear: boolean) {
-  if (!canDoGraphicAnimation(graphic, params)) {
-    return false;
-  }
-
-  const { wipe = {} } = params;
-  const from = wipe.from ?? params.from ?? 'right';
-  const duration = wipe.duration ?? params.duration;
-  const easing = wipe.easing ?? params.easing;
-
-  let fromRatio = 0;
-  let toRatio = 1;
-  if (!appear) {
-    [fromRatio, toRatio] = [toRatio, fromRatio];
-  }
-
-  graphic.setAttributes({
-    wipeDirection: Direction[from],
-    wipeRatio: fromRatio
-  } as any);
-  graphic
-    .animate()
-    .to({ wipeRatio: toRatio }, duration, easing)
-    .onEnd(() => {
-      graphic.setAttributes({ wipeRatio: toRatio } as any);
-    });
-  return true;
-}
+import type { IComponentMoveToAction, IComponentScaleToAction, IComponentStyleAction } from '../interface/style-action';
+import { fadeIn, fadeOut } from '../common/fade-processor';
+import { scaleIn, scaleOut, scaleTo } from '../common/scale-processor';
+import { wipeIn, wipeOut } from '../common/wipe-processor';
+import { getCharacterGraphic } from '../common/common';
+import { moveIn, moveOut, moveTo } from '../common/move-processor';
 
 export class CommonVisibilityActionProcessor extends ActionProcessorItem {
-  name: 'appearOrDisAppear';
+  name: string = 'appearOrDisAppear';
 
   constructor() {
     super();
@@ -202,5 +84,55 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
     if (text && textStyle) {
       graphic.animate().to(textStyle, duration, easing as EasingType);
     }
+  }
+}
+export class CommonMoveToActionProcessor extends ActionProcessorItem {
+  name: 'moveTo';
+
+  constructor() {
+    super();
+  }
+
+  getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
+    const { startTime: globalStartTime = 0 } = action;
+    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+
+    const st = globalStartTime + startTime;
+    const d = duration;
+    return {
+      startTime: st,
+      duration: d
+    };
+  }
+
+  run(character: ICharacter, actionSpec: IComponentMoveToAction): void {
+    const { animation, destination } = actionSpec.payload ?? {};
+
+    moveTo(character, animation as any, destination);
+  }
+}
+export class CommonScaleToActionProcessor extends ActionProcessorItem {
+  name: 'scaleTo';
+
+  constructor() {
+    super();
+  }
+
+  getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
+    const { startTime: globalStartTime = 0 } = action;
+    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+
+    const st = globalStartTime + startTime;
+    const d = duration;
+    return {
+      startTime: st,
+      duration: d
+    };
+  }
+
+  run(character: ICharacter, actionSpec: IComponentScaleToAction): void {
+    const { animation, scale } = actionSpec.payload ?? {};
+
+    scaleTo(character, animation as any, scale);
   }
 }

@@ -20,7 +20,7 @@ function _defaultAppear(graphic: Timeline, params: any) {
 }
 
 export class TimelineVisibilityActionProcessor extends CommonVisibilityActionProcessor {
-  name: 'appearOrDisAppear';
+  name: string = 'appearOrDisAppear';
   constructor() {
     super();
   }
@@ -31,5 +31,44 @@ export class TimelineVisibilityActionProcessor extends CommonVisibilityActionPro
         return defaultAppear;
     }
     return super.getEffectFunc(effect, appear);
+  }
+}
+
+function forward(character: ICharacter, animation: ITypeWriterParams, effect: string) {
+  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
+  graphics.forEach((graphic: any) => _forward(graphic, animation as any));
+}
+
+function _forward(graphic: Timeline, params: any) {
+  if (graphic && graphic.type !== 'text') {
+    const { duration, easing } = params;
+    graphic.forward({ duration: duration, easing });
+  }
+}
+function backward(character: ICharacter, animation: ITypeWriterParams, effect: string) {
+  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
+  graphics.forEach((graphic: any) => _backward(graphic, animation as any));
+}
+
+function _backward(graphic: Timeline, params: any) {
+  if (graphic && graphic.type !== 'text') {
+    const { duration, easing } = params;
+    graphic.backward({ duration: duration, easing });
+  }
+}
+export class TimelineStateActionProcessor extends CommonVisibilityActionProcessor {
+  name: string = 'state';
+  constructor() {
+    super();
+  }
+
+  getEffectFunc(effect: string = 'forward', appear: boolean) {
+    switch (effect) {
+      case 'forward':
+        return forward;
+      case 'backward':
+        return backward;
+    }
+    return forward;
   }
 }

@@ -2,10 +2,19 @@ import type {
   IChartVisibilityAction,
   IComponentVisibilityAction
 } from '../../player/processor/interface/appear-action';
-import type { IComponentStyleAction } from '../../player/processor/interface/style-action';
+import type {
+  IComponentMoveToAction,
+  IComponentScaleToAction,
+  IComponentStyleAction
+} from '../../player/processor/interface/style-action';
 import type { ICharacterSpec } from '../character';
 
-export type IAction = IComponentStyleAction | IComponentVisibilityAction | IChartVisibilityAction;
+export type IAction =
+  | IComponentStyleAction
+  | IComponentMoveToAction
+  | IComponentScaleToAction
+  | IComponentVisibilityAction
+  | IChartVisibilityAction;
 
 export interface IStorySpec {
   acts: IActSpec[]; // 作品的章节

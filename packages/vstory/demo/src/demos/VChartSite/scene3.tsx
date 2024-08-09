@@ -1208,11 +1208,11 @@ export const scene3: ISceneSpec = {
           action: 'moveTo',
           startTime: 6500,
           duration: 700,
-          destination: {
-            x: 0,
-            y: 0
-          },
           payload: {
+            destination: {
+              x: 0,
+              y: 0
+            },
             animation: {
               duration: 700,
               easing: easeInOutQuad
