@@ -3,5 +3,6 @@ export const ACTION_TYPE = {
   DISAPPEAR: 'disappear',
   STYLE: 'style',
   MOVETO: 'moveTo',
-  SCALETO: 'scaleTo'
+  SCALETO: 'scaleTo',
+  STATE: 'state'
 };

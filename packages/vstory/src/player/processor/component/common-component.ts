@@ -10,7 +10,7 @@ import { getCharacterGraphic } from '../common/common';
 import { moveIn, moveOut, moveTo } from '../common/move-processor';
 
 export class CommonVisibilityActionProcessor extends ActionProcessorItem {
-  name: 'appearOrDisAppear';
+  name: string = 'appearOrDisAppear';
 
   constructor() {
     super();

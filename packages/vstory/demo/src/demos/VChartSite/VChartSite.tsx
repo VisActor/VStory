@@ -42,8 +42,8 @@ export const VChartSiteDemo = () => {
         {
           id: 'default-chapter',
           scenes: [
-            // scene1,
-            scene2
+            scene1
+            // scene2
             // scene3,
             // scene4,
             // scene5,

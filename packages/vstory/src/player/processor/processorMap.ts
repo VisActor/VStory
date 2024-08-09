@@ -6,7 +6,10 @@ import { LineVisibilityActionProcessor } from './component/line/line-visibility'
 import { RectVisibilityActionProcessor } from './component/rect/rect-visibility';
 import { ShapeVisibilityActionProcessor } from './component/shape/shape-visibility';
 import { TextVisibilityActionProcessor } from './component/text/text-visibility';
-import { TimelineVisibilityActionProcessor } from './component/timeline/timeline-visibility';
+import {
+  TimelineStateActionProcessor,
+  TimelineVisibilityActionProcessor
+} from './component/timeline/timeline-visibility';
 import {
   CommonMoveToActionProcessor,
   CommonScaleToActionProcessor,
@@ -61,7 +64,8 @@ export const processorComponentMap = {
     [ACTION_TYPE.DISAPPEAR]: new TimelineVisibilityActionProcessor(),
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),
     [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
-    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor()
+    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
+    [ACTION_TYPE.STATE]: new TimelineStateActionProcessor()
   }
 };
 
