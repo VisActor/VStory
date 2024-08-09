@@ -12,7 +12,13 @@ export class GraphicTimeline extends Graphic {
     return {
       x: 0,
       y: 0,
-      clipRange: 0
+      clipRange: 0,
+      activeSymbolStyle: {
+        size: 26
+      },
+      activeLineStyle: {
+        lineWidth: 1.5
+      }
     };
   }
 

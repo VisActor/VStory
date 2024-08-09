@@ -281,7 +281,7 @@ export const scene2: ISceneSpec = {
           action: 'moveTo',
           payload: {
             destination: {
-              x: 500,
+              x: 900,
               y: 60
             },
             animation: {
@@ -294,10 +294,20 @@ export const scene2: ISceneSpec = {
           action: 'scaleTo',
           payload: {
             scale: {
-              scaleX: 0.75,
-              scaleY: 0.75
+              scaleX: 0.8,
+              scaleY: 0.8
             },
             animation: {
+              duration: 500
+            }
+          }
+        },
+        {
+          startTime: 6000,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
               duration: 500
             }
           }

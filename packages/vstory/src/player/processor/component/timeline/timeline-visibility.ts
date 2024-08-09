@@ -62,13 +62,13 @@ export class TimelineStateActionProcessor extends CommonVisibilityActionProcesso
     super();
   }
 
-  getEffectFunc(effect: string = 'default', appear: boolean) {
+  getEffectFunc(effect: string = 'forward', appear: boolean) {
     switch (effect) {
       case 'forward':
         return forward;
       case 'backward':
         return backward;
     }
-    return null;
+    return forward;
   }
 }
