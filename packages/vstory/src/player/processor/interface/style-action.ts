@@ -15,3 +15,9 @@ interface IComponentMoveToPayLoad extends IActionPayload {
 export interface IComponentMoveToAction extends IAction<IComponentMoveToPayLoad> {
   action: 'moveTo';
 }
+interface IComponentScaleToPayLoad extends IActionPayload {
+  scale: { scaleX: number; scaleY: number };
+}
+export interface IComponentScaleToAction extends IAction<IComponentScaleToPayLoad> {
+  action: 'scaleTo';
+}

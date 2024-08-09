@@ -2,9 +2,9 @@ import type { ICharacter } from '../../../story/character';
 import type { IAction } from '../../../story/interface';
 import { ActionProcessorItem } from '../processor-item';
 import type { EasingType, IGraphic } from '@visactor/vrender-core';
-import type { IComponentMoveToAction, IComponentStyleAction } from '../interface/style-action';
+import type { IComponentMoveToAction, IComponentScaleToAction, IComponentStyleAction } from '../interface/style-action';
 import { fadeIn, fadeOut } from '../common/fade-processor';
-import { scaleIn, scaleOut } from '../common/scale-processor';
+import { scaleIn, scaleOut, scaleTo } from '../common/scale-processor';
 import { wipeIn, wipeOut } from '../common/wipe-processor';
 import { getCharacterGraphic } from '../common/common';
 import { moveIn, moveOut, moveTo } from '../common/move-processor';
@@ -109,5 +109,30 @@ export class CommonMoveToActionProcessor extends ActionProcessorItem {
     const { animation, destination } = actionSpec.payload ?? {};
 
     moveTo(character, animation as any, destination);
+  }
+}
+export class CommonScaleToActionProcessor extends ActionProcessorItem {
+  name: 'scaleTo';
+
+  constructor() {
+    super();
+  }
+
+  getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
+    const { startTime: globalStartTime = 0 } = action;
+    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+
+    const st = globalStartTime + startTime;
+    const d = duration;
+    return {
+      startTime: st,
+      duration: d
+    };
+  }
+
+  run(character: ICharacter, actionSpec: IComponentScaleToAction): void {
+    const { animation, scale } = actionSpec.payload ?? {};
+
+    scaleTo(character, animation as any, scale);
   }
 }

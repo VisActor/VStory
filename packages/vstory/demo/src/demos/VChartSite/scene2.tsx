@@ -281,8 +281,21 @@ export const scene2: ISceneSpec = {
           action: 'moveTo',
           payload: {
             destination: {
-              x: 550,
-              y: 80
+              x: 500,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        },
+        {
+          startTime: 6000,
+          action: 'scaleTo',
+          payload: {
+            scale: {
+              scaleX: 0.75,
+              scaleY: 0.75
             },
             animation: {
               duration: 500

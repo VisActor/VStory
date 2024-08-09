@@ -49,7 +49,7 @@ export const VChartSiteDemo = () => {
             // scene5,
             // scene6,
             // scene7,
-            // scene8,
+            // scene8
             // scene9,
             // scene10,
             // scene11,

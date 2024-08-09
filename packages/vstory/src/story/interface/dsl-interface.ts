@@ -2,12 +2,17 @@ import type {
   IChartVisibilityAction,
   IComponentVisibilityAction
 } from '../../player/processor/interface/appear-action';
-import type { IComponentMoveToAction, IComponentStyleAction } from '../../player/processor/interface/style-action';
+import type {
+  IComponentMoveToAction,
+  IComponentScaleToAction,
+  IComponentStyleAction
+} from '../../player/processor/interface/style-action';
 import type { ICharacterSpec } from '../character';
 
 export type IAction =
   | IComponentStyleAction
   | IComponentMoveToAction
+  | IComponentScaleToAction
   | IComponentVisibilityAction
   | IChartVisibilityAction;
 

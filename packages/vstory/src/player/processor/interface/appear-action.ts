@@ -57,6 +57,10 @@ export interface IMoveParams extends IAnimationParams {
   };
 }
 
+export interface IScaleToParams extends IAnimationParams {
+  scale: { scaleX: number; scaleY: number };
+}
+
 export interface IScaleInParams extends IAnimationParams {
   ratio?: number;
   scale?: {

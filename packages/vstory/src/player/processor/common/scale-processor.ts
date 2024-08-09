@@ -1,8 +1,18 @@
-import type { IGraphic } from '@visactor/vrender-core';
+import type { EasingType, IGraphic } from '@visactor/vrender-core';
 import type { ICharacter } from '../../../story/character';
-import { getCharacterByEffect } from './common';
+import { getCharacterByEffect, getCharacterParentGraphic } from './common';
 import { canDoGraphicAnimation } from '../component/utils';
-import type { IFadeInParams, IScaleInParams } from '../interface/appear-action';
+import type { IFadeInParams, IScaleInParams, IScaleToParams } from '../interface/appear-action';
+
+export function scaleTo(character: ICharacter, animation: IScaleToParams, scaleTo: { scaleX: number; scaleY: number }) {
+  const graphic = getCharacterParentGraphic(character);
+  if (graphic) {
+    const { duration, easing } = animation;
+    if (scaleTo) {
+      graphic.animate().to(scaleTo, duration, easing as EasingType);
+    }
+  }
+}
 
 export function scaleIn(character: ICharacter, animation: IFadeInParams, effect: string) {
   const graphics = getCharacterByEffect(character, effect) as IGraphic[];
