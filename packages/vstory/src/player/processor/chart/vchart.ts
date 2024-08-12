@@ -269,3 +269,52 @@ export class VChartUpdateActionProcessor extends ActionProcessorItem {
     }
   }
 }
+
+export interface IChartAddPayload extends IActionPayload {
+  id: string | number;
+  values: Datum | Datum[];
+  style?: {
+    [key: string]: number | string;
+  };
+}
+
+export interface IChartAddAction extends IAction<IChartAddPayload> {
+  action: 'add';
+  payload: IChartAddPayload;
+}
+
+export class VChartAddActionProcessor extends ActionProcessorItem {
+  name: 'add';
+
+  constructor() {
+    super();
+  }
+
+  getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
+    const { startTime: globalStartTime = 0 } = action;
+    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+
+    const st = globalStartTime + startTime;
+    const d = duration;
+    return {
+      startTime: st,
+      duration: d
+    };
+  }
+
+  run(character: ICharacter, actionSpec: IChartAddAction): void {
+    const instance = (character.graphic as any)._vchart as IVChart;
+    if (!instance) {
+      return;
+    }
+
+    const { payload } = actionSpec as IChartAddAction;
+    const { id: dataId, values } = payload;
+    const rowData = cloneDeep((instance as any)._dataSet.getDataView(dataId).rawData);
+
+    const data = isArray(values) ? values : [values];
+    rowData.push(...data);
+
+    instance.updateDataSync(dataId, rowData);
+  }
+}

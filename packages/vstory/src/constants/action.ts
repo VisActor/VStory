@@ -8,5 +8,6 @@ export const ACTION_TYPE = {
 };
 
 export const VCHART_ACTION_TYPE = {
-  UPDATE: 'update'
+  UPDATE: 'update',
+  ADD: 'add'
 };

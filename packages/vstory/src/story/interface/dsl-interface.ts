@@ -1,7 +1,8 @@
 import type { IChartUpdateAction } from '../../player/processor/chart/vchart';
 import type {
   IChartVisibilityAction,
-  IComponentVisibilityAction
+  IComponentVisibilityAction,
+  IChartAddAction
 } from '../../player/processor/interface/appear-action';
 import type {
   IComponentMoveToAction,
@@ -16,7 +17,8 @@ export type IActionSpec =
   | IComponentMoveToAction
   | IComponentScaleToAction
   | IChartVisibilityAction
-  | IChartUpdateAction;
+  | IChartUpdateAction
+  | IChartAddAction;
 
 export interface IStorySpec {
   acts: IActSpec[]; // 作品的章节
