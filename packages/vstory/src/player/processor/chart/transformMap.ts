@@ -4,20 +4,20 @@ import { runAppearOrDisAppear } from './component/commonAppear';
 import { runLabelAppear } from './component/labelAppear';
 import { runLegendsAppear } from './component/legendsAppear';
 import { runTitleAppear } from './component/titleAppear';
-import { transformArcAppear } from './seriesmark/transformArcAppear';
-import { transformLineAppear } from './seriesmark/transformLineAppear';
-import { transformRectAppear } from './seriesmark/transformRectAppear';
-import { transformSymbolAppear } from './seriesmark/transformSymbolAppear';
-import { transformTextAppear } from './seriesmark/transformTextAppear';
+import { transformArcVisibility } from './seriesmark/transformArcVisibility';
+import { transformLineVisibility } from './seriesmark/transformLineVisibility';
+import { transformRectVisibility } from './seriesmark/transformRectVisibility';
+import { transformSymbolVisibility } from './seriesmark/transformSymbolVisibility';
+import { transformTextVisibility } from './seriesmark/transformTextVisibility';
 
 export const transformMap = {
   appear: {
     // series & mark
-    rect: transformRectAppear,
-    line: transformLineAppear,
-    symbol: transformSymbolAppear,
-    text: transformTextAppear,
-    arc: transformArcAppear,
+    rect: transformRectVisibility,
+    line: transformLineVisibility,
+    symbol: transformSymbolVisibility,
+    text: transformTextVisibility,
+    arc: transformArcVisibility,
     // component
     legends: runLegendsAppear,
     label: runLabelAppear,

@@ -2,18 +2,14 @@ import type VChart from '@visactor/vchart';
 import type { IChartVisibilityAction } from '../../interface/appear-action';
 import { commonFade, commonGrow } from './commonTransformMarkAppear';
 
-// 将payload转换为chart内置的动画type
-export const transformTextAppear = (
+export const transformLineVisibility = (
   instance: VChart,
   animation: IChartVisibilityAction['payload']['animation'],
-  option: {
-    disappear: boolean;
-    markIndex: number;
-  }
+  option: { markIndex: number; disappear: boolean }
 ) => {
   switch (animation.effect) {
     case 'grow': {
-      return commonGrow(instance, animation, ['scaleIn', 'scaleOut'], option);
+      return commonGrow(instance, animation, ['clipIn', 'clipOut'], option);
     }
     case 'fade': {
       return commonFade(instance, animation, option);
