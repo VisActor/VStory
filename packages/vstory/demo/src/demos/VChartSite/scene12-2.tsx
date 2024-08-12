@@ -423,7 +423,7 @@ const chartSpec = {
 
 export const scene12_2_Characters: ICharacterSpec[] = [
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12_2-title`,
     zIndex: 0,
     position: {
@@ -439,7 +439,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12_2-chart-image`,
     zIndex: 1,
     position: {
@@ -455,7 +455,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12_2-text-zh`,
     zIndex: 0,
     position: {
@@ -471,7 +471,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12_2-text-en`,
     zIndex: 0,
     position: {
@@ -487,7 +487,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'SunburstChart',
+    type: 'VChart',
     id: `scene12_2-sunburst-chart`,
     zIndex: 1,
     position: {
@@ -518,7 +518,8 @@ export const scene12_2: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -535,7 +536,8 @@ export const scene12_2: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -552,7 +554,8 @@ export const scene12_2: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -569,7 +572,8 @@ export const scene12_2: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }

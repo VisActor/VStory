@@ -15,7 +15,7 @@ const getCurve = (x: number) => {
 };
 export const scene4Characters: ICharacterSpec[] = [
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-title-decoration',
     zIndex: 1,
     position: {
@@ -31,7 +31,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: 'scene4-title',
     zIndex: 1,
     position: {
@@ -50,7 +50,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: 'scene4-subtitle',
     zIndex: 1,
     position: {
@@ -69,7 +69,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'LineComponent',
+    type: 'Line',
     id: 'scene4-line-left',
     zIndex: 1,
     position: {
@@ -89,7 +89,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-line-left-decoration',
     zIndex: 1,
     position: {
@@ -105,7 +105,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-chart-image',
     zIndex: 1,
     position: {
@@ -121,7 +121,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ScatterChart',
+    type: 'VChart',
     id: 'scatter',
     zIndex: 1,
     position: {
@@ -136,52 +136,39 @@ export const scene4Characters: ICharacterSpec[] = [
         stroke: 'black',
         lineWidth: 1
       },
-      data: [
-        {
-          id: 'data',
-          values: [
-            { x: 104, y: 10, type: 'A' },
-            { x: 98, y: 10, type: 'A' },
-            { x: 93, y: 10, type: 'A' },
-            { x: 90, y: 10, type: 'A' },
-            { x: 76, y: 10, type: 'A' },
-            { x: 70, y: 10, type: 'A' },
-            { x: 63, y: 10, type: 'A' }
-          ]
-        }
-      ],
-      seriesSpec: [
-        {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            background: 'white',
-            xField: 'x',
-            yField: 'y',
-            seriesField: 'type',
-            point: {
-              style: {
-                size: 8,
-                fill: `#E05F38`
-              }
-            },
-            axes: [
-              {
-                orient: 'bottom',
-                bandPadding: 0
-              }
-            ],
-            animationUpdate: {
-              easing: 'cubicInOut',
-              duration: 1000
-            }
+      spec: {
+        type: 'scatter',
+        data: [
+          {
+            id: 'data',
+            values: [
+              { x: 104, y: 10, type: 'A' },
+              { x: 98, y: 10, type: 'A' },
+              { x: 93, y: 10, type: 'A' },
+              { x: 90, y: 10, type: 'A' },
+              { x: 76, y: 10, type: 'A' },
+              { x: 70, y: 10, type: 'A' },
+              { x: 63, y: 10, type: 'A' }
+            ]
           }
-        }
-      ],
-      componentSpec: [
-        {
-          specKey: 'axes',
-          matchInfo: { orient: 'bottom', bandPadding: 0, paddingInner: 0, paddingOuter: 0 },
-          spec: {
+        ],
+        background: 'white',
+        xField: 'x',
+        yField: 'y',
+        seriesField: 'type',
+        point: {
+          style: {
+            size: 8,
+            fill: `#E05F38`
+          }
+        },
+        animationUpdate: {
+          easing: 'cubicInOut',
+          duration: 1000
+        },
+        axes: [
+          {
+            orient: 'bottom',
             bandPadding: 0,
             paddingInner: 0,
             paddingOuter: 0,
@@ -192,23 +179,19 @@ export const scene4Characters: ICharacterSpec[] = [
             label: { visible: false },
             grid: { visible: false },
             domainLine: { visible: true, style: { stroke: 'black', lineWidth: 4 } }
-          }
-        },
-        {
-          specKey: 'axes',
-          matchInfo: { orient: 'left' },
-          spec: {
+          },
+          {
+            orient: 'left',
             visible: false,
             min: 0,
             max: 100
           }
-        }
-      ],
-      attribute: {}
+        ]
+      }
     }
   },
   {
-    type: 'LineComponent',
+    type: 'Line',
     id: 'scene4-text-zh-line',
     zIndex: 1,
     position: {
@@ -228,7 +211,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-text-zh-image',
     zIndex: 1,
     position: {
@@ -244,7 +227,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-text-en-image',
     zIndex: 1,
     position: {
@@ -260,7 +243,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: 'scene4-green-rect',
     zIndex: 1,
     position: {
@@ -278,7 +261,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-decoration',
     zIndex: 1,
     position: {
@@ -294,7 +277,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: 'scene4-grey-rect',
     zIndex: 1,
     position: {
@@ -311,7 +294,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-bg-decoration',
     zIndex: 1,
     position: {
@@ -327,7 +310,7 @@ export const scene4Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: 'scene4-bg-decoration',
     zIndex: 1,
     position: {

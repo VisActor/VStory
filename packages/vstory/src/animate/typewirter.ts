@@ -1,5 +1,5 @@
 import { ACustomAnimate, createLine, getTextBounds, registerShadowRootGraphic } from '@visactor/vrender';
-import type { IGraphic } from '@visactor/vrender';
+import type { IGraphic, ITextGraphicAttribute } from '@visactor/vrender';
 import { isArray } from '@visactor/vutils';
 registerShadowRootGraphic();
 export class TypeWriter extends ACustomAnimate<{ text: string }> {
@@ -60,8 +60,16 @@ export class TypeWriter extends ACustomAnimate<{ text: string }> {
     // update line position
     const line = this.target.shadowRoot?.at(0) as IGraphic;
 
-    const endX = getTextBounds({ ...this.target.attribute, ...out }).width() / 2 + 2;
+    const attr = { ...this.target.attribute, ...out };
+    const width = getTextBounds(attr).width();
+    const { textAlign } = attr as ITextGraphicAttribute;
+    let x = width;
+    if (textAlign === 'center') {
+      x = width / 2;
+    } else if (textAlign === 'right') {
+      x = 0;
+    }
 
-    line.setAttribute('x', endX);
+    line.setAttribute('x', x);
   }
 }

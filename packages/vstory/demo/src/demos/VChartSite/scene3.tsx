@@ -15,7 +15,7 @@ import { easeInOutQuad } from './util';
 // @ts-ignore
 export const scene3Characters: ICharacterSpec[] = [
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `scene3-title1`,
     zIndex: 1,
     position: {
@@ -29,7 +29,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'LineComponent',
+    type: 'Line',
     id: `scene3-line-top`,
     zIndex: 1,
     position: {
@@ -49,7 +49,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'LineComponent',
+    type: 'Line',
     id: `scene3-line-bottom`,
     zIndex: 1,
     position: {
@@ -69,7 +69,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `scene3-title-Nicole`,
     zIndex: 1,
     position: {
@@ -83,7 +83,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-text-image-top`,
     zIndex: 1,
     position: {
@@ -99,7 +99,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-text-image-top`,
     zIndex: 1,
     position: {
@@ -115,7 +115,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-1`,
     zIndex: 1,
     position: {
@@ -131,7 +131,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-2`,
     zIndex: 1,
     position: {
@@ -147,7 +147,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-3`,
     zIndex: 1,
     position: {
@@ -163,7 +163,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-4`,
     zIndex: 1,
     position: {
@@ -179,7 +179,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-chart-image-5`,
     zIndex: 1,
     position: {
@@ -195,7 +195,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-text-image-bottom`,
     zIndex: 1,
     position: {
@@ -211,7 +211,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `scene3-title-1486`,
     zIndex: 1,
     position: {
@@ -225,7 +225,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-title-image`,
     zIndex: 1,
     position: {
@@ -241,7 +241,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene3-background`,
     zIndex: 0,
     position: {
@@ -258,7 +258,7 @@ export const scene3Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene3-background-decoration`,
     zIndex: 0,
     position: {
@@ -275,7 +275,7 @@ export const scene3Characters: ICharacterSpec[] = [
   },
   // Bar Chart
   {
-    type: 'BarChart',
+    type: 'VChart',
     id: `bar`,
     zIndex: 1,
     position: {
@@ -284,7 +284,6 @@ export const scene3Characters: ICharacterSpec[] = [
       width: 260,
       height: 335
     },
-
     options: {
       panel: {
         fill: '#ffffff',
@@ -293,136 +292,119 @@ export const scene3Characters: ICharacterSpec[] = [
         shadowOffsetX: 4,
         shadowOffsetY: 4
       },
-      title: {
-        text: 'BarChart',
-        orient: 'bottom',
-        align: 'center',
-        textStyle: {
-          fontSize: 10,
-          lineHeight: 10
-        }
-      },
+      spec: {
+        type: 'bar',
+        title: {
+          text: 'BarChart',
+          orient: 'bottom',
+          align: 'center',
+          textStyle: {
+            fontSize: 10,
+            lineHeight: 10
+          }
+        },
 
-      padding: [120, 60, 75, 60],
-      data: [
-        {
-          id: 'data',
-          values: [
-            {
-              x: '1',
-              y: 100,
-              type: 'Category1'
-            },
-            {
-              x: '2',
-              y: 100,
-              type: 'Category1'
-            },
-            {
-              x: '3',
-              y: 100,
-              type: 'Category1'
-            },
-            {
-              x: '4',
-              y: 100,
-              type: 'Category1'
-            },
-            {
-              x: '1',
-              y: 100,
-              type: 'Category2'
-            },
-            {
-              x: '2',
-              y: 100,
-              type: 'Category2'
-            },
-            {
-              x: '3',
-              y: 100,
-              type: 'Category2'
-            },
-            {
-              x: '4',
-              y: 100,
-              type: 'Category2'
-            }
-          ]
-        }
-      ],
-      seriesSpec: [
-        {
-          matchInfo: { specIndex: 'all' },
-          spec: {
-            xField: ['x', 'type'],
-            yField: 'y',
-            seriesField: 'type',
-            bar: {
-              style: {
-                fill: {
-                  gradient: 'linear',
-                  stops: [
-                    {
-                      offset: 1
-                    },
-                    {
-                      offset: 0,
-                      opacity: 0.6
-                    }
-                  ]
-                }
-              },
-              state: {
-                selected: {
-                  stroke: '#000',
-                  strokeWidth: 1
-                }
-              }
-            },
-            label: {
-              style: {
-                visible: false
-              }
-            },
-            axes: [
+        padding: [120, 60, 75, 60],
+        data: [
+          {
+            id: 'data',
+            values: [
               {
-                orient: 'bottom',
-                bandPadding: 0
+                x: '1',
+                y: 100,
+                type: 'Category1'
+              },
+              {
+                x: '2',
+                y: 100,
+                type: 'Category1'
+              },
+              {
+                x: '3',
+                y: 100,
+                type: 'Category1'
+              },
+              {
+                x: '4',
+                y: 100,
+                type: 'Category1'
+              },
+              {
+                x: '1',
+                y: 100,
+                type: 'Category2'
+              },
+              {
+                x: '2',
+                y: 100,
+                type: 'Category2'
+              },
+              {
+                x: '3',
+                y: 100,
+                type: 'Category2'
+              },
+              {
+                x: '4',
+                y: 100,
+                type: 'Category2'
               }
-            ],
-            animationUpdate: {
-              easing: 'cubicInOut',
-              duration: 1000
+            ]
+          }
+        ],
+        xField: ['x', 'type'],
+        yField: 'y',
+        seriesField: 'type',
+        bar: {
+          style: {
+            fill: {
+              gradient: 'linear',
+              stops: [
+                {
+                  offset: 1
+                },
+                {
+                  offset: 0,
+                  opacity: 0.6
+                }
+              ]
+            }
+          },
+          state: {
+            selected: {
+              stroke: '#000',
+              strokeWidth: 1
             }
           }
-        }
-      ],
-      componentSpec: [
-        {
-          specKey: 'axes',
-          matchInfo: { orient: 'bottom', bandPadding: 0, paddingInner: 0, paddingOuter: 0 },
-          spec: {
+        },
+        label: {
+          style: {
+            visible: false
+          }
+        },
+        axes: [
+          {
+            orient: 'bottom',
             bandPadding: 0,
             paddingInner: 0,
             paddingOuter: 0,
             tick: { visible: false },
             label: { visible: false },
             grid: { visible: false }
-          }
-        },
-        {
-          specKey: 'axes',
-          matchInfo: { orient: 'left' },
-          spec: {
+          },
+          {
+            orient: 'left',
             tick: { visible: false },
             label: { visible: false },
             grid: { visible: false }
           }
-        }
-      ],
-      color: ['#4CC9E4', '#4954E6'],
-      attribute: {}
+        ],
+        animationUpdate: {
+          easing: 'cubicInOut',
+          duration: 1000
+        },
+        color: ['#4CC9E4', '#4954E6']
+      }
     }
   }
 ];
@@ -430,7 +412,6 @@ export const scene3Characters: ICharacterSpec[] = [
 export const scene3: ISceneSpec = {
   id: 'scene3',
   actions: [
-    // 第二个 scene 的内容，写在这里仅用作测试
     {
       characterId: `scene3-background`,
       characterActions: [
@@ -806,7 +787,6 @@ export const scene3: ISceneSpec = {
         }
       ]
     },
-
     // Bar Chart
     {
       characterId: 'bar',
@@ -1228,11 +1208,11 @@ export const scene3: ISceneSpec = {
           action: 'moveTo',
           startTime: 6500,
           duration: 700,
-          destination: {
-            x: 0,
-            y: 0
-          },
           payload: {
+            destination: {
+              x: 0,
+              y: 0
+            },
             animation: {
               duration: 700,
               easing: easeInOutQuad

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { Component, useCallback, useState } from 'react';
+import { Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
-import { SimpleBar } from './demos/SimpleBar';
-import { RankingBar } from './demos/RankingBar';
 import { StoryBarDemo } from './demos/StoryBarDemo';
-import { StorySceneDemo } from './demos/StoryScene';
-import { AreaWithTag } from './demos/AreaWithTag';
-import { StoryLineDemo } from './demos/StoryLineDemo';
+// import { StorySceneDemo } from './demos/StoryScene';
+// import { AreaWithTag } from './demos/AreaWithTag';
+// import { StoryLineDemo } from './demos/StoryLineDemo';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { StoryPieDemo } from './demos/StoryPieDemo';
+// import { StoryPieDemo } from './demos/StoryPieDemo';
 import { GraphicActionDemo } from './demos/graphicAction';
 import { VChartSiteDemo } from './demos/VChartSite/VChartSite';
 import { DisAppear } from './demos/DisAppear';
@@ -19,38 +18,50 @@ import { Pictogram } from './demos/infographics/Pictogram';
 import { UnitVizLegacyLayoutAlgo } from './demos/infographics/UnitVizLegacyLayoutAlgo';
 import { UnitVizSimple } from './demos/infographics/UnitVizSimple';
 import { Unit } from './demos/Unit';
+import { LV_BAR1 } from './demos/lv/bar1';
+import { BarLineSeries } from './demos/BarLineSeries';
+import { wordcloud } from './demos/wordcloud';
+import { BaseComponent } from './demos/BaseComponent';
+
+type MenusType = (
+  | {
+      name: string;
+      component: () => React.JSX.Element;
+      subMenus?: undefined;
+    }
+  | {
+      name: string;
+      subMenus: {
+        name: string;
+        component: () => React.JSX.Element;
+      }[];
+      component?: undefined;
+    }
+)[];
 
 const App = () => {
-  const [activeIndex, setActiveIndex] = useLocalStorage('menuIndex', 0);
+  const [activeName, setActiveName] = useLocalStorage('menuName', '');
   const menus = [
-    {
-      name: 'SimpleBar',
-      component: SimpleBar
-    },
-    {
-      name: 'RankingBar',
-      component: RankingBar
-    },
     {
       name: 'Bar',
       component: StoryBarDemo
     },
-    {
-      name: 'Line',
-      component: StoryLineDemo
-    },
-    {
-      name: 'Pie',
-      component: StoryPieDemo
-    },
-    {
-      name: 'StoryScene',
-      component: StorySceneDemo
-    },
-    {
-      name: 'AreaWithTag',
-      component: AreaWithTag
-    },
+    // {
+    //   name: 'Line',
+    //   component: StoryLineDemo
+    // },
+    // {
+    //   name: 'Pie',
+    //   component: StoryPieDemo
+    // },
+    // {
+    //   name: 'StoryScene',
+    //   component: StorySceneDemo
+    // },
+    // {
+    //   name: 'AreaWithTag',
+    //   component: AreaWithTag
+    // },
     {
       name: 'DisAppear',
       component: DisAppear
@@ -94,22 +105,78 @@ const App = () => {
     {
       name: 'Unit Viz Component',
       component: Unit
+    },
+    {
+      name: 'BarLineSeries',
+      component: BarLineSeries
+    },
+    {
+      name: 'wordcloud',
+      component: wordcloud
+    },
+    {
+      name: 'BaseComponent',
+      component: BaseComponent
+    },
+    {
+      name: 'lv_chart',
+      subMenus: [
+        {
+          name: 'bar1',
+          component: LV_BAR1
+        }
+      ]
     }
   ];
-  const selectedMenu = menus[activeIndex ?? menus.length - 1];
+  const getSelectedMenu = useCallback<(menus: MenusType) => any>(
+    (menus: MenusType) => {
+      for (let i = 0; i < menus.length; i++) {
+        const menu = menus[i];
+        if (menu.name === activeName) {
+          console.log(menu);
+          return menus[i];
+        }
+        if (menu.subMenus) {
+          const data = getSelectedMenu(menu.subMenus);
+          if (data) {
+            return data;
+          }
+        }
+      }
+    },
+    [activeName]
+  );
+  const selectedMenu = getSelectedMenu(menus);
+  console.log('selectedMenu', selectedMenu);
 
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      <div style={{ flexBasis: 200, height: '90vh', border: '1px solid #eee' }}>
-        {menus.map((menu, index) => (
-          <div key={index} onClick={() => setActiveIndex(index)} style={{ color: 'blueviolet' }}>
-            <button>{menu.name}</button>
-          </div>
-        ))}
+      <div style={{ flexBasis: 200, height: '90vh', overflow: 'auto', border: '1px solid #eee' }}>
+        <Nav
+          style={{ width: 200 }}
+          onSelect={data => setActiveName(data.itemKey)}
+          selectedKeys={[activeName]}
+          footer={{
+            collapseButton: false
+          }}
+        >
+          {menus.map(item => {
+            if (!item.subMenus) {
+              return <Nav.Item key={item.name} itemKey={item.name} text={item.name} />;
+            }
+            return (
+              <Nav.Sub key={item.name} itemKey={item.name} text={item.name}>
+                {item.subMenus.map(menu => (
+                  <Nav.Item key={menu.name} itemKey={menu.name} text={menu.name} />
+                ))}
+              </Nav.Sub>
+            );
+          })}
+        </Nav>
       </div>
 
       <div style={{ flexGrow: 1, border: '1px solid #eee', height: '90vh' }}>
-        <selectedMenu.component />
+        {selectedMenu && <selectedMenu.component />}
       </div>
     </div>
   );

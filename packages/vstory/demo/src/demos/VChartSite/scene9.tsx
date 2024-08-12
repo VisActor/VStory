@@ -146,7 +146,7 @@ const chartSpec = {
 
 export const scene9Characters: ICharacterSpec[] = [
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene9-background`,
     zIndex: 0,
     position: {
@@ -163,7 +163,7 @@ export const scene9Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene9-bg-decoration`,
     zIndex: 0,
     position: {
@@ -179,7 +179,7 @@ export const scene9Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene9-person`,
     zIndex: 1,
     position: {
@@ -195,7 +195,7 @@ export const scene9Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene9-chart-image`,
     zIndex: 0,
     position: {
@@ -212,7 +212,7 @@ export const scene9Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene9-title`,
     zIndex: 0,
     position: {
@@ -228,7 +228,7 @@ export const scene9Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene9-text-zh`,
     zIndex: 0,
     position: {
@@ -244,7 +244,7 @@ export const scene9Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene9-text-en`,
     zIndex: 0,
     position: {
@@ -260,7 +260,7 @@ export const scene9Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RoseChart',
+    type: 'VChart',
     id: `scene9-rose-chart`,
     zIndex: 2,
     position: {
@@ -327,6 +327,7 @@ export const scene9: ISceneSpec = {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
+              effect: 'move',
               move: {
                 from: 'right'
               }
@@ -421,18 +422,18 @@ export const scene9: ISceneSpec = {
             }
           }
         },
-        ...month.map((mon, i) => {
-          return {
-            action: 'add',
-            startTime: 2000 + (i + 1) * 200,
-            duration: 200,
-            payload: {
-              id: '1856Rose',
-              // @ts-ignore
-              values: monthData[mon]
-            }
-          };
-        }),
+        // ...month.map((mon, i) => {
+        //   return {
+        //     action: 'add',
+        //     startTime: 2000 + (i + 1) * 200,
+        //     duration: 200,
+        //     payload: {
+        //       id: '1856Rose',
+        //       // @ts-ignore
+        //       values: monthData[mon]
+        //     }
+        //   };
+        // }),
         {
           action: 'disappear',
           startTime: 5500,
@@ -463,6 +464,7 @@ scene9.actions.forEach(({ characterId, characterActions }) => {
         animation: {
           duration: 500,
           easing: easeInOutQuad,
+          effect: 'move',
           move: {
             to: 'left'
           }

@@ -4,7 +4,7 @@ import { ISceneSpec } from '../../../../src/story/interface';
 
 export const scene2Characters: ICharacterSpec[] = [
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `title1`,
     zIndex: 1,
     position: {
@@ -18,7 +18,7 @@ export const scene2Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `title2`,
     zIndex: 1,
     position: {
@@ -32,7 +32,7 @@ export const scene2Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RichTextComponent',
+    type: 'RichText',
     id: `titlesubtitle`,
     zIndex: 1,
     position: {
@@ -59,7 +59,7 @@ export const scene2Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TextComponent',
+    type: 'Text',
     id: `scene2-title2`,
     zIndex: 1,
     position: {
@@ -76,6 +76,45 @@ export const scene2Characters: ICharacterSpec[] = [
         text: 'DEVELOPMENT ROADMAP'
       }
     }
+  },
+  {
+    type: 'Timeline',
+    id: 'timeline',
+    zIndex: 10,
+    position: {
+      top: 500,
+      left: 100,
+      width: 1200,
+      height: 100
+    },
+    options: {
+      graphic: {
+        times: [
+          { label: '1486', desc: '' },
+          { label: '1644', desc: '' },
+          { label: '1765', desc: '' },
+          { label: '1786', desc: '' },
+          { label: '1801', desc: '' },
+          { label: '1833', desc: '' },
+          { label: '1856', desc: '' },
+          { label: '1877', desc: '' },
+          { label: '1976', desc: '' },
+          { label: '1990s', desc: '' }
+        ],
+        lineStyle: {
+          lineDash: [1, 1]
+        },
+        labelStyle: {
+          fontSize: 28,
+          fontWeight: 'bold'
+        },
+        activeLabelStyle: {
+          fontSize: 28,
+          fontWeight: 'bold',
+          dy: 20
+        }
+      }
+    }
   }
 ];
 
@@ -89,11 +128,11 @@ export const scene2: ISceneSpec = {
           startTime: 0,
           duration: 800,
           action: 'moveTo',
-          destination: {
-            x: 250,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: 250,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
@@ -122,11 +161,11 @@ export const scene2: ISceneSpec = {
           startTime: 0,
           duration: 800,
           action: 'moveTo',
-          destination: {
-            x: 550,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: 550,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
@@ -171,13 +210,12 @@ export const scene2: ISceneSpec = {
       characterActions: [
         {
           startTime: 2000,
-          duration: 800,
           action: 'moveTo',
-          destination: {
-            x: -650,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: -650,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
@@ -191,13 +229,12 @@ export const scene2: ISceneSpec = {
       characterActions: [
         {
           startTime: 2000,
-          duration: 800,
           action: 'moveTo',
-          destination: {
-            x: -350,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: -350,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
@@ -213,14 +250,65 @@ export const scene2: ISceneSpec = {
           startTime: 2000,
           duration: 800,
           action: 'moveTo',
-          destination: {
-            x: -750,
-            y: 80
-          },
           payload: {
+            destination: {
+              x: -750,
+              y: 80
+            },
             animation: {
               duration: 800,
               easing: 'quadInOut'
+            }
+          }
+        }
+      ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 2000,
+          action: 'appear',
+          payload: {
+            animation: {
+              duration: 4000,
+              effect: 'default'
+            }
+          }
+        },
+        {
+          startTime: 6000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 900,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        },
+        {
+          startTime: 6000,
+          action: 'scaleTo',
+          payload: {
+            scale: {
+              scaleX: 0.8,
+              scaleY: 0.8
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        },
+        {
+          startTime: 6000,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 500
             }
           }
         }

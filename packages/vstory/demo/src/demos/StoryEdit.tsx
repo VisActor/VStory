@@ -22,7 +22,7 @@ export const StoryEdit = () => {
     const tempSpec: IStorySpec = {
       characters: [
         {
-          type: 'RectComponent',
+          type: 'Rect',
           id: 'test-graphics-0',
           zIndex: 10,
           position: {
@@ -44,7 +44,7 @@ export const StoryEdit = () => {
           }
         },
         {
-          type: 'RectComponent',
+          type: 'Rect',
           id: 'test-graphics-1',
           zIndex: 0,
           position: {

@@ -192,7 +192,7 @@ const chartSpec = {
 
 export const scene11Characters: ICharacterSpec[] = [
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene11-background`,
     zIndex: 0,
     position: {
@@ -209,7 +209,7 @@ export const scene11Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene11-bg-decoration`,
     zIndex: 0,
     position: {
@@ -225,7 +225,7 @@ export const scene11Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene11-title`,
     zIndex: 0,
     position: {
@@ -241,7 +241,7 @@ export const scene11Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene11-text-en`,
     zIndex: 0,
     position: {
@@ -257,7 +257,7 @@ export const scene11Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene11-text-zh`,
     zIndex: 0,
     position: {
@@ -273,7 +273,7 @@ export const scene11Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene11-chart-image`,
     zIndex: 0,
     position: {
@@ -289,7 +289,7 @@ export const scene11Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'WordCloudChart',
+    type: 'VChart',
     id: `scene11-wordcloud-chart`,
     zIndex: 0,
     position: {
@@ -354,8 +354,9 @@ export const scene11: ISceneSpec = {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
+              effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -373,8 +374,9 @@ export const scene11: ISceneSpec = {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
+              effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -392,8 +394,9 @@ export const scene11: ISceneSpec = {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
+              effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -411,8 +414,9 @@ export const scene11: ISceneSpec = {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
+              effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -430,6 +434,7 @@ export const scene11: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
+              effect: 'fade',
               fade: {
                 isBaseOpacity: true
               }
@@ -444,6 +449,7 @@ export const scene11: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
+              effect: 'fade',
               fade: {
                 opacity: 0,
                 isBaseOpacity: true
