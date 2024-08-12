@@ -8,7 +8,7 @@ import type { IChartVisibilityAction } from '../interface/appear-action';
 import type { AxisBaseAttributes } from '@visactor/vrender-components';
 import type { IGraphic, IGroup } from '@visactor/vrender-core';
 import type { IAction, IActionPayload } from '../interface/common-action';
-import { isMatch } from '../component/utils';
+import { checkArrayOrder, isMatch } from '../component/utils';
 
 export type Datum = Record<string, any>;
 
@@ -86,15 +86,27 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
   protected axisComponentAppear(vchart: IVChart, component: IComponent, actionSpec: IActionSpec) {
     const vrenderComponents = component.getVRenderComponents();
     const axis = vrenderComponents[0];
+    if (!axis) {
+      return;
+    }
     const axisGrid = vrenderComponents[1];
-    const axisOrient = (axis?.attribute as AxisBaseAttributes)?.orient;
-    const axisItems = (axis?.attribute as AxisBaseAttributes)?.items ?? [[]];
+    const axisOrient = (axis.attribute as AxisBaseAttributes)?.orient;
+    if (axisOrient === 'angle' || axisOrient === 'radius') {
+      this.polarAxisAppear(axis, axisGrid, actionSpec);
+    } else {
+      this.cartesianAxisAppear(axis, axisGrid, actionSpec);
+    }
+  }
+
+  protected cartesianAxisAppear(axis: any, axisGrid: any, actionSpec: IActionSpec) {
+    const axisOrient = (axis.attribute as AxisBaseAttributes)?.orient;
+    const axisItems = (axis.attribute as AxisBaseAttributes)?.items ?? [[]];
     const orient = axisOrient === 'left' || axisOrient === 'right' ? 'height' : 'width';
     const gridOrient = axisOrient === 'left' || axisOrient === 'right' ? 'width' : 'height';
-    const direction = isNumberClose(axisItems[0]?.[0]?.value, 1) ? 'positive' : 'negative';
+    // 有点 hack。从 vrender component 拿不到轴 inverse 配置。
+    const direction = checkArrayOrder(axisItems[0], 'value') < 0 ? 'positive' : 'negative';
     const appearTransformFunc = (transformMap.appear as any).axis;
-    const defaultPayload = (VChartVisibilityActionProcessor as any).defaultPayload;
-
+    const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
     if (axis) {
       this.runTransformFunc(axis as any, appearTransformFunc, actionSpec, defaultPayload, { orient, direction });
     }
@@ -103,6 +115,18 @@ export class VChartVisibilityActionProcessor extends ActionProcessorItem {
         orient: gridOrient,
         direction
       });
+    }
+  }
+
+  protected polarAxisAppear(axis: any, axisGrid: any, actionSpec: IActionSpec) {
+    const axisItems = (axis.attribute as AxisBaseAttributes)?.items ?? [[]];
+    const appearTransformFunc = (transformMap.appear as any).axis;
+    const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
+    if (axis) {
+      this.runTransformFunc(axis as any, appearTransformFunc, actionSpec, defaultPayload);
+    }
+    if (axisGrid) {
+      this.runTransformFunc(axisGrid as any, appearTransformFunc, actionSpec, defaultPayload, {});
     }
   }
 

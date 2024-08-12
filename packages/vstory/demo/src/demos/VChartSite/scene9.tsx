@@ -132,6 +132,7 @@ const chartSpec = {
     {
       orient: 'angle',
       visible: true,
+      domain: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       domainLine: { visible: true, smooth: false },
       grid: { visible: true, smooth: false },
       label: {
@@ -412,7 +413,7 @@ export const scene9: ISceneSpec = {
         ...month.map((mon, i) => {
           return {
             action: 'add',
-            startTime: 2000 + (i + 1) * 200,
+            startTime: 2200 + (i + 1) * 200,
             payload: {
               id: '1856Rose',
               duration: 200,
