@@ -1,5 +1,4 @@
 import type { IActSpec, IStory } from '../story/interface';
-import { IAction } from '../story/interface';
 import type { ICharacter } from '../story/character';
 import type { IPlayer } from './interface/player';
 import type { IActionProcessor } from './processor/interface/action-processor';

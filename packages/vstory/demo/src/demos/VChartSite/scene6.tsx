@@ -1359,16 +1359,12 @@ const scene6_1 = [
     characterId: 'scene6-img1',
     characterActions: [
       {
-        startTime: 1,
-        duration: 1200,
         action: 'appear',
         payload: {
           animation: {
             easing: easeInOutQuad,
             duration: 1200,
-            scale: {
-              ratio: 1
-            }
+            effect: 'scale'
           }
         }
       },
@@ -1392,12 +1388,12 @@ const scene6_1 = [
     characterActions: [
       {
         startTime: 1500,
-        duration: 500,
         action: 'appear',
         payload: {
           animation: {
             easing: easeInOutQuad,
             duration: 500,
+            effect: ['fade', 'scale'],
             fade: {
               opacity: 1,
               isBaseOpacity: true
@@ -1412,23 +1408,21 @@ const scene6_1 = [
         // 更新数据
         return {
           startTime: 1500 + 500 + index * barDuration,
-          duration: barDuration,
           action: 'update',
           payload: {
             id: 'dataId',
+            duration: barDuration,
             values: data.sort((b, a) => a.max - b.max)
           }
         };
       }),
       {
         startTime: 2000 + asiaData.length * barDuration,
-        duration: 1200,
         action: 'disappear',
         payload: {
           animation: {
             easing: easeInOutQuad,
             duration: 1200,
-            effect: 'fade',
             fade: {
               opacity: 0,
               isBaseOpacity: true
@@ -1447,25 +1441,21 @@ const scene6_2 = [
     characterActions: [
       {
         startTime: scene62Start,
-        duration: 1000,
         action: 'appear',
         payload: {
           animation: {
             easing: easeInOutQuad,
-            duration: 1000,
-            effect: 'fade'
+            duration: 1000
           }
         }
       },
       {
         startTime: endTimeStart,
-        duration: 1000,
         action: 'disappear',
         payload: {
           animation: {
             easing: easeInOutQuad,
-            duration: 1000,
-            effect: 'fade'
+            duration: 1000
           }
         }
       }
@@ -1478,28 +1468,28 @@ const scene6_2 = [
     characterActions: [
       {
         startTime: scene62Start,
-        duration: 1000,
         action: 'appear',
         payload: {
           animation: {
             easing: easeInOutQuad,
             duration: 1000,
+            effect: 'move',
             move: {
-              from: 'bottom'
+              pos: 'bottom'
             }
           }
         }
       },
       {
         startTime: endTimeStart,
-        duration: 1000,
         action: 'disappear',
         payload: {
           animation: {
             easing: easeInOutQuad,
             duration: 1000,
+            effect: 'move',
             move: {
-              to: 'top'
+              pos: 'top'
             }
           }
         }
@@ -1512,7 +1502,6 @@ const scene6_2 = [
     characterActions: [
       {
         startTime: 10000,
-        duration: 1000,
         action: 'appear',
         payload: {
           animation: {
@@ -1527,7 +1516,6 @@ const scene6_2 = [
       },
       {
         startTime: 13000,
-        duration: 1000,
         action: 'disappear',
         payload: {
           animation: {
@@ -1548,29 +1536,25 @@ const scene6_2 = [
     characterActions: [
       {
         startTime: scene62Start,
-        duration: 1000,
         action: 'appear',
         payload: {
           animation: {
             easing: easeInOutQuad,
             duration: 1000,
+            effect: 'move',
             move: {
-              from: 'bottom'
+              pos: 'bottom'
             }
           }
         }
       },
       {
         startTime: endTimeStart,
-        duration: 1000,
         action: 'disappear',
         payload: {
           animation: {
             easing: easeInOutQuad,
-            duration: 1000,
-            fade: {
-              opacity: 0
-            }
+            duration: 1000
           }
         }
       }
@@ -1583,29 +1567,21 @@ const scene6_2 = [
     characterActions: [
       {
         startTime: 8200,
-        duration: 300,
         action: 'appear',
         payload: {
           animation: {
             easing: easeInOutQuad,
-            duration: 300,
-            fade: {
-              opacity: 1
-            }
+            duration: 300
           }
         }
       },
       {
         startTime: endTimeFinished - 5,
-        duration: 5,
         action: 'disappear',
         payload: {
           animation: {
             duration: 5,
-            easing: easeInOutQuad,
-            fade: {
-              opacity: 0
-            }
+            easing: easeInOutQuad
           }
         }
       }
@@ -1618,29 +1594,21 @@ const scene6_2 = [
     characterActions: [
       {
         startTime: scene62Start,
-        duration: 1000,
         action: 'appear',
         payload: {
           animation: {
             easing: easeInOutQuad,
-            duration: 600,
-            fade: {
-              opacity: 1
-            }
+            duration: 600
           }
         }
       },
       {
         startTime: endTimeFinished - 5,
-        duration: 5,
         action: 'disappear',
         payload: {
           animation: {
             duration: 5,
-            easing: easeInOutQuad,
-            fade: {
-              opacity: 0
-            }
+            easing: easeInOutQuad
           }
         }
       }
@@ -1834,22 +1802,17 @@ export const scene6: ISceneSpec = {
       characterId: 'scene6-bg1',
       characterActions: [
         {
-          startTime: 1,
-          duration: 1,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 1,
-              scale: {
-                ratio: 1
-              }
+              effect: 'scale'
             }
           }
         },
         {
           startTime: 8000,
-          duration: 500,
           action: 'style',
           payload: {
             graphic: { x: 90, width: 1262 },
@@ -1861,15 +1824,11 @@ export const scene6: ISceneSpec = {
         },
         {
           startTime: scene62Start,
-          duration: 1000,
           action: 'disappear',
           payload: {
             animation: {
               easing: easeInOutQuad,
-              duration: 600,
-              fade: {
-                opacity: 0
-              }
+              duration: 1000
             }
           }
         }
@@ -1881,7 +1840,6 @@ export const scene6: ISceneSpec = {
       characterActions: [
         {
           startTime: 8000,
-          duration: 0,
           action: 'appear',
           payload: {
             animation: {
@@ -1892,15 +1850,11 @@ export const scene6: ISceneSpec = {
         },
         {
           startTime: endTimeFinished - 5,
-          duration: 5,
           action: 'disappear',
           payload: {
             animation: {
               easing: easeInOutQuad,
-              duration: 5,
-              fade: {
-                opacity: 0
-              }
+              duration: 5
             }
           }
         }

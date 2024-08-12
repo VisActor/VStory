@@ -1,10 +1,10 @@
 import type { ICharacter } from '../../../story/character';
-import type { IAction } from '../../../story/interface';
+import type { IActionSpec } from '../../../story/interface';
 
 export interface IActionProcessorItem {
-  getStartTime: (action: IAction) => number;
-  getDuration: (action: IAction) => number;
-  getStartTimeAndDuration: (action: IAction) => { startTime: number; duration: number };
+  getStartTime: (action: IActionSpec) => number;
+  getDuration: (action: IActionSpec) => number;
+  getStartTimeAndDuration: (action: IActionSpec) => { startTime: number; duration: number };
 
   run: (...actionParams: any) => any;
 }
@@ -12,11 +12,11 @@ export interface IActionProcessorItem {
 export interface IActionProcessor {
   getActInfo: (
     characterId: string,
-    action: IAction
+    action: IActionSpec
   ) => {
     startTime: number;
     duration: number;
   } | null;
 
-  doAction: (name: string, actionName: string, character: ICharacter, actionSpec: IAction) => void;
+  doAction: (name: string, actionName: string, character: ICharacter, actionSpec: IActionSpec) => void;
 }

@@ -203,8 +203,6 @@ export const scene7: ISceneSpec = {
         // 应该是一个 scaleX 更新的动画
         {
           action: 'style',
-          startTime: 1,
-          duration: 500,
           payload: {
             graphic: { scaleX: 1 },
             animation: {
@@ -221,8 +219,6 @@ export const scene7: ISceneSpec = {
         // 应该是一个 scaleX 更新的动画
         {
           action: 'style',
-          startTime: 1,
-          duration: 500,
           payload: {
             graphic: { scaleX: 1 },
             animation: {
@@ -239,8 +235,6 @@ export const scene7: ISceneSpec = {
         // 应该是一个 scaleX 更新的动画
         {
           action: 'style',
-          startTime: 1,
-          duration: 500,
           payload: {
             graphic: { scaleX: 1 }, // TODO: 这里应该有一个从上一页继承过来的 bg Image
             animation: {
@@ -256,12 +250,11 @@ export const scene7: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
+              effect: 'move',
               move: {
                 from: 'left'
               }
@@ -275,13 +268,10 @@ export const scene7: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 100,
           payload: {
             animation: {
               duration: 100,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -294,7 +284,6 @@ export const scene7: ISceneSpec = {
         {
           action: 'appear',
           startTime: 300,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
@@ -312,7 +301,7 @@ export const scene7: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
+
           duration: 1000,
           payload: {
             animation: {
@@ -329,12 +318,13 @@ export const scene7: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
+
           duration: 500,
           payload: {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
+              effect: 'move',
               move: {
                 from: 'top'
               }
@@ -350,7 +340,6 @@ export const scene7: ISceneSpec = {
         {
           action: 'appear',
           startTime: 1500,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000
@@ -360,12 +349,10 @@ export const scene7: ISceneSpec = {
         {
           action: 'disappear',
           startTime: 3500,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -379,12 +366,10 @@ scene7.actions.forEach(({ characterId, characterActions }) => {
     characterActions.push({
       action: 'disappear',
       startTime: 5500,
-      duration: 500,
       payload: {
         animation: {
           duration: 500,
-          easing: easeInOutQuad,
-          effect: 'fade'
+          easing: easeInOutQuad
         }
       }
     });
@@ -392,16 +377,13 @@ scene7.actions.forEach(({ characterId, characterActions }) => {
     characterActions.push({
       action: 'disappear',
       startTime: 5500,
-      duration: 500,
       payload: {
         animation: {
           duration: 500,
           easing: easeInOutQuad,
+          effect: ['move', 'fade'],
           move: {
             to: 'top'
-          },
-          fade: {
-            opacity: 0
           }
         }
       }

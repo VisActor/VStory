@@ -1,7 +1,7 @@
-import { ACTION_TYPE } from '../../constants/action';
+import { ACTION_TYPE, VCHART_ACTION_TYPE } from '../../constants/action';
 import { StoryChartType, StoryComponentType } from '../../constants/character';
 import { ImageVisibilityActionProcessor } from './component/image/image-visibility';
-import { VChartVisibilityActionProcessor } from './chart/vchart';
+import { VChartUpdateActionProcessor, VChartVisibilityActionProcessor } from './chart/vchart';
 import { LineVisibilityActionProcessor } from './component/line/line-visibility';
 import { RectVisibilityActionProcessor } from './component/rect/rect-visibility';
 import { ShapeVisibilityActionProcessor } from './component/shape/shape-visibility';
@@ -19,7 +19,8 @@ import {
 export const processorChartMap = {
   [StoryChartType.VCHART]: {
     [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor(),
-    [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor()
+    [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor(),
+    [VCHART_ACTION_TYPE.UPDATE]: new VChartUpdateActionProcessor()
   }
 };
 
