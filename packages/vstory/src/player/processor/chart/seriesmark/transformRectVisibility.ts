@@ -5,7 +5,7 @@ import type { IChartVisibilityAction } from '../../interface/appear-action';
 import { commonFade } from './commonTransformMarkAppear';
 
 // 将payload转换为chart内置的动画type
-export const transformRectAppear = (
+export const transformRectVisibility = (
   instance: VChart,
   animation: IChartVisibilityAction['payload']['animation'],
   option: { markIndex: number; disappear: boolean }

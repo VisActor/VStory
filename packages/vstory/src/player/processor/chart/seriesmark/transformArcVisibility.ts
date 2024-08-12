@@ -2,7 +2,7 @@ import type VChart from '@visactor/vchart';
 import type { IChartVisibilityAction } from '../../interface/appear-action';
 
 // 将payload转换为chart内置的动画type
-export const transformArcAppear = (
+export const transformArcVisibility = (
   instance: VChart,
   animation: IChartVisibilityAction['payload']['animation'],
   option: {

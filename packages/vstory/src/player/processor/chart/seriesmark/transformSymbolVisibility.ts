@@ -2,7 +2,7 @@ import type VChart from '@visactor/vchart';
 import type { IChartVisibilityAction } from '../../interface/appear-action';
 import { commonFade, commonGrow } from './commonTransformMarkAppear';
 
-export const transformSymbolAppear = (
+export const transformSymbolVisibility = (
   instance: VChart,
   animation: IChartVisibilityAction['payload']['animation'],
   option: { markIndex: number; disappear: boolean }
