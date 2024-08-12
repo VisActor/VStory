@@ -312,8 +312,8 @@ export const UnitVizLegacyLayoutAlgo = () => {
                   characterId: 'title-1',
                   characterActions: [
                     {
-                      startTime: animationDuration,
-                      duration: animationDuration,
+                      startTime: 0,
+                      duration: 0,
                       action: 'appear',
                       payload: {
                         animation: {
@@ -335,8 +335,8 @@ export const UnitVizLegacyLayoutAlgo = () => {
                   characterId: 'title-1',
                   characterActions: [
                     {
-                      startTime: sceneDuration - animationDuration,
-                      duration: animationDuration,
+                      startTime: sceneDuration,
+                      duration: 0,
                       action: 'disappear',
                       payload: {
                         animation: {

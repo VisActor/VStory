@@ -18,6 +18,7 @@ import { Playground } from './demos/Playground';
 import { Pictogram } from './demos/infographics/Pictogram';
 import { UnitVizLegacyLayoutAlgo } from './demos/infographics/UnitVizLegacyLayoutAlgo';
 import { UnitVizSimple } from './demos/infographics/UnitVizSimple';
+import { Unit } from './demos/Unit';
 
 const App = () => {
   const [activeIndex, setActiveIndex] = useLocalStorage('menuIndex', 0);
@@ -89,6 +90,10 @@ const App = () => {
     {
       name: 'Infographic-UnitVizSimple-LegacyLayoutAlgo',
       component: UnitVizLegacyLayoutAlgo
+    },
+    {
+      name: 'Unit Viz Component',
+      component: Unit
     }
   ];
   const selectedMenu = menus[activeIndex ?? menus.length - 1];
