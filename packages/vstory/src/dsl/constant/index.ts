@@ -23,7 +23,8 @@ export enum StoryGraphicType {
   TEXT = 'TextComponent',
   RICH_TEXT = 'RichTextComponent',
   QIPAO = 'QipaoComponent',
-  IMAGE = 'ImageComponent'
+  IMAGE = 'ImageComponent',
+  UNITS = 'UnitsComponent'
 }
 
 export const enum StoryChartComponentType {
