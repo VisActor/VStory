@@ -307,15 +307,13 @@ export const scene11Characters: ICharacterSpec[] = [
 
 export const scene11: ISceneSpec = {
   id: 'scene11',
-  delay: -1000,
+  // delay: -200,
   actions: [
     {
       characterId: 'scene11-background',
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
@@ -331,8 +329,6 @@ export const scene11: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
@@ -348,8 +344,6 @@ export const scene11: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
@@ -368,8 +362,6 @@ export const scene11: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
@@ -388,8 +380,6 @@ export const scene11: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
@@ -409,7 +399,6 @@ export const scene11: ISceneSpec = {
         {
           action: 'appear',
           startTime: 500,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
@@ -429,12 +418,10 @@ export const scene11: ISceneSpec = {
         {
           action: 'appear',
           startTime: 2000,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              effect: 'fade',
               fade: {
                 isBaseOpacity: true
               }
@@ -444,16 +431,11 @@ export const scene11: ISceneSpec = {
         {
           action: 'disappear',
           startTime: 4500,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              effect: 'fade',
-              fade: {
-                opacity: 0,
-                isBaseOpacity: true
-              }
+              fade: { isBaseOpacity: true }
             }
           }
         }
@@ -467,7 +449,6 @@ scene11.actions.forEach(({ characterId, characterActions }) => {
     characterActions.push({
       action: 'disappear',
       startTime: 7000,
-      duration: 1000,
       payload: {
         animation: {
           duration: 1000,
@@ -483,7 +464,6 @@ scene11.actions.forEach(({ characterId, characterActions }) => {
       characterActions.push({
         action: 'style',
         startTime: 7000,
-        duration: 1000,
         payload: {
           graphic: {
             x: 960 - left,

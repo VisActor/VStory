@@ -674,7 +674,6 @@ export const scene12: ISceneSpec = {
         {
           action: 'appear',
           startTime: 3000,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
@@ -687,7 +686,6 @@ export const scene12: ISceneSpec = {
         {
           action: 'disappear',
           startTime: 5500,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
@@ -709,7 +707,6 @@ scene12.actions.forEach(({ characterId, characterActions }) => {
     characterActions.push({
       action: 'disappear',
       startTime: 7500,
-      duration: 1000,
       payload: {
         animation: {
           duration: 1000,

@@ -132,6 +132,7 @@ const chartSpec = {
     {
       orient: 'angle',
       visible: true,
+      domain: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       domainLine: { visible: true, smooth: false },
       grid: { visible: true, smooth: false },
       label: {
@@ -288,12 +289,10 @@ export const scene9: ISceneSpec = {
         {
           action: 'appear',
           startTime: 500,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -305,12 +304,10 @@ export const scene9: ISceneSpec = {
         {
           action: 'appear',
           startTime: 500,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -321,15 +318,13 @@ export const scene9: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
               effect: 'move',
               move: {
-                from: 'right'
+                pos: 'right'
               }
             }
           }
@@ -342,12 +337,10 @@ export const scene9: ISceneSpec = {
         {
           action: 'appear',
           startTime: 500,
-          duration: 300,
           payload: {
             animation: {
               duration: 300,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -359,7 +352,6 @@ export const scene9: ISceneSpec = {
         {
           action: 'appear',
           startTime: 500,
-          duration: 300,
           payload: {
             animation: {
               duration: 300,
@@ -376,7 +368,6 @@ export const scene9: ISceneSpec = {
         {
           action: 'appear',
           startTime: 500,
-          duration: 300,
           payload: {
             animation: {
               duration: 300,
@@ -393,12 +384,10 @@ export const scene9: ISceneSpec = {
         {
           action: 'appear',
           startTime: 500,
-          duration: 300,
           payload: {
             animation: {
               duration: 300,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -410,7 +399,6 @@ export const scene9: ISceneSpec = {
         {
           action: 'appear',
           startTime: 2000,
-          duration: 200,
           payload: {
             animation: {
               duration: 200,
@@ -422,22 +410,21 @@ export const scene9: ISceneSpec = {
             }
           }
         },
-        // ...month.map((mon, i) => {
-        //   return {
-        //     action: 'add',
-        //     startTime: 2000 + (i + 1) * 200,
-        //     duration: 200,
-        //     payload: {
-        //       id: '1856Rose',
-        //       // @ts-ignore
-        //       values: monthData[mon]
-        //     }
-        //   };
-        // }),
+        ...month.map((mon, i) => {
+          return {
+            action: 'add',
+            startTime: 2200 + (i + 1) * 200,
+            payload: {
+              id: '1856Rose',
+              duration: 200,
+              // @ts-ignore
+              values: monthData[mon]
+            }
+          };
+        }),
         {
           action: 'disappear',
           startTime: 5500,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
@@ -459,14 +446,13 @@ scene9.actions.forEach(({ characterId, characterActions }) => {
     characterActions.push({
       action: 'disappear',
       startTime: 7500,
-      duration: 500,
       payload: {
         animation: {
           duration: 500,
           easing: easeInOutQuad,
           effect: 'move',
           move: {
-            to: 'left'
+            pos: 'left'
           }
         }
       }
@@ -475,12 +461,10 @@ scene9.actions.forEach(({ characterId, characterActions }) => {
     characterActions.push({
       action: 'disappear',
       startTime: 7500,
-      duration: 500,
       payload: {
         animation: {
           duration: 500,
-          easing: easeInOutQuad,
-          effect: 'fade'
+          easing: easeInOutQuad
         }
       }
     });

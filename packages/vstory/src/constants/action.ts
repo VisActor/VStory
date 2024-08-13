@@ -6,3 +6,8 @@ export const ACTION_TYPE = {
   SCALETO: 'scaleTo',
   STATE: 'state'
 };
+
+export const VCHART_ACTION_TYPE = {
+  UPDATE: 'update',
+  ADD: 'add'
+};

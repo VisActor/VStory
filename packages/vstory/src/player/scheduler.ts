@@ -1,5 +1,5 @@
 import { isNumber } from '@visactor/vutils';
-import type { IAction, IActSpec, ISceneSpec } from '../story/interface';
+import type { IActionSpec, IActSpec, ISceneSpec } from '../story/interface';
 import { IStory } from '../story/interface';
 import type { IActionProcessor } from './processor/interface/action-processor';
 import type { IScheduler } from './interface/scheduler';
@@ -20,17 +20,17 @@ interface ISceneInfo {
 export interface IActionItem {
   startTime: number;
   duration: number;
-  actionSpec: IAction;
+  actionSpec: IActionSpec;
   characterId: string;
 }
 
 class ActionItem implements IActionItem {
   startTime: number;
   duration: number;
-  actionSpec: IAction;
+  actionSpec: IActionSpec;
   characterId: string;
 
-  constructor(st: number, d: number, as: IAction, ci: string) {
+  constructor(st: number, d: number, as: IActionSpec, ci: string) {
     this.startTime = st;
     this.duration = d;
     this.actionSpec = as;
