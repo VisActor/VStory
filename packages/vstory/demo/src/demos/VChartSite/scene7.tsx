@@ -357,6 +357,35 @@ export const scene7: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 100, // TODO 不知道为啥不能是0
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 6000,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 1000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 700,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };
@@ -373,7 +402,7 @@ scene7.actions.forEach(({ characterId, characterActions }) => {
         }
       }
     });
-  } else {
+  } else if (characterId !== 'timeline') {
     characterActions.push({
       action: 'disappear',
       startTime: 5500,

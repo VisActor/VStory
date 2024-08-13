@@ -677,20 +677,51 @@ export const scene4: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 0,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 6000,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 1000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 850,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };
 
-scene4.actions.forEach(({ characterActions }) => {
-  characterActions.push({
-    action: 'disappear',
-    startTime: 6000,
-    payload: {
-      animation: {
-        duration: 500
+scene4.actions.forEach(({ characterActions, characterId }) => {
+  if (characterId !== 'timeline') {
+    characterActions.push({
+      action: 'disappear',
+      startTime: 6000,
+      payload: {
+        animation: {
+          duration: 500
+        }
       }
-    }
-  });
+    });
+  }
 });
 
 scene4.actions.push({

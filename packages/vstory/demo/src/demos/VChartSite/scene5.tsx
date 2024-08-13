@@ -1380,13 +1380,42 @@ export const scene5: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 0,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 6000,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 1000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 800,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };
 
 // disappear
 scene5.actions
-  .filter(({ characterId }) => characterId !== 'scene5-chart')
+  .filter(({ characterId }) => characterId !== 'scene5-chart' && characterId !== 'timeline')
   .forEach(({ characterId, characterActions }) => {
     const duration = 1000;
 

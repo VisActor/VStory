@@ -114,6 +114,7 @@ export class Scheduler implements IScheduler {
         }
       });
     });
+    // actions.length && console.log('找到', fromTime, toTime, actions);
     return actions;
   }
 
@@ -125,6 +126,7 @@ export class Scheduler implements IScheduler {
       startTime += actInfo.duration;
       return actInfo;
     });
+    // console.log(this);
   }
 
   protected _getActInfo(act: IActSpec, actStartTime: number): IActInfo {
@@ -169,7 +171,7 @@ export class Scheduler implements IScheduler {
 
     const sceneInfo: ISceneInfo = {
       startTime: sceneStartTime + scene_st,
-      duration: sceneStartTime + scene_et - scene_st,
+      duration: scene_et - scene_st,
       id: scene.id,
       actionList
     };

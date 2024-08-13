@@ -600,6 +600,45 @@ export const scene12_2: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        // {
+        //   startTime: 1000,
+        //   action: 'state',
+        //   payload: {
+        //     animation: {
+        //       effect: 'forward',
+        //       duration: 3000,
+        //       easing: 'linear'
+        //     }
+        //   }
+        // },
+        // {
+        //   startTime: 1000,
+        //   action: 'moveTo',
+        //   payload: {
+        //     destination: {
+        //       x: 450,
+        //       y: 60
+        //     },
+        //     animation: {
+        //       duration: 500
+        //     }
+        //   }
+        // },
+        {
+          startTime: 3000,
+          action: 'disappear',
+          payload: {
+            animation: {
+              duration: 500,
+              effect: 'fade'
+            }
+          }
+        }
+      ]
     }
   ]
 };

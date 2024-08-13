@@ -63,7 +63,7 @@ export const VChartSiteDemo = () => {
     // console.log('dsl', tempSpec);
     const story = new Story(tempSpec, { dom: id, playerOption: { scaleX: 1, scaleY: 1 } });
     window.story = story;
-    story.play();
+    story.play(false);
     const btn1 = document.createElement('button');
     btn1.innerText = 'replay';
     btn1.addEventListener('click', () => {

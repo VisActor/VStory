@@ -1863,6 +1863,35 @@ export const scene6: ISceneSpec = {
     // 6-1
     ...scene6_1,
     // // 6-2
-    ...scene6_2
+    ...scene6_2,
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 500,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 14500,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 1000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 750,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
+    }
   ]
 };
