@@ -25,14 +25,14 @@ export const scene2Characters: ICharacterSpec[] = [
       top: 390,
       left: 680,
       width: 600,
-      height: 60
+      height: 200
     },
     options: {
       graphic: { text: 'OF CHARTS', fontSize: 75, fontWeight: 'bold' }
     }
   },
   {
-    type: 'RichText',
+    type: 'Text',
     id: `titlesubtitle`,
     zIndex: 1,
     position: {

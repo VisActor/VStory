@@ -13,7 +13,7 @@ function defaultAppear(character: ICharacter, animation: ITypeWriterParams, effe
 }
 
 function _defaultAppear(graphic: Timeline, params: any) {
-  if (graphic && graphic.type !== 'text') {
+  if (graphic && graphic.type !== 'text' && graphic.type !== 'richtext') {
     const { duration, easing } = params;
     graphic.appearAnimate({ duration: duration, easing });
   }
@@ -40,7 +40,7 @@ function forward(character: ICharacter, animation: ITypeWriterParams, effect: st
 }
 
 function _forward(graphic: Timeline, params: any) {
-  if (graphic && graphic.type !== 'text') {
+  if (graphic && graphic.type !== 'text' && graphic.type !== 'richtext') {
     const { duration, easing } = params;
     graphic.forward({ duration: duration, easing });
   }
@@ -51,7 +51,7 @@ function backward(character: ICharacter, animation: ITypeWriterParams, effect: s
 }
 
 function _backward(graphic: Timeline, params: any) {
-  if (graphic && graphic.type !== 'text') {
+  if (graphic && graphic.type !== 'text' && graphic.type !== 'richtext') {
     const { duration, easing } = params;
     graphic.backward({ duration: duration, easing });
   }

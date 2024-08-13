@@ -5,7 +5,7 @@ import { ContainerModule, GraphicRender, container } from '@visactor/vrender';
 import { CanvasPickerContribution } from '@visactor/vrender';
 import { ChartRender, VChartRender } from './character/chart/graphic/vchart-graphic-render';
 import { CharacterComponentText } from './character/component/characters/character-text';
-import { CharacterComponentRichText } from './character/component/characters/character-richtext';
+// import { CharacterComponentRichText } from './character/component/characters/character-richtext';
 import { VChartPicker } from './character/chart/graphic/vchart-graphic-picker';
 import { StoryComponentType } from '../constants/character';
 import { CharacterComponentLine } from './character/component/characters/character-line';
@@ -41,7 +41,7 @@ export function registerCharacter() {
   // StoryFactory.registerCharacter('LineChart', CharacterChart);
   StoryFactory.registerCharacter(StoryComponentType.RECT, CharacterComponentRect);
   StoryFactory.registerCharacter(StoryComponentType.TEXT, CharacterComponentText);
-  StoryFactory.registerCharacter(StoryComponentType.RICH_TEXT, CharacterComponentRichText);
+  // StoryFactory.registerCharacter(StoryComponentType.RICH_TEXT, CharacterComponentRichText);
   StoryFactory.registerCharacter(StoryComponentType.QIPAO, CharacterComponentQipao);
   StoryFactory.registerCharacter(StoryComponentType.LINE, CharacterComponentLine);
   StoryFactory.registerCharacter(StoryComponentType.IMAGE, CharacterComponentImage);

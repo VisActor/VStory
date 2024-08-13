@@ -1,16 +1,36 @@
 import { getLayoutFromWidget } from '../../../utils/layout';
 import type { IWidgetData } from '../../dsl-interface';
-import type { IText, ITextGraphicAttribute, TextAlignType, TextBaselineType } from '@visactor/vrender';
-import { createText } from '@visactor/vrender';
+import type { IRichText, IRichTextGraphicAttribute, TextAlignType, TextBaselineType } from '@visactor/vrender';
+import { createRichText, createText } from '@visactor/vrender';
 import type { CharacterComponent } from '../character';
 
 export const MAX_LAYOUT_SIZE = 999999;
 
-export class GraphicText {
+export class GraphicBaseText {
   private _character: CharacterComponent;
-  private _graphic: IText;
+  private _graphic: IRichText;
   constructor(graphicCharacter: CharacterComponent) {
     this._character = graphicCharacter;
+  }
+
+  getInitialAttributes(): IRichTextGraphicAttribute & { graphicAlign: string; graphicBaseline: string } {
+    return {
+      visible: true,
+      x: 0,
+      y: 0,
+      textAlign: 'center',
+      textBaseline: 'middle',
+      textConfig: [],
+      fontSize: 16,
+      // fill: '#000000',
+      // whiteSpace: 'normal',
+      graphicAlign: 'center',
+      graphicBaseline: 'middle',
+      // // compute real height without vrender buffer
+      ignoreBuf: true,
+      maxLineWidth: MAX_LAYOUT_SIZE,
+      heightLimit: MAX_LAYOUT_SIZE
+    };
   }
 
   show(): void {
@@ -26,39 +46,45 @@ export class GraphicText {
     });
   }
 
+  transformTextAttrsToRichTextConfig() {
+    const textAttr = (this._character.spec.options?.text ?? {}) as IRichTextGraphicAttribute;
+    let textConfig = textAttr.textConfig;
+
+    // 如果是纯文本定义方式
+    if (!(textConfig && textConfig.length) && textAttr.text) {
+      const textList = Array.isArray(textAttr.text) ? textAttr.text : [textAttr.text];
+      textConfig = textList.map((item, i) => {
+        return {
+          textAlign: 'center',
+          textBaseline: 'middle',
+          // ...((textAttr || {}) as any),
+          text: item + (i < textList.length - 1 ? '\n' : '')
+        };
+      });
+    }
+
+    return textConfig;
+  }
+
   init() {
-    this._graphic = createText(
+    this._graphic = createRichText(
       this._transformTextAttributes({
-        visible: true,
-        x: 0,
-        y: 0,
-        textAlign: 'center',
-        textBaseline: 'middle',
-        text: null,
-        fontSize: 16,
-        whiteSpace: 'normal',
-        graphicAlign: 'center',
-        graphicBaseline: 'middle',
-        fill: '#000000',
-        // compute real height without vrender buffer
-        ignoreBuf: true,
-        ...(this._character.spec.options?.text ?? {}),
-        maxLineWidth: MAX_LAYOUT_SIZE,
-        heightLimit: MAX_LAYOUT_SIZE
-      })
+        ...this.getInitialAttributes(),
+        textConfig: this.transformTextAttrsToRichTextConfig()
+      } as any)
     );
     this._character.getGraphicParent().add(this._graphic);
   }
 
-  applyGraphicAttribute(graphicAttribute: Partial<ITextGraphicAttribute>): void {
+  applyGraphicAttribute(graphicAttribute: Partial<IRichTextGraphicAttribute>): void {
     this._graphic.setAttributes({ ...graphicAttribute });
   }
 
-  getGraphicAttribute(): ITextGraphicAttribute {
+  getGraphicAttribute(): IRichTextGraphicAttribute {
     return this._graphic?.attribute;
   }
 
-  updateAttribute = (attribute: Partial<ITextGraphicAttribute>): void => {
+  updateAttribute = (attribute: Partial<IRichTextGraphicAttribute>): void => {
     if (attribute) {
       this._graphic.setAttributes(this._transformTextAttributes(attribute));
       this._updateGraphicCharacterSize();
@@ -108,6 +134,7 @@ export class GraphicText {
         baseline = 'bottom';
         break;
     }
+
     this._graphic.setAttributes(
       this._transformTextAttributes({
         x,
@@ -117,7 +144,8 @@ export class GraphicText {
         angle: layoutData.angle,
         anchor: [layoutData.width / 2, layoutData.height / 2],
         scaleCenter: [layoutData.width / 2, layoutData.height / 2],
-        maxLineWidth: right - left,
+        maxWidth: layoutData.width,
+        maxHeight: layoutData.height,
         heightLimit: this._character.graphic.getGraphicAttribute().isResized ? bottom - top : MAX_LAYOUT_SIZE
       })
     );
@@ -136,7 +164,7 @@ export class GraphicText {
     }
   }
 
-  private _transformTextAttributes(attributes: ITextGraphicAttribute): ITextGraphicAttribute {
+  private _transformTextAttributes(attributes: IRichTextGraphicAttribute): IRichTextGraphicAttribute {
     return attributes;
   }
 }

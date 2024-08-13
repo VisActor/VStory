@@ -17,7 +17,7 @@ export const GraphicEdit = () => {
     const tempSpec: IStorySpec = {
       characters: [
         {
-          type: 'RichText',
+          type: 'Text',
           id: `richtext`,
           zIndex: 1,
           position: {

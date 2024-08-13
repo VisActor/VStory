@@ -829,14 +829,14 @@ export const scene1Characters = [
       top: 390,
       left: 680,
       width: 600,
-      height: 60
+      height: 200
     },
     options: {
       graphic: { text: 'OF CHARTS', fontSize: 75, fontWeight: 'bold' }
     }
   },
   {
-    type: 'RichText',
+    type: 'Text',
     id: `titlesubtitle`,
     zIndex: 1,
     position: {
@@ -906,7 +906,7 @@ export const scene1 = {
           action: 'appear',
           payload: {
             animation: {
-              duration: 500,
+              duration: 5000,
               effect: 'typewriter',
               easing: 'quadIn'
             }
@@ -993,23 +993,23 @@ export const scene1 = {
           }
         }
       ]
-    }))
-    // {
-    //   characterId: `titlesubtitle`,
-    //   characterActions: [
-    //     {
-    //       startTime: 6000,
-    //       duration: 1000,
-    //       action: 'disappear',
-    //       payload: {
-    //         animation: {
-    //           duration: 1000,
-    //           easing: 'linear',
-    //           effect: 'fade'
-    //         }
-    //       }
-    //     }
-    //   ]
-    // }
+    })),
+    {
+      characterId: `titlesubtitle`,
+      characterActions: [
+        {
+          startTime: 6000,
+          duration: 1000,
+          action: 'disappear',
+          payload: {
+            animation: {
+              duration: 1000,
+              easing: 'linear',
+              effect: 'fade'
+            }
+          }
+        }
+      ]
+    }
   ]
 };

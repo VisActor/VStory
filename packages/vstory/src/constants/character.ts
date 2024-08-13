@@ -10,7 +10,7 @@ export enum StoryComponentType {
   // AREA = 'AreaComponent',
   PATH = 'Path',
   TEXT = 'Text',
-  RICH_TEXT = 'RichText',
+  // RICH_TEXT = 'RichText',
   QIPAO = 'Qipao',
   IMAGE = 'Image',
   TIMELINE = 'Timeline'

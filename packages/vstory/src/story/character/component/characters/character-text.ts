@@ -1,5 +1,5 @@
 import type { Graphic } from '../graphic/graphic';
-import { GraphicPureText } from '../graphic/text';
+import { GraphicText } from '../graphic/text';
 import { CharacterComponent } from '../character';
 import { StoryComponentType } from '../../../../constants/character';
 
@@ -9,6 +9,6 @@ import { StoryComponentType } from '../../../../constants/character';
 export class CharacterComponentText extends CharacterComponent {
   readonly graphicType: string = 'text';
   protected _createGraphic(): Graphic {
-    return new GraphicPureText(StoryComponentType.TEXT, this as any);
+    return new GraphicText(StoryComponentType.TEXT, this as any);
   }
 }
