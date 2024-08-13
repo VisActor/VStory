@@ -11,6 +11,7 @@ import {
   TimelineVisibilityActionProcessor
 } from './component/timeline/timeline-visibility';
 import {
+  CommonBounceActionProcessor,
   CommonMoveToActionProcessor,
   CommonScaleToActionProcessor,
   CommonStyleActionProcessor
@@ -20,6 +21,7 @@ export const processorChartMap = {
   [StoryChartType.VCHART]: {
     [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor(),
     [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor(),
     [VCHART_ACTION_TYPE.UPDATE]: new VChartUpdateActionProcessor(),
     [VCHART_ACTION_TYPE.ADD]: new VChartAddActionProcessor()
   }
@@ -31,35 +33,40 @@ export const processorComponentMap = {
     [ACTION_TYPE.DISAPPEAR]: new RectVisibilityActionProcessor(),
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),
     [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
-    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor()
+    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
   },
   [StoryComponentType.LINE]: {
     [ACTION_TYPE.APPEAR]: new LineVisibilityActionProcessor(),
     [ACTION_TYPE.DISAPPEAR]: new LineVisibilityActionProcessor(),
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),
     [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
-    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor()
+    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
   },
   [StoryComponentType.SHAPE]: {
     [ACTION_TYPE.APPEAR]: new ShapeVisibilityActionProcessor(),
     [ACTION_TYPE.DISAPPEAR]: new ShapeVisibilityActionProcessor(),
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),
     [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
-    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor()
+    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
   },
   [StoryComponentType.IMAGE]: {
     [ACTION_TYPE.APPEAR]: new ImageVisibilityActionProcessor(),
     [ACTION_TYPE.DISAPPEAR]: new ImageVisibilityActionProcessor(),
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),
     [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
-    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor()
+    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
   },
   [StoryComponentType.TEXT]: {
     [ACTION_TYPE.APPEAR]: new TextVisibilityActionProcessor(),
     [ACTION_TYPE.DISAPPEAR]: new TextVisibilityActionProcessor(),
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),
     [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
-    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor()
+    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
   },
   [StoryComponentType.TIMELINE]: {
     [ACTION_TYPE.APPEAR]: new TimelineVisibilityActionProcessor(),
@@ -67,7 +74,8 @@ export const processorComponentMap = {
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),
     [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
     [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
-    [ACTION_TYPE.STATE]: new TimelineStateActionProcessor()
+    [ACTION_TYPE.STATE]: new TimelineStateActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
   }
 };
 
