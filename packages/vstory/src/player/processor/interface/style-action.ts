@@ -21,3 +21,18 @@ interface IComponentScaleToPayLoad extends IActionPayload {
 export interface IComponentScaleToAction extends IAction<IComponentScaleToPayLoad> {
   action: 'scaleTo';
 }
+
+export interface IComponentBouncePayLoad extends IActionPayload {
+  /**
+   * 自定义弹跳 easing path string
+   */
+  customEase?: string;
+  /**
+   * 跳跃高度
+   */
+  dy?: number;
+}
+
+export interface IComponentBounceAction extends IAction<IComponentScaleToPayLoad> {
+  action: 'bounce';
+}
