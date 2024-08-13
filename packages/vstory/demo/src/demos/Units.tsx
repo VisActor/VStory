@@ -13,7 +13,7 @@ export const Units = () => {
         {
           type: 'RectComponent',
           id: 'background-top',
-          zIndex: 2,
+          zIndex: 1,
           position: {
             top: 0,
             left: 0,
@@ -39,8 +39,7 @@ export const Units = () => {
           },
           options: {
             graphic: {
-              fill: 'red',
-              stroke: false
+              fill: 'red'
             }
           }
         }
