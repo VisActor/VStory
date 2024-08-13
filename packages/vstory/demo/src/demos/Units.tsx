@@ -35,7 +35,7 @@ export const Units = () => {
             top: 0,
             left: 0,
             width: 1920,
-            height: 254
+            height: 600
           },
           options: {
             graphic: {
