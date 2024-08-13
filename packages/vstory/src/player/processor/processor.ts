@@ -1,5 +1,5 @@
 import type { ICharacter } from '../../story/character';
-import type { IAction, IStory } from '../../story/interface';
+import type { IActionSpec, IStory } from '../../story/interface';
 import { IActionsLink } from '../../story/interface';
 import { logger } from '../../util/output';
 import type { IActionProcessor, IActionProcessorItem } from './interface/action-processor';
@@ -45,7 +45,7 @@ export class ActionProcessor implements IActionProcessor {
    */
   getActInfo(
     characterId: string,
-    action: IAction
+    action: IActionSpec
   ): {
     startTime: number;
     duration: number;
@@ -99,7 +99,7 @@ export class ActionProcessor implements IActionProcessor {
    * @param actionParams
    * @returns IProcessorReturnType
    */
-  doAction(name: string, actionName: string, character: ICharacter, actionSpec: IAction): void {
+  doAction(name: string, actionName: string, character: ICharacter, actionSpec: IActionSpec): void {
     const processor = this.getProcessor(name, actionName);
     if (processor) {
       // try {

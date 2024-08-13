@@ -815,223 +815,223 @@ const chartSpec = {
       id: 'dataLinkSeries',
       values: [
         {
-          from: 'Deandre Ayton_0_start_node',
+          pos: 'Deandre Ayton_0_start_node',
           to: 'Deandre Ayton_0_end_node'
         },
         {
-          from: 'Deandre Ayton_1_start_node',
+          pos: 'Deandre Ayton_1_start_node',
           to: 'Deandre Ayton_1_end_node'
         },
         {
-          from: 'Deandre Ayton_2_start_node',
+          pos: 'Deandre Ayton_2_start_node',
           to: 'Deandre Ayton_2_end_node'
         },
         {
-          from: 'Deandre Ayton_3_start_node',
+          pos: 'Deandre Ayton_3_start_node',
           to: 'Deandre Ayton_3_end_node'
         },
         {
-          from: 'Devin Booker_0_start_node',
+          pos: 'Devin Booker_0_start_node',
           to: 'Devin Booker_0_end_node'
         },
         {
-          from: 'Devin Booker_1_start_node',
+          pos: 'Devin Booker_1_start_node',
           to: 'Devin Booker_1_end_node'
         },
         {
-          from: 'Devin Booker_2_start_node',
+          pos: 'Devin Booker_2_start_node',
           to: 'Devin Booker_2_end_node'
         },
         {
-          from: 'Kyle Lowry_0_start_node',
+          pos: 'Kyle Lowry_0_start_node',
           to: 'Kyle Lowry_0_end_node'
         },
         {
-          from: 'Kyle Lowry_1_start_node',
+          pos: 'Kyle Lowry_1_start_node',
           to: 'Kyle Lowry_1_end_node'
         },
         {
-          from: 'Kyle Lowry_2_start_node',
+          pos: 'Kyle Lowry_2_start_node',
           to: 'Kyle Lowry_2_end_node'
         },
         {
-          from: 'Kyle Lowry_3_start_node',
+          pos: 'Kyle Lowry_3_start_node',
           to: 'Kyle Lowry_3_end_node'
         },
         {
-          from: 'Jae Crowder_0_start_node',
+          pos: 'Jae Crowder_0_start_node',
           to: 'Jae Crowder_0_end_node'
         },
         {
-          from: 'Jae Crowder_1_start_node',
+          pos: 'Jae Crowder_1_start_node',
           to: 'Jae Crowder_1_end_node'
         },
         {
-          from: 'Jae Crowder_2_start_node',
+          pos: 'Jae Crowder_2_start_node',
           to: 'Jae Crowder_2_end_node'
         },
         {
-          from: 'Aron Baynes_0_start_node',
+          pos: 'Aron Baynes_0_start_node',
           to: 'Aron Baynes_0_end_node'
         },
         {
-          from: 'Aron Baynes_1_start_node',
+          pos: 'Aron Baynes_1_start_node',
           to: 'Aron Baynes_1_end_node'
         },
         {
-          from: 'Pascal Siakam_0_start_node',
+          pos: 'Pascal Siakam_0_start_node',
           to: 'Pascal Siakam_0_end_node'
         },
         {
-          from: 'Pascal Siakam_1_start_node',
+          pos: 'Pascal Siakam_1_start_node',
           to: 'Pascal Siakam_1_end_node'
         },
         {
-          from: 'Pascal Siakam_2_start_node',
+          pos: 'Pascal Siakam_2_start_node',
           to: 'Pascal Siakam_2_end_node'
         },
         {
-          from: 'Mikal Bridges_0_start_node',
+          pos: 'Mikal Bridges_0_start_node',
           to: 'Mikal Bridges_0_end_node'
         },
         {
-          from: 'Mikal Bridges_1_start_node',
+          pos: 'Mikal Bridges_1_start_node',
           to: 'Mikal Bridges_1_end_node'
         },
         {
-          from: 'Mikal Bridges_2_start_node',
+          pos: 'Mikal Bridges_2_start_node',
           to: 'Mikal Bridges_2_end_node'
         },
         {
-          from: 'Mikal Bridges_3_start_node',
+          pos: 'Mikal Bridges_3_start_node',
           to: 'Mikal Bridges_3_end_node'
         },
         {
-          from: 'Chris Paul_0_start_node',
+          pos: 'Chris Paul_0_start_node',
           to: 'Chris Paul_0_end_node'
         },
         {
-          from: 'Chris Paul_1_start_node',
+          pos: 'Chris Paul_1_start_node',
           to: 'Chris Paul_1_end_node'
         },
         {
-          from: 'Chris Paul_2_start_node',
+          pos: 'Chris Paul_2_start_node',
           to: 'Chris Paul_2_end_node'
         },
         {
-          from: 'OG Anunoby_0_start_node',
+          pos: 'OG Anunoby_0_start_node',
           to: 'OG Anunoby_0_end_node'
         },
         {
-          from: 'OG Anunoby_1_start_node',
+          pos: 'OG Anunoby_1_start_node',
           to: 'OG Anunoby_1_end_node'
         },
         {
-          from: 'OG Anunoby_2_start_node',
+          pos: 'OG Anunoby_2_start_node',
           to: 'OG Anunoby_2_end_node'
         },
         {
-          from: 'OG Anunoby_3_start_node',
+          pos: 'OG Anunoby_3_start_node',
           to: 'OG Anunoby_3_end_node'
         },
         {
-          from: 'Fred VanVleet_0_start_node',
+          pos: 'Fred VanVleet_0_start_node',
           to: 'Fred VanVleet_0_end_node'
         },
         {
-          from: 'Fred VanVleet_1_start_node',
+          pos: 'Fred VanVleet_1_start_node',
           to: 'Fred VanVleet_1_end_node'
         },
         {
-          from: 'Fred VanVleet_2_start_node',
+          pos: 'Fred VanVleet_2_start_node',
           to: 'Fred VanVleet_2_end_node'
         },
         {
-          from: 'Cameron Johnson_0_start_node',
+          pos: 'Cameron Johnson_0_start_node',
           to: 'Cameron Johnson_0_end_node'
         },
         {
-          from: 'Cameron Johnson_1_start_node',
+          pos: 'Cameron Johnson_1_start_node',
           to: 'Cameron Johnson_1_end_node'
         },
         {
-          from: 'Cameron Johnson_2_start_node',
+          pos: 'Cameron Johnson_2_start_node',
           to: 'Cameron Johnson_2_end_node'
         },
         {
-          from: 'Yuta Watanabe_0_start_node',
+          pos: 'Yuta Watanabe_0_start_node',
           to: 'Yuta Watanabe_0_end_node'
         },
         {
-          from: 'Yuta Watanabe_1_start_node',
+          pos: 'Yuta Watanabe_1_start_node',
           to: 'Yuta Watanabe_1_end_node'
         },
         {
-          from: 'Dario Saric_0_start_node',
+          pos: 'Dario Saric_0_start_node',
           to: 'Dario Saric_0_end_node'
         },
         {
-          from: 'Dario Saric_1_start_node',
+          pos: 'Dario Saric_1_start_node',
           to: 'Dario Saric_1_end_node'
         },
         {
-          from: 'Dario Saric_2_start_node',
+          pos: 'Dario Saric_2_start_node',
           to: 'Dario Saric_2_end_node'
         },
         {
-          from: 'Chris Boucher_0_start_node',
+          pos: 'Chris Boucher_0_start_node',
           to: 'Chris Boucher_0_end_node'
         },
         {
-          from: 'Chris Boucher_1_start_node',
+          pos: 'Chris Boucher_1_start_node',
           to: 'Chris Boucher_1_end_node'
         },
         {
-          from: 'Norman Powell_0_start_node',
+          pos: 'Norman Powell_0_start_node',
           to: 'Norman Powell_0_end_node'
         },
         {
-          from: 'Norman Powell_1_start_node',
+          pos: 'Norman Powell_1_start_node',
           to: 'Norman Powell_1_end_node'
         },
         {
-          from: 'Norman Powell_2_start_node',
+          pos: 'Norman Powell_2_start_node',
           to: 'Norman Powell_2_end_node'
         },
         {
-          from: 'Cameron Payne_0_start_node',
+          pos: 'Cameron Payne_0_start_node',
           to: 'Cameron Payne_0_end_node'
         },
         {
-          from: 'Cameron Payne_1_start_node',
+          pos: 'Cameron Payne_1_start_node',
           to: 'Cameron Payne_1_end_node'
         },
         {
-          from: 'Langston Galloway_0_start_node',
+          pos: 'Langston Galloway_0_start_node',
           to: 'Langston Galloway_0_end_node'
         },
         {
-          from: 'Jevon Carter_0_start_node',
+          pos: 'Jevon Carter_0_start_node',
           to: 'Jevon Carter_0_end_node'
         },
         {
-          from: 'Jevon Carter_1_start_node',
+          pos: 'Jevon Carter_1_start_node',
           to: 'Jevon Carter_1_end_node'
         },
         {
-          from: 'Malachi Flynn_0_start_node',
+          pos: 'Malachi Flynn_0_start_node',
           to: 'Malachi Flynn_0_end_node'
         },
         {
-          from: 'Alex Len_0_start_node',
+          pos: 'Alex Len_0_start_node',
           to: 'Alex Len_0_end_node'
         },
         {
-          from: 'Alex Len_1_start_node',
+          pos: 'Alex Len_1_start_node',
           to: 'Alex Len_1_end_node'
         },
         {
-          from: "DeAndre' Bembry_0_start_node",
+          pos: "DeAndre' Bembry_0_start_node",
           to: "DeAndre' Bembry_0_end_node"
         }
       ]
@@ -1206,15 +1206,14 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-background-top',
       characterActions: [
         {
-          startTime: 1,
-          duration: 700,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
+              effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -1225,15 +1224,14 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-background-decoration',
       characterActions: [
         {
-          startTime: 1,
-          duration: 700,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
+              effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -1244,15 +1242,14 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-background-bottom',
       characterActions: [
         {
-          startTime: 1,
-          duration: 700,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
+              effect: 'move',
               move: {
-                from: 'bottom'
+                pos: 'bottom'
               }
             }
           }
@@ -1263,15 +1260,14 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-title-image',
       characterActions: [
         {
-          startTime: 1,
-          duration: 700,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
+              effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -1283,14 +1279,14 @@ export const scene5: ISceneSpec = {
       characterActions: [
         {
           startTime: 200,
-          duration: 700,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
+              effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -1302,14 +1298,14 @@ export const scene5: ISceneSpec = {
       characterActions: [
         {
           startTime: 400,
-          duration: 700,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
+              effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -1320,15 +1316,14 @@ export const scene5: ISceneSpec = {
       characterId: 'scene5-atom',
       characterActions: [
         {
-          startTime: 1,
-          duration: 700,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
+              effect: 'move',
               move: {
-                from: 'bottom'
+                pos: 'bottom'
               }
             }
           }
@@ -1340,13 +1335,11 @@ export const scene5: ISceneSpec = {
       characterActions: [
         {
           startTime: 2000,
-          duration: 700,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
-              effect: 'fade',
               fade: {
                 isBaseOpacity: true
               }
@@ -1355,13 +1348,11 @@ export const scene5: ISceneSpec = {
         },
         {
           startTime: 4000,
-          duration: 700,
           action: 'disappear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
-              effect: 'fade',
               fade: {
                 opacity: 0,
                 isBaseOpacity: true
@@ -1376,14 +1367,14 @@ export const scene5: ISceneSpec = {
       characterActions: [
         {
           startTime: 300,
-          duration: 700,
           action: 'appear',
           payload: {
             animation: {
               easing: easeInOutQuad,
               duration: 700,
+              effect: 'move',
               move: {
-                from: 'bottom'
+                pos: 'bottom'
               }
             }
           }
@@ -1397,7 +1388,7 @@ export const scene5: ISceneSpec = {
 scene5.actions
   .filter(({ characterId }) => characterId !== 'scene5-chart')
   .forEach(({ characterId, characterActions }) => {
-    const duration = 700;
+    const duration = 1000;
 
     if (characterId !== 'scene5-background-decoration') {
       const scaleX = 4;
@@ -1413,7 +1404,6 @@ scene5.actions
         const newHeight = height * scaleY;
         characterActions.push({
           startTime: 5400,
-          duration,
           action: 'style',
           payload: {
             graphic: {
@@ -1432,7 +1422,6 @@ scene5.actions
     }
     characterActions.push({
       startTime: 5400,
-      duration,
       action: 'disappear',
       payload: {
         animation: {

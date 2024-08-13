@@ -9,7 +9,7 @@ export interface IChartVisibilityPayload extends IActionPayload {
      * 折线图支持: 'grow' | 'fade'
      * 饼图支持: 'grow' | 'fade' | 'growAngle' | 'growRadius'
      */
-    effect: string;
+    effect: string | string[];
   };
   fade?: { isBaseOpacity?: boolean };
 }

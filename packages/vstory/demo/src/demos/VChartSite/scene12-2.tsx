@@ -512,8 +512,6 @@ export const scene12_2: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
@@ -530,8 +528,6 @@ export const scene12_2: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
@@ -548,7 +544,7 @@ export const scene12_2: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
+
           duration: 1000,
           payload: {
             animation: {
@@ -566,8 +562,6 @@ export const scene12_2: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
@@ -585,12 +579,11 @@ export const scene12_2: ISceneSpec = {
         {
           action: 'appear',
           startTime: 3000,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              effect: 'centerGrow',
+              effect: ['centerGrow', 'fade'],
               fade: { isBaseOpacity: true }
             }
           }
@@ -598,12 +591,10 @@ export const scene12_2: ISceneSpec = {
         {
           action: 'disappear',
           startTime: 5500,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              effect: 'fade',
               fade: { isBaseOpacity: true }
             }
           }
@@ -620,12 +611,10 @@ scene12_2.actions.forEach(({ characterId, characterActions }) => {
     characterActions.push({
       action: 'disappear',
       startTime: 7000,
-      duration: 1000,
       payload: {
         animation: {
           duration: 1000,
-          easing: easeInOutQuad,
-          effect: 'fade'
+          easing: easeInOutQuad
         }
       }
     });

@@ -1,13 +1,14 @@
 import type { ICharacter } from '../../../story/character';
-import type { IAction } from '../../../story/interface';
+import type { IActionSpec } from '../../../story/interface';
 import { ActionProcessorItem } from '../processor-item';
-import type { EasingType, IGraphic } from '@visactor/vrender-core';
+import type { EasingType } from '@visactor/vrender-core';
 import type { IComponentMoveToAction, IComponentScaleToAction, IComponentStyleAction } from '../interface/style-action';
 import { fadeIn, fadeOut } from '../common/fade-processor';
 import { scaleIn, scaleOut, scaleTo } from '../common/scale-processor';
 import { wipeIn, wipeOut } from '../common/wipe-processor';
 import { getCharacterGraphic } from '../common/common';
 import { moveIn, moveOut, moveTo } from '../common/move-processor';
+import { array } from '@visactor/vutils';
 
 export class CommonVisibilityActionProcessor extends ActionProcessorItem {
   name: string = 'appearOrDisAppear';
@@ -16,7 +17,7 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
     super();
   }
 
-  getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
+  getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
     const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
 
@@ -28,13 +29,15 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
     };
   }
 
-  run(character: ICharacter, actionSpec: IAction): void {
+  run(character: ICharacter, actionSpec: IActionSpec): void {
     const { animation } = actionSpec.payload ?? {};
     const { effect = 'fade' } = animation ?? ({} as any);
-
-    const effectFunc = this.getEffectFunc(effect, actionSpec.action === 'appear');
-
-    effectFunc(character, animation as any, effect);
+    array(effect).forEach(_effect => {
+      const effectFunc = this.getEffectFunc(_effect, actionSpec.action === 'appear');
+      if (effectFunc) {
+        effectFunc(character, animation as any, _effect);
+      }
+    });
   }
 
   getEffectFunc(effect: string, appear: boolean) {
@@ -59,7 +62,7 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
     super();
   }
 
-  getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
+  getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
     const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
 
@@ -93,7 +96,7 @@ export class CommonMoveToActionProcessor extends ActionProcessorItem {
     super();
   }
 
-  getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
+  getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
     const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
 
@@ -118,7 +121,7 @@ export class CommonScaleToActionProcessor extends ActionProcessorItem {
     super();
   }
 
-  getStartTimeAndDuration(action: IAction): { startTime: number; duration: number } {
+  getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
     const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
 

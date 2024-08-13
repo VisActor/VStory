@@ -192,8 +192,7 @@ export const scene2: ISceneSpec = {
       characterId: `scene2-title2`,
       characterActions: [
         {
-          startTime: 800,
-          duration: 800,
+          startTime: 1200,
           action: 'appear',
           payload: {
             animation: {
@@ -209,7 +208,7 @@ export const scene2: ISceneSpec = {
       characterId: `title1`,
       characterActions: [
         {
-          startTime: 2000,
+          startTime: 6200,
           action: 'moveTo',
           payload: {
             destination: {
@@ -228,7 +227,7 @@ export const scene2: ISceneSpec = {
       characterId: `title2`,
       characterActions: [
         {
-          startTime: 2000,
+          startTime: 6200,
           action: 'moveTo',
           payload: {
             destination: {
@@ -247,8 +246,7 @@ export const scene2: ISceneSpec = {
       characterId: `scene2-title2`,
       characterActions: [
         {
-          startTime: 2000,
-          duration: 800,
+          startTime: 6200,
           action: 'moveTo',
           payload: {
             destination: {
@@ -267,48 +265,12 @@ export const scene2: ISceneSpec = {
       characterId: 'timeline',
       characterActions: [
         {
-          startTime: 2000,
+          startTime: 1200,
           action: 'appear',
           payload: {
             animation: {
-              duration: 4000,
+              duration: 5000,
               effect: 'default'
-            }
-          }
-        },
-        {
-          startTime: 6000,
-          action: 'moveTo',
-          payload: {
-            destination: {
-              x: 900,
-              y: 60
-            },
-            animation: {
-              duration: 500
-            }
-          }
-        },
-        {
-          startTime: 6000,
-          action: 'scaleTo',
-          payload: {
-            scale: {
-              scaleX: 0.8,
-              scaleY: 0.8
-            },
-            animation: {
-              duration: 500
-            }
-          }
-        },
-        {
-          startTime: 6000,
-          action: 'state',
-          payload: {
-            animation: {
-              effect: 'forward',
-              duration: 500
             }
           }
         }
