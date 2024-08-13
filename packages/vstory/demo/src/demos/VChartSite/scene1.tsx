@@ -906,7 +906,7 @@ export const scene1 = {
           action: 'appear',
           payload: {
             animation: {
-              duration: 5000,
+              duration: 500,
               effect: 'typewriter',
               easing: 'quadIn'
             }
