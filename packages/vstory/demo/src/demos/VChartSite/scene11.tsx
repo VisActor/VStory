@@ -440,6 +440,35 @@ export const scene11: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 0,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 7500,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 500,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 500,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };

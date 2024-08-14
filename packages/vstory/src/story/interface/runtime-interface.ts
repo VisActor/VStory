@@ -1,5 +1,6 @@
 import type { IGraphic, IStage } from '@visactor/vrender';
 import type { ICharacter, ICharacterSpec } from '../character';
+import type { IPlayer } from '../../player/interface/player';
 
 export interface IStoryInitOption {
   dom: string | HTMLDivElement; // dom id
@@ -21,6 +22,7 @@ export interface IStoryCanvas {
 
 export interface IStory {
   readonly id: string;
+  readonly player: IPlayer;
   canvas: IStoryCanvas;
   getCharacters: () => { [key: string]: ICharacter };
   getCharactersById: (key: string) => ICharacter | null;

@@ -16,7 +16,7 @@ function typewriterOut(character: ICharacter, animation: ITypeWriterParams, effe
 }
 
 function _typewriter(graphic: IText, params: any, appear: boolean) {
-  if (graphic && graphic.type === 'text') {
+  if (graphic && (graphic.type === 'text' || graphic.type === 'richtext')) {
     const { duration, easing } = params;
     const { text } = graphic.attribute;
     if (isString(text)) {

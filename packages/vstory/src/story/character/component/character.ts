@@ -1,6 +1,6 @@
 import type { IGroup } from '@visactor/vrender';
 import { createGroup } from '@visactor/vrender';
-import { GraphicText } from './graphic/graphic-text';
+import { GraphicBaseText } from './graphic/graphic-base-text';
 import type { IComponentCharacterSpec } from '../dsl-interface';
 import { CharacterBase } from '../base/base';
 import type { Graphic } from './graphic/graphic';
@@ -18,7 +18,7 @@ export abstract class CharacterComponent extends CharacterBase {
   get graphic() {
     return this._graphic;
   }
-  protected declare _text: GraphicText;
+  protected declare _text: GraphicBaseText;
   get text() {
     return this._text;
   }
@@ -43,7 +43,7 @@ export abstract class CharacterComponent extends CharacterBase {
     this.option.graphicParent.add(this._group);
 
     this._graphic = this._createGraphic();
-    this._text = new GraphicText(this);
+    this._text = new GraphicBaseText(this);
     this._graphic.init();
     this._text.init();
 

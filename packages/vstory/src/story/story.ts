@@ -30,6 +30,10 @@ export class Story implements IStory {
     return this._canvas;
   }
 
+  get player(): IPlayer {
+    return this._player;
+  }
+
   constructor(spec: IStorySpec, option: IStoryInitOption) {
     this.id = 'test-mvp_' + Story._id_++;
     this._canvas = new StoryCanvas(

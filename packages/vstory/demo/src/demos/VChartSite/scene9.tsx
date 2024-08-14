@@ -437,11 +437,43 @@ export const scene9: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 500,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 7000,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 1000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 600,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };
 
 scene9.actions.forEach(({ characterId, characterActions }) => {
+  if (characterId === 'timeline') {
+    return;
+  }
   if (characterId === 'scene9-person') {
     characterActions.push({
       action: 'disappear',

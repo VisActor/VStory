@@ -431,11 +431,43 @@ export const scene8: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 600, // TODO 这里如果是500也不行
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 6000,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 1000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 650,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };
 
 scene8.actions.forEach(({ characterId, characterActions }) => {
+  if (characterId === 'timeline') {
+    return;
+  }
   characterActions.push({
     action: 'disappear',
     startTime: characterId === 'scene8-background' ? 7500 : 7000,

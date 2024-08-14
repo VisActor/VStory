@@ -354,11 +354,43 @@ export const scene10: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 500,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 7000,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 1000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 550,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };
 
 scene10.actions.forEach(({ characterId, characterActions }) => {
+  if (characterId === 'timeline') {
+    return;
+  }
   if (characterId.includes('background') || characterId.includes('decoration')) {
     characterActions.push({
       action: 'disappear',

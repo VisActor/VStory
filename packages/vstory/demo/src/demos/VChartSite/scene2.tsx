@@ -25,14 +25,14 @@ export const scene2Characters: ICharacterSpec[] = [
       top: 390,
       left: 680,
       width: 600,
-      height: 60
+      height: 200
     },
     options: {
       graphic: { text: 'OF CHARTS', fontSize: 75, fontWeight: 'bold' }
     }
   },
   {
-    type: 'RichText',
+    type: 'Text',
     id: `titlesubtitle`,
     zIndex: 1,
     position: {
@@ -99,19 +99,22 @@ export const scene2Characters: ICharacterSpec[] = [
           { label: '1856', desc: '' },
           { label: '1877', desc: '' },
           { label: '1976', desc: '' },
-          { label: '1990s', desc: '' }
+          { label: '1990s', desc: '' },
+          { label: '', desc: '' }
         ],
         lineStyle: {
           lineDash: [1, 1]
         },
         labelStyle: {
-          fontSize: 28,
+          fontSize: 16,
           fontWeight: 'bold'
         },
+        activeSymbolStyle: {
+          size: 20
+        },
         activeLabelStyle: {
-          fontSize: 28,
-          fontWeight: 'bold',
-          dy: 20
+          fontSize: 22,
+          fontWeight: 'bold'
         }
       }
     }

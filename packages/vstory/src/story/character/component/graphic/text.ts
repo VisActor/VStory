@@ -1,12 +1,25 @@
-import type { IText } from '@visactor/vrender';
-import { createText } from '@visactor/vrender';
+import type { IRichText, IRichTextGraphicAttribute, IText } from '@visactor/vrender';
+import { createRichText, createText } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import { Graphic } from './graphic';
 import type { IWidgetData } from '../../dsl-interface';
 import { getLayoutFromWidget } from '../../../utils/layout';
 
-export class GraphicPureText extends Graphic {
-  protected _graphic: IText;
+const richtextCombinedAttrs = [
+  'fill',
+  'stroke',
+  'fontSize',
+  'fontFamily',
+  'fontStyle',
+  'fontWeight',
+  'lineWidth',
+  'opacity',
+  'fillOpacity',
+  'strokeOpacity'
+];
+
+export class GraphicText extends Graphic {
+  protected _graphic: IRichText;
 
   getInitialAttributes() {
     return {
@@ -26,12 +39,33 @@ export class GraphicPureText extends Graphic {
     };
   }
 
+  transformTextAttrsToRichTextConfig() {
+    const textAttr = (this._character.spec.options?.graphic ?? {}) as IRichTextGraphicAttribute;
+    let textConfig = textAttr.textConfig;
+
+    // 如果是纯文本定义方式
+    if (!(textConfig && textConfig.length) && textAttr.text) {
+      const textList = Array.isArray(textAttr.text) ? textAttr.text : [textAttr.text];
+      textConfig = textList.map((item, i) => {
+        return {
+          textAlign: 'center',
+          textBaseline: 'middle',
+          // ...((textAttr || {}) as any),
+          text: item + (i < textList.length - 1 ? '\n' : '')
+        };
+      });
+    }
+
+    return textConfig;
+  }
+
   init() {
     if (!this._graphic) {
-      this._graphic = createText(
+      this._graphic = createRichText(
         this._transformAttributes({
           ...this.getInitialAttributes(),
-          ...(this._character.spec.options?.graphic ?? {})
+          ...(this._character.spec.options?.graphic ?? {}),
+          textConfig: this.transformTextAttrsToRichTextConfig()
         })
       );
       this._graphic.name = `graphic-text-${this._character.id}`;
