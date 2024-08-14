@@ -62,7 +62,7 @@ export const VChartSiteDemo = () => {
     };
     // console.log('dsl', tempSpec);
     const story = new Story(tempSpec, { dom: id, playerOption: { scaleX: 1, scaleY: 1 } });
-    // story.player.speed = 5;
+    story.player.speed = 5;
     window.story = story;
     story.play(false);
     const btn1 = document.createElement('button');

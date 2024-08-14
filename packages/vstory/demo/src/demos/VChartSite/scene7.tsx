@@ -72,6 +72,7 @@ export const scene7Characters: ICharacterSpec[] = [
     options: {
       graphic: {
         stroke: false,
+        scaleX: 0.8,
         fill: 'rgb(221,221,221)'
       }
     }
@@ -256,7 +257,7 @@ export const scene7: ISceneSpec = {
               easing: easeInOutQuad,
               effect: 'move',
               move: {
-                from: 'left'
+                pos: 'left'
               }
             }
           }
@@ -289,7 +290,7 @@ export const scene7: ISceneSpec = {
               duration: 500,
               easing: easeInOutQuad,
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }
@@ -326,7 +327,7 @@ export const scene7: ISceneSpec = {
               easing: easeInOutQuad,
               effect: 'move',
               move: {
-                from: 'top'
+                pos: 'top'
               }
             }
           }

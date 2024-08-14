@@ -48,8 +48,8 @@ export class GraphicText extends Graphic {
       const textList = Array.isArray(textAttr.text) ? textAttr.text : [textAttr.text];
       textConfig = textList.map((item, i) => {
         return {
-          textAlign: 'center',
-          textBaseline: 'middle',
+          textAlign: textAttr.textAlign,
+          textBaseline: textAttr.textBaseline,
           // ...((textAttr || {}) as any),
           text: item + (i < textList.length - 1 ? '\n' : '')
         };

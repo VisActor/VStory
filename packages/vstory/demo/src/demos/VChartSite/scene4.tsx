@@ -38,7 +38,7 @@ export const scene4Characters: ICharacterSpec[] = [
       left: 200,
       top: 200,
       width: 400,
-      height: 60
+      height: 100
     },
     options: {
       graphic: {
@@ -57,7 +57,7 @@ export const scene4Characters: ICharacterSpec[] = [
       left: 200,
       top: 256,
       width: 300,
-      height: 30
+      height: 100
     },
     options: {
       graphic: {
