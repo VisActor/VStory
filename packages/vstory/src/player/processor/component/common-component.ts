@@ -2,13 +2,19 @@ import type { ICharacter } from '../../../story/character';
 import type { IActionSpec } from '../../../story/interface';
 import { ActionProcessorItem } from '../processor-item';
 import type { EasingType } from '@visactor/vrender-core';
-import type { IComponentMoveToAction, IComponentScaleToAction, IComponentStyleAction } from '../interface/style-action';
+import type {
+  IComponentBounceAction,
+  IComponentMoveToAction,
+  IComponentScaleToAction,
+  IComponentStyleAction
+} from '../interface/style-action';
 import { fadeIn, fadeOut } from '../common/fade-processor';
 import { scaleIn, scaleOut, scaleTo } from '../common/scale-processor';
 import { wipeIn, wipeOut } from '../common/wipe-processor';
-import { getCharacterGraphic } from '../common/common';
 import { moveIn, moveOut, moveTo } from '../common/move-processor';
+import { getCharacterGraphic } from '../common/common';
 import { array } from '@visactor/vutils';
+import { bounce } from '../common/bounce-processor';
 
 export class CommonVisibilityActionProcessor extends ActionProcessorItem {
   name: string = 'appearOrDisAppear';
@@ -137,5 +143,30 @@ export class CommonScaleToActionProcessor extends ActionProcessorItem {
     const { animation, scale } = actionSpec.payload ?? {};
 
     scaleTo(character, animation as any, scale);
+  }
+}
+
+export class CommonBounceActionProcessor extends ActionProcessorItem {
+  name: 'bounce';
+
+  constructor() {
+    super();
+  }
+
+  getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
+    const { startTime: globalStartTime = 0 } = action;
+    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+
+    const st = globalStartTime + startTime;
+    const d = duration;
+    return {
+      startTime: st,
+      duration: d
+    };
+  }
+
+  run(character: ICharacter, actionSpec: IComponentBounceAction): void {
+    const { animation } = actionSpec.payload ?? {};
+    bounce(character, animation as any, actionSpec.payload);
   }
 }

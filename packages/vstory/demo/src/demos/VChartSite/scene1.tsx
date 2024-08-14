@@ -946,7 +946,7 @@ export const scene1 = {
         }
       ]
     })),
-    ...new Array(10).fill(0).map((_, i) => ({
+    ...new Array(5).fill(0).map((_, i) => ({
       characterId: `chart${i}`,
       characterActions: [
         {

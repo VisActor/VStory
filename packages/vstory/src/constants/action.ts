@@ -4,7 +4,8 @@ export const ACTION_TYPE = {
   STYLE: 'style',
   MOVETO: 'moveTo',
   SCALETO: 'scaleTo',
-  STATE: 'state'
+  STATE: 'state',
+  BOUNCE: 'bounce'
 };
 
 export const VCHART_ACTION_TYPE = {
