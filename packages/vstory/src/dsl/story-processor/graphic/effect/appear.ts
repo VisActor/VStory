@@ -1,7 +1,7 @@
 import type { EasingType, IGraphic } from '@visactor/vrender';
 import type { IAnimationParams } from '../../../types';
 import { isObject, isString } from '@visactor/vutils';
-import { Wipe } from '../../../../animate/wipeIn';
+// import { Wipe } from '../../../../animate/wipeIn';
 import { typewriter } from '../effect/typewriter';
 import { canDoGraphicAnimation } from '../util';
 
@@ -209,21 +209,23 @@ export function wipeIn(graphic: IGraphic, params: IWipeInParams) {
     return false;
   }
 
-  const { wipe = {} } = params;
-  const from = wipe.from ?? params.from ?? 1;
-  const duration = wipe.duration ?? params.duration;
-  const easing = wipe.easing ?? params.easing;
+  // const { wipe = {} } = params;
+  // const from = wipe.from ?? params.from ?? 1;
+  // const duration = wipe.duration ?? params.duration;
+  // const easing = wipe.easing ?? params.easing;
 
-  const { fill } = graphic.attribute;
-  if (isString(fill)) {
-    graphic.animate().play(
-      new Wipe({}, {}, duration, easing as EasingType, {
-        direction: Direction[from]
-      })
-    );
-  } else if (isObject(fill)) {
-    // 渐变色支持
-  }
+  // const { fill } = graphic.attribute;
+  // if (isString(fill)) {
+  //   // graphic
+  //   //   .animate()
+  //   //   .play
+  //   //   // new Wipe({}, {}, duration, easing as EasingType, {
+  //   //   //   direction: Direction[from]
+  //   //   // })
+  //   //   ();
+  // } else if (isObject(fill)) {
+  //   // 渐变色支持
+  // }
   return true;
 }
 

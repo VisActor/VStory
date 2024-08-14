@@ -13,7 +13,7 @@ export abstract class Graphic {
   readonly containsShapePoints: boolean = false;
   type: string;
 
-  protected _character: CharacterComponent;
+  protected _character: any;
   protected _graphic: IGraphic<any>;
   get graphic() {
     return this._graphic;

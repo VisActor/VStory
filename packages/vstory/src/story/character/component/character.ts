@@ -14,10 +14,10 @@ export abstract class CharacterComponent extends CharacterBase {
   get spec() {
     return this._spec;
   }
-  protected declare _graphic: Graphic;
-  get graphic() {
-    return this._graphic;
-  }
+  // protected declare _graphic: Graphic;
+  // get graphic() {
+  //   return this._graphic;
+  // }
   protected declare _text: GraphicBaseText;
   get text() {
     return this._text;
