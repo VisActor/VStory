@@ -818,7 +818,7 @@ export const scene1Characters = [
       height: 200
     },
     options: {
-      graphic: { text: 'A BRIEF HISTORY', fontSize: 75, fontWeight: 'bold' }
+      graphic: { text: 'A BRIEF HISTORY', textAlign: 'center', fontSize: 75, fontWeight: 'bold' }
     }
   },
   {
@@ -832,7 +832,7 @@ export const scene1Characters = [
       height: 200
     },
     options: {
-      graphic: { text: 'OF CHARTS', fontSize: 75, fontWeight: 'bold' }
+      graphic: { text: 'OF CHARTS', textAlign: 'center', fontSize: 75, fontWeight: 'bold' }
     }
   },
   {
@@ -850,6 +850,7 @@ export const scene1Characters = [
         width: 400,
         fontSize: 22,
         fontWeight: 'bold',
+        textAlign: 'center',
         textConfig: [
           {
             text: 'Powered By '

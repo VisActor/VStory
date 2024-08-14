@@ -63,7 +63,7 @@ export const scene2Characters: ICharacterSpec[] = [
     id: `scene2-title2`,
     zIndex: 1,
     position: {
-      top: 50,
+      top: 30,
       left: 150,
       width: 200,
       height: 20
@@ -73,6 +73,7 @@ export const scene2Characters: ICharacterSpec[] = [
         width: 400,
         fontSize: 12,
         fill: '#292729',
+        textAlign: 'center',
         text: 'DEVELOPMENT ROADMAP'
       }
     }
