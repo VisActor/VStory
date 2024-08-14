@@ -1,10 +1,11 @@
-import type { IChartUpdateAction } from '../../player/processor/chart/vchart';
+import type { IChartAddAction, IChartUpdateAction } from '../../player/processor/chart/vchart';
 import type {
   IChartVisibilityAction,
-  IComponentVisibilityAction,
-  IChartAddAction
+  IComponentVisibilityAction
+  // IChartAddAction
 } from '../../player/processor/interface/appear-action';
 import type {
+  IComponentBounceAction,
   IComponentMoveToAction,
   IComponentScaleToAction,
   IComponentStyleAction
@@ -16,6 +17,7 @@ export type IActionSpec =
   | IComponentVisibilityAction
   | IComponentMoveToAction
   | IComponentScaleToAction
+  | IComponentBounceAction
   | IChartVisibilityAction
   | IChartUpdateAction
   | IChartAddAction;

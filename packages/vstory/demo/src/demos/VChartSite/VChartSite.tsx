@@ -60,7 +60,7 @@ export const VChartSiteDemo = () => {
         }
       ]
     };
-    // console.log('dsl', tempSpec);
+    console.log('dsl', tempSpec);
     const story = new Story(tempSpec, { dom: id, playerOption: { scaleX: 1, scaleY: 1 } });
     story.player.speed = 5;
     window.story = story;
