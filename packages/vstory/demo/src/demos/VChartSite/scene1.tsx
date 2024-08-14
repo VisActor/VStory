@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { ICharacterSpec } from '../../../../src/story/character';
 import { ISceneSpec } from '../../../../src/story/interface';
+import { after, at, getSceneEndTime } from '../../../../src/util/utility';
 
 const chartSpecList = [
   {
@@ -863,6 +864,115 @@ export const scene1Characters = [
     }
   }
 ];
+
+export const _scene1: ISceneSpec = { id: 'scene1', actions: [] };
+
+const appearAction = {
+  action: 'appear',
+  payload: {
+    animation: {
+      duration: 1000
+    }
+  }
+};
+
+let lastId;
+let curTime = 500;
+
+for (let index = 0; index < 5; index++) {
+  const topChartId = `chart${index}`;
+  const bottomChartId = `chart${9 - index}`;
+  at(curTime, topChartId, appearAction, _scene1);
+  at(curTime, bottomChartId, appearAction, _scene1);
+  curTime += 300;
+}
+
+at(
+  1500,
+  'title1',
+  {
+    action: 'appear',
+    payload: {
+      animation: {
+        duration: 500,
+        effect: 'typewriter',
+        easing: 'quadIn'
+      }
+    }
+  },
+  _scene1
+);
+
+after(
+  'title1',
+  'title2',
+  {
+    action: 'appear',
+    payload: {
+      animation: {
+        duration: 500,
+        effect: 'typewriter',
+        easing: 'quadIn'
+      }
+    }
+  },
+  _scene1
+);
+
+curTime = getSceneEndTime(_scene1);
+
+const bounceAction = {
+  action: 'bounce',
+  payload: {
+    animation: {
+      duration: 2000
+    }
+  }
+};
+
+for (let index = 0; index < 5; index++) {
+  const topChartId = `chart${index}`;
+  const bottomChartId = `chart${9 - index}`;
+  at(curTime, topChartId, bounceAction, _scene1);
+  at(curTime, bottomChartId, bounceAction, _scene1);
+  chartStartTime += 100;
+}
+
+at(
+  curTime,
+  'titlesubtitle',
+  {
+    action: 'appear',
+    payload: {
+      animation: {
+        duration: 200,
+        easing: 'linear',
+        effect: 'fade'
+      }
+    }
+  },
+  _scene1
+);
+
+curTime = getSceneEndTime(_scene1);
+
+for (let index = 0; index < 10; index++) {
+  const chartId = `chart${index}`;
+  at(
+    curTime + 1000,
+    chartId,
+    {
+      action: 'disappear',
+      payload: {
+        animation: {
+          duration: 1000
+        },
+        fade: { isBaseOpacity: true }
+      }
+    },
+    _scene1
+  );
+}
 
 export const scene1 = {
   id: 'scene1',

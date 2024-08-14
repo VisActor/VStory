@@ -1,7 +1,9 @@
 import React, { act, useEffect } from 'react';
 import { IStorySpec } from '../../../../src/story/interface';
 import { Story } from '../../../../src/story/story';
-import { scene1, scene1Characters } from './scene1';
+import { getSceneEndTime } from '../../../../src/util/utility';
+
+import { _scene1, scene1, scene1Characters } from './scene1';
 import { scene2, scene2Characters } from './scene2';
 import { scene3, scene3Characters } from './scene3';
 import { scene4, scene4Characters } from './scene4';
@@ -42,7 +44,8 @@ export const VChartSiteDemo = () => {
         {
           id: 'default-chapter',
           scenes: [
-            scene1,
+            _scene1,
+            // scene1,
             scene2,
             scene3,
             scene4,
@@ -60,7 +63,15 @@ export const VChartSiteDemo = () => {
         }
       ]
     };
-    // console.log('dsl', tempSpec);
+    console.log(111, tempSpec);
+    console.table(
+      tempSpec.acts[0].scenes.map(scene => {
+        return {
+          sceneId: scene.id,
+          endTime: getSceneEndTime(scene)
+        };
+      })
+    );
     const story = new Story(tempSpec, { dom: id, playerOption: { scaleX: 0.5, scaleY: 0.5 } });
     window.story = story;
     story.play();
