@@ -706,13 +706,13 @@ export const scene12: ISceneSpec = {
           payload: {
             animation: {
               effect: 'forward',
-              duration: 6000,
+              duration: 6300,
               easing: 'linear'
             }
           }
         },
         {
-          startTime: 1000,
+          startTime: 2000,
           action: 'moveTo',
           payload: {
             destination: {

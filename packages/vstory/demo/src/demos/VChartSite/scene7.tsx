@@ -362,18 +362,18 @@ export const scene7: ISceneSpec = {
       characterId: 'timeline',
       characterActions: [
         {
-          startTime: 100, // TODO 不知道为啥不能是0
+          startTime: 0, // TODO 不知道为啥不能是0
           action: 'state',
           payload: {
             animation: {
               effect: 'forward',
-              duration: 6000,
+              duration: 5500,
               easing: 'linear'
             }
           }
         },
         {
-          startTime: 1000,
+          startTime: 500,
           action: 'moveTo',
           payload: {
             destination: {

@@ -106,13 +106,15 @@ export const scene2Characters: ICharacterSpec[] = [
           lineDash: [1, 1]
         },
         labelStyle: {
-          fontSize: 28,
+          fontSize: 16,
           fontWeight: 'bold'
         },
+        activeSymbolStyle: {
+          size: 20
+        },
         activeLabelStyle: {
-          fontSize: 28,
-          fontWeight: 'bold',
-          dy: 20
+          fontSize: 22,
+          fontWeight: 'bold'
         }
       }
     }

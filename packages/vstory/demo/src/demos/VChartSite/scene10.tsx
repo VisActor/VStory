@@ -364,7 +364,7 @@ export const scene10: ISceneSpec = {
           payload: {
             animation: {
               effect: 'forward',
-              duration: 5500,
+              duration: 7000,
               easing: 'linear'
             }
           }

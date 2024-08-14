@@ -604,17 +604,17 @@ export const scene12_2: ISceneSpec = {
     {
       characterId: 'timeline',
       characterActions: [
-        // {
-        //   startTime: 1000,
-        //   action: 'state',
-        //   payload: {
-        //     animation: {
-        //       effect: 'forward',
-        //       duration: 3000,
-        //       easing: 'linear'
-        //     }
-        //   }
-        // },
+        {
+          startTime: 1000,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 6000,
+              easing: 'linear'
+            }
+          }
+        }
         // {
         //   startTime: 1000,
         //   action: 'moveTo',
@@ -628,16 +628,16 @@ export const scene12_2: ISceneSpec = {
         //     }
         //   }
         // },
-        {
-          startTime: 3000,
-          action: 'disappear',
-          payload: {
-            animation: {
-              duration: 500,
-              effect: 'fade'
-            }
-          }
-        }
+        // {
+        //   startTime: 3000,
+        //   action: 'disappear',
+        //   payload: {
+        //     animation: {
+        //       duration: 500,
+        //       effect: 'fade'
+        //     }
+        //   }
+        // }
       ]
     }
   ]

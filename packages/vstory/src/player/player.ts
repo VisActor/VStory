@@ -12,6 +12,7 @@ export class Ticker {
   cb?: (delta: number) => void;
   rafIdx = 0;
   running: boolean;
+  speed: number = 1;
   start(cb: (t: number) => void) {
     this.stop();
     this.cb = cb;
@@ -25,7 +26,7 @@ export class Ticker {
     }
     const ct = Date.now();
     this.rafIdx = requestAnimationFrame(() => this._tick(ct));
-    this.cb && this.cb(lt === 0 ? 0 : ct - lt);
+    this.cb && this.cb((lt === 0 ? 0 : ct - lt) * this.speed);
   };
 
   stop() {
@@ -42,6 +43,16 @@ export class Player extends EventEmitter implements IPlayer {
   // protected _encoder: Encoder;
   protected _actionProcessor: IActionProcessor;
   protected _scheduler: IScheduler;
+
+  set speed(speed: number) {
+    if (this._scheduler) {
+      this._ticker.speed = speed;
+    }
+  }
+
+  get speed(): number {
+    return this._ticker ? this._ticker.speed : 1;
+  }
 
   constructor(story: IStory, options?: { scaleX?: number; scaleY?: number }) {
     super();

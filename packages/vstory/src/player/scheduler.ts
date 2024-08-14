@@ -126,7 +126,6 @@ export class Scheduler implements IScheduler {
       startTime += actInfo.duration;
       return actInfo;
     });
-    // console.log(this);
   }
 
   protected _getActInfo(act: IActSpec, actStartTime: number): IActInfo {

@@ -693,7 +693,7 @@ export const scene4: ISceneSpec = {
           }
         },
         {
-          startTime: 1000,
+          startTime: 500,
           action: 'moveTo',
           payload: {
             destination: {
