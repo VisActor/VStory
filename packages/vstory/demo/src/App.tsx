@@ -1,5 +1,5 @@
 import React, { Component, useCallback, useState } from 'react';
-import { Nav } from '@douyinfe/semi-ui';
+import { BaseComponent, Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
 import { StoryBarDemo } from './demos/StoryBarDemo';
 // import { StorySceneDemo } from './demos/StoryScene';
@@ -15,6 +15,9 @@ import { Appear } from './demos/Appear';
 import { GraphicEdit } from './demos/GraphicEdit';
 import { Playground } from './demos/Playground';
 import { Pictogram } from './demos/infographics/Pictogram';
+import { BarLineSeries } from './demos/BarLineSeries';
+import { wordcloud } from './demos/wordcloud';
+import { LV_BAR1 } from './demos/lv/bar1';
 
 const App = () => {
   const [activeName, setActiveName] = useLocalStorage('menuName', '');
@@ -91,11 +94,11 @@ const App = () => {
           component: LV_BAR1
         }
       ]
-    },
-    {
-      name: 'Units',
-      component: Units
     }
+    // {
+    //   name: 'Units',
+    //   component: Units
+    // }
   ];
   const getSelectedMenu = useCallback<(menus: MenusType) => any>(
     (menus: MenusType) => {
