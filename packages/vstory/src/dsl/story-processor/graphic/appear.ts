@@ -1,5 +1,4 @@
 import type { ICharacter } from '../../../story/character';
-import type { IText } from '@visactor/vrender';
 import type { IGraphicAppearAction } from '../../types/graphic/appear';
 import { appearEffectMap } from './effect/appear';
 import { getCharacterByEffect } from './util';

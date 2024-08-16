@@ -80,7 +80,7 @@ const chartSpec = {
 
 export const scene10Characters: ICharacterSpec[] = [
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene10-background`,
     zIndex: 0,
     position: {
@@ -97,7 +97,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-person`,
     zIndex: 1,
     position: {
@@ -113,7 +113,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-title`,
     zIndex: 1,
     position: {
@@ -129,7 +129,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-bg-decoration`,
     zIndex: 0,
     position: {
@@ -145,7 +145,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-text-zh`,
     zIndex: 0,
     position: {
@@ -161,7 +161,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-text-en`,
     zIndex: 0,
     position: {
@@ -177,7 +177,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene10-chart-image`,
     zIndex: 0,
     position: {
@@ -193,7 +193,7 @@ export const scene10Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RadarChart',
+    type: 'VChart',
     id: `scene10-radar-chart`,
     zIndex: 3,
     position: {
@@ -213,15 +213,13 @@ export const scene10Characters: ICharacterSpec[] = [
 
 export const scene10: ISceneSpec = {
   id: 'scene10',
-  delay: -1000,
+  delay: -500,
   actions: [
     {
       characterId: 'scene10-background',
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
@@ -238,13 +236,13 @@ export const scene10: ISceneSpec = {
         {
           action: 'appear',
           startTime: 500,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
+              effect: 'move',
               move: {
-                from: 'right'
+                pos: 'right'
               }
             }
           }
@@ -257,12 +255,10 @@ export const scene10: ISceneSpec = {
         {
           action: 'appear',
           startTime: 1000,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -274,12 +270,10 @@ export const scene10: ISceneSpec = {
         {
           action: 'appear',
           startTime: 1000,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -291,12 +285,10 @@ export const scene10: ISceneSpec = {
         {
           action: 'appear',
           startTime: 1000,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -308,12 +300,10 @@ export const scene10: ISceneSpec = {
         {
           action: 'appear',
           startTime: 1000,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -325,12 +315,10 @@ export const scene10: ISceneSpec = {
         {
           action: 'appear',
           startTime: 1000,
-          duration: 500,
           payload: {
             animation: {
               duration: 500,
-              easing: easeInOutQuad,
-              effect: 'fade'
+              easing: easeInOutQuad
             }
           }
         }
@@ -342,12 +330,10 @@ export const scene10: ISceneSpec = {
         {
           action: 'appear',
           startTime: 2500,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              effect: 'grow',
               fade: {
                 isBaseOpacity: true
               }
@@ -357,7 +343,6 @@ export const scene10: ISceneSpec = {
         {
           action: 'disappear',
           startTime: 5000,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
@@ -369,16 +354,47 @@ export const scene10: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 500,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 7000,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 1000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 550,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };
 
 scene10.actions.forEach(({ characterId, characterActions }) => {
+  if (characterId === 'timeline') {
+    return;
+  }
   if (characterId.includes('background') || characterId.includes('decoration')) {
     characterActions.push({
       action: 'disappear',
       startTime: 7500,
-      duration: 500,
       payload: {
         animation: {
           duration: 500,
@@ -391,16 +407,13 @@ scene10.actions.forEach(({ characterId, characterActions }) => {
     characterActions.push({
       action: 'disappear',
       startTime: 7500,
-      duration: 500,
       payload: {
         animation: {
           duration: 500,
           easing: easeInOutQuad,
+          effect: ['move', 'fade'],
           move: {
-            to: 'bottom'
-          },
-          fade: {
-            opacity: 0
+            pos: 'bottom'
           }
         }
       }

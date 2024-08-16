@@ -1,11 +1,11 @@
 import type { Graphic } from '../graphic/graphic';
 import { CharacterComponent } from '../character';
-import { StoryGraphicType } from '../../../../dsl/constant';
+import { StoryComponentType } from '../../../../constants/character';
 import { GraphicSymbol } from '../graphic/symbol';
 
 export class CharacterComponentShape extends CharacterComponent {
   readonly graphicType: string = 'shape';
   protected _createGraphic(): Graphic {
-    return new GraphicSymbol(StoryGraphicType.SHAPE, this);
+    return new GraphicSymbol(StoryComponentType.SHAPE, this);
   }
 }

@@ -125,6 +125,7 @@ export interface IVisactorGraphic extends IGroup {
   readonly vProduct: IVChart;
 
   updateSpec: (spec: any) => void;
+  release: () => void;
 }
 
 // 编辑元素

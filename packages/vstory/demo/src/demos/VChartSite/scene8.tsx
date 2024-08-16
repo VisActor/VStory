@@ -126,7 +126,7 @@ const chartSpec = {
 
 export const scene8Characters: ICharacterSpec[] = [
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene8-background`,
     zIndex: 0,
     position: {
@@ -143,7 +143,7 @@ export const scene8Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene8-bg-decoration`,
     zIndex: 0,
     position: {
@@ -159,7 +159,7 @@ export const scene8Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene8-title`,
     zIndex: 0,
     position: {
@@ -175,7 +175,7 @@ export const scene8Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene8-text`,
     zIndex: 0,
     position: {
@@ -191,7 +191,7 @@ export const scene8Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene8-chart-image`,
     zIndex: 0,
     position: {
@@ -207,7 +207,7 @@ export const scene8Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene8-image1`,
     zIndex: 0,
     position: {
@@ -223,7 +223,7 @@ export const scene8Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene8-image2`,
     zIndex: 0,
     position: {
@@ -239,7 +239,7 @@ export const scene8Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ScatterChart',
+    type: 'VChart',
     id: `scene8-chart`,
     zIndex: 0,
     position: {
@@ -358,8 +358,9 @@ export const scene8: ISceneSpec = {
             animation: {
               duration: 1500,
               easing: easeInOutElastic,
+              effect: 'move',
               move: {
-                from: 'bottom-left'
+                pos: 'bottom-left'
               }
             }
           }
@@ -377,7 +378,8 @@ export const scene8: ISceneSpec = {
             animation: {
               duration: 1500,
               easing: easeInOutElastic,
-              move: { from: 'top-right' }
+              effect: 'move',
+              move: { pos: 'top-right' }
             }
           }
         }
@@ -394,7 +396,8 @@ export const scene8: ISceneSpec = {
             animation: {
               duration: 1500,
               easing: easeInOutElastic,
-              move: { from: 'bottom-right' }
+              effect: 'move',
+              move: { pos: 'bottom-right' }
             }
           }
         }
@@ -428,11 +431,43 @@ export const scene8: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 600, // TODO 这里如果是500也不行
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 6000,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 1000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 650,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };
 
 scene8.actions.forEach(({ characterId, characterActions }) => {
+  if (characterId === 'timeline') {
+    return;
+  }
   characterActions.push({
     action: 'disappear',
     startTime: characterId === 'scene8-background' ? 7500 : 7000,

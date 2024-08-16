@@ -40,7 +40,7 @@ function createIconMatrix(matrix: number[][], startIndex: number, x: number, y: 
       const iconIndex = matrix[i][j];
       const id = `icon-${startIndex + i * matrix[i].length + j}-${x}-${y}`;
       const character: ICharacterSpec = {
-        type: 'ShapeComponent',
+        type: 'Shape',
         id,
         zIndex: 3,
         position: {
@@ -89,7 +89,7 @@ export const Pictogram = () => {
     const spec: IStorySpec = {
       characters: [
         {
-          type: 'RectComponent',
+          type: 'Rect',
           id: 'background-top',
           zIndex: 2,
           position: {
@@ -106,7 +106,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'RectComponent',
+          type: 'Rect',
           id: 'background-bottom-filter',
           zIndex: 0,
           position: {
@@ -124,7 +124,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'ImageComponent',
+          type: 'Image',
           id: 'background-bottom',
           zIndex: 1,
           position: {
@@ -141,7 +141,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'RichTextComponent',
+          type: 'RichText',
           id: 'Title',
           zIndex: 3,
           position: {
@@ -175,7 +175,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'LineComponent',
+          type: 'Line',
           id: 'SplitLine',
           zIndex: 3,
           position: {
@@ -196,7 +196,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'ShapeComponent',
+          type: 'Shape',
           id: 'Star',
           zIndex: 3,
           position: {
@@ -218,7 +218,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'TextComponent',
+          type: 'Text',
           id: 'LeftPercent',
           zIndex: 3,
           position: {
@@ -239,7 +239,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'RichTextComponent',
+          type: 'RichText',
           id: 'LeftDescription',
           zIndex: 3,
           position: {
@@ -264,7 +264,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'TextComponent',
+          type: 'Text',
           id: 'RightPercent',
           zIndex: 3,
           position: {
@@ -285,7 +285,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'RichTextComponent',
+          type: 'RichText',
           id: 'RightDescription',
           zIndex: 3,
           position: {

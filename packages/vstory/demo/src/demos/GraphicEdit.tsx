@@ -17,7 +17,7 @@ export const GraphicEdit = () => {
     const tempSpec: IStorySpec = {
       characters: [
         {
-          type: 'RichTextComponent',
+          type: 'Text',
           id: `richtext`,
           zIndex: 1,
           position: {
@@ -44,7 +44,7 @@ export const GraphicEdit = () => {
           }
         },
         {
-          type: 'RectComponent',
+          type: 'Rect',
           id: 'rect',
           zIndex: 0,
           position: {
@@ -67,7 +67,7 @@ export const GraphicEdit = () => {
           }
         },
         {
-          type: 'ImageComponent',
+          type: 'Image',
           id: `image`,
           zIndex: 1,
           position: {

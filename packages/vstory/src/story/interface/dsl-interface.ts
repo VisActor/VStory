@@ -1,12 +1,26 @@
-import type { Action } from '../../dsl/types';
+import type { IChartAddAction, IChartUpdateAction } from '../../player/processor/chart/vchart';
+import type {
+  IChartVisibilityAction,
+  IComponentVisibilityAction
+  // IChartAddAction
+} from '../../player/processor/interface/appear-action';
+import type {
+  IComponentBounceAction,
+  IComponentMoveToAction,
+  IComponentScaleToAction,
+  IComponentStyleAction
+} from '../../player/processor/interface/style-action';
 import type { ICharacterSpec } from '../character';
 
-export interface IAction {
-  startTime: number;
-  action: string;
-  duration: number;
-  payload?: Action['payload'];
-}
+export type IActionSpec =
+  | IComponentStyleAction
+  | IComponentVisibilityAction
+  | IComponentMoveToAction
+  | IComponentScaleToAction
+  | IComponentBounceAction
+  | IChartVisibilityAction
+  | IChartUpdateAction
+  | IChartAddAction;
 
 export interface IStorySpec {
   acts: IActSpec[]; // 作品的章节
@@ -15,7 +29,7 @@ export interface IStorySpec {
 
 export interface IActionsLink {
   characterId: string;
-  characterActions: IAction[];
+  characterActions: IActionSpec[];
 }
 
 export type ISceneSpec = {

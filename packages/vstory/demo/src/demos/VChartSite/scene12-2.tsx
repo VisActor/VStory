@@ -423,7 +423,7 @@ const chartSpec = {
 
 export const scene12_2_Characters: ICharacterSpec[] = [
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12_2-title`,
     zIndex: 0,
     position: {
@@ -439,7 +439,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12_2-chart-image`,
     zIndex: 1,
     position: {
@@ -455,7 +455,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12_2-text-zh`,
     zIndex: 0,
     position: {
@@ -471,7 +471,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12_2-text-en`,
     zIndex: 0,
     position: {
@@ -487,7 +487,7 @@ export const scene12_2_Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'SunburstChart',
+    type: 'VChart',
     id: `scene12_2-sunburst-chart`,
     zIndex: 1,
     position: {
@@ -512,13 +512,12 @@ export const scene12_2: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -529,13 +528,12 @@ export const scene12_2: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -546,13 +544,14 @@ export const scene12_2: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
+
           duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -563,13 +562,12 @@ export const scene12_2: ISceneSpec = {
       characterActions: [
         {
           action: 'appear',
-          startTime: 1,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'right', isVariableSpeed: false }
+              effect: 'move',
+              move: { pos: 'right', isVariableSpeed: false }
             }
           }
         }
@@ -581,12 +579,11 @@ export const scene12_2: ISceneSpec = {
         {
           action: 'appear',
           startTime: 3000,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              effect: 'centerGrow',
+              effect: ['centerGrow', 'fade'],
               fade: { isBaseOpacity: true }
             }
           }
@@ -594,16 +591,53 @@ export const scene12_2: ISceneSpec = {
         {
           action: 'disappear',
           startTime: 5500,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              effect: 'fade',
               fade: { isBaseOpacity: true }
             }
           }
         }
+      ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 1000,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 6000,
+              easing: 'linear'
+            }
+          }
+        }
+        // {
+        //   startTime: 1000,
+        //   action: 'moveTo',
+        //   payload: {
+        //     destination: {
+        //       x: 450,
+        //       y: 60
+        //     },
+        //     animation: {
+        //       duration: 500
+        //     }
+        //   }
+        // },
+        // {
+        //   startTime: 3000,
+        //   action: 'disappear',
+        //   payload: {
+        //     animation: {
+        //       duration: 500,
+        //       effect: 'fade'
+        //     }
+        //   }
+        // }
       ]
     }
   ]
@@ -616,12 +650,10 @@ scene12_2.actions.forEach(({ characterId, characterActions }) => {
     characterActions.push({
       action: 'disappear',
       startTime: 7000,
-      duration: 1000,
       payload: {
         animation: {
           duration: 1000,
-          easing: easeInOutQuad,
-          effect: 'fade'
+          easing: easeInOutQuad
         }
       }
     });

@@ -17,7 +17,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/screenshot-202
 const spec = {
   characters: [
     {
-      type: 'RangeColumnChart',
+      type: 'VChart',
       id: 'chart0',
       zIndex: 1,
       position: {
@@ -27,75 +27,35 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'Timeline Chart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
-          }
-        },
-        padding: 12,
-        data: [
-          {
-            id: 'id0',
-            values: [
-              {
-                type: 'a',
-                value: 0.36,
-                value2: 0.06
-              },
-              {
-                type: 'b',
-                value: 0.66,
-                value2: 0.26
-              },
-              {
-                type: 'c',
-                value: 0.4,
-                value2: 0
-              },
-              {
-                type: 'd',
-                value: 0.6,
-                value2: 0.2
-              }
-            ]
-          }
-        ],
-        direction: 'horizontal',
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              minField: 'value',
-              maxField: 'value2',
-              yField: 'type',
-              bar: {
-                maxWidth: 2,
-                style: {
-                  maxWidth: 2
-                }
-              },
-              label: {
-                style: {
-                  visible: false
-                }
-              }
+        spec: {
+          type: 'rangeColumn',
+          title: {
+            text: 'Timeline Chart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
             }
-          }
-        ],
-        componentSpec: [
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'bottom'
-            },
-            spec: {
+          },
+          direction: 'horizontal',
+          minField: 'value',
+          maxField: 'value2',
+          yField: 'type',
+          bar: {
+            maxWidth: 2,
+            style: {
+              maxWidth: 2
+            }
+          },
+          label: {
+            style: {
+              visible: false
+            }
+          },
+          axes: [
+            {
+              orient: 'bottom',
               domainLine: {
                 visible: true
               },
@@ -108,14 +68,9 @@ const spec = {
               grid: {
                 visible: false
               }
-            }
-          },
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'left'
             },
-            spec: {
+            {
+              orient: 'left',
               domainLine: {
                 visible: false
               },
@@ -129,8 +84,37 @@ const spec = {
                 visible: false
               }
             }
-          }
-        ],
+          ],
+          padding: 12,
+          data: [
+            {
+              id: 'id0',
+              values: [
+                {
+                  type: 'a',
+                  value: 0.36,
+                  value2: 0.06
+                },
+                {
+                  type: 'b',
+                  value: 0.66,
+                  value2: 0.26
+                },
+                {
+                  type: 'c',
+                  value: 0.4,
+                  value2: 0
+                },
+                {
+                  type: 'd',
+                  value: 0.6,
+                  value2: 0.2
+                }
+              ]
+            }
+          ]
+        },
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -141,7 +125,7 @@ const spec = {
       }
     },
     {
-      type: 'BarChart',
+      type: 'VChart',
       id: 'chart1',
       zIndex: 1,
       position: {
@@ -151,117 +135,101 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'BarChart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
-          }
-        },
-        padding: 12,
-        data: [
-          {
-            id: 'data',
-            values: [
-              {
-                x: 'Mon',
-                y: 100,
-                type: '销售额'
-              },
-              {
-                x: 'Tues',
-                y: 66,
-                type: '销售额'
-              },
-              {
-                x: 'Wed',
-                y: 95,
-                type: '销售额'
-              },
-              {
-                x: 'Mon',
-                y: 43,
-                type: '利润'
-              },
-              {
-                x: 'Tues',
-                y: 80,
-                type: '利润'
-              },
-              {
-                x: 'Wed',
-                y: 68,
-                type: '利润'
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              xField: ['x', 'type'],
-              yField: 'y',
-              seriesField: 'type',
-              bar: {
-                style: {
-                  fill: {
-                    gradient: 'linear',
-                    stops: [
-                      {
-                        offset: 1
-                      },
-                      {
-                        offset: 0,
-                        opacity: 0.6
-                      }
-                    ]
-                  }
-                },
-                state: {
-                  selected: {
-                    stroke: '#000',
-                    strokeWidth: 1
-                  }
-                }
-              },
-              label: {
-                style: {
-                  visible: false
-                }
-              }
+        spec: {
+          type: 'bar',
+          color: ['#4CC9E4', '#4954E6'],
+          title: {
+            text: 'BarChart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
             }
-          }
-        ],
-        componentSpec: [
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'bottom'
+          },
+          padding: 12,
+          xField: ['x', 'type'],
+          yField: 'y',
+          seriesField: 'type',
+          bar: {
+            style: {
+              fill: {
+                gradient: 'linear',
+                stops: [
+                  {
+                    offset: 1
+                  },
+                  {
+                    offset: 0,
+                    opacity: 0.6
+                  }
+                ]
+              }
             },
-            spec: {
-              tick: {
-                visible: false
-              },
-              label: {
-                visible: false
-              },
-              grid: {
-                visible: false
+            state: {
+              selected: {
+                stroke: '#000',
+                strokeWidth: 1
               }
             }
           },
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'left'
+          label: {
+            style: {
+              visible: false
+            }
+          },
+          data: [
+            {
+              id: 'data',
+              values: [
+                {
+                  x: 'Mon',
+                  y: 100,
+                  type: '销售额'
+                },
+                {
+                  x: 'Tues',
+                  y: 66,
+                  type: '销售额'
+                },
+                {
+                  x: 'Wed',
+                  y: 95,
+                  type: '销售额'
+                },
+                {
+                  x: 'Mon',
+                  y: 43,
+                  type: '利润'
+                },
+                {
+                  x: 'Tues',
+                  y: 80,
+                  type: '利润'
+                },
+                {
+                  x: 'Wed',
+                  y: 68,
+                  type: '利润'
+                }
+              ]
+            }
+          ],
+          axes: [
+            {
+              orient: 'bottom',
+              tick: {
+                visible: false
+              },
+              label: {
+                visible: false
+              },
+              grid: {
+                visible: false
+              }
             },
-            spec: {
+            {
+              orient: 'left',
               tick: {
                 visible: false
               },
@@ -272,9 +240,9 @@ const spec = {
                 visible: false
               }
             }
-          }
-        ],
-        color: ['#4CC9E4', '#4954E6'],
+          ]
+        },
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -285,7 +253,7 @@ const spec = {
       }
     },
     {
-      type: 'AreaChart',
+      type: 'VChart',
       id: 'chart2',
       zIndex: 1,
       position: {
@@ -295,103 +263,86 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'Line/Area Chart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
-          }
-        },
-        padding: 12,
-        data: [
-          {
-            id: 'data2',
-            values: [
-              {
-                x: 1,
-                y: 70,
-                type: 'a'
-              },
-              {
-                x: 2,
-                y: 20,
-                type: 'a'
-              },
-              {
-                x: 3,
-                y: 30,
-                type: 'a'
-              },
-              {
-                x: 4,
-                y: 10,
-                type: 'a'
-              },
-              {
-                x: 1,
-                y: 70,
-                type: 'b'
-              },
-              {
-                x: 2,
-                y: 20,
-                type: 'b'
-              },
-              {
-                x: 3,
-                y: 30,
-                type: 'b'
-              },
-              {
-                x: 4,
-                y: 10,
-                type: 'b'
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              xField: 'x',
-              yField: 'y',
-              seriesField: 'type',
-              point: {
-                visible: false
-              }
-            }
-          }
-        ],
-        componentSpec: [
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'bottom'
-            },
-            spec: {
-              tick: {
-                visible: false
-              },
-              label: {
-                visible: false
-              },
-              grid: {
-                visible: false
-              }
+        spec: {
+          type: 'area',
+          title: {
+            text: 'Line/Area Chart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
             }
           },
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'left'
+          xField: 'x',
+          yField: 'y',
+          seriesField: 'type',
+          point: {
+            visible: false
+          },
+          padding: 12,
+          data: [
+            {
+              id: 'data2',
+              values: [
+                {
+                  x: 1,
+                  y: 70,
+                  type: 'a'
+                },
+                {
+                  x: 2,
+                  y: 20,
+                  type: 'a'
+                },
+                {
+                  x: 3,
+                  y: 30,
+                  type: 'a'
+                },
+                {
+                  x: 4,
+                  y: 10,
+                  type: 'a'
+                },
+                {
+                  x: 1,
+                  y: 70,
+                  type: 'b'
+                },
+                {
+                  x: 2,
+                  y: 20,
+                  type: 'b'
+                },
+                {
+                  x: 3,
+                  y: 30,
+                  type: 'b'
+                },
+                {
+                  x: 4,
+                  y: 10,
+                  type: 'b'
+                }
+              ]
+            }
+          ],
+          axes: [
+            {
+              orient: 'bottom',
+              tick: {
+                visible: false
+              },
+              label: {
+                visible: false
+              },
+              grid: {
+                visible: false
+              }
             },
-            spec: {
+            {
+              orient: 'left',
               tick: {
                 visible: false
               },
@@ -402,8 +353,9 @@ const spec = {
                 visible: false
               }
             }
-          }
-        ],
+          ]
+        },
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -414,7 +366,7 @@ const spec = {
       }
     },
     {
-      type: 'PieChart',
+      type: 'VChart',
       id: 'chart3',
       zIndex: 1,
       position: {
@@ -424,49 +376,44 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'Pie Chart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
-          }
-        },
-        padding: 12,
-        data: [
-          {
-            id: 'data1',
-            values: [
-              {
-                value: 348,
-                name: '中介渠道: 34.8%'
-              },
-              {
-                value: 152,
-                name: '会员: 15.2%'
-              },
-              {
-                value: 500,
-                name: '散客: 50%'
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              valueField: 'value',
-              categoryField: 'name',
-              radius: 1,
-              innerRadius: 0
+        spec: {
+          type: 'pie',
+          title: {
+            text: 'Pie Chart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
             }
-          }
-        ],
+          },
+          padding: 12,
+          animation: false,
+          data: [
+            {
+              id: 'data1',
+              values: [
+                {
+                  value: 348,
+                  name: '中介渠道: 34.8%'
+                },
+                {
+                  value: 152,
+                  name: '会员: 15.2%'
+                },
+                {
+                  value: 500,
+                  name: '散客: 50%'
+                }
+              ]
+            }
+          ],
+          valueField: 'value',
+          categoryField: 'name',
+          radius: 1,
+          innerRadius: 0
+        },
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -477,7 +424,7 @@ const spec = {
       }
     },
     {
-      type: 'ScatterChart',
+      type: 'VChart',
       id: 'chart4',
       zIndex: 1,
       position: {
@@ -487,88 +434,80 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'Scatter Chart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
-          }
-        },
-        padding: 12,
-        data: [
-          {
-            id: 'data2',
-            values: [
-              {
-                x: 1,
-                y: 70,
-                type: 'a'
-              },
-              {
-                x: 2,
-                y: 20,
-                type: 'a'
-              },
-              {
-                x: 3,
-                y: 30,
-                type: 'a'
-              },
-              {
-                x: 4,
-                y: 10,
-                type: 'a'
-              },
-              {
-                x: 1,
-                y: 70,
-                type: 'b'
-              },
-              {
-                x: 2,
-                y: 20,
-                type: 'b'
-              },
-              {
-                x: 3,
-                y: 30,
-                type: 'b'
-              },
-              {
-                x: 4,
-                y: 10,
-                type: 'b'
-              }
-            ]
-          }
-        ],
-        componentSpec: [
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'bottom'
-            },
-            spec: {
-              tick: {
-                visible: false
-              },
-              label: {
-                visible: false
-              },
-              grid: {
-                visible: false
-              }
+        spec: {
+          type: 'scatter',
+          title: {
+            text: 'Scatter Chart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
             }
           },
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'left'
+          padding: 12,
+          data: [
+            {
+              id: 'data2',
+              values: [
+                {
+                  x: 1,
+                  y: 70,
+                  type: 'a'
+                },
+                {
+                  x: 2,
+                  y: 20,
+                  type: 'a'
+                },
+                {
+                  x: 3,
+                  y: 30,
+                  type: 'a'
+                },
+                {
+                  x: 4,
+                  y: 10,
+                  type: 'a'
+                },
+                {
+                  x: 1,
+                  y: 70,
+                  type: 'b'
+                },
+                {
+                  x: 2,
+                  y: 20,
+                  type: 'b'
+                },
+                {
+                  x: 3,
+                  y: 30,
+                  type: 'b'
+                },
+                {
+                  x: 4,
+                  y: 10,
+                  type: 'b'
+                }
+              ]
+            }
+          ],
+          axes: [
+            {
+              orient: 'bottom',
+              tick: {
+                visible: false
+              },
+              label: {
+                visible: false
+              },
+              grid: {
+                visible: false
+              }
             },
-            spec: {
+            {
+              orient: 'left',
               tick: {
                 visible: false
               },
@@ -579,25 +518,17 @@ const spec = {
                 visible: false
               }
             }
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              xField: 'x',
-              yField: 'y',
-              seriesField: 'type',
-              point: {
-                style: {
-                  size: 4
-                }
-              }
+          ],
+          xField: 'x',
+          yField: 'y',
+          seriesField: 'type',
+          point: {
+            style: {
+              size: 4
             }
           }
-        ],
+        },
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -608,7 +539,7 @@ const spec = {
       }
     },
     {
-      type: 'RoseChart',
+      type: 'VChart',
       id: 'chart5',
       zIndex: 1,
       position: {
@@ -618,78 +549,61 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'Rose Chart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
-          }
-        },
-        padding: 12,
-        data: [
-          {
-            id: 'data1',
-            values: [
-              {
-                value: 348,
-                name: '中介渠道: 34.8%'
-              },
-              {
-                value: 152,
-                name: '会员: 15.2%'
-              },
-              {
-                value: 500,
-                name: '散客: 50%'
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              valueField: 'value',
-              seriesField: 'name',
-              categoryField: 'name',
-              radius: 1,
-              innerRadius: 0
-            }
-          }
-        ],
-        componentSpec: [
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'radius'
-            },
-            spec: {
-              domainLine: {
-                visible: false,
-                smooth: false
-              },
-              label: {
-                visible: false
-              },
-              tick: {
-                visible: false
-              },
-              grid: {
-                visible: false
-              }
+        spec: {
+          type: 'rose',
+          title: {
+            text: 'Rose Chart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
             }
           },
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'angle'
+          padding: 12,
+          data: [
+            {
+              id: 'data1',
+              values: [
+                {
+                  value: 348,
+                  name: '中介渠道: 34.8%'
+                },
+                {
+                  value: 152,
+                  name: '会员: 15.2%'
+                },
+                {
+                  value: 500,
+                  name: '散客: 50%'
+                }
+              ]
+            }
+          ],
+          valueField: 'value',
+          seriesField: 'name',
+          categoryField: 'name',
+          radius: 1,
+          innerRadius: 0,
+          axes: [
+            {
+              orient: 'radius',
+              domainLine: {
+                visible: false,
+                smooth: false
+              },
+              label: {
+                visible: false
+              },
+              tick: {
+                visible: false
+              },
+              grid: {
+                visible: false
+              }
             },
-            spec: {
+            {
+              orient: 'angle',
               domainLine: {
                 visible: false,
                 smooth: false
@@ -704,8 +618,9 @@ const spec = {
                 visible: false
               }
             }
-          }
-        ],
+          ]
+        },
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -716,7 +631,7 @@ const spec = {
       }
     },
     {
-      type: 'RadarChart',
+      type: 'VChart',
       id: 'chart6',
       zIndex: 1,
       position: {
@@ -726,146 +641,134 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'Radar Chart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
-          }
-        },
-        padding: 12,
-        data: [
-          {
-            id: 'data2',
-            values: [
-              {
-                theta: 0,
-                type: 'A',
-                value: 833
-              },
-              {
-                theta: 1,
-                type: 'A',
-                value: 898
-              },
-              {
-                theta: 2,
-                type: 'A',
-                value: 672
-              },
-              {
-                theta: 3,
-                type: 'A',
-                value: 889
-              },
-              {
-                theta: 4,
-                type: 'A',
-                value: 889
-              },
-              {
-                theta: 5,
-                type: 'A',
-                value: 658
-              },
-              {
-                theta: 6,
-                type: 'A',
-                value: 822
-              },
-              {
-                theta: 7,
-                type: 'A',
-                value: 825
-              },
-              {
-                theta: 0,
-                type: 'B',
-                value: 659
-              },
-              {
-                theta: 1,
-                type: 'B',
-                value: 896
-              },
-              {
-                theta: 2,
-                type: 'B',
-                value: 822
-              },
-              {
-                theta: 3,
-                type: 'B',
-                value: 874
-              },
-              {
-                theta: 4,
-                type: 'B',
-                value: 742
-              },
-              {
-                theta: 5,
-                type: 'B',
-                value: 878
-              },
-              {
-                theta: 6,
-                type: 'B',
-                value: 643
-              },
-              {
-                theta: 7,
-                type: 'B',
-                value: 604
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              categoryField: 'theta',
-              valueField: 'value',
-              seriesField: 'type',
-              line: {
-                style: {
-                  strokeWidth: 2
-                }
-              },
-              legends: {
-                visible: false
-              },
-              label: {
-                visible: false
-              },
-              animationAppear: {
-                preset: 'clipIn'
-              },
-              point: {
-                style: {
-                  size: 2,
-                  strokeWidth: 1
-                }
-              },
-              startAngle: 90
+        spec: {
+          type: 'radar',
+          title: {
+            text: 'Radar Chart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
             }
-          }
-        ],
-        componentSpec: [
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'radius'
-            },
-            spec: {
+          },
+          padding: 12,
+          data: [
+            {
+              id: 'data2',
+              values: [
+                {
+                  theta: 0,
+                  type: 'A',
+                  value: 833
+                },
+                {
+                  theta: 1,
+                  type: 'A',
+                  value: 898
+                },
+                {
+                  theta: 2,
+                  type: 'A',
+                  value: 672
+                },
+                {
+                  theta: 3,
+                  type: 'A',
+                  value: 889
+                },
+                {
+                  theta: 4,
+                  type: 'A',
+                  value: 889
+                },
+                {
+                  theta: 5,
+                  type: 'A',
+                  value: 658
+                },
+                {
+                  theta: 6,
+                  type: 'A',
+                  value: 822
+                },
+                {
+                  theta: 7,
+                  type: 'A',
+                  value: 825
+                },
+                {
+                  theta: 0,
+                  type: 'B',
+                  value: 659
+                },
+                {
+                  theta: 1,
+                  type: 'B',
+                  value: 896
+                },
+                {
+                  theta: 2,
+                  type: 'B',
+                  value: 822
+                },
+                {
+                  theta: 3,
+                  type: 'B',
+                  value: 874
+                },
+                {
+                  theta: 4,
+                  type: 'B',
+                  value: 742
+                },
+                {
+                  theta: 5,
+                  type: 'B',
+                  value: 878
+                },
+                {
+                  theta: 6,
+                  type: 'B',
+                  value: 643
+                },
+                {
+                  theta: 7,
+                  type: 'B',
+                  value: 604
+                }
+              ]
+            }
+          ],
+          categoryField: 'theta',
+          valueField: 'value',
+          seriesField: 'type',
+          line: {
+            style: {
+              strokeWidth: 2
+            }
+          },
+          legends: {
+            visible: false
+          },
+          label: {
+            visible: false
+          },
+          animationAppear: {
+            preset: 'clipIn'
+          },
+          point: {
+            style: {
+              size: 2,
+              strokeWidth: 1
+            }
+          },
+          startAngle: 90,
+          axes: [
+            {
+              orient: 'radius',
               domainLine: {
-                visible: true,
+                visible: false,
                 smooth: false
               },
               label: {
@@ -875,16 +778,11 @@ const spec = {
                 visible: false
               },
               grid: {
-                visible: true
+                visible: false
               }
-            }
-          },
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'angle'
             },
-            spec: {
+            {
+              orient: 'angle',
               domainLine: {
                 visible: false,
                 smooth: false
@@ -892,12 +790,16 @@ const spec = {
               label: {
                 visible: false
               },
+              tick: {
+                visible: false
+              },
               grid: {
                 visible: false
               }
             }
-          }
-        ],
+          ]
+        },
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -908,7 +810,7 @@ const spec = {
       }
     },
     {
-      type: 'WordCloudChart',
+      type: 'VChart',
       id: 'chart7',
       zIndex: 1,
       position: {
@@ -918,66 +820,60 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'Word Cloud',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
-          }
-        },
-        padding: 12,
-        data: [
-          {
-            id: 'data1',
-            values: [
-              {
-                challenge_id: 1658490688121879,
-                challenge_name: '宅家剧场',
-                sum_count: 128
-              },
-              {
-                challenge_id: 1640007327696910,
-                challenge_name: '我的观影报告',
-                sum_count: 103
-              },
-              {
-                challenge_id: 1557656100811777,
-                challenge_name: '抖瓜小助手',
-                sum_count: 76
-              },
-              {
-                challenge_id: 1553513807372289,
-                challenge_name: '搞笑',
-                sum_count: 70
-              },
-              {
-                challenge_id: 1599321527572563,
-                challenge_name: '我要上热门',
-                sum_count: 69
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              valueField: 'sum_count',
-              seriesField: 'challenge_name',
-              nameField: 'challenge_name',
-              wordCloudConfig: {
-                drawOutOfBound: 'clip'
-              },
-              maskShape: 'circle',
-              fontSizeRange: [5, 8]
+        spec: {
+          type: 'wordCloud',
+          title: {
+            text: 'Word Cloud',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
             }
-          }
-        ],
+          },
+          padding: 12,
+          data: [
+            {
+              id: 'data1',
+              values: [
+                {
+                  challenge_id: 1658490688121879,
+                  challenge_name: '宅家剧场',
+                  sum_count: 128
+                },
+                {
+                  challenge_id: 1640007327696910,
+                  challenge_name: '我的观影报告',
+                  sum_count: 103
+                },
+                {
+                  challenge_id: 1557656100811777,
+                  challenge_name: '抖瓜小助手',
+                  sum_count: 76
+                },
+                {
+                  challenge_id: 1553513807372289,
+                  challenge_name: '搞笑',
+                  sum_count: 70
+                },
+                {
+                  challenge_id: 1599321527572563,
+                  challenge_name: '我要上热门',
+                  sum_count: 69
+                }
+              ]
+            }
+          ],
+          valueField: 'sum_count',
+          seriesField: 'challenge_name',
+          nameField: 'challenge_name',
+          wordCloudConfig: {
+            drawOutOfBound: 'clip'
+          },
+          maskShape: 'circle',
+          fontSizeRange: [5, 8]
+        },
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -988,7 +884,7 @@ const spec = {
       }
     },
     {
-      type: 'TreeMapChart',
+      type: 'VChart',
       id: 'chart8',
       zIndex: 1,
       position: {
@@ -998,104 +894,98 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'TreeMap Chart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
+        spec: {
+          type: 'treemap',
+          title: {
+            text: 'TreeMap Chart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
+            }
+          },
+          padding: 12,
+          data: [
+            {
+              id: 'data',
+              values: [
+                {
+                  name: 'Second',
+                  children: [
+                    {
+                      name: 'B2',
+                      value: 98
+                    },
+                    {
+                      name: 'B3',
+                      value: 56
+                    }
+                  ]
+                },
+                {
+                  name: 'First',
+                  children: [
+                    {
+                      name: 'A2',
+                      value: 60
+                    },
+                    {
+                      name: 'A3',
+                      value: 30
+                    }
+                  ]
+                },
+                {
+                  name: 'Third',
+                  children: [
+                    {
+                      name: 'C1',
+                      value: 33
+                    },
+                    {
+                      name: 'C2',
+                      value: 30
+                    },
+                    {
+                      name: 'C3',
+                      value: 40
+                    }
+                  ]
+                },
+                {
+                  name: 'Fourth',
+                  children: [
+                    {
+                      name: 'D4',
+                      value: 64
+                    },
+                    {
+                      name: 'D5',
+                      value: 60
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          categoryField: 'name',
+          valueField: 'value',
+          legends: {
+            visible: false
+          },
+          nodePadding: 1,
+          nonLeaf: {
+            visible: false
+          },
+          nonLeafLabel: {
+            visible: false
+          },
+          label: {
+            visible: false
           }
         },
-        padding: 12,
-        data: [
-          {
-            id: 'data',
-            values: [
-              {
-                name: 'Second',
-                children: [
-                  {
-                    name: 'B2',
-                    value: 98
-                  },
-                  {
-                    name: 'B3',
-                    value: 56
-                  }
-                ]
-              },
-              {
-                name: 'First',
-                children: [
-                  {
-                    name: 'A2',
-                    value: 60
-                  },
-                  {
-                    name: 'A3',
-                    value: 30
-                  }
-                ]
-              },
-              {
-                name: 'Third',
-                children: [
-                  {
-                    name: 'C1',
-                    value: 33
-                  },
-                  {
-                    name: 'C2',
-                    value: 30
-                  },
-                  {
-                    name: 'C3',
-                    value: 40
-                  }
-                ]
-              },
-              {
-                name: 'Fourth',
-                children: [
-                  {
-                    name: 'D4',
-                    value: 64
-                  },
-                  {
-                    name: 'D5',
-                    value: 60
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              categoryField: 'name',
-              valueField: 'value',
-              legends: {
-                visible: false
-              },
-              nodePadding: 1,
-              nonLeaf: {
-                visible: false
-              },
-              nonLeafLabel: {
-                visible: false
-              },
-              label: {
-                visible: false
-              }
-            }
-          }
-        ],
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -1106,7 +996,7 @@ const spec = {
       }
     },
     {
-      type: 'SunburstChart',
+      type: 'VChart',
       id: 'chart9',
       zIndex: 1,
       position: {
@@ -1116,110 +1006,104 @@ const spec = {
         height: 110
       },
       options: {
-        attribute: {},
-        title: {
-          text: 'Sunburst Chart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
+        spec: {
+          type: 'sunburst',
+          title: {
+            text: 'Sunburst Chart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
+            }
+          },
+          padding: 12,
+          data: [
+            {
+              id: 'data',
+              values: [
+                {
+                  name: 'Grandpa',
+                  children: [
+                    {
+                      name: 'Uncle Leo',
+                      value: 15,
+                      children: [
+                        {
+                          name: 'Cousin Jack',
+                          value: 2
+                        },
+                        {
+                          name: 'Cousin Mary',
+                          value: 5,
+                          children: [
+                            {
+                              name: 'Jackson',
+                              value: 2
+                            }
+                          ]
+                        },
+                        {
+                          name: 'Cousin Ben',
+                          value: 4
+                        }
+                      ]
+                    },
+                    {
+                      name: 'Father',
+                      value: 10,
+                      children: [
+                        {
+                          name: 'Me',
+                          value: 5
+                        },
+                        {
+                          name: 'Brother Peter',
+                          value: 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  name: 'Nancy',
+                  children: [
+                    {
+                      name: 'Uncle Nike',
+                      children: [
+                        {
+                          name: 'Cousin Betty',
+                          value: 1
+                        },
+                        {
+                          name: 'Cousin Jenny',
+                          value: 2
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          offsetX: 0,
+          offsetY: 0,
+          categoryField: 'name',
+          valueField: 'value',
+          outerRadius: 1,
+          innerRadius: 0,
+          gap: 1,
+          sunburst: {
+            style: {
+              stroke: false,
+              lineWidth: 0
+            }
+          },
+          label: {
+            visible: false
           }
         },
-        padding: 12,
-        data: [
-          {
-            id: 'data',
-            values: [
-              {
-                name: 'Grandpa',
-                children: [
-                  {
-                    name: 'Uncle Leo',
-                    value: 15,
-                    children: [
-                      {
-                        name: 'Cousin Jack',
-                        value: 2
-                      },
-                      {
-                        name: 'Cousin Mary',
-                        value: 5,
-                        children: [
-                          {
-                            name: 'Jackson',
-                            value: 2
-                          }
-                        ]
-                      },
-                      {
-                        name: 'Cousin Ben',
-                        value: 4
-                      }
-                    ]
-                  },
-                  {
-                    name: 'Father',
-                    value: 10,
-                    children: [
-                      {
-                        name: 'Me',
-                        value: 5
-                      },
-                      {
-                        name: 'Brother Peter',
-                        value: 1
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                name: 'Nancy',
-                children: [
-                  {
-                    name: 'Uncle Nike',
-                    children: [
-                      {
-                        name: 'Cousin Betty',
-                        value: 1
-                      },
-                      {
-                        name: 'Cousin Jenny',
-                        value: 2
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              offsetX: 0,
-              offsetY: 0,
-              categoryField: 'name',
-              valueField: 'value',
-              outerRadius: 1,
-              innerRadius: 0,
-              gap: 1,
-              sunburst: {
-                style: {
-                  stroke: false,
-                  lineWidth: 0
-                }
-              },
-              label: {
-                visible: false
-              }
-            }
-          }
-        ],
+        attribute: {},
         panel: {
           fill: 'white',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -1230,7 +1114,73 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
+      id: 'title1',
+      zIndex: 1,
+      position: {
+        top: 290,
+        left: 680,
+        width: 775,
+        height: 200
+      },
+      options: {
+        graphic: {
+          text: 'A BRIEF HISTORY',
+          textAlign: 'center',
+          fontSize: 75,
+          fontWeight: 'bold'
+        }
+      }
+    },
+    {
+      type: 'Text',
+      id: 'title2',
+      zIndex: 1,
+      position: {
+        top: 390,
+        left: 680,
+        width: 600,
+        height: 200
+      },
+      options: {
+        graphic: {
+          text: 'OF CHARTS',
+          textAlign: 'center',
+          fontSize: 75,
+          fontWeight: 'bold'
+        }
+      }
+    },
+    {
+      type: 'Text',
+      id: 'titlesubtitle',
+      zIndex: 1,
+      position: {
+        top: 470,
+        left: 770,
+        width: 400,
+        height: 80
+      },
+      options: {
+        graphic: {
+          width: 400,
+          fontSize: 22,
+          fontWeight: 'bold',
+          textAlign: 'center',
+          textConfig: [
+            {
+              text: 'Powered By '
+            },
+            {
+              text: 'VChart',
+              fill: 'blue'
+            }
+          ]
+        }
+      }
+    },
+    {
+      type: 'Text',
       id: 'title1',
       zIndex: 1,
       position: {
@@ -1248,14 +1198,14 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'title2',
       zIndex: 1,
       position: {
         top: 390,
         left: 680,
         width: 600,
-        height: 60
+        height: 200
       },
       options: {
         graphic: {
@@ -1266,7 +1216,7 @@ const spec = {
       }
     },
     {
-      type: 'RichTextComponent',
+      type: 'Text',
       id: 'titlesubtitle',
       zIndex: 1,
       position: {
@@ -1293,11 +1243,11 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene2-title2',
       zIndex: 1,
       position: {
-        top: 50,
+        top: 30,
         left: 150,
         width: 200,
         height: 20
@@ -1307,12 +1257,88 @@ const spec = {
           width: 400,
           fontSize: 12,
           fill: '#292729',
+          textAlign: 'center',
           text: 'DEVELOPMENT ROADMAP'
         }
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Timeline',
+      id: 'timeline',
+      zIndex: 10,
+      position: {
+        top: 500,
+        left: 100,
+        width: 1200,
+        height: 100
+      },
+      options: {
+        graphic: {
+          times: [
+            {
+              label: '1486',
+              desc: ''
+            },
+            {
+              label: '1644',
+              desc: ''
+            },
+            {
+              label: '1765',
+              desc: ''
+            },
+            {
+              label: '1786',
+              desc: ''
+            },
+            {
+              label: '1801',
+              desc: ''
+            },
+            {
+              label: '1833',
+              desc: ''
+            },
+            {
+              label: '1856',
+              desc: ''
+            },
+            {
+              label: '1877',
+              desc: ''
+            },
+            {
+              label: '1976',
+              desc: ''
+            },
+            {
+              label: '1990s',
+              desc: ''
+            },
+            {
+              label: '',
+              desc: ''
+            }
+          ],
+          lineStyle: {
+            lineDash: [1, 1]
+          },
+          labelStyle: {
+            fontSize: 16,
+            fontWeight: 'bold'
+          },
+          activeSymbolStyle: {
+            size: 20
+          },
+          activeLabelStyle: {
+            fontSize: 22,
+            fontWeight: 'bold'
+          }
+        }
+      }
+    },
+    {
+      type: 'Text',
       id: 'scene3-title1',
       zIndex: 1,
       position: {
@@ -1331,7 +1357,7 @@ const spec = {
       }
     },
     {
-      type: 'LineComponent',
+      type: 'Line',
       id: 'scene3-line-top',
       zIndex: 1,
       position: {
@@ -1357,7 +1383,7 @@ const spec = {
       }
     },
     {
-      type: 'LineComponent',
+      type: 'Line',
       id: 'scene3-line-bottom',
       zIndex: 1,
       position: {
@@ -1383,7 +1409,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene3-title-Nicole',
       zIndex: 1,
       position: {
@@ -1402,7 +1428,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-text-image-top',
       zIndex: 1,
       position: {
@@ -1418,23 +1444,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
-      id: 'scene3-text-image-top',
-      zIndex: 1,
-      position: {
-        top: 160,
-        left: 560,
-        width: 570,
-        height: 65
-      },
-      options: {
-        graphic: {
-          image: '/vstory/assets/scene3/text-zh.png'
-        }
-      }
-    },
-    {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-1',
       zIndex: 1,
       position: {
@@ -1450,7 +1460,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-2',
       zIndex: 1,
       position: {
@@ -1466,7 +1476,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-3',
       zIndex: 1,
       position: {
@@ -1482,7 +1492,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-4',
       zIndex: 1,
       position: {
@@ -1498,7 +1508,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-chart-image-5',
       zIndex: 1,
       position: {
@@ -1514,7 +1524,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-text-image-bottom',
       zIndex: 1,
       position: {
@@ -1530,7 +1540,7 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene3-title-1486',
       zIndex: 1,
       position: {
@@ -1549,7 +1559,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-title-image',
       zIndex: 1,
       position: {
@@ -1565,7 +1575,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene3-background',
       zIndex: 0,
       position: {
@@ -1582,7 +1592,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene3-background-decoration',
       zIndex: 0,
       position: {
@@ -1598,7 +1608,7 @@ const spec = {
       }
     },
     {
-      type: 'BarChart',
+      type: 'VChart',
       id: 'bar',
       zIndex: 1,
       position: {
@@ -1615,122 +1625,98 @@ const spec = {
           shadowOffsetX: 4,
           shadowOffsetY: 4
         },
-        title: {
-          text: 'BarChart',
-          orient: 'bottom',
-          align: 'center',
-          textStyle: {
-            fontSize: 10,
-            lineHeight: 10
-          }
-        },
-        padding: [120, 60, 75, 60],
-        data: [
-          {
-            id: 'data',
-            values: [
-              {
-                x: '1',
-                y: 100,
-                type: 'Category1'
-              },
-              {
-                x: '2',
-                y: 100,
-                type: 'Category1'
-              },
-              {
-                x: '3',
-                y: 100,
-                type: 'Category1'
-              },
-              {
-                x: '4',
-                y: 100,
-                type: 'Category1'
-              },
-              {
-                x: '1',
-                y: 100,
-                type: 'Category2'
-              },
-              {
-                x: '2',
-                y: 100,
-                type: 'Category2'
-              },
-              {
-                x: '3',
-                y: 100,
-                type: 'Category2'
-              },
-              {
-                x: '4',
-                y: 100,
-                type: 'Category2'
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              xField: ['x', 'type'],
-              yField: 'y',
-              seriesField: 'type',
-              bar: {
-                style: {
-                  fill: {
-                    gradient: 'linear',
-                    stops: [
-                      {
-                        offset: 1
-                      },
-                      {
-                        offset: 0,
-                        opacity: 0.6
-                      }
-                    ]
-                  }
-                },
-                state: {
-                  selected: {
-                    stroke: '#000',
-                    strokeWidth: 1
-                  }
-                }
-              },
-              label: {
-                style: {
-                  visible: false
-                }
-              },
-              axes: [
+        spec: {
+          type: 'bar',
+          title: {
+            text: 'BarChart',
+            orient: 'bottom',
+            align: 'center',
+            textStyle: {
+              fontSize: 10,
+              lineHeight: 10
+            }
+          },
+          padding: [120, 60, 75, 60],
+          data: [
+            {
+              id: 'data',
+              values: [
                 {
-                  orient: 'bottom',
-                  bandPadding: 0
+                  x: '1',
+                  y: 100,
+                  type: 'Category1'
+                },
+                {
+                  x: '2',
+                  y: 100,
+                  type: 'Category1'
+                },
+                {
+                  x: '3',
+                  y: 100,
+                  type: 'Category1'
+                },
+                {
+                  x: '4',
+                  y: 100,
+                  type: 'Category1'
+                },
+                {
+                  x: '1',
+                  y: 100,
+                  type: 'Category2'
+                },
+                {
+                  x: '2',
+                  y: 100,
+                  type: 'Category2'
+                },
+                {
+                  x: '3',
+                  y: 100,
+                  type: 'Category2'
+                },
+                {
+                  x: '4',
+                  y: 100,
+                  type: 'Category2'
                 }
-              ],
-              animationUpdate: {
-                easing: 'cubicInOut',
-                duration: 1000
+              ]
+            }
+          ],
+          xField: ['x', 'type'],
+          yField: 'y',
+          seriesField: 'type',
+          bar: {
+            style: {
+              fill: {
+                gradient: 'linear',
+                stops: [
+                  {
+                    offset: 1
+                  },
+                  {
+                    offset: 0,
+                    opacity: 0.6
+                  }
+                ]
+              }
+            },
+            state: {
+              selected: {
+                stroke: '#000',
+                strokeWidth: 1
               }
             }
-          }
-        ],
-        componentSpec: [
-          {
-            specKey: 'axes',
-            matchInfo: {
+          },
+          label: {
+            style: {
+              visible: false
+            }
+          },
+          axes: [
+            {
               orient: 'bottom',
-              bandPadding: 0,
-              paddingInner: 0,
-              paddingOuter: 0
-            },
-            spec: {
               bandPadding: 0,
               paddingInner: 0,
               paddingOuter: 0,
@@ -1743,14 +1729,9 @@ const spec = {
               grid: {
                 visible: false
               }
-            }
-          },
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'left'
             },
-            spec: {
+            {
+              orient: 'left',
               tick: {
                 visible: false
               },
@@ -1761,14 +1742,17 @@ const spec = {
                 visible: false
               }
             }
-          }
-        ],
-        color: ['#4CC9E4', '#4954E6'],
-        attribute: {}
+          ],
+          animationUpdate: {
+            easing: 'cubicInOut',
+            duration: 1000
+          },
+          color: ['#4CC9E4', '#4954E6']
+        }
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-title-decoration',
       zIndex: 1,
       position: {
@@ -1784,14 +1768,14 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene4-title',
       zIndex: 1,
       position: {
         left: 200,
         top: 200,
         width: 400,
-        height: 60
+        height: 100
       },
       options: {
         graphic: {
@@ -1803,14 +1787,14 @@ const spec = {
       }
     },
     {
-      type: 'TextComponent',
+      type: 'Text',
       id: 'scene4-subtitle',
       zIndex: 1,
       position: {
         left: 200,
         top: 256,
         width: 300,
-        height: 30
+        height: 100
       },
       options: {
         graphic: {
@@ -1822,7 +1806,7 @@ const spec = {
       }
     },
     {
-      type: 'LineComponent',
+      type: 'Line',
       id: 'scene4-line-left',
       zIndex: 1,
       position: {
@@ -1848,7 +1832,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-line-left-decoration',
       zIndex: 1,
       position: {
@@ -1864,7 +1848,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-chart-image',
       zIndex: 1,
       position: {
@@ -1880,7 +1864,7 @@ const spec = {
       }
     },
     {
-      type: 'ScatterChart',
+      type: 'VChart',
       id: 'scatter',
       zIndex: 1,
       position: {
@@ -1895,87 +1879,67 @@ const spec = {
           stroke: 'black',
           lineWidth: 1
         },
-        data: [
-          {
-            id: 'data',
-            values: [
-              {
-                x: 104,
-                y: 10,
-                type: 'A'
-              },
-              {
-                x: 98,
-                y: 10,
-                type: 'A'
-              },
-              {
-                x: 93,
-                y: 10,
-                type: 'A'
-              },
-              {
-                x: 90,
-                y: 10,
-                type: 'A'
-              },
-              {
-                x: 76,
-                y: 10,
-                type: 'A'
-              },
-              {
-                x: 70,
-                y: 10,
-                type: 'A'
-              },
-              {
-                x: 63,
-                y: 10,
-                type: 'A'
-              }
-            ]
-          }
-        ],
-        seriesSpec: [
-          {
-            matchInfo: {
-              specIndex: 'all'
-            },
-            spec: {
-              background: 'white',
-              xField: 'x',
-              yField: 'y',
-              seriesField: 'type',
-              point: {
-                style: {
-                  size: 8,
-                  fill: '#E05F38'
-                }
-              },
-              axes: [
+        spec: {
+          type: 'scatter',
+          data: [
+            {
+              id: 'data',
+              values: [
                 {
-                  orient: 'bottom',
-                  bandPadding: 0
+                  x: 104,
+                  y: 10,
+                  type: 'A'
+                },
+                {
+                  x: 98,
+                  y: 10,
+                  type: 'A'
+                },
+                {
+                  x: 93,
+                  y: 10,
+                  type: 'A'
+                },
+                {
+                  x: 90,
+                  y: 10,
+                  type: 'A'
+                },
+                {
+                  x: 76,
+                  y: 10,
+                  type: 'A'
+                },
+                {
+                  x: 70,
+                  y: 10,
+                  type: 'A'
+                },
+                {
+                  x: 63,
+                  y: 10,
+                  type: 'A'
                 }
-              ],
-              animationUpdate: {
-                easing: 'cubicInOut',
-                duration: 1000
-              }
+              ]
             }
-          }
-        ],
-        componentSpec: [
-          {
-            specKey: 'axes',
-            matchInfo: {
+          ],
+          background: 'white',
+          xField: 'x',
+          yField: 'y',
+          seriesField: 'type',
+          point: {
+            style: {
+              size: 8,
+              fill: '#E05F38'
+            }
+          },
+          animationUpdate: {
+            easing: 'cubicInOut',
+            duration: 1000
+          },
+          axes: [
+            {
               orient: 'bottom',
-              bandPadding: 0,
-              paddingInner: 0,
-              paddingOuter: 0
-            },
-            spec: {
               bandPadding: 0,
               paddingInner: 0,
               paddingOuter: 0,
@@ -1998,25 +1962,19 @@ const spec = {
                   lineWidth: 4
                 }
               }
-            }
-          },
-          {
-            specKey: 'axes',
-            matchInfo: {
-              orient: 'left'
             },
-            spec: {
+            {
+              orient: 'left',
               visible: false,
               min: 0,
               max: 100
             }
-          }
-        ],
-        attribute: {}
+          ]
+        }
       }
     },
     {
-      type: 'LineComponent',
+      type: 'Line',
       id: 'scene4-text-zh-line',
       zIndex: 1,
       position: {
@@ -2042,7 +2000,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-text-zh-image',
       zIndex: 1,
       position: {
@@ -2058,7 +2016,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-text-en-image',
       zIndex: 1,
       position: {
@@ -2074,7 +2032,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene4-green-rect',
       zIndex: 1,
       position: {
@@ -2092,7 +2050,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-decoration',
       zIndex: 1,
       position: {
@@ -2108,7 +2066,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene4-grey-rect',
       zIndex: 1,
       position: {
@@ -2125,7 +2083,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-bg-decoration',
       zIndex: 1,
       position: {
@@ -2141,7 +2099,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene4-bg-decoration',
       zIndex: 1,
       position: {
@@ -2157,7 +2115,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene5-background-top',
       zIndex: 0,
       position: {
@@ -2174,7 +2132,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene5-background-bottom',
       zIndex: 0,
       position: {
@@ -2191,7 +2149,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-title-image',
       zIndex: 1,
       position: {
@@ -2207,7 +2165,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-background-decoration',
       zIndex: 0,
       position: {
@@ -2224,7 +2182,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-atom',
       zIndex: 0,
       position: {
@@ -2240,7 +2198,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-zh-text',
       zIndex: 0,
       position: {
@@ -2256,7 +2214,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-en-text',
       zIndex: 0,
       position: {
@@ -2272,7 +2230,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene5-chart-image',
       zIndex: 0,
       position: {
@@ -2288,7 +2246,7 @@ const spec = {
       }
     },
     {
-      type: 'CharacterChart',
+      type: 'VChart',
       id: 'scene5-chart',
       zIndex: 0,
       position: {
@@ -3102,223 +3060,223 @@ const spec = {
               id: 'dataLinkSeries',
               values: [
                 {
-                  from: 'Deandre Ayton_0_start_node',
+                  pos: 'Deandre Ayton_0_start_node',
                   to: 'Deandre Ayton_0_end_node'
                 },
                 {
-                  from: 'Deandre Ayton_1_start_node',
+                  pos: 'Deandre Ayton_1_start_node',
                   to: 'Deandre Ayton_1_end_node'
                 },
                 {
-                  from: 'Deandre Ayton_2_start_node',
+                  pos: 'Deandre Ayton_2_start_node',
                   to: 'Deandre Ayton_2_end_node'
                 },
                 {
-                  from: 'Deandre Ayton_3_start_node',
+                  pos: 'Deandre Ayton_3_start_node',
                   to: 'Deandre Ayton_3_end_node'
                 },
                 {
-                  from: 'Devin Booker_0_start_node',
+                  pos: 'Devin Booker_0_start_node',
                   to: 'Devin Booker_0_end_node'
                 },
                 {
-                  from: 'Devin Booker_1_start_node',
+                  pos: 'Devin Booker_1_start_node',
                   to: 'Devin Booker_1_end_node'
                 },
                 {
-                  from: 'Devin Booker_2_start_node',
+                  pos: 'Devin Booker_2_start_node',
                   to: 'Devin Booker_2_end_node'
                 },
                 {
-                  from: 'Kyle Lowry_0_start_node',
+                  pos: 'Kyle Lowry_0_start_node',
                   to: 'Kyle Lowry_0_end_node'
                 },
                 {
-                  from: 'Kyle Lowry_1_start_node',
+                  pos: 'Kyle Lowry_1_start_node',
                   to: 'Kyle Lowry_1_end_node'
                 },
                 {
-                  from: 'Kyle Lowry_2_start_node',
+                  pos: 'Kyle Lowry_2_start_node',
                   to: 'Kyle Lowry_2_end_node'
                 },
                 {
-                  from: 'Kyle Lowry_3_start_node',
+                  pos: 'Kyle Lowry_3_start_node',
                   to: 'Kyle Lowry_3_end_node'
                 },
                 {
-                  from: 'Jae Crowder_0_start_node',
+                  pos: 'Jae Crowder_0_start_node',
                   to: 'Jae Crowder_0_end_node'
                 },
                 {
-                  from: 'Jae Crowder_1_start_node',
+                  pos: 'Jae Crowder_1_start_node',
                   to: 'Jae Crowder_1_end_node'
                 },
                 {
-                  from: 'Jae Crowder_2_start_node',
+                  pos: 'Jae Crowder_2_start_node',
                   to: 'Jae Crowder_2_end_node'
                 },
                 {
-                  from: 'Aron Baynes_0_start_node',
+                  pos: 'Aron Baynes_0_start_node',
                   to: 'Aron Baynes_0_end_node'
                 },
                 {
-                  from: 'Aron Baynes_1_start_node',
+                  pos: 'Aron Baynes_1_start_node',
                   to: 'Aron Baynes_1_end_node'
                 },
                 {
-                  from: 'Pascal Siakam_0_start_node',
+                  pos: 'Pascal Siakam_0_start_node',
                   to: 'Pascal Siakam_0_end_node'
                 },
                 {
-                  from: 'Pascal Siakam_1_start_node',
+                  pos: 'Pascal Siakam_1_start_node',
                   to: 'Pascal Siakam_1_end_node'
                 },
                 {
-                  from: 'Pascal Siakam_2_start_node',
+                  pos: 'Pascal Siakam_2_start_node',
                   to: 'Pascal Siakam_2_end_node'
                 },
                 {
-                  from: 'Mikal Bridges_0_start_node',
+                  pos: 'Mikal Bridges_0_start_node',
                   to: 'Mikal Bridges_0_end_node'
                 },
                 {
-                  from: 'Mikal Bridges_1_start_node',
+                  pos: 'Mikal Bridges_1_start_node',
                   to: 'Mikal Bridges_1_end_node'
                 },
                 {
-                  from: 'Mikal Bridges_2_start_node',
+                  pos: 'Mikal Bridges_2_start_node',
                   to: 'Mikal Bridges_2_end_node'
                 },
                 {
-                  from: 'Mikal Bridges_3_start_node',
+                  pos: 'Mikal Bridges_3_start_node',
                   to: 'Mikal Bridges_3_end_node'
                 },
                 {
-                  from: 'Chris Paul_0_start_node',
+                  pos: 'Chris Paul_0_start_node',
                   to: 'Chris Paul_0_end_node'
                 },
                 {
-                  from: 'Chris Paul_1_start_node',
+                  pos: 'Chris Paul_1_start_node',
                   to: 'Chris Paul_1_end_node'
                 },
                 {
-                  from: 'Chris Paul_2_start_node',
+                  pos: 'Chris Paul_2_start_node',
                   to: 'Chris Paul_2_end_node'
                 },
                 {
-                  from: 'OG Anunoby_0_start_node',
+                  pos: 'OG Anunoby_0_start_node',
                   to: 'OG Anunoby_0_end_node'
                 },
                 {
-                  from: 'OG Anunoby_1_start_node',
+                  pos: 'OG Anunoby_1_start_node',
                   to: 'OG Anunoby_1_end_node'
                 },
                 {
-                  from: 'OG Anunoby_2_start_node',
+                  pos: 'OG Anunoby_2_start_node',
                   to: 'OG Anunoby_2_end_node'
                 },
                 {
-                  from: 'OG Anunoby_3_start_node',
+                  pos: 'OG Anunoby_3_start_node',
                   to: 'OG Anunoby_3_end_node'
                 },
                 {
-                  from: 'Fred VanVleet_0_start_node',
+                  pos: 'Fred VanVleet_0_start_node',
                   to: 'Fred VanVleet_0_end_node'
                 },
                 {
-                  from: 'Fred VanVleet_1_start_node',
+                  pos: 'Fred VanVleet_1_start_node',
                   to: 'Fred VanVleet_1_end_node'
                 },
                 {
-                  from: 'Fred VanVleet_2_start_node',
+                  pos: 'Fred VanVleet_2_start_node',
                   to: 'Fred VanVleet_2_end_node'
                 },
                 {
-                  from: 'Cameron Johnson_0_start_node',
+                  pos: 'Cameron Johnson_0_start_node',
                   to: 'Cameron Johnson_0_end_node'
                 },
                 {
-                  from: 'Cameron Johnson_1_start_node',
+                  pos: 'Cameron Johnson_1_start_node',
                   to: 'Cameron Johnson_1_end_node'
                 },
                 {
-                  from: 'Cameron Johnson_2_start_node',
+                  pos: 'Cameron Johnson_2_start_node',
                   to: 'Cameron Johnson_2_end_node'
                 },
                 {
-                  from: 'Yuta Watanabe_0_start_node',
+                  pos: 'Yuta Watanabe_0_start_node',
                   to: 'Yuta Watanabe_0_end_node'
                 },
                 {
-                  from: 'Yuta Watanabe_1_start_node',
+                  pos: 'Yuta Watanabe_1_start_node',
                   to: 'Yuta Watanabe_1_end_node'
                 },
                 {
-                  from: 'Dario Saric_0_start_node',
+                  pos: 'Dario Saric_0_start_node',
                   to: 'Dario Saric_0_end_node'
                 },
                 {
-                  from: 'Dario Saric_1_start_node',
+                  pos: 'Dario Saric_1_start_node',
                   to: 'Dario Saric_1_end_node'
                 },
                 {
-                  from: 'Dario Saric_2_start_node',
+                  pos: 'Dario Saric_2_start_node',
                   to: 'Dario Saric_2_end_node'
                 },
                 {
-                  from: 'Chris Boucher_0_start_node',
+                  pos: 'Chris Boucher_0_start_node',
                   to: 'Chris Boucher_0_end_node'
                 },
                 {
-                  from: 'Chris Boucher_1_start_node',
+                  pos: 'Chris Boucher_1_start_node',
                   to: 'Chris Boucher_1_end_node'
                 },
                 {
-                  from: 'Norman Powell_0_start_node',
+                  pos: 'Norman Powell_0_start_node',
                   to: 'Norman Powell_0_end_node'
                 },
                 {
-                  from: 'Norman Powell_1_start_node',
+                  pos: 'Norman Powell_1_start_node',
                   to: 'Norman Powell_1_end_node'
                 },
                 {
-                  from: 'Norman Powell_2_start_node',
+                  pos: 'Norman Powell_2_start_node',
                   to: 'Norman Powell_2_end_node'
                 },
                 {
-                  from: 'Cameron Payne_0_start_node',
+                  pos: 'Cameron Payne_0_start_node',
                   to: 'Cameron Payne_0_end_node'
                 },
                 {
-                  from: 'Cameron Payne_1_start_node',
+                  pos: 'Cameron Payne_1_start_node',
                   to: 'Cameron Payne_1_end_node'
                 },
                 {
-                  from: 'Langston Galloway_0_start_node',
+                  pos: 'Langston Galloway_0_start_node',
                   to: 'Langston Galloway_0_end_node'
                 },
                 {
-                  from: 'Jevon Carter_0_start_node',
+                  pos: 'Jevon Carter_0_start_node',
                   to: 'Jevon Carter_0_end_node'
                 },
                 {
-                  from: 'Jevon Carter_1_start_node',
+                  pos: 'Jevon Carter_1_start_node',
                   to: 'Jevon Carter_1_end_node'
                 },
                 {
-                  from: 'Malachi Flynn_0_start_node',
+                  pos: 'Malachi Flynn_0_start_node',
                   to: 'Malachi Flynn_0_end_node'
                 },
                 {
-                  from: 'Alex Len_0_start_node',
+                  pos: 'Alex Len_0_start_node',
                   to: 'Alex Len_0_end_node'
                 },
                 {
-                  from: 'Alex Len_1_start_node',
+                  pos: 'Alex Len_1_start_node',
                   to: 'Alex Len_1_end_node'
                 },
                 {
-                  from: "DeAndre' Bembry_0_start_node",
+                  pos: "DeAndre' Bembry_0_start_node",
                   to: "DeAndre' Bembry_0_end_node"
                 }
               ]
@@ -3331,7 +3289,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene6-bg1',
       zIndex: 1,
       position: {
@@ -3348,7 +3306,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene6-bg2',
       zIndex: -1,
       position: {
@@ -3365,7 +3323,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene6-bg-bottom',
       zIndex: 1,
       position: {
@@ -3382,7 +3340,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene6-bg-top',
       zIndex: 0,
       position: {
@@ -3399,7 +3357,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene6-img1',
       zIndex: 1,
       position: {
@@ -3415,7 +3373,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene6-img2',
       zIndex: 1,
       position: {
@@ -3431,7 +3389,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene6-img3',
       zIndex: 1,
       position: {
@@ -3447,7 +3405,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene6-img4',
       zIndex: 1,
       position: {
@@ -3463,7 +3421,7 @@ const spec = {
       }
     },
     {
-      type: 'BarChart',
+      type: 'VChart',
       id: 'scene6-chart',
       zIndex: 1,
       position: {
@@ -3572,7 +3530,7 @@ const spec = {
       }
     },
     {
-      type: 'CharacterChart',
+      type: 'VChart',
       id: 'scene6-range-chart',
       zIndex: 2,
       position: {
@@ -3768,7 +3726,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene7-background-top',
       zIndex: 0,
       position: {
@@ -3786,7 +3744,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene7-background-middle',
       zIndex: 0,
       position: {
@@ -3798,12 +3756,13 @@ const spec = {
       options: {
         graphic: {
           stroke: false,
+          scaleX: 0.8,
           fill: 'rgb(221,221,221)'
         }
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene7-background-bottom',
       zIndex: 0,
       position: {
@@ -3821,7 +3780,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-zh-text',
       zIndex: 0,
       position: {
@@ -3837,7 +3796,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-title',
       zIndex: 0,
       position: {
@@ -3853,7 +3812,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-chart-image',
       zIndex: 0,
       position: {
@@ -3869,7 +3828,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-en-text',
       zIndex: 0,
       position: {
@@ -3885,7 +3844,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene7-pie-image',
       zIndex: 0,
       position: {
@@ -3901,7 +3860,7 @@ const spec = {
       }
     },
     {
-      type: 'PieChart',
+      type: 'VChart',
       id: 'scene7-chart',
       zIndex: 0,
       position: {
@@ -3978,7 +3937,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene8-background',
       zIndex: 0,
       position: {
@@ -3995,7 +3954,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-bg-decoration',
       zIndex: 0,
       position: {
@@ -4011,7 +3970,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-title',
       zIndex: 0,
       position: {
@@ -4027,7 +3986,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-text',
       zIndex: 0,
       position: {
@@ -4043,7 +4002,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-chart-image',
       zIndex: 0,
       position: {
@@ -4059,7 +4018,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-image1',
       zIndex: 0,
       position: {
@@ -4075,7 +4034,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene8-image2',
       zIndex: 0,
       position: {
@@ -4091,7 +4050,7 @@ const spec = {
       }
     },
     {
-      type: 'ScatterChart',
+      type: 'VChart',
       id: 'scene8-chart',
       zIndex: 0,
       position: {
@@ -4362,7 +4321,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene9-background',
       zIndex: 0,
       position: {
@@ -4379,7 +4338,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-bg-decoration',
       zIndex: 0,
       position: {
@@ -4395,7 +4354,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-person',
       zIndex: 1,
       position: {
@@ -4411,7 +4370,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-chart-image',
       zIndex: 0,
       position: {
@@ -4428,7 +4387,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-title',
       zIndex: 0,
       position: {
@@ -4444,7 +4403,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-text-zh',
       zIndex: 0,
       position: {
@@ -4460,7 +4419,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene9-text-en',
       zIndex: 0,
       position: {
@@ -4476,7 +4435,7 @@ const spec = {
       }
     },
     {
-      type: 'RoseChart',
+      type: 'VChart',
       id: 'scene9-rose-chart',
       zIndex: 2,
       position: {
@@ -4553,6 +4512,7 @@ const spec = {
             {
               orient: 'angle',
               visible: true,
+              domain: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
               domainLine: {
                 visible: true,
                 smooth: false
@@ -4576,7 +4536,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene10-background',
       zIndex: 0,
       position: {
@@ -4593,7 +4553,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-person',
       zIndex: 1,
       position: {
@@ -4609,7 +4569,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-title',
       zIndex: 1,
       position: {
@@ -4625,7 +4585,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-bg-decoration',
       zIndex: 0,
       position: {
@@ -4641,7 +4601,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-text-zh',
       zIndex: 0,
       position: {
@@ -4657,7 +4617,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-text-en',
       zIndex: 0,
       position: {
@@ -4673,7 +4633,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene10-chart-image',
       zIndex: 0,
       position: {
@@ -4689,7 +4649,7 @@ const spec = {
       }
     },
     {
-      type: 'RadarChart',
+      type: 'VChart',
       id: 'scene10-radar-chart',
       zIndex: 3,
       position: {
@@ -4707,122 +4667,122 @@ const spec = {
               values: [
                 {
                   month: '1月',
-                  value: 74.991313790127,
+                  value: 97.17869571644114,
                   type: 'A'
                 },
                 {
                   month: '2月',
-                  value: 107.62490806248796,
+                  value: 68.20870993431173,
                   type: 'A'
                 },
                 {
                   month: '3月',
-                  value: 15.829481100869272,
+                  value: 62.29364409784285,
                   type: 'A'
                 },
                 {
                   month: '4月',
-                  value: 11.449775169289659,
+                  value: 69.06482375725099,
                   type: 'A'
                 },
                 {
                   month: '5月',
-                  value: 64.22623788686346,
+                  value: 43.66244159526366,
                   type: 'A'
                 },
                 {
                   month: '6月',
-                  value: 89.9457105718538,
+                  value: 43.540482296082665,
                   type: 'A'
                 },
                 {
                   month: '7月',
-                  value: 109.70317749645685,
+                  value: 37.75185429407454,
                   type: 'A'
                 },
                 {
                   month: '8月',
-                  value: 84.42429722631023,
+                  value: 22.13206117257979,
                   type: 'A'
                 },
                 {
                   month: '9月',
-                  value: 55.90133671773269,
+                  value: 19.44353640832962,
                   type: 'A'
                 },
                 {
                   month: '10月',
-                  value: 83.68711790270481,
+                  value: 96.00035733743903,
                   type: 'A'
                 },
                 {
                   month: '11月',
-                  value: 97.54235698030925,
+                  value: 57.690901070572856,
                   type: 'A'
                 },
                 {
                   month: '12月',
-                  value: 10.57069500007314,
+                  value: 21.403998502361446,
                   type: 'A'
                 },
                 {
                   month: '1月',
-                  value: 14.99197159264888,
+                  value: 61.32683386376748,
                   type: 'B'
                 },
                 {
                   month: '2月',
-                  value: 94.8588207992393,
+                  value: 48.60776408137119,
                   type: 'B'
                 },
                 {
                   month: '3月',
-                  value: 44.2050255469841,
+                  value: 15.171917963424132,
                   type: 'B'
                 },
                 {
                   month: '4月',
-                  value: 87.93704611997147,
+                  value: 76.49828878378965,
                   type: 'B'
                 },
                 {
                   month: '5月',
-                  value: 74.0533829075194,
+                  value: 101.17333061989213,
                   type: 'B'
                 },
                 {
                   month: '6月',
-                  value: 50.786386099195916,
+                  value: 23.899068572173867,
                   type: 'B'
                 },
                 {
                   month: '7月',
-                  value: 36.26085917763044,
+                  value: 13.546413961151028,
                   type: 'B'
                 },
                 {
                   month: '8月',
-                  value: 41.13013975725101,
+                  value: 14.296304308715726,
                   type: 'B'
                 },
                 {
                   month: '9月',
-                  value: 44.42104256628875,
+                  value: 48.019172975273065,
                   type: 'B'
                 },
                 {
                   month: '10月',
-                  value: 64.27705782282615,
+                  value: 58.05173951474118,
                   type: 'B'
                 },
                 {
                   month: '11月',
-                  value: 77.67507194650635,
+                  value: 17.484007324043596,
                   type: 'B'
                 },
                 {
                   month: '12月',
-                  value: 109.23431695327432,
+                  value: 107.83708538693574,
                   type: 'B'
                 }
               ]
@@ -4886,7 +4846,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene11-background',
       zIndex: 0,
       position: {
@@ -4903,7 +4863,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-bg-decoration',
       zIndex: 0,
       position: {
@@ -4919,7 +4879,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-title',
       zIndex: 0,
       position: {
@@ -4935,7 +4895,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-text-en',
       zIndex: 0,
       position: {
@@ -4951,7 +4911,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-text-zh',
       zIndex: 0,
       position: {
@@ -4967,7 +4927,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene11-chart-image',
       zIndex: 0,
       position: {
@@ -4983,7 +4943,7 @@ const spec = {
       }
     },
     {
-      type: 'WordCloudChart',
+      type: 'VChart',
       id: 'scene11-wordcloud-chart',
       zIndex: 0,
       position: {
@@ -5178,7 +5138,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene12-background',
       zIndex: 0,
       position: {
@@ -5211,7 +5171,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene12-background-bottom',
       zIndex: 0,
       position: {
@@ -5228,7 +5188,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-title',
       zIndex: 0,
       position: {
@@ -5244,7 +5204,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-chart-image',
       zIndex: 1,
       position: {
@@ -5260,7 +5220,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-bg-decoration',
       zIndex: 0,
       position: {
@@ -5276,7 +5236,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-text-zh',
       zIndex: 0,
       position: {
@@ -5292,7 +5252,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12-text-en',
       zIndex: 0,
       position: {
@@ -5308,7 +5268,7 @@ const spec = {
       }
     },
     {
-      type: 'TreeMapChart',
+      type: 'VChart',
       id: 'scene12-treemap-chart',
       zIndex: 1,
       position: {
@@ -6381,7 +6341,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12_2-title',
       zIndex: 0,
       position: {
@@ -6397,7 +6357,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12_2-chart-image',
       zIndex: 1,
       position: {
@@ -6413,7 +6373,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12_2-text-zh',
       zIndex: 0,
       position: {
@@ -6429,7 +6389,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene12_2-text-en',
       zIndex: 0,
       position: {
@@ -6445,7 +6405,7 @@ const spec = {
       }
     },
     {
-      type: 'SunburstChart',
+      type: 'VChart',
       id: 'scene12_2-sunburst-chart',
       zIndex: 1,
       position: {
@@ -7045,7 +7005,7 @@ const spec = {
       }
     },
     {
-      type: 'RectComponent',
+      type: 'Rect',
       id: 'scene13-background',
       zIndex: 2,
       position: {
@@ -7062,7 +7022,7 @@ const spec = {
       }
     },
     {
-      type: 'ImageComponent',
+      type: 'Image',
       id: 'scene13-logo',
       zIndex: 2,
       position: {
@@ -7645,11 +7605,11 @@ const spec = {
                   startTime: 0,
                   duration: 800,
                   action: 'moveTo',
-                  destination: {
-                    x: 250,
-                    y: 80
-                  },
                   payload: {
+                    destination: {
+                      x: 250,
+                      y: 80
+                    },
                     animation: {
                       duration: 800,
                       easing: 'quadInOut'
@@ -7678,11 +7638,11 @@ const spec = {
                   startTime: 0,
                   duration: 800,
                   action: 'moveTo',
-                  destination: {
-                    x: 550,
-                    y: 80
-                  },
                   payload: {
+                    destination: {
+                      x: 550,
+                      y: 80
+                    },
                     animation: {
                       duration: 800,
                       easing: 'quadInOut'
@@ -7709,8 +7669,7 @@ const spec = {
               characterId: 'scene2-title2',
               characterActions: [
                 {
-                  startTime: 800,
-                  duration: 800,
+                  startTime: 1200,
                   action: 'appear',
                   payload: {
                     animation: {
@@ -7726,14 +7685,13 @@ const spec = {
               characterId: 'title1',
               characterActions: [
                 {
-                  startTime: 2000,
-                  duration: 800,
+                  startTime: 6200,
                   action: 'moveTo',
-                  destination: {
-                    x: -650,
-                    y: 80
-                  },
                   payload: {
+                    destination: {
+                      x: -650,
+                      y: 80
+                    },
                     animation: {
                       duration: 800,
                       easing: 'quadInOut'
@@ -7746,14 +7704,13 @@ const spec = {
               characterId: 'title2',
               characterActions: [
                 {
-                  startTime: 2000,
-                  duration: 800,
+                  startTime: 6200,
                   action: 'moveTo',
-                  destination: {
-                    x: -350,
-                    y: 80
-                  },
                   payload: {
+                    destination: {
+                      x: -350,
+                      y: 80
+                    },
                     animation: {
                       duration: 800,
                       easing: 'quadInOut'
@@ -7766,17 +7723,31 @@ const spec = {
               characterId: 'scene2-title2',
               characterActions: [
                 {
-                  startTime: 2000,
-                  duration: 800,
+                  startTime: 6200,
                   action: 'moveTo',
-                  destination: {
-                    x: -750,
-                    y: 80
-                  },
                   payload: {
+                    destination: {
+                      x: -750,
+                      y: 80
+                    },
                     animation: {
                       duration: 800,
                       easing: 'quadInOut'
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 1200,
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 5000,
+                      effect: 'default'
                     }
                   }
                 }
@@ -7791,14 +7762,15 @@ const spec = {
               characterId: 'scene3-background',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 800,
+                  startTime: 0,
                   action: 'appear',
                   payload: {
                     animation: {
-                      duration: 700,
+                      duration: 800,
+                      effect: ['fade', 'move'],
                       move: {
-                        from: 'right'
+                        pos: 'right',
+                        isVariableSpeed: false
                       }
                     }
                   }
@@ -7809,14 +7781,14 @@ const spec = {
               characterId: 'scene3-background-decoration',
               characterActions: [
                 {
-                  startTime: 1,
                   duration: 800,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: ['fade', 'move'],
                       move: {
-                        from: 'right'
+                        pos: 'right'
                       }
                     }
                   }
@@ -7828,13 +7800,13 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
                   duration: 700,
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -7846,14 +7818,13 @@ const spec = {
               characterId: 'scene3-line-top',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -7865,14 +7836,14 @@ const spec = {
               characterId: 'scene3-line-bottom',
               characterActions: [
                 {
-                  startTime: 1,
                   duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -7884,14 +7855,13 @@ const spec = {
               characterId: 'scene3-title-Nicole',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -7903,14 +7873,13 @@ const spec = {
               characterId: 'scene3-title-1486',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -7922,14 +7891,13 @@ const spec = {
               characterId: 'scene3-title-image',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -7942,13 +7910,13 @@ const spec = {
               characterActions: [
                 {
                   startTime: 300,
-                  duration: 500,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -7960,20 +7928,19 @@ const spec = {
               characterActions: [
                 {
                   startTime: 330,
-                  duration: 500,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 1500,
-                  duration: 1000,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -7991,20 +7958,19 @@ const spec = {
               characterActions: [
                 {
                   startTime: 330,
-                  duration: 500,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 1500,
-                  duration: 1000,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -8028,15 +7994,15 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 1500,
-                  duration: 1000,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -8054,20 +8020,19 @@ const spec = {
               characterActions: [
                 {
                   startTime: 330,
-                  duration: 500,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 1500,
-                  duration: 1000,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -8091,15 +8056,15 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 1500,
-                  duration: 1000,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -8113,7 +8078,6 @@ const spec = {
                 },
                 {
                   startTime: 3500,
-                  duration: 500,
                   action: 'disappear',
                   payload: {
                     animation: {
@@ -8129,13 +8093,13 @@ const spec = {
               characterActions: [
                 {
                   startTime: 360,
-                  duration: 500,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -8148,15 +8112,12 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 2500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
                       easing: 'cubicOut',
-                      effect: 'grow',
                       fade: {
                         opacity: 1,
-                        isBaseOpacity: true,
                         easing: 'linear'
                       }
                     }
@@ -8165,9 +8126,9 @@ const spec = {
                 {
                   action: 'update',
                   startTime: 3500,
-                  duration: 1000,
                   payload: {
                     id: 'data',
+                    duration: 1000,
                     data: [
                       {
                         sourceValue: {
@@ -8223,8 +8184,8 @@ const spec = {
                 {
                   action: 'update',
                   startTime: 4500,
-                  duration: 1000,
                   payload: {
+                    duration: 1000,
                     id: 'data',
                     data: [
                       {
@@ -8281,9 +8242,9 @@ const spec = {
                 {
                   action: 'update',
                   startTime: 5500,
-                  duration: 1000,
                   payload: {
                     id: 'data',
+                    duration: 1000,
                     data: [
                       {
                         sourceValue: {
@@ -8387,7 +8348,6 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       easing: 'cubicInOut',
@@ -8411,8 +8371,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -8429,8 +8390,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -8447,8 +8409,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -8465,8 +8428,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -8479,12 +8443,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -8501,8 +8465,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -8515,11 +8480,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6500,
-                  duration: 700,
                   payload: {
                     animation: {
-                      duration: 700,
-                      effect: 'fade'
+                      duration: 700
                     }
                   }
                 }
@@ -8531,11 +8494,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6500,
-                  duration: 700,
                   payload: {
                     animation: {
-                      duration: 700,
-                      effect: 'fade'
+                      duration: 700
                     }
                   }
                 }
@@ -8547,11 +8508,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6500,
-                  duration: 700,
                   payload: {
                     animation: {
-                      duration: 700,
-                      effect: 'fade'
+                      duration: 700
                     }
                   }
                 }
@@ -8563,11 +8522,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6500,
-                  duration: 700,
                   payload: {
                     animation: {
-                      duration: 700,
-                      effect: 'fade'
+                      duration: 700
                     }
                   }
                 }
@@ -8595,11 +8552,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6500,
-                  duration: 700,
                   payload: {
                     animation: {
-                      duration: 700,
-                      effect: 'fade'
+                      duration: 700
                     }
                   }
                 }
@@ -8611,11 +8566,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6500,
-                  duration: 700,
                   payload: {
                     animation: {
-                      duration: 700,
-                      effect: 'fade'
+                      duration: 700
                     }
                   }
                 }
@@ -8627,11 +8580,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6500,
-                  duration: 700,
                   payload: {
                     animation: {
-                      duration: 700,
-                      effect: 'fade'
+                      duration: 700
                     }
                   }
                 }
@@ -8643,14 +8594,66 @@ const spec = {
                 {
                   action: 'moveTo',
                   startTime: 6500,
-                  duration: 700,
-                  destination: {
-                    x: 0,
-                    y: 0
-                  },
                   payload: {
+                    destination: {
+                      x: 0,
+                      y: 0
+                    },
                     animation: {
                       duration: 700
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 0,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 900,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
+                    }
+                  }
+                },
+                {
+                  startTime: 0,
+                  action: 'scaleTo',
+                  payload: {
+                    scale: {
+                      scaleX: 0.8,
+                      scaleY: 0.8
+                    },
+                    animation: {
+                      duration: 500
+                    }
+                  }
+                },
+                {
+                  startTime: 0,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 500,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 600,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 6400,
+                      easing: 'linear'
                     }
                   }
                 }
@@ -8665,14 +8668,13 @@ const spec = {
               characterId: 'scene4-title-decoration',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -8680,11 +8682,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -8694,14 +8694,14 @@ const spec = {
               characterId: 'scene4-title',
               characterActions: [
                 {
-                  startTime: 1,
                   duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -8709,11 +8709,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -8723,14 +8721,13 @@ const spec = {
               characterId: 'scene4-subtitle',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -8738,11 +8735,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -8752,14 +8747,13 @@ const spec = {
               characterId: 'scene4-line-left',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -8767,11 +8761,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -8781,14 +8773,13 @@ const spec = {
               characterId: 'scene4-line-left-decoration',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -8796,11 +8787,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -8810,19 +8799,15 @@ const spec = {
               characterId: 'scene4-chart-image',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
-                      duration: 700,
-                      effect: 'fade'
+                      duration: 700
                     }
                   }
                 },
                 {
                   startTime: 1300,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -8836,13 +8821,8 @@ const spec = {
                 },
                 {
                   startTime: 2500,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
-                    graphic: {
-                      width: 500,
-                      height: 120
-                    },
                     animation: {
                       duration: 700
                     }
@@ -8850,23 +8830,19 @@ const spec = {
                 },
                 {
                   startTime: 5000,
-                  duration: 500,
                   action: 'appear',
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -8876,21 +8852,19 @@ const spec = {
               characterId: 'scene4-text-zh-image',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 1300,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -8905,11 +8879,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -8919,21 +8891,19 @@ const spec = {
               characterId: 'scene4-text-zh-line',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 1300,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -8948,11 +8918,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -8962,14 +8930,13 @@ const spec = {
               characterId: 'scene4-text-en-image',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -8977,11 +8944,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -8992,13 +8957,13 @@ const spec = {
               characterActions: [
                 {
                   startTime: 200,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -9006,11 +8971,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -9021,13 +8984,13 @@ const spec = {
               characterActions: [
                 {
                   startTime: 200,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -9035,11 +8998,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -9050,13 +9011,13 @@ const spec = {
               characterActions: [
                 {
                   startTime: 200,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'right'
+                        pos: 'right'
                       }
                     }
                   }
@@ -9064,11 +9025,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -9079,23 +9038,19 @@ const spec = {
               characterActions: [
                 {
                   startTime: 0,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
-                      duration: 700,
-                      effect: 'fade'
+                      duration: 700
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -9107,7 +9062,6 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 2500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
@@ -9217,7 +9171,6 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5000,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
@@ -9230,11 +9183,38 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 0,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 6000,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 500,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 850,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
                     }
                   }
                 }
@@ -9246,7 +9226,6 @@ const spec = {
                 {
                   action: 'style',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     graphic: {
                       scaleY: 0
@@ -9259,11 +9238,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 6000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -9278,21 +9255,19 @@ const spec = {
               characterId: 'scene5-background-top',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -9302,17 +9277,16 @@ const spec = {
                       y: -720
                     },
                     animation: {
-                      duration: 700
+                      duration: 1000
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 700,
+                      duration: 1000,
                       fade: {
                         opacity: 0
                       }
@@ -9325,25 +9299,23 @@ const spec = {
               characterId: 'scene5-background-decoration',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 700,
+                      duration: 1000,
                       fade: {
                         opacity: 0
                       }
@@ -9356,21 +9328,19 @@ const spec = {
               characterId: 'scene5-background-bottom',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -9380,17 +9350,16 @@ const spec = {
                       y: 1640
                     },
                     animation: {
-                      duration: 700
+                      duration: 1000
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 700,
+                      duration: 1000,
                       fade: {
                         opacity: 0
                       }
@@ -9403,21 +9372,19 @@ const spec = {
               characterId: 'scene5-title-image',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -9427,17 +9394,16 @@ const spec = {
                       y: -220
                     },
                     animation: {
-                      duration: 700
+                      duration: 1000
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 700,
+                      duration: 1000,
                       fade: {
                         opacity: 0
                       }
@@ -9451,20 +9417,19 @@ const spec = {
               characterActions: [
                 {
                   startTime: 200,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -9474,17 +9439,16 @@ const spec = {
                       y: 904
                     },
                     animation: {
-                      duration: 700
+                      duration: 1000
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 700,
+                      duration: 1000,
                       fade: {
                         opacity: 0
                       }
@@ -9498,20 +9462,19 @@ const spec = {
               characterActions: [
                 {
                   startTime: 400,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -9521,17 +9484,16 @@ const spec = {
                       y: -68
                     },
                     animation: {
-                      duration: 700
+                      duration: 1000
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 700,
+                      duration: 1000,
                       fade: {
                         opacity: 0
                       }
@@ -9544,21 +9506,19 @@ const spec = {
               characterId: 'scene5-atom',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -9568,17 +9528,16 @@ const spec = {
                       y: 1760
                     },
                     animation: {
-                      duration: 700
+                      duration: 1000
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 700,
+                      duration: 1000,
                       fade: {
                         opacity: 0
                       }
@@ -9592,12 +9551,10 @@ const spec = {
               characterActions: [
                 {
                   startTime: 2000,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
-                      effect: 'fade',
                       fade: {
                         isBaseOpacity: true
                       }
@@ -9606,12 +9563,10 @@ const spec = {
                 },
                 {
                   startTime: 4000,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
                     animation: {
                       duration: 700,
-                      effect: 'fade',
                       fade: {
                         opacity: 0,
                         isBaseOpacity: true
@@ -9626,20 +9581,19 @@ const spec = {
               characterActions: [
                 {
                   startTime: 300,
-                  duration: 700,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 700,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -9649,20 +9603,48 @@ const spec = {
                       y: 1840
                     },
                     animation: {
-                      duration: 700
+                      duration: 1000
                     }
                   }
                 },
                 {
                   startTime: 5400,
-                  duration: 700,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 700,
+                      duration: 1000,
                       fade: {
                         opacity: 0
                       }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 0,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 5900,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 500,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 800,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
                     }
                   }
                 }
@@ -9678,21 +9660,16 @@ const spec = {
               characterId: 'scene6-bg1',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 1,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 1,
-                      scale: {
-                        ratio: 1
-                      }
+                      effect: 'scale'
                     }
                   }
                 },
                 {
                   startTime: 8000,
-                  duration: 500,
                   action: 'style',
                   payload: {
                     graphic: {
@@ -9706,14 +9683,10 @@ const spec = {
                 },
                 {
                   startTime: 8500,
-                  duration: 1000,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 600,
-                      fade: {
-                        opacity: 0
-                      }
+                      duration: 1000
                     }
                   }
                 }
@@ -9724,7 +9697,6 @@ const spec = {
               characterActions: [
                 {
                   startTime: 8000,
-                  duration: 0,
                   action: 'appear',
                   payload: {
                     animation: {
@@ -9734,14 +9706,10 @@ const spec = {
                 },
                 {
                   startTime: 14995,
-                  duration: 5,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 5,
-                      fade: {
-                        opacity: 0
-                      }
+                      duration: 5
                     }
                   }
                 }
@@ -9751,15 +9719,11 @@ const spec = {
               characterId: 'scene6-img1',
               characterActions: [
                 {
-                  startTime: 1,
-                  duration: 1200,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 1200,
-                      scale: {
-                        ratio: 1
-                      }
+                      effect: 'scale'
                     }
                   }
                 },
@@ -9781,11 +9745,11 @@ const spec = {
               characterActions: [
                 {
                   startTime: 1500,
-                  duration: 500,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['fade', 'scale'],
                       fade: {
                         opacity: 1,
                         isBaseOpacity: true
@@ -9798,10 +9762,10 @@ const spec = {
                 },
                 {
                   startTime: 2000,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 239.27,
@@ -9916,10 +9880,10 @@ const spec = {
                 },
                 {
                   startTime: 2500,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 278.39,
@@ -10034,10 +9998,10 @@ const spec = {
                 },
                 {
                   startTime: 3000,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 336.52,
@@ -10152,10 +10116,10 @@ const spec = {
                 },
                 {
                   startTime: 3500,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 427.65,
@@ -10270,10 +10234,10 @@ const spec = {
                 },
                 {
                   startTime: 4000,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 488.02,
@@ -10388,10 +10352,10 @@ const spec = {
                 },
                 {
                   startTime: 4500,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 521.74,
@@ -10506,10 +10470,10 @@ const spec = {
                 },
                 {
                   startTime: 5000,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 545.92,
@@ -10624,10 +10588,10 @@ const spec = {
                 },
                 {
                   startTime: 5500,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 578.41,
@@ -10742,10 +10706,10 @@ const spec = {
                 },
                 {
                   startTime: 6000,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 589.42,
@@ -10860,10 +10824,10 @@ const spec = {
                 },
                 {
                   startTime: 6500,
-                  duration: 500,
                   action: 'update',
                   payload: {
                     id: 'dataId',
+                    duration: 500,
                     values: [
                       {
                         max: 617.03,
@@ -10978,12 +10942,10 @@ const spec = {
                 },
                 {
                   startTime: 7000,
-                  duration: 1200,
                   action: 'disappear',
                   payload: {
                     animation: {
                       duration: 1200,
-                      effect: 'fade',
                       fade: {
                         opacity: 0,
                         isBaseOpacity: true
@@ -10998,23 +10960,19 @@ const spec = {
               characterActions: [
                 {
                   startTime: 8500,
-                  duration: 1000,
                   action: 'appear',
                   payload: {
                     animation: {
-                      duration: 1000,
-                      effect: 'fade'
+                      duration: 1000
                     }
                   }
                 },
                 {
                   startTime: 14000,
-                  duration: 1000,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 1000,
-                      effect: 'fade'
+                      duration: 1000
                     }
                   }
                 }
@@ -11025,26 +10983,26 @@ const spec = {
               characterActions: [
                 {
                   startTime: 8500,
-                  duration: 1000,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 14000,
-                  duration: 1000,
                   action: 'disappear',
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -11056,7 +11014,6 @@ const spec = {
               characterActions: [
                 {
                   startTime: 10000,
-                  duration: 1000,
                   action: 'appear',
                   payload: {
                     animation: {
@@ -11071,7 +11028,6 @@ const spec = {
                 },
                 {
                   startTime: 13000,
-                  duration: 1000,
                   action: 'disappear',
                   payload: {
                     animation: {
@@ -11091,27 +11047,23 @@ const spec = {
               characterActions: [
                 {
                   startTime: 8500,
-                  duration: 1000,
                   action: 'appear',
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
                 },
                 {
                   startTime: 14000,
-                  duration: 1000,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 1000,
-                      fade: {
-                        opacity: 0
-                      }
+                      duration: 1000
                     }
                   }
                 }
@@ -11122,27 +11074,19 @@ const spec = {
               characterActions: [
                 {
                   startTime: 8200,
-                  duration: 300,
                   action: 'appear',
                   payload: {
                     animation: {
-                      duration: 300,
-                      fade: {
-                        opacity: 1
-                      }
+                      duration: 300
                     }
                   }
                 },
                 {
                   startTime: 14995,
-                  duration: 5,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 5,
-                      fade: {
-                        opacity: 0
-                      }
+                      duration: 5
                     }
                   }
                 }
@@ -11153,27 +11097,48 @@ const spec = {
               characterActions: [
                 {
                   startTime: 8500,
-                  duration: 1000,
                   action: 'appear',
                   payload: {
                     animation: {
-                      duration: 600,
-                      fade: {
-                        opacity: 1
-                      }
+                      duration: 600
                     }
                   }
                 },
                 {
                   startTime: 14995,
-                  duration: 5,
                   action: 'disappear',
                   payload: {
                     animation: {
-                      duration: 5,
-                      fade: {
-                        opacity: 0
-                      }
+                      duration: 5
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 500,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 14000,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 1000,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 750,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
                     }
                   }
                 }
@@ -11189,8 +11154,6 @@ const spec = {
               characterActions: [
                 {
                   action: 'style',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     graphic: {
                       scaleX: 1
@@ -11203,15 +11166,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
                         to: 'top'
-                      },
-                      fade: {
-                        opacity: 0
                       }
                     }
                   }
@@ -11223,8 +11183,6 @@ const spec = {
               characterActions: [
                 {
                   action: 'style',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     graphic: {
                       scaleX: 1
@@ -11237,15 +11195,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
                         to: 'top'
-                      },
-                      fade: {
-                        opacity: 0
                       }
                     }
                   }
@@ -11257,8 +11212,6 @@ const spec = {
               characterActions: [
                 {
                   action: 'style',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     graphic: {
                       scaleX: 1
@@ -11271,11 +11224,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -11286,13 +11237,12 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'left'
+                        pos: 'left'
                       }
                     }
                   }
@@ -11300,15 +11250,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
                         to: 'top'
-                      },
-                      fade: {
-                        opacity: 0
                       }
                     }
                   }
@@ -11320,27 +11267,21 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 100,
                   payload: {
                     animation: {
-                      duration: 100,
-                      effect: 'fade'
+                      duration: 100
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
                         to: 'top'
-                      },
-                      fade: {
-                        opacity: 0
                       }
                     }
                   }
@@ -11353,12 +11294,11 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 300,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -11366,15 +11306,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
                         to: 'top'
-                      },
-                      fade: {
-                        opacity: 0
                       }
                     }
                   }
@@ -11386,7 +11323,6 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
                   duration: 1000,
                   payload: {
                     animation: {
@@ -11398,15 +11334,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
                         to: 'top'
-                      },
-                      fade: {
-                        opacity: 0
                       }
                     }
                   }
@@ -11418,13 +11351,13 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
                   duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -11432,15 +11365,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
                         to: 'top'
-                      },
-                      fade: {
-                        opacity: 0
                       }
                     }
                   }
@@ -11453,7 +11383,6 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 1500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000
@@ -11463,27 +11392,51 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 3500,
-                  duration: 1000,
                   payload: {
                     animation: {
-                      duration: 1000,
-                      effect: 'fade'
+                      duration: 1000
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
                         to: 'top'
-                      },
-                      fade: {
-                        opacity: 0
                       }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 0,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 5500,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 500,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 700,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
                     }
                   }
                 }
@@ -11630,8 +11583,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 1500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom-left'
+                        pos: 'bottom-left'
                       }
                     }
                   }
@@ -11659,8 +11613,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 1500,
+                      effect: 'move',
                       move: {
-                        from: 'top-right'
+                        pos: 'top-right'
                       }
                     }
                   }
@@ -11688,8 +11643,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 1500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom-right'
+                        pos: 'bottom-right'
                       }
                     }
                   }
@@ -11744,6 +11700,35 @@ const spec = {
                   }
                 }
               ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 600,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 6000,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 1000,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 650,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
+                    }
+                  }
+                }
+              ]
             }
           ]
         },
@@ -11757,22 +11742,18 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -11784,22 +11765,18 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -11810,13 +11787,12 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'right'
+                        pos: 'right'
                       }
                     }
                   }
@@ -11824,12 +11800,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        to: 'left'
+                        pos: 'left'
                       }
                     }
                   }
@@ -11842,22 +11818,18 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 500,
-                  duration: 300,
                   payload: {
                     animation: {
-                      duration: 300,
-                      effect: 'fade'
+                      duration: 300
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -11869,7 +11841,6 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 500,
-                  duration: 300,
                   payload: {
                     animation: {
                       duration: 300,
@@ -11880,11 +11851,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -11896,7 +11865,6 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 500,
-                  duration: 300,
                   payload: {
                     animation: {
                       duration: 300,
@@ -11907,11 +11875,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -11923,22 +11889,18 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 500,
-                  duration: 300,
                   payload: {
                     animation: {
-                      duration: 300,
-                      effect: 'fade'
+                      duration: 300
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 }
@@ -11950,7 +11912,6 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 2000,
-                  duration: 200,
                   payload: {
                     animation: {
                       duration: 200,
@@ -11964,10 +11925,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 2200,
-                  duration: 200,
+                  startTime: 2400,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -11989,10 +11950,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 2400,
-                  duration: 200,
+                  startTime: 2600,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12014,10 +11975,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 2600,
-                  duration: 200,
+                  startTime: 2800,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12039,10 +12000,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 2800,
-                  duration: 200,
+                  startTime: 3000,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12064,10 +12025,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 3000,
-                  duration: 200,
+                  startTime: 3200,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12089,10 +12050,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 3200,
-                  duration: 200,
+                  startTime: 3400,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12114,10 +12075,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 3400,
-                  duration: 200,
+                  startTime: 3600,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12139,10 +12100,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 3600,
-                  duration: 200,
+                  startTime: 3800,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12164,10 +12125,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 3800,
-                  duration: 200,
+                  startTime: 4000,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12189,10 +12150,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 4000,
-                  duration: 200,
+                  startTime: 4200,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12214,10 +12175,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 4200,
-                  duration: 200,
+                  startTime: 4400,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12239,10 +12200,10 @@ const spec = {
                 },
                 {
                   action: 'add',
-                  startTime: 4400,
-                  duration: 200,
+                  startTime: 4600,
                   payload: {
                     id: '1856Rose',
+                    duration: 200,
                     values: [
                       {
                         type: 'rail',
@@ -12265,7 +12226,6 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
@@ -12279,11 +12239,38 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 500,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 7000,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 1000,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 600,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
                     }
                   }
                 }
@@ -12293,15 +12280,13 @@ const spec = {
         },
         {
           id: 'scene10',
-          delay: -1000,
+          delay: -500,
           actions: [
             {
               characterId: 'scene10-background',
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
@@ -12312,7 +12297,6 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
@@ -12328,12 +12312,12 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'right'
+                        pos: 'right'
                       }
                     }
                   }
@@ -12341,15 +12325,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
-                        to: 'bottom'
-                      },
-                      fade: {
-                        opacity: 0
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -12362,26 +12343,21 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 1000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
-                        to: 'bottom'
-                      },
-                      fade: {
-                        opacity: 0
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -12394,18 +12370,15 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 1000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
@@ -12421,26 +12394,21 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 1000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
-                        to: 'bottom'
-                      },
-                      fade: {
-                        opacity: 0
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -12453,26 +12421,21 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 1000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
-                        to: 'bottom'
-                      },
-                      fade: {
-                        opacity: 0
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -12485,26 +12448,21 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 1000,
-                  duration: 500,
                   payload: {
                     animation: {
-                      duration: 500,
-                      effect: 'fade'
+                      duration: 500
                     }
                   }
                 },
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
-                        to: 'bottom'
-                      },
-                      fade: {
-                        opacity: 0
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -12517,11 +12475,9 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 2500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
-                      effect: 'grow',
                       fade: {
                         isBaseOpacity: true
                       }
@@ -12531,7 +12487,6 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5000,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
@@ -12544,16 +12499,42 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: ['move', 'fade'],
                       move: {
-                        to: 'bottom'
-                      },
-                      fade: {
-                        opacity: 0
+                        pos: 'bottom'
                       }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 500,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 7000,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 1000,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 550,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
                     }
                   }
                 }
@@ -12563,15 +12544,12 @@ const spec = {
         },
         {
           id: 'scene11',
-          delay: -1000,
           actions: [
             {
               characterId: 'scene11-background',
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
@@ -12582,7 +12560,6 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
@@ -12597,8 +12574,6 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
@@ -12609,7 +12584,6 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
@@ -12624,13 +12598,12 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -12638,7 +12611,6 @@ const spec = {
                 {
                   action: 'style',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     graphic: {
                       x: 194,
@@ -12659,13 +12631,12 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -12673,7 +12644,6 @@ const spec = {
                 {
                   action: 'style',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     graphic: {
                       x: 118,
@@ -12694,13 +12664,12 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -12708,7 +12677,6 @@ const spec = {
                 {
                   action: 'style',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     graphic: {
                       x: 804,
@@ -12730,12 +12698,12 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 500,
-                  duration: 500,
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'top'
+                        pos: 'top'
                       }
                     }
                   }
@@ -12743,7 +12711,6 @@ const spec = {
                 {
                   action: 'style',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     graphic: {
                       x: 804,
@@ -12765,7 +12732,6 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 2000,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
@@ -12778,12 +12744,10 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 4500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
                       fade: {
-                        opacity: 0,
                         isBaseOpacity: true
                       }
                     }
@@ -12792,7 +12756,6 @@ const spec = {
                 {
                   action: 'style',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     graphic: {
                       x: 804,
@@ -12803,6 +12766,35 @@ const spec = {
                     },
                     animation: {
                       duration: 1000
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 0,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 7500,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 500,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 500,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
                     }
                   }
                 }
@@ -12840,8 +12832,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 500,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -12865,12 +12858,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'left',
+                        pos: 'left',
                         isVariableSpeed: false
                       }
                     }
@@ -12888,8 +12881,9 @@ const spec = {
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        from: 'bottom'
+                        pos: 'bottom'
                       }
                     }
                   }
@@ -12897,12 +12891,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'left',
+                        pos: 'left',
                         isVariableSpeed: false
                       }
                     }
@@ -12927,12 +12921,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'left',
+                        pos: 'left',
                         isVariableSpeed: false
                       }
                     }
@@ -12957,12 +12951,12 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'left',
+                        pos: 'left',
                         isVariableSpeed: false
                       }
                     }
@@ -12992,7 +12986,6 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 3000,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
@@ -13006,7 +12999,6 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
@@ -13020,14 +13012,43 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        to: 'left',
+                        pos: 'left',
                         isVariableSpeed: false
                       }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 1500,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 6300,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  startTime: 2000,
+                  action: 'moveTo',
+                  payload: {
+                    destination: {
+                      x: 450,
+                      y: 60
+                    },
+                    animation: {
+                      duration: 500
                     }
                   }
                 }
@@ -13044,13 +13065,12 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -13059,11 +13079,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     animation: {
-                      duration: 1000,
-                      effect: 'fade'
+                      duration: 1000
                     }
                   }
                 }
@@ -13074,13 +13092,12 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -13089,11 +13106,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     animation: {
-                      duration: 1000,
-                      effect: 'fade'
+                      duration: 1000
                     }
                   }
                 }
@@ -13104,13 +13119,13 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
                   duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -13119,11 +13134,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     animation: {
-                      duration: 1000,
-                      effect: 'fade'
+                      duration: 1000
                     }
                   }
                 }
@@ -13134,13 +13147,12 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
+                      effect: 'move',
                       move: {
-                        from: 'right',
+                        pos: 'right',
                         isVariableSpeed: false
                       }
                     }
@@ -13149,11 +13161,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     animation: {
-                      duration: 1000,
-                      effect: 'fade'
+                      duration: 1000
                     }
                   }
                 }
@@ -13165,11 +13175,10 @@ const spec = {
                 {
                   action: 'appear',
                   startTime: 3000,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
-                      effect: 'centerGrow',
+                      effect: ['centerGrow', 'fade'],
                       fade: {
                         isBaseOpacity: true
                       }
@@ -13179,11 +13188,9 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 5500,
-                  duration: 1000,
                   payload: {
                     animation: {
                       duration: 1000,
-                      effect: 'fade',
                       fade: {
                         isBaseOpacity: true
                       }
@@ -13193,11 +13200,34 @@ const spec = {
                 {
                   action: 'disappear',
                   startTime: 7000,
-                  duration: 1000,
                   payload: {
                     animation: {
-                      duration: 1000,
-                      effect: 'fade'
+                      duration: 1000
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'timeline',
+              characterActions: [
+                {
+                  startTime: 1000,
+                  action: 'state',
+                  payload: {
+                    animation: {
+                      effect: 'forward',
+                      duration: 6000,
+                      easing: 'linear'
+                    }
+                  }
+                },
+                {
+                  action: 'disappear',
+                  startTime: 7000,
+                  payload: {
+                    animation: {
+                      duration: 1000
                     }
                   }
                 }
@@ -13213,7 +13243,7 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
+                  startTime: 0,
                   duration: 1000,
                   payload: {
                     animation: {
@@ -13229,11 +13259,12 @@ const spec = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 1,
+                  startTime: 0,
                   duration: 1000,
                   payload: {
                     animation: {
-                      duration: 1000,
+                      duration: 2000,
+                      effect: 'scale',
                       fade: {
                         opacity: 1
                       }
@@ -13249,7 +13280,8 @@ const spec = {
   ]
 };
 
-const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 0.5, scaleY: 0.5 } });
+const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 1, scaleY: 1 } });
+vstory.canvas.getStage().defaultLayer.scale(0.5, 0.5);
 window.vstory = vstory;
 vstory.play();
 ```

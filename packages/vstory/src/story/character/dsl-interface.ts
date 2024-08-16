@@ -1,4 +1,4 @@
-import type { ITextGraphicAttribute } from '@visactor/vrender';
+import type { IRichTextGraphicAttribute, ITextGraphicAttribute } from '@visactor/vrender';
 import type { DirectionType } from './chart/const';
 
 export type IPercent = `${number}%`;
@@ -28,7 +28,7 @@ export interface ICharacterSpecBase {
 export type IEditorTextGraphicAttribute = {
   graphicAlign?: 'left' | 'center' | 'right';
   graphicBaseline?: 'top' | 'middle' | 'bottom';
-} & ITextGraphicAttribute;
+} & Partial<ITextGraphicAttribute & IRichTextGraphicAttribute>;
 
 export interface IComponentCharacterSpec extends ICharacterSpecBase {
   options: {

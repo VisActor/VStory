@@ -402,7 +402,7 @@ const chartSpec = {
 };
 export const scene12Characters: ICharacterSpec[] = [
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene12-background`,
     zIndex: 0,
     position: {
@@ -429,7 +429,7 @@ export const scene12Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'RectComponent',
+    type: 'Rect',
     id: `scene12-background-bottom`,
     zIndex: 0,
     position: {
@@ -446,7 +446,7 @@ export const scene12Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12-title`,
     zIndex: 0,
     position: {
@@ -462,7 +462,7 @@ export const scene12Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12-chart-image`,
     zIndex: 1,
     position: {
@@ -478,7 +478,7 @@ export const scene12Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12-bg-decoration`,
     zIndex: 0,
     position: {
@@ -494,7 +494,7 @@ export const scene12Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12-text-zh`,
     zIndex: 0,
     position: {
@@ -510,7 +510,7 @@ export const scene12Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'ImageComponent',
+    type: 'Image',
     id: `scene12-text-en`,
     zIndex: 0,
     position: {
@@ -526,7 +526,7 @@ export const scene12Characters: ICharacterSpec[] = [
     }
   },
   {
-    type: 'TreeMapChart',
+    type: 'VChart',
     id: `scene12-treemap-chart`,
     zIndex: 1,
     position: {
@@ -574,7 +574,8 @@ export const scene12: ISceneSpec = {
             animation: {
               duration: 500,
               easing: easeInOutQuad,
-              move: { from: 'bottom' }
+              effect: 'move',
+              move: { pos: 'bottom' }
             }
           }
         }
@@ -608,7 +609,8 @@ export const scene12: ISceneSpec = {
             animation: {
               duration: 1000,
               easing: easeInOutQuad,
-              move: { from: 'bottom' }
+              effect: 'move',
+              move: { pos: 'bottom' }
             }
           }
         }
@@ -672,7 +674,6 @@ export const scene12: ISceneSpec = {
         {
           action: 'appear',
           startTime: 3000,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
@@ -685,7 +686,6 @@ export const scene12: ISceneSpec = {
         {
           action: 'disappear',
           startTime: 5500,
-          duration: 1000,
           payload: {
             animation: {
               duration: 1000,
@@ -696,23 +696,52 @@ export const scene12: ISceneSpec = {
           }
         }
       ]
+    },
+    {
+      characterId: 'timeline',
+      characterActions: [
+        {
+          startTime: 1500,
+          action: 'state',
+          payload: {
+            animation: {
+              effect: 'forward',
+              duration: 6300,
+              easing: 'linear'
+            }
+          }
+        },
+        {
+          startTime: 2000,
+          action: 'moveTo',
+          payload: {
+            destination: {
+              x: 450,
+              y: 60
+            },
+            animation: {
+              duration: 500
+            }
+          }
+        }
+      ]
     }
   ]
 };
 
 scene12.actions.forEach(({ characterId, characterActions }) => {
-  if (characterId.includes('background') || characterId.includes('decoration')) {
+  if (characterId.includes('background') || characterId.includes('decoration') || characterId === 'timeline') {
     // do nothing
   } else {
     characterActions.push({
       action: 'disappear',
       startTime: 7500,
-      duration: 1000,
       payload: {
         animation: {
           duration: 1000,
           easing: easeInOutQuad,
-          move: { to: 'left', isVariableSpeed: false }
+          effect: 'move',
+          move: { pos: 'left', isVariableSpeed: false }
         }
       }
     });

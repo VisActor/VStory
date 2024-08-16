@@ -2,7 +2,7 @@ import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
 import { cloneDeep } from '@visactor/vutils';
-import { VChart } from '@visactor/vchart';
+import VChart from '@visactor/vchart';
 import type { IChartCharacterSpec } from '../dsl-interface';
 import { Chart } from './graphic/vchart-graphic';
 import { getLayoutFromWidget } from '../../utils/layout';
@@ -14,25 +14,6 @@ import type { IChartTemp } from './temp/interface';
 import { SeriesSpecRuntime } from './runtime/series-spec';
 import type { StoryEvent } from '../../interface/runtime-interface';
 import type { ICharacterPickInfo } from '../runtime-interface';
-
-const tempSpec = {
-  type: 'bar',
-  data: [
-    {
-      id: 'barData',
-      values: [
-        { month: 'Monday', sales: 22 },
-        { month: 'Tuesday', sales: 13 },
-        { month: 'Wednesday', sales: 25 },
-        { month: 'Thursday', sales: 29 },
-        { month: 'Friday', sales: 38 }
-      ]
-    }
-  ],
-  xField: 'month',
-  yField: 'sales',
-  axes: [{ orient: 'bottom', label: { visible: false } }]
-};
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
@@ -72,7 +53,7 @@ export class CharacterChart extends CharacterVisactor {
       y1: layout.y,
       y2: layout.y + layout.height
     };
-    const spec = cloneDeep(this._specProcess.getVisSpec() ?? this._spec.options.spec);
+    const spec = cloneDeep(this._specProcess.getVisSpec());
     spec.width = layout.width;
     spec.height = layout.height;
     // @ts-ignore
@@ -128,5 +109,10 @@ export class CharacterChart extends CharacterVisactor {
 
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {
     return false;
+  }
+
+  release(): void {
+    this.option.graphicParent.removeChild(this._graphic as any);
+    this._graphic.release && this._graphic.release();
   }
 }

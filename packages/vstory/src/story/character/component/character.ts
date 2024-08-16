@@ -1,23 +1,24 @@
 import type { IGroup } from '@visactor/vrender';
 import { createGroup } from '@visactor/vrender';
-import { GraphicText } from './graphic/graphic-text';
+import { GraphicBaseText } from './graphic/graphic-base-text';
 import type { IComponentCharacterSpec } from '../dsl-interface';
 import { CharacterBase } from '../base/base';
 import type { Graphic } from './graphic/graphic';
 import { getLayoutFromWidget } from '../../utils/layout';
 import type { StoryEvent } from '../../interface/runtime-interface';
 import type { ICharacterPickInfo } from '../runtime-interface';
+import { ComponentGroup } from './character-group/component-group-graphic';
 
 export abstract class CharacterComponent extends CharacterBase {
   protected declare _spec: IComponentCharacterSpec;
   get spec() {
     return this._spec;
   }
-  protected declare _graphic: Graphic;
-  get graphic() {
-    return this._graphic;
-  }
-  protected declare _text: GraphicText;
+  // protected declare _graphic: Graphic;
+  // get graphic() {
+  //   return this._graphic;
+  // }
+  protected declare _text: GraphicBaseText;
   get text() {
     return this._text;
   }
@@ -34,7 +35,7 @@ export abstract class CharacterComponent extends CharacterBase {
   }
 
   protected _initGraphics(): void {
-    this._group = createGroup({
+    this._group = new ComponentGroup({
       ...getLayoutFromWidget(this._spec.position),
       angle: this._spec.options.angle,
       zIndex: this._spec.zIndex
@@ -42,7 +43,7 @@ export abstract class CharacterComponent extends CharacterBase {
     this.option.graphicParent.add(this._group);
 
     this._graphic = this._createGraphic();
-    this._text = new GraphicText(this);
+    this._text = new GraphicBaseText(this);
     this._graphic.init();
     this._text.init();
 
@@ -98,6 +99,10 @@ export abstract class CharacterComponent extends CharacterBase {
       part: event.path[event.path.length - 1] === this._graphic.graphic ? 'graphic' : 'text',
       graphicType: this.graphicType
     };
+  }
+
+  release() {
+    this.option.graphicParent.removeChild(this._group);
   }
 }
 

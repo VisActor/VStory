@@ -5,6 +5,6 @@ import { CharacterComponent } from '../character';
 export class CharacterComponentQipao extends CharacterComponent {
   readonly graphicType: string = 'qipao';
   protected _createGraphic(): Graphic {
-    return new GraphicQipao('QipaoComponent', this);
+    return new GraphicQipao('Qipao', this);
   }
 }
