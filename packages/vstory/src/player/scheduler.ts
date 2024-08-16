@@ -1,4 +1,4 @@
-import { isNumber } from '@visactor/vutils';
+import { isNumber, isString } from '@visactor/vutils';
 import type { IActionSpec, IActSpec, ISceneSpec } from '../story/interface';
 import { IStory } from '../story/interface';
 import type { IActionProcessor } from './processor/interface/action-processor';
@@ -153,15 +153,18 @@ export class Scheduler implements IScheduler {
       let character_st = Infinity;
       let character_et = -Infinity;
       action.characterActions.forEach(ca => {
-        const info = this._actionProcessor.getActInfo(action.characterId, ca);
-        if (!info) {
-          return;
-        }
-        const item = new ActionItem(info.startTime, info.duration, ca, action.characterId);
+        const characterIdList = isString(action.characterId) ? [action.characterId] : action.characterId;
+        characterIdList.forEach(characterId => {
+          const info = this._actionProcessor.getActInfo(characterId, ca);
+          if (!info) {
+            return;
+          }
+          const item = new ActionItem(info.startTime, info.duration, ca, characterId);
 
-        character_st = Math.max(Math.min(item.startTime, character_st), 0);
-        character_et = Math.max(item.startTime + item.duration, character_et);
-        actionList.push(item);
+          character_st = Math.max(Math.min(item.startTime, character_st), 0);
+          character_et = Math.max(item.startTime + item.duration, character_et);
+          actionList.push(item);
+        });
       });
 
       scene_st = !actIdx ? character_st : Math.max(Math.min(character_st, scene_st), 0);
