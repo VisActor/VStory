@@ -3,7 +3,7 @@ import type { EasingType } from '@visactor/vrender';
 export interface IAction<T> {
   action: string;
   startTime?: number;
-  payload: T;
+  payload?: T;
 }
 
 export interface IAnimationParams {

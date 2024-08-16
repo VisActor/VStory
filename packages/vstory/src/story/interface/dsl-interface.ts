@@ -1,8 +1,8 @@
+import type { IRankingBarPlayAction } from './../../player/processor/chart/rankingBar/rankingBar';
 import type { IChartAddAction, IChartUpdateAction } from '../../player/processor/chart/vchart';
 import type {
   IChartVisibilityAction,
   IComponentVisibilityAction
-  // IChartAddAction
 } from '../../player/processor/interface/appear-action';
 import type {
   IComponentBounceAction,
@@ -20,7 +20,8 @@ export type IActionSpec =
   | IComponentBounceAction
   | IChartVisibilityAction
   | IChartUpdateAction
-  | IChartAddAction;
+  | IChartAddAction
+  | IRankingBarPlayAction;
 
 export interface IStorySpec {
   acts: IActSpec[]; // 作品的章节
