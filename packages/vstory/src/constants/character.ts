@@ -1,5 +1,6 @@
 export const enum StoryChartType {
-  VCHART = 'VChart'
+  VCHART = 'VChart',
+  RANKINGBAR = 'RankingBar'
 }
 
 export enum StoryComponentType {

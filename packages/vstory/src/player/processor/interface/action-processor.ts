@@ -4,7 +4,7 @@ import type { IActionSpec } from '../../../story/interface';
 export interface IActionProcessorItem {
   getStartTime: (action: IActionSpec) => number;
   getDuration: (action: IActionSpec) => number;
-  getStartTimeAndDuration: (action: IActionSpec) => { startTime: number; duration: number };
+  getStartTimeAndDuration: (action: IActionSpec, character?: ICharacter) => { startTime: number; duration: number };
 
   run: (...actionParams: any) => any;
 }

@@ -19,6 +19,7 @@ import { LV_BAR1 } from './demos/lv/bar1';
 import { BarLineSeries } from './demos/BarLineSeries';
 import { wordcloud } from './demos/wordcloud';
 import { BaseComponent } from './demos/BaseComponent';
+import { RankingBar } from './demos/template/RankingBar';
 
 type MenusType = (
   | {
@@ -111,6 +112,10 @@ const App = () => {
           component: LV_BAR1
         }
       ]
+    },
+    {
+      name: 'RankingBar',
+      component: RankingBar
     }
   ];
   const getSelectedMenu = useCallback<(menus: MenusType) => any>(
