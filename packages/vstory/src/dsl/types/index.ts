@@ -10,6 +10,7 @@ export interface IActionContext {
 
 export interface IActionPayload {
   animation?: IAnimationParams;
+  selector?: string;
 }
 
 export interface IAction {

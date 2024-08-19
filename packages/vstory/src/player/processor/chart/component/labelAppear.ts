@@ -1,9 +1,9 @@
-import type { IChartVisibilityAction } from '../../interface/appear-action';
+import type { IChartVisibilityPayload } from '../../interface/appear-action';
 import type { IGraphic, IGroup } from '@visactor/vrender-core';
 
 export const runLabelAppear = (
   instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { disappear: boolean }
 ) => {
   switch (animation.effect) {
@@ -24,7 +24,7 @@ export const runLabelAppear = (
 
 const labelGrow = (
   instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { disappear: boolean }
 ) => {
   const { duration, easing } = animation;
@@ -44,7 +44,7 @@ const labelGrow = (
 
 const labelFade = (
   instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { disappear: boolean }
 ) => {
   const { duration, easing } = animation;
@@ -63,7 +63,7 @@ const labelFade = (
 
 const labelFollowGraphic = (
   instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { disappear: boolean }
 ) => {
   const { duration, easing } = animation;
