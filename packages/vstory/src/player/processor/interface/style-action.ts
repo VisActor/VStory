@@ -33,6 +33,6 @@ export interface IComponentBouncePayLoad extends IActionPayload {
   dy?: number;
 }
 
-export interface IComponentBounceAction extends IAction<IComponentScaleToPayLoad> {
+export interface IComponentBounceAction extends IAction<IComponentBouncePayLoad> {
   action: 'bounce';
 }
