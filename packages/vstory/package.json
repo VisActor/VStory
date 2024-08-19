@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -24,12 +24,13 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vchart": "1.11.5",
-    "@visactor/vrender": "0.19.14-alpha.1",
-    "@visactor/vrender-core": "0.19.14-alpha.1",
-    "@visactor/vrender-kits": "0.19.14-alpha.1",
-    "@visactor/vrender-components": "0.19.14-alpha.1",
-    "@visactor/vutils": "~0.18.4"
+    "@visactor/vchart": "1.12.1-alpha.0",
+    "@visactor/vrender": "0.20.1-alpha.0",
+    "@visactor/vrender-core": "0.20.1-alpha.0",
+    "@visactor/vrender-kits": "0.20.1-alpha.0",
+    "@visactor/vrender-components": "0.20.1-alpha.0",
+    "@visactor/vutils": "~0.18.4",
+    "@visactor/vchart-extension": "0.0.2-alpha.2"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",
@@ -38,6 +39,7 @@
     "@rushstack/eslint-patch": "~1.1.4",
     "@ffmpeg/core": "^0.11.0",
     "@ffmpeg/ffmpeg": "^0.11.6",
+    "@douyinfe/semi-ui": "^2.62.1",
     "canvas": "2.11.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

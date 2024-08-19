@@ -11,19 +11,21 @@ export const enum StoryChartType {
   SCATTER = 'ScatterChart',
   WORD_CLOUD = 'WordCloudChart',
   TREE_MAP = 'TreeMapChart',
-  SUNBURST = 'SunburstChart'
+  SUNBURST = 'SunburstChart',
+  VCHART = 'VChart'
 }
-export enum StoryGraphicType {
-  RECT = 'RectComponent',
-  // Shape = 'SymbolComponent',
-  LINE = 'LineComponent',
-  ARC = 'ArcComponent',
+export enum StoryComponentType {
+  RECT = 'Rect',
+  SHAPE = 'Shape',
+  LINE = 'Line',
+  ARC = 'Arc',
   // AREA = 'AreaComponent',
-  PATH = 'PathComponent',
-  TEXT = 'TextComponent',
-  RICH_TEXT = 'RichTextComponent',
-  QIPAO = 'QipaoComponent',
-  IMAGE = 'ImageComponent'
+  PATH = 'Path',
+  TEXT = 'Text',
+  RICH_TEXT = 'RichText',
+  QIPAO = 'Qipao',
+  IMAGE = 'Image',
+  TIMELINE = 'Timeline'
 }
 
 export const enum StoryChartComponentType {

@@ -23,7 +23,7 @@ export class SeriesSpecRuntime implements IChartCharacterRuntime {
       merge(rawSpec, options.seriesSpec[0].spec);
       return;
     }
-    options.seriesSpec.forEach(seriesSpec => {
+    options.seriesSpec?.forEach(seriesSpec => {
       if (!rawSpec.series) {
         rawSpec.series = [{ ...seriesSpec.spec }];
         return;

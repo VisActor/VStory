@@ -29,6 +29,8 @@ export class Chart extends Group implements IVisactorGraphic {
   type: GraphicType = 'chart' as any;
   declare attribute: IChartGraphicAttribute;
   protected _vchart: IVChart;
+  // 是否试一次空render，目的是只生成场景树，不会真实渲染
+  // protected _emptyRenderCall: boolean;
   get vchart() {
     return this._vchart;
   }
@@ -52,7 +54,7 @@ export class Chart extends Group implements IVisactorGraphic {
         // viewBox: params.vi
         dpr: params.dpr,
         interactive: params.interactive,
-        animation: params.animation,
+        animation: false,
         autoFit: false,
         disableTriggerEvent: params.disableTriggerEvent,
         disableDirtyBounds: params.disableDirtyBounds,
@@ -84,9 +86,11 @@ export class Chart extends Group implements IVisactorGraphic {
     } else {
       this._vchart = params.vchart;
     }
-    this._vchart.renderSync();
     // 背景设置为false后，不会擦除画布内容，可以实现元素正常堆叠绘制
     const stage = this._vchart.getStage();
+    stage.stage.pauseRender();
+    this._vchart.renderSync();
+    stage.stage.resumeRender();
     if (stage) {
       stage.background = false as any;
       // 关闭交互
@@ -120,5 +124,9 @@ export class Chart extends Group implements IVisactorGraphic {
     viewBox.y1 = 0;
     this._vchart.resize(viewBox.x2 - viewBox.x1, viewBox.y2 - viewBox.y1);
     this._vchart.updateViewBox(viewBox);
+  }
+
+  release() {
+    this._vchart && this._vchart.release();
   }
 }

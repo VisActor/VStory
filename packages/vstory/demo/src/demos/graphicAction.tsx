@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { IActionsLink, IAction, IStorySpec } from '../../../src/story/interface';
+import { IActionsLink, IActionSpec, IStorySpec } from '../../../src/story/interface';
 import { Story } from '../../../src/story/story';
 import '../../../src/story/index';
 import { ICharacterSpec } from '../../../src/story/character';
-import { StoryGraphicType } from '../../../src/dsl/constant';
+import { StoryComponentType } from '../../../src/constants/character';
 
 const duration = 1000;
 const width = 200;
@@ -34,7 +34,7 @@ const createCharacterAndAction = (type: string, effects: string[], row = 0, col 
       ...options
     }
   };
-  const characterActions: IAction[] = effects.map((effect, effectIndex) => {
+  const characterActions: IActionSpec[] = effects.map((effect, effectIndex) => {
     if (effectIndex === 0) {
       return {
         startTime: 50 + row * duration,
@@ -91,7 +91,7 @@ export const GraphicActionDemo = () => {
         ['fade', 'flicker', 'darken'] //
       ];
       effects.forEach((effect, index) => {
-        const { character, characterAction } = createCharacterAndAction(StoryGraphicType.RECT, effect, index);
+        const { character, characterAction } = createCharacterAndAction(StoryComponentType.RECT, effect, index);
         characters.push(character);
         characterActions.push(characterAction);
       });
@@ -106,7 +106,7 @@ export const GraphicActionDemo = () => {
         ['typewriter', 'flicker'] //
       ];
       effects.forEach((effect, index) => {
-        const { character, characterAction } = createCharacterAndAction(StoryGraphicType.TEXT, effect, index, col, {
+        const { character, characterAction } = createCharacterAndAction(StoryComponentType.TEXT, effect, index, col, {
           graphic: { fontSize: 24, text: effect[0], dx: width / 2, dy: height / 2 },
           text: { visible: false }
         });

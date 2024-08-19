@@ -3,6 +3,7 @@ import type { ICharacterInitOption, ICharacterPickInfo } from '../runtime-interf
 import type { ICharacter, ICharacterSpec } from '..';
 import type { IGroup } from '@visactor/vrender';
 import type { StoryEvent } from '../../interface';
+import { IVisactorGraphic } from '../visactor/interface';
 
 export abstract class CharacterBase implements ICharacter {
   readonly id: string;
@@ -11,6 +12,10 @@ export abstract class CharacterBase implements ICharacter {
   protected _spec: ICharacterSpec;
   get spec() {
     return this._spec;
+  }
+  protected declare _graphic: any;
+  get graphic() {
+    return this._graphic;
   }
 
   protected _option: ICharacterInitOption;
@@ -71,4 +76,7 @@ export abstract class CharacterBase implements ICharacter {
   abstract clearCharacter(): void;
 
   abstract checkEvent(event: StoryEvent): false | ICharacterPickInfo;
+  release() {
+    this.graphic && this.graphic.release && this.graphic.release();
+  }
 }

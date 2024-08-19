@@ -53,9 +53,16 @@ export class VChartRender extends DefaultCanvasRectRender implements IGraphicRen
     // @ts-ignore
     chartStage._editor_needRender = true;
     const matrix = chart.globalTransMatrix.clone();
-    const stageMatrix = chart.stage.window.getViewBoxTransform();
-    matrix.multiply(stageMatrix.a, stageMatrix.b, stageMatrix.c, stageMatrix.d, stageMatrix.e, stageMatrix.f);
-    chartStage.window.setViewBoxTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
+    const stageMatrix = chart.stage.window.getViewBoxTransform().clone();
+    stageMatrix.multiply(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
+    chartStage.window.setViewBoxTransform(
+      stageMatrix.a,
+      stageMatrix.b,
+      stageMatrix.c,
+      stageMatrix.d,
+      stageMatrix.e,
+      stageMatrix.f
+    );
     chartStage.dirtyBounds?.clear();
     chartStage.render();
     chartCtx.baseGlobalAlpha /= baseOpacity;

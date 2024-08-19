@@ -23,7 +23,7 @@ export const StorySceneDemo = () => {
     const tempSpec: IStorySpec = {
       roles: [
         {
-          type: 'RectComponent',
+          type: 'Rect',
           id: 'test-graphics-0',
           zIndex: 0,
           position: {
@@ -45,7 +45,7 @@ export const StorySceneDemo = () => {
           }
         },
         {
-          type: 'RectComponent',
+          type: 'Rect',
           id: 'test-graphics-1',
           zIndex: 0,
           position: {
@@ -116,7 +116,7 @@ export const StorySceneDemo = () => {
           }
         },
         {
-          type: 'QipaoComponent',
+          type: 'Qipao',
           id: 'test-graphics-2',
           zIndex: 3,
           position: {

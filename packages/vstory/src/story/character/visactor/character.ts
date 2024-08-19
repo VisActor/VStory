@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import { ICharacterSpec } from 'src/story/character/dsl-interface';
+import type { ICharacterSpec } from 'src/story/character/dsl-interface';
 import { CharacterBase } from '../base/base';
 import type { ISpecProcess, ICharacterVisactor, IVisactorGraphic } from './interface';
-import { ICharacterInitOption } from '../runtime-interface';
-import { IChartCharacterRuntime } from '../chart/runtime/interface';
+import type { ICharacterInitOption } from '../runtime-interface';
+import type { IChartCharacterRuntime } from '../chart/runtime/interface';
 
 export abstract class CharacterVisactor extends CharacterBase implements ICharacterVisactor {
   protected declare _specProcess: ISpecProcess;
@@ -22,11 +22,6 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
     return this._specProcess.dataTempTransform.specTemp?.type;
   }
 
-  protected declare _graphic: IVisactorGraphic;
-  get graphic() {
-    return this._graphic;
-  }
-
   protected _runtime: IChartCharacterRuntime[] = [];
 
   constructor(spec: ICharacterSpec, option: ICharacterInitOption) {
@@ -34,7 +29,9 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
     this._initSpecProcess();
   }
 
-  protected _initRuntime(): void {}
+  protected _initRuntime(): void {
+    return;
+  }
 
   clearConfig(opt: { clearCurrent: false | { [key: string]: any } }) {
     // do nothing

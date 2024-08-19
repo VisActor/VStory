@@ -1,13 +1,11 @@
 import { ACustomAnimate, createLine, getTextBounds, registerShadowRootGraphic } from '@visactor/vrender';
-import type { IGraphic } from '@visactor/vrender';
-import { isArray } from '@visactor/vutils';
+import type { IGraphic, IRichText, IRichTextCharacter, ITextGraphicAttribute } from '@visactor/vrender';
+import { clone, cloneDeep, isArray } from '@visactor/vutils';
 registerShadowRootGraphic();
 export class TypeWriter extends ACustomAnimate<{ text: string }> {
   declare valid: boolean;
-  declare target: IGraphic;
-
-  private fromText = '';
-  private toText = '';
+  declare target: IRichText;
+  declare targetTextConfig: IRichTextCharacter[];
 
   getEndProps(): Record<string, any> {
     if (this.valid === false) {
@@ -19,26 +17,22 @@ export class TypeWriter extends ACustomAnimate<{ text: string }> {
   }
 
   onBind(): void {
-    this.fromText = this.from?.text ?? '';
-    this.toText = this.to?.text ?? '';
-    if (!this.toText || isArray(this.toText)) {
-      this.valid = false;
-    } else {
-      this.toText = this.toText.toString();
-      const root = this.target.attachShadow();
-      const fontSize = this.target.getComputedAttribute('fontSize');
-      const line = createLine({
-        x: 0,
-        y: 0,
-        dy: -fontSize / 2,
-        points: [
-          { x: 0, y: 0 },
-          { x: 0, y: fontSize }
-        ],
-        stroke: 'black'
-      });
-      root.add(line);
-    }
+    const root = this.target.attachShadow();
+    const fontSize = this.target.getComputedAttribute('fontSize');
+    this.target.attribute.textConfig;
+    const line = createLine({
+      x: 0,
+      y: 0,
+      dy: -fontSize / 2,
+      points: [
+        { x: 0, y: 0 },
+        { x: 0, y: fontSize }
+      ],
+      stroke: 'black',
+      lineWidth: 1
+    });
+    root.add(line);
+    this.targetTextConfig = cloneDeep(this.target.attribute.textConfig || []);
   }
 
   onEnd(): void {
@@ -51,17 +45,63 @@ export class TypeWriter extends ACustomAnimate<{ text: string }> {
       return;
     }
     // update text
-    const fromCount = this.fromText.length;
-    const toCount = this.toText.length;
-    const count = Math.ceil(fromCount + (toCount - fromCount) * ratio);
+    // const { textConfig = [] } = this.target.attribute;
+    const totalLength = this.targetTextConfig.reduce(
+      (a, b) => (a + (b as any).text ? (b as any).text.toString().length : 1),
+      0
+    );
+    const nextLength = totalLength * ratio;
+    const nextTextConfig: IRichTextCharacter[] = [];
+    let curLen = 0;
+    this.targetTextConfig.forEach(config => {
+      if (curLen >= nextLength) {
+        return;
+      }
+      const len = (config as any).text ? (config as any).text.toString().length : 1;
+      if (curLen + len < nextLength) {
+        nextTextConfig.push(config);
+        curLen += len;
+      } else {
+        nextTextConfig.push({
+          ...config,
+          text: (config as any).text.substr(0, nextLength - curLen)
+        });
+        curLen = nextLength;
+      }
+    });
+    this.target.setAttributes({
+      textConfig: nextTextConfig
+    });
 
-    out.text = this.toText.substr(0, count);
-
-    // update line position
+    const cache = this.target.getFrameCache();
+    if (!(cache.lines && cache.lines.length)) {
+      return;
+    }
+    const lastLine = cache.lines[cache.lines.length - 1];
+    const x = cache.left + lastLine.left + lastLine.actualWidth;
+    const y = cache.top + lastLine.top;
+    const h = lastLine.paragraphs?.[lastLine.paragraphs.length - 1]?.fontSize || lastLine.height;
     const line = this.target.shadowRoot?.at(0) as IGraphic;
 
-    const endX = getTextBounds({ ...this.target.attribute, ...out }).width() / 2 + 2;
+    // console.log(x, y, h, line);
+    // const attr = { ...this.target.attribute, ...out };
+    // const width = getTextBounds(attr).width();
+    // const { textAlign } = attr as ITextGraphicAttribute;
+    // let x = width;
+    let dx = 0;
+    if (lastLine.textAlign === 'center') {
+      dx = -lastLine.actualWidth / 2;
+    } else if (lastLine.textAlign === 'right') {
+      dx = -lastLine.actualWidth;
+    }
 
-    line.setAttribute('x', endX);
+    line.setAttributes({
+      x: x + dx,
+      y,
+      points: [
+        { x: 0, y: 0 },
+        { x: 0, y: h }
+      ]
+    } as any);
   }
 }
