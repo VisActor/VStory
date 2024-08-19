@@ -15,6 +15,7 @@ import { VChartCharacter } from './character/chart/characters/vchart';
 import { ComponentGroupRender } from './character/component/character-group/component-group-graphic-render';
 import { CharacterComponentTimeline } from './character/component/characters/character-timeline';
 import { RankingBarCharacter } from './character/chart/characters/rankingBar';
+import { CharacterComponentUnit } from './character/component/characters/character-unit';
 
 const splitModule = new ContainerModule(bind => {
   // chart渲染器注入
@@ -49,6 +50,7 @@ export function registerCharacter() {
   StoryFactory.registerCharacter(StoryComponentType.IMAGE, CharacterComponentImage);
   StoryFactory.registerCharacter(StoryComponentType.SHAPE, CharacterComponentShape);
   StoryFactory.registerCharacter(StoryComponentType.TIMELINE, CharacterComponentTimeline);
+  StoryFactory.registerCharacter(StoryComponentType.UNIT, CharacterComponentUnit);
 
   container.load(splitModule);
 }

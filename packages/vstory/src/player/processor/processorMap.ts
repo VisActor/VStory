@@ -17,6 +17,7 @@ import {
   CommonStyleActionProcessor
 } from './component/common-component';
 import { RankingBarPlayActionProcessor } from './chart/rankingBar/rankingBar';
+import { UnitVisibilityActionProcessor } from './component/unit/unit-visibility';
 
 export const processorChartMap = {
   [StoryChartType.VCHART]: {
@@ -82,6 +83,14 @@ export const processorComponentMap = {
     [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
     [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
     [ACTION_TYPE.STATE]: new TimelineStateActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
+  },
+  [StoryComponentType.UNIT]: {
+    [ACTION_TYPE.APPEAR]: new UnitVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new UnitVisibilityActionProcessor(),
+    [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),
+    [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
+    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
     [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
   }
 };

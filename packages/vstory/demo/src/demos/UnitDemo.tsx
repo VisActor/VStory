@@ -25,6 +25,22 @@ export const UnitDemo = () => {
               stroke: false
             }
           }
+        },
+        {
+          type: 'Unit',
+          id: 'unit-test',
+          zIndex: 2,
+          position: {
+            top: 0,
+            left: 0,
+            width: 1920,
+            height: 600
+          },
+          options: {
+            graphic: {
+              fill: '#faedcb'
+            }
+          }
         }
       ],
       acts: [
@@ -36,6 +52,21 @@ export const UnitDemo = () => {
               actions: [
                 {
                   characterId: 'background-top',
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 0,
+                      payload: {
+                        animation: {
+                          effect: 'move',
+                          duration: 100
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  characterId: 'unit-test',
                   characterActions: [
                     {
                       action: 'appear',
