@@ -1,5 +1,5 @@
 import type { IVisactorGraphic } from '../../visactor/interface';
-import type { AABBBounds, IBoundsLike } from '@visactor/vutils';
+import { Bounds, type AABBBounds, type IBoundsLike } from '@visactor/vutils';
 import type { ISpec, IVChart } from '@visactor/vchart';
 import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Group } from '@visactor/vrender';
@@ -43,7 +43,6 @@ export class Chart extends Group implements IVisactorGraphic {
 
   private _chartViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
   private _BoundsViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
-  private _offset: { x: number; y: number } = { x: 0, y: 0 };
 
   drawTag = false;
   protected _boundsChangeTag: boolean = true;
@@ -57,31 +56,12 @@ export class Chart extends Group implements IVisactorGraphic {
     if (!this._vchart) {
       return super.doUpdateAABBBounds();
     }
-    return this._getVChartRootMarkBounds().translate(this.attribute.x, this.attribute.y);
-  }
-
-  shouldUpdateAABBBounds(): boolean {
-    if (super.shouldUpdateAABBBounds()) {
-      return true;
-    }
-    if (this._boundsChangeTag) {
-      this._boundsChangeTag = false;
-      return true;
-    }
-    return false;
-  }
-
-  protected tryUpdateAABBBounds(full?: boolean): AABBBounds {
-    if (!this.shouldUpdateAABBBounds()) {
-      return this._AABBBounds;
-    }
-    if (!this.valid) {
-      this._AABBBounds.clear();
-      return this._AABBBounds;
-    }
-
-    const bounds = this.doUpdateAABBBounds(full);
-    return bounds;
+    const b = new Bounds();
+    b.x1 = this.attribute.x;
+    b.x2 = this.attribute.x + this.attribute.width;
+    b.y1 = this.attribute.y;
+    b.y2 = this.attribute.y + this.attribute.height;
+    return b;
   }
 
   constructor(params: IChartGraphicAttribute) {
