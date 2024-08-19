@@ -69,7 +69,11 @@ function createIconMatrix(matrix: number[][], startIndex: number, x: number, y: 
           {
             action: 'appear',
             startTime: 0,
-            duration: 0
+            payload: {
+              animation: {
+                duration: 0
+              }
+            }
           }
         ]
       });
@@ -141,7 +145,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'RichText',
+          type: 'Text',
           id: 'Title',
           zIndex: 3,
           position: {
@@ -239,7 +243,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'RichText',
+          type: 'Text',
           id: 'LeftDescription',
           zIndex: 3,
           position: {
@@ -285,7 +289,7 @@ export const Pictogram = () => {
           }
         },
         {
-          type: 'RichText',
+          type: 'Text',
           id: 'RightDescription',
           zIndex: 3,
           position: {
@@ -325,7 +329,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 },
@@ -335,7 +343,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 },
@@ -345,7 +357,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 },
@@ -355,7 +371,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 },
@@ -365,7 +385,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 },
@@ -375,7 +399,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 },
@@ -387,7 +415,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 },
@@ -397,7 +429,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 },
@@ -407,7 +443,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 },
@@ -417,7 +457,11 @@ export const Pictogram = () => {
                     {
                       action: 'appear',
                       startTime: 0,
-                      duration: 0
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 }
