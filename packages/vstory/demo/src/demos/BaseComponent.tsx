@@ -153,6 +153,41 @@ export const BaseComponent = () => {
           id: 'default-chapter',
           scenes: [
             {
+              id: 'scene1',
+              actions: [
+                {
+                  characterId: [
+                    ...new Array(3).fill(0).map((_, i) => 'rect' + (i % 3)),
+                    ...new Array(3).fill(0).map((_, i) => 'line' + (i % 3)),
+                    ...new Array(3).fill(0).map((_, i) => 'shape' + (i % 3)),
+                    ...new Array(3).fill(0).map((_, i) => 'image' + (i % 3)),
+                    ...new Array(4).fill(0).map((_, i) => 'text' + (i % 4)),
+                    ...new Array(4).fill(0).map((_, i) => 'timeline' + (i % 4))
+                  ],
+                  characterActions: [
+                    {
+                      startTime: 0,
+                      action: 'appear',
+                      payload: {
+                        animation: {
+                          duration: 1600
+                        }
+                      }
+                    },
+                    {
+                      startTime: 2000,
+                      action: 'disappear',
+                      payload: {
+                        animation: {
+                          duration: 1600
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               id: 'scene0',
               actions: [
                 ...new Array(6).fill(0).map((_, i) => {

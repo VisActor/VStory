@@ -1,9 +1,9 @@
 import type VChart from '@visactor/vchart';
-import type { IChartVisibilityAction } from '../../interface/appear-action';
+import type { IChartVisibilityPayload } from '../../interface/appear-action';
 
 export const commonGrow = (
   instance: VChart,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   typeList: string[],
   option: { markIndex: number; disappear: boolean }
 ) => {
@@ -23,7 +23,7 @@ export const commonGrow = (
 
 export const commonFade = (
   instance: VChart,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { markIndex: number; disappear: boolean }
 ) => {
   const { duration, loop, oneByOne, easing } = animation;

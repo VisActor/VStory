@@ -16,6 +16,7 @@ import {
   CommonScaleToActionProcessor,
   CommonStyleActionProcessor
 } from './component/common-component';
+import { RankingBarPlayActionProcessor } from './chart/rankingBar/rankingBar';
 
 export const processorChartMap = {
   [StoryChartType.VCHART]: {
@@ -24,6 +25,12 @@ export const processorChartMap = {
     [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor(),
     [VCHART_ACTION_TYPE.UPDATE]: new VChartUpdateActionProcessor(),
     [VCHART_ACTION_TYPE.ADD]: new VChartAddActionProcessor()
+  },
+  [StoryChartType.RANKINGBAR]: {
+    [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor(),
+    play: new RankingBarPlayActionProcessor()
   }
 };
 

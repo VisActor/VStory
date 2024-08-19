@@ -1,13 +1,13 @@
 import type VChart from '@visactor/vchart';
 // import type { IChartVisibilityAction } from '../../../../types/chart/appear';
 import type { IOrientType } from '@visactor/vrender-components';
-import type { IChartVisibilityAction } from '../../interface/appear-action';
+import type { IChartVisibilityPayload } from '../../interface/appear-action';
 import { commonFade } from './commonTransformMarkAppear';
 
 // 将payload转换为chart内置的动画type
 export const transformRectVisibility = (
   instance: VChart,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { markIndex: number; disappear: boolean }
 ) => {
   switch (animation.effect) {
@@ -34,7 +34,7 @@ export const transformRectVisibility = (
 
 const rectGrow = (
   instance: VChart,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option = { center: false, disappear: false }
 ) => {
   const { duration, loop, oneByOne, easing } = animation;

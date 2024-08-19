@@ -1,9 +1,9 @@
 import type { EasingType } from '@visactor/vrender';
 
-export interface IAction<T> {
+export interface IAction<T extends IActionPayload> {
   action: string;
   startTime?: number;
-  payload: T;
+  payload?: T | T[];
 }
 
 export interface IAnimationParams {
@@ -14,4 +14,5 @@ export interface IAnimationParams {
 
 export interface IActionPayload {
   animation?: IAnimationParams;
+  selector?: string;
 }

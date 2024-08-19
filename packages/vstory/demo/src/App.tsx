@@ -19,6 +19,8 @@ import { LV_BAR1 } from './demos/lv/bar1';
 import { BarLineSeries } from './demos/BarLineSeries';
 import { wordcloud } from './demos/wordcloud';
 import { BaseComponent } from './demos/BaseComponent';
+import { BarLineSeriesSelector } from './demos/BarLineSeriesSelector';
+import { RankingBar } from './demos/template/RankingBar';
 import { UnitDemo } from './demos/UnitDemo';
 
 type MenusType = (
@@ -97,6 +99,10 @@ const App = () => {
       component: BarLineSeries
     },
     {
+      name: 'BarLineSeriesSelector',
+      component: BarLineSeriesSelector
+    },
+    {
       name: 'wordcloud',
       component: wordcloud
     },
@@ -112,6 +118,10 @@ const App = () => {
           component: LV_BAR1
         }
       ]
+    },
+    {
+      name: 'RankingBar',
+      component: RankingBar
     },
     {
       name: 'UnitDemo',
