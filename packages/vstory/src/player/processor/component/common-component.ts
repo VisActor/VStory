@@ -5,8 +5,11 @@ import type { EasingType } from '@visactor/vrender-core';
 import type {
   IComponentBounceAction,
   IComponentMoveToAction,
+  IComponentMoveToPayLoad,
   IComponentScaleToAction,
-  IComponentStyleAction
+  IComponentScaleToPayLoad,
+  IComponentStyleAction,
+  IComponentStylePayLoad
 } from '../interface/style-action';
 import { fadeIn, fadeOut } from '../common/fade-processor';
 import { scaleIn, scaleOut, scaleTo } from '../common/scale-processor';
@@ -15,6 +18,10 @@ import { moveIn, moveOut, moveTo } from '../common/move-processor';
 import { getCharacterGraphic } from '../common/common';
 import { array } from '@visactor/vutils';
 import { bounce } from '../common/bounce-processor';
+
+function getPayload(action: IActionSpec) {
+  return (Array.isArray(action.payload) ? action.payload[0] : action.payload) ?? {};
+}
 
 export class CommonVisibilityActionProcessor extends ActionProcessorItem {
   name: string = 'appearOrDisAppear';
@@ -25,7 +32,7 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
 
   getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
-    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+    const { startTime = 0, duration = 0 } = getPayload(action).animation ?? ({} as any);
 
     const st = globalStartTime + startTime;
     const d = duration;
@@ -36,7 +43,7 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IActionSpec): void {
-    const { animation } = actionSpec.payload ?? {};
+    const { animation } = getPayload(actionSpec);
     const { effect = 'fade' } = animation ?? ({} as any);
     array(effect).forEach(_effect => {
       const effectFunc = this.getEffectFunc(_effect, actionSpec.action === 'appear');
@@ -70,7 +77,7 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
 
   getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
-    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+    const { startTime = 0, duration = 0 } = getPayload(action).animation ?? ({} as any);
 
     const st = globalStartTime + startTime;
     const d = duration;
@@ -81,7 +88,7 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentStyleAction): void {
-    const { animation, graphic: graphicStyle, text: textStyle } = actionSpec.payload ?? {};
+    const { animation, graphic: graphicStyle, text: textStyle } = getPayload(actionSpec) as IComponentStylePayLoad;
 
     const { duration, easing } = animation;
     const graphic = getCharacterGraphic(character)[0];
@@ -104,7 +111,7 @@ export class CommonMoveToActionProcessor extends ActionProcessorItem {
 
   getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
-    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+    const { startTime = 0, duration = 0 } = getPayload(action).animation ?? ({} as any);
 
     const st = globalStartTime + startTime;
     const d = duration;
@@ -115,7 +122,7 @@ export class CommonMoveToActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentMoveToAction): void {
-    const { animation, destination } = actionSpec.payload ?? {};
+    const { animation, destination } = getPayload(actionSpec) as IComponentMoveToPayLoad;
 
     moveTo(character, animation as any, destination);
   }
@@ -129,7 +136,7 @@ export class CommonScaleToActionProcessor extends ActionProcessorItem {
 
   getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
-    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+    const { startTime = 0, duration = 0 } = getPayload(action).animation ?? ({} as any);
 
     const st = globalStartTime + startTime;
     const d = duration;
@@ -140,7 +147,7 @@ export class CommonScaleToActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentScaleToAction): void {
-    const { animation, scale } = actionSpec.payload ?? {};
+    const { animation, scale } = getPayload(actionSpec) as IComponentScaleToPayLoad;
 
     scaleTo(character, animation as any, scale);
   }
@@ -155,7 +162,7 @@ export class CommonBounceActionProcessor extends ActionProcessorItem {
 
   getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
-    const { startTime = 0, duration = 0 } = action.payload?.animation ?? ({} as any);
+    const { startTime = 0, duration = 0 } = getPayload(action).animation ?? ({} as any);
 
     const st = globalStartTime + startTime;
     const d = duration;
@@ -166,7 +173,8 @@ export class CommonBounceActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentBounceAction): void {
-    const { animation } = actionSpec.payload ?? {};
-    bounce(character, animation as any, actionSpec.payload);
+    const payload = getPayload(actionSpec);
+    const { animation } = payload;
+    bounce(character, animation as any, payload);
   }
 }

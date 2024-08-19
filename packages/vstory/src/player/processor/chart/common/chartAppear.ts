@@ -1,11 +1,11 @@
-import type { IChartVisibilityAction } from '../../interface/appear-action';
-import type { IGroup, ILine, IText } from '@visactor/vrender-core';
+import type { IChartVisibilityPayload } from '../../interface/appear-action';
+import type { IGroup } from '@visactor/vrender-core';
 import { commonFade, commonGrow } from './commonAppear';
 
 // TODO: 区分直角坐标系和极坐标系
 export const runChartAppear = (
   instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { disappear: boolean }
 ) => {
   switch (animation.effect) {

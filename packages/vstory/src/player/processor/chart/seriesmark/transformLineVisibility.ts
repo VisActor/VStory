@@ -1,10 +1,10 @@
 import type VChart from '@visactor/vchart';
-import type { IChartVisibilityAction } from '../../interface/appear-action';
+import type { IChartVisibilityPayload } from '../../interface/appear-action';
 import { commonFade, commonGrow } from './commonTransformMarkAppear';
 
 export const transformLineVisibility = (
   instance: VChart,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { markIndex: number; disappear: boolean }
 ) => {
   switch (animation.effect) {

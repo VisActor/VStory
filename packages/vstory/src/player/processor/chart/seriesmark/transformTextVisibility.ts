@@ -1,11 +1,11 @@
 import type VChart from '@visactor/vchart';
-import type { IChartVisibilityAction } from '../../interface/appear-action';
+import type { IChartVisibilityPayload } from '../../interface/appear-action';
 import { commonFade, commonGrow } from './commonTransformMarkAppear';
 
 // 将payload转换为chart内置的动画type
 export const transformTextVisibility = (
   instance: VChart,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: {
     disappear: boolean;
     markIndex: number;

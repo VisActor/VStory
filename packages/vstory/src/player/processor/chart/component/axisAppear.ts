@@ -1,4 +1,4 @@
-import type { IChartVisibilityAction } from '../../interface/appear-action';
+import type { IChartVisibilityPayload } from '../../interface/appear-action';
 import { commonFade } from '../common/commonAppear';
 import { commonGrow } from './commonAppear';
 import type { IGroup, ILine, IText } from '@visactor/vrender-core';
@@ -6,7 +6,7 @@ import type { IGroup, ILine, IText } from '@visactor/vrender-core';
 // TODO: 区分直角坐标系和极坐标系
 export const runAxisAppear = (
   instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { disappear: boolean }
 ) => {
   switch (animation.effect) {
@@ -24,7 +24,7 @@ export const runAxisAppear = (
 
 function axisGrow(
   instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { disappear: boolean; orient?: 'width' | 'height'; direction?: 'negative' | 'positive' }
 ) {
   const isGrid = instance.name?.includes('grid');
@@ -37,7 +37,7 @@ function axisGrow(
 
 function mainAxisGrow(
   instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { disappear: boolean; orient?: 'width' | 'height'; direction?: 'negative' | 'positive' }
 ) {
   const { duration, easing } = animation;
@@ -119,7 +119,7 @@ function mainAxisGrow(
 
 function gridGrow(
   instance: IGroup,
-  animation: IChartVisibilityAction['payload']['animation'],
+  animation: IChartVisibilityPayload['animation'],
   option: { disappear: boolean; orient?: 'width' | 'height'; direction?: 'negative' | 'positive' }
 ) {
   if (instance) {
