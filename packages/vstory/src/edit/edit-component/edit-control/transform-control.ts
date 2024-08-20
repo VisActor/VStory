@@ -24,6 +24,7 @@ import type { VRenderPointerEvent } from '../../../interface/type';
 import type { IEditComponent } from '../../interface';
 import { Edit } from '../../edit';
 import { DragComponent } from './transform-drag';
+import { StoryEvent } from '../../../story/interface';
 // import { EditorActionMode } from './enum';
 
 type AnchorDirection = 'top' | 'bottom' | 'left-top' | 'left-bottom' | 'right' | 'left' | 'right-top' | 'right-bottom';

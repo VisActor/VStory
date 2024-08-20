@@ -1,3 +1,4 @@
+import type { IEditSelectionInfo } from '../interface';
 import { type IEditActionInfo, type IEditComponent } from '../interface';
 
 import type { Edit } from '../edit';
@@ -10,6 +11,15 @@ export class ChartSelection extends BaseSelection implements IEditComponent {
 
   constructor(public readonly edit: Edit) {
     super(edit);
+  }
+
+  updateComponent() {
+    const actionInfo = this._actionInfo as IEditSelectionInfo;
+    if (!(actionInfo && actionInfo.character)) {
+      return;
+    }
+
+    this._layoutComponent.updateBoundsAndAngle(actionInfo.character.getGraphicParent().AABBBounds, 0);
   }
 
   enableEditCharacter(character: ICharacter) {
