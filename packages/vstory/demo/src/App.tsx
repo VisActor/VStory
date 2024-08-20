@@ -14,14 +14,15 @@ import { StoryEdit } from './demos/StoryEdit';
 import { Appear } from './demos/Appear';
 import { GraphicEdit } from './demos/GraphicEdit';
 import { Playground } from './demos/Playground';
-import { Pictogram } from './demos/infographics/Pictogram';
+import { Pictogram } from './demos/UnitViz/Pictogram';
 import { LV_BAR1 } from './demos/lv/bar1';
 import { BarLineSeries } from './demos/BarLineSeries';
 import { wordcloud } from './demos/wordcloud';
 import { BaseComponent } from './demos/BaseComponent';
 import { BarLineSeriesSelector } from './demos/BarLineSeriesSelector';
 import { RankingBar } from './demos/template/RankingBar';
-import { UnitDemo } from './demos/UnitDemo';
+import { UnitComponentDemo } from './demos/UnitViz/UnitDemo';
+import { GunDeath } from './demos/UnitViz/GunDeath';
 
 type MenusType = (
   | {
@@ -91,10 +92,6 @@ const App = () => {
       component: Playground
     },
     {
-      name: 'Infographic-Pictogram',
-      component: Pictogram
-    },
-    {
       name: 'BarLineSeries',
       component: BarLineSeries
     },
@@ -124,8 +121,21 @@ const App = () => {
       component: RankingBar
     },
     {
-      name: 'UnitDemo',
-      component: UnitDemo
+      name: 'Unit Visualization',
+      subMenus: [
+        {
+          name: 'Unit Component Demo',
+          component: UnitComponentDemo
+        },
+        {
+          name: 'Gun Death',
+          component: GunDeath
+        },
+        {
+          name: 'Infographic Pictogram',
+          component: Pictogram
+        }
+      ]
     }
   ];
   const getSelectedMenu = useCallback<(menus: MenusType) => any>(

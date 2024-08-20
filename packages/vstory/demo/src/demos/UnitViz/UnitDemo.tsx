@@ -1,9 +1,9 @@
-import { IStorySpec } from '../../../src/story/interface';
-import { Story } from '../../../src/story/story';
+import { IStorySpec } from '../../../../src/story/interface';
+import { Story } from '../../../../src/story/story';
 import React, { useEffect } from 'react';
 
-export const UnitDemo = () => {
-  const id = 'unit-demo';
+export const UnitComponentDemo = () => {
+  const id = 'unit-component-demo';
 
   useEffect(() => {
     // 准备一个图表
