@@ -14,6 +14,7 @@ import { SeriesSpecRuntime } from './runtime/series-spec';
 import type { StoryEvent } from '../../interface/runtime-interface';
 import type { ICharacterPickInfo } from '../runtime-interface';
 import { getLayoutFromWidget } from '../../utils/layout';
+import { getChartModelWithEvent } from '../../utils/vchart-pick';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
@@ -137,9 +138,16 @@ export class CharacterChart extends CharacterVisactor {
     //   return false;
     // }
     const chartPath = event.detailPath[event.detailPath.length - 1];
+    const result = getChartModelWithEvent(this._graphic.vProduct, event);
+    if (!result) {
+      return false;
+    }
+    const graphic = chartPath?.[chartPath.length - 1];
     return {
-      part: chartPath?.[chartPath.length - 1]?.type,
-      graphicType: chartPath?.[chartPath.length - 1]?.type
+      part: result.type,
+      modelInfo: result,
+      graphic,
+      graphicType: graphic.type
     };
   }
 

@@ -1,13 +1,14 @@
-import type { IGroup } from '@visactor/vrender';
+import type { IGroup, IGraphic } from '@visactor/vrender';
 import type { IBoundsLike, IPointLike } from '@visactor/vutils';
-import type { StoryCanvas } from '../canvas/canvas';
 import type { IStory, IStoryCanvas, StoryEvent } from '../interface/runtime-interface';
 import type { ICharacterSpec } from './dsl-interface';
 import type { Graphic } from './component/graphic/graphic';
 
 export interface ICharacterPickInfo {
   part: string;
+  graphic: IGraphic;
   graphicType: string;
+  modelInfo: any;
 }
 export interface ICharacter {
   id: string;

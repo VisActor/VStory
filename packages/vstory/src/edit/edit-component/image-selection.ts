@@ -1,4 +1,3 @@
-// import { StoryGraphicType } from '../../dsl/constant';
 import { StoryComponentType } from '../../constants/character';
 import { type IEditComponent } from '../interface';
 import { BaseSelection } from './base-selection';
