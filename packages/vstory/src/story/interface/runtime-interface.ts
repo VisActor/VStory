@@ -37,4 +37,6 @@ export interface ICharacterTree {
 export type StoryEvent = Event & {
   detailPath: IGraphic[];
   path: IGraphic[];
+  canvasX?: number;
+  canvasY?: number;
 };

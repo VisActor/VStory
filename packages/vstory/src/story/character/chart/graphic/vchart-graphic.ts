@@ -3,6 +3,7 @@ import type { IBoundsLike } from '@visactor/vutils';
 import type { ISpec, IVChart } from '@visactor/vchart';
 import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Group } from '@visactor/vrender';
+import { isPointInBounds } from '../../../../util/space';
 
 export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
@@ -108,6 +109,22 @@ export class Chart extends Group implements IVisactorGraphic {
         height: y2 - y1
       });
     }
+  }
+
+  /**
+   * 判定点是否在VChart中，可能点在Character里，但不在VChart里
+   * @param canvasX
+   * @param canvasY
+   */
+  pointInVChart(canvasX: number, canvasY: number): boolean {
+    const vchart = this._vchart;
+    if (!vchart) {
+      return false;
+    }
+    const target = { x: 0, y: 0 };
+    this.globalTransMatrix.transformPoint({ x: canvasX, y: canvasY }, target);
+    // 判断点是否在viewBox中
+    return isPointInBounds(target, vchart.getStage().viewBox);
   }
 
   setAttributes(attrs: Partial<IChartGraphicAttribute>) {

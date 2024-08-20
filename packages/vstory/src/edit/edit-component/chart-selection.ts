@@ -4,6 +4,7 @@ import { type IEditActionInfo, type IEditComponent } from '../interface';
 import type { Edit } from '../edit';
 import { BaseSelection } from './base-selection';
 import type { ICharacter } from '../../story/character';
+import type { Chart } from '../../story/character/chart/graphic/vchart-graphic';
 
 export class ChartSelection extends BaseSelection implements IEditComponent {
   readonly level = 3;
@@ -19,7 +20,19 @@ export class ChartSelection extends BaseSelection implements IEditComponent {
       return;
     }
 
-    this._layoutComponent.updateBoundsAndAngle(actionInfo.character.getGraphicParent().AABBBounds, 0);
+    const viewBox = (actionInfo.character.graphic as Chart).vchart.getStage().viewBox;
+    const group = actionInfo.character.getGraphicParent();
+    const { angle, x, y } = group.attribute;
+    this._layoutComponent.updateBoundsAndAngle(
+      {
+        x1: viewBox.x1 + x,
+        y1: viewBox.y1 + y,
+        x2: viewBox.x2 + x,
+        y2: viewBox.y2 + y
+      },
+      angle
+    );
+    // this._layoutComponent.updateBoundsAndAngle(actionInfo.character.getGraphicParent().AABBBounds, 0);
   }
 
   enableEditCharacter(character: ICharacter) {
