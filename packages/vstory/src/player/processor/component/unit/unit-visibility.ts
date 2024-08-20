@@ -1,7 +1,7 @@
 import type { IGraphic, ISymbol } from '@visactor/vrender-core';
 import type { ICharacter } from '../../../../story/character';
 import { getCharacterByEffect } from '../../common/common';
-import type { ITypeWriterParams } from '../../interface/appear-action';
+import type { IStyleParams, ITypeWriterParams } from '../../interface/appear-action';
 import { CommonVisibilityActionProcessor } from '../common-component';
 
 export class UnitVisibilityActionProcessor extends CommonVisibilityActionProcessor {
@@ -11,39 +11,43 @@ export class UnitVisibilityActionProcessor extends CommonVisibilityActionProcess
   }
 }
 
-function restyle(character: ICharacter, animation: ITypeWriterParams, effect: string) {
+function style(character: ICharacter, animation: ITypeWriterParams, effect: string) {
   const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach((graphic: any) => _restyle(graphic, animation as any));
+  graphics.forEach((graphic: any) => _style(graphic, animation as any));
 }
 
-function _restyle(graphic: IGraphic, params: any) {
-  const { styleFunc, start, end, style } = params;
+function _style(graphic: IGraphic, params: IStyleParams) {
+  const {
+    styleFunc,
+    startIndex,
+    endIndex,
+    style,
+    stagger: { enable: staggerEnable, ratio: staggerRatio = 0.25 }
+  } = params;
   const symbols = graphic.getChildren();
-  const startIndex = start ?? 0;
-  const endIndex = end ?? symbols.length - 1;
+  const start = startIndex ?? 0;
+  const end = endIndex ?? symbols.length - 1;
   symbols.forEach((symbol: ISymbol, index) => {
+    const duration = staggerEnable ? params.duration * staggerRatio : params.duration;
+    const delay = staggerEnable ? Math.random() * params.duration * (1 - staggerRatio) : 0;
     if (styleFunc) {
-      symbol.animate().to(styleFunc(index), params.duration, params.easing);
-    } else {
-      if (index >= startIndex && index <= endIndex) {
-        if (style) {
-          symbol.animate().to(style, params.duration, params.easing);
-        }
-      }
+      symbol.animate().wait(delay).to(styleFunc(index), duration, params.easing);
+    } else if (index >= start && index <= end && style) {
+      symbol.animate().wait(delay).to(style, duration, params.easing);
     }
   });
 }
 
-export class UnitRestyleActionProcessor extends CommonVisibilityActionProcessor {
-  name: 'restyle';
+export class UnitStyleActionProcessor extends CommonVisibilityActionProcessor {
+  name: 'style';
   constructor() {
     super();
   }
 
   getEffectFunc(effect: string, appear: boolean) {
     switch (effect) {
-      case 'restyle':
-        return restyle;
+      case 'style':
+        return style;
     }
     return super.getEffectFunc(effect, appear);
   }

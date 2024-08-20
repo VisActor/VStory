@@ -82,18 +82,21 @@ export const UnitDemo = () => {
                   characterId: 'unit-test',
                   characterActions: [
                     {
-                      action: 'restyle',
-                      startTime: 0,
+                      action: 'style',
+                      startTime: 10,
                       payload: {
                         animation: {
                           // styleFunc: (index: number) => {
                           //   return index > 99 ? { symbolType: 'rect', fill: '#6638f0' } : {};
                           // },
-                          start: 100,
+                          startIndex: 100,
                           style: { fill: '#6638f0' },
-                          effect: 'restyle',
-                          duration: 2000,
-                          easing: 'linear'
+                          effect: 'style',
+                          duration: 1000,
+                          easing: 'linear',
+                          stagger: {
+                            enable: true
+                          }
                         }
                       }
                     }
