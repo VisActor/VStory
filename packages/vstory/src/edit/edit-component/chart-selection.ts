@@ -35,5 +35,19 @@ export class ChartSelection extends BaseSelection implements IEditComponent {
         // nothing 不支持任何修改
       }
     });
+    // @ts-ignore;
+    const character = this._actionInfo.character;
+    character.graphic.addEventListener('pointerdown', this.handlerChartClick);
   }
+
+  editEnd() {
+    // @ts-ignore;
+    const character = this._actionInfo.character;
+    character.graphic.removeEventListener('pointerdown', this.handlerChartClick);
+    super.editEnd();
+  }
+
+  handlerChartClick = (e: any) => {
+    this._layoutComponent.handleDragMouseDown(e);
+  };
 }
