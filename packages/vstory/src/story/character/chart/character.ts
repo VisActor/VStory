@@ -91,6 +91,12 @@ export class CharacterChart extends CharacterVisactor {
     this.option.graphicParent.add(this._graphic as any);
   }
 
+  setAttributes(attr: Record<string, any>): void {
+    // this.group.setAttributes(attr);
+    this._graphic.setAttributes(attr);
+    // this._text.updateAttribute({});
+  }
+
   protected _afterRender(): void {
     // console.log('afterRender');
     return;
