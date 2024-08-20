@@ -7,6 +7,8 @@ import { IVisactorGraphic } from '../visactor/interface';
 
 export abstract class CharacterBase implements ICharacter {
   readonly id: string;
+  readonly visActorType: string;
+  readonly type: string;
   protected _spec: ICharacterSpec;
   get spec() {
     return this._spec;
@@ -22,6 +24,7 @@ export abstract class CharacterBase implements ICharacter {
   }
 
   constructor(spec: ICharacterSpec, option: ICharacterInitOption) {
+    this.type = spec.type;
     this.id = spec.id;
     this._spec = spec;
     this._option = option;

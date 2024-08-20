@@ -1,7 +1,7 @@
 import { CharacterComponentQipao } from './character/component/characters/character-qipao';
 import { CharacterComponentRect } from './character/component/characters/character-rect';
 import { StoryFactory } from './factory/factory';
-import { ContainerModule, GraphicRender, container } from '@visactor/vrender';
+import { AutoEnablePlugins, ContainerModule, GraphicRender, RichTextEditPlugin, container } from '@visactor/vrender';
 import { CanvasPickerContribution } from '@visactor/vrender';
 import { ChartRender, VChartRender } from './character/chart/graphic/vchart-graphic-render';
 import { CharacterComponentText } from './character/component/characters/character-text';
@@ -29,6 +29,11 @@ const splitModule = new ContainerModule(bind => {
   bind(GraphicRender).toService(ComponentGroupRender);
 });
 
+const editPlugin = new ContainerModule(bind => {
+  bind(RichTextEditPlugin).toSelf();
+  bind(AutoEnablePlugins).toService(RichTextEditPlugin);
+});
+
 let _register = false;
 export function registerCharacter() {
   if (_register) {
@@ -51,6 +56,7 @@ export function registerCharacter() {
   StoryFactory.registerCharacter(StoryComponentType.TIMELINE, CharacterComponentTimeline);
 
   container.load(splitModule);
+  container.load(editPlugin);
 }
 
 registerCharacter();

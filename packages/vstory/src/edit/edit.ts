@@ -2,8 +2,14 @@ import type { StoryEvent } from '../story/interface/runtime-interface';
 import type { Story } from './../story/story';
 import { EditAction } from './edit-action';
 import { EventEmitter } from '@visactor/vutils';
-import type { IEditActionInfo, IEditComponent, IEditComponentConstructor, IEditMessage } from './interface';
-import type { IGroup } from '@visactor/vrender';
+import {
+  EditActionEnum,
+  type IEditActionInfo,
+  type IEditComponent,
+  type IEditComponentConstructor,
+  type IEditMessage
+} from './interface';
+import type { IGroup, IGraphic } from '@visactor/vrender';
 import { createGroup } from '@visactor/vrender';
 
 export class Edit {
@@ -20,6 +26,7 @@ export class Edit {
   protected _componentList: IEditComponent[];
 
   protected _currentComponent: IEditComponent;
+  protected _overGraphicGroup: IGroup;
 
   protected _editGroup: IGroup;
 
@@ -34,8 +41,13 @@ export class Edit {
 
   _initEditGroup() {
     this._editGroup = createGroup({});
+    this._editGroup.name = 'edit_group';
     const editLayer = this.story.canvas.getStage().createLayer();
     editLayer.add(this._editGroup);
+
+    this._overGraphicGroup = createGroup({});
+    this._overGraphicGroup.name = 'over_group';
+    editLayer.add(this._overGraphicGroup);
   }
 
   getEditGroup() {
@@ -53,6 +65,11 @@ export class Edit {
   }
 
   onStoryEvent(event: StoryEvent, type: string) {
+    const pathTarget = event.path?.[event.path?.length - 1];
+    // 如果交互到编辑元素忽略
+    if (event.path.find(g => g === this._editGroup || g === this._overGraphicGroup)) {
+      return;
+    }
     this.editAction.onStoryEvent(event, type);
   }
 
@@ -61,6 +78,8 @@ export class Edit {
       // 优先上一次的编辑组件
       if (this._currentComponent.checkAction(actionInfo)) {
         return;
+      } else if (actionInfo.type === EditActionEnum.unSelection) {
+        this.stopEdit();
       }
     }
     for (let i = 0; i < this._componentList.length; i++) {
@@ -74,7 +93,11 @@ export class Edit {
   }
 
   startEdit(msg: IEditMessage) {
-    this.emitter.emit('startEdit', msg);
+    this.dispatchEditAction('startEdit', msg);
+  }
+
+  dispatchEditAction(type: string, msg: IEditMessage) {
+    this.emitter.emit(type, msg);
   }
 
   triggerEditWithEvent(event: StoryEvent) {
@@ -92,5 +115,12 @@ export class Edit {
 
   release() {
     this.story.canvas?.getStage?.().removeEventListener('*', this.onStoryEvent as any);
+  }
+
+  showOverGraphic(graphic: IGraphic, clearOther: boolean = true) {
+    if (clearOther) {
+      this._overGraphicGroup.removeAllChild(true);
+    }
+    this._overGraphicGroup.add(graphic);
   }
 }

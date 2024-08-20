@@ -47,9 +47,11 @@ export class StoryCanvas implements IStoryCanvas {
       width: this._canvas.clientWidth,
       height: this._canvas.clientHeight,
       canvasControled: true,
-      autoRender: false,
+      // 得开启自动渲染，否则编辑场景中无法触发视图更新
+      autoRender: true,
       disableDirtyBounds: true,
       ticker: new ManualTicker([]),
+      pluginList: ['RichTextEditPlugin'],
       dpr: window.devicePixelRatio,
       event: {
         clickInterval: 300

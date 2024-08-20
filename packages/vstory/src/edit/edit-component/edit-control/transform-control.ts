@@ -223,7 +223,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     this.rect = createRect({
       fill: 'transparent',
       stroke: false,
-      pickable: true
+      pickable: false
     });
     // this.rect.attachShadow();
     this.editBorder = createRect({

@@ -10,6 +10,7 @@ import type { ICharacterPickInfo } from '../runtime-interface';
 import { ComponentGroup } from './character-group/component-group-graphic';
 
 export abstract class CharacterComponent extends CharacterBase {
+  visActorType: 'component';
   protected declare _spec: IComponentCharacterSpec;
   get spec() {
     return this._spec;
@@ -21,6 +22,10 @@ export abstract class CharacterComponent extends CharacterBase {
   protected declare _text: GraphicBaseText;
   get text() {
     return this._text;
+  }
+
+  get textGraphic() {
+    return this._text.graphic;
   }
 
   protected declare _group: IGroup;

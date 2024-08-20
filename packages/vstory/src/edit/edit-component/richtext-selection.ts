@@ -1,6 +1,5 @@
 import type { IEditSelectionInfo } from '../interface';
 import { EditActionEnum, type IEditActionInfo, type IEditComponent } from '../interface';
-import { StoryEvent } from '../../story/interface/runtime-interface';
 import type { Edit } from '../edit';
 import { BaseSelection } from './base-selection';
 import type { TransformAttributes, ITransformControl } from './edit-control/transform-control';
@@ -16,17 +15,6 @@ export class RichTextSelection extends BaseSelection implements IEditComponent {
 
   protected _createLayoutComponent(attributes: Partial<TransformAttributes>): ITransformControl {
     return new RichTextTransformControl(this, attributes);
-  }
-
-  editEnd(): void {
-    super.editEnd();
-    return;
-  }
-  checkAction(actionInfo: IEditSelectionInfo | IEditActionInfo): boolean {
-    if (this.isEditing) {
-      return this.checkActionWhileEditing(actionInfo);
-    }
-    return this.checkActionWhileNoEditing(actionInfo);
   }
 
   checkActionWhileEditing(actionInfo: IEditSelectionInfo | IEditActionInfo): boolean {
