@@ -144,8 +144,8 @@ export class GraphicBaseText {
       this._transformTextAttributes({
         x,
         y,
-        textAlign: 'left',
-        textBaseline: 'top',
+        textAlign: graphicAlign,
+        textBaseline: graphicBaseline,
         angle: layoutData.angle,
         anchor: [layoutData.width / 2, layoutData.height / 2],
         scaleCenter: [layoutData.width / 2, layoutData.height / 2],
