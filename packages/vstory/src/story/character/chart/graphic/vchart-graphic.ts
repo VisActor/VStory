@@ -3,6 +3,7 @@ import type { IBoundsLike } from '@visactor/vutils';
 import type { ISpec, IVChart } from '@visactor/vchart';
 import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Group } from '@visactor/vrender';
+import { isPointInBounds } from '../../../../util/space';
 
 export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
@@ -97,26 +98,62 @@ export class Chart extends Group implements IVisactorGraphic {
       stage.pauseTriggerEvent();
     }
     if (params.viewBox) {
-      this.updateViewBox(params.viewBox);
+      const x1 = params.viewBox.x1 ?? 0;
+      const y1 = params.viewBox.y1 ?? 0;
+      const x2 = params.viewBox.x2 ?? 0;
+      const y2 = params.viewBox.y2 ?? 0;
+      this.setAttributes({
+        x: x1,
+        y: y1,
+        width: x2 - x1,
+        height: y2 - y1
+      });
     }
+  }
+
+  /**
+   * 判定点是否在VChart中，可能点在Character里，但不在VChart里
+   * @param canvasX
+   * @param canvasY
+   */
+  pointInVChart(canvasX: number, canvasY: number): boolean {
+    const vchart = this._vchart;
+    if (!vchart) {
+      return false;
+    }
+    const target = { x: 0, y: 0 };
+    this.globalTransMatrix.transformPoint({ x: canvasX, y: canvasY }, target);
+    // 判断点是否在viewBox中
+    return isPointInBounds(target, vchart.getStage().viewBox);
+  }
+
+  setAttributes(attrs: Partial<IChartGraphicAttribute>) {
+    super.setAttributes(attrs);
+    const vchart = this._vchart;
+    const viewBox = vchart.getStage().viewBox;
+
+    const x1 = attrs.x ?? viewBox.x1;
+    const y1 = attrs.y ?? viewBox.y1;
+    const width = attrs.width ?? viewBox.width();
+    const height = attrs.height ?? viewBox.height();
+    this.updateViewBox({
+      x1,
+      y1,
+      x2: x1 + width,
+      y2: y1 + height
+    });
   }
 
   updateSpec(spec: ISpec, forceMerge = false, morphConfig = false) {
     this._vchart.updateSpecSync(spec, forceMerge, morphConfig as any);
   }
 
-  updateViewBox(viewBox: IBoundsLike) {
+  protected updateViewBox(viewBox: IBoundsLike) {
     this._updateViewBox(viewBox);
   }
 
   private _updateViewBox(_viewBox: IBoundsLike) {
     const viewBox = { ..._viewBox };
-    this.setAttributes({
-      x: viewBox.x1,
-      y: viewBox.y1,
-      width: viewBox.x2 - viewBox.x1,
-      height: viewBox.y2 - viewBox.y1
-    });
     //
     viewBox.x2 -= viewBox.x1;
     viewBox.y2 -= viewBox.y1;

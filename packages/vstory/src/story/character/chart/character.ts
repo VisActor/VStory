@@ -28,6 +28,8 @@ export class CharacterChart extends CharacterVisactor {
   protected declare _specProcess: SpecProcess;
   protected _ticker: ITicker;
 
+  declare _graphic: Chart;
+
   protected declare _spec: IChartCharacterSpec;
   get spec() {
     return this._spec;
@@ -91,6 +93,12 @@ export class CharacterChart extends CharacterVisactor {
     this.option.graphicParent.add(this._graphic as any);
   }
 
+  setAttributes(attr: Record<string, any>): void {
+    // this.group.setAttributes(attr);
+    this._graphic.setAttributes(attr);
+    // this._text.updateAttribute({});
+  }
+
   protected _afterRender(): void {
     // console.log('afterRender');
     return;
@@ -111,6 +119,9 @@ export class CharacterChart extends CharacterVisactor {
 
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {
     if (!(event.detailPath ?? event.path).some(g => g === this._graphic)) {
+      return false;
+    }
+    if (!this._graphic.pointInVChart((event as any).canvasX, (event as any).canvasY)) {
       return false;
     }
     const chartPath = event.detailPath[event.detailPath.length - 1];

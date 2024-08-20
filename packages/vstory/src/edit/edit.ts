@@ -65,10 +65,14 @@ export class Edit {
   }
 
   onStoryEvent(event: StoryEvent, type: string) {
-    const pathTarget = event.path?.[event.path?.length - 1];
+    // const pathTarget = event.path?.[event.path?.length - 1];
     // 如果交互到编辑元素忽略
     if (event.path.find(g => g === this._editGroup || g === this._overGraphicGroup)) {
-      return;
+      // 具体判断是否编辑到交互元素，如果pick到group，就不算
+      const pathTarget = event.path[event.path.length - 1];
+      if (!pathTarget.isContainer) {
+        return;
+      }
     }
     this.editAction.onStoryEvent(event, type);
   }

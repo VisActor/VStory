@@ -24,6 +24,7 @@ import type { VRenderPointerEvent } from '../../../interface/type';
 import type { IEditComponent } from '../../interface';
 import { Edit } from '../../edit';
 import { DragComponent } from './transform-drag';
+import { StoryEvent } from '../../../story/interface';
 // import { EditorActionMode } from './enum';
 
 type AnchorDirection = 'top' | 'bottom' | 'left-top' | 'left-bottom' | 'right' | 'left' | 'right-top' | 'right-bottom';
@@ -96,7 +97,7 @@ const anchorCursorMap = {
 };
 
 export interface ITransformControl extends IGroup {
-  updateSubBounds: (b: IAABBBoundsLike) => void;
+  updateBoundsAndAngle: (b: IAABBBoundsLike, angle: number) => void;
   onActive: () => void;
   onUpdate: (cb: (data: IUpdateParams, event?: VRenderPointerEvent) => Partial<IUpdateParams> | false) => void;
   onEditorEnd: (cb: (event?: VRenderPointerEvent) => void) => void;
@@ -280,7 +281,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     // this._opt.editorEvent.setCursorSyncToTriggerLayer();
   };
 
-  updateSubBounds(bounds: IAABBBoundsLike) {
+  updateBoundsAndAngle(bounds: IAABBBoundsLike, angle: number) {
     // set bounds
     this.rect.setAttributes({
       x: bounds.x1,
@@ -292,7 +293,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     // set anchor
     const x = (this.attribute.x ?? 0) + (bounds.x1 + bounds.x2) / 2;
     const y = (this.attribute.y ?? 0) + (bounds.y1 + bounds.y2) / 2;
-    this.setAttributes({ anchor: [x, y] });
+    this.setAttributes({ anchor: [x, y], angle });
   }
 
   onActive() {

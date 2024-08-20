@@ -59,10 +59,10 @@ export class StoryCanvas implements IStoryCanvas {
     });
     // @ts-ignore
     this._stage = stage;
-    stage.on('*', (e, type) => {
-      // eslint-disable-next-line no-console
-      type === 'click' && console.log('canvas', e);
-    });
+    // stage.on('*', (e, type) => {
+    //   // eslint-disable-next-line no-console
+    //   type === 'click' && console.log('canvas', e);
+    // });
   }
 
   getEventDetail(event: StoryEvent) {

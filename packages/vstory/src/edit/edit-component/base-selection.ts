@@ -146,7 +146,12 @@ export abstract class BaseSelection implements IEditComponent {
     if (!(actionInfo && actionInfo.character)) {
       return;
     }
-    this._layoutComponent.updateSubBounds(actionInfo.character.getGraphicParent().AABBBounds);
+    const rect = actionInfo.character.graphic.graphic;
+    const bounds = rect.AABBBounds.clone();
+    const group = actionInfo.character.getGraphicParent();
+    const { angle, x, y } = group.attribute;
+    bounds.translate(x, y);
+    this._layoutComponent.updateBoundsAndAngle(bounds, angle);
   }
 
   attachComponent(layoutComponent: ITransformControl) {

@@ -1,6 +1,8 @@
 import { StoryComponentType } from '../../constants/character';
+import type { VRenderPointerEvent } from '../../interface/type';
 import type { IEditActionInfo } from '../interface';
 import { type IEditComponent } from '../interface';
+import type { IUpdateParams } from './edit-control/transform-control';
 import { RichTextSelectionCommon } from './richtext-selection-common';
 
 export class RectSelection extends RichTextSelectionCommon implements IEditComponent {
@@ -25,4 +27,8 @@ export class RectSelection extends RichTextSelectionCommon implements IEditCompo
     this._layoutComponent.handleDragMouseDown(e);
     this.endRichTextEdit();
   };
+
+  protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
+    return super.handlerTransformChange(data, event);
+  }
 }
