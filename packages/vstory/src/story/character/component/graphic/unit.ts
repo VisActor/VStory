@@ -1,22 +1,63 @@
-import type { IGroup } from '@visactor/vrender';
-import { createGroup, createSymbol, type IRect, type ISymbolGraphicAttribute } from '@visactor/vrender';
+import { createGroup, createSymbol, type IGroup, type ISymbolGraphicAttribute } from '@visactor/vrender';
 import { Graphic } from './graphic';
-import type { IPointLike } from '@visactor/vutils';
 import { getLayoutFromWidget } from '../../../utils/layout';
+import type { IWidgetData } from '../../dsl-interface';
 
 interface IGraphicUnitAttributes {
-  width: number;
-  height: number;
-  padding: {
-    top: number;
-    bottom: number;
-    right: number;
-    left: number;
+  // TODO: Consider moving this to the IComponentCharacterSpec graphic interface.
+
+  /**
+   * The width of the container.
+   * Defaults to the width defined by the position of the character.
+   */
+  width?: number;
+
+  /**
+   * The height of the container.
+   * Defaults to the height defined by the position of the character.
+   */
+  height?: number;
+
+  /**
+   * The padding inside the container, specifying space between the container border and its content.
+   * @default { top: 50, bottom: 50, right: 50, left: 50 }
+   */
+  padding?: {
+    top?: number;
+    bottom?: number;
+    right?: number;
+    left?: number;
   };
+
+  /**
+   * The total number of units to be rendered within the container.
+   * @default 250
+   */
   count: number;
-  unitStyle?: (index: number) => ISymbolGraphicAttribute;
+
+  /**
+   * A function defining the style of each unit based on its index.
+   * @default { symbolType: 'circle', fill: '#4e8ae0' }
+   */
+  styleFunc?: (index: number) => ISymbolGraphicAttribute;
+
+  /**
+   * The gap between units, represented as a percentage of the unit's width and height.
+   * The first value specifies the horizontal gap, and the second value specifies the vertical gap.
+   * @default [0.5, 0.5]
+   */
   gap?: [number, number];
+
+  /**
+   * The aspect ratio of the units, defined as width divided by height.
+   * @default 1
+   */
   aspect?: number;
+
+  /**
+   * The direction in which units are laid out within the container.
+   * @default 'horizontal'
+   */
   direction?: 'horizontal' | 'vertical';
 }
 
@@ -34,28 +75,30 @@ export class GraphicUnit extends Graphic {
 
   getInitialAttributes(): IGraphicUnitAttributes {
     return {
-      width: 1920,
-      height: 600,
       padding: {
         top: 50,
         bottom: 50,
-        right: 100,
-        left: 100
+        right: 50,
+        left: 50
       },
-      count: 1,
-      unitStyle: (index: number) => ({
-        symbolType: 'rect',
+      count: 250,
+      styleFunc: (index: number) => ({
+        symbolType: 'circle',
         fill: '#4e8ae0'
       }),
-      gap: [0.5, 1],
-      aspect: 2,
+      gap: [0.5, 0.5],
+      aspect: 1,
       direction: 'horizontal'
     };
   }
 
   init() {
     if (!this._graphic) {
-      const attributes = { ...this.getInitialAttributes(), ...this._character.spec.options?.graphic };
+      const { width, height } = this._getContainerSize(
+        this._character.spec.position,
+        this._character.spec.options?.graphic
+      );
+      const attributes = { ...this.getInitialAttributes(), ...this._character.spec.options?.graphic, width, height };
       const gridConfig = this._calculateGrid(attributes);
       this._graphic = createGroup({
         ...getLayoutFromWidget(this._character.spec.position),
@@ -65,6 +108,19 @@ export class GraphicUnit extends Graphic {
       this._addUnitsToGraphic(gridConfig, attributes);
       this._character.getGraphicParent().add(this._graphic);
     }
+  }
+
+  private _getContainerSize(position: IWidgetData, graphic: IGraphicUnitAttributes) {
+    if (graphic.width && graphic.height) {
+      return { width: graphic.width, height: graphic.height };
+    }
+    if ('width' in position && 'height' in position) {
+      return { width: position.width, height: position.height };
+    }
+    if ('bottom' in position && 'right' in position) {
+      return { width: position.right - position.left, height: position.bottom - position.top };
+    }
+    throw new Error('Invalid IWidgetData type');
   }
 
   private _calculateGrid(attributes: IGraphicUnitAttributes): IGridConfig {
@@ -167,7 +223,7 @@ export class GraphicUnit extends Graphic {
 
   private _addUnitsToGraphic(gridConfig: IGridConfig, attributes: IGraphicUnitAttributes) {
     const { rows, cols, unitWidth, unitHeight, offsetX, offsetY } = gridConfig;
-    const { count, unitStyle, padding, gap, direction } = attributes;
+    const { count, styleFunc: unitStyle, padding, gap, direction } = attributes;
     const startX = padding.left + unitWidth / 2;
     const startY = padding.top + unitHeight / 2;
     const isHorizontal = direction === 'horizontal';

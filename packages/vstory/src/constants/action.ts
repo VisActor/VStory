@@ -5,7 +5,8 @@ export const ACTION_TYPE = {
   MOVETO: 'moveTo',
   SCALETO: 'scaleTo',
   STATE: 'state',
-  BOUNCE: 'bounce'
+  BOUNCE: 'bounce',
+  RESTYLE: 'restyle'
 };
 
 export const VCHART_ACTION_TYPE = {

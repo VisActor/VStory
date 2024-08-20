@@ -16,8 +16,8 @@ export const UnitDemo = () => {
           position: {
             top: 0,
             left: 0,
-            width: 1920,
-            height: 254
+            width: 20,
+            height: 20
           },
           options: {
             graphic: {
@@ -33,12 +33,25 @@ export const UnitDemo = () => {
           position: {
             top: 0,
             left: 0,
-            width: 1920,
-            height: 600
+            width: 1200,
+            height: 1000
           },
           options: {
             graphic: {
-              fill: '#faedcb'
+              fill: '#f1f1f0',
+              padding: {
+                top: 100,
+                bottom: 100,
+                right: 50,
+                left: 50
+              },
+              count: 200,
+              styleFunc: (index: number) => {
+                return index < 66 ? { symbolType: 'rect', fill: '#4e8ae0' } : { fill: '#f6c86d' };
+              },
+              gap: [0.5, 0.75],
+              aspect: 1,
+              direction: 'vertical'
             }
           }
         }
@@ -69,12 +82,18 @@ export const UnitDemo = () => {
                   characterId: 'unit-test',
                   characterActions: [
                     {
-                      action: 'appear',
+                      action: 'restyle',
                       startTime: 0,
                       payload: {
                         animation: {
-                          effect: 'move',
-                          duration: 100
+                          // styleFunc: (index: number) => {
+                          //   return index > 99 ? { symbolType: 'rect', fill: '#6638f0' } : {};
+                          // },
+                          start: 100,
+                          style: { fill: '#6638f0' },
+                          effect: 'restyle',
+                          duration: 2000,
+                          easing: 'linear'
                         }
                       }
                     }
