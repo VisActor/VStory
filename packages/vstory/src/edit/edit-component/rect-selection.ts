@@ -1,3 +1,4 @@
+import { StoryComponentType } from '../../constants/character';
 import type { IEditActionInfo } from '../interface';
 import { type IEditComponent } from '../interface';
 import { RichTextSelectionCommon } from './richtext-selection-common';
@@ -5,7 +6,7 @@ import { RichTextSelectionCommon } from './richtext-selection-common';
 export class RectSelection extends RichTextSelectionCommon implements IEditComponent {
   readonly level = 3;
   readonly type: string = 'rect';
-  readonly editCharacterType = 'RectComponent';
+  readonly editCharacterType = StoryComponentType.RECT;
 
   startEdit(actionInfo: IEditActionInfo) {
     super.startEdit(actionInfo);
@@ -20,7 +21,7 @@ export class RectSelection extends RichTextSelectionCommon implements IEditCompo
     super.editEnd();
   }
 
-  handlerRectClick = e => {
+  handlerRectClick = (e: any) => {
     this._layoutComponent.handleDragMouseDown(e);
     this.endRichTextEdit();
   };

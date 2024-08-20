@@ -47,9 +47,9 @@ export abstract class BaseSelection implements IEditComponent {
     }
     if (actionInfo.type === EditActionEnum.singleSelection) {
       // 选中其他内容了，return false
-      if (!this.enableEditCharacter(actionInfo.character)) {
+      if (!this.enableEditCharacter((actionInfo as IEditSelectionInfo).character)) {
         return false;
-      } else if (actionInfo.character !== this._activeCharacter) {
+      } else if ((actionInfo as IEditSelectionInfo).character !== this._activeCharacter) {
         // 选中同类型其他元素
         // 先停止当前的
         this.editEnd();
@@ -66,7 +66,10 @@ export abstract class BaseSelection implements IEditComponent {
   }
 
   checkActionWhileNoEditing(actionInfo: IEditActionInfo | IEditSelectionInfo): boolean {
-    if (actionInfo.type === EditActionEnum.singleSelection && this.enableEditCharacter(actionInfo.character)) {
+    if (
+      actionInfo.type === EditActionEnum.singleSelection &&
+      this.enableEditCharacter((actionInfo as IEditSelectionInfo).character)
+    ) {
       this.startEdit(actionInfo);
       // graphic
       return true;

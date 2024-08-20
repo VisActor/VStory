@@ -53,7 +53,7 @@ export class EditAction {
   }
 
   onStoryEvent(event: StoryEvent, type: string) {
-    if (IgnoreEvent[type]) {
+    if ((IgnoreEvent as any)[type]) {
       return;
     }
     if (type.endsWith(IgnoreEnds)) {
@@ -70,7 +70,7 @@ export class EditAction {
     }
 
     // 非选中逻辑
-    if (!PickEventType[type]) {
+    if (!(PickEventType as any)[type]) {
       return this.dispatchAction({
         type: type,
         event

@@ -9,7 +9,7 @@ import { BoxSelection } from '../../../../src/edit/edit-component/box-selection'
 import { TextSelection } from '../../../../src/edit/edit-component/text-selection';
 import { RichTextSelection } from '../../../../src/edit/edit-component/richtext-selection';
 
-Edit.registerEditComponent('common', CommonEditComponent);
+// Edit.registerEditComponent('common', CommonEditComponent);
 Edit.registerEditComponent('text', TextSelection);
 Edit.registerEditComponent('richtext', RichTextSelection);
 Edit.registerEditComponent('box-selection', BoxSelection);

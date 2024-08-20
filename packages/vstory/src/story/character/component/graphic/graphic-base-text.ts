@@ -31,6 +31,8 @@ export class GraphicBaseText {
       graphicBaseline: 'middle',
       // // compute real height without vrender buffer
       ignoreBuf: true,
+      height: 0,
+      width: 0,
       maxLineWidth: MAX_LAYOUT_SIZE,
       heightLimit: MAX_LAYOUT_SIZE
     };
