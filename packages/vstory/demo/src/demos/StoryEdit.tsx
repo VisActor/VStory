@@ -4,17 +4,11 @@ import { Story } from '../../../src/story/story';
 import { Edit } from '../../../src/edit/edit';
 import '../../../src/story/index';
 import { cloneDeep } from '@visactor/vutils';
-import { CommonEditComponent } from '../../../src/edit/edit-component/common';
-import { ChartSelection } from '../../../src/edit/edit-component/chart-selection';
-import { BoxSelection } from '../../../src/edit/edit-component/box-selection';
-import { TextSelection } from '../../../src/edit/edit-component/text-selection';
-import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
+import Scene3ChartImage2 from '../assets/scene3/chart-2.png';
+import { loadAllSelection } from '../../../src/edit/edit-component';
 
 // Edit.registerEditComponent('common', CommonEditComponent);
-Edit.registerEditComponent('chart', ChartSelection);
-Edit.registerEditComponent('text', TextSelection);
-Edit.registerEditComponent('richtext', RichTextSelection);
-Edit.registerEditComponent('box-selection', BoxSelection);
+loadAllSelection();
 
 const chartSpec = {
   type: 'bar',
@@ -43,7 +37,7 @@ export const StoryEdit = () => {
       characters: [
         {
           type: 'Rect',
-          id: 'test-graphics-0',
+          id: 'rect0',
           zIndex: 10,
           position: {
             top: 40,
@@ -65,7 +59,7 @@ export const StoryEdit = () => {
         },
         {
           type: 'Rect',
-          id: 'test-graphics-1',
+          id: 'rect1',
           zIndex: 0,
           position: {
             top: 40,
@@ -81,6 +75,66 @@ export const StoryEdit = () => {
             text: {
               text: 'title2',
               fill: 'black'
+            },
+            angle: 0,
+            shapePoints: []
+          }
+        },
+        {
+          type: 'Image',
+          id: 'image0',
+          zIndex: 0,
+          position: {
+            top: 140,
+            left: 250,
+            width: 200,
+            height: 100
+          },
+          options: {
+            graphic: {
+              image: Scene3ChartImage2
+            },
+            text: {
+              text: 'Image',
+              fill: 'black'
+            },
+            angle: 0,
+            shapePoints: []
+          }
+        },
+        // {
+        //   type: 'Text',
+        //   id: 'text0',
+        //   zIndex: 0,
+        //   position: {
+        //     top: 140,
+        //     left: 150,
+        //     width: 200,
+        //     height: 100
+        //   },
+        //   options: {
+        //     graphic: {
+        //       fill: 'pink',
+        //       text: 'hahaha'
+        //     },
+        //     angle: 0,
+        //     shapePoints: []
+        //   }
+        // },
+        {
+          type: 'Shape',
+          id: 'shape0',
+          zIndex: 0,
+          position: {
+            top: 240,
+            left: 250,
+            width: 200,
+            height: 100
+          },
+          options: {
+            graphic: {
+              fill: 'green',
+              symbolType: 'star'
             },
             angle: 0,
             shapePoints: []
@@ -109,23 +163,7 @@ export const StoryEdit = () => {
               id: 'scene0',
               actions: [
                 {
-                  characterId: 'test-graphics-0',
-                  characterActions: [
-                    {
-                      startTime: 0,
-                      action: 'appear',
-                      payload: {
-                        animation: {
-                          duration: 100,
-                          easing: 'linear',
-                          effect: 'fadeIn'
-                        } as any
-                      }
-                    }
-                  ]
-                },
-                {
-                  characterId: 'test-graphics-1',
+                  characterId: ['rect0', 'rect1', 'image0', 'shape0'],
                   characterActions: [
                     {
                       startTime: 0,

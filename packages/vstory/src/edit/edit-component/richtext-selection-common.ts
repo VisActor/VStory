@@ -11,8 +11,8 @@ export interface RichTextSelectionCommon
 
 export class RichTextSelectionCommon extends BaseSelection implements IEditComponent {
   readonly level = 3;
-  readonly type: string = 'rect';
-  readonly editCharacterType = 'Rect';
+  readonly type: string;
+  readonly editCharacterType: string;
 
   protected _getRichText() {
     // @ts-ignore

@@ -86,6 +86,9 @@ export class EditAction {
       // 取消选中
       type = EditActionEnum.unSelection;
     }
+    // if (type === EditActionEnum.singleSelection) {
+    //   debugger;
+    // }
     this.dispatchAction({
       type: type,
       characterId: character?.id,
