@@ -8,22 +8,22 @@ import { RichTextSelectionCommon } from './richtext-selection-common';
 export class RectSelection extends RichTextSelectionCommon implements IEditComponent {
   readonly level = 3;
   readonly type: string = 'rect';
-  readonly editCharacterType = StoryComponentType.RECT;
+  readonly editCharacterType: string = StoryComponentType.RECT;
 
   startEdit(actionInfo: IEditActionInfo) {
     super.startEdit(actionInfo);
     // @ts-ignore;
     const character = this._actionInfo.character;
-    character.graphic.graphic.addEventListener('pointerdown', this.handlerRectClick);
+    character.graphic.graphic.addEventListener('pointerdown', this.handlerContentClick);
   }
   editEnd() {
     // @ts-ignore;
     const character = this._actionInfo.character;
-    character.graphic.graphic.removeEventListener('pointerdown', this.handlerRectClick);
+    character.graphic.graphic.removeEventListener('pointerdown', this.handlerContentClick);
     super.editEnd();
   }
 
-  handlerRectClick = (e: any) => {
+  handlerContentClick = (e: any) => {
     this._layoutComponent.handleDragMouseDown(e);
     this.endRichTextEdit();
   };
