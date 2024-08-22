@@ -11,9 +11,11 @@ export class DragComponent {
 
   private _lastPosX: number;
   private _lastPosY: number;
+  private _stage: IStage;
   // protected _container: HTMLElement;
 
   constructor(stage: IStage) {
+    this._stage = stage;
     stage.addEventListener('pointermove', this.pointerMove, true);
     stage.addEventListener('pointerup', this.stopDrag, true);
   }
@@ -65,8 +67,11 @@ export class DragComponent {
   };
 
   release() {
-    window.removeEventListener('pointermove', this.pointerMove, true);
-    window.removeEventListener('pointerup', this.stopDrag, true);
+    if (this._stage) {
+      this._stage.removeEventListener('pointermove', this.pointerMove, true);
+      this._stage.removeEventListener('pointerup', this.stopDrag, true);
+      this._stage = null;
+    }
     this._dragHandler = null;
     this._dragEndHandler = null;
   }

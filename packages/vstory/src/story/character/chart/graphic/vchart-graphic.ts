@@ -41,7 +41,10 @@ export class Chart extends Group implements IVisactorGraphic {
     return this._vchart;
   }
 
-  private _chartViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
+  // 设置的 viewBox 是全局值
+  private _globalViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
+  // 设置的 viewBox 相对于 vchart-graphic 的位置
+  private _localViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
   private _BoundsViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
 
   drawTag = false;
@@ -121,17 +124,13 @@ export class Chart extends Group implements IVisactorGraphic {
       stage.pauseTriggerEvent();
     }
     if (params.viewBox) {
-      const x1 = params.viewBox.x1 ?? 0;
-      const y1 = params.viewBox.y1 ?? 0;
-      const x2 = params.viewBox.x2 ?? 0;
-      const y2 = params.viewBox.y2 ?? 0;
-      this.setAttributes({
-        x: x1,
-        y: y1,
-        width: x2 - x1,
-        height: y2 - y1
-      });
+      this.updateViewBox(params.viewBox);
     }
+
+    this.setAttributes({
+      fill: 'red',
+      fillOpacity: 0.5
+    });
   }
 
   /**
@@ -150,21 +149,15 @@ export class Chart extends Group implements IVisactorGraphic {
     return isPointInBounds(target, vchart.getStage().viewBox);
   }
 
-  setAttributes(attrs: Partial<IChartGraphicAttribute>) {
-    super.setAttributes(attrs);
-    const vchart = this._vchart;
-    const viewBox = vchart.getStage().viewBox;
-
-    const x1 = attrs.x ?? viewBox.x1;
-    const y1 = attrs.y ?? viewBox.y1;
-    const width = attrs.width ?? viewBox.width();
-    const height = attrs.height ?? viewBox.height();
-    this.updateViewBox({
-      x1,
-      y1,
-      x2: x1 + width,
-      y2: y1 + height
-    });
+  /**
+   * 判定点是否在设置 viewBox 内。设置 viewBox 会小于展示 bounds
+   * @param canvasX
+   * @param canvasY
+   */
+  pointInViewBox(canvasX: number, canvasY: number): boolean {
+    const target = { x: 0, y: 0 };
+    this.globalTransMatrix.transformPoint({ x: canvasX, y: canvasY }, target);
+    return isPointInBounds(target, this._localViewBox);
   }
 
   updateSpec(spec: ISpec, viewBox?: IBoundsLike, forceMerge = false, morphConfig = false) {
@@ -176,7 +169,9 @@ export class Chart extends Group implements IVisactorGraphic {
 
   updateViewBox(viewBox: IBoundsLike) {
     // 图表的设置大小
-    this._chartViewBox = { ...viewBox };
+    this._globalViewBox = { ...viewBox };
+    this._localViewBox = { x1: 0, y1: 0, x2: viewBox.x2 - viewBox.x1, y2: viewBox.y2 - viewBox.y1 };
+
     this._updateViewBox();
   }
 
@@ -189,13 +184,18 @@ export class Chart extends Group implements IVisactorGraphic {
     this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1, -rootBounds.y1);
     this._BoundsViewBox = rootBounds;
 
-    const viewBox = { ...this._chartViewBox };
+    const viewBox = { ...this._globalViewBox };
     this.setAttributes({
       x: viewBox.x1 + rootBounds.x1,
       y: viewBox.y1 + rootBounds.y1,
       width: rootBounds.x2 - rootBounds.x1,
       height: rootBounds.y2 - rootBounds.y1
     });
+    // viewBox 在展示 bounds 下的位置
+    this._localViewBox.x1 = -rootBounds.x1;
+    this._localViewBox.y1 = -rootBounds.y1;
+    this._localViewBox.x2 += -rootBounds.x1;
+    this._localViewBox.y2 += -rootBounds.y1;
     //
     viewBox.x2 -= viewBox.x1;
     viewBox.y2 -= viewBox.y1;

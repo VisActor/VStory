@@ -1,7 +1,7 @@
 import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
-import { cloneDeep, isValid } from '@visactor/vutils';
+import { cloneDeep } from '@visactor/vutils';
 import { VChart } from '@visactor/vchart';
 import type { IChartCharacterSpec } from '../dsl-interface';
 import { Chart } from './graphic/vchart-graphic';
@@ -85,9 +85,12 @@ export class CharacterChart extends CharacterVisactor {
   }
 
   setAttributes(attr: Record<string, any>): void {
-    // this.group.setAttributes(attr);
-    this._graphic.setAttributes(attr);
-    // this._text.updateAttribute({});
+    // character 的属性
+    if (attr.position) {
+      this._spec.position = attr.position;
+      // 位置属性
+      this._graphic.updateViewBox(this.getViewBoxFromSpec().viewBox);
+    }
   }
   getViewBoxFromSpec() {
     const layout = getLayoutFromWidget(this._spec.position);
@@ -116,7 +119,6 @@ export class CharacterChart extends CharacterVisactor {
     return;
   }
   protected _updateVisactorSpec(): void {
-    // console.log('_updateVisactorSpec', this._specProcess.getVisSpec());
     this._graphic?.updateSpec(this._specProcess.getVisSpec());
   }
 
@@ -133,13 +135,18 @@ export class CharacterChart extends CharacterVisactor {
     if (!(event.detailPath ?? event.path).some(g => g === this._graphic)) {
       return false;
     }
-    // 超出vchart viewBox 外的图表元素，依然会绘制并且能被选中
-    // if (!this._graphic.pointInVChart((event as any).canvasX, (event as any).canvasY)) {
-    //   return false;
-    // }
     const chartPath = event.detailPath[event.detailPath.length - 1];
     const result = getChartModelWithEvent(this._graphic.vProduct, event);
     if (!result) {
+      // 点击到图表的空白区域
+      if (this._graphic.pointInViewBox((event as any).canvasX, (event as any).canvasY)) {
+        return {
+          part: 'null',
+          graphic: null,
+          modelInfo: null,
+          graphicType: 'null'
+        };
+      }
       return false;
     }
     const graphic = chartPath?.[chartPath.length - 1];
