@@ -61,7 +61,7 @@ export const UnitComponentDemo = () => {
           id: 'page1',
           scenes: [
             {
-              id: 'singleScene',
+              id: '1',
               actions: [
                 {
                   characterId: 'background-top',
@@ -83,7 +83,7 @@ export const UnitComponentDemo = () => {
                   characterActions: [
                     {
                       action: 'style',
-                      startTime: 10,
+                      startTime: 1,
                       payload: {
                         animation: {
                           // styleFunc: (index: number) => {
@@ -93,6 +93,34 @@ export const UnitComponentDemo = () => {
                           style: { fill: '#6638f0' },
                           effect: 'style',
                           duration: 1000,
+                          easing: 'linear',
+                          stagger: {
+                            enable: true
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              id: '1',
+              actions: [
+                {
+                  characterId: 'unit-test',
+                  characterActions: [
+                    {
+                      action: 'style',
+                      startTime: 1000,
+                      payload: {
+                        animation: {
+                          // styleFunc: (index: number) => {
+                          //   return index > 99 ? { symbolType: 'rect', fill: '#6638f0' } : {};
+                          // },
+                          style: { fill: '#4af2a1' },
+                          effect: 'style',
+                          duration: 5000,
                           easing: 'linear',
                           stagger: {
                             enable: true

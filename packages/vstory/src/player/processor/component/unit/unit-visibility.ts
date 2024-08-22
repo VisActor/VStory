@@ -29,7 +29,7 @@ function _style(graphic: IGraphic, params: IStyleParams) {
   const end = endIndex ?? symbols.length - 1;
   symbols.forEach((symbol: ISymbol, index) => {
     const duration = staggerEnable ? params.duration * staggerRatio : params.duration;
-    const delay = staggerEnable ? Math.random() * params.duration * (1 - staggerRatio) : 0;
+    const delay = staggerEnable ? Math.random() * params.duration * (1 - staggerRatio) : 1;
     if (styleFunc) {
       symbol.animate().wait(delay).to(styleFunc(index), duration, params.easing);
     } else if (index >= start && index <= end && style) {

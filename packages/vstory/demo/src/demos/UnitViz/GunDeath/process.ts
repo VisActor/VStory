@@ -108,7 +108,7 @@ function generateTitleSpec(input: RequiredInput) {
   const { padding } = layout.title;
   console.log('layout', layout);
   console.log('padding', padding);
-  let startTime = 0;
+  let startTime = 1;
   const characters: ICharacterSpec[] = scenes.map((scene, sceneIndex) => {
     return {
       type: 'Text',
@@ -169,7 +169,7 @@ function generateTitleSpec(input: RequiredInput) {
         ]
       }
     ];
-    startTime += scene.sceneDuration;
+    // startTime += scene.sceneDuration;
     return actions;
   });
 
@@ -202,7 +202,7 @@ function generateVizSpec(input: RequiredInput) {
     const styleList = prevStyleList.slice();
     updateStyleList(styleList, nodes as QueryNode[], data, indexList);
     const action = createUnitViz(styleList, animationDuration, startTime);
-    startTime += sceneDuration;
+    // startTime += sceneDuration;
     prevStyleList = styleList;
     actions.push(action);
   }

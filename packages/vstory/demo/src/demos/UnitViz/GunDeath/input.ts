@@ -1,5 +1,5 @@
 import { ISymbolGraphicAttribute, ITextGraphicAttribute } from '@visactor/vrender-core';
-import data from '../../../../data/gun-death-data.json' assert { type: 'json' };
+import data from '../../../../data/sorted-gun-death-data.json' assert { type: 'json' };
 
 export interface Input {
   layout?: {
@@ -32,7 +32,6 @@ export interface Input {
   };
   data: Record<string, any>[];
   scenes: {
-    // id: string; //TODO: delete, use template + id
     // TODO: how to support fill, textAlign etc.?
     title: ITextGraphicAttribute[];
     sceneDuration?: number;
@@ -90,7 +89,7 @@ export const defaultInput: Input = {
     aspect: 1,
     defaultStyle: {
       symbolType: 'circle',
-      fill: '#f78ae0'
+      fill: '#ffffff'
     }
   },
   data: [],
@@ -125,39 +124,41 @@ function initialInput(input: Input): RequiredInput {
 
 export const userInput: Input = {
   layout: {
-    width: 1500,
-    height: 600,
+    width: 1600,
+    height: 800,
     title: {
       backgroundColor: '#f1f1f0',
       height: 150
-    },
-    viz: {
-      backgroundColor: '#e3e2e0'
+    }
+  },
+  unit: {
+    gap: [0.2, 0.2],
+    defaultStyle: {
+      fill: '#222222'
     }
   },
   // TODO: remove slice data, 性能问题
-  data: (data as Record<string, any>[]).slice(0, 1000),
+  data: (data as Record<string, any>[]).filter(record => record.year === 2014),
   scenes: [
     {
       sceneDuration: 5000,
       animationDuration: 1000,
       title: [
         {
-          text: 'In America, nearly '
+          text: 'More than '
         },
         {
-          text: 'two-thirds',
+          text: '33,000',
           fontWeight: 'bold'
         },
         {
-          text: 'of gun deaths are Bala bla, Bala bala Bala bala Bala bala '
-        },
-        { text: 'suicides', fontWeight: 'bold' }
+          text: ' people are fatally shot in the U.S. each year.'
+        }
       ],
       nodes: [
         {
           style: {
-            fill: '#4e8ae0'
+            fill: '#dedede'
           }
         }
       ]
@@ -167,22 +168,54 @@ export const userInput: Input = {
       animationDuration: 1000,
       title: [
         {
-          text: 'In 2019, there were '
+          text: 'Nearly two-third of gun deaths are '
         },
         {
-          text: '39,707',
+          text: 'suicides',
           fontWeight: 'bold'
         },
         {
-          text: ' gun deaths in the United States, according to data from the Centers for Disease Control and Prevention.'
+          text: '.'
         }
       ],
       nodes: [
         {
-          query: datum => datum.race === 'Black',
+          query: datum => datum.intent === 'Suicide',
           style: {
-            fill: '#4af2a1'
+            fill: '#e3662e'
           }
+        }
+      ]
+    },
+    {
+      sceneDuration: 5000,
+      animationDuration: 1000,
+      title: [
+        {
+          text: 'More than 85 percent of suicide victims are '
+        },
+        {
+          text: 'male',
+          fontWeight: 'bold'
+        },
+        {
+          text: '...'
+        }
+      ],
+      nodes: [
+        {
+          query: datum => datum.intent === 'Suicide',
+          style: {
+            fill: '#f4cfbb'
+          },
+          children: [
+            {
+              query: datum => datum.sex === 'M',
+              style: {
+                fill: '#e3662e'
+              }
+            }
+          ]
         }
       ]
     }
@@ -190,5 +223,3 @@ export const userInput: Input = {
 };
 
 export const input = initialInput(userInput);
-
-console.log('input', input);
