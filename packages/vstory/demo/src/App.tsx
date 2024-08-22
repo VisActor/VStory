@@ -146,7 +146,7 @@ const App = () => {
 
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      <div style={{ flexBasis: 200, height: '90vh', overflow: 'auto', border: '1px solid #eee' }}>
+      <div style={{ flex: '0 0 200px', height: '90vh', overflowY: 'auto', border: '1px solid #eee' }}>
         <Nav
           style={{ width: 200 }}
           onSelect={data => setActiveName(data.itemKey)}
