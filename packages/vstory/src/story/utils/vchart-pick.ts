@@ -1,6 +1,15 @@
 import type { IGraphic, IGraphicAttribute } from '@visactor/vrender';
-import type { VChart } from '@visactor/vchart';
+import type { IVChart } from '@visactor/vchart';
 import type { StoryEvent } from '../interface/runtime-interface';
+
+export interface IPickModelInfo {
+  type: string;
+  model: any;
+  specKey: string;
+  specIndex: number;
+  datum?: any;
+  mark?: any;
+}
 
 function commonModelInfo(model: any) {
   return {
@@ -15,7 +24,7 @@ export const seriesMarkPick = {
   check: (graphic: IGraphic, graphicPath: IGraphic[]) => {
     return graphic.name?.startsWith('seriesGroup_');
   },
-  modelInfo: (chart: VChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
+  modelInfo: (chart: IVChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
     const nameInfo = graphic.name.split('_');
     const seriesId = +nameInfo[2];
     const markGraphic = graphicPath[index + 1];
@@ -37,7 +46,7 @@ export const axisMarkPick = {
   check: (graphic: IGraphic, graphicPath: IGraphic[]) => {
     return graphic.name === 'axis' || graphic.name === 'axis-grid';
   },
-  modelInfo: (chart: VChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
+  modelInfo: (chart: IVChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
     const axisGroup = graphicPath[index - 1];
     const axisId = +axisGroup.name.split('_')[1];
     const axis = chart
@@ -60,8 +69,8 @@ export const markerMarkPick = {
   check: (graphic: IGraphic, graphicPath: IGraphic[]) => {
     return !!MarkerClassName[graphic.constructor.name];
   },
-  modelInfo: (chart: VChart, graphic: IGraphic, graphicPath: IGraphic[]) => {
-    const markerId = +graphic.id.split('-')[1];
+  modelInfo: (chart: IVChart, graphic: IGraphic, graphicPath: IGraphic[]) => {
+    const markerId = +(<string>graphic.id).split('-')[1];
     const model = chart
       .getChart()
       .getAllComponents()
@@ -75,7 +84,7 @@ export const labelMarkPick = {
   check: (graphic: IGraphic, graphicPath: IGraphic[]) => {
     return graphic.name === 'data-label';
   },
-  modelInfo: (chart: VChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
+  modelInfo: (chart: IVChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
     const id = +graphicPath[index - 1].name.split('_')[1];
     const model = chart
       .getChart()
@@ -97,7 +106,7 @@ function commonModePick(vrenderGraphicClassName: string, modelName: string) {
     check: (graphic: IGraphic, graphicPath: IGraphic[]) => {
       return graphic.constructor.name === vrenderGraphicClassName;
     },
-    modelInfo: (chart: VChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
+    modelInfo: (chart: IVChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
       return commonModelInfo(
         chart
           .getChart()
@@ -119,7 +128,7 @@ export const discretePlayerMarkPick = commonModePick('DiscretePlayer', 'player')
 
 const modelCheck: {
   check: (graphic: IGraphic, graphicPath: IGraphic[]) => boolean;
-  modelInfo: (chart: VChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => any;
+  modelInfo: (chart: IVChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => any;
 }[] = [
   seriesMarkPick,
   axisMarkPick,
@@ -138,7 +147,7 @@ const modelCheck: {
  * 从event属性上，读取当前pick到的图表模块内容
  * @param event
  */
-export function getChartModelWithEvent(chart: VChart, event: StoryEvent) {
+export function getChartModelWithEvent(chart: IVChart, event: StoryEvent) {
   const graphicPath = event.detailPath[event.detailPath.length - 1] as unknown as IGraphic<
     Partial<IGraphicAttribute>
   >[];
@@ -152,7 +161,12 @@ export function getChartModelWithEvent(chart: VChart, event: StoryEvent) {
   return getGraphicModelMark(chart, pickGraphic, graphicPath, 0);
 }
 
-export function getGraphicModelMark(chart: VChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) {
+export function getGraphicModelMark(
+  chart: IVChart,
+  graphic: IGraphic,
+  graphicPath: IGraphic[],
+  index: number
+): IPickModelInfo {
   const modelPick = modelCheck.find(mc => mc.check(graphic, graphicPath));
   if (modelPick) {
     return modelPick.modelInfo(chart, graphic, graphicPath, index);

@@ -8,7 +8,8 @@ import { isValid } from '@visactor/vutils';
 import type { IAction, IActionPayload } from '../../interface/common-action';
 
 // TODO: move to interface folder
-export type IRankingBarPlayPayload = Omit<IActionPayload, 'animation'>;
+// export type IRankingBarPlayPayload = Omit<IActionPayload, 'animation'>;
+export type IRankingBarPlayPayload = IActionPayload;
 
 export interface IRankingBarPlayAction extends IAction<IRankingBarPlayPayload> {
   action: 'play';
@@ -54,6 +55,7 @@ export class RankingBarPlayActionProcessor extends ActionProcessorItem {
 
   getStartTimeAndDuration(action: IActionSpec, character?: ICharacter): { startTime: number; duration: number } {
     const { startTime: globalStartTime = 0 } = action;
+    // @ts-ignore
     const { startTime = 0 } = action.payload?.animation ?? ({} as any);
     const instance = (character.graphic as any)._vchart as IVChart;
     const interval = instance?.getSpec()?.interval ?? 0;

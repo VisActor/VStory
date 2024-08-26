@@ -1,5 +1,5 @@
+import type { IBoundsLike } from '@visactor/vutils';
 import type { IGroup } from '@visactor/vrender';
-import { createGroup } from '@visactor/vrender';
 import { GraphicBaseText } from './graphic/graphic-base-text';
 import type { IComponentCharacterSpec } from '../dsl-interface';
 import { CharacterBase } from '../base/base';
@@ -99,7 +99,7 @@ export abstract class CharacterComponent extends CharacterBase {
   }
 
   getLayoutBounds() {
-    return this._group.AABBBounds;
+    return this._group.AABBBounds as IBoundsLike;
   }
 
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {

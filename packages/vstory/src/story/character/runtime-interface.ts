@@ -6,9 +6,9 @@ import type { Graphic } from './component/graphic/graphic';
 
 export interface ICharacterPickInfo {
   part: string;
-  graphic: IGraphic;
-  graphicType: string;
-  modelInfo: any;
+  graphic?: IGraphic;
+  graphicType?: string;
+  modelInfo?: any;
 }
 export interface ICharacter {
   id: string;

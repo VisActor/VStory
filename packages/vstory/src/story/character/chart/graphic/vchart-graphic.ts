@@ -1,5 +1,5 @@
 import type { IVisactorGraphic } from '../../visactor/interface';
-import { Bounds, type AABBBounds, type IBoundsLike } from '@visactor/vutils';
+import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
 import type { ISpec, IVChart } from '@visactor/vchart';
 import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Group } from '@visactor/vrender';
@@ -55,7 +55,7 @@ export class Chart extends Group implements IVisactorGraphic {
     return stage.defaultLayer.getChildByName('root').AABBBounds.clone();
   }
 
-  doUpdateAABBBounds(full?: boolean): AABBBounds {
+  doUpdateAABBBounds(full?: boolean): IAABBBounds {
     if (!this._vchart) {
       return super.doUpdateAABBBounds();
     }

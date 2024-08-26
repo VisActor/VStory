@@ -1,10 +1,16 @@
-import { ICharacter } from './../../../runtime-interface';
 import { TemplateChartType } from '../constant';
-import { CartesianSingleSeriesTemp } from './cartesian-single';
 import type { CharacterChart } from '../../character';
+import { BaseTemp } from './base-temp';
+import type { StandardData, DataInfo } from '../../data/interface';
 
-export class BarTemp extends CartesianSingleSeriesTemp {
-  static type: string = TemplateChartType.bar;
+export class BarTemp extends BaseTemp {
+  getSpec(data: StandardData, ctx: { character: CharacterChart }, opt?: any) {
+    throw new Error('Method not implemented.');
+  }
+  checkDataEnable(data: StandardData, info: DataInfo, opt?: any): boolean {
+    throw new Error('Method not implemented.');
+  }
+  static type: string = TemplateChartType.vchart;
   type: string = BarTemp.type;
   // 唯一系列类型
   seriesType = 'bar';
@@ -14,8 +20,7 @@ export class BarTemp extends CartesianSingleSeriesTemp {
   protected _getSeriesSpec() {
     return {
       type: 'bar',
-      stack: true,
-      direction: this.direction
+      stack: true
     };
   }
 
