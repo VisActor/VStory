@@ -21,215 +21,68 @@ export const StorySceneDemo = () => {
   useEffect(() => {
     // 准备一个图表
     const tempSpec: IStorySpec = {
-      roles: [
+      characters: [
         {
           type: 'Rect',
-          id: 'test-graphics-0',
-          zIndex: 0,
+          id: 'background-top',
+          zIndex: 2,
           position: {
-            top: 40,
-            left: 50,
+            top: 0,
+            left: 0,
             width: 200,
-            height: 100
+            height: 200
           },
           options: {
             graphic: {
-              fill: 'red'
-            },
-            text: {
-              text: 'haha',
-              fill: 'black'
-            },
-            angle: 0,
-            shapePoints: []
-          }
-        },
-        {
-          type: 'Rect',
-          id: 'test-graphics-1',
-          zIndex: 0,
-          position: {
-            top: 40,
-            left: 250,
-            width: 200,
-            height: 100
-          },
-          options: {
-            graphic: {
-              fill: 'red',
-              visible: false
-            },
-            text: {
-              text: 'title2',
-              fill: 'black'
-            },
-            angle: 0,
-            shapePoints: []
-          }
-        },
-        {
-          type: 'BarChart',
-          id: 'test-chart-0',
-          zIndex: 0,
-          position: {
-            top: 200,
-            left: 100,
-            width: 300,
-            height: 300
-          },
-          options: {
-            data: data0,
-            // @ts-ignore
-            attribute: {}
-          }
-        },
-        {
-          type: 'BarChart',
-          id: 'test-chart-1',
-          zIndex: 0,
-          position: {
-            top: 350,
-            left: 100,
-            width: 300,
-            height: 300
-          },
-          options: {
-            data: data1,
-            // @ts-ignore
-            attribute: {}
-          }
-        },
-        {
-          type: 'BarChart',
-          id: 'test-chart-2',
-          zIndex: 0,
-          position: {
-            top: 350,
-            left: 300,
-            width: 300,
-            height: 300
-          },
-          options: {
-            data: data1,
-            // @ts-ignore
-            attribute: {}
-          }
-        },
-        {
-          type: 'Qipao',
-          id: 'test-graphics-2',
-          zIndex: 3,
-          position: {
-            top: 355,
-            left: 340,
-            width: 40,
-            height: 40
-          },
-          options: {
-            graphic: {
-              fill: 'red',
-              visible: false
-            },
-            text: {
-              text: '128min',
-              fill: 'black',
-              fontSize: 10
-            },
-            angle: 0,
-            shapePoints: []
+              fill: '#2D6BA0',
+              stroke: false
+            }
           }
         }
       ],
       acts: [
         {
-          id: 'default-chapter',
+          id: 'page1',
           scenes: [
-            [
-              {
-                roleId: 'test-graphics-0',
-                actions: [
-                  {
-                    startTime: 1,
-                    duration: 1000,
-                    action: 'appear',
-                    payload: {
-                      style: {},
-                      animation: {
-                        duration: 1000,
-                        easing: 'linear',
-                        effect: 'fadeIn'
-                      } as any
+            {
+              id: '1',
+              actions: [
+                {
+                  characterId: 'background-top',
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 0,
+                      payload: {
+                        animation: {
+                          duration: 100
+                        }
+                      }
                     }
-                  }
-                ]
-              },
-              {
-                roleId: 'test-graphics-1',
-                actions: [
-                  {
-                    startTime: 2000,
-                    duration: 1000,
-                    action: 'appear',
-                    payload: {
-                      style: {},
-                      animation: {
-                        duration: 1000,
-                        easing: 'linear',
-                        effect: 'fadeIn'
-                      } as any
+                  ]
+                }
+              ]
+            },
+            {
+              id: '2',
+              actions: [
+                {
+                  characterId: 'background-top',
+                  characterActions: [
+                    {
+                      action: 'style',
+                      startTime: 1000, // FIXME
+                      payload: {
+                        graphic: { fill: 'red' },
+                        animation: {
+                          duration: 1000
+                        }
+                      }
                     }
-                  }
-                ]
-              },
-              {
-                roleId: 'test-chart-1',
-                actions: [
-                  {
-                    startTime: 4000,
-                    duration: 1000,
-                    action: 'appear'
-                  }
-                ]
-              },
-              {
-                roleId: 'test-chart-0',
-                actions: [
-                  {
-                    startTime: 4500,
-                    duration: 1000,
-                    action: 'appear'
-                  }
-                ]
-              },
-              {
-                roleId: 'test-chart-2',
-                actions: [
-                  {
-                    startTime: 5500,
-                    duration: 1000,
-                    action: 'appear'
-                  }
-                ]
-              },
-              {
-                roleId: 'test-graphics-2',
-                actions: [
-                  {
-                    startTime: 4300,
-                    duration: 1000,
-                    action: 'appear',
-                    payload: {
-                      style: {},
-                      animation: {
-                        duration: 300,
-                        easing: 'linear',
-                        effect: 'grow'
-                      } as any
-                    }
-                  }
-                ]
-              }
-            ]
+                  ]
+                }
+              ]
+            }
           ]
         }
       ]

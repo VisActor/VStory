@@ -2,7 +2,7 @@ import React, { Component, useCallback, useState } from 'react';
 import { Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
 import { StoryBarDemo } from './demos/StoryBarDemo';
-// import { StorySceneDemo } from './demos/StoryScene';
+import { StorySceneDemo } from './demos/StoryScene';
 // import { AreaWithTag } from './demos/AreaWithTag';
 // import { StoryLineDemo } from './demos/StoryLineDemo';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -53,10 +53,10 @@ const App = () => {
     //   name: 'Pie',
     //   component: StoryPieDemo
     // },
-    // {
-    //   name: 'StoryScene',
-    //   component: StorySceneDemo
-    // },
+    {
+      name: 'StoryScene',
+      component: StorySceneDemo
+    },
     // {
     //   name: 'AreaWithTag',
     //   component: AreaWithTag
