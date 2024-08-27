@@ -45,7 +45,7 @@ export const UnitComponentDemo = () => {
                 right: 50,
                 left: 50
               },
-              count: 200,
+              count: 250,
               styleFunc: (index: number) => {
                 return index < 66 ? { symbolType: 'rect', fill: '#4e8ae0' } : { fill: '#f6c86d' };
               },
@@ -105,7 +105,7 @@ export const UnitComponentDemo = () => {
               ]
             },
             {
-              id: '1',
+              id: '2',
               actions: [
                 {
                   characterId: 'unit-test',

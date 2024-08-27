@@ -1,9 +1,9 @@
 import { ISymbolGraphicAttribute } from '@visactor/vrender-core';
 import { ICharacterSpec } from '../../../../../src/story/character';
 import { IActionsLink, IStorySpec } from '../../../../../src/story/interface';
-import { QueryNode, RequiredInput, UnitNode } from './input';
+import { Input, QueryNode } from './input';
 
-export function generateSpec(input: RequiredInput): IStorySpec {
+export function generateSpec(input: Input): IStorySpec {
   const { characters: layoutCharacters, actions: layoutActions } = generateLayoutSpec(input);
   const { characters: titleCharacters, actionsGroup: titleActionsGroup } = generateTitleSpec(input);
   const { character: vizCharacter, actions: vizActions } = generateVizSpec(input);
@@ -23,14 +23,10 @@ export function generateSpec(input: RequiredInput): IStorySpec {
     ]
   };
 
-  console.log('spec', spec);
-  console.log('vizCharacter', vizCharacter);
-  console.log('vizActions', vizActions);
-
   return spec;
 }
 
-function generateLayoutSpec(input: RequiredInput) {
+function generateLayoutSpec(input: Input) {
   const { layout } = input;
   const characters: ICharacterSpec[] = [
     {
@@ -40,12 +36,12 @@ function generateLayoutSpec(input: RequiredInput) {
       position: {
         top: 0,
         left: 0,
-        width: layout.width,
-        height: layout.title.height
+        width: layout?.width!,
+        height: layout?.title?.height!
       },
       options: {
         graphic: {
-          fill: layout.title.backgroundColor,
+          fill: layout?.title?.backgroundColor,
           stroke: false
         }
       }
@@ -57,12 +53,12 @@ function generateLayoutSpec(input: RequiredInput) {
       position: {
         top: 0,
         left: 0,
-        width: layout.width,
-        height: layout.height
+        width: layout?.width!,
+        height: layout?.height!
       },
       options: {
         graphic: {
-          fill: layout.viz.backgroundColor,
+          fill: layout?.viz?.backgroundColor,
           stroke: false
         }
       }
@@ -103,9 +99,9 @@ function generateLayoutSpec(input: RequiredInput) {
   return { characters, actions };
 }
 
-function generateTitleSpec(input: RequiredInput) {
+function generateTitleSpec(input: Input) {
   const { scenes, layout } = input;
-  const { padding } = layout.title;
+  const { padding } = layout?.title!;
   console.log('layout', layout);
   console.log('padding', padding);
   let startTime = 1;
@@ -115,15 +111,15 @@ function generateTitleSpec(input: RequiredInput) {
       id: 'title-' + sceneIndex,
       zIndex: 3,
       position: {
-        top: layout.title.height / 2,
-        left: layout.width / 2,
-        width: layout.width,
-        height: layout.height
+        top: layout?.title?.height! / 2,
+        left: layout?.width! / 2,
+        width: layout?.width! - padding?.left! - padding?.right!,
+        height: layout?.height!
       },
       options: {
         graphic: {
-          width: layout.width - padding.left - padding.right,
-          height: layout.height,
+          width: layout?.width! - padding?.left! - padding?.right!,
+          height: layout?.height!,
           fontSize: 40,
           wordBreak: 'break-word',
           textAlign: 'center',
@@ -141,23 +137,7 @@ function generateTitleSpec(input: RequiredInput) {
         characterActions: [
           {
             action: 'appear',
-            startTime: startTime + scene.animationDuration + 1,
-            payload: {
-              animation: {
-                duration: scene.animationDuration,
-                easing: 'linear',
-                effect: 'fade'
-              }
-            }
-          }
-        ]
-      },
-      {
-        characterId: `title-${sceneIndex}`,
-        characterActions: [
-          {
-            action: 'disappear',
-            startTime: startTime + scene.sceneDuration - scene.animationDuration,
+            startTime: startTime + scene.animationDuration! + 1,
             payload: {
               animation: {
                 duration: scene.animationDuration,
@@ -169,19 +149,36 @@ function generateTitleSpec(input: RequiredInput) {
         ]
       }
     ];
-    // startTime += scene.sceneDuration;
+
+    // Only add disappear action if it's not the last scene
+    if (sceneIndex < scenes.length - 1) {
+      actions.push({
+        characterId: `title-${sceneIndex}`,
+        characterActions: [
+          {
+            action: 'disappear',
+            startTime: startTime + scene.sceneDuration! - scene.animationDuration!,
+            payload: {
+              animation: {
+                duration: scene.animationDuration,
+                easing: 'linear',
+                effect: 'fade'
+              }
+            }
+          }
+        ]
+      });
+    }
+
     return actions;
   });
 
   return { characters, actionsGroup };
 }
 
-function generateVizSpec(input: RequiredInput) {
-  const {
-    scenes,
-    data,
-    unit: { defaultStyle }
-  } = input;
+function generateVizSpec(input: Input) {
+  const { scenes, data, unit } = input;
+  const { defaultStyle } = unit!;
   const initialStyleList: ISymbolGraphicAttribute[] = [];
   for (let i = 0; i < data.length; i++) {
     if (typeof defaultStyle === 'function') {
@@ -197,11 +194,11 @@ function generateVizSpec(input: RequiredInput) {
   let prevStyleList = initialStyleList;
   for (let sceneIndex = 0; sceneIndex < scenes.length; sceneIndex++) {
     const sceneSpec = scenes[sceneIndex];
-    const { nodes, sceneDuration, animationDuration } = sceneSpec;
+    const { nodes, animationDuration } = sceneSpec;
     const indexList = Array.from({ length: data.length }, (_, i) => i);
     const styleList = prevStyleList.slice();
-    updateStyleList(styleList, nodes as QueryNode[], data, indexList);
-    const action = createUnitViz(styleList, animationDuration, startTime);
+    updateStyleList(styleList, nodes, data, indexList);
+    const action = createUnitViz(styleList, animationDuration!, startTime);
     // startTime += sceneDuration;
     prevStyleList = styleList;
     actions.push(action);
@@ -209,36 +206,34 @@ function generateVizSpec(input: RequiredInput) {
   return { character, actions };
 }
 
-function getUnitCharacter(styleList: ISymbolGraphicAttribute[], input: RequiredInput): ICharacterSpec {
+function getUnitCharacter(styleList: ISymbolGraphicAttribute[], input: Input): ICharacterSpec {
   const { layout, unit } = input;
-  const { padding } = layout.viz;
+  const { padding, direction } = layout?.viz!;
 
   const character: ICharacterSpec = {
     type: 'Unit',
     id: 'unit',
-    // TODO: remove zIndex and analyze all zIndex in the story
     zIndex: 2,
     position: {
-      top: layout.title.height,
+      top: layout?.title?.height!,
       left: 0,
-      width: layout.width,
-      height: layout.height - layout.title.height
+      width: layout?.width!,
+      height: layout?.height! - layout?.title?.height!
     },
     options: {
       graphic: {
         padding: {
-          top: padding.top,
-          bottom: padding.bottom,
-          right: padding.right,
-          left: padding.left
+          top: padding?.top!,
+          bottom: padding?.bottom!,
+          right: padding?.right!,
+          left: padding?.left!
         },
         count: styleList.length,
-        // TODO: change opacity
-        styleFunc: (index: number): ISymbolGraphicAttribute => ({ ...styleList[index], opacity: 0.7 }),
-        gap: unit.gap,
-        aspect: unit.aspect,
+        styleFunc: (index: number): ISymbolGraphicAttribute => ({ ...styleList[index] }),
+        gap: unit?.gap!,
+        aspect: unit?.aspect!,
         // TODO: add direction to input
-        direction: 'horizontal'
+        direction: direction
       }
     }
   };

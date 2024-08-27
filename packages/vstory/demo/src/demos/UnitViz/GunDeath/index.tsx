@@ -10,7 +10,7 @@ export const GunDeath = () => {
   useEffect(() => {
     // 准备一个图表
     const spec: IStorySpec = generateSpec(input);
-    const story = new Story(spec, { dom: id, playerOption: { scaleX: 0.6, scaleY: 0.6 } });
+    const story = new Story(spec, { dom: id, playerOption: { scaleX: 0.5, scaleY: 0.5 } });
     // const story = new Story(spec, { dom: id, playerOption: {} });
     story.play(false);
     window.story = story;
