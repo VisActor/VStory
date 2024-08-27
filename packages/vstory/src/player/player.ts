@@ -7,6 +7,7 @@ import { processorMap } from './processor/processorMap';
 import type { IScheduler } from './interface/scheduler';
 import { Scheduler } from './scheduler';
 import { EventEmitter } from '@visactor/vutils';
+import { createRect } from '@visactor/vrender-core';
 
 export class Ticker {
   cb?: (delta: number) => void;
@@ -116,14 +117,21 @@ export class Player extends EventEmitter implements IPlayer {
     });
 
     this._currTime = t;
-    this._story.canvas.getStage().ticker.tickAt(t);
-    this._story.canvas.getStage().render();
+
+    const stage = this._story.canvas.getStage();
+    stage.ticker.tickAt(t);
+    stage.render();
   }
 
   play(): void {
     this._ticker.stop();
     this._currTime = 0;
     this.reset();
+    const stage = this._story.canvas.getStage();
+    // 开启ticker
+    stage.ticker.start(true);
+    stage.getTimeline().resume();
+
     this._ticker.start(t => {
       let nextT = this._currTime + t;
       const totalTime = this._scheduler.getTotalTime();

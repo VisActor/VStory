@@ -106,7 +106,7 @@ export class Scheduler implements IScheduler {
       const { startTime: sceneStartTime } = sceneInfo;
       sceneInfo.actionList.forEach(actionInfo => {
         const startTime = sceneStartTime + actionInfo.startTime;
-        if (startTime < formatToTime) {
+        if (startTime <= formatToTime) {
           if (!this._runnedAct.has(actionInfo)) {
             this._runnedAct.add(actionInfo);
             actions.push(actionInfo);
