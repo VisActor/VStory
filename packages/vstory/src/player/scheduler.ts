@@ -172,8 +172,8 @@ export class Scheduler implements IScheduler {
     });
 
     const sceneInfo: ISceneInfo = {
-      startTime: sceneStartTime + scene_st,
-      duration: scene_et - scene_st,
+      startTime: sceneStartTime,
+      duration: scene_et,
       id: scene.id,
       actionList
     };
