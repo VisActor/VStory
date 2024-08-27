@@ -170,7 +170,7 @@ export const StoryEdit = () => {
                       action: 'appear',
                       payload: {
                         animation: {
-                          duration: 100,
+                          duration: 0,
                           easing: 'linear',
                           effect: 'fadeIn'
                         } as any
@@ -183,7 +183,12 @@ export const StoryEdit = () => {
                   characterActions: [
                     {
                       startTime: 0,
-                      action: 'appear'
+                      action: 'appear',
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 }
