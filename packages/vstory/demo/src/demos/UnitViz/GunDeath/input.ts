@@ -1,6 +1,10 @@
 import { ISymbolGraphicAttribute, ITextGraphicAttribute } from '@visactor/vrender-core';
 import data from '../../../../data/sorted-gun-death-data.json' assert { type: 'json' };
 import { merge } from '@visactor/vutils';
+import { IEditorTextGraphicAttribute } from '../../../../../src/story/character';
+
+export const DEFAULT_SCENE_DURATION = 5000;
+export const DEFAULT_ANIMATION_DURATION = 1000;
 
 export interface Input {
   layout?: {
@@ -9,12 +13,14 @@ export interface Input {
     title?: {
       height?: number;
       backgroundColor?: string;
+      style?: IEditorTextGraphicAttribute;
       padding?: {
         left?: number;
         right?: number;
         top?: number;
         bottom?: number;
       };
+      // TODO: add style
     };
     viz?: {
       backgroundColor?: string;
@@ -34,7 +40,6 @@ export interface Input {
   };
   data: Record<string, any>[];
   scenes: {
-    // TODO: how to support fill, textAlign etc.?
     title: ITextGraphicAttribute[];
     sceneDuration?: number;
     animationDuration?: number;
@@ -69,6 +74,13 @@ export const defaultInput: Input = {
     title: {
       height: 250,
       backgroundColor: '#ffffff',
+      style: {
+        fontSize: 40,
+        fontWeight: 200,
+        textAlign: 'center',
+        fill: 'black',
+        wordBreak: 'break-word'
+      },
       padding: {
         left: 50,
         right: 50,
@@ -100,7 +112,10 @@ export const defaultInput: Input = {
 };
 
 function initialInput(input: Input): Input {
-  return merge({}, defaultInput, input);
+  const { data, ...restInput } = input;
+  const res = merge({}, defaultInput, restInput);
+  res.data = data;
+  return res;
 }
 
 export const userInput: Input = {
@@ -113,7 +128,9 @@ export const userInput: Input = {
       }
     },
     title: {
-      // backgroundColor: '#f1f1f0',
+      style: {
+        fontSize: 36
+      },
       height: 150
     }
   },
@@ -126,9 +143,6 @@ export const userInput: Input = {
   data: (data as Record<string, any>[]).filter(record => record.year === 2014),
   scenes: [
     {
-      // ? how to default
-      sceneDuration: 5000,
-      animationDuration: 1000,
       title: [
         {
           text: 'More than '
@@ -150,8 +164,6 @@ export const userInput: Input = {
       ]
     },
     {
-      sceneDuration: 5000,
-      animationDuration: 1000,
       title: [
         {
           text: 'Nearly two-third of gun deaths are'
@@ -174,8 +186,8 @@ export const userInput: Input = {
       ]
     },
     {
-      sceneDuration: 5000,
-      animationDuration: 1000,
+      sceneDuration: 3000,
+      animationDuration: 500,
       title: [
         {
           text: 'More than 85 percent of suicide victims are '
@@ -206,8 +218,8 @@ export const userInput: Input = {
       ]
     },
     {
-      sceneDuration: 5000,
-      animationDuration: 1000,
+      sceneDuration: 3000,
+      animationDuration: 500,
       title: [
         {
           text: '... and more than half of all suicides are '
@@ -235,8 +247,6 @@ export const userInput: Input = {
       ]
     },
     {
-      sceneDuration: 5000,
-      animationDuration: 1000,
       title: [
         {
           text: 'Another third of all gun deaths — about 12,000 in total each year — are '
@@ -265,8 +275,6 @@ export const userInput: Input = {
       ]
     },
     {
-      sceneDuration: 5000,
-      animationDuration: 1000,
       title: [
         {
           text: 'More than half of homicide victims are '
@@ -297,8 +305,6 @@ export const userInput: Input = {
       ]
     },
     {
-      sceneDuration: 5000,
-      animationDuration: 1000,
       title: [
         {
           text: '… two-thirds of whom are '
@@ -337,8 +343,6 @@ export const userInput: Input = {
       ]
     },
     {
-      sceneDuration: 5000,
-      animationDuration: 1000,
       title: [
         {
           text: 'Women',
@@ -373,8 +377,6 @@ export const userInput: Input = {
       ]
     },
     {
-      sceneDuration: 5000,
-      animationDuration: 1000,
       title: [
         {
           text: 'The remaining gun deawths are '
@@ -409,8 +411,6 @@ export const userInput: Input = {
       ]
     },
     {
-      sceneDuration: 5000,
-      animationDuration: 1000,
       title: [
         {
           text: 'The common element in all these deaths is a gun. But the causes are very different, and that means the solutions must be, too.'

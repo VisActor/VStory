@@ -1,7 +1,7 @@
 import { ISymbolGraphicAttribute } from '@visactor/vrender-core';
 import { ICharacterSpec } from '../../../../../src/story/character';
 import { IActionsLink, IStorySpec } from '../../../../../src/story/interface';
-import { Input, QueryNode } from './input';
+import { DEFAULT_ANIMATION_DURATION, DEFAULT_SCENE_DURATION, Input, QueryNode } from './input';
 
 export function generateSpec(input: Input): IStorySpec {
   const { characters: layoutCharacters, actions: layoutActions } = generateLayoutSpec(input);
@@ -101,7 +101,7 @@ function generateLayoutSpec(input: Input) {
 
 function generateTitleSpec(input: Input) {
   const { scenes, layout } = input;
-  const { padding } = layout?.title!;
+  const { padding, style } = layout?.title!;
   console.log('layout', layout);
   console.log('padding', padding);
   let startTime = 1;
@@ -120,11 +120,7 @@ function generateTitleSpec(input: Input) {
         graphic: {
           width: layout?.width! - padding?.left! - padding?.right!,
           height: layout?.height!,
-          fontSize: 40,
-          wordBreak: 'break-word',
-          textAlign: 'center',
-          fill: 'black',
-          fontWeight: 200,
+          ...style,
           textConfig: scene.title
         }
       }
@@ -137,10 +133,10 @@ function generateTitleSpec(input: Input) {
         characterActions: [
           {
             action: 'appear',
-            startTime: startTime + scene.animationDuration! + 1,
+            startTime: startTime + (scene.animationDuration ?? DEFAULT_ANIMATION_DURATION) + 1,
             payload: {
               animation: {
-                duration: scene.animationDuration,
+                duration: scene.animationDuration ?? DEFAULT_ANIMATION_DURATION,
                 easing: 'linear',
                 effect: 'fade'
               }
@@ -157,10 +153,13 @@ function generateTitleSpec(input: Input) {
         characterActions: [
           {
             action: 'disappear',
-            startTime: startTime + scene.sceneDuration! - scene.animationDuration!,
+            startTime:
+              startTime +
+              (scene.sceneDuration ?? DEFAULT_SCENE_DURATION) -
+              (scene.animationDuration ?? DEFAULT_ANIMATION_DURATION),
             payload: {
               animation: {
-                duration: scene.animationDuration,
+                duration: scene.animationDuration ?? DEFAULT_ANIMATION_DURATION,
                 easing: 'linear',
                 effect: 'fade'
               }
@@ -198,8 +197,7 @@ function generateVizSpec(input: Input) {
     const indexList = Array.from({ length: data.length }, (_, i) => i);
     const styleList = prevStyleList.slice();
     updateStyleList(styleList, nodes, data, indexList);
-    const action = createUnitViz(styleList, animationDuration!, startTime);
-    // startTime += sceneDuration;
+    const action = createUnitViz(styleList, animationDuration ?? DEFAULT_ANIMATION_DURATION, startTime);
     prevStyleList = styleList;
     actions.push(action);
   }
