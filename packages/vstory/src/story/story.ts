@@ -43,11 +43,11 @@ export class Story implements IStory {
     this._player = new Player(this, option.playerOption);
 
     this._characterTree = new CharacterTree(this);
-    this._spec = spec;
-    this._spec && this.load(this._spec);
+    spec && this.load(this._spec);
   }
 
   load(spec: IStorySpec) {
+    this._spec = spec;
     this._characterTree.initCharacters(spec.characters);
     this._player.initActs(spec.acts);
   }

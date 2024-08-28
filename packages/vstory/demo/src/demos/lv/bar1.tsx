@@ -4,7 +4,6 @@ import { Story } from '../../../../src/story/story';
 import { Edit } from '../../../../src/edit/edit';
 import '../../../../src/story/index';
 import { cloneDeep } from '@visactor/vutils';
-import { CommonEditComponent } from '../../../../src/edit/edit-component/common';
 import { BoxSelection } from '../../../../src/edit/edit-component/box-selection';
 import { TextSelection } from '../../../../src/edit/edit-component/text-selection';
 import { RichTextSelection } from '../../../../src/edit/edit-component/richtext-selection';

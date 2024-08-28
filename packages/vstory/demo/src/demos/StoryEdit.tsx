@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { IStorySpec } from '../../../src/story/interface';
 import { Story } from '../../../src/story/story';
-import { Edit } from '../../../src/edit/edit';
 import '../../../src/story/index';
 import { cloneDeep } from '@visactor/vutils';
 import Scene3ChartImage2 from '../assets/scene3/chart-2.png';
 import { loadAllSelection } from '../../../src/edit/edit-component';
+import { Edit } from '../../../src/edit/edit';
 
 // Edit.registerEditComponent('common', CommonEditComponent);
 loadAllSelection();

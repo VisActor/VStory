@@ -1,6 +1,6 @@
-import { IChartTemp } from '../interface';
-import { DataInfo, StandardData } from '../../data/interface';
-import { CharacterChart } from '../../character';
+import type { IChartTemp } from '../interface';
+import type { DataInfo, StandardData } from '../../data/interface';
+import type { CharacterChart } from '../../character';
 
 export const EDITOR_SERIES_MARK_SINGLE = '_editor_series_mark_single';
 export const EDITOR_SERIES_MARK_SINGLE_LEVEL = 100;
@@ -17,7 +17,7 @@ export abstract class BaseTemp implements IChartTemp {
     return this.type;
   }
 
-  afterInitializeChart() {
+  afterInitializeChart(ctx: { character: CharacterChart }) {
     // do nothing
   }
 

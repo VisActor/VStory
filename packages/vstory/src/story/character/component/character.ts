@@ -1,5 +1,5 @@
+import type { IBoundsLike } from '@visactor/vutils';
 import type { IGroup } from '@visactor/vrender';
-import { createGroup } from '@visactor/vrender';
 import { GraphicBaseText } from './graphic/graphic-base-text';
 import type { IComponentCharacterSpec } from '../dsl-interface';
 import { CharacterBase } from '../base/base';
@@ -60,7 +60,9 @@ export abstract class CharacterComponent extends CharacterBase {
     this.hide();
   }
 
-  setAttributes(attr: Record<string, any>): void {
+  setAttributes(updateAttr: Record<string, any>): void {
+    const { position, ...rest } = updateAttr;
+    const attr = { ...(position ?? {}), ...rest };
     this.group.setAttributes(attr);
     this._graphic.setAttributes({ ...attr, x: 0, y: 0, angle: 0 });
     this._text.updateAttribute({});
@@ -94,6 +96,10 @@ export abstract class CharacterComponent extends CharacterBase {
 
   getGraphicParent() {
     return this._group;
+  }
+
+  getLayoutBounds() {
+    return this._group.AABBBounds as IBoundsLike;
   }
 
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {

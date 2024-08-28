@@ -891,7 +891,16 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     this.removeEventListener('pointerdown', this.handleDragMouseDown);
   }
 
+  releaseDragger() {
+    if (!this._dragger) {
+      return;
+    }
+    this._dragger.release();
+  }
+
+  private _isRelease = false;
   release(): void {
+    this._isRelease = true;
     // event
     this.releaseEvent();
 

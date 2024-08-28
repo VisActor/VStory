@@ -18,6 +18,7 @@ import { Pictogram } from './demos/infographics/Pictogram';
 import { LV_BAR1 } from './demos/lv/bar1';
 import { BarLineSeries } from './demos/BarLineSeries';
 import { wordcloud } from './demos/wordcloud';
+import { VChartGraphic } from './demos/VChartGraphic';
 import { BaseComponent } from './demos/BaseComponent';
 import { BarLineSeriesSelector } from './demos/BarLineSeriesSelector';
 import { RankingBar } from './demos/template/RankingBar';
@@ -121,6 +122,10 @@ const App = () => {
     {
       name: 'RankingBar',
       component: RankingBar
+    },
+    {
+      name: 'VChartGraphic',
+      component: VChartGraphic
     }
   ];
   const getSelectedMenu = useCallback<(menus: MenusType) => any>(

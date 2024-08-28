@@ -1,7 +1,7 @@
 import { merge, isValid } from '@visactor/vutils';
-import { IComponentSpec } from '../../dsl-interface';
-import { CharacterChart } from '../character';
-import { IChartCharacterRuntime } from './interface';
+import type { IComponentSpec } from '../../dsl-interface';
+import type { CharacterChart } from '../character';
+import type { IChartCharacterRuntime } from './interface';
 import { ChartSpecMatch } from './utils';
 
 export class ComponentSpecRuntime implements IChartCharacterRuntime {
@@ -23,32 +23,52 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
     componentSpec?.forEach(cSpec => {
       if (cSpec.specKey === 'axes') {
         this._mergeAxesSpec(rawSpec, cSpec);
+      } else {
+        this._mergeComponentSpec(rawSpec, cSpec, cSpec.specKey);
       }
     });
   }
 
   protected _mergeAxesSpec(rawSpec: any, componentSpec: IComponentSpec) {
-    if (!rawSpec.axes) {
-      rawSpec.axes = [{ ...componentSpec }];
-      return;
-    } else {
-      const s = rawSpec.axes.find((a: any, index: number) => {
-        if (ChartSpecMatch(a, index, componentSpec.matchInfo)) {
-          return true;
-        } else {
-          return a.orient === componentSpec.matchInfo.orient;
-        }
-      });
-      if (s) {
-        merge(s, componentSpec.spec);
-      } else {
-        rawSpec.axes.push(componentSpec.spec);
+    this._mergeComponentSpec(
+      rawSpec,
+      componentSpec,
+      'axes',
+      (a: any, index: number, _componentSpec: IComponentSpec) => {
+        return a.orient === componentSpec.matchInfo.orient;
       }
+    );
+  }
+
+  protected _mergeComponentSpec(
+    rawSpec: any,
+    componentSpec: IComponentSpec,
+    key: string,
+    additionalMatch?: (rawComponentSpec: any, index: number, componentSpec: IComponentSpec) => boolean
+  ) {
+    if (!rawSpec[key]) {
+      rawSpec[key] = [];
+    }
+    const s = rawSpec[key].find((a: any, index: number) => {
+      if (ChartSpecMatch(a, index, componentSpec.matchInfo)) {
+        return true;
+      }
+      if (additionalMatch) {
+        return additionalMatch(a, index, componentSpec);
+      }
+      return false;
+    });
+    if (s) {
+      merge(s, componentSpec.spec);
+    } else {
+      rawSpec[key].push(componentSpec.spec);
     }
   }
 
   afterInitializeChart() {
     //
   }
-  afterVRenderDraw() {}
+  afterVRenderDraw() {
+    //
+  }
 }

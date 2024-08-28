@@ -2,10 +2,9 @@ import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
 import { cloneDeep } from '@visactor/vutils';
-import VChart from '@visactor/vchart';
+import { VChart } from '@visactor/vchart';
 import type { IChartCharacterSpec } from '../dsl-interface';
 import { Chart } from './graphic/vchart-graphic';
-import { getLayoutFromWidget } from '../../utils/layout';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
 import { ChartDataTempTransform } from './spec-process/data-temp-transform';
@@ -14,6 +13,8 @@ import type { IChartTemp } from './temp/interface';
 import { SeriesSpecRuntime } from './runtime/series-spec';
 import type { StoryEvent } from '../../interface/runtime-interface';
 import type { ICharacterPickInfo } from '../runtime-interface';
+import { getLayoutFromWidget } from '../../utils/layout';
+import { getChartModelWithEvent } from '../../utils/vchart-pick';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
@@ -49,21 +50,11 @@ export class CharacterChart extends CharacterVisactor {
     this._specProcess.updateConfig(this._spec);
   }
   protected _initGraphics(): void {
-    // this._ticker = new ManualTicker([]);
-    const layout = getLayoutFromWidget(this._spec.position);
-    const viewBox = {
-      x1: layout.x,
-      x2: layout.x + layout.width,
-      y1: layout.y,
-      y2: layout.y + layout.height
-    };
-    const spec = cloneDeep(this._specProcess.getVisSpec());
-    spec.width = layout.width;
-    spec.height = layout.height;
+    const { spec, viewBox } = this._getChartOption();
     // @ts-ignore
     this._graphic = new Chart({
       renderCanvas: this._option.canvas.getCanvas(),
-      spec: spec,
+      spec,
       ClassType: VChart,
       vchart: null,
       zIndex: this._spec.zIndex,
@@ -94,9 +85,33 @@ export class CharacterChart extends CharacterVisactor {
   }
 
   setAttributes(attr: Record<string, any>): void {
-    // this.group.setAttributes(attr);
-    this._graphic.setAttributes(attr);
-    // this._text.updateAttribute({});
+    // character 的属性
+    if (attr.position) {
+      this._spec.position = attr.position;
+      // 位置属性
+      this._graphic.updateViewBox(this.getViewBoxFromSpec().viewBox);
+    }
+  }
+  getViewBoxFromSpec() {
+    const layout = getLayoutFromWidget(this._spec.position);
+    const viewBox = {
+      x1: layout.x,
+      x2: layout.x + layout.width,
+      y1: layout.y,
+      y2: layout.y + layout.height
+    };
+    return { layout, viewBox };
+  }
+
+  private _getChartOption() {
+    const { layout, viewBox } = this.getViewBoxFromSpec();
+    const spec = cloneDeep(this._specProcess.getVisSpec() ?? this._spec.options.spec);
+    spec.width = layout.width;
+    spec.height = layout.height;
+    return {
+      viewBox,
+      spec
+    };
   }
 
   protected _afterRender(): void {
@@ -104,7 +119,6 @@ export class CharacterChart extends CharacterVisactor {
     return;
   }
   protected _updateVisactorSpec(): void {
-    // console.log('_updateVisactorSpec', this._specProcess.getVisSpec());
     this._graphic?.updateSpec(this._specProcess.getVisSpec());
   }
 
@@ -121,18 +135,40 @@ export class CharacterChart extends CharacterVisactor {
     if (!(event.detailPath ?? event.path).some(g => g === this._graphic)) {
       return false;
     }
-    if (!this._graphic.pointInVChart((event as any).canvasX, (event as any).canvasY)) {
+    const chartPath = event.detailPath[event.detailPath.length - 1];
+    const result = getChartModelWithEvent(this._graphic.vProduct, event);
+    if (!result) {
+      // 点击到图表的空白区域
+      if (this._graphic.pointInViewBox((event as any).canvasX, (event as any).canvasY)) {
+        return {
+          part: 'null',
+          graphic: null,
+          modelInfo: null,
+          graphicType: 'null'
+        };
+      }
       return false;
     }
-    const chartPath = event.detailPath[event.detailPath.length - 1];
+    const graphic = chartPath?.[chartPath.length - 1];
     return {
-      part: chartPath?.[chartPath.length - 1]?.type,
-      graphicType: chartPath?.[chartPath.length - 1]?.type
+      part: result.type,
+      modelInfo: result,
+      graphic,
+      graphicType: graphic.type
     };
   }
 
   release(): void {
     this.option.graphicParent.removeChild(this._graphic as any);
     this._graphic.release && this._graphic.release();
+  }
+
+  private _reflow() {
+    if (!this._graphic) {
+      this._initGraphics();
+      return;
+    }
+    const { spec } = this._getChartOption();
+    this._graphic.updateSpec(spec);
   }
 }

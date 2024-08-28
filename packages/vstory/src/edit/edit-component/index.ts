@@ -1,11 +1,9 @@
 // import { CommonEditComponent } from './common';
 import { BoxSelection } from './box-selection';
 import { ImageSelection } from './image-selection';
-import { TextSelection } from './text-selection';
-import { RichTextSelection } from './richtext-selection';
 import { RectSelection } from './rect-selection';
-import { Edit } from '../edit';
 import { ChartSelection } from './chart-selection';
+import { Edit } from '../edit';
 import { ShapeSelection } from './shape-selection';
 
 export function loadAllSelection() {

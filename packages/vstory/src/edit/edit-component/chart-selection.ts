@@ -20,18 +20,9 @@ export class ChartSelection extends BaseSelection implements IEditComponent {
       return;
     }
 
-    const viewBox = (actionInfo.character.graphic as Chart).vchart.getStage().viewBox;
     const group = actionInfo.character.getGraphicParent();
-    const { angle, x, y } = group.attribute;
-    this._layoutComponent.updateBoundsAndAngle(
-      {
-        x1: viewBox.x1 + x,
-        y1: viewBox.y1 + y,
-        x2: viewBox.x2 + x,
-        y2: viewBox.y2 + y
-      },
-      angle
-    );
+    const { angle } = group.attribute;
+    this._layoutComponent.updateBoundsAndAngle(actionInfo.character.getLayoutBounds(), angle);
     // this._layoutComponent.updateBoundsAndAngle(actionInfo.character.getGraphicParent().AABBBounds, 0);
   }
 
