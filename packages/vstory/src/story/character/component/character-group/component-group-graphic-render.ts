@@ -11,16 +11,16 @@ import type {
   IGroup
 } from '@visactor/vrender';
 import { injectable, DefaultCanvasGroupRender } from '@visactor/vrender';
-import { CHART_NUMBER_TYPE } from './component-group-graphic';
+import { COMPONENT_NUMBER_TYPE } from './component-group-graphic';
 import { Direction } from '../../../../constants/config';
 
-export const ChartRender = Symbol.for('ChartRender');
-export const ChartRenderContribution = Symbol.for('ChartRenderContribution');
+export const ComponentRender = Symbol.for('VStoryComponentRender');
+export const ComponentRenderContribution = Symbol.for('VStoryComponentRenderContribution');
 
 @injectable()
 export class ComponentGroupRender extends DefaultCanvasGroupRender implements IGraphicRender {
   type: any = 'vstory-component-group';
-  numberType: number = CHART_NUMBER_TYPE;
+  numberType: number = COMPONENT_NUMBER_TYPE;
 
   draw(group: IGroup, renderService: IRenderService, drawContext: IDrawContext, params?: IGraphicRenderDrawParams) {
     const { context } = drawContext;
