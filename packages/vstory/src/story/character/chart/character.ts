@@ -1,7 +1,7 @@
 import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
-import { cloneDeep } from '@visactor/vutils';
+import { cloneDeep, merge } from '@visactor/vutils';
 import { VChart } from '@visactor/vchart';
 import type { IChartCharacterSpec } from '../dsl-interface';
 import { Chart } from './graphic/vchart-graphic';
@@ -67,19 +67,22 @@ export class CharacterChart extends CharacterVisactor {
       ticker: this._option.canvas.getStage().ticker,
       visibleAll: false,
       ...(this._spec.options.panel ?? {}),
-      chartInitOptions: {
-        animation: true,
-        disableTriggerEvent: true,
-        performanceHook: {
-          afterInitializeChart: () => {
-            (<IChartTemp>this.specProcess.dataTempTransform?.specTemp)?.afterInitializeChart({ character: this });
-            this._runtime.forEach(r => r.afterInitializeChart?.());
-          },
-          afterVRenderDraw: () => {
-            this._runtime.forEach(r => r.afterVRenderDraw?.());
+      chartInitOptions: merge(
+        {
+          animation: true,
+          disableTriggerEvent: true,
+          performanceHook: {
+            afterInitializeChart: () => {
+              (<IChartTemp>this.specProcess.dataTempTransform?.specTemp)?.afterInitializeChart({ character: this });
+              this._runtime.forEach(r => r.afterInitializeChart?.());
+            },
+            afterVRenderDraw: () => {
+              this._runtime.forEach(r => r.afterVRenderDraw?.());
+            }
           }
-        }
-      }
+        },
+        this._spec.options.initOption ?? {}
+      )
     });
     this.option.graphicParent.add(this._graphic as any);
   }

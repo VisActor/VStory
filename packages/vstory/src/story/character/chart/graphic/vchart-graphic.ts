@@ -126,11 +126,6 @@ export class Chart extends Group implements IVisactorGraphic {
     if (params.viewBox) {
       this.updateViewBox(params.viewBox);
     }
-
-    this.setAttributes({
-      fill: 'red',
-      fillOpacity: 0.5
-    });
   }
 
   /**

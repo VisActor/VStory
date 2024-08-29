@@ -23,7 +23,7 @@ export class VChartPicker implements IGraphicPicker {
     const chartStage = vChart.getStage();
     // @ts-ignore
     chartStage._editor_needRender = true;
-    const matrix = chart.globalTransMatrix.clone();
+    const matrix = chart.transMatrix.clone();
     const stageMatrix = chart.stage.window.getViewBoxTransform();
     matrix.multiply(stageMatrix.a, stageMatrix.b, stageMatrix.c, stageMatrix.d, stageMatrix.e, stageMatrix.f);
     chartStage.window.setViewBoxTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);

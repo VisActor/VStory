@@ -12,8 +12,8 @@ import { injectable, DefaultCanvasRectRender } from '@visactor/vrender';
 import type { Chart } from './vchart-graphic';
 import { CHART_NUMBER_TYPE } from './vchart-graphic';
 
-export const ChartRender = Symbol.for('ChartRender');
-export const ChartRenderContribution = Symbol.for('ChartRenderContribution');
+export const ChartRender = Symbol.for('VStoryChartRender');
+export const ChartRenderContribution = Symbol.for('VStoryChartRenderContribution');
 
 @injectable()
 export class VChartRender extends DefaultCanvasRectRender implements IGraphicRender {

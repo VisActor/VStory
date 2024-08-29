@@ -315,7 +315,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
           disappear: action === 'disappear'
         });
       // @ts-ignore
-      product && product.animate.run(config || {});
+      product && product.animate && product.animate.run(config || {});
     });
   }
 

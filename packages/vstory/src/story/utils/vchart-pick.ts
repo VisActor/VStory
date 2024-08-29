@@ -65,17 +65,36 @@ const MarkerClassName: { [key: string]: boolean } = {
   MarkArcLine: true,
   MarkArcArea: true
 };
+
+const MarkerIdPrefix: { [key: string]: boolean } = {
+  markPoint: true,
+  markLine: true,
+  markArea: true
+};
+
 export const markerMarkPick = {
   check: (graphic: IGraphic, graphicPath: IGraphic[]) => {
     return !!MarkerClassName[graphic.constructor.name];
   },
   modelInfo: (chart: IVChart, graphic: IGraphic, graphicPath: IGraphic[]) => {
-    const markerId = +(<string>graphic.id).split('-')[1];
-    const model = chart
-      .getChart()
-      .getAllComponents()
-      // @ts-ignore
-      .find(c => c.id === markerId);
+    const split = (<string>graphic.id).split('-');
+    const idPrefix = split[0];
+    let model;
+    if (MarkerIdPrefix[idPrefix]) {
+      const markerId = +(<string>graphic.id).split('-')[1];
+      model = chart
+        .getChart()
+        .getAllComponents()
+        // @ts-ignore
+        .find(c => c.id === markerId);
+    } else {
+      const markerUserId = graphic.id;
+      model = chart
+        .getChart()
+        .getAllComponents()
+        // @ts-ignore
+        .find(c => c.userId === markerUserId);
+    }
     return commonModelInfo(model);
   }
 };
