@@ -47,14 +47,24 @@ export const axisMarkPick = {
     return graphic.name === 'axis' || graphic.name === 'axis-grid';
   },
   modelInfo: (chart: IVChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
-    const axisGroup = graphicPath[index - 1];
-    const axisId = +axisGroup.name.split('_')[1];
-    const axis = chart
+    const axisModel = chart
       .getChart()
       .getAllComponents()
       // @ts-ignore
-      .find(c => c._axisMark?.id === axisId || c._gridMark?.id === axisId);
-    return commonModelInfo(axis);
+      .filter(c => c.specKey === 'axes');
+    let axisGraphic = graphicPath.find(g => g.name === 'axis');
+    if (axisGraphic) {
+      // @ts-ignore
+      const axis = axisModel.find(a => a._axisMark.getProduct().graphicItem === axisGraphic.parent);
+      return commonModelInfo(axis);
+    }
+    axisGraphic = graphicPath.find(g => g.name === 'axis-grid');
+    if (axisGraphic) {
+      // @ts-ignore
+      const axis = axisModel.find(a => a._gridMark.getProduct().graphicItem === axisGraphic.parent);
+      return commonModelInfo(axis);
+    }
+    return null;
   }
 };
 
