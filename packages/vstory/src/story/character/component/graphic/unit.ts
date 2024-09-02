@@ -2,10 +2,9 @@ import { createGroup, createSymbol, type IGroup, type ISymbolGraphicAttribute } 
 import { Graphic } from './graphic';
 import { getLayoutFromWidget } from '../../../utils/layout';
 import type { IWidgetData } from '../../dsl-interface';
+import { logger } from '../../../../util/output';
 
 interface IGraphicUnitAttributes {
-  // TODO: Consider moving this to the IComponentCharacterSpec graphic interface.
-
   /**
    * The width of the container.
    * Defaults to the width defined by the position of the character.
@@ -33,7 +32,7 @@ interface IGraphicUnitAttributes {
    * The total number of units to be rendered within the container.
    * @default 250
    */
-  count: number;
+  count?: number;
 
   /**
    * A function defining the style of each unit based on its index.
@@ -120,7 +119,7 @@ export class GraphicUnit extends Graphic {
     if ('bottom' in position && 'right' in position) {
       return { width: position.right - position.left, height: position.bottom - position.top };
     }
-    throw new Error('Invalid IWidgetData type');
+    logger('error', 'Invalid IWidgetData type');
   }
 
   private _calculateGrid(attributes: IGraphicUnitAttributes): IGridConfig {
@@ -156,12 +155,17 @@ export class GraphicUnit extends Graphic {
         (secondaryCount - 1) * adjustedGap[0] * unitSecondarySize) /
       (secondaryCount - 1);
 
-    const primaryOffset =
-      secondaryCount <= 1
-        ? count <= 1
-          ? (primaryLength - unitPrimarySize) / 2
-          : (primaryLength - count * unitPrimarySize - (count - 1) * unitPrimarySize * adjustedGap[1]) / (count - 1)
-        : 0;
+    let primaryOffset;
+    if (secondaryCount <= 1) {
+      if (count <= 1) {
+        primaryOffset = (primaryLength - unitPrimarySize) / 2;
+      } else {
+        primaryOffset =
+          (primaryLength - count * unitPrimarySize - (count - 1) * unitPrimarySize * adjustedGap[1]) / (count - 1);
+      }
+    } else {
+      primaryOffset = 0;
+    }
     const secondaryOffset = secondaryCount <= 1 ? (secondaryLength - unitSecondarySize) / 2 : offset;
 
     return isHorizontal

@@ -1,7 +1,8 @@
 import { ISymbolGraphicAttribute } from '@visactor/vrender-core';
 import { ICharacterSpec } from '../../../../../src/story/character';
 import { IActionsLink, IStorySpec } from '../../../../../src/story/interface';
-import { DEFAULT_ANIMATION_DURATION, DEFAULT_SCENE_DURATION, Input, QueryNode } from './input';
+import { DEFAULT_ANIMATION_DURATION, DEFAULT_SCENE_DURATION, defaultInput, Input, QueryNode } from './input';
+import { isFunction, isObject } from '@visactor/vutils';
 
 export function generateSpec(input: Input): IStorySpec {
   const { characters: layoutCharacters, actions: layoutActions } = generateLayoutSpec(input);
@@ -27,7 +28,17 @@ export function generateSpec(input: Input): IStorySpec {
 }
 
 function generateLayoutSpec(input: Input) {
-  const { layout } = input;
+  const {
+    layout: {
+      width: layoutWidth = defaultInput.layout.width,
+      height: layoutHeight = defaultInput.layout.height,
+      title: {
+        height: titleHeight = defaultInput.layout.title.height,
+        backgroundColor: titleBackgroundColor = defaultInput.layout.title.backgroundColor
+      } = {},
+      viz: { backgroundColor: vizBackgroundColor = defaultInput.layout.viz.backgroundColor } = {}
+    } = {}
+  } = input;
   const characters: ICharacterSpec[] = [
     {
       type: 'Rect',
@@ -36,12 +47,12 @@ function generateLayoutSpec(input: Input) {
       position: {
         top: 0,
         left: 0,
-        width: layout?.width!,
-        height: layout?.title?.height!
+        width: layoutWidth,
+        height: titleHeight
       },
       options: {
         graphic: {
-          fill: layout?.title?.backgroundColor,
+          fill: titleBackgroundColor,
           stroke: false
         }
       }
@@ -53,12 +64,12 @@ function generateLayoutSpec(input: Input) {
       position: {
         top: 0,
         left: 0,
-        width: layout?.width!,
-        height: layout?.height!
+        width: layoutWidth,
+        height: layoutHeight
       },
       options: {
         graphic: {
-          fill: layout?.viz?.backgroundColor,
+          fill: vizBackgroundColor,
           stroke: false
         }
       }
@@ -100,27 +111,39 @@ function generateLayoutSpec(input: Input) {
 }
 
 function generateTitleSpec(input: Input) {
-  const { scenes, layout } = input;
-  const { padding, style } = layout?.title!;
-  console.log('layout', layout);
-  console.log('padding', padding);
-  let startTime = 1;
+  const {
+    scenes,
+    layout: {
+      width: layoutWidth = defaultInput.layout.width,
+      height: layoutHeight = defaultInput.layout.height,
+      title: {
+        height: titleHeight = defaultInput.layout.title.height,
+        padding: {
+          left: titlePaddingLeft = defaultInput.layout.title.padding.left,
+          right: titlePaddingRight = defaultInput.layout.title.padding.right
+        } = {},
+        style: titleStyle = defaultInput.layout.title.style
+      } = {}
+    } = {}
+  } = input;
+
+  let startTime = 0;
   const characters: ICharacterSpec[] = scenes.map((scene, sceneIndex) => {
     return {
       type: 'Text',
       id: 'title-' + sceneIndex,
       zIndex: 3,
       position: {
-        top: layout?.title?.height! / 2,
-        left: layout?.width! / 2,
-        width: layout?.width! - padding?.left! - padding?.right!,
-        height: layout?.height!
+        top: titleHeight / 2,
+        left: layoutWidth / 2,
+        width: layoutWidth - titlePaddingLeft - titlePaddingRight,
+        height: layoutHeight
       },
       options: {
         graphic: {
-          width: layout?.width! - padding?.left! - padding?.right!,
-          height: layout?.height!,
-          ...style,
+          width: layoutWidth - titlePaddingLeft - titlePaddingRight,
+          height: layoutHeight,
+          ...titleStyle,
           textConfig: scene.title
         }
       }
@@ -176,20 +199,19 @@ function generateTitleSpec(input: Input) {
 }
 
 function generateVizSpec(input: Input) {
-  const { scenes, data, unit } = input;
-  const { defaultStyle } = unit!;
+  const { scenes, data, unit: { defaultStyle = defaultInput.unit.defaultStyle } = {} } = input;
   const initialStyleList: ISymbolGraphicAttribute[] = [];
   for (let i = 0; i < data.length; i++) {
-    if (typeof defaultStyle === 'function') {
+    if (isFunction(defaultStyle)) {
       initialStyleList.push(defaultStyle(i));
     }
-    if (typeof defaultStyle === 'object') {
-      initialStyleList.push(defaultStyle);
+    if (isObject(defaultStyle)) {
+      initialStyleList.push(defaultStyle as ISymbolGraphicAttribute);
     }
   }
   const character: ICharacterSpec = getUnitCharacter(initialStyleList, input);
   const actions: IActionsLink[] = [];
-  let startTime = 1;
+  let startTime = 0;
   let prevStyleList = initialStyleList;
   for (let sceneIndex = 0; sceneIndex < scenes.length; sceneIndex++) {
     const sceneSpec = scenes[sceneIndex];
@@ -205,33 +227,47 @@ function generateVizSpec(input: Input) {
 }
 
 function getUnitCharacter(styleList: ISymbolGraphicAttribute[], input: Input): ICharacterSpec {
-  const { layout, unit } = input;
-  const { padding, direction } = layout?.viz!;
+  const {
+    layout: {
+      width: layoutWidth = defaultInput.layout.width,
+      height: layoutHeight = defaultInput.layout.height,
+      title: { height: titleHeight = defaultInput.layout.title.height } = {},
+      viz: {
+        padding: {
+          left: vizPaddingLeft = defaultInput.layout.viz.padding.left,
+          right: vizPaddingRight = defaultInput.layout.viz.padding.right,
+          top: vizPaddingTop = defaultInput.layout.viz.padding.top,
+          bottom: vizPaddingBottom = defaultInput.layout.viz.padding.bottom
+        } = {},
+        direction: vizDirection = defaultInput.layout.viz.direction
+      } = {}
+    } = {},
+    unit: { gap: unitGap = defaultInput.unit.gap, aspect: unitAspect = defaultInput.unit.aspect } = {}
+  } = input;
 
   const character: ICharacterSpec = {
     type: 'Unit',
     id: 'unit',
     zIndex: 2,
     position: {
-      top: layout?.title?.height!,
+      top: titleHeight,
       left: 0,
-      width: layout?.width!,
-      height: layout?.height! - layout?.title?.height!
+      width: layoutWidth,
+      height: layoutHeight - titleHeight
     },
     options: {
       graphic: {
         padding: {
-          top: padding?.top!,
-          bottom: padding?.bottom!,
-          right: padding?.right!,
-          left: padding?.left!
+          top: vizPaddingTop,
+          bottom: vizPaddingBottom,
+          right: vizPaddingRight,
+          left: vizPaddingLeft
         },
         count: styleList.length,
         styleFunc: (index: number): ISymbolGraphicAttribute => ({ ...styleList[index] }),
-        gap: unit?.gap!,
-        aspect: unit?.aspect!,
-        // TODO: add direction to input
-        direction: direction
+        gap: unitGap,
+        aspect: unitAspect,
+        direction: vizDirection
       }
     }
   };

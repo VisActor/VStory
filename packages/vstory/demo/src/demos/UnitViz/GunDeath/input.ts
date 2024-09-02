@@ -20,7 +20,6 @@ export interface Input {
         top?: number;
         bottom?: number;
       };
-      // TODO: add style
     };
     viz?: {
       backgroundColor?: string;
@@ -67,7 +66,7 @@ export interface UnitNode {
 
 // export type RequiredInput = DeepRequired<Input>;
 
-export const defaultInput: Input = {
+export const defaultInput = {
   layout: {
     width: 1920,
     height: 1080,
