@@ -121,7 +121,7 @@ export class Chart extends Group implements IVisactorGraphic {
     if (stage) {
       stage.background = false as any;
       // 关闭交互
-      stage.pauseTriggerEvent();
+      // stage.pauseTriggerEvent();
     }
     if (params.viewBox) {
       this.updateViewBox(params.viewBox);

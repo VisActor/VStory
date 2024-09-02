@@ -606,14 +606,14 @@ const storySpec: IStorySpec = {
       type: 'VChart',
       id: '58e9a996-7460-44de-8c7a-eceae2260308',
       position: {
-        top: -25,
+        top: 125,
         left: 79.5,
-        bottom: 319.8,
+        bottom: 419.8,
         right: 679.5
       },
       options: {
         spec: spec,
-        initOption: { animation: false }
+        initOption: { animation: false, interactive: true, disableTriggerEvent: false }
       }
     }
   ]
@@ -631,9 +631,21 @@ export const VChartGraphic = () => {
     const edit = new Edit(story);
     window.edit = edit;
 
-    setTimeout(() => {
-      story.getCharactersById(storySpec.characters[0].id)?.graphic.updateSpec(spec1);
-    }, 3000);
+    const vchart = story.getCharactersById('58e9a996-7460-44de-8c7a-eceae2260308')?.graphic.vchart;
+    window.vchart = vchart;
+    console.log('vchart', vchart);
+    vchart.on('pointerdown', (event: any) => {
+      console.log('vchart on pointerdown', event);
+    });
+    vchart.getStage().on('pointerdown', (event: any) => {
+      console.log('vchart stage on pointerdown', [...event.detailPath]);
+    });
+    story.canvas.getStage().on('pointerdown', (event: any) => {
+      console.log('stage on pointerdown', [...event.detailPath]);
+    });
+    // setTimeout(() => {
+    //   story.getCharactersById(storySpec.characters[0].id)?.graphic.updateSpec(spec1, null, false, false);
+    // }, 3000);
   }, []);
 
   return <div style={{ width: '100%', height: '100%' }} id={id}></div>;
