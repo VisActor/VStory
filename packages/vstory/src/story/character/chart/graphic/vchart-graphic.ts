@@ -1,6 +1,6 @@
 import type { IVisactorGraphic } from '../../visactor/interface';
 import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
-import type { ISpec, IVChart } from '@visactor/vchart';
+import type { IInitOption, ISpec, IVChart } from '@visactor/vchart';
 import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Group } from '@visactor/vrender';
 import { isPointInBounds } from '../../../../util/space';
@@ -11,7 +11,7 @@ export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   spec: any;
   ClassType: any;
   vchart: IVChart;
-  mode: string;
+  mode: IInitOption['mode'];
   modeParams?: any;
   dpr: number;
   interactive: boolean;
@@ -89,6 +89,7 @@ export class Chart extends Group implements IVisactorGraphic {
             autoFit: false,
             disableTriggerEvent: params.disableTriggerEvent,
             disableDirtyBounds: params.disableDirtyBounds,
+            // @ts-ignore
             ticker: params.ticker,
             beforeRender: () => {
               if (!this.stage) {
