@@ -4,6 +4,7 @@ import type { ISpec, IVChart } from '@visactor/vchart';
 import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Group } from '@visactor/vrender';
 import { isPointInBounds } from '../../../../util/space';
+import { mergeChartOption } from '../../../utils/chart';
 
 export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
@@ -73,43 +74,48 @@ export class Chart extends Group implements IVisactorGraphic {
 
     // 创建chart
     if (!params.vchart) {
-      params.vchart = this._vchart = new params.ClassType(params.spec, {
-        renderCanvas: params.renderCanvas,
-        mode: params.mode,
-        modeParams: params.modeParams,
-        canvasControled: false,
-        // viewBox: params.vi
-        dpr: params.dpr,
-        interactive: params.interactive,
-        animation: false,
-        autoFit: false,
-        disableTriggerEvent: params.disableTriggerEvent,
-        disableDirtyBounds: params.disableDirtyBounds,
-        ticker: params.ticker,
-        beforeRender: () => {
-          if (!this.stage) {
-            return;
-          }
-          const chartStage = this._vchart.getStage();
-          if (!(chartStage as any)._editor_needRender) {
-            chartStage.pauseRender();
-            this.stage.dirtyBounds?.union(this.globalAABBBounds);
-            this.stage.renderNextFrame();
-          }
-        },
-        afterRender: () => {
-          if (!this._vchart) {
-            return;
-          }
-          if (!this.stage) {
-            return;
-          }
-          // @ts-ignore
-          this._vchart.getStage()._editor_needRender = false;
-          this._vchart.getStage().stage.resumeRender();
-        },
-        ...(params.chartInitOptions ?? {})
-      });
+      params.vchart = this._vchart = new params.ClassType(
+        params.spec,
+        mergeChartOption(
+          {
+            renderCanvas: params.renderCanvas,
+            mode: params.mode,
+            modeParams: params.modeParams,
+            canvasControled: false,
+            // viewBox: params.vi
+            dpr: params.dpr,
+            interactive: params.interactive,
+            animation: false,
+            autoFit: false,
+            disableTriggerEvent: params.disableTriggerEvent,
+            disableDirtyBounds: params.disableDirtyBounds,
+            ticker: params.ticker,
+            beforeRender: () => {
+              if (!this.stage) {
+                return;
+              }
+              const chartStage = this._vchart.getStage();
+              if (!(chartStage as any)._editor_needRender) {
+                chartStage.pauseRender();
+                this.stage.dirtyBounds?.union(this.globalAABBBounds);
+                this.stage.renderNextFrame();
+              }
+            },
+            afterRender: () => {
+              if (!this._vchart) {
+                return;
+              }
+              if (!this.stage) {
+                return;
+              }
+              // @ts-ignore
+              this._vchart.getStage()._editor_needRender = false;
+              this._vchart.getStage().stage.resumeRender();
+            }
+          },
+          params.chartInitOptions ?? {}
+        )
+      );
     } else {
       this._vchart = params.vchart;
     }

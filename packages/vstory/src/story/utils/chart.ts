@@ -1,5 +1,5 @@
-import { ISpec } from '@visactor/vchart';
-import { isArray, isArrayLike, isNil, isObject, isPlainObject, isString, isValid } from '@visactor/vutils';
+import type { ISpec, IInitOption } from '@visactor/vchart';
+import { isArray, isArrayLike, isNil, isObject, isPlainObject, isString, isValid, array } from '@visactor/vutils';
 
 const directlyAssignSpecKeys = ['seriesId', 'text'];
 
@@ -131,4 +131,41 @@ export function findChartSpec(s: any, vchartSpec: ISpec) {
     return isModelInfoMatchSpec(s, chartSpec as { id: string | number }, s.specKey, 0) ? chartSpec : null;
   }
   return null;
+}
+
+export function mergeChartOption(
+  target: Partial<IInitOption>,
+  ...sources: Partial<IInitOption>[]
+): Partial<IInitOption> {
+  const performanceHook: { [key: string]: (() => void)[] } = {};
+
+  function pushHookToTemp(hooks: IInitOption['performanceHook']) {
+    Object.keys(hooks).forEach((k: string) => {
+      if (!performanceHook[k]) {
+        performanceHook[k] = [];
+      }
+      // @ts-ignore
+      performanceHook[k].push(hooks[k]);
+    });
+  }
+  if (target.performanceHook) {
+    pushHookToTemp(target.performanceHook);
+  }
+  sources.forEach(source => {
+    if (!source) {
+      return;
+    }
+    if (source.performanceHook) {
+      pushHookToTemp(source.performanceHook);
+      delete source.performanceHook;
+    }
+  });
+  target.performanceHook = {};
+  Object.keys(performanceHook).forEach(k => {
+    // @ts-ignore
+    target.performanceHook[k] = () => {
+      performanceHook[k].forEach(f => f());
+    };
+  });
+  return target;
 }

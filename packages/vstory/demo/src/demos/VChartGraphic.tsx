@@ -605,6 +605,7 @@ const storySpec: IStorySpec = {
     {
       type: 'VChart',
       id: '58e9a996-7460-44de-8c7a-eceae2260308',
+      zIndex: 200,
       position: {
         top: 125,
         left: 79.5,
@@ -613,7 +614,19 @@ const storySpec: IStorySpec = {
       },
       options: {
         spec: spec,
-        initOption: { animation: false, interactive: true, disableTriggerEvent: false }
+        initOption: {
+          animation: false,
+          interactive: true,
+          disableTriggerEvent: false,
+          performanceHook: {
+            afterInitializeChart: () => {
+              console.log('afterInitializeChart');
+            },
+            afterVRenderDraw: () => {
+              console.log('afterVRenderDraw');
+            }
+          }
+        }
       }
     }
   ]
