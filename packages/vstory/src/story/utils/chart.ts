@@ -1,5 +1,5 @@
 import type { ISpec, IInitOption } from '@visactor/vchart';
-import { isArray, isArrayLike, isNil, isObject, isPlainObject, isString, isValid, array } from '@visactor/vutils';
+import { isArray, isArrayLike, isNil, isObject, isPlainObject, isString, isValid, merge } from '@visactor/vutils';
 
 const directlyAssignSpecKeys = ['seriesId', 'text'];
 
@@ -158,6 +158,7 @@ export function mergeChartOption(
     if (source.performanceHook) {
       pushHookToTemp(source.performanceHook);
       delete source.performanceHook;
+      merge(target, source);
     }
   });
   target.performanceHook = {};
