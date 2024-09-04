@@ -164,8 +164,9 @@ export function mergeChartOption(
   target.performanceHook = {};
   Object.keys(performanceHook).forEach(k => {
     // @ts-ignore
-    target.performanceHook[k] = () => {
-      performanceHook[k].forEach(f => f());
+    target.performanceHook[k] = (...args) => {
+      // @ts-ignore
+      performanceHook[k].forEach(f => f(...args));
     };
   });
   return target;
