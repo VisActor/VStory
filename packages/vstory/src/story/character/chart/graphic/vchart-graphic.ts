@@ -182,6 +182,10 @@ export class Chart extends Group implements IVisactorGraphic {
       return;
     }
     this._boundsChangeTag = true;
+    this._vchart.resize(
+      this._globalViewBox.x2 - this._globalViewBox.x1,
+      this._globalViewBox.y2 - this._globalViewBox.y1
+    );
     const rootBounds = this._getVChartRootMarkBounds();
     this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1, -rootBounds.y1);
     this._BoundsViewBox = rootBounds;
@@ -203,7 +207,7 @@ export class Chart extends Group implements IVisactorGraphic {
     viewBox.y2 -= viewBox.y1;
     viewBox.x1 = 0;
     viewBox.y1 = 0;
-    this._vchart.resize(viewBox.x2 - viewBox.x1, viewBox.y2 - viewBox.y1);
+    // this._vchart.resize(viewBox.x2 - viewBox.x1, viewBox.y2 - viewBox.y1);
     this._vchart.updateViewBox(viewBox);
     const renderViewBox = { ...rootBounds };
     renderViewBox.x2 -= renderViewBox.x1;

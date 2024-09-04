@@ -155,11 +155,11 @@ export function mergeChartOption(
     if (!source) {
       return;
     }
-    if (source.performanceHook) {
-      pushHookToTemp(source.performanceHook);
-      delete source.performanceHook;
-      merge(target, source);
+    const { performanceHook, ...rest } = source;
+    if (performanceHook) {
+      pushHookToTemp(performanceHook);
     }
+    merge(target, rest);
   });
   target.performanceHook = {};
   Object.keys(performanceHook).forEach(k => {
