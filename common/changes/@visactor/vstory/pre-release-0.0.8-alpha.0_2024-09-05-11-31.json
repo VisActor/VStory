@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory",
+      "comment": "fix: fix the issue of ranking bar character dose not update data",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory"
+}
