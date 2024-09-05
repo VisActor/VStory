@@ -21,38 +21,74 @@ export class StoryCanvas implements IStoryCanvas {
     return this._canvas;
   }
 
-  protected _container: HTMLDivElement;
+  protected _container: HTMLDivElement | null;
   get container() {
     return this._container;
   }
 
-  constructor(story: Story, container: HTMLDivElement) {
+  constructor(
+    story: Story,
+    params: {
+      container?: HTMLDivElement;
+      canvas?: HTMLCanvasElement;
+      width?: number;
+      height?: number;
+    }
+  ) {
     this._story = story;
-    this._container = container;
-    this._initCanvas();
+    this._container = params.container;
+    this._container && this._initCanvasByContainer();
+    params.canvas && this._initCanvasByCanvas(params.canvas, params.width || 500, params.height || 500);
   }
 
-  protected _initCanvas() {
+  resize(w: number, h: number) {
+    if (this._canvas) {
+      this._canvas.width = w * vglobal.devicePixelRatio;
+      this._canvas.height = h * vglobal.devicePixelRatio;
+      this._canvas.style.width = w + 'px';
+      this._canvas.style.height = h + 'px';
+      this._stage.resize(w, h);
+    }
+  }
+
+  protected _initCanvasByContainer() {
     const canvas = document.createElement('canvas');
-    canvas.width = this._container.clientWidth * window.devicePixelRatio;
-    canvas.height = this._container.clientHeight * window.devicePixelRatio;
-    canvas.style.width = this._container.clientWidth + 'px';
-    canvas.style.height = this._container.clientHeight + 'px';
     canvas.style.position = 'absolute';
     canvas.id = `_visactor_story_canvas_${this._story.id}`;
     this._container.appendChild(canvas);
     this._canvas = canvas;
     const stage = createStage({
       canvas: this._canvas,
-      width: this._canvas.clientWidth,
-      height: this._canvas.clientHeight,
+      width: this._container.clientWidth,
+      height: this._container.clientHeight,
+      dpr: vglobal.devicePixelRatio,
       canvasControled: true,
       // 得开启自动渲染，否则编辑场景中无法触发视图更新
       autoRender: true,
       disableDirtyBounds: true,
       ticker: new ManualTicker([]),
       pluginList: ['RichTextEditPlugin'],
-      dpr: window.devicePixelRatio,
+      event: {
+        clickInterval: 300
+      }
+    });
+    // @ts-ignore
+    this._stage = stage;
+  }
+
+  protected _initCanvasByCanvas(canvas: HTMLCanvasElement, width: number, height: number) {
+    this._canvas = canvas;
+    const stage = createStage({
+      canvas: this._canvas,
+      width,
+      height,
+      canvasControled: true,
+      // 得开启自动渲染，否则编辑场景中无法触发视图更新
+      autoRender: true,
+      disableDirtyBounds: true,
+      ticker: new ManualTicker([]),
+      pluginList: ['RichTextEditPlugin'],
+      dpr: vglobal.devicePixelRatio,
       event: {
         clickInterval: 300
       }
