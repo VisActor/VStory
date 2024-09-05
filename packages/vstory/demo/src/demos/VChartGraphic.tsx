@@ -656,9 +656,17 @@ export const VChartGraphic = () => {
     story.canvas.getStage().on('pointerdown', (event: any) => {
       console.log('stage on pointerdown', [...event.detailPath]);
     });
-    // setTimeout(() => {
-    //   story.getCharactersById(storySpec.characters[0].id)?.graphic.updateSpec(spec1, null, false, false);
-    // }, 3000);
+    window.vchart = vchart;
+    window.chartGraphic = story.getCharactersById(storySpec.characters[0].id);
+    window.updateSpec1 = () => {
+      window.chartGraphic?.graphic.updateSpec(spec1, null, false, false);
+    };
+    window.updateSpec0 = () => {
+      window.chartGraphic?.graphic.updateSpec(spec, null, false, false);
+    };
+    setTimeout(() => {
+      window.chartGraphic?.graphic.updateSpec(spec1, null, false, false);
+    }, 3000);
   }, []);
 
   return <div style={{ width: '100%', height: '100%' }} id={id}></div>;
