@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -30,7 +30,7 @@
     "@visactor/vrender-kits": "0.20.1-alpha.5",
     "@visactor/vrender-components": "0.20.1-alpha.5",
     "@visactor/vutils": "~0.18.4",
-    "@visactor/vchart-extension": "0.0.2-alpha.2"
+    "@visactor/vchart-extension": "0.0.2"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",
