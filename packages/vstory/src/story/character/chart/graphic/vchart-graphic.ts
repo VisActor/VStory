@@ -6,6 +6,8 @@ import { genNumberType, Group } from '@visactor/vrender';
 import { isPointInBounds } from '../../../../util/space';
 import { mergeChartOption } from '../../../utils/chart';
 
+const VIEW_BOX_EXPEND = 4;
+
 export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
   spec: any;
@@ -187,7 +189,9 @@ export class Chart extends Group implements IVisactorGraphic {
       this._globalViewBox.y2 - this._globalViewBox.y1
     );
     const rootBounds = this._getVChartRootMarkBounds();
-    this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1 + 1, -rootBounds.y1 + 1);
+    this._vchart
+      .getStage()
+      .defaultLayer.translateTo(-rootBounds.x1 + VIEW_BOX_EXPEND, -rootBounds.y1 + VIEW_BOX_EXPEND);
     this._BoundsViewBox = rootBounds;
 
     const viewBox = { ...this._globalViewBox };
@@ -214,8 +218,8 @@ export class Chart extends Group implements IVisactorGraphic {
     renderViewBox.y2 -= renderViewBox.y1;
     renderViewBox.x1 = 0;
     renderViewBox.y1 = 0;
-    renderViewBox.x2 += 2;
-    renderViewBox.y2 += 2;
+    renderViewBox.x2 += VIEW_BOX_EXPEND * 2;
+    renderViewBox.y2 += VIEW_BOX_EXPEND * 2;
     // @ts-ignore
     this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);
   }
