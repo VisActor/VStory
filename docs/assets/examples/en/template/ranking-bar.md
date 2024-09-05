@@ -50,7 +50,6 @@ const allData = [];
 yearsData.forEach(value => {
   allData.push(...value);
 });
-console.log(countryImage);
 
 const rankingBarSpec = {
   type: 'rankingBar',
@@ -96,10 +95,10 @@ const spec = {
       id: 'bar',
       zIndex: 10,
       position: {
-        top: 100,
-        left: 100,
+        top: 50,
+        left: 50,
         width: 800,
-        height: 500
+        height: 400
       },
       options: {
         spec: rankingBarSpec
@@ -141,7 +140,7 @@ const spec = {
 };
 
 const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 1, scaleY: 1 } });
-vstory.canvas.getStage().defaultLayer.scale(0.5, 0.5);
+vstory.canvas.getStage().defaultLayer.scale(0.9, 0.9);
 window.vstory = vstory;
 vstory.play();
 ```
