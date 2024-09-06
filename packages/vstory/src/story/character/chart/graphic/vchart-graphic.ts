@@ -1,3 +1,4 @@
+import type { IGroup } from '@visactor/vrender-core';
 import type { IVisactorGraphic } from '../../visactor/interface';
 import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
 import type { IInitOption, ISpec, IVChart } from '@visactor/vchart';
@@ -53,9 +54,27 @@ export class Chart extends Group implements IVisactorGraphic {
   drawTag = false;
   protected _boundsChangeTag: boolean = true;
 
-  private _getVChartRootMarkBounds() {
+  private _getVChartBounds() {
     const stage = this._vchart.getStage();
     return stage.defaultLayer.getChildByName('root').AABBBounds.clone();
+  }
+
+  getVChartActualBounds() {
+    const stage = this._vchart.getStage();
+    const layer = stage.defaultLayer;
+    const root = stage.defaultLayer.getChildByName('root') as IGroup;
+    const bounds = new Bounds();
+    root.forEachChildren((child: IGroup) => {
+      if (child.attribute.width || child.attribute.height) {
+        child.forEachChildren((_child: IGroup) => {
+          bounds.union(_child.AABBBounds);
+        });
+      } else {
+        bounds.union(child.AABBBounds);
+      }
+    });
+    bounds.translate(this.attribute.x + layer.attribute.x, this.attribute.y + layer.attribute.y);
+    return bounds;
   }
 
   doUpdateAABBBounds(full?: boolean): IAABBBounds {
@@ -188,10 +207,8 @@ export class Chart extends Group implements IVisactorGraphic {
       this._globalViewBox.x2 - this._globalViewBox.x1,
       this._globalViewBox.y2 - this._globalViewBox.y1
     );
-    const rootBounds = this._getVChartRootMarkBounds();
-    this._vchart
-      .getStage()
-      .defaultLayer.translateTo(-rootBounds.x1 + VIEW_BOX_EXPEND, -rootBounds.y1 + VIEW_BOX_EXPEND);
+    const rootBounds = this._getVChartBounds();
+    this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1, -rootBounds.y1);
     this._BoundsViewBox = rootBounds;
 
     const viewBox = { ...this._globalViewBox };
@@ -218,8 +235,8 @@ export class Chart extends Group implements IVisactorGraphic {
     renderViewBox.y2 -= renderViewBox.y1;
     renderViewBox.x1 = 0;
     renderViewBox.y1 = 0;
-    renderViewBox.x2 += VIEW_BOX_EXPEND * 2;
-    renderViewBox.y2 += VIEW_BOX_EXPEND * 2;
+    renderViewBox.x2 += VIEW_BOX_EXPEND;
+    renderViewBox.y2 += VIEW_BOX_EXPEND;
     // @ts-ignore
     this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);
   }
