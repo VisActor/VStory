@@ -77,6 +77,7 @@ importers:
       '@types/react-dom': ^18.0.0
       '@visactor/vchart': 1.12.2
       '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': ~0.18.4
       '@visactor/vrender': 0.20.1
       '@visactor/vrender-components': 0.20.1
       '@visactor/vrender-core': 0.20.1
@@ -98,6 +99,7 @@ importers:
     dependencies:
       '@visactor/vchart': 1.12.2
       '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': 0.18.15
       '@visactor/vrender': 0.20.1
       '@visactor/vrender-components': 0.20.1
       '@visactor/vrender-core': 0.20.1
@@ -3355,7 +3357,7 @@ packages:
     dependencies:
       '@visactor/vrender-core': 0.20.1
       '@visactor/vrender-kits': 0.20.1
-      '@visactor/vscale': 0.18.14
+      '@visactor/vscale': 0.18.15
       '@visactor/vutils': 0.18.15
     dev: false
 
@@ -3382,12 +3384,6 @@ packages:
       '@visactor/vrender-kits': 0.20.1
     dev: false
 
-  /@visactor/vscale/0.18.14:
-    resolution: {integrity: sha512-uhyI8yqOPyMurdwqz1oqcqfTXZebpY5kYdnOM5xG79Lz54L95YNZ1J5BNu+SOxOBWbul5hnyjVpdTbZIoujveQ==}
-    dependencies:
-      '@visactor/vutils': 0.18.14
-    dev: false
-
   /@visactor/vscale/0.18.15:
     resolution: {integrity: sha512-09dDWc6muJbOMxzp4odCsyLjqAF6u3BOx9kAJJ0tEpKE1AuHL4BTejNe697mJAnXqAo2ynAA+dn+cgWYiW1WQg==}
     dependencies:
@@ -3399,14 +3395,6 @@ packages:
     dependencies:
       '@visactor/vdataset': 0.18.15
       '@visactor/vutils': 0.18.15
-    dev: false
-
-  /@visactor/vutils/0.18.14:
-    resolution: {integrity: sha512-Yf6v+utbMd7kK5F2UqZ3pw7xDpsvm24MQHzUzX3OUVFq+kAmYSPIc7j5YigShnn5se9uoghpNo62Vk0+we0W5Q==}
-    dependencies:
-      '@turf/helpers': 6.5.0
-      '@turf/invariant': 6.5.0
-      eventemitter3: 4.0.7
     dev: false
 
   /@visactor/vutils/0.18.15:

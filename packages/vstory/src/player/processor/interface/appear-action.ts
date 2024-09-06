@@ -1,4 +1,4 @@
-import type { EasingType } from '@visactor/vrender-core';
+import type { EasingType, ISymbolGraphicAttribute } from '@visactor/vrender-core';
 import type { IAction, IActionPayload, IAnimationParams } from './common-action';
 
 export interface IChartVisibilityPayload extends IActionPayload {

@@ -11,6 +11,7 @@ import type {
   IComponentStyleAction
 } from '../../player/processor/interface/style-action';
 import type { ICharacterSpec } from '../character';
+import type { IUnitStyleAction, IUnitVisibilityAction } from '../../player/processor/interface/unit-action';
 
 export type IActionSpec =
   | IComponentStyleAction
@@ -21,7 +22,9 @@ export type IActionSpec =
   | IChartVisibilityAction
   | IChartUpdateAction
   | IChartAddAction
-  | IRankingBarPlayAction;
+  | IRankingBarPlayAction
+  | IUnitStyleAction
+  | IUnitVisibilityAction;
 
 export interface IStorySpec {
   acts: IActSpec[]; // 作品的章节
