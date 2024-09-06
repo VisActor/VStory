@@ -6,7 +6,7 @@ import { genNumberType, Group } from '@visactor/vrender';
 import { isPointInBounds } from '../../../../util/space';
 import { mergeChartOption } from '../../../utils/chart';
 
-const VIEW_BOX_EXPEND = 4;
+const VIEW_BOX_EXPEND = 0;
 
 export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
