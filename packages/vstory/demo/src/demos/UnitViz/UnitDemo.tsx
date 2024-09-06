@@ -82,7 +82,7 @@ export const UnitComponentDemo = () => {
                   characterId: 'unit-test',
                   characterActions: [
                     {
-                      action: 'style',
+                      action: 'appear',
                       startTime: 1,
                       payload: {
                         animation: {

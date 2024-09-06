@@ -1,19 +1,30 @@
 import type { IGraphic, ISymbol } from '@visactor/vrender-core';
 import type { ICharacter } from '../../../../story/character';
 import { getCharacterByEffect } from '../../common/common';
-import type { IStyleParams, ITypeWriterParams } from '../../interface/appear-action';
-import { CommonVisibilityActionProcessor } from '../common-component';
+import type { IStyleParams, IUnitStyleAction } from '../../interface/unit-action';
+import { CommonStyleActionProcessor, CommonVisibilityActionProcessor } from '../common-component';
 
 export class UnitVisibilityActionProcessor extends CommonVisibilityActionProcessor {
   name: 'appearOrDisAppear';
-  constructor() {
-    super();
+
+  getEffectFunc(effect: string, appear: boolean) {
+    switch (effect) {
+      case 'style':
+        return style;
+    }
+    return super.getEffectFunc(effect, appear);
   }
 }
 
-function style(character: ICharacter, animation: ITypeWriterParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach((graphic: any) => _style(graphic, animation as any));
+export class UnitStyleActionProcessor extends CommonStyleActionProcessor {
+  run(character: ICharacter, actionSpec: IUnitStyleAction): void {
+    style(character, actionSpec.payload.animation, actionSpec.payload.animation.effect);
+  }
+}
+
+export function style(character: ICharacter, animation: IStyleParams, effect: string) {
+  const graphics = getCharacterByEffect(character, effect)[0];
+  _style(graphics, animation);
 }
 
 function _style(graphic: IGraphic, params: IStyleParams) {
@@ -36,19 +47,4 @@ function _style(graphic: IGraphic, params: IStyleParams) {
       symbol.animate().wait(delay).to(style, duration, params.easing);
     }
   });
-}
-
-export class UnitStyleActionProcessor extends CommonVisibilityActionProcessor {
-  name: 'style';
-  constructor() {
-    super();
-  }
-
-  getEffectFunc(effect: string, appear: boolean) {
-    switch (effect) {
-      case 'style':
-        return style;
-    }
-    return super.getEffectFunc(effect, appear);
-  }
 }

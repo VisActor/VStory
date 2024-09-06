@@ -27,4 +27,9 @@ export interface IComponentUnitStylePayload extends IActionPayload {
 
 export interface IUnitStyleAction extends IAction<IComponentUnitStylePayload> {
   action: 'style';
+  payload: IComponentUnitStylePayload;
+}
+
+export interface IUnitVisibilityAction extends IAction<IComponentUnitStylePayload> {
+  action: 'appear';
 }

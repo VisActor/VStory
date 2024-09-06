@@ -205,8 +205,8 @@ function generateVizSpec(input: Input) {
     if (isFunction(defaultStyle)) {
       initialStyleList.push(defaultStyle(i));
     }
-    if (isObject(defaultStyle)) {
-      initialStyleList.push(defaultStyle as ISymbolGraphicAttribute);
+    if (isObject<ISymbolGraphicAttribute>(defaultStyle)) {
+      initialStyleList.push(defaultStyle);
     }
   }
   const character: ICharacterSpec = getUnitCharacter(initialStyleList, input);
