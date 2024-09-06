@@ -1,18 +1,32 @@
 import React, { useEffect } from 'react';
 import { IStorySpec } from '../../../src/story/interface';
 import { Story } from '../../../src/story/story';
-import { Edit } from '../../../src/edit/edit';
 import '../../../src/story/index';
 import { cloneDeep } from '@visactor/vutils';
-import { CommonEditComponent } from '../../../src/edit/edit-component/common';
-import { BoxSelection } from '../../../src/edit/edit-component/box-selection';
-import { TextSelection } from '../../../src/edit/edit-component/text-selection';
-import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
+import Scene3ChartImage2 from '../assets/scene3/chart-2.png';
+import { loadAllSelection } from '../../../src/edit/edit-component';
+import { Edit } from '../../../src/edit/edit';
 
-Edit.registerEditComponent('common', CommonEditComponent);
-Edit.registerEditComponent('text', TextSelection);
-Edit.registerEditComponent('richtext', RichTextSelection);
-Edit.registerEditComponent('box-selection', BoxSelection);
+// Edit.registerEditComponent('common', CommonEditComponent);
+loadAllSelection();
+
+const chartSpec = {
+  type: 'bar',
+  data: [
+    {
+      id: 'barData',
+      values: [
+        { month: 'Monday', sales: 22 },
+        { month: 'Tuesday', sales: 13 },
+        { month: 'Wednesday', sales: 25 },
+        { month: 'Thursday', sales: 29 },
+        { month: 'Friday', sales: 38 }
+      ]
+    }
+  ],
+  xField: 'month',
+  yField: 'sales'
+};
 
 export const StoryEdit = () => {
   const id = 'storyBar';
@@ -23,7 +37,7 @@ export const StoryEdit = () => {
       characters: [
         {
           type: 'Rect',
-          id: 'test-graphics-0',
+          id: 'rect0',
           zIndex: 10,
           position: {
             top: 40,
@@ -45,7 +59,7 @@ export const StoryEdit = () => {
         },
         {
           type: 'Rect',
-          id: 'test-graphics-1',
+          id: 'rect1',
           zIndex: 0,
           position: {
             top: 40,
@@ -55,7 +69,7 @@ export const StoryEdit = () => {
           },
           options: {
             graphic: {
-              fill: 'red',
+              fill: 'blue',
               visible: false
             },
             text: {
@@ -67,7 +81,67 @@ export const StoryEdit = () => {
           }
         },
         {
-          type: 'BarChart',
+          type: 'Image',
+          id: 'image0',
+          zIndex: 0,
+          position: {
+            top: 140,
+            left: 250,
+            width: 200,
+            height: 100
+          },
+          options: {
+            graphic: {
+              image: Scene3ChartImage2
+            },
+            text: {
+              text: 'Image',
+              fill: 'black'
+            },
+            angle: 0,
+            shapePoints: []
+          }
+        },
+        // {
+        //   type: 'Text',
+        //   id: 'text0',
+        //   zIndex: 0,
+        //   position: {
+        //     top: 140,
+        //     left: 150,
+        //     width: 200,
+        //     height: 100
+        //   },
+        //   options: {
+        //     graphic: {
+        //       fill: 'pink',
+        //       text: 'hahaha'
+        //     },
+        //     angle: 0,
+        //     shapePoints: []
+        //   }
+        // },
+        {
+          type: 'Shape',
+          id: 'shape0',
+          zIndex: 0,
+          position: {
+            top: 240,
+            left: 250,
+            width: 200,
+            height: 100
+          },
+          options: {
+            graphic: {
+              fill: 'green',
+              symbolType: 'star'
+            },
+            angle: 0,
+            shapePoints: []
+          }
+        },
+        {
+          type: 'VChart',
           id: 'test-chart-0',
           zIndex: 9,
           position: {
@@ -77,37 +151,7 @@ export const StoryEdit = () => {
             height: 400
           },
           options: {
-            title: {
-              text: 'Timeline Chart',
-              orient: 'bottom',
-              align: 'center',
-              textStyle: {
-                fontSize: 10,
-                lineHeight: 10
-              }
-            },
-            padding: 12,
-            data: [
-              {
-                id: 'id0',
-                values: [
-                  { type: 'a', value: 0.36, value2: 0.06 },
-                  { type: 'b', value: 0.66, value2: 0.26 },
-                  { type: 'c', value: 0.4, value2: 0.0 },
-                  { type: 'd', value: 0.6, value2: 0.2 }
-                ]
-              }
-            ],
-            direction: 'vertical',
-            seriesSpec: [
-              {
-                matchInfo: { specIndex: 'all' },
-                spec: {
-                  xField: 'type',
-                  yField: 'value'
-                }
-              }
-            ]
+            spec: chartSpec
           }
         }
       ],
@@ -119,32 +163,12 @@ export const StoryEdit = () => {
               id: 'scene0',
               actions: [
                 {
-                  characterId: 'test-graphics-0',
+                  characterId: ['rect0', 'rect1', 'image0', 'shape0'],
                   characterActions: [
                     {
                       startTime: 0,
-                      duration: 0,
                       action: 'appear',
                       payload: {
-                        style: {},
-                        animation: {
-                          duration: 0,
-                          easing: 'linear',
-                          effect: 'fadeIn'
-                        } as any
-                      }
-                    }
-                  ]
-                },
-                {
-                  characterId: 'test-graphics-1',
-                  characterActions: [
-                    {
-                      startTime: 0,
-                      duration: 0,
-                      action: 'appear',
-                      payload: {
-                        style: {},
                         animation: {
                           duration: 0,
                           easing: 'linear',
@@ -159,8 +183,12 @@ export const StoryEdit = () => {
                   characterActions: [
                     {
                       startTime: 0,
-                      duration: 0,
-                      action: 'appear'
+                      action: 'appear',
+                      payload: {
+                        animation: {
+                          duration: 0
+                        }
+                      }
                     }
                   ]
                 }
@@ -171,7 +199,7 @@ export const StoryEdit = () => {
       ]
     };
     const story = new Story(tempSpec, { dom: id });
-    story.play();
+    story.play(false);
     const edit = new Edit(story);
     edit.emitter.on('startEdit', msg => {
       if (msg.type === 'commonEdit' && msg.actionInfo.character) {

@@ -22,15 +22,15 @@ export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   chartInitOptions?: any;
 }
 
-export const CHART_NUMBER_TYPE = genNumberType();
+export const COMPONENT_NUMBER_TYPE = genNumberType();
 
 // @ts-ignore
 export class ComponentGroup extends Group implements IVisactorGraphic {
   type: GraphicType = 'vstory-component-group' as any;
-  numberType: number = CHART_NUMBER_TYPE;
+  numberType: number = COMPONENT_NUMBER_TYPE;
 
   constructor(attrs: IGroupGraphicAttribute) {
     // vstory-component-group没有主题，必须都初始化，否则动画会找不到属性
-    super({ scaleX: 1, scaleY: 1, x: 0, y: 0, angle: 0, ...attrs });
+    super({ scaleX: 1, scaleY: 1, x: 0, y: 0, angle: 0, ...attrs, pickable: false });
   }
 }

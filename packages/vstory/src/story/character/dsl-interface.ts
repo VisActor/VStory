@@ -1,3 +1,4 @@
+import type { IInitOption } from '@visactor/vchart';
 import type { IRichTextGraphicAttribute, ITextGraphicAttribute } from '@visactor/vrender';
 import type { DirectionType } from './chart/const';
 
@@ -56,6 +57,8 @@ export interface IChartCharacterSpec extends ICharacterSpecBase {
   options: {
     // 图表spec
     spec?: any;
+    // 初始化参数
+    initOption?: IInitOption;
     panel?: any;
     // 各种图表配置属性
     theme?: any;

@@ -16,6 +16,22 @@
           }
         }
       ]
+    },
+    {
+      "path": "template",
+      "title": {
+        "zh": "叙事模板",
+        "en": "Narrative Template"
+      },
+      "children": [
+        {
+          "path": "ranking-bar",
+          "title": {
+            "zh": "动态排行榜条形图",
+            "en": "Dynamic Ranking Bar Chart"
+          }
+        }
+      ]
     }
   ]
 }

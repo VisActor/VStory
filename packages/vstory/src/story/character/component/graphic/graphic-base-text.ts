@@ -9,6 +9,9 @@ export const MAX_LAYOUT_SIZE = 999999;
 export class GraphicBaseText {
   private _character: CharacterComponent;
   private _graphic: IRichText;
+  get graphic() {
+    return this._graphic;
+  }
   constructor(graphicCharacter: CharacterComponent) {
     this._character = graphicCharacter;
   }
@@ -28,6 +31,8 @@ export class GraphicBaseText {
       graphicBaseline: 'middle',
       // // compute real height without vrender buffer
       ignoreBuf: true,
+      height: 0,
+      width: 0,
       maxLineWidth: MAX_LAYOUT_SIZE,
       heightLimit: MAX_LAYOUT_SIZE
     };
@@ -139,8 +144,8 @@ export class GraphicBaseText {
       this._transformTextAttributes({
         x,
         y,
-        textAlign: align,
-        textBaseline: baseline,
+        textAlign: graphicAlign,
+        textBaseline: graphicBaseline,
         angle: layoutData.angle,
         anchor: [layoutData.width / 2, layoutData.height / 2],
         scaleCenter: [layoutData.width / 2, layoutData.height / 2],

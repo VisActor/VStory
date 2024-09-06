@@ -1,5 +1,5 @@
+import type { IBoundsLike } from '@visactor/vutils';
 import type { IGroup } from '@visactor/vrender';
-import { createGroup } from '@visactor/vrender';
 import { GraphicBaseText } from './graphic/graphic-base-text';
 import type { IComponentCharacterSpec } from '../dsl-interface';
 import { CharacterBase } from '../base/base';
@@ -10,6 +10,7 @@ import type { ICharacterPickInfo } from '../runtime-interface';
 import { ComponentGroup } from './character-group/component-group-graphic';
 
 export abstract class CharacterComponent extends CharacterBase {
+  visActorType: 'component';
   protected declare _spec: IComponentCharacterSpec;
   get spec() {
     return this._spec;
@@ -21,6 +22,10 @@ export abstract class CharacterComponent extends CharacterBase {
   protected declare _text: GraphicBaseText;
   get text() {
     return this._text;
+  }
+
+  get textGraphic() {
+    return this._text.graphic;
   }
 
   protected declare _group: IGroup;
@@ -55,7 +60,9 @@ export abstract class CharacterComponent extends CharacterBase {
     this.hide();
   }
 
-  setAttributes(attr: Record<string, any>): void {
+  setAttributes(updateAttr: Record<string, any>): void {
+    const { position, ...rest } = updateAttr;
+    const attr = { ...(position ?? {}), ...rest };
     this.group.setAttributes(attr);
     this._graphic.setAttributes({ ...attr, x: 0, y: 0, angle: 0 });
     this._text.updateAttribute({});
@@ -89,6 +96,10 @@ export abstract class CharacterComponent extends CharacterBase {
 
   getGraphicParent() {
     return this._group;
+  }
+
+  getLayoutBounds() {
+    return this._group.AABBBounds as IBoundsLike;
   }
 
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {

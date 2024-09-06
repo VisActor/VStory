@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory",
-  "version": "0.0.5",
+  "version": "0.0.8-alpha.0",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -24,13 +24,13 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vchart": "1.12.1-alpha.0",
-    "@visactor/vrender": "0.20.1-alpha.0",
-    "@visactor/vrender-core": "0.20.1-alpha.0",
-    "@visactor/vrender-kits": "0.20.1-alpha.0",
-    "@visactor/vrender-components": "0.20.1-alpha.0",
+    "@visactor/vchart": "1.12.2",
+    "@visactor/vrender": "0.20.1",
+    "@visactor/vrender-core": "0.20.1",
+    "@visactor/vrender-kits": "0.20.1",
+    "@visactor/vrender-components": "0.20.1",
     "@visactor/vutils": "~0.18.4",
-    "@visactor/vchart-extension": "0.0.2-alpha.2",
+    "@visactor/vchart-extension": "0.0.2",
     "@visactor/vdataset": "~0.18.4"
   },
   "devDependencies": {

@@ -1,3 +1,4 @@
+import type { IBoundsLike } from '@visactor/vutils';
 import { isValid, merge } from '@visactor/vutils';
 import type { ICharacterInitOption, ICharacterPickInfo } from '../runtime-interface';
 import type { ICharacter, ICharacterSpec } from '..';
@@ -7,6 +8,8 @@ import { IVisactorGraphic } from '../visactor/interface';
 
 export abstract class CharacterBase implements ICharacter {
   readonly id: string;
+  readonly visActorType: string;
+  readonly type: string;
   protected _spec: ICharacterSpec;
   get spec() {
     return this._spec;
@@ -22,6 +25,7 @@ export abstract class CharacterBase implements ICharacter {
   }
 
   constructor(spec: ICharacterSpec, option: ICharacterInitOption) {
+    this.type = spec.type;
     this.id = spec.id;
     this._spec = spec;
     this._option = option;
@@ -69,6 +73,7 @@ export abstract class CharacterBase implements ICharacter {
   }
 
   abstract getGraphicParent(): IGroup;
+  abstract getLayoutBounds(): IBoundsLike;
 
   abstract clearCharacter(): void;
 

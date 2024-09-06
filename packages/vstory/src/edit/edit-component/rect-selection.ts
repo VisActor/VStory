@@ -1,62 +1,34 @@
-import type { IEditSelectionInfo } from '../interface';
-import { EditActionEnum, type IEditActionInfo, type IEditComponent } from '../interface';
-import type { Edit } from '../edit';
-import { BaseSelection } from './base-selection';
-import type { TransformAttributes, ITransformControl, IUpdateParams } from './edit-control/transform-control';
-import { TransformControl } from './edit-control/transform-control';
+import { StoryComponentType } from '../../constants/character';
 import type { VRenderPointerEvent } from '../../interface/type';
-import { RichTextTransformControl } from './edit-control/richtext-transform-control';
+import type { IEditActionInfo } from '../interface';
+import { type IEditComponent } from '../interface';
+import type { IUpdateParams } from './edit-control/transform-control';
+import { RichTextSelectionCommon } from './richtext-selection-common';
 
-export class RectSelection extends BaseSelection implements IEditComponent {
+export class RectSelection extends RichTextSelectionCommon implements IEditComponent {
   readonly level = 3;
   readonly type: string = 'rect';
+  readonly editCharacterType: string = StoryComponentType.RECT;
 
-  constructor(public readonly edit: Edit) {
-    super(edit);
+  startEdit(actionInfo: IEditActionInfo) {
+    super.startEdit(actionInfo);
+    // @ts-ignore;
+    const character = this._actionInfo.character;
+    character.graphic.graphic.addEventListener('pointerdown', this.handlerContentClick);
   }
-
-  protected _createLayoutComponent(attributes: Partial<TransformAttributes>): ITransformControl {
-    return new RichTextTransformControl(this, attributes);
-  }
-
-  editEnd(): void {
+  editEnd() {
+    // @ts-ignore;
+    const character = this._actionInfo.character;
+    character.graphic.graphic.removeEventListener('pointerdown', this.handlerContentClick);
     super.editEnd();
-    return;
-  }
-  checkAction(actionInfo: IEditSelectionInfo): boolean {
-    if (this.isEditing) {
-      return this.checkActionWhileEditing(actionInfo);
-    }
-    return this.checkActionWhileNoEditing(actionInfo);
   }
 
-  checkActionWhileEditing(actionInfo: IEditSelectionInfo): boolean {
-    // 点到其他内容了，return false
-    if (actionInfo.type === EditActionEnum.singleSelection && actionInfo.detail.graphicType !== this.type) {
-      return false;
-    }
-
-    if (actionInfo.event.type === 'pointerdown') {
-      if (!actionInfo.event.target || (actionInfo.event.target as any).parent !== this._layoutComponent) {
-        return false;
-      }
-    }
-    return true;
-  }
+  handlerContentClick = (e: any) => {
+    this._layoutComponent.handleDragMouseDown(e);
+    this.endRichTextEdit();
+  };
 
   protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
-    if (this._activeCharacter) {
-      this._activeCharacter.setAttributes(data);
-    }
-  }
-
-  checkActionWhileNoEditing(actionInfo: IEditSelectionInfo): boolean {
-    if (actionInfo.type === EditActionEnum.singleSelection && actionInfo.detail.graphicType === this.type) {
-      this.startEdit(actionInfo);
-      // graphic
-      return true;
-    }
-
-    return false;
+    return super.handlerTransformChange(data, event);
   }
 }

@@ -2,6 +2,8 @@ import type { ISymbol } from '@visactor/vrender';
 import { createSymbol } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import { Graphic } from './graphic';
+import type { IWidgetData } from '../../dsl-interface';
+import { getLayoutFromWidget } from '../../../utils/layout';
 
 export class GraphicSymbol extends Graphic {
   protected _graphic: ISymbol;
@@ -23,14 +25,31 @@ export class GraphicSymbol extends Graphic {
 
   init() {
     if (!this._graphic) {
-      this._graphic = createSymbol(
-        this._transformAttributes({
-          ...this.getInitialAttributes(),
-          ...(this._character.spec.options?.graphic ?? {})
-        })
-      );
+      const attributes = this._transformAttributes({
+        ...this.getInitialAttributes(),
+        ...(this._character.spec.options?.graphic ?? {})
+      });
+      this._graphic = createSymbol(attributes);
       this._graphic.name = `graphic-symbol-${this._character.id}`;
       this._character.getGraphicParent().add(this._graphic);
     }
+  }
+
+  applyLayoutData(layoutData: Partial<IWidgetData>): void {
+    const attributes = this._transformAttributes({
+      ...getLayoutFromWidget(layoutData),
+      shapePoints: this._character.spec.options.shapePoints
+    });
+    attributes.size = Math.min(attributes.width, attributes.height);
+
+    this._graphic.setAttributes(attributes);
+  }
+
+  protected _transformAttributes(attributes: any): any {
+    const data = super._transformAttributes(attributes);
+    const { width, height } = attributes;
+    data.x = width / 2;
+    data.y = height / 2;
+    return data;
   }
 }

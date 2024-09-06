@@ -2,7 +2,7 @@ import React, { Component, useCallback, useState } from 'react';
 import { Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
 import { StoryBarDemo } from './demos/StoryBarDemo';
-// import { StorySceneDemo } from './demos/StoryScene';
+import { StorySceneDemo } from './demos/StoryScene';
 // import { AreaWithTag } from './demos/AreaWithTag';
 // import { StoryLineDemo } from './demos/StoryLineDemo';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -18,6 +18,7 @@ import { Pictogram } from './demos/UnitViz/Pictogram';
 import { LV_BAR1 } from './demos/lv/bar1';
 import { BarLineSeries } from './demos/BarLineSeries';
 import { wordcloud } from './demos/wordcloud';
+import { VChartGraphic } from './demos/VChartGraphic';
 import { BaseComponent } from './demos/BaseComponent';
 import { BarLineSeriesSelector } from './demos/BarLineSeriesSelector';
 import { RankingBar } from './demos/template/RankingBar';
@@ -55,10 +56,10 @@ const App = () => {
     //   name: 'Pie',
     //   component: StoryPieDemo
     // },
-    // {
-    //   name: 'StoryScene',
-    //   component: StorySceneDemo
-    // },
+    {
+      name: 'StoryScene',
+      component: StorySceneDemo
+    },
     // {
     //   name: 'AreaWithTag',
     //   component: AreaWithTag
@@ -121,6 +122,10 @@ const App = () => {
       component: RankingBar
     },
     {
+      name: 'VChartGraphic',
+      component: VChartGraphic
+    },
+    {
       name: 'Unit Visualization',
       subMenus: [
         {
@@ -161,7 +166,7 @@ const App = () => {
 
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      <div style={{ flexBasis: 200, height: '90vh', overflow: 'auto', border: '1px solid #eee' }}>
+      <div style={{ flex: '0 0 200px', height: '90vh', overflowY: 'auto', border: '1px solid #eee' }}>
         <Nav
           style={{ width: 200 }}
           onSelect={data => setActiveName(data.itemKey)}

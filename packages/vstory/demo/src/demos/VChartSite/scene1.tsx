@@ -988,9 +988,9 @@ export const scene1 = {
           action: 'disappear',
           payload: {
             animation: {
-              duration: 1000
-            },
-            fade: { isBaseOpacity: true }
+              duration: 1000,
+              fade: { opacity: 0, isBaseOpacity: true }
+            }
           }
         }
       ]

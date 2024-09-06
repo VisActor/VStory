@@ -6,15 +6,14 @@ import type {
   IGraphicRenderDrawParams,
   IMarkAttribute,
   IRenderService,
-  IThemeAttribute,
-  IGraphic
+  IThemeAttribute
 } from '@visactor/vrender';
 import { injectable, DefaultCanvasRectRender } from '@visactor/vrender';
 import type { Chart } from './vchart-graphic';
 import { CHART_NUMBER_TYPE } from './vchart-graphic';
 
-export const ChartRender = Symbol.for('ChartRender');
-export const ChartRenderContribution = Symbol.for('ChartRenderContribution');
+export const ChartRender = Symbol.for('VStoryChartRender');
+export const ChartRenderContribution = Symbol.for('VStoryChartRenderContribution');
 
 @injectable()
 export class VChartRender extends DefaultCanvasRectRender implements IGraphicRender {
@@ -47,15 +46,15 @@ export class VChartRender extends DefaultCanvasRectRender implements IGraphicRen
     super.drawShape(chart, context, x, y, drawContext, params, fillCb, strokeCb);
     context.baseGlobalAlpha /= baseOpacity;
     const vChart = (chart as Chart).vchart;
-    const chartStage = vChart.getStage();
-    const chartCtx = chartStage.window.getContext();
-    chartCtx.baseGlobalAlpha *= baseOpacity;
+    const vchartStage = vChart.getStage();
+    const vchartCtx = vchartStage.window.getContext();
+    vchartCtx.baseGlobalAlpha *= baseOpacity;
     // @ts-ignore
-    chartStage._editor_needRender = true;
+    vchartStage._editor_needRender = true;
     const matrix = chart.globalTransMatrix.clone();
     const stageMatrix = chart.stage.window.getViewBoxTransform().clone();
     stageMatrix.multiply(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
-    chartStage.window.setViewBoxTransform(
+    vchartStage.window.setViewBoxTransform(
       stageMatrix.a,
       stageMatrix.b,
       stageMatrix.c,
@@ -63,12 +62,9 @@ export class VChartRender extends DefaultCanvasRectRender implements IGraphicRen
       stageMatrix.e,
       stageMatrix.f
     );
-    chartStage.dirtyBounds?.clear();
-    chartStage.render();
-    chartCtx.baseGlobalAlpha /= baseOpacity;
-    // const ctx = chartStage.window.getContext();
-    // ctx.fillStyle = 'green';
-    // ctx.fillRect(0, 0, 100, 100);
+    vchartStage.dirtyBounds?.clear();
+    vchartStage.render();
+    vchartCtx.baseGlobalAlpha /= baseOpacity;
   }
 
   draw(chart: any, renderService: IRenderService, drawContext: IDrawContext, params?: IGraphicRenderDrawParams) {

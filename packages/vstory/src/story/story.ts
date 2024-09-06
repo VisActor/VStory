@@ -34,20 +34,25 @@ export class Story implements IStory {
     return this._player;
   }
 
-  constructor(spec: IStorySpec, option: IStoryInitOption) {
+  constructor(spec: IStorySpec | null, option: IStoryInitOption) {
     this.id = 'test-mvp_' + Story._id_++;
-    this._canvas = new StoryCanvas(
-      this,
-      isString(option.dom) ? (document.getElementById(option.dom) as HTMLDivElement) : option.dom
-    );
+    this._canvas = new StoryCanvas(this, {
+      container: isString(option.dom) ? (document.getElementById(option.dom) as HTMLDivElement) : option.dom,
+      canvas: isString(option.canvas) ? (document.getElementById(option.canvas) as HTMLCanvasElement) : option.canvas,
+      width: option.width,
+      height: option.height
+    });
     this._player = new Player(this, option.playerOption);
 
     this._characterTree = new CharacterTree(this);
-    this._spec = spec;
-    this._spec && this.load(this._spec);
+    spec && this.load(spec);
   }
 
   load(spec: IStorySpec) {
+    this._spec = spec;
+    if (!spec) {
+      return;
+    }
     this._characterTree.initCharacters(spec.characters);
     this._player.initActs(spec.acts);
   }

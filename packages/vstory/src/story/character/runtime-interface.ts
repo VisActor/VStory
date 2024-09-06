@@ -1,24 +1,28 @@
-import type { IGroup } from '@visactor/vrender';
-import type { IPointLike } from '@visactor/vutils';
-import type { StoryCanvas } from '../canvas/canvas';
+import type { IGroup, IGraphic } from '@visactor/vrender';
+import type { IBoundsLike, IPointLike } from '@visactor/vutils';
 import type { IStory, IStoryCanvas, StoryEvent } from '../interface/runtime-interface';
 import type { ICharacterSpec } from './dsl-interface';
 import type { Graphic } from './component/graphic/graphic';
 
 export interface ICharacterPickInfo {
   part: string;
-  graphicType: string;
+  graphic?: IGraphic;
+  graphicType?: string;
+  modelInfo?: any;
 }
 export interface ICharacter {
   id: string;
+  type: string;
+  visActorType: string;
   spec: ICharacterSpec;
+  graphic: Graphic | IGroup;
 
   init: () => void;
   reset: () => void;
   show: () => void;
   hide: () => void;
   getGraphicParent: () => IGroup;
-  graphic: Graphic | IGroup;
+  getLayoutBounds: () => IBoundsLike;
   tickTo: (t: number) => void;
 
   checkEvent: (event: StoryEvent) => false | (ICharacterPickInfo & any);

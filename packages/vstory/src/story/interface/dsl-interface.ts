@@ -32,7 +32,7 @@ export interface IStorySpec {
 }
 
 export interface IActionsLink {
-  characterId: string[];
+  characterId: string | string[];
   characterActions: IActionSpec[];
 }
 
