@@ -347,7 +347,9 @@ export const StoryBarDemo = () => {
         ]
       };
       console.log('debug tempSpec', tempSpec);
-      const story = new Story(tempSpec as IStorySpec, { dom: id });
+      const story = new Story(tempSpec as IStorySpec, {
+        dom: id
+      });
       story.play();
     } catch (e) {
       console.error(e);

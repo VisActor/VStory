@@ -68,7 +68,7 @@ export class Chart extends Group implements IVisactorGraphic {
   }
 
   constructor(params: IChartGraphicAttribute) {
-    super(params);
+    super({ ...params, visibleAll: false });
     this.numberType = CHART_NUMBER_TYPE;
 
     // 创建chart
@@ -86,16 +86,19 @@ export class Chart extends Group implements IVisactorGraphic {
         disableTriggerEvent: params.disableTriggerEvent,
         disableDirtyBounds: params.disableDirtyBounds,
         ticker: params.ticker,
-        beforeRender: () => {
+        beforeRender: (stage: any) => {
           if (!this.stage) {
             return;
           }
-          const chartStage = this._vchart.getStage();
-          if (!(chartStage as any)._editor_needRender) {
-            chartStage.pauseRender();
-            this.stage.dirtyBounds?.union(this.globalAABBBounds);
-            this.stage.renderNextFrame();
+          if (this.attribute.visibleAll === false) {
+            stage.pauseRender();
           }
+          // const chartStage = this._vchart.getStage();
+          // if (!(chartStage as any)._editor_needRender) {
+          //   chartStage.pauseRender();
+          //   this.stage.dirtyBounds?.union(this.globalAABBBounds);
+          //   this.stage.renderNextFrame();
+          // }
         },
         afterRender: () => {
           if (!this._vchart) {
@@ -105,8 +108,8 @@ export class Chart extends Group implements IVisactorGraphic {
             return;
           }
           // @ts-ignore
-          this._vchart.getStage()._editor_needRender = false;
-          this._vchart.getStage().stage.resumeRender();
+          // this._vchart.getStage()._editor_needRender = false;
+          // this._vchart.getStage().stage.resumeRender();
         },
         ...(params.chartInitOptions ?? {})
       });
@@ -115,9 +118,9 @@ export class Chart extends Group implements IVisactorGraphic {
     }
     // 背景设置为false后，不会擦除画布内容，可以实现元素正常堆叠绘制
     const stage = this._vchart.getStage();
-    stage.stage.pauseRender();
+    // TODO stage的pauseRender支持传入count
+    (stage as any)._skipRender = -Infinity;
     this._vchart.renderSync();
-    stage.stage.resumeRender();
     if (stage) {
       stage.background = false as any;
       // 关闭交互
@@ -126,6 +129,7 @@ export class Chart extends Group implements IVisactorGraphic {
     if (params.viewBox) {
       this.updateViewBox(params.viewBox);
     }
+    stage.resumeRender();
   }
 
   /**

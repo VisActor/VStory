@@ -198,7 +198,10 @@ export const StoryEdit = () => {
         }
       ]
     };
-    const story = new Story(tempSpec, { dom: id });
+    const story = new Story(tempSpec, {
+      dom: id,
+      playerOption: { scaleX: 0.6, scaleY: 0.6, offsetX: 100, offsetY: 0 }
+    });
     story.play(false);
     const edit = new Edit(story);
     edit.emitter.on('startEdit', msg => {

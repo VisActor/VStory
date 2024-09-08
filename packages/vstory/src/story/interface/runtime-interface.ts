@@ -8,6 +8,8 @@ export interface IStoryInitOption {
   width?: number;
   height?: number;
   playerOption?: {
+    offsetX?: number;
+    offsetY?: number;
     scaleX?: number;
     scaleY?: number;
   };
