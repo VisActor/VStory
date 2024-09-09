@@ -193,6 +193,7 @@ function generateTitleSpec(input: IUnitTemplateSpec) {
               animation: {
                 duration: scene.animationDuration ?? DEFAULT_ANIMATION_DURATION,
                 easing: 'linear',
+                // @ts-ignore
                 effect: 'fade'
               }
             }
