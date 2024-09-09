@@ -1,10 +1,12 @@
-import { ISymbolGraphicAttribute } from '@visactor/vrender-core';
-import { ICharacterSpec } from '../../../../../src/story/character';
-import { IActionsLink, IStorySpec } from '../../../../../src/story/interface';
-import { DEFAULT_ANIMATION_DURATION, DEFAULT_SCENE_DURATION, defaultInput, Input, QueryNode } from './input';
-import { isFunction, isObject } from '@visactor/vutils';
+import type { ISymbolGraphicAttribute } from '@visactor/vrender-core';
+import { DEFAULT_ANIMATION_DURATION, DEFAULT_SCENE_DURATION, defaultConfig } from './default';
+import { isFunction, isObject, merge } from '@visactor/vutils';
+import type { IUnitTemplateSpec, QueryNode } from './type';
+import type { IActionsLink, IStorySpec } from '../../story/interface';
+import type { ICharacterSpec } from '../../story/character';
 
-export function generateSpec(input: Input): IStorySpec {
+export function generateSpec(input: IUnitTemplateSpec): IStorySpec {
+  input = initialInput(input);
   const { characters: layoutCharacters, actions: layoutActions } = generateLayoutSpec(input);
   const { characters: titleCharacters, actionsGroup: titleActionsGroup } = generateTitleSpec(input);
   const { character: vizCharacter, actions: vizActions } = generateVizSpec(input);
@@ -27,16 +29,23 @@ export function generateSpec(input: Input): IStorySpec {
   return spec;
 }
 
-function generateLayoutSpec(input: Input) {
+function initialInput(input: IUnitTemplateSpec): IUnitTemplateSpec {
+  const { data, ...restInput } = input;
+  const res = merge({}, defaultConfig, restInput);
+  res.data = data;
+  return res;
+}
+
+function generateLayoutSpec(input: IUnitTemplateSpec) {
   const {
     layout: {
-      width: layoutWidth = defaultInput.layout.width,
-      height: layoutHeight = defaultInput.layout.height,
+      width: layoutWidth = defaultConfig.layout.width,
+      height: layoutHeight = defaultConfig.layout.height,
       title: {
-        height: titleHeight = defaultInput.layout.title.height,
-        backgroundColor: titleBackgroundColor = defaultInput.layout.title.backgroundColor
+        height: titleHeight = defaultConfig.layout.title.height,
+        backgroundColor: titleBackgroundColor = defaultConfig.layout.title.backgroundColor
       } = {},
-      viz: { backgroundColor: vizBackgroundColor = defaultInput.layout.viz.backgroundColor } = {}
+      viz: { backgroundColor: vizBackgroundColor = defaultConfig.layout.viz.backgroundColor } = {}
     } = {}
   } = input;
   const characters: ICharacterSpec[] = [
@@ -110,24 +119,24 @@ function generateLayoutSpec(input: Input) {
   return { characters, actions };
 }
 
-function generateTitleSpec(input: Input) {
+function generateTitleSpec(input: IUnitTemplateSpec) {
   const {
     scenes,
     layout: {
-      width: layoutWidth = defaultInput.layout.width,
-      height: layoutHeight = defaultInput.layout.height,
+      width: layoutWidth = defaultConfig.layout.width,
+      height: layoutHeight = defaultConfig.layout.height,
       title: {
-        height: titleHeight = defaultInput.layout.title.height,
+        height: titleHeight = defaultConfig.layout.title.height,
         padding: {
-          left: titlePaddingLeft = defaultInput.layout.title.padding.left,
-          right: titlePaddingRight = defaultInput.layout.title.padding.right
+          left: titlePaddingLeft = defaultConfig.layout.title.padding.left,
+          right: titlePaddingRight = defaultConfig.layout.title.padding.right
         } = {},
-        style: titleStyle = defaultInput.layout.title.style
+        style: titleStyle = defaultConfig.layout.title.style
       } = {}
     } = {}
   } = input;
 
-  let startTime = 0;
+  const startTime = 0;
   const characters: ICharacterSpec[] = scenes.map((scene, sceneIndex) => {
     return {
       type: 'Text',
@@ -198,8 +207,8 @@ function generateTitleSpec(input: Input) {
   return { characters, actionsGroup };
 }
 
-function generateVizSpec(input: Input) {
-  const { scenes, data, unit: { defaultStyle = defaultInput.unit.defaultStyle } = {} } = input;
+function generateVizSpec(input: IUnitTemplateSpec) {
+  const { scenes, data, unit: { defaultStyle = defaultConfig.unit.defaultStyle } = {} } = input;
   const initialStyleList: ISymbolGraphicAttribute[] = [];
   for (let i = 0; i < data.length; i++) {
     if (isFunction(defaultStyle)) {
@@ -211,7 +220,7 @@ function generateVizSpec(input: Input) {
   }
   const character: ICharacterSpec = getUnitCharacter(initialStyleList, input);
   const actions: IActionsLink[] = [];
-  let startTime = 0;
+  const startTime = 0;
   let prevStyleList = initialStyleList;
   for (let sceneIndex = 0; sceneIndex < scenes.length; sceneIndex++) {
     const sceneSpec = scenes[sceneIndex];
@@ -226,23 +235,23 @@ function generateVizSpec(input: Input) {
   return { character, actions };
 }
 
-function getUnitCharacter(styleList: ISymbolGraphicAttribute[], input: Input): ICharacterSpec {
+function getUnitCharacter(styleList: ISymbolGraphicAttribute[], input: IUnitTemplateSpec): ICharacterSpec {
   const {
     layout: {
-      width: layoutWidth = defaultInput.layout.width,
-      height: layoutHeight = defaultInput.layout.height,
-      title: { height: titleHeight = defaultInput.layout.title.height } = {},
+      width: layoutWidth = defaultConfig.layout.width,
+      height: layoutHeight = defaultConfig.layout.height,
+      title: { height: titleHeight = defaultConfig.layout.title.height } = {},
       viz: {
         padding: {
-          left: vizPaddingLeft = defaultInput.layout.viz.padding.left,
-          right: vizPaddingRight = defaultInput.layout.viz.padding.right,
-          top: vizPaddingTop = defaultInput.layout.viz.padding.top,
-          bottom: vizPaddingBottom = defaultInput.layout.viz.padding.bottom
+          left: vizPaddingLeft = defaultConfig.layout.viz.padding.left,
+          right: vizPaddingRight = defaultConfig.layout.viz.padding.right,
+          top: vizPaddingTop = defaultConfig.layout.viz.padding.top,
+          bottom: vizPaddingBottom = defaultConfig.layout.viz.padding.bottom
         } = {},
-        direction: vizDirection = defaultInput.layout.viz.direction
+        direction: vizDirection = defaultConfig.layout.viz.direction
       } = {}
     } = {},
-    unit: { gap: unitGap = defaultInput.unit.gap, aspect: unitAspect = defaultInput.unit.aspect } = {}
+    unit: { gap: unitGap = defaultConfig.unit.gap, aspect: unitAspect = defaultConfig.unit.aspect } = {}
   } = input;
 
   const character: ICharacterSpec = {
@@ -281,10 +290,10 @@ function updateStyleList(
   data: Record<string, any>[],
   indexList: number[]
 ) {
-  for (let node of nodes) {
+  for (const node of nodes) {
     const query = node.query;
     const filteredIndexList = query ? indexList.filter(index => query(data[index])) : indexList;
-    for (let index of filteredIndexList) {
+    for (const index of filteredIndexList) {
       styleList[index] = { ...styleList[index], ...node.style };
     }
     if (node.children) {
