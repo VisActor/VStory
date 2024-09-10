@@ -1,8 +1,8 @@
 ---
 category: examples
-group: template
-title: ranking-bar
-keywords: ranking-bar
+group: unit
+title: unit-infographic
+keywords: unit-infographic
 order: 2-1
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-infographic.png
 ---

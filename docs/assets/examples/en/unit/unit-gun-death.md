@@ -1,17 +1,17 @@
 ---
 category: examples
-group: template
-title: ranking-bar
-keywords: ranking-bar
+group: unit
+title: unit-gun-death
+keywords: unit-gun-death
 order: 2-2
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/gun-death.png
 ---
 
-# 单元可视化叙事示例
+# Unit Story Telling
 
-> 该示例来源于：https://fivethirtyeight.com/features/gun-deaths/
+> This example is inspired by https://fivethirtyeight.com/features/gun-deaths/
 
-## 代码演示
+## Demo source
 
 ```javascript livedemo template=vstory
 const data = await fetch('https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/sorted-gun-death-data.json').then(
