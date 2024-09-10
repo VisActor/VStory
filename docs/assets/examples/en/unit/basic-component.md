@@ -1,10 +1,10 @@
 ---
 category: examples
-group: template
-title: ranking-bar
-keywords: ranking-bar
+group: unit
+title: basic
+keywords: basic
 order: 2-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-basic.png
 ---
 
 # Basic Unit Component
