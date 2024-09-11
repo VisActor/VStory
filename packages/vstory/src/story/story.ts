@@ -110,6 +110,13 @@ export class Story implements IStory {
     return this._player;
   }
 
+  toDSL(): IStorySpec {
+    return {
+      acts: this._player.toDSL(),
+      characters: this._characterTree.toDSL()
+    };
+  }
+
   release() {
     this._player.release();
     this._canvas.release();

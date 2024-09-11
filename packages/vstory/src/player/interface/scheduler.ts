@@ -9,4 +9,5 @@ export interface IScheduler {
   clearState: () => void;
   getTotalTime: () => number;
   getScenes: () => ISceneSpec[];
+  toDSL: () => IActSpec[];
 }

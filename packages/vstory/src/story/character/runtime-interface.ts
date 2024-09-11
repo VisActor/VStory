@@ -28,6 +28,7 @@ export interface ICharacter {
   checkEvent: (event: StoryEvent) => false | (ICharacterPickInfo & any);
 
   updateSpec: (spec: Omit<Partial<ICharacterSpec>, 'id' | 'type'>) => void;
+  toSpec: () => ICharacterSpec;
 
   setAttributes: (attr: Record<string, any>) => void;
   release: () => void;

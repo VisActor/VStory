@@ -62,4 +62,10 @@ export class CharacterTree implements ICharacterTree {
       c.release();
     });
   }
+
+  toDSL() {
+    return Object.keys(this._characters).map(k => {
+      return this._characters[k].toSpec();
+    });
+  }
 }

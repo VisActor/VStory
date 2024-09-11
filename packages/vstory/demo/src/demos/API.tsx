@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { Story } from '../../../src/story/story';
 import Scene3ChartImage2 from '../assets/scene3/chart-2.png';
+import { loadAllSelection } from '../../../src/edit/edit-component';
+import { Edit } from '../../../src/edit/edit';
+
+loadAllSelection();
 
 export const API = () => {
   const id = 'Appear';
@@ -90,7 +94,15 @@ export const API = () => {
       // 添加character
       // 更新character
       story.play();
+      const edit = new Edit(story);
+      edit.emitter.on('startEdit', msg => {
+        if (msg.type === 'commonEdit' && msg.actionInfo.character) {
+          msg.updateCharacter({ options: { graphic: { fill: 'green' } } });
+          story.play();
+        }
+      });
       // 导出DSL
+      console.log(story.toDSL());
       // story读取DSL
     } catch (e) {
       console.error(e);

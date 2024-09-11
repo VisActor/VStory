@@ -194,4 +194,8 @@ export class Player extends EventEmitter implements IPlayer {
   release(): void {
     return;
   }
+
+  toDSL(): IActSpec[] {
+    return this._scheduler.toDSL();
+  }
 }

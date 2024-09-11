@@ -42,7 +42,7 @@ export class Scheduler implements IScheduler {
   protected _actionProcessor: IActionProcessor;
   protected _actsInfo: IActInfo[];
   protected _runnedAct: Set<IActionItem>;
-  protected _actSpec: IActSpec[] | null;
+  protected _actSpec: IActSpec[];
 
   constructor(actionProcessor: IActionProcessor) {
     this._actionProcessor = actionProcessor;
@@ -254,5 +254,9 @@ export class Scheduler implements IScheduler {
       scenes.push(...act.scenes);
     }
     return scenes;
+  }
+
+  toDSL(): IActSpec[] {
+    return this._actSpec;
   }
 }

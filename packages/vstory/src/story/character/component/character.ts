@@ -52,6 +52,10 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
     this._graphic.init();
     this._text.init();
 
+    this.applySpec();
+  }
+
+  applySpec(): void {
     this._graphic.applyGraphicAttribute(this._spec.options.graphic);
     this._text.applyGraphicAttribute(this._spec.options.text);
 

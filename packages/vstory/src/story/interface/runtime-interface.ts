@@ -1,7 +1,7 @@
 import type { IGraphic, IStage } from '@visactor/vrender';
 import type { ICharacter, ICharacterSpec } from '../character';
 import type { IPlayer } from '../../player/interface/player';
-import type { IActionSpec } from '.';
+import type { IActionSpec, IStorySpec } from '.';
 
 export interface IStoryInitOption {
   dom?: string | HTMLDivElement; // dom id
@@ -40,6 +40,7 @@ export interface IStory {
   addCharacterWithAppear: (spec: ICharacterSpec) => ICharacter;
   removeCharacter: (cId: string) => void;
   addAction: (cId: string, actionParams: IActionParams) => void;
+  toDSL: () => IStorySpec;
 }
 export interface ICharacterTree {
   getCharacters: () => { [key: string]: ICharacter };
@@ -47,6 +48,7 @@ export interface ICharacterTree {
   addCharacter: (spec: ICharacterSpec) => ICharacter;
   removeCharacter: (cId: string) => void;
   initCharacters: (spec: ICharacterSpec[]) => void;
+  toDSL: () => ICharacterSpec[];
 }
 
 export type StoryEvent = Event & {

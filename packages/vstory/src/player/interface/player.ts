@@ -13,4 +13,5 @@ export interface IPlayer extends EventEmitter {
   addAction: (sceneId: string, characterId: string, actions: IActionSpec[]) => void;
   removeCharacterActions: (characterId: string) => void;
   reset: () => void;
+  toDSL: () => IActSpec[];
 }
