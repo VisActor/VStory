@@ -650,6 +650,8 @@ export const VChartGraphic = () => {
     vchart.on('pointerdown', (event: any) => {
       console.log('vchart on pointerdown', event);
     });
+    story.canvas.getStage().defaultLayer.translate(200, 100);
+    // story.canvas.getStage().defaultLayer.scale(2, 2);
     vchart.getStage().on('pointerdown', (event: any) => {
       console.log('vchart stage on pointerdown', [...event.detailPath]);
     });
