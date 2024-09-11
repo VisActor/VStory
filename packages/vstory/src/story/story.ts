@@ -3,13 +3,11 @@ import { isString } from '@visactor/vutils';
 import type { ICharacterTree, IStory, IStoryCanvas, IStoryInitOption } from './interface/runtime-interface';
 import type { ICharacter } from './character/runtime-interface';
 import { StoryCanvas } from './canvas/canvas';
-import type { IStorySpec, IActSpec } from './interface';
-import { StoryFactory } from './factory/factory';
+import type { IStorySpec, IActionSpec, IActionParams } from './interface';
 import { defaultTicker, defaultTimeline } from '@visactor/vrender';
 import { CharacterTree } from './character-tree/character-tree';
 import type { IPlayer } from '../player/interface/player';
 import { Player } from '../player/player';
-import { logger } from '../util/output';
 
 defaultTicker.remTimeline(defaultTimeline);
 
@@ -55,6 +53,25 @@ export class Story implements IStory {
     }
     this._characterTree.initCharacters(spec.characters);
     this._player.initActs(spec.acts);
+  }
+
+  addCharacter(spec: ICharacterSpec, actionParams?: IActionParams): ICharacter {
+    const c = this._characterTree.addCharacter(spec);
+    actionParams && this.addAction(c.id, actionParams);
+    return c;
+  }
+  addCharacterWithAppear(spec: ICharacterSpec): ICharacter {
+    const c = this._characterTree.addCharacter(spec);
+    this.addAction(c.id, { sceneId: '', actions: [{ action: 'appear' }] });
+    return c;
+  }
+  removeCharacter(cId: string): void {
+    this._characterTree.removeCharacter(cId);
+    this._player.removeCharacterActions(cId);
+  }
+
+  addAction(cId: string, actionParams: IActionParams): void {
+    this._player.addAction(actionParams.sceneId, cId, actionParams.actions);
   }
 
   getCharacters(): { [key: string]: ICharacter } {

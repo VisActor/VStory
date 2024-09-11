@@ -6,10 +6,10 @@ import { CharacterBase } from '../base/base';
 import type { Graphic } from './graphic/graphic';
 import { getLayoutFromWidget } from '../../utils/layout';
 import type { StoryEvent } from '../../interface/runtime-interface';
-import type { ICharacterPickInfo } from '../runtime-interface';
+import type { ICharacter, ICharacterPickInfo } from '../runtime-interface';
 import { ComponentGroup } from './character-group/component-group-graphic';
 
-export abstract class CharacterComponent extends CharacterBase {
+export abstract class CharacterComponent extends CharacterBase implements ICharacter {
   visActorType: 'component';
   protected declare _spec: IComponentCharacterSpec;
   get spec() {
@@ -116,65 +116,3 @@ export abstract class CharacterComponent extends CharacterBase {
     this.option.graphicParent.removeChild(this._group);
   }
 }
-
-// export abstract class CharacterGraphicComponent extends CharacterBase {
-//   protected declare _spec: IComponentCharacterSpec;
-
-//   get spec() {
-//     return this._spec;
-//   }
-//   protected declare _graphic: Graphic;
-//   get graphic() {
-//     return this._graphic;
-//   }
-
-//   protected declare _group: IGroup;
-//   get group() {
-//     return this._group;
-//   }
-
-//   protected abstract _createGraphic(): Graphic;
-
-//   protected _initRuntime(): void {
-//     return;
-//   }
-
-//   protected _parserSpec(): void {
-//     return;
-//   }
-
-//   protected _initGraphics(): void {
-//     this._group = createGroup({
-//       ...getLayoutFromWidget(this._spec.position),
-//       angle: this._spec.options.angle,
-//       zIndex: this._spec.zIndex
-//     });
-//     this.option.graphicParent.add(this._group);
-
-//     this._graphic = this._createGraphic();
-//     this._graphic.init();
-
-//     this._graphic.applyGraphicAttribute(this._spec.options.graphic);
-
-//     this._graphic.applyLayoutData(this._spec.position);
-//     this.hide();
-//   }
-
-//   show(): void {
-//     this._graphic?.show();
-//   }
-//   hide(): void {
-//     this._graphic?.hide();
-//   }
-
-//   getGraphicParent() {
-//     return this._group;
-//   }
-
-//   clearCharacter(): void {
-//     if (this._group) {
-//       this._group.parent.removeChild(this._group);
-//       this._graphic = null;
-//     }
-//   }
-// }

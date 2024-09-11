@@ -24,6 +24,7 @@ import { BarLineSeriesSelector } from './demos/BarLineSeriesSelector';
 import { RankingBar } from './demos/template/RankingBar';
 import { UnitComponentDemo } from './demos/UnitViz/UnitDemo';
 import { GunDeath } from './demos/UnitViz/GunDeath';
+import { API } from './demos/API';
 
 type MenusType = (
   | {
@@ -59,6 +60,10 @@ const App = () => {
     {
       name: 'StoryScene',
       component: StorySceneDemo
+    },
+    {
+      name: 'API',
+      component: API
     },
     // {
     //   name: 'AreaWithTag',

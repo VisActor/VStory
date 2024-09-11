@@ -18,6 +18,10 @@ export class CharacterTree implements ICharacterTree {
     return this._characters[key] || null;
   }
 
+  removeCharacter(cId: string) {
+    this._characters[cId] = null;
+  }
+
   addCharacter(spec: ICharacterSpec) {
     const option = {
       story: this._story,
