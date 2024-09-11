@@ -3,7 +3,7 @@ import type { IVisactorGraphic } from '../../visactor/interface';
 import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
 import type { IInitOption, ISpec, IVChart } from '@visactor/vchart';
 import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
-import { genNumberType, Group } from '@visactor/vrender';
+import { genNumberType, Rect } from '@visactor/vrender';
 import { isPointInBounds } from '../../../../util/space';
 import { mergeChartOption } from '../../../utils/chart';
 
@@ -30,7 +30,7 @@ export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
 export const CHART_NUMBER_TYPE = genNumberType();
 
 // @ts-ignore
-export class Chart extends Group implements IVisactorGraphic {
+export class Chart extends Rect implements IVisactorGraphic {
   type: GraphicType = 'chart' as any;
   declare attribute: IChartGraphicAttribute;
   protected _vchart: IVChart;

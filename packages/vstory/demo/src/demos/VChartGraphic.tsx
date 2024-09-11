@@ -25,8 +25,7 @@ const spec = {
       bar: {
         style: {
           stroke: '',
-          lineWidth: 1,
-          fill: 'red'
+          lineWidth: 1
         },
         state: {
           hover: {
@@ -576,7 +575,7 @@ const storySpec: IStorySpec = {
           id: 'scene0',
           actions: [
             {
-              characterId: '58e9a996-7460-44de-8c7a-eceae2260308',
+              characterId: 'vchart',
               characterActions: [
                 {
                   startTime: 0,
@@ -595,6 +594,42 @@ const storySpec: IStorySpec = {
                   }
                 }
               ]
+            },
+            {
+              characterId: 'vchart2',
+              characterActions: [
+                {
+                  startTime: 0,
+                  action: 'appear',
+                  selector: '*',
+                  payload: {
+                    style: {},
+                    animation: {
+                      effect: 'fade',
+                      move: {
+                        pos: 'top'
+                      },
+                      duration: 1000,
+                      easing: 'linear'
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: 'rect',
+              characterActions: [
+                {
+                  startTime: 1,
+                  duration: 800,
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 700
+                    }
+                  }
+                }
+              ]
             }
           ]
         }
@@ -603,17 +638,67 @@ const storySpec: IStorySpec = {
   ],
   characters: [
     {
-      type: 'VChart',
-      id: '58e9a996-7460-44de-8c7a-eceae2260308',
-      zIndex: 200,
+      type: 'Rect',
+      id: 'rect',
+      zIndex: 0,
       position: {
-        top: 125,
-        left: 79.5,
-        bottom: 419.8,
-        right: 679.5
+        top: 50,
+        left: 10,
+        width: 500,
+        height: 200
+      },
+      options: {
+        graphic: {
+          fill: 'red',
+          visible: false
+        },
+        text: {
+          text: 'title2',
+          fill: 'black'
+        },
+        angle: 0,
+        shapePoints: []
+      }
+    },
+    {
+      type: 'VChart',
+      id: 'vchart',
+      zIndex: 100,
+      position: {
+        x: 100,
+        y: 100,
+        width: 400,
+        height: 400
       },
       options: {
         spec: spec,
+        initOption: {
+          animation: false,
+          interactive: true,
+          disableTriggerEvent: false,
+          performanceHook: {
+            afterInitializeChart: () => {
+              console.log('afterInitializeChart');
+            },
+            afterVRenderDraw: () => {
+              console.log('afterVRenderDraw');
+            }
+          }
+        }
+      }
+    },
+    {
+      type: 'VChart',
+      id: 'vchart2',
+      zIndex: 200,
+      position: {
+        x: 50,
+        y: 150,
+        width: 400,
+        height: 400
+      },
+      options: {
+        spec: { ...spec, color: ['red', 'blue'] },
         initOption: {
           animation: false,
           interactive: true,
@@ -644,31 +729,24 @@ export const VChartGraphic = () => {
     const edit = new Edit(story);
     window.edit = edit;
 
-    const vchart = story.getCharactersById('58e9a996-7460-44de-8c7a-eceae2260308')?.graphic.vchart;
+    const vchart = story.getCharactersById('vchart')?.graphic.vchart;
     window.vchart = vchart;
+    const vchart2 = story.getCharactersById('vchart2')?.graphic.vchart;
+    window.vchart2 = vchart2;
     console.log('vchart', vchart);
     vchart.on('pointerdown', (event: any) => {
       console.log('vchart on pointerdown', event);
     });
+    vchart2.on('pointerdown', (event: any) => {
+      console.log('vchart2 on pointerdown', event);
+    });
     story.canvas.getStage().defaultLayer.translate(200, 100);
-    // story.canvas.getStage().defaultLayer.scale(2, 2);
-    vchart.getStage().on('pointerdown', (event: any) => {
-      console.log('vchart stage on pointerdown', [...event.detailPath]);
-    });
     story.canvas.getStage().on('pointerdown', (event: any) => {
-      console.log('stage on pointerdown', [...event.detailPath]);
+      console.log('stage on pointerdown', [...event.detailPath], event.detailPath?.[2]?._uid);
     });
-    window.vchart = vchart;
-    window.chartGraphic = story.getCharactersById(storySpec.characters[0].id);
-    window.updateSpec1 = () => {
-      window.chartGraphic?.graphic.updateSpec(spec1, null, false, false);
-    };
-    window.updateSpec0 = () => {
-      window.chartGraphic?.graphic.updateSpec(spec, null, false, false);
-    };
-    setTimeout(() => {
-      window.chartGraphic?.graphic.updateSpec(spec1, null, false, false);
-    }, 3000);
+    // setTimeout(() => {
+    //   window.chartGraphic?.graphic.updateSpec(spec1, null, false, false);
+    // }, 3000);
   }, []);
 
   return <div style={{ width: '100%', height: '100%' }} id={id}></div>;

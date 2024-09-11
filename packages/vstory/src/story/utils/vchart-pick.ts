@@ -196,6 +196,12 @@ export function getGraphicModelMark(
   graphicPath: IGraphic[],
   index: number
 ): IPickModelInfo {
+  if (!graphic) {
+    return null;
+  }
+  if (graphic.layer !== chart.getStage().layer) {
+    return null;
+  }
   const modelPick = modelCheck.find(mc => mc.check(graphic, graphicPath));
   if (modelPick) {
     return modelPick.modelInfo(chart, graphic, graphicPath, index);

@@ -23,7 +23,10 @@ export class VChartPicker implements IGraphicPicker {
     vchartStage.dirtyBounds?.clear();
     const toChartMatrix = vchartStage.window.getViewBoxTransform();
     toChartMatrix.transformPoint(nextP, nextP);
-    const graphic = vchartStage.pick(nextP.x, nextP.y);
-    return graphic;
+    const pick = vchartStage.pick(nextP.x, nextP.y);
+    if (pick.graphic === null && pick.group.name === 'root') {
+      return false;
+    }
+    return pick;
   }
 }
