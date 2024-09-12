@@ -25,6 +25,7 @@ import type { IEditComponent } from '../../interface';
 import { Edit } from '../../edit';
 import { DragComponent } from './transform-drag';
 import { StoryEvent } from '../../../story/interface';
+import { transformDeltaWithStage, transformPointWithStage } from '../../../util/transform';
 // import { EditorActionMode } from './enum';
 
 type AnchorDirection = 'top' | 'bottom' | 'left-top' | 'left-bottom' | 'right' | 'left' | 'right-top' | 'right-bottom';
@@ -257,9 +258,15 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
   }
 
   protected _dragElement = (moveX: number, moveY: number) => {
+    const stage = this.stage;
+    if (!stage) {
+      return;
+    }
     this._lastBoxInDrag.setAttribute('visible', true);
-    const scale = this.stage.defaultLayer?.globalTransMatrix.a ?? 1;
-    this.moveBy(moveX / scale, moveY / scale);
+
+    const layer = stage.defaultLayer;
+    const p = transformDeltaWithStage(stage, { x: moveX, y: moveY }, layer.globalTransMatrix);
+    this.moveBy(p.x, p.y);
   };
   private _dragEnd = () => {
     this._editorEnd();
@@ -329,7 +336,11 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
   protected handleDragMouseDown = (e: any) => {
     this.isEditor = true;
     this.editStartCbs.forEach(cb => cb(e));
-    const layerPos = transformPointWithMatrix(this.layer.globalTransMatrix.getInverse(), e.offset);
+    const layerPos = this.transformPoint(e.offset);
+    if (!layerPos) {
+      return;
+    }
+
     this.dragOffsetX = layerPos.x;
     this.dragOffsetY = layerPos.y;
 
@@ -351,8 +362,10 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     if (!this.isDragging) {
       return;
     }
-    // this._editComponent.isEditing = true;
-    const layerPos = transformPointWithMatrix(this.layer.globalTransMatrix.getInverse(), e.offset);
+    const layerPos = this.transformPoint(e.offset);
+    if (!layerPos) {
+      return;
+    }
 
     const dx = layerPos.x - this.dragOffsetX;
     const dy = layerPos.y - this.dragOffsetY;
@@ -466,9 +479,21 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     }
   }
 
+  private transformPoint(point: IPointLike) {
+    const stage = this.stage;
+    if (!stage) {
+      return;
+    }
+    // this._editComponent.isEditing = true;
+    return transformPointWithStage(stage, point, this.layer.globalTransMatrix);
+  }
+
   // 等比缩放
   private _handleScaleProportional(dx: number, dy: number, e: any) {
-    const layerPos = transformPointWithMatrix(this.layer.globalTransMatrix.getInverse(), e.offset);
+    const layerPos = this.transformPoint(e.offset);
+    if (!layerPos) {
+      return;
+    }
     const { attribute, temp } = this._getRectWithOffset(
       layerPos.x - this._eventPosBeforeScale.x,
       layerPos.y - this._eventPosBeforeScale.y,

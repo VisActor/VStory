@@ -93,7 +93,7 @@ export class Chart extends Graphic implements IVisactorGraphic {
   }
 
   constructor(params: IChartGraphicAttribute) {
-    super(params);
+    super({ ...params, visibleAll: false });
     this.numberType = CHART_NUMBER_TYPE;
 
     // 创建chart
@@ -146,9 +146,9 @@ export class Chart extends Graphic implements IVisactorGraphic {
     }
     // 背景设置为false后，不会擦除画布内容，可以实现元素正常堆叠绘制
     const stage = this._vchart.getStage();
-    stage.stage.pauseRender();
+    // TODO stage的pauseRender支持传入count
+    (stage as any)._skipRender = -Infinity;
     this._vchart.renderSync();
-    stage.stage.resumeRender();
     if (stage) {
       stage.background = false as any;
       // 关闭交互
@@ -157,6 +157,7 @@ export class Chart extends Graphic implements IVisactorGraphic {
     if (params.viewBox) {
       this.updateViewBox(params.viewBox);
     }
+    stage.resumeRender();
   }
 
   /**

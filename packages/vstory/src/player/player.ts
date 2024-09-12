@@ -54,7 +54,7 @@ export class Player extends EventEmitter implements IPlayer {
     return this._ticker ? this._ticker.speed : 1;
   }
 
-  constructor(story: IStory, options?: { scaleX?: number; scaleY?: number }) {
+  constructor(story: IStory, options?: { scaleX?: number; scaleY?: number; offsetX?: number; offsetY?: number }) {
     super();
     this._story = story;
     this._ticker = new Ticker();
@@ -62,8 +62,10 @@ export class Player extends EventEmitter implements IPlayer {
     const stage = this._story.canvas.getStage();
     const scaleX = options?.scaleX ?? 1;
     const scaleY = options?.scaleY ?? 1;
+    const offsetX = options?.offsetX ?? 0;
+    const offsetY = options?.offsetY ?? 0;
 
-    stage.window.setViewBoxTransform(scaleX, 0, 0, scaleY, 0, 0);
+    stage.window.setViewBoxTransform(scaleX, 0, 0, scaleY, offsetX, offsetY);
 
     // stage.defaultLayer.setAttributes({
     //   scaleX,

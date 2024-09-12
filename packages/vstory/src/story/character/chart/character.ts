@@ -85,6 +85,7 @@ export class CharacterChart extends CharacterVisactor {
         this._spec.options.initOption ?? {}
       )
     });
+    this.hide();
     this.option.graphicParent.add(this._graphic as any);
   }
 
