@@ -93,7 +93,7 @@ export class Chart extends Graphic implements IVisactorGraphic {
   }
 
   constructor(params: IChartGraphicAttribute) {
-    super({ ...params, visibleAll: false });
+    super({ ...params, visible: false });
     this.numberType = CHART_NUMBER_TYPE;
 
     // 创建chart
