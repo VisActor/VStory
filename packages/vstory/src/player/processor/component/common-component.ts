@@ -43,8 +43,8 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IActionSpec): void {
-    const { animation } = getPayload(actionSpec);
-    const { effect = 'fade' } = animation ?? ({} as any);
+    const { animation = {} } = getPayload(actionSpec);
+    const { effect = 'fade' } = animation as any;
     array(effect).forEach(_effect => {
       const effectFunc = this.getEffectFunc(_effect, actionSpec.action === 'appear');
       if (effectFunc) {
@@ -88,9 +88,9 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentStyleAction): void {
-    const { animation, graphic: graphicStyle, text: textStyle } = getPayload(actionSpec) as IComponentStylePayLoad;
+    const { animation = {}, graphic: graphicStyle, text: textStyle } = getPayload(actionSpec) as IComponentStylePayLoad;
 
-    const { duration, easing } = animation;
+    const { duration, easing } = animation as any;
     const graphic = getCharacterGraphic(character)[0];
     const text = getCharacterGraphic(character)[1];
 
@@ -122,7 +122,7 @@ export class CommonMoveToActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentMoveToAction): void {
-    const { animation, destination } = getPayload(actionSpec) as IComponentMoveToPayLoad;
+    const { animation = {}, destination } = getPayload(actionSpec) as IComponentMoveToPayLoad;
 
     moveTo(character, animation as any, destination);
   }
@@ -147,7 +147,7 @@ export class CommonScaleToActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentScaleToAction): void {
-    const { animation, scale } = getPayload(actionSpec) as IComponentScaleToPayLoad;
+    const { animation = {}, scale } = getPayload(actionSpec) as IComponentScaleToPayLoad;
 
     scaleTo(character, animation as any, scale);
   }
@@ -174,7 +174,7 @@ export class CommonBounceActionProcessor extends ActionProcessorItem {
 
   run(character: ICharacter, actionSpec: IComponentBounceAction): void {
     const payload = getPayload(actionSpec);
-    const { animation } = payload;
+    const { animation = {} } = payload;
     bounce(character, animation as any, payload);
   }
 }

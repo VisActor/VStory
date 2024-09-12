@@ -18,6 +18,10 @@ export class CharacterTree implements ICharacterTree {
     return this._characters[key] || null;
   }
 
+  removeCharacter(cId: string) {
+    this._characters[cId] = null;
+  }
+
   addCharacter(spec: ICharacterSpec) {
     const option = {
       story: this._story,
@@ -56,6 +60,12 @@ export class CharacterTree implements ICharacterTree {
     Object.keys(this._characters).forEach(k => {
       const c = this._characters[k];
       c.release();
+    });
+  }
+
+  toDSL() {
+    return Object.keys(this._characters).map(k => {
+      return this._characters[k].toSpec();
     });
   }
 }

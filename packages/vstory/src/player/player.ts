@@ -1,4 +1,4 @@
-import type { IActSpec, IStory } from '../story/interface';
+import type { IActionSpec, IActSpec, IStory } from '../story/interface';
 import type { ICharacter } from '../story/character';
 import type { IPlayer } from './interface/player';
 import type { IActionProcessor } from './processor/interface/action-processor';
@@ -6,7 +6,7 @@ import { ActionProcessor } from './processor/processor';
 import { processorMap } from './processor/processorMap';
 import type { IScheduler } from './interface/scheduler';
 import { Scheduler } from './scheduler';
-import { EventEmitter } from '@visactor/vutils';
+import { cloneDeep, EventEmitter } from '@visactor/vutils';
 import { createRect } from '@visactor/vrender-core';
 
 export class Ticker {
@@ -44,7 +44,6 @@ export class Player extends EventEmitter implements IPlayer {
   // protected _encoder: Encoder;
   protected _actionProcessor: IActionProcessor;
   protected _scheduler: IScheduler;
-
   set speed(speed: number) {
     if (this._scheduler) {
       this._ticker.speed = speed;
@@ -82,6 +81,14 @@ export class Player extends EventEmitter implements IPlayer {
 
   initActs(acts: IActSpec[]) {
     this._scheduler.init(acts);
+  }
+
+  addAction(sceneId: string, characterId: string, actions: IActionSpec[]) {
+    this._scheduler.addAction(sceneId, characterId, actions);
+  }
+
+  removeCharacterActions(characterId: string) {
+    this._scheduler.removeCharacterActions(characterId);
   }
 
   // 清除当前状态，一般用于回放操作
@@ -186,5 +193,9 @@ export class Player extends EventEmitter implements IPlayer {
 
   release(): void {
     return;
+  }
+
+  toDSL(): IActSpec[] {
+    return this._scheduler.toDSL();
   }
 }

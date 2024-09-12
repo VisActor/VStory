@@ -1,4 +1,4 @@
-import { isNumber, isString } from '@visactor/vutils';
+import { cloneDeep, isNumber, isString } from '@visactor/vutils';
 import type { IActionSpec, IActSpec, ISceneSpec } from '../story/interface';
 import { IStory } from '../story/interface';
 import type { IActionProcessor } from './processor/interface/action-processor';
@@ -42,15 +42,54 @@ export class Scheduler implements IScheduler {
   protected _actionProcessor: IActionProcessor;
   protected _actsInfo: IActInfo[];
   protected _runnedAct: Set<IActionItem>;
+  protected _actSpec: IActSpec[];
 
   constructor(actionProcessor: IActionProcessor) {
     this._actionProcessor = actionProcessor;
     this._runnedAct = new Set();
+    this._actSpec = [
+      {
+        id: 'defaultAct',
+        scenes: [
+          {
+            id: 'defaultScene',
+            actions: []
+          }
+        ]
+      }
+    ];
   }
 
   init(acts: IActSpec[]) {
+    // 重新设置所有属性
     this.clearState();
+    this._actsInfo = [];
+    this._runnedAct.clear();
+
     this.initActs(acts);
+    this._actSpec = cloneDeep(acts);
+  }
+
+  addAction(sceneId: string, characterId: string, actions: IActionSpec[]) {
+    const scene = sceneId ? this.findScene(sceneId) : this.getScenes()[0];
+    if (!scene) {
+      return;
+    }
+    scene.actions.push({
+      characterId,
+      characterActions: actions
+    });
+    this.init(this._actSpec);
+  }
+
+  removeCharacterActions(characterId: string) {
+    for (let i = 0; i < this._actSpec.length; i++) {
+      for (let j = 0; j < this._actSpec[i].scenes.length; j++) {
+        const scene = this._actSpec[i].scenes[j];
+        scene.actions = scene.actions.filter(a => a.characterId !== characterId);
+      }
+    }
+    this.init(this._actSpec);
   }
 
   clearState(): void {
@@ -58,10 +97,19 @@ export class Scheduler implements IScheduler {
   }
 
   getTotalTime(): number {
+    if (!this._actsInfo) {
+      return 0;
+    }
     return this._actsInfo.reduce((t, actInfo) => Math.max(t, actInfo.startTime + actInfo.duration), 0);
   }
 
   findActByTime(t: number) {
+    if (!this._actsInfo) {
+      return {
+        actInfo: null,
+        t: 0
+      };
+    }
     // 规范化t
     const totalTime = this.getTotalTime();
     if (totalTime <= 0) {
@@ -97,6 +145,8 @@ export class Scheduler implements IScheduler {
     const { actInfo: toAct, t: formatToTime } = this.findActByTime(toTime);
     if (fromAct !== toAct) {
       // TODO 跳帧了
+    } else if (!(fromAct && toAct)) {
+      return [];
     }
     // const formatFromTime = Scheduler.formatTimeInAction(fromTime, toAct);
     // const formatToTime = Scheduler.formatTimeInAction(toTime, toAct);
@@ -179,5 +229,34 @@ export class Scheduler implements IScheduler {
     };
 
     return sceneInfo;
+  }
+
+  findScene(id: string): ISceneSpec | null {
+    for (let i = 0; i < this._actSpec.length; i++) {
+      const act = this._actSpec[i];
+      for (let j = 0; j < act.scenes.length; j++) {
+        const scene = act.scenes[j];
+        if (scene.id === id) {
+          return scene;
+        }
+      }
+    }
+    return null;
+  }
+
+  getScenes(): ISceneSpec[] {
+    if (!this._actSpec) {
+      return [];
+    }
+    const scenes: ISceneSpec[] = [];
+    for (let i = 0; i < this._actSpec.length; i++) {
+      const act = this._actSpec[i];
+      scenes.push(...act.scenes);
+    }
+    return scenes;
+  }
+
+  toDSL(): IActSpec[] {
+    return this._actSpec;
   }
 }
