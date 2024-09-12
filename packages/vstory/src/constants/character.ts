@@ -15,7 +15,8 @@ export enum StoryComponentType {
   // RICH_TEXT = 'RichText',
   QIPAO = 'Qipao',
   IMAGE = 'Image',
-  TIMELINE = 'Timeline'
+  TIMELINE = 'Timeline',
+  UNIT = 'Unit'
 }
 
 export const enum StoryChartComponentType {

@@ -40,6 +40,11 @@ export abstract class CharacterBase implements ICharacter {
     if (spec.options) {
       this._spec.options = merge(this._spec.options ?? {}, spec.options);
     }
+    this.applySpec();
+  }
+
+  applySpec() {
+    return;
   }
 
   setAttributes(attr: Record<string, any>) {
@@ -59,6 +64,10 @@ export abstract class CharacterBase implements ICharacter {
   reset() {
     this.clearCharacter();
     this.init();
+  }
+
+  toSpec(): ICharacterSpec {
+    return this._spec;
   }
 
   protected abstract _initRuntime(): void;
