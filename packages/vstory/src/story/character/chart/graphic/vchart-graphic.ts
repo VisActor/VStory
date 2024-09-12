@@ -2,14 +2,14 @@ import type { IGroup } from '@visactor/vrender-core';
 import type { IVisactorGraphic } from '../../visactor/interface';
 import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
 import type { IInitOption, ISpec, IVChart } from '@visactor/vchart';
-import type { GraphicType, IGraphicAttribute, ITicker } from '@visactor/vrender';
-import { application, genNumberType, getTheme, Graphic, NOWORK_ANIMATE_ATTR } from '@visactor/vrender';
+import type { GraphicType, IRectGraphicAttribute, ITicker } from '@visactor/vrender';
+import { genNumberType, Rect } from '@visactor/vrender';
 import { isPointInBounds } from '../../../../util/space';
 import { mergeChartOption } from '../../../utils/chart';
 
 const VIEW_BOX_EXPEND = 4;
 
-export interface IChartGraphicAttribute extends IGraphicAttribute {
+export interface IChartGraphicAttribute extends IRectGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
   spec: any;
   ClassType: any;
@@ -27,14 +27,12 @@ export interface IChartGraphicAttribute extends IGraphicAttribute {
   chartInitOptions?: any;
   // 是否支持bounds选中。默认为false，不会选中图表的无内容部分。
   enablePickBounds?: boolean;
-  width: number;
-  height: number;
 }
 
 export const CHART_NUMBER_TYPE = genNumberType();
 
 // @ts-ignore
-export class Chart extends Graphic implements IVisactorGraphic {
+export class Chart extends Rect implements IVisactorGraphic {
   type: GraphicType = 'chart' as any;
   declare attribute: IChartGraphicAttribute;
   protected _vchart: IVChart;
@@ -219,7 +217,6 @@ export class Chart extends Graphic implements IVisactorGraphic {
     this.setAttributes({
       x: viewBox.x1 + rootBounds.x1,
       y: viewBox.y1 + rootBounds.y1,
-      // @ts-ignore
       width: rootBounds.x2 - rootBounds.x1,
       height: rootBounds.y2 - rootBounds.y1
     });
@@ -248,33 +245,5 @@ export class Chart extends Graphic implements IVisactorGraphic {
 
   release() {
     this._vchart && this._vchart.release();
-  }
-
-  getGraphicTheme() {
-    return getTheme(this).rect;
-  }
-
-  protected updateAABBBounds(
-    attribute: IChartGraphicAttribute,
-    rectTheme: Required<IChartGraphicAttribute>,
-    aabbBounds: IAABBBounds
-  ) {
-    if (!this.updatePathProxyAABBBounds(aabbBounds)) {
-      const { width, height, x, y } = attribute;
-      if (isFinite(width) || isFinite(height) || isFinite(x) || isFinite(y)) {
-        aabbBounds.set(0, 0, width || 0, height || 0);
-      }
-    }
-
-    application.graphicService.transformAABBBounds(attribute, aabbBounds, rectTheme, false, this);
-    return aabbBounds;
-  }
-
-  getNoWorkAnimateAttr() {
-    return NOWORK_ANIMATE_ATTR;
-  }
-
-  clone() {
-    return new Chart({ ...this.attribute });
   }
 }
