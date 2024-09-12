@@ -25,7 +25,7 @@ export class VChartPicker implements IGraphicPicker {
     toChartMatrix.transformPoint(nextP, nextP);
     const pick = vchartStage.pick(nextP.x, nextP.y);
     // @ts-ignore
-    if (pick.graphic === null && pick.group.name === 'root') {
+    if (pick.graphic === null && pick.group.name === 'root' && chart.attribute.enablePickBounds !== true) {
       return false;
     }
     return pick;
