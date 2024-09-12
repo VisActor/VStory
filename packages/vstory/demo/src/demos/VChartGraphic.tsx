@@ -595,27 +595,27 @@ const storySpec: IStorySpec = {
                 }
               ]
             },
-            {
-              characterId: 'vchart2',
-              characterActions: [
-                {
-                  startTime: 0,
-                  action: 'appear',
-                  selector: '*',
-                  payload: {
-                    style: {},
-                    animation: {
-                      effect: 'fade',
-                      move: {
-                        pos: 'top'
-                      },
-                      duration: 1000,
-                      easing: 'linear'
-                    }
-                  }
-                }
-              ]
-            },
+            // {
+            //   characterId: 'vchart2',
+            //   characterActions: [
+            //     {
+            //       startTime: 0,
+            //       action: 'appear',
+            //       selector: '*',
+            //       payload: {
+            //         style: {},
+            //         animation: {
+            //           effect: 'fade',
+            //           move: {
+            //             pos: 'top'
+            //           },
+            //           duration: 1000,
+            //           easing: 'linear'
+            //         }
+            //       }
+            //     }
+            //   ]
+            // },
             {
               characterId: 'rect',
               characterActions: [
@@ -686,34 +686,34 @@ const storySpec: IStorySpec = {
           }
         }
       }
-    },
-    {
-      type: 'VChart',
-      id: 'vchart2',
-      zIndex: 200,
-      position: {
-        x: 50,
-        y: 150,
-        width: 400,
-        height: 400
-      },
-      options: {
-        spec: { ...spec, color: ['red', 'blue'] },
-        initOption: {
-          animation: false,
-          interactive: true,
-          disableTriggerEvent: false,
-          performanceHook: {
-            afterInitializeChart: () => {
-              console.log('afterInitializeChart');
-            },
-            afterVRenderDraw: () => {
-              console.log('afterVRenderDraw');
-            }
-          }
-        }
-      }
     }
+    // {
+    //   type: 'VChart',
+    //   id: 'vchart2',
+    //   zIndex: 200,
+    //   position: {
+    //     x: 50,
+    //     y: 150,
+    //     width: 400,
+    //     height: 400
+    //   },
+    //   options: {
+    //     spec: { ...spec, color: ['red', 'blue'] },
+    //     initOption: {
+    //       animation: false,
+    //       interactive: true,
+    //       disableTriggerEvent: false,
+    //       performanceHook: {
+    //         afterInitializeChart: () => {
+    //           console.log('afterInitializeChart');
+    //         },
+    //         afterVRenderDraw: () => {
+    //           console.log('afterVRenderDraw');
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   ]
 };
 
@@ -729,18 +729,18 @@ export const VChartGraphic = () => {
     const edit = new Edit(story);
     window.edit = edit;
 
-    const vchart = story.getCharactersById('vchart')?.graphic.vchart;
-    window.vchart = vchart;
-    const vchart2 = story.getCharactersById('vchart2')?.graphic.vchart;
-    window.vchart2 = vchart2;
-    console.log('vchart', vchart);
-    vchart.on('pointerdown', (event: any) => {
-      console.log('vchart on pointerdown', event);
-    });
-    vchart2.on('pointerdown', (event: any) => {
-      console.log('vchart2 on pointerdown', event);
-    });
-    story.canvas.getStage().defaultLayer.translate(200, 100);
+    // const vchart = story.getCharactersById('vchart')?.graphic.vchart;
+    // window.vchart = vchart;
+    // const vchart2 = story.getCharactersById('vchart2')?.graphic.vchart;
+    // window.vchart2 = vchart2;
+    // console.log('vchart', vchart);
+    // vchart.on('pointerdown', (event: any) => {
+    //   console.log('vchart on pointerdown', event);
+    // });
+    // vchart2.on('pointerdown', (event: any) => {
+    //   console.log('vchart2 on pointerdown', event);
+    // });
+    // story.canvas.getStage().defaultLayer.translate(200, 100);
     story.canvas.getStage().on('pointerdown', (event: any) => {
       console.log('stage on pointerdown', [...event.detailPath], event.detailPath?.[2]?._uid);
     });

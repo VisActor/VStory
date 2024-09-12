@@ -2,14 +2,14 @@ import type { IGroup } from '@visactor/vrender-core';
 import type { IVisactorGraphic } from '../../visactor/interface';
 import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
 import type { IInitOption, ISpec, IVChart } from '@visactor/vchart';
-import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
-import { genNumberType, Rect } from '@visactor/vrender';
+import type { GraphicType, IGraphicAttribute, ITicker } from '@visactor/vrender';
+import { genNumberType, Graphic } from '@visactor/vrender';
 import { isPointInBounds } from '../../../../util/space';
 import { mergeChartOption } from '../../../utils/chart';
 
 const VIEW_BOX_EXPEND = 4;
 
-export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
+export interface IChartGraphicAttribute extends IGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
   spec: any;
   ClassType: any;
@@ -25,12 +25,13 @@ export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   ticker?: ITicker;
   autoRender?: boolean;
   chartInitOptions?: any;
+  enablePickBounds?: boolean;
 }
 
 export const CHART_NUMBER_TYPE = genNumberType();
 
 // @ts-ignore
-export class Chart extends Rect implements IVisactorGraphic {
+export class Chart extends Graphic implements IVisactorGraphic {
   type: GraphicType = 'chart' as any;
   declare attribute: IChartGraphicAttribute;
   protected _vchart: IVChart;
