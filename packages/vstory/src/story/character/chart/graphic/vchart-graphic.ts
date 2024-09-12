@@ -26,6 +26,8 @@ export interface IChartGraphicAttribute extends IGraphicAttribute {
   autoRender?: boolean;
   chartInitOptions?: any;
   enablePickBounds?: boolean;
+  width: number;
+  height: number;
 }
 
 export const CHART_NUMBER_TYPE = genNumberType();
@@ -216,6 +218,7 @@ export class Chart extends Graphic implements IVisactorGraphic {
     this.setAttributes({
       x: viewBox.x1 + rootBounds.x1,
       y: viewBox.y1 + rootBounds.y1,
+      // @ts-ignore
       width: rootBounds.x2 - rootBounds.x1,
       height: rootBounds.y2 - rootBounds.y1
     });
