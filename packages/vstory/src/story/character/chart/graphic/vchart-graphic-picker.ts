@@ -1,15 +1,5 @@
-import type { IPoint } from '@visactor/vutils';
-import { inject, injectable, getTheme, CircleRender, getScaledStroke, CIRCLE_NUMBER_TYPE } from '@visactor/vrender';
-import type {
-  IGraphicAttribute,
-  ICircle,
-  IContext2d,
-  IMarkAttribute,
-  IThemeAttribute,
-  IGraphicPicker,
-  IGraphicRender,
-  IPickParams
-} from '@visactor/vrender';
+import { injectable } from '@visactor/vrender';
+import type { IGraphicPicker, IPickParams } from '@visactor/vrender';
 import type { Chart } from './vchart-graphic';
 import { CHART_NUMBER_TYPE } from './vchart-graphic';
 
@@ -20,7 +10,7 @@ export class VChartPicker implements IGraphicPicker {
 
   contains(chart: any, point: any, params?: IPickParams): boolean | any {
     // 将当前的point转化到global
-    const matrix = chart.transMatrix.clone();
+    const matrix = chart.parent.globalTransMatrix.clone();
     const stageMatrix = chart.stage.window.getViewBoxTransform();
     matrix.multiply(stageMatrix.a, stageMatrix.b, stageMatrix.c, stageMatrix.d, stageMatrix.e, stageMatrix.f);
     const toGlobalMatrix = matrix.getInverse();
@@ -31,7 +21,13 @@ export class VChartPicker implements IGraphicPicker {
     const vChart = (chart as Chart).vchart;
     const vchartStage = vChart.getStage();
     vchartStage.dirtyBounds?.clear();
-    const graphic = vchartStage.pick(nextP.x, nextP.y);
-    return graphic;
+    const toChartMatrix = vchartStage.window.getViewBoxTransform();
+    toChartMatrix.transformPoint(nextP, nextP);
+    const pick = vchartStage.pick(nextP.x, nextP.y);
+    // @ts-ignore
+    if (pick.graphic === null && pick.group.name === 'root') {
+      return false;
+    }
+    return pick;
   }
 }

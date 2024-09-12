@@ -15,6 +15,7 @@ import type { StoryEvent } from '../../interface/runtime-interface';
 import type { ICharacterPickInfo } from '../runtime-interface';
 import { getLayoutFromWidget } from '../../utils/layout';
 import { getChartModelWithEvent } from '../../utils/vchart-pick';
+import { mergeChartOption } from '../../utils/chart';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
@@ -67,7 +68,7 @@ export class CharacterChart extends CharacterVisactor {
       ticker: this._option.canvas.getStage().ticker,
       visibleAll: false,
       ...(this._spec.options.panel ?? {}),
-      chartInitOptions: merge(
+      chartInitOptions: mergeChartOption(
         {
           animation: true,
           disableTriggerEvent: true,

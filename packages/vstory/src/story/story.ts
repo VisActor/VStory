@@ -32,6 +32,10 @@ export class Story implements IStory {
     return this._player;
   }
 
+  get characterTree() {
+    return this._characterTree;
+  }
+
   constructor(spec: IStorySpec | null, option: IStoryInitOption) {
     this.id = 'test-mvp_' + Story._id_++;
     this._canvas = new StoryCanvas(this, {
