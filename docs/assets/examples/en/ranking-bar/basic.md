@@ -1,15 +1,15 @@
 ---
 category: examples
-group: template
+group: ranking-bar
 title: ranking-bar
 keywords: ranking-bar
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
 ---
 
-# 动态排行榜条形图
+# Dynamic Ranking Bar Chart
 
-## 代码演示
+## Demo source
 
 ```javascript livedemo template=vstory
 const res = await fetch('https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/ranking-bar-rawData.json');

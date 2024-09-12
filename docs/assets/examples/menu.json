@@ -18,17 +18,47 @@
       ]
     },
     {
-      "path": "template",
+      "path": "ranking-bar",
       "title": {
-        "zh": "叙事模板",
-        "en": "Narrative Template"
+        "zh": "动态排行榜条形图",
+        "en": "Dynamic Ranking Bar Chart"
       },
       "children": [
         {
-          "path": "ranking-bar",
+          "path": "basic",
           "title": {
-            "zh": "动态排行榜条形图",
-            "en": "Dynamic Ranking Bar Chart"
+            "zh": "基本场景",
+            "en": "basic"
+          }
+        }
+      ]
+    },
+    {
+      "path": "unit",
+      "title": {
+        "zh": "单元可视化组件",
+        "en": "Unit Visualization component"
+      },
+      "children": [
+        {
+          "path": "basic-component",
+          "title": {
+            "zh": "基础组件",
+            "en": "Basic Unit Component"
+          }
+        },
+        {
+          "path": "unit-infographic",
+          "title": {
+            "zh": "单元可视化信息图示例",
+            "en": "Unit Infographic Example"
+          }
+        },
+        {
+          "path": "unit-gun-death",
+          "title": {
+            "zh": "单元可视化叙事示例",
+            "en": "Unit Story Telling"
           }
         }
       ]

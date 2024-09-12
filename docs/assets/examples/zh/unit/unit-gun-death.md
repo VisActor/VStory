@@ -1,123 +1,23 @@
-import { ISymbolGraphicAttribute, ITextGraphicAttribute } from '@visactor/vrender-core';
-import data from '../../../../data/sorted-gun-death-data.json' assert { type: 'json' };
-import { merge } from '@visactor/vutils';
-import { IEditorTextGraphicAttribute } from '../../../../../src/story/character';
+---
+category: examples
+group: unit
+title: unit-gun-death
+keywords: unit-gun-death
+order: 2-2
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/gun-death.png
+---
 
-export const DEFAULT_SCENE_DURATION = 5000;
-export const DEFAULT_ANIMATION_DURATION = 1000;
+# 单元可视化叙事示例
 
-export interface Input {
-  layout?: {
-    width?: number;
-    height?: number;
-    title?: {
-      height?: number;
-      backgroundColor?: string;
-      style?: IEditorTextGraphicAttribute;
-      padding?: {
-        left?: number;
-        right?: number;
-        top?: number;
-        bottom?: number;
-      };
-    };
-    viz?: {
-      backgroundColor?: string;
-      direction?: 'horizontal' | 'vertical';
-      padding?: {
-        left?: number;
-        right?: number;
-        top?: number;
-        bottom?: number;
-      };
-    };
-  };
-  unit?: {
-    gap?: [number, number];
-    aspect?: number;
-    defaultStyle?: ISymbolGraphicAttribute | ((index: number) => ISymbolGraphicAttribute);
-  };
-  data: Record<string, any>[];
-  scenes: {
-    title: ITextGraphicAttribute[];
-    sceneDuration?: number;
-    animationDuration?: number;
-    nodes: QueryNode[];
-  }[];
-}
+> 该示例来源于：https://fivethirtyeight.com/features/gun-deaths/
 
-export interface QueryNode {
-  query?: (datum: any) => boolean;
-  style?: ISymbolGraphicAttribute;
-  children?: QueryNode[];
-}
+## 代码演示
 
-export interface UnitNode {
-  style?: ISymbolGraphicAttribute;
-  count: number;
-  children?: UnitNode[];
-}
-
-// type DeepRequired<T> = T extends object
-//   ? {
-//       [P in keyof T]-?: DeepRequired<T[P]>;
-//     }
-//   : T;
-
-// export type RequiredInput = DeepRequired<Input>;
-
-export const defaultInput = {
-  layout: {
-    width: 1920,
-    height: 1080,
-    title: {
-      height: 250,
-      backgroundColor: '#ffffff',
-      style: {
-        fontSize: 40,
-        fontWeight: 200,
-        textAlign: 'center',
-        fill: 'black',
-        wordBreak: 'break-word'
-      },
-      padding: {
-        left: 50,
-        right: 50,
-        top: 50,
-        bottom: 0
-      }
-    },
-    viz: {
-      backgroundColor: '#ffffff',
-      direction: 'horizontal',
-      padding: {
-        left: 50,
-        right: 50,
-        top: 50,
-        bottom: 50
-      }
-    }
-  },
-  unit: {
-    gap: [0.5, 0.5],
-    aspect: 1,
-    defaultStyle: {
-      symbolType: 'circle',
-      fill: '#ffffff'
-    }
-  },
-  data: [],
-  scenes: []
-};
-
-function initialInput(input: Input): Input {
-  const { data, ...restInput } = input;
-  const res = merge({}, defaultInput, restInput);
-  res.data = data;
-  return res;
-}
-
-export const userInput: Input = {
+```javascript livedemo template=vstory
+const data = await fetch('https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/sorted-gun-death-data.json').then(
+  res => res.json()
+);
+const unitSpec = {
   layout: {
     width: 1550,
     height: 800,
@@ -139,7 +39,7 @@ export const userInput: Input = {
       fill: '#222222'
     }
   },
-  data: (data as Record<string, any>[]).filter(record => record.year === 2014),
+  data: data.filter(record => record.year === 2014),
   scenes: [
     {
       title: [
@@ -151,7 +51,7 @@ export const userInput: Input = {
           fontWeight: 'bold'
         },
         {
-          text: ' people are fatally shot in the U.S. each year. This is for test. This is f test. This is for test'
+          text: ' people are fatally shot in the U.S. each year. '
         }
       ],
       nodes: [
@@ -165,7 +65,7 @@ export const userInput: Input = {
     {
       title: [
         {
-          text: 'Nearly two-third of gun deaths are'
+          text: 'Nearly two-third of gun deaths are '
         },
         {
           text: 'suicides',
@@ -444,5 +344,10 @@ export const userInput: Input = {
     }
   ]
 };
-
-export const input = initialInput(userInput);
+// 准备一个图表
+const spec = VStory.generateSpec(unitSpec);
+const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 1, scaleY: 1 } });
+vstory.canvas.getStage().defaultLayer.scale(0.5, 0.5);
+vstory.play(false);
+window.vstory = vstory;
+```
