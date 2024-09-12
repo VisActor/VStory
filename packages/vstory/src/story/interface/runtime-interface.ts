@@ -33,6 +33,7 @@ export type IActionParams = {
 export interface IStory {
   readonly id: string;
   readonly player: IPlayer;
+  readonly characterTree: ICharacterTree;
   canvas: IStoryCanvas;
   getCharacters: () => { [key: string]: ICharacter };
   getCharactersById: (key: string) => ICharacter | null;
