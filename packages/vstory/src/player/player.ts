@@ -6,8 +6,7 @@ import { ActionProcessor } from './processor/processor';
 import { processorMap } from './processor/processorMap';
 import type { IScheduler } from './interface/scheduler';
 import { Scheduler } from './scheduler';
-import { cloneDeep, EventEmitter } from '@visactor/vutils';
-import { createRect } from '@visactor/vrender-core';
+import { cloneDeep, EventEmitter, Matrix } from '@visactor/vutils';
 
 export class Ticker {
   cb?: (delta: number) => void;
@@ -54,7 +53,10 @@ export class Player extends EventEmitter implements IPlayer {
     return this._ticker ? this._ticker.speed : 1;
   }
 
-  constructor(story: IStory, options?: { scaleX?: number; scaleY?: number; offsetX?: number; offsetY?: number }) {
+  constructor(
+    story: IStory,
+    options?: { scaleX?: number; scaleY?: number; offsetX?: number; offsetY?: number; transformStage?: boolean }
+  ) {
     super();
     this._story = story;
     this._ticker = new Ticker();
@@ -65,8 +67,15 @@ export class Player extends EventEmitter implements IPlayer {
     const offsetX = options?.offsetX ?? 0;
     const offsetY = options?.offsetY ?? 0;
 
-    stage.window.setViewBoxTransform(scaleX, 0, 0, scaleY, offsetX, offsetY);
-
+    if (options?.transformStage) {
+      stage.window.setViewBoxTransform(scaleX, 0, 0, scaleY, offsetX, offsetY);
+    } else {
+      stage.forEachChildren((layer: any) => {
+        layer.attribute.postMatrix = new Matrix(scaleX, 0, 0, scaleY, offsetX, offsetY);
+        layer.setAttributes({ width: stage.width, height: stage.height });
+      });
+      stage.defaultLayer.setAttributes({ clip: true });
+    }
     // stage.defaultLayer.setAttributes({
     //   scaleX,
     //   scaleY
@@ -79,6 +88,20 @@ export class Player extends EventEmitter implements IPlayer {
     // this._encoder = new Encoder();
     this._actionProcessor = new ActionProcessor(story, processorMap);
     this._scheduler = new Scheduler(this._actionProcessor);
+  }
+
+  setViewSize(offsetX: number, offsetY: number, scaleX: number, scaleY: number, transformStage: boolean) {
+    const stage = this._story.canvas.getStage();
+
+    if (transformStage) {
+      stage.window.setViewBoxTransform(scaleX, 0, 0, scaleY, offsetX, offsetY);
+    } else {
+      stage.forEachChildren((layer: any) => {
+        layer.attribute.postMatrix = new Matrix(scaleX, 0, 0, scaleY, offsetX, offsetY);
+        layer.setAttributes({ width: stage.width, height: stage.height });
+      });
+      stage.defaultLayer.setAttributes({ clip: true });
+    }
   }
 
   initActs(acts: IActSpec[]) {

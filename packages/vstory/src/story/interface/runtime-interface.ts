@@ -13,6 +13,7 @@ export interface IStoryInitOption {
     offsetY?: number;
     scaleX?: number;
     scaleY?: number;
+    transformStage?: boolean;
   };
 }
 
