@@ -43,6 +43,8 @@ export class Edit {
     this._editGroup = createGroup({});
     this._editGroup.name = 'edit_group';
     const editLayer = this.story.canvas.getStage().createLayer();
+    editLayer.attribute.postMatrix = this.story.canvas.getStage().defaultLayer.attribute.postMatrix;
+    editLayer.clipInViewBox = false;
     editLayer.add(this._editGroup);
 
     this._overGraphicGroup = createGroup({});
