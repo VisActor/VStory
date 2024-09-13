@@ -12,6 +12,10 @@ export class CharacterComponentShape extends CharacterComponent {
   }
 
   setAttributes(attr: Record<string, any>): void {
+    if (attr.position) {
+      this._spec.position = attr.position;
+    }
+
     this.group.setAttributes({
       ...attr,
       x: attr.x - attr.width / 2,

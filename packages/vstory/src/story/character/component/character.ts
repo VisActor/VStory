@@ -67,6 +67,7 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
   setAttributes(updateAttr: Record<string, any>): void {
     const { position, ...rest } = updateAttr;
     const attr = { ...(position ?? {}), ...rest };
+    this._spec.position = position;
     this.group.setAttributes(attr);
     this._graphic.setAttributes({ ...attr, x: 0, y: 0, angle: 0 });
     this._text.updateAttribute({});
