@@ -42,7 +42,9 @@ export class Story implements IStory {
       container: isString(option.dom) ? (document.getElementById(option.dom) as HTMLDivElement) : option.dom,
       canvas: isString(option.canvas) ? (document.getElementById(option.canvas) as HTMLCanvasElement) : option.canvas,
       width: option.width,
-      height: option.height
+      height: option.height,
+      background: option.background ?? 'transparent',
+      layerBackground: option.layerBackground ?? 'transparent'
     });
     this._player = new Player(this, option.playerOption);
 

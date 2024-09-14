@@ -10,3 +10,4 @@ export * from './story/utils/layout';
 export * from './story/interface/index';
 export * from './story/character';
 export * from './template/unit';
+export * from './edit/edit-component';

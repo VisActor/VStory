@@ -200,11 +200,14 @@ export const StoryEdit = () => {
     };
     const story = new Story(tempSpec, {
       dom: id,
-      playerOption: { scaleX: 0.6, scaleY: 0.6, offsetX: 100, offsetY: 0 }
+      playerOption: { scaleX: 0.3, scaleY: 0.6, offsetX: 100, offsetY: 0 },
+      background: 'transparent',
+      layerBackground: 'pink'
     });
     story.play(false);
     const edit = new Edit(story);
     edit.emitter.on('startEdit', msg => {
+      console.log('startEdit');
       if (msg.type === 'commonEdit' && msg.actionInfo.character) {
         console.log(cloneDeep(msg.actionInfo.character.spec));
         msg.updateCharacter({ options: { graphic: { fill: 'green' } } });
