@@ -26,10 +26,10 @@ export class RichTextSelectionCommon extends BaseSelection implements IEditCompo
     const { character, text } = this._getRichText();
     this._createRichControl(character, text);
   }
-  editEnd() {
+  endEdit() {
     const { character, text } = this._getRichText();
     this._releaseRichControl(character, text);
-    super.editEnd();
+    super.endEdit();
   }
 
   endRichTextEdit = () => {

@@ -31,24 +31,27 @@ export class ChartSelection extends BaseSelection implements IEditComponent {
   }
 
   startEdit(actionInfo: IEditActionInfo) {
-    super.startEdit(actionInfo);
-    this.edit.startEdit({
+    super.startEdit(actionInfo, false);
+    this.edit.emitter.emit('startEdit', {
       type: 'chartSelection',
-      actionInfo: this._actionInfo,
-      updateCharacter: (params: any) => {
-        // nothing 不支持任何修改
-      }
+      actionInfo,
+      selection: this
     });
+    // this.edit.startEdit({
+    //   type: 'chartSelection',
+    //   actionInfo: this._actionInfo,
+    //   selection: this
+    // });
     // @ts-ignore;
     const character = this._actionInfo.character;
     character.graphic.addEventListener('pointerdown', this.handlerChartClick);
   }
 
-  editEnd() {
+  endEdit() {
     // @ts-ignore;
     const character = this._actionInfo.character;
     character.graphic.removeEventListener('pointerdown', this.handlerChartClick);
-    super.editEnd();
+    super.endEdit();
   }
 
   handlerChartClick = (e: any) => {

@@ -51,8 +51,11 @@ export interface IEditComponent {
   // 是否 开始/继续 编辑 返回false的话，会导致当前编辑结束
   checkAction: (actionInfo: IEditActionInfo | IEditSelectionInfo) => boolean;
 
+  // 编辑开始
+  startEdit: (actionInfo: IEditActionInfo | IEditSelectionInfo, emitEvent?: boolean) => void;
+
   // 编辑结束
-  editEnd: () => void;
+  endEdit: (emitEvent?: boolean) => void;
 
   getActiveCharacter: () => ICharacter | null | undefined;
 }
@@ -81,5 +84,6 @@ export interface IEditComponentConstructor {
 export interface IEditMessage {
   type: string; // 编辑组件类型，
   actionInfo: IEditActionInfo;
-  updateCharacter: (updateParams: any) => void;
+  [key: string]: any;
+  // updateCharacter: (updateParams: any) => void;
 }
