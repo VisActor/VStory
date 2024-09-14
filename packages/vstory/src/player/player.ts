@@ -71,8 +71,17 @@ export class Player extends EventEmitter implements IPlayer {
       stage.window.setViewBoxTransform(scaleX, 0, 0, scaleY, offsetX, offsetY);
     } else {
       stage.forEachChildren((layer: any) => {
-        layer.attribute.postMatrix = new Matrix(scaleX, 0, 0, scaleY, offsetX, offsetY);
-        layer.setAttributes({ width: stage.width, height: stage.height });
+        const maxScale = Math.max(scaleX, scaleY);
+        layer.setAttributes({
+          x: offsetX,
+          y: offsetY,
+          width: (stage.width * scaleX) / maxScale,
+          height: (stage.height * scaleY) / maxScale,
+          scaleX: maxScale,
+          scaleY: maxScale
+        });
+        // layer.attribute.postMatrix = new Matrix(maxScale, 0, 0, maxScale, 0, 0);
+        // layer.setAttributes({ width: stage.width, height: stage.height });
       });
       stage.defaultLayer.setAttributes({ clip: true });
     }
@@ -97,8 +106,15 @@ export class Player extends EventEmitter implements IPlayer {
       stage.window.setViewBoxTransform(scaleX, 0, 0, scaleY, offsetX, offsetY);
     } else {
       stage.forEachChildren((layer: any) => {
-        layer.attribute.postMatrix = new Matrix(scaleX, 0, 0, scaleY, offsetX, offsetY);
-        layer.setAttributes({ width: stage.width, height: stage.height });
+        const maxScale = Math.max(scaleX, scaleY);
+        layer.setAttributes({
+          x: offsetX,
+          y: offsetY,
+          width: (stage.width * scaleX) / maxScale,
+          height: (stage.height * scaleY) / maxScale,
+          scaleX: maxScale,
+          scaleY: maxScale
+        });
       });
       stage.defaultLayer.setAttributes({ clip: true });
     }

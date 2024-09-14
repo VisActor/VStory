@@ -8,6 +8,8 @@ export interface IStoryInitOption {
   canvas?: string | HTMLCanvasElement; // canvas id
   width?: number;
   height?: number;
+  background?: string;
+  layerBackground?: string;
   playerOption?: {
     offsetX?: number;
     offsetY?: number;

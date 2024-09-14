@@ -33,12 +33,17 @@ export class StoryCanvas implements IStoryCanvas {
       canvas?: HTMLCanvasElement;
       width?: number;
       height?: number;
+      background: string;
+      layerBackground: string;
     }
   ) {
     this._story = story;
     this._container = params.container;
+
     this._container && this._initCanvasByContainer();
     params.canvas && this._initCanvasByCanvas(params.canvas, params.width || 500, params.height || 500);
+    this._stage.background = 'transparent';
+    this._stage.defaultLayer.setAttributes({ background: params.layerBackground ?? 'transparent' });
   }
 
   resize(w: number, h: number) {
@@ -63,6 +68,7 @@ export class StoryCanvas implements IStoryCanvas {
       height: this._container.clientHeight,
       dpr: vglobal.devicePixelRatio,
       canvasControled: true,
+
       // 得开启自动渲染，否则编辑场景中无法触发视图更新
       autoRender: true,
       disableDirtyBounds: true,
