@@ -122,3 +122,7 @@ export function getItemBoundsRectWithSpace(
   };
   return rect;
 }
+
+export function isBoundsLikeEqual(a: IBoundsLike, b: IBoundsLike) {
+  return a.x1 === b.x1 && a.x2 === b.x2 && a.y1 === b.y1 && a.y2 === b.y2;
+}
