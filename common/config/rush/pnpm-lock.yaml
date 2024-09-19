@@ -18,7 +18,7 @@ importers:
       '@types/markdown-it': ^13.0.0
       '@types/react': ^18.0.0
       '@types/react-dom': ^18.0.0
-      '@visactor/vstory': workspace:0.0.8-alpha.2
+      '@visactor/vstory': workspace:0.0.8-alpha.6
       '@vitejs/plugin-react': 3.1.0
       axios: ^1.4.0
       chalk: ^3.0.0
@@ -178,7 +178,7 @@ importers:
       '@rushstack/eslint-patch': ~1.1.4
       '@types/node': '*'
       '@types/node-fetch': 2.6.4
-      '@visactor/vstory': workspace:0.0.8-alpha.2
+      '@visactor/vstory': workspace:0.0.8-alpha.6
       eslint: ~8.18.0
       form-data: ~4.0.0
       node-fetch: 2.6.6
@@ -6317,7 +6317,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
+    deprecated: Upgrade to fsevents v2 to mitigate potential security issues
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
