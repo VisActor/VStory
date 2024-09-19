@@ -3,8 +3,8 @@ import type { IVisactorGraphic } from '../../visactor/interface';
 import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
 import type { IInitOption, ISpec, IVChart } from '@visactor/vchart';
 import type { GraphicType, IGraphicAttribute, ITicker } from '@visactor/vrender';
-import { genNumberType, Graphic, Rect } from '@visactor/vrender';
-import { isPointInBounds } from '../../../../util/space';
+import { genNumberType, Rect } from '@visactor/vrender';
+import { isBoundsLikeEqual, isPointInBounds } from '../../../../util/space';
 import { mergeChartOption } from '../../../utils/chart';
 
 const VIEW_BOX_EXPEND = 4;
@@ -144,6 +144,7 @@ export class Chart extends Rect implements IVisactorGraphic {
     } else {
       this._vchart = params.vchart;
     }
+
     // 背景设置为false后，不会擦除画布内容，可以实现元素正常堆叠绘制
     const stage = this._vchart.getStage();
     // TODO stage的pauseRender支持传入count
@@ -189,16 +190,39 @@ export class Chart extends Rect implements IVisactorGraphic {
 
   updateSpec(spec: ISpec, viewBox?: IBoundsLike, forceMerge = false, morphConfig = false) {
     this._boundsChangeTag = true;
-    viewBox && this.updateViewBox(viewBox);
+    // 如果有新的viewBox
+    if (viewBox) {
+      this._setGlobalViewBox(viewBox);
+    }
+    if (this._globalViewBox) {
+      spec.width = this._globalViewBox.x2 - this._globalViewBox.x1;
+      spec.height = this._globalViewBox.y2 - this._globalViewBox.y1;
+    }
     this._vchart.updateSpecSync(spec, forceMerge, { reuse: false, morph: morphConfig });
+    if (this._BoundsViewBox) {
+      const rootBounds = this._getVChartBounds();
+      if (isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {
+        return;
+      }
+    }
     this._updateViewBox();
   }
 
-  updateViewBox(viewBox: IBoundsLike) {
+  private _setGlobalViewBox(viewBox: IBoundsLike) {
+    if (this._globalAABBBounds && isBoundsLikeEqual(this._globalAABBBounds, viewBox)) {
+      // 尺寸没变化
+      return false;
+    }
     // 图表的设置大小
     this._globalViewBox = { ...viewBox };
     this._localViewBox = { x1: 0, y1: 0, x2: viewBox.x2 - viewBox.x1, y2: viewBox.y2 - viewBox.y1 };
+    return true;
+  }
 
+  updateViewBox(viewBox: IBoundsLike) {
+    if (!this._setGlobalViewBox(viewBox)) {
+      return;
+    }
     this._updateViewBox();
   }
 
@@ -207,11 +231,22 @@ export class Chart extends Rect implements IVisactorGraphic {
       return;
     }
     this._boundsChangeTag = true;
-    this._vchart.resize(
-      this._globalViewBox.x2 - this._globalViewBox.x1,
-      this._globalViewBox.y2 - this._globalViewBox.y1
-    );
+    const rect = this._vchart.getChart().getCanvasRect();
+    // 只有当尺寸变化时才resize
+    if (
+      rect.width !== this._globalViewBox.x2 - this._globalViewBox.x1 ||
+      rect.height !== this._globalViewBox.y2 - this._globalViewBox.y1
+    ) {
+      this._vchart.resize(
+        this._globalViewBox.x2 - this._globalViewBox.x1,
+        this._globalViewBox.y2 - this._globalViewBox.y1
+      );
+    }
     const rootBounds = this._getVChartBounds();
+    // 如果 图表bounds 没有变化，则不更新
+    if (this._BoundsViewBox && isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {
+      return;
+    }
     this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1, -rootBounds.y1);
     this._BoundsViewBox = rootBounds;
 
@@ -228,13 +263,7 @@ export class Chart extends Rect implements IVisactorGraphic {
     this._localViewBox.y1 = -rootBounds.y1;
     this._localViewBox.x2 += -rootBounds.x1;
     this._localViewBox.y2 += -rootBounds.y1;
-    //
-    viewBox.x2 -= viewBox.x1;
-    viewBox.y2 -= viewBox.y1;
-    viewBox.x1 = 0;
-    viewBox.y1 = 0;
-    // this._vchart.resize(viewBox.x2 - viewBox.x1, viewBox.y2 - viewBox.y1);
-    this._vchart.updateViewBox(viewBox);
+
     const renderViewBox = { ...rootBounds };
     renderViewBox.x2 -= renderViewBox.x1;
     renderViewBox.y2 -= renderViewBox.y1;
@@ -242,6 +271,7 @@ export class Chart extends Rect implements IVisactorGraphic {
     renderViewBox.y1 = 0;
     renderViewBox.x2 += VIEW_BOX_EXPEND;
     renderViewBox.y2 += VIEW_BOX_EXPEND;
+    // 这个时候需要改的是vrender的viewBox
     // @ts-ignore
     this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);
   }

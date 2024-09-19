@@ -594,7 +594,7 @@ const storySpec: IStorySpec = {
                   }
                 }
               ]
-            },
+            }
             // {
             //   characterId: 'vchart2',
             //   characterActions: [
@@ -616,50 +616,50 @@ const storySpec: IStorySpec = {
             //     }
             //   ]
             // },
-            {
-              characterId: 'rect',
-              characterActions: [
-                {
-                  startTime: 1,
-                  duration: 800,
-                  action: 'appear',
-                  payload: {
-                    animation: {
-                      duration: 700
-                    }
-                  }
-                }
-              ]
-            }
+            // {
+            //   characterId: 'rect',
+            //   characterActions: [
+            //     {
+            //       startTime: 1,
+            //       duration: 800,
+            //       action: 'appear',
+            //       payload: {
+            //         animation: {
+            //           duration: 700
+            //         }
+            //       }
+            //     }
+            //   ]
+            // }
           ]
         }
       ]
     }
   ],
   characters: [
-    {
-      type: 'Rect',
-      id: 'rect',
-      zIndex: 0,
-      position: {
-        top: 50,
-        left: 10,
-        width: 500,
-        height: 200
-      },
-      options: {
-        graphic: {
-          fill: 'red',
-          visible: false
-        },
-        text: {
-          text: 'title2',
-          fill: 'black'
-        },
-        angle: 0,
-        shapePoints: []
-      }
-    },
+    // {
+    //   type: 'Rect',
+    //   id: 'rect',
+    //   zIndex: 0,
+    //   position: {
+    //     top: 50,
+    //     left: 10,
+    //     width: 500,
+    //     height: 200
+    //   },
+    //   options: {
+    //     graphic: {
+    //       fill: 'red',
+    //       visible: false
+    //     },
+    //     text: {
+    //       text: 'title2',
+    //       fill: 'black'
+    //     },
+    //     angle: 0,
+    //     shapePoints: []
+    //   }
+    // },
     {
       type: 'VChart',
       id: 'vchart',
