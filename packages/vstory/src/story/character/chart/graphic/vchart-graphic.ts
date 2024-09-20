@@ -241,7 +241,7 @@ export class Chart extends Rect implements IVisactorGraphic {
         this._globalViewBox.y2 - this._globalViewBox.y1
       );
     }
-    const rootBounds = this._getVChartBounds();
+    const rootBounds = this._getVChartBounds().expand(VIEW_BOX_EXPEND);
     // 如果 图表bounds 没有变化，则不更新
     if (this._BoundsViewBox && isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {
       return;
@@ -266,10 +266,8 @@ export class Chart extends Rect implements IVisactorGraphic {
     const renderViewBox = { ...rootBounds };
     renderViewBox.x2 -= renderViewBox.x1;
     renderViewBox.y2 -= renderViewBox.y1;
-    renderViewBox.x1 = -VIEW_BOX_EXPEND;
-    renderViewBox.y1 = -VIEW_BOX_EXPEND;
-    renderViewBox.x2 += VIEW_BOX_EXPEND * 2;
-    renderViewBox.y2 += VIEW_BOX_EXPEND * 2;
+    renderViewBox.x1 = 0;
+    renderViewBox.y1 = 0;
     // 这个时候需要改的是vrender的viewBox
     // @ts-ignore
     this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);
