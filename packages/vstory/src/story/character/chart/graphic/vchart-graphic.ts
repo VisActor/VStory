@@ -268,8 +268,8 @@ export class Chart extends Rect implements IVisactorGraphic {
     renderViewBox.y2 -= renderViewBox.y1;
     renderViewBox.x1 = -VIEW_BOX_EXPEND;
     renderViewBox.y1 = -VIEW_BOX_EXPEND;
-    renderViewBox.x2 += VIEW_BOX_EXPEND;
-    renderViewBox.y2 += VIEW_BOX_EXPEND;
+    renderViewBox.x2 += VIEW_BOX_EXPEND * 2;
+    renderViewBox.y2 += VIEW_BOX_EXPEND * 2;
     // 这个时候需要改的是vrender的viewBox
     // @ts-ignore
     this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);
