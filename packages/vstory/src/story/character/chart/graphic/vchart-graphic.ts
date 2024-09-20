@@ -266,8 +266,8 @@ export class Chart extends Rect implements IVisactorGraphic {
     const renderViewBox = { ...rootBounds };
     renderViewBox.x2 -= renderViewBox.x1;
     renderViewBox.y2 -= renderViewBox.y1;
-    renderViewBox.x1 = 0;
-    renderViewBox.y1 = 0;
+    renderViewBox.x1 = -VIEW_BOX_EXPEND;
+    renderViewBox.y1 = -VIEW_BOX_EXPEND;
     renderViewBox.x2 += VIEW_BOX_EXPEND;
     renderViewBox.y2 += VIEW_BOX_EXPEND;
     // 这个时候需要改的是vrender的viewBox
