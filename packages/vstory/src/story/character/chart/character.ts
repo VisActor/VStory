@@ -96,6 +96,10 @@ export class CharacterChart extends CharacterVisactor {
       // 位置属性
       this._graphic.updateViewBox(this.getViewBoxFromSpec().viewBox);
     }
+    if (attr.options) {
+      this.updateSpec(attr);
+      this.onSpecReady();
+    }
   }
   getViewBoxFromSpec() {
     const layout = getLayoutFromWidget(this._spec.position);
