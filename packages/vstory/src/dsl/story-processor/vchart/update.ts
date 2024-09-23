@@ -1,6 +1,6 @@
 import type { IChartSpec } from '@visactor/vchart';
 import type VChart from '@visactor/vchart';
-import { cloneDeep, isArray, isEqual } from '@visactor/vutils';
+import { cloneDeep, isArray } from '@visactor/vutils';
 import type { IChartUpdateAction } from '../../types/chart/update';
 import type { ICharacterVisactor } from '../../../story/character/visactor/interface';
 import { isMatch } from './utils';
