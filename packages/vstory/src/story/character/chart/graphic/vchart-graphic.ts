@@ -7,6 +7,7 @@ import { genNumberType, Rect } from '@visactor/vrender';
 import { isBoundsLikeEqual, isPointInBounds } from '../../../../util/space';
 import { mergeChartOption } from '../../../utils/chart';
 
+//TODO vrender升级文本的精确测量后，设置为0或者删除对应的代码逻辑
 const VIEW_BOX_EXPEND = 4;
 
 export interface IChartGraphicAttribute extends IGraphicAttribute {
@@ -242,7 +243,7 @@ export class Chart extends Rect implements IVisactorGraphic {
         this._globalViewBox.y2 - this._globalViewBox.y1
       );
     }
-    const rootBounds = this._getVChartBounds();
+    const rootBounds = this._getVChartBounds().expand(VIEW_BOX_EXPEND);
     // 先更新位置
     this.setAttributes({
       x: this._globalViewBox.x1 + rootBounds.x1,
