@@ -207,13 +207,16 @@ export const StoryEdit = () => {
     story.play(false);
     const edit = new Edit(story);
     edit.emitter.on('startEdit', msg => {
-      console.log('startEdit');
+      console.log('startEdit', msg);
       if (msg.type === 'commonEdit' && msg.actionInfo.character) {
         console.log(cloneDeep(msg.actionInfo.character.spec));
         msg.updateCharacter({ options: { graphic: { fill: 'green' } } });
         console.log(cloneDeep(msg.actionInfo.character.spec));
         story.play();
       }
+    });
+    edit.emitter.on('endEdit', msg => {
+      console.log('endEdit', msg);
     });
   }, []);
 

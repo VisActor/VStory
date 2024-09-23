@@ -100,6 +100,7 @@ export class Edit {
       const cpt = this._componentList[i];
       if (cpt.checkAction(actionInfo)) {
         this.stopEdit();
+        cpt.startEdit(actionInfo);
         this._currentComponent = cpt;
         return;
       }
@@ -108,6 +109,9 @@ export class Edit {
 
   startEdit(msg: IEditMessage) {
     this.dispatchEditAction('startEdit', msg);
+  }
+  endEdit(msg: IEditMessage) {
+    this.dispatchEditAction('endEdit', msg);
   }
 
   dispatchEditAction(type: string, msg: IEditMessage) {
@@ -123,7 +127,7 @@ export class Edit {
   }
 
   stopEdit() {
-    this._currentComponent?.editEnd();
+    this._currentComponent?.endEdit();
     this._currentComponent = null;
   }
 

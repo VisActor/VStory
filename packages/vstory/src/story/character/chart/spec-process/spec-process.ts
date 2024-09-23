@@ -10,15 +10,7 @@ const DefaultEditorSpec: IChartCharacterSpec = {
   id: '',
   position: undefined,
   options: {
-    data: null,
-    theme: null,
-    color: null,
-    layout: { viewBox: { x: 0, y: 0, width: 0, height: 0 }, data: [] },
-    marker: {
-      markLine: [],
-      markArea: []
-    },
-    markStyle: null
+    data: null
   }
 };
 

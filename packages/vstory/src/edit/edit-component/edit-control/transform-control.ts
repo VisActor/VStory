@@ -127,7 +127,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
   runningAddChildUpdateBoundTag: boolean;
 
   updateCbs: Array<(data: IUpdateParams, event?: VRenderPointerEvent) => Partial<IUpdateParams> | false>;
-  editEndCbs: Array<(event?: VRenderPointerEvent) => void>;
+  endEditCbs: Array<(event?: VRenderPointerEvent) => void>;
   editStartCbs: Array<(event?: VRenderPointerEvent) => void>;
   unTransStartCbs: Array<(event: PointerEvent) => void>;
 
@@ -238,7 +238,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     this.editStartCbs = [];
     this.unTransStartCbs = [];
     this.updateCbs = [];
-    this.editEndCbs = [];
+    this.endEditCbs = [];
   }
 
   addDrag() {
@@ -397,7 +397,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     this.dragOffsetX = 0;
     this.dragOffsetY = 0;
     this.setActiveGraphic(null);
-    this.editEndCbs?.forEach(cb => cb(e));
+    this.endEditCbs?.forEach(cb => cb(e));
     this.isEditor = false;
     this.isDragging = false;
   };
@@ -869,7 +869,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
   }
 
   onEditorEnd(cb: (event?: VRenderPointerEvent) => void) {
-    this.editEndCbs.push(cb);
+    this.endEditCbs.push(cb);
   }
   onEditorStart(cb: (event?: VRenderPointerEvent) => void) {
     this.editStartCbs.push(cb);
@@ -932,7 +932,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
     this.parent.removeChild(this);
     this.editBorder = null;
     this.updateCbs = [];
-    this.editEndCbs = [];
+    this.endEditCbs = [];
     this.unTransStartCbs = [];
     super.release();
   }

@@ -9,8 +9,8 @@ export class BoxSelection extends BaseSelection implements IEditComponent {
   constructor(public readonly edit: Edit) {
     super(edit);
   }
-  editEnd(): void {
-    super.editEnd();
+  endEdit(): void {
+    super.endEdit();
     return;
   }
   checkAction(actionInfo: IEditActionInfo): boolean {
@@ -30,9 +30,9 @@ export class BoxSelection extends BaseSelection implements IEditComponent {
       }
       return true;
     }
-    if (actionInfo.type === 'pointerdown') {
-      return true;
-    }
+    // if (actionInfo.type === 'pointerdown') {
+    //   return true;
+    // }
     return false;
   }
 

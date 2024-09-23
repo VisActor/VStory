@@ -16,11 +16,11 @@ export class RectSelection extends RichTextSelectionCommon implements IEditCompo
     const character = this._actionInfo.character;
     character.graphic.graphic.addEventListener('pointerdown', this.handlerContentClick);
   }
-  editEnd() {
+  endEdit() {
     // @ts-ignore;
     const character = this._actionInfo.character;
     character.graphic.graphic.removeEventListener('pointerdown', this.handlerContentClick);
-    super.editEnd();
+    super.endEdit();
   }
 
   handlerContentClick = (e: any) => {

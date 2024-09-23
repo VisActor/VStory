@@ -20,11 +20,18 @@ export abstract class BaseSelection implements IEditComponent {
   constructor(public readonly edit: Edit) {}
   declare type: string;
 
-  editEnd(): void {
+  endEdit(emitEvent: boolean = true): void {
     this.isEditing = false;
+    const actionInfo = this._actionInfo;
     this._actionInfo = null;
     this.inActiveLayoutComponent();
     this._activeCharacter = null;
+    emitEvent &&
+      this.edit.endEdit({
+        type: this.type,
+        actionInfo,
+        selection: this
+      });
   }
 
   checkAction(actionInfo: IEditActionInfo | IEditSelectionInfo): boolean {
@@ -52,9 +59,9 @@ export abstract class BaseSelection implements IEditComponent {
       } else if ((actionInfo as IEditSelectionInfo).character !== this._activeCharacter) {
         // 选中同类型其他元素
         // 先停止当前的
-        this.editEnd();
+        this.endEdit();
         // 在开始新元素的编辑
-        this.startEdit(actionInfo);
+        // this.startEdit(actionInfo);
         return true;
       }
     }
@@ -70,7 +77,7 @@ export abstract class BaseSelection implements IEditComponent {
       actionInfo.type === EditActionEnum.singleSelection &&
       this.enableEditCharacter((actionInfo as IEditSelectionInfo).character)
     ) {
-      this.startEdit(actionInfo);
+      // this.startEdit(actionInfo);
       // graphic
       return true;
     }
@@ -82,13 +89,19 @@ export abstract class BaseSelection implements IEditComponent {
     return this._activeCharacter;
   }
 
-  startEdit(actionInfo: IEditActionInfo) {
+  startEdit(actionInfo: IEditActionInfo, emitEvent: boolean = true) {
     this.isEditing = true;
     this._actionInfo = actionInfo;
     if (actionInfo && (actionInfo as IEditSelectionInfo).character) {
       this._activeCharacter = (actionInfo as IEditSelectionInfo).character;
     }
     this.activeLayoutComponent();
+    emitEvent &&
+      this.edit.startEdit({
+        type: this.type,
+        actionInfo,
+        selection: this
+      });
   }
 
   createLayoutComponent(): ITransformControl | undefined {
