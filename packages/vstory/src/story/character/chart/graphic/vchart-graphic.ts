@@ -2,8 +2,8 @@ import type { IGroup } from '@visactor/vrender-core';
 import type { IVisactorGraphic } from '../../visactor/interface';
 import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
 import type { IInitOption, ISpec, IVChart } from '@visactor/vchart';
-import type { GraphicType, IGraphicAttribute, ITicker } from '@visactor/vrender';
 import { isPointInBounds, isBoundsLikeEqual } from '../../../../util/space';
+import type { GraphicType, IGraphicAttribute, ITicker, IGraphic } from '@visactor/vrender';
 import { genNumberType, Rect } from '@visactor/vrender';
 import { mergeChartOption } from '../../../utils/chart';
 
@@ -62,19 +62,35 @@ export class Chart extends Rect implements IVisactorGraphic {
     return stage.defaultLayer.getChildByName('root').AABBBounds.clone();
   }
 
+  private _getGroupActualBounds(bounds: Bounds, _group: IGraphic) {
+    if (_group.type !== 'group') {
+      bounds.union(_group.AABBBounds);
+      return;
+    }
+    // 以下是 group 的情况
+    const group = _group as IGroup;
+    if (group.childrenCount === 0) {
+      return;
+    }
+    if (group.name?.startsWith('seriesGroup_')) {
+      return bounds.union(group.AABBBounds);
+    }
+    if (group.attribute.clip === true && (group.attribute.width || group.attribute.height)) {
+      bounds.union(group.AABBBounds);
+      return;
+    }
+    group.forEachChildren(_child => {
+      this._getGroupActualBounds(bounds, _child as IGraphic);
+    });
+  }
+
   getVChartActualBounds() {
     const stage = this._vchart.getStage();
     const layer = stage.defaultLayer;
     const root = stage.defaultLayer.getChildByName('root') as IGroup;
     const bounds = new Bounds();
     root.forEachChildren((child: IGroup) => {
-      if (child.attribute.width || child.attribute.height) {
-        child.forEachChildren((_child: IGroup) => {
-          bounds.union(_child.AABBBounds);
-        });
-      } else {
-        bounds.union(child.AABBBounds);
-      }
+      this._getGroupActualBounds(bounds, child);
     });
     bounds.translate(this.attribute.x + layer.attribute.x, this.attribute.y + layer.attribute.y);
     return bounds;
