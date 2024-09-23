@@ -53,6 +53,8 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
     this._text.init();
 
     this.applySpec();
+
+    this.hide();
   }
 
   applySpec(): void {
@@ -61,7 +63,6 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
 
     this._graphic.applyLayoutData(this._spec.position);
     this._text.applyLayoutData(this._spec.position);
-    this.hide();
   }
 
   setAttributes(updateAttr: Record<string, any>): void {

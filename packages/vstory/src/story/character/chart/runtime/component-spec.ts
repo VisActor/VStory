@@ -19,14 +19,14 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
     if (!options) {
       return;
     }
-    const componentSpec = options.componentSpec;
-    componentSpec?.forEach(cSpec => {
-      if (cSpec.specKey === 'axes') {
-        this._mergeAxesSpec(rawSpec, cSpec);
-      } else {
-        this._mergeComponentSpec(rawSpec, cSpec, cSpec.specKey);
-      }
-    });
+    // const componentSpec = options.componentSpec;
+    // componentSpec?.forEach(cSpec => {
+    //   if (cSpec.specKey === 'axes') {
+    //     this._mergeAxesSpec(rawSpec, cSpec);
+    //   } else {
+    //     this._mergeComponentSpec(rawSpec, cSpec, cSpec.specKey);
+    //   }
+    // });
   }
 
   protected _mergeAxesSpec(rawSpec: any, componentSpec: IComponentSpec) {

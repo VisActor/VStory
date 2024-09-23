@@ -39,7 +39,7 @@ export class RichTextSelection extends BaseSelection implements IEditComponent {
       actionInfo.type === EditActionEnum.singleSelection &&
       (actionInfo as IEditSelectionInfo).detail.graphicType === this.type
     ) {
-      this.startEdit(actionInfo);
+      // this.startEdit(actionInfo);
       // graphic
       return true;
     }
