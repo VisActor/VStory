@@ -242,6 +242,13 @@ export class Chart extends Rect implements IVisactorGraphic {
       );
     }
     const rootBounds = this._getVChartBounds().expand(VIEW_BOX_EXPEND);
+    this.setAttributes({
+      x: this._globalViewBox.x1 + rootBounds.x1,
+      y: this._globalViewBox.y1 + rootBounds.y1,
+      // @ts-ignore
+      width: rootBounds.x2 - rootBounds.x1,
+      height: rootBounds.y2 - rootBounds.y1
+    });
     // 如果 图表bounds 没有变化，则不更新
     if (this._BoundsViewBox && isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {
       return;
@@ -249,14 +256,6 @@ export class Chart extends Rect implements IVisactorGraphic {
     this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1, -rootBounds.y1);
     this._BoundsViewBox = rootBounds;
 
-    const viewBox = { ...this._globalViewBox };
-    this.setAttributes({
-      x: viewBox.x1 + rootBounds.x1,
-      y: viewBox.y1 + rootBounds.y1,
-      // @ts-ignore
-      width: rootBounds.x2 - rootBounds.x1,
-      height: rootBounds.y2 - rootBounds.y1
-    });
     // viewBox 在展示 bounds 下的位置
     this._localViewBox.x1 = -rootBounds.x1;
     this._localViewBox.y1 = -rootBounds.y1;
