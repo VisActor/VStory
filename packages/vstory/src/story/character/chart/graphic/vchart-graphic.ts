@@ -246,8 +246,8 @@ export class Chart extends Rect implements IVisactorGraphic {
     const rootBounds = this._getVChartBounds().expand(VIEW_BOX_EXPEND);
     // 先更新位置
     this.setAttributes({
-      x: this._globalViewBox.x1 + rootBounds.x1,
-      y: this._globalViewBox.y1 + rootBounds.y1,
+      // x: this._globalViewBox.x1 + rootBounds.x1,
+      // y: this._globalViewBox.y1 + rootBounds.y1,
       // @ts-ignore
       width: rootBounds.x2 - rootBounds.x1,
       height: rootBounds.y2 - rootBounds.y1
