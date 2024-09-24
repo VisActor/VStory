@@ -25,17 +25,18 @@ export class GraphicText extends Graphic {
     return {
       x: 0,
       y: 0,
-      width: 120,
-      height: 80,
-      angle: 0,
+      // width: 120,
+      // height: 80,
+      // angle: 0,
       fontSize: 16,
-      textAlign: 'center',
-      textBaseline: 'middle',
+      textAlign: 'left',
+      textBaseline: 'top',
       fill: '#000000',
-      lineWidth: 2,
-      ignoreBuf: true,
-      stroke: false,
-      shapePoints: [] as IPointLike[]
+      ellipsis: true,
+      // lineWidth: 2,
+      ignoreBuf: true
+      // stroke: false,
+      // shapePoints: [] as IPointLike[]
     };
   }
 

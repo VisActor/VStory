@@ -6,7 +6,7 @@ import '../../../src/story/index';
 import { cloneDeep } from '@visactor/vutils';
 import { BoxSelection } from '../../../src/edit/edit-component/box-selection';
 import { TextSelection } from '../../../src/edit/edit-component/text-selection';
-import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
+// import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
 import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
 import { Resizable, Enable } from 're-resizable';
 
