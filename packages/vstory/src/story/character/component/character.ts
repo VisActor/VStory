@@ -42,7 +42,7 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
   protected _initGraphics(): void {
     this._group = new ComponentGroup({
       ...getLayoutFromWidget(this._spec.position),
-      angle: this._spec.options.angle,
+      // angle: this._spec.options.angle,
       zIndex: this._spec.zIndex
     });
     this.option.graphicParent.add(this._group);

@@ -10,6 +10,8 @@ export type IWidgetData = {
   top?: WidgetNumber;
   x?: WidgetNumber;
   y?: WidgetNumber;
+  angle?: number;
+  anchor?: [number, number];
 } & (
   | {
       bottom: WidgetNumber;
@@ -38,7 +40,7 @@ export interface IComponentCharacterSpec extends ICharacterSpecBase {
     graphic: any;
     text?: IEditorTextGraphicAttribute;
     isResized?: boolean;
-    angle?: number;
+    // angle?: number;
     shapePoints?: any;
   };
 }

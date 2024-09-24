@@ -67,6 +67,7 @@ export class CharacterChart extends CharacterVisactor {
       viewBox,
       ticker: this._option.canvas.getStage().ticker,
       visibleAll: false,
+      ...getLayoutFromWidget(this._spec.position),
       ...(this._spec.options.panel ?? {}),
       chartInitOptions: mergeChartOption(
         {
@@ -91,12 +92,16 @@ export class CharacterChart extends CharacterVisactor {
 
   setAttributes(attr: Record<string, any>): void {
     // character 的属性
-    if (attr.position) {
-      this._spec.position = attr.position;
+    const { position, options } = attr;
+    if (position) {
+      this._spec.position = position;
       // 位置属性
+      this._graphic.setAttributes({
+        ...position
+      });
       this._graphic.updateViewBox(this.getViewBoxFromSpec().viewBox);
     }
-    if (attr.options) {
+    if (options) {
       this.updateSpec(attr);
       this.onSpecReady();
     }
