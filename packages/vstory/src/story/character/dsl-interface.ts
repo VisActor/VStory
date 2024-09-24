@@ -6,8 +6,10 @@ export type IPercent = `${number}%`;
 export type WidgetNumber = number; // | IPercent;
 
 export type IWidgetData = {
-  left: WidgetNumber;
-  top: WidgetNumber;
+  left?: WidgetNumber;
+  top?: WidgetNumber;
+  x?: WidgetNumber;
+  y?: WidgetNumber;
 } & (
   | {
       bottom: WidgetNumber;

@@ -12,21 +12,22 @@ export class CharacterComponentShape extends CharacterComponent {
   }
 
   setAttributes(attr: Record<string, any>): void {
-    if (attr.position) {
-      this._spec.position = attr.position;
+    const { position } = attr;
+    if (position) {
+      this._spec.position = position;
     }
 
     this.group.setAttributes({
-      ...attr,
-      x: attr.x - attr.width / 2,
-      y: attr.y - attr.height / 2
+      ...position,
+      x: position.x,
+      y: position.y
     });
     this._graphic.setAttributes({
-      ...attr,
-      x: attr.width / 2,
-      y: attr.height / 2,
+      ...position,
+      x: position.width / 2,
+      y: position.height / 2,
       angle: 0,
-      size: Math.min(attr.width, attr.height)
+      size: Math.min(position.width, position.height)
     });
     this._text.updateAttribute({});
   }

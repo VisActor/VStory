@@ -12,6 +12,7 @@ loadAllSelection();
 
 const chartSpec = {
   type: 'bar',
+  animation: false,
   data: [
     {
       id: 'barData',

@@ -89,6 +89,26 @@ export const API = () => {
           spec: chartSpec
         }
       });
+      const shape = story.addCharacterWithAppear({
+        id: 'shape-0',
+        type: 'Shape',
+        zIndex: 0,
+        position: {
+          x: 200,
+          y: 200,
+          width: 200,
+          height: 200
+        },
+        options: {
+          graphic: {
+            fill: 'white',
+            stroke: 'black',
+            symbolType: 'circle'
+          }
+        }
+      });
+
+      chart.setAttributes({ zIndex: 100 });
 
       // 设置character
       // 添加character
@@ -100,6 +120,9 @@ export const API = () => {
           msg.updateCharacter({ options: { graphic: { fill: 'green' } } });
           story.play();
         }
+      });
+      edit.emitter.on('resize', msg => {
+        console.log('resize', msg);
       });
       // 导出DSL
       console.log(story.toDSL());

@@ -37,14 +37,14 @@ export class ShapeSelection extends RectSelection implements IEditComponent {
     );
   }
 
-  protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
-    if (this._activeCharacter) {
-      const { x, y, width, height } = data;
-      this._activeCharacter.setAttributes({
-        ...data,
-        x: x + width / 2,
-        y: y + height / 2
-      });
-    }
-  }
+  // protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
+  //   if (this._activeCharacter) {
+  //     const { x, y, width, height } = data;
+  //     this._activeCharacter.setAttributes({
+  //       ...data,
+  //       x: x + width / 2,
+  //       y: y + height / 2
+  //     });
+  //   }
+  // }
 }
