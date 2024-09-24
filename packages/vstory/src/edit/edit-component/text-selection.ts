@@ -20,7 +20,7 @@ export class TextSelection extends BaseSelection implements IEditComponent {
       actionInfo: this._actionInfo,
       selection: this
     });
-    const character = this._actionInfo.character;
+    const character = (this._actionInfo as any).character;
     character.graphic.graphic.addEventListener('pointerdown', this.handlerContentClick);
   }
 
