@@ -64,7 +64,7 @@ export class Chart extends Rect implements IVisactorGraphic {
 
   private _getGroupActualBounds(bounds: Bounds, _group: IGraphic) {
     if (_group.type !== 'group') {
-      bounds.union(_group.AABBBounds);
+      bounds.union(_group.globalAABBBounds);
       return;
     }
     // 以下是 group 的情况
@@ -73,10 +73,10 @@ export class Chart extends Rect implements IVisactorGraphic {
       return;
     }
     if (group.name?.startsWith('seriesGroup_')) {
-      return bounds.union(group.AABBBounds);
+      return bounds.union(group.globalAABBBounds);
     }
     if (group.attribute.clip === true && (group.attribute.width || group.attribute.height)) {
-      bounds.union(group.AABBBounds);
+      bounds.union(group.globalAABBBounds);
       return;
     }
     group.forEachChildren(_child => {
@@ -86,13 +86,13 @@ export class Chart extends Rect implements IVisactorGraphic {
 
   getVChartActualBounds() {
     const stage = this._vchart.getStage();
-    const layer = stage.defaultLayer;
+    // const layer = stage.defaultLayer;
     const root = stage.defaultLayer.getChildByName('root') as IGroup;
     const bounds = new Bounds();
     root.forEachChildren((child: IGroup) => {
       this._getGroupActualBounds(bounds, child);
     });
-    bounds.translate(this.attribute.x + layer.attribute.x, this.attribute.y + layer.attribute.y);
+    bounds.translate(this.attribute.x, this.attribute.y);
     return bounds;
   }
 
