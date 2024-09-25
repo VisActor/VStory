@@ -2,9 +2,12 @@ import { type IEditActionInfo, type IEditComponent } from '../interface';
 
 import type { Edit } from '../edit';
 import { BaseSelection } from './base-selection';
+import { StoryComponentType } from '../../constants/character';
 
 export class TextSelection extends BaseSelection implements IEditComponent {
   readonly level = 3;
+  readonly type: string = 'text';
+  readonly editCharacterType: string = StoryComponentType.TEXT;
 
   constructor(public readonly edit: Edit) {
     super(edit);
@@ -15,9 +18,20 @@ export class TextSelection extends BaseSelection implements IEditComponent {
     this.edit.startEdit({
       type: 'textSelection',
       actionInfo: this._actionInfo,
-      updateCharacter: (params: any) => {
-        // nothing 不支持任何修改
-      }
+      selection: this
     });
+    const character = (this._actionInfo as any).character;
+    character.graphic.graphic.addEventListener('pointerdown', this.handlerContentClick);
   }
+
+  endEdit() {
+    // @ts-ignore;
+    const character = this._actionInfo.character;
+    character.graphic.graphic.removeEventListener('pointerdown', this.handlerContentClick);
+    super.endEdit();
+  }
+
+  handlerContentClick = (e: any) => {
+    this._layoutComponent.handleDragMouseDown(e);
+  };
 }

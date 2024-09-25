@@ -107,6 +107,28 @@ export const API = () => {
           }
         }
       });
+      const text = story.addCharacterWithAppear({
+        id: 'text-0',
+        type: 'Text',
+        zIndex: 0,
+        position: {
+          x: 200,
+          y: 200,
+          width: 200,
+          height: 200
+        },
+        options: {
+          graphic: {
+            fill: 'black',
+            text: 'black',
+            symbolType: 'circle'
+          }
+        }
+      });
+
+      debugger;
+      text.setAttributes({ options: { graphic: { text: '这是普通文本' } } });
+      console.log(text);
 
       chart.setAttributes({ zIndex: 100 });
 

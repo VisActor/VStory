@@ -5,12 +5,12 @@ import '../../../src/story/index';
 import { Edit } from '../../../src/edit/edit';
 import { BoxSelection } from '../../../src/edit/edit-component/box-selection';
 import { TextSelection } from '../../../src/edit/edit-component/text-selection';
-import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
+// import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
 import { loadAllSelection } from '../../../src/edit/edit-component';
 
 loadAllSelection();
 Edit.registerEditComponent('text', TextSelection);
-Edit.registerEditComponent('richtext', RichTextSelection);
+// Edit.registerEditComponent('richtext', RichTextSelection);
 Edit.registerEditComponent('box-selection', BoxSelection);
 
 const spec = {

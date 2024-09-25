@@ -12,24 +12,28 @@ export class CharacterComponentShape extends CharacterComponent {
   }
 
   setAttributes(attr: Record<string, any>): void {
-    const { position } = attr;
+    const { position, options = {} } = attr;
     if (position) {
       this._spec.position = position;
+      this.group.setAttributes({
+        ...position,
+        x: position.x,
+        y: position.y
+      });
+      this._graphic.setAttributes({
+        ...position,
+        x: position.width / 2,
+        y: position.height / 2,
+        angle: 0,
+        size: Math.min(position.width, position.height)
+      });
     }
-
-    this.group.setAttributes({
-      ...position,
-      x: position.x,
-      y: position.y
-    });
-    this._graphic.setAttributes({
-      ...position,
-      x: position.width / 2,
-      y: position.height / 2,
-      angle: 0,
-      size: Math.min(position.width, position.height)
-    });
-    this._text.updateAttribute({});
+    if (options.graphic) {
+      this._graphic.setAttributes(options.graphic);
+    }
+    if (options.text) {
+      this._text.updateAttribute(options.text);
+    }
   }
 
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {
