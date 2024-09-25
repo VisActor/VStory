@@ -25,7 +25,7 @@ export class GraphicRect extends Graphic {
       this._graphic = createRect(
         this._transformAttributes({
           ...this.getInitialAttributes(),
-          ...(this._character.spec.options?.graphic ?? {})
+          ...(this._character.config.options?.graphic ?? {})
         })
       );
       this._graphic.name = `graphic-rect-${this._character.id}`;

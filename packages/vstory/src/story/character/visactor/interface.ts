@@ -1,4 +1,4 @@
-import type { IChartCharacterSpec } from '../dsl-interface';
+import type { IChartCharacterConfig } from '../dsl-interface';
 import type { EventEmitter, IBoundsLike } from '@visactor/vutils';
 import type { ICharacter } from '../runtime-interface';
 import type { ISpec, IVChart } from '@visactor/vchart';
@@ -52,7 +52,7 @@ export interface ISpecProcess {
   // 得到visactor元素的spec
   getVisSpec: () => ISpec;
   // 得到角色的spec
-  getCharacterSpec: () => IChartCharacterSpec;
+  getCharacterConfig: () => IChartCharacterConfig;
 
   // temp
   getCharacterType: () => string;

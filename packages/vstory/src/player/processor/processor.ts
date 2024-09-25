@@ -56,10 +56,10 @@ export class ActionProcessor implements IActionProcessor {
       return null;
     }
 
-    const processor = this.getProcessor(character.spec.type, action.action);
+    const processor = this.getProcessor(character.config.type, action.action);
 
     if (!processor) {
-      logger('error', `获取processor失败，请检查 ${character.spec.type} 是否支持 ${action.action}`);
+      logger('error', `获取processor失败，请检查 ${character.config.type} 是否支持 ${action.action}`);
       return null;
     }
     return processor.getStartTimeAndDuration(action, character);

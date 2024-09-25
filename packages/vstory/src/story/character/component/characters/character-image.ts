@@ -11,11 +11,10 @@ export class CharacterComponentImage extends CharacterComponent {
     return new GraphicImage(StoryComponentType.IMAGE, this as any);
   }
 
-  setAttributes(updateAttr: Record<string, any>): void {
+  applyConfig(updateAttr: Record<string, any>): void {
     const { position, options = {} } = updateAttr;
     // const attr = { ...(position ?? {}), ...rest };
     if (position) {
-      this._spec.position = position;
       this.group.setAttributes(position);
       this._graphic.setAttributes({ width: position.width, height: position.height });
     }

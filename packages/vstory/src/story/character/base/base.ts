@@ -1,18 +1,17 @@
 import type { IBoundsLike } from '@visactor/vutils';
 import { isValid, merge } from '@visactor/vutils';
 import type { ICharacterInitOption, ICharacterPickInfo } from '../runtime-interface';
-import type { ICharacter, ICharacterSpec } from '..';
+import type { ICharacter, ICharacterConfig } from '..';
 import type { IGroup } from '@visactor/vrender';
 import type { StoryEvent } from '../../interface';
-import { IVisactorGraphic } from '../visactor/interface';
 
 export abstract class CharacterBase implements ICharacter {
   readonly id: string;
   readonly visActorType: string;
   readonly type: string;
-  protected _spec: ICharacterSpec;
-  get spec() {
-    return this._spec;
+  protected _config: ICharacterConfig;
+  get config() {
+    return this._config;
   }
   protected declare _graphic: any;
   get graphic() {
@@ -24,31 +23,28 @@ export abstract class CharacterBase implements ICharacter {
     return this._option;
   }
 
-  constructor(spec: ICharacterSpec, option: ICharacterInitOption) {
-    this.type = spec.type;
-    this.id = spec.id;
-    this._spec = spec;
+  constructor(config: ICharacterConfig, option: ICharacterInitOption) {
+    this.type = config.type;
+    this.id = config.id;
+    this._config = config;
     this._option = option;
   }
-  updateSpec(spec: Omit<Partial<ICharacterSpec>, 'id' | 'type'>): void {
-    if (spec.position) {
-      this._spec.position = spec.position;
+  // 设置position、zIndex和options
+  setConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>): void {
+    if (config.position) {
+      this._config.position = config.position;
     }
-    if (isValid(spec.zIndex)) {
-      this._spec.zIndex = spec.zIndex;
+    if (isValid(config.zIndex)) {
+      this._config.zIndex = config.zIndex;
     }
-    if (spec.options) {
-      this._spec.options = merge(this._spec.options ?? {}, spec.options);
+    if (config.options) {
+      this._config.options = merge(this._config.options ?? {}, config.options);
     }
-    this.applySpec();
+    this.applyConfig(config);
   }
 
-  applySpec() {
+  protected applyConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>) {
     return;
-  }
-
-  setAttributes(attr: Record<string, any>) {
-    throw new Error('请重载setAttributes函数');
   }
 
   tickTo(t: number): void {
@@ -57,7 +53,7 @@ export abstract class CharacterBase implements ICharacter {
 
   init() {
     this._initRuntime();
-    this._parserSpec();
+    this._parseConfig();
     this._initGraphics();
   }
 
@@ -66,12 +62,12 @@ export abstract class CharacterBase implements ICharacter {
     this.init();
   }
 
-  toSpec(): ICharacterSpec {
-    return this._spec;
+  toJSON(): ICharacterConfig {
+    return this._config;
   }
 
   protected abstract _initRuntime(): void;
-  protected abstract _parserSpec(): void;
+  protected abstract _parseConfig(): void;
   protected abstract _initGraphics(): void;
 
   abstract show(): void;

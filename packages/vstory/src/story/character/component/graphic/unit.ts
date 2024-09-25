@@ -94,15 +94,15 @@ export class GraphicUnit extends Graphic {
   init() {
     if (!this._graphic) {
       const { width, height } = this._getContainerSize(
-        this._character.spec.position,
-        this._character.spec.options?.graphic
+        this._character.config.position,
+        this._character.config.options?.graphic
       );
-      const attributes = { ...this.getInitialAttributes(), ...this._character.spec.options?.graphic, width, height };
+      const attributes = { ...this.getInitialAttributes(), ...this._character.config.options?.graphic, width, height };
       const gridConfig = this._calculateGrid(attributes);
       this._graphic = createGroup({
-        ...getLayoutFromWidget(this._character.spec.position),
-        angle: this._character.spec.options.angle,
-        zIndex: this._character.spec.zIndex
+        ...getLayoutFromWidget(this._character.config.position),
+        angle: this._character.config.options.angle,
+        zIndex: this._character.config.zIndex
       });
       this._addUnitsToGraphic(gridConfig, attributes);
       this._character.getGraphicParent().add(this._graphic);

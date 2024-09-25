@@ -10,7 +10,7 @@ import type {
   IComponentScaleToAction,
   IComponentStyleAction
 } from '../../player/processor/interface/style-action';
-import type { ICharacterSpec } from '../character';
+import type { ICharacterConfig } from '../character';
 import type { IUnitStyleAction, IUnitVisibilityAction } from '../../player/processor/interface/unit-action';
 
 export type IActionSpec =
@@ -26,9 +26,9 @@ export type IActionSpec =
   | IUnitStyleAction
   | IUnitVisibilityAction;
 
-export interface IStorySpec {
+export interface IStoryDSL {
   acts: IActSpec[]; // 作品的章节
-  characters: ICharacterSpec[]; // 作品中的元素
+  characters: ICharacterConfig[]; // 作品中的元素
 }
 
 export interface IActionsLink {

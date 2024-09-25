@@ -1,5 +1,5 @@
 import { merge, isValid } from '@visactor/vutils';
-import type { IComponentSpec } from '../../dsl-interface';
+import type { IComponentConfig } from '../../dsl-interface';
 import type { CharacterChart } from '../character';
 import type { IChartCharacterRuntime } from './interface';
 import { ChartSpecMatch } from './utils';
@@ -15,7 +15,7 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
 
   onSpecReady() {
     const rawSpec = this._character.specProcess.getVisSpec();
-    const options = this._character.specProcess.getCharacterSpec().options;
+    const options = this._character.specProcess.getCharacterConfig().options;
     if (!options) {
       return;
     }
@@ -29,12 +29,12 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
     // });
   }
 
-  protected _mergeAxesSpec(rawSpec: any, componentSpec: IComponentSpec) {
+  protected _mergeAxesSpec(rawSpec: any, componentSpec: IComponentConfig) {
     this._mergeComponentSpec(
       rawSpec,
       componentSpec,
       'axes',
-      (a: any, index: number, _componentSpec: IComponentSpec) => {
+      (a: any, index: number, _componentSpec: IComponentConfig) => {
         return a.orient === componentSpec.matchInfo.orient;
       }
     );
@@ -42,9 +42,9 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
 
   protected _mergeComponentSpec(
     rawSpec: any,
-    componentSpec: IComponentSpec,
+    componentSpec: IComponentConfig,
     key: string,
-    additionalMatch?: (rawComponentSpec: any, index: number, componentSpec: IComponentSpec) => boolean
+    additionalMatch?: (rawComponentSpec: any, index: number, componentSpec: IComponentConfig) => boolean
   ) {
     if (!rawSpec[key]) {
       rawSpec[key] = [];

@@ -1,9 +1,9 @@
-import type { ICharacterSpec } from './character/dsl-interface';
+import type { ICharacterConfig } from './character/dsl-interface';
 import { isString } from '@visactor/vutils';
 import type { ICharacterTree, IStory, IStoryCanvas, IStoryInitOption } from './interface/runtime-interface';
 import type { ICharacter } from './character/runtime-interface';
 import { StoryCanvas } from './canvas/canvas';
-import type { IStorySpec, IActionSpec, IActionParams } from './interface';
+import type { IStoryDSL, IActionParams } from './interface';
 import { defaultTicker, defaultTimeline } from '@visactor/vrender';
 import { CharacterTree } from './character-tree/character-tree';
 import type { IPlayer } from '../player/interface/player';
@@ -22,7 +22,7 @@ export class Story implements IStory {
 
   protected _characterTree: ICharacterTree;
 
-  protected _spec: IStorySpec;
+  protected _dsl: IStoryDSL;
 
   get canvas() {
     return this._canvas;
@@ -36,7 +36,7 @@ export class Story implements IStory {
     return this._characterTree;
   }
 
-  constructor(spec: IStorySpec | null, option: IStoryInitOption) {
+  constructor(spec: IStoryDSL | null, option: IStoryInitOption) {
     this.id = 'test-mvp_' + Story._id_++;
     this._canvas = new StoryCanvas(this, {
       container: isString(option.dom) ? (document.getElementById(option.dom) as HTMLDivElement) : option.dom,
@@ -52,21 +52,21 @@ export class Story implements IStory {
     spec && this.load(spec);
   }
 
-  load(spec: IStorySpec) {
-    this._spec = spec;
-    if (!spec) {
+  load(dsl: IStoryDSL) {
+    this._dsl = dsl;
+    if (!dsl) {
       return;
     }
-    this._characterTree.initCharacters(spec.characters);
-    this._player.initActs(spec.acts);
+    this._characterTree.initCharacters(dsl.characters);
+    this._player.initActs(dsl.acts);
   }
 
-  addCharacter(spec: ICharacterSpec, actionParams?: IActionParams): ICharacter {
+  addCharacter(spec: ICharacterConfig, actionParams?: IActionParams): ICharacter {
     const c = this._characterTree.addCharacter(spec);
     actionParams && this.addAction(c.id, actionParams);
     return c;
   }
-  addCharacterWithAppear(spec: ICharacterSpec): ICharacter {
+  addCharacterWithAppear(spec: ICharacterConfig): ICharacter {
     const c = this._characterTree.addCharacter(spec);
     this.addAction(c.id, { sceneId: '', actions: [{ action: 'appear' }] });
     return c;
@@ -94,7 +94,7 @@ export class Story implements IStory {
 
   play(loop: boolean = true) {
     // player 开始播放
-    this._spec && this.load(this._spec);
+    this._dsl && this.load(this._dsl);
     this._player.play();
     if (loop) {
       this._player.once('onstop', () => {
@@ -116,7 +116,7 @@ export class Story implements IStory {
     return this._player;
   }
 
-  toDSL(): IStorySpec {
+  toDSL(): IStoryDSL {
     return {
       acts: this._player.toDSL(),
       characters: this._characterTree.toDSL()

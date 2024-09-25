@@ -3,7 +3,7 @@ import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
 import { cloneDeep, merge } from '@visactor/vutils';
 import { VChart } from '@visactor/vchart';
-import type { IChartCharacterSpec } from '../dsl-interface';
+import type { ICharacterConfig, IChartCharacterConfig } from '../dsl-interface';
 import { Chart } from './graphic/vchart-graphic';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
@@ -32,9 +32,9 @@ export class CharacterChart extends CharacterVisactor {
 
   declare _graphic: Chart;
 
-  protected declare _spec: IChartCharacterSpec;
-  get spec() {
-    return this._spec;
+  protected declare _config: IChartCharacterConfig;
+  get config() {
+    return this._config;
   }
 
   protected _initSpecProcess(): void {
@@ -47,8 +47,8 @@ export class CharacterChart extends CharacterVisactor {
     });
   }
 
-  protected _parserSpec(): void {
-    this._specProcess.updateConfig(this._spec);
+  protected _parseConfig(): void {
+    this._specProcess.updateConfig(this._config);
   }
   protected _initGraphics(): void {
     const { spec, viewBox } = this._getChartOption();
@@ -58,7 +58,7 @@ export class CharacterChart extends CharacterVisactor {
       spec,
       ClassType: VChart,
       vchart: null,
-      zIndex: this._spec.zIndex,
+      zIndex: this._config.zIndex,
       mode: 'desktop-browser',
       dpr: window.devicePixelRatio,
       interactive: false,
@@ -67,8 +67,8 @@ export class CharacterChart extends CharacterVisactor {
       viewBox,
       ticker: this._option.canvas.getStage().ticker,
       visibleAll: false,
-      ...getLayoutFromWidget(this._spec.position),
-      ...(this._spec.options.panel ?? {}),
+      ...getLayoutFromWidget(this._config.position),
+      ...(this._config.options.panel ?? {}),
       chartInitOptions: mergeChartOption(
         {
           animation: true,
@@ -83,31 +83,30 @@ export class CharacterChart extends CharacterVisactor {
             }
           }
         },
-        this._spec.options.initOption ?? {}
+        this._config.options.initOption ?? {}
       )
     });
     this.hide();
     this.option.graphicParent.add(this._graphic as any);
   }
 
-  setAttributes(attr: Record<string, any>): void {
-    // character 的属性
-    const { position, options } = attr;
+  setConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>): void {
+    super.setConfig(config);
+    this.onSpecReady();
+  }
+
+  applyConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>): void {
+    const { position } = config;
     if (position) {
-      this._spec.position = position;
-      // 位置属性
       this._graphic.setAttributes({
         ...position
       });
       this._graphic.updateViewBox(this.getViewBoxFromSpec().viewBox);
     }
-    if (options) {
-      this.updateSpec(attr);
-      this.onSpecReady();
-    }
   }
+
   getViewBoxFromSpec() {
-    const layout = getLayoutFromWidget(this._spec.position);
+    const layout = getLayoutFromWidget(this._config.position);
     const viewBox = {
       x1: layout.x,
       x2: layout.x + layout.width,
@@ -119,7 +118,7 @@ export class CharacterChart extends CharacterVisactor {
 
   private _getChartOption() {
     const { layout, viewBox } = this.getViewBoxFromSpec();
-    const spec = cloneDeep(this._specProcess.getVisSpec() ?? this._spec.options.spec);
+    const spec = cloneDeep(this._specProcess.getVisSpec() ?? this._config.options.spec);
     spec.width = layout.width;
     spec.height = layout.height;
     return {

@@ -23,7 +23,7 @@ export class GraphicQipao extends Graphic {
       this._graphic = createSymbol({
         ...this._transformAttributes({
           ...this.getInitialAttributes(),
-          ...(this._character.spec.options?.graphic ?? {})
+          ...(this._character.config.options?.graphic ?? {})
         })
       });
       this._graphic.name = `graphic-qipao-${this._character.id}`;

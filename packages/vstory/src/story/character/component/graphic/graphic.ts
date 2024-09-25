@@ -2,7 +2,7 @@ import type { IGraphic } from '@visactor/vrender';
 import type { IAABBBounds, IPointLike } from '@visactor/vutils';
 import { isValid } from '@visactor/vutils';
 import type { CharacterComponent } from '../character';
-import type { IComponentCharacterSpec, IWidgetData } from '../..';
+import type { IComponentCharacterConfig, IWidgetData } from '../..';
 import { getLayoutFromWidget } from '../../../utils/layout';
 
 export interface IGraphicConstructor {
@@ -72,11 +72,11 @@ export abstract class Graphic {
     });
   }
 
-  getGraphicAttribute(): IComponentCharacterSpec['options']['graphic'] {
+  getGraphicAttribute(): IComponentCharacterConfig['options']['graphic'] {
     return this._graphic?.attribute;
   }
 
-  applyGraphicAttribute(graphicAttribute: IComponentCharacterSpec['options']['graphic']): void {
+  applyGraphicAttribute(graphicAttribute: IComponentCharacterConfig['options']['graphic']): void {
     this._graphic.setAttributes(
       this._transformAttributes({
         ...graphicAttribute
@@ -99,7 +99,7 @@ export abstract class Graphic {
     this._graphic.setAttributes(
       this._transformAttributes({
         ...getLayoutFromWidget(layoutData),
-        shapePoints: this._character.spec.options.shapePoints
+        shapePoints: this._character.config.options.shapePoints
       })
     );
   }

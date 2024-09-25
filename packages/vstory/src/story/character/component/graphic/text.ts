@@ -48,7 +48,7 @@ export class GraphicText extends Graphic {
   }
 
   protected transformTextAttrsToRichTextConfig() {
-    const textAttr = (this._character.spec.options?.graphic ?? {}) as IRichTextGraphicAttribute;
+    const textAttr = (this._character.config.options?.graphic ?? {}) as IRichTextGraphicAttribute;
     let textConfig = textAttr.textConfig;
 
     // 如果是纯文本定义方式
@@ -72,7 +72,7 @@ export class GraphicText extends Graphic {
       this._graphic = createRichText(
         this._transformAttributes({
           ...this.getInitialAttributes(),
-          ...(this._character.spec.options?.graphic ?? {}),
+          ...(this._character.config.options?.graphic ?? {}),
           textConfig: this.transformTextAttrsToRichTextConfig()
         })
       );

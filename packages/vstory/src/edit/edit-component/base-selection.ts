@@ -181,7 +181,7 @@ export abstract class BaseSelection implements IEditComponent {
       this.edit.emitter.emit('resize', {
         position: data
       });
-      this._activeCharacter.setAttributes({ position: data });
+      this._activeCharacter.setConfig({ position: data });
     }
   }
 }

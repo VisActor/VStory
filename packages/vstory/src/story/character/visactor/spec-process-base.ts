@@ -1,4 +1,4 @@
-import { IChartCharacterSpec } from '../dsl-interface';
+import type { IChartCharacterConfig } from '../dsl-interface';
 import { EventEmitter, cloneDeep } from '@visactor/vutils';
 import type {
   IDataTempTransform,
@@ -10,9 +10,9 @@ import type {
 } from './interface';
 
 export abstract class SpecProcessBase implements ISpecProcess {
-  // 编辑器spec 存储和加载都是这个数据结构
+  // 编辑器config 存储和加载都是这个数据结构
   // 保证结构可序列化。
-  protected _characterSpec: IChartCharacterSpec;
+  protected _characterConfig: IChartCharacterConfig;
   protected _onSpecReadyCall: () => void = null;
   // vTableSpec 只作为临时转换结果，传递给vTable，不会存储。
   protected _visSpec: any;
@@ -45,13 +45,13 @@ export abstract class SpecProcessBase implements ISpecProcess {
     return this._visSpec;
   }
 
-  getCharacterSpec() {
-    return this._characterSpec;
+  getCharacterConfig() {
+    return this._characterConfig;
   }
 
   protected _dataUpdateSuccess = (option: IUpdateAttributeOption) => {
     this.emitter.emit('beforeTempChange');
-    this._characterSpec.options.data = this._dataTempTransform.dataParser.getSave();
+    this._characterConfig.options.data = this._dataTempTransform.dataParser.getSave();
     this.emitter.emit('afterDataChange');
   };
   protected _tempUpdateSuccess = (
@@ -60,7 +60,7 @@ export abstract class SpecProcessBase implements ISpecProcess {
   ) => {
     const willPushHistory = option?.triggerHistory !== false;
     this.emitter.emit('beforeTempChange', willPushHistory, transParams);
-    this._characterSpec.type = this._dataTempTransform.specTemp.type;
+    this._characterConfig.type = this._dataTempTransform.specTemp.type;
     this.emitter.emit('afterTempChange', transParams);
   };
   protected _dataTempUpdateSuccess = (
@@ -69,8 +69,8 @@ export abstract class SpecProcessBase implements ISpecProcess {
   ) => {
     const willPushHistory = option?.triggerHistory !== false;
     this.emitter.emit('beforeTempChange', willPushHistory, transParams);
-    this._characterSpec.options.data = this._dataTempTransform.dataParser.getSave();
-    this._characterSpec.type = this._dataTempTransform.specTemp.type;
+    this._characterConfig.options.data = this._dataTempTransform.dataParser.getSave();
+    this._characterConfig.type = this._dataTempTransform.specTemp.type;
     this.emitter.emit('afterTempChange', transParams);
   };
 
@@ -84,13 +84,13 @@ export abstract class SpecProcessBase implements ISpecProcess {
     this._onSpecReadyCall = null;
     this._dataTempTransform.release();
     this._dataTempTransform = null;
-    this._characterSpec = null;
+    this._characterConfig = null;
     this._visSpec = null;
     this._character = null;
   }
 
   // 得到模版类型
   getCharacterType() {
-    return this._characterSpec.type;
+    return this._characterConfig.type;
   }
 }

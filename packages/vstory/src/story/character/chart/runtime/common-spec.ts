@@ -13,7 +13,7 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
 
   onSpecReady() {
     const rawSpec = this._character.specProcess.getVisSpec();
-    const options = this._character.specProcess.getCharacterSpec().options;
+    const options = this._character.specProcess.getCharacterConfig().options;
     if (!options) {
       return;
     }

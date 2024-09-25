@@ -74,7 +74,7 @@ export type IUpdateParams = {
 const borderAnchors = ['top', 'bottom', 'left', 'right'];
 const cornerAnchors = ['left-top', 'right-top', 'left-bottom', 'right-bottom'];
 
-const anchorPositionMap = {
+const anchorPositionMap: any = {
   top: [0, 0, 1, 0],
   bottom: [0, 1, 1, 1],
   left: [0, 0, 0, 1],
@@ -86,7 +86,7 @@ const anchorPositionMap = {
   'right-bottom': [1, 1]
 };
 
-const anchorCursorMap = {
+const anchorCursorMap: any = {
   'left-top': 'nwse-resize',
   top: 'ns-resize',
   'right-top': 'nesw-resize',

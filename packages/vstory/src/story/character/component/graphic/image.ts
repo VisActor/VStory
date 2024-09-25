@@ -24,7 +24,7 @@ export class GraphicImage extends Graphic {
       this._graphic = createImage(
         this._transformAttributes({
           ...this.getInitialAttributes(),
-          ...(this._character.spec.options?.graphic ?? {})
+          ...(this._character.config.options?.graphic ?? {})
         })
       );
       this._graphic.name = `graphic-image-${this._character.id}`;

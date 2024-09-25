@@ -93,9 +93,9 @@ export const LV_BAR1 = () => {
     const edit = new Edit(story);
     edit.emitter.on('startEdit', msg => {
       if (msg.type === 'commonEdit' && msg.actionInfo.character) {
-        console.log(cloneDeep(msg.actionInfo.character.spec));
+        console.log(cloneDeep(msg.actionInfo.character.config));
         msg.updateCharacter({ options: { graphic: { fill: 'green' } } });
-        console.log(cloneDeep(msg.actionInfo.character.spec));
+        console.log(cloneDeep(msg.actionInfo.character.config));
         story.play();
       }
     });

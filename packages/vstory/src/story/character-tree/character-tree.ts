@@ -1,4 +1,4 @@
-import type { ICharacter, ICharacterSpec } from '../character';
+import type { ICharacter, ICharacterConfig } from '../character';
 import { StoryFactory } from '../factory/factory';
 import type { ICharacterTree, IStory } from '../interface';
 
@@ -22,22 +22,22 @@ export class CharacterTree implements ICharacterTree {
     this._characters[cId] = null;
   }
 
-  addCharacter(spec: ICharacterSpec) {
+  addCharacter(spec: ICharacterConfig) {
     const option = {
       story: this._story,
       canvas: this._story.canvas,
       graphicParent: this._story.canvas.getStage().defaultLayer
     };
-    if ((<ICharacterSpec>spec).id) {
-      if (!this._characters[(<ICharacterSpec>spec).id]) {
-        this._characters[(<ICharacterSpec>spec).id] = StoryFactory.createCharacter(<ICharacterSpec>spec, option);
+    if ((<ICharacterConfig>spec).id) {
+      if (!this._characters[(<ICharacterConfig>spec).id]) {
+        this._characters[(<ICharacterConfig>spec).id] = StoryFactory.createCharacter(<ICharacterConfig>spec, option);
       }
-      return this._characters[(<ICharacterSpec>spec).id];
+      return this._characters[(<ICharacterConfig>spec).id];
     }
     return null;
   }
 
-  initCharacters(specs: ICharacterSpec[]): void {
+  initCharacters(specs: ICharacterConfig[]): void {
     this.releaseOldCharacters();
     this._characters = {};
     const option = {
@@ -47,11 +47,11 @@ export class CharacterTree implements ICharacterTree {
     };
 
     specs.forEach(spec => {
-      if ((<ICharacterSpec>spec).id) {
-        if (!this._characters[(<ICharacterSpec>spec).id]) {
-          this._characters[(<ICharacterSpec>spec).id] = StoryFactory.createCharacter(<ICharacterSpec>spec, option);
+      if ((<ICharacterConfig>spec).id) {
+        if (!this._characters[(<ICharacterConfig>spec).id]) {
+          this._characters[(<ICharacterConfig>spec).id] = StoryFactory.createCharacter(<ICharacterConfig>spec, option);
         }
-        // return this._characters[(<ICharacterSpec>spec).id];
+        // return this._characters[(<ICharacterConfig>spec).id];
       }
     });
   }
@@ -65,7 +65,7 @@ export class CharacterTree implements ICharacterTree {
 
   toDSL() {
     return Object.keys(this._characters).map(k => {
-      return this._characters[k].toSpec();
+      return this._characters[k].toJSON();
     });
   }
 }

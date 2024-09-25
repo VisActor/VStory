@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import type { ICharacterSpec } from 'src/story/character/dsl-interface';
+import type { ICharacterConfig } from 'src/story/character/dsl-interface';
 import { CharacterBase } from '../base/base';
 import type { ISpecProcess, ICharacterVisactor } from './interface';
 import type { ICharacterInitOption } from '../runtime-interface';
@@ -25,7 +25,7 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
 
   protected _runtime: IChartCharacterRuntime[] = [];
 
-  constructor(spec: ICharacterSpec, option: ICharacterInitOption) {
+  constructor(spec: ICharacterConfig, option: ICharacterInitOption) {
     super(spec, option);
     this._initSpecProcess();
   }
@@ -64,7 +64,7 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
   }
 
   getViewBoxFromSpec() {
-    const layout = getLayoutFromWidget(this._spec.position);
+    const layout = getLayoutFromWidget(this._config.position);
     const viewBox = {
       x1: layout.x,
       x2: layout.x + layout.width,

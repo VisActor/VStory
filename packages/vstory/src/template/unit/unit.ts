@@ -2,16 +2,16 @@ import type { ISymbolGraphicAttribute } from '@visactor/vrender-core';
 import { DEFAULT_ANIMATION_DURATION, DEFAULT_SCENE_DURATION, defaultConfig } from './default';
 import { isFunction, isObject, merge } from '@visactor/vutils';
 import type { IUnitTemplateSpec, QueryNode } from './type';
-import type { IActionsLink, IStorySpec } from '../../story/interface';
-import type { ICharacterSpec } from '../../story/character';
+import type { IActionsLink, IStoryDSL } from '../../story/interface';
+import type { ICharacterConfig } from '../../story/character';
 
-export function generateSpec(input: IUnitTemplateSpec): IStorySpec {
+export function generateSpec(input: IUnitTemplateSpec): IStoryDSL {
   input = initialInput(input);
   const { characters: layoutCharacters, actions: layoutActions } = generateLayoutSpec(input);
   const { characters: titleCharacters, actionsGroup: titleActionsGroup } = generateTitleSpec(input);
   const { character: vizCharacter, actions: vizActions } = generateVizSpec(input);
 
-  const spec: IStorySpec = {
+  const spec: IStoryDSL = {
     characters: [...layoutCharacters, ...titleCharacters, vizCharacter],
     acts: [
       {
@@ -48,7 +48,7 @@ function generateLayoutSpec(input: IUnitTemplateSpec) {
       viz: { backgroundColor: vizBackgroundColor = defaultConfig.layout.viz.backgroundColor } = {}
     } = {}
   } = input;
-  const characters: ICharacterSpec[] = [
+  const characters: ICharacterConfig[] = [
     {
       type: 'Rect',
       id: 'background-title',
@@ -137,7 +137,7 @@ function generateTitleSpec(input: IUnitTemplateSpec) {
   } = input;
 
   const startTime = 0;
-  const characters: ICharacterSpec[] = scenes.map((scene, sceneIndex) => {
+  const characters: ICharacterConfig[] = scenes.map((scene, sceneIndex) => {
     return {
       type: 'Text',
       id: 'title-' + sceneIndex,
@@ -219,7 +219,7 @@ function generateVizSpec(input: IUnitTemplateSpec) {
       initialStyleList.push(defaultStyle);
     }
   }
-  const character: ICharacterSpec = getUnitCharacter(initialStyleList, input);
+  const character: ICharacterConfig = getUnitCharacter(initialStyleList, input);
   const actions: IActionsLink[] = [];
   const startTime = 0;
   let prevStyleList = initialStyleList;
@@ -236,7 +236,7 @@ function generateVizSpec(input: IUnitTemplateSpec) {
   return { character, actions };
 }
 
-function getUnitCharacter(styleList: ISymbolGraphicAttribute[], input: IUnitTemplateSpec): ICharacterSpec {
+function getUnitCharacter(styleList: ISymbolGraphicAttribute[], input: IUnitTemplateSpec): ICharacterConfig {
   const {
     layout: {
       width: layoutWidth = defaultConfig.layout.width,
@@ -255,7 +255,7 @@ function getUnitCharacter(styleList: ISymbolGraphicAttribute[], input: IUnitTemp
     unit: { gap: unitGap = defaultConfig.unit.gap, aspect: unitAspect = defaultConfig.unit.aspect } = {}
   } = input;
 
-  const character: ICharacterSpec = {
+  const character: ICharacterConfig = {
     type: 'Unit',
     id: 'unit',
     zIndex: 2,
