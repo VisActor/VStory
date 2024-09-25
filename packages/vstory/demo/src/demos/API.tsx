@@ -126,6 +126,10 @@ export const API = () => {
         }
       });
 
+      debugger;
+      text.setAttributes({ options: { graphic: { text: '这是普通文本' } } });
+      console.log(text);
+
       chart.setAttributes({ zIndex: 100 });
 
       // 设置character

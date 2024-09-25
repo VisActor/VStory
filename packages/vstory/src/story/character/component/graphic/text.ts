@@ -40,7 +40,14 @@ export class GraphicText extends Graphic {
     };
   }
 
-  transformTextAttrsToRichTextConfig() {
+  setAttributes(attr: Record<string, any>): void {
+    if (attr.text) {
+      attr.textConfig = this.transformTextAttrsToRichTextConfig();
+    }
+    super.setAttributes(attr);
+  }
+
+  protected transformTextAttrsToRichTextConfig() {
     const textAttr = (this._character.spec.options?.graphic ?? {}) as IRichTextGraphicAttribute;
     let textConfig = textAttr.textConfig;
 
