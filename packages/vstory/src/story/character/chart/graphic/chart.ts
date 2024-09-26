@@ -8,6 +8,16 @@ import { VChartGraphic } from './vrender/vchart-graphic';
 export class Chart extends BaseGraphic {
   protected _graphic: VChartGraphic;
 
+  setAttributes(attr: Record<string, any>): void {
+    if (!this._graphic) {
+      return;
+    }
+    if (attr.spec) {
+      this._graphic.updateSpec(attr.spec);
+    }
+    this._graphic.setAttributes(attr);
+  }
+
   constructor(type: string, character: any, params: IChartGraphicAttribute) {
     super(type, character);
     this._graphic = new VChartGraphic(params);
