@@ -1,7 +1,7 @@
 import type { IBoundsLike } from '@visactor/vutils';
 import type { IGroup } from '@visactor/vrender';
 import { GraphicBaseText } from './graphic/graphic-base-text';
-import type { IComponentCharacterConfig } from '../dsl-interface';
+import type { ICharacterConfig, IComponentCharacterConfig } from '../dsl-interface';
 import { CharacterBase } from '../base/base';
 import type { Graphic } from './graphic/graphic';
 import { getLayoutFromWidget } from '../../utils/layout';
@@ -52,17 +52,19 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
     this._graphic.init();
     this._text.init();
 
-    this.applySpec();
-
-    this.hide();
-  }
-
-  applySpec(): void {
     this._graphic.applyGraphicAttribute(this._config.options.graphic);
     this._text.applyGraphicAttribute(this._config.options.text);
 
     this._graphic.applyLayoutData(this._config.position);
     this._text.applyLayoutData(this._config.position);
+
+    this.hide();
+  }
+
+  protected applyConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>): void {
+    if (config.position) {
+      this.group.setAttributes(config.position);
+    }
   }
 
   protected abstract _createGraphic(): Graphic;

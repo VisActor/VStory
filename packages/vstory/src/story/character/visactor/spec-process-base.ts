@@ -13,7 +13,7 @@ export abstract class SpecProcessBase implements ISpecProcess {
   // 编辑器config 存储和加载都是这个数据结构
   // 保证结构可序列化。
   protected _characterConfig: IChartCharacterConfig;
-  protected _onSpecReadyCall: () => void = null;
+  protected _onConfigReadyCall: () => void = null;
   // vTableSpec 只作为临时转换结果，传递给vTable，不会存储。
   protected _visSpec: any;
 
@@ -32,7 +32,7 @@ export abstract class SpecProcessBase implements ISpecProcess {
       character,
       specProcess: this
     });
-    this._onSpecReadyCall = call;
+    this._onConfigReadyCall = call;
     this._dataTempTransform.emitter.on('specReady', this.transformSpec);
     this._dataTempTransform.emitter.on('tempUpdate', this._tempUpdateSuccess);
     this._dataTempTransform.emitter.on('dataUpdate', this._dataUpdateSuccess);
@@ -77,11 +77,11 @@ export abstract class SpecProcessBase implements ISpecProcess {
   protected transformSpec = () => {
     this._visSpec = this._dataTempTransform.getBaseSpec();
     this._mergeConfig();
-    this._onSpecReadyCall();
+    this._onConfigReadyCall();
   };
 
   release() {
-    this._onSpecReadyCall = null;
+    this._onConfigReadyCall = null;
     this._dataTempTransform.release();
     this._dataTempTransform = null;
     this._characterConfig = null;

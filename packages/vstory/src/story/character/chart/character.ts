@@ -4,7 +4,7 @@ import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
 import { cloneDeep, merge } from '@visactor/vutils';
 import { VChart } from '@visactor/vchart';
 import type { ICharacterConfig, IChartCharacterConfig } from '../dsl-interface';
-import { Chart } from './graphic/vchart-graphic';
+import { VChartGraphic } from './graphic/vrender/vchart-graphic';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
 import { ChartDataTempTransform } from './spec-process/data-temp-transform';
@@ -16,6 +16,8 @@ import type { ICharacterPickInfo } from '../runtime-interface';
 import { getLayoutFromWidget } from '../../utils/layout';
 import { getChartModelWithEvent } from '../../utils/vchart-pick';
 import { mergeChartOption } from '../../utils/chart';
+import { Chart } from './graphic/chart';
+import { StoryChartType, StoryComponentType } from '../../../constants/character';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
@@ -38,7 +40,7 @@ export class CharacterChart extends CharacterVisactor {
   }
 
   protected _initSpecProcess(): void {
-    this._specProcess = new SpecProcess(this as any, ChartDataTempTransform, this.onSpecReady);
+    this._specProcess = new SpecProcess(this as any, ChartDataTempTransform, this.onConfigReady);
   }
 
   protected _initRuntime(): void {
@@ -53,10 +55,10 @@ export class CharacterChart extends CharacterVisactor {
   protected _initGraphics(): void {
     const { spec, viewBox } = this._getChartOption();
     // @ts-ignore
-    this._graphic = new Chart({
+    this._graphic = new Chart(StoryChartType.VCHART, this, {
       renderCanvas: this._option.canvas.getCanvas(),
       spec,
-      ClassType: VChart,
+      // ClassType: VChart,
       vchart: null,
       zIndex: this._config.zIndex,
       mode: 'desktop-browser',
@@ -86,23 +88,9 @@ export class CharacterChart extends CharacterVisactor {
         this._config.options.initOption ?? {}
       )
     });
+    this._graphic.init();
     this.hide();
-    this.option.graphicParent.add(this._graphic as any);
-  }
-
-  setConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>): void {
-    super.setConfig(config);
-    this.onSpecReady();
-  }
-
-  applyConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>): void {
-    const { position } = config;
-    if (position) {
-      this._graphic.setAttributes({
-        ...position
-      });
-      this._graphic.updateViewBox(this.getViewBoxFromSpec().viewBox);
-    }
+    this.option.graphicParent.add(this._graphic.graphic);
   }
 
   getViewBoxFromSpec() {
@@ -132,12 +120,13 @@ export class CharacterChart extends CharacterVisactor {
     return;
   }
   protected _updateVisactorSpec(): void {
-    this._graphic?.updateSpec(this._specProcess.getVisSpec());
+    this._graphic?.setAttributes({
+      spec: this._specProcess.getVisSpec()
+    });
   }
 
   clearCharacter(): void {
-    this._graphic.vProduct.release();
-    this._graphic.parent.removeChild(this._graphic);
+    this._graphic.release();
   }
 
   tickTo(t: number): void {
@@ -145,14 +134,14 @@ export class CharacterChart extends CharacterVisactor {
   }
 
   checkEvent(event: StoryEvent): false | ICharacterPickInfo {
-    if (!(event.detailPath ?? event.path).some(g => g === this._graphic)) {
+    if (!(event.detailPath ?? event.path).some(g => g === this._graphic.graphic)) {
       return false;
     }
     const chartPath = event.detailPath[event.detailPath.length - 1];
-    const result = getChartModelWithEvent(this._graphic.vProduct, event);
+    const result = getChartModelWithEvent(this._graphic.graphic.vProduct, event);
     if (!result) {
       // 点击到图表的空白区域
-      if (this._graphic.pointInViewBox((event as any).canvasX, (event as any).canvasY)) {
+      if (this._graphic.graphic.pointInViewBox((event as any).canvasX, (event as any).canvasY)) {
         return {
           part: 'null',
           graphic: null,
@@ -176,12 +165,15 @@ export class CharacterChart extends CharacterVisactor {
     this._graphic.release && this._graphic.release();
   }
 
-  private _reflow() {
-    if (!this._graphic) {
-      this._initGraphics();
-      return;
+  protected applyConfig(config: any): void {
+    const { position } = config;
+    if (position) {
+      // 位置属性
+      this._graphic.setAttributes({
+        ...position
+      });
+      this._graphic.updateViewBox(this.getViewBoxFromSpec().viewBox);
     }
-    const { spec } = this._getChartOption();
-    this._graphic.updateSpec(spec);
+    super.applyConfig(config);
   }
 }

@@ -1,11 +1,11 @@
 import type { IGroup } from '@visactor/vrender-core';
-import type { IVisactorGraphic } from '../../visactor/interface';
+import type { IVisactorGraphic } from '../../../visactor/interface';
 import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
-import type { IInitOption, ISpec, IVChart } from '@visactor/vchart';
+import { VChart, type IInitOption, type ISpec, type IVChart } from '@visactor/vchart';
 import type { GraphicType, IGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Rect } from '@visactor/vrender';
-import { isBoundsLikeEqual, isPointInBounds } from '../../../../util/space';
-import { mergeChartOption } from '../../../utils/chart';
+import { isBoundsLikeEqual, isPointInBounds } from '../../../../../util/space';
+import { mergeChartOption } from '../../../../utils/chart';
 
 //TODO vrender升级文本的精确测量后，设置为0或者删除对应的代码逻辑
 const VIEW_BOX_EXPEND = 4;
@@ -13,7 +13,7 @@ const VIEW_BOX_EXPEND = 4;
 export interface IChartGraphicAttribute extends IGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
   spec: any;
-  ClassType: any;
+  // ClassType: any;
   vchart: IVChart;
   mode: IInitOption['mode'];
   modeParams?: any;
@@ -34,13 +34,13 @@ export interface IChartGraphicAttribute extends IGraphicAttribute {
 export const CHART_NUMBER_TYPE = genNumberType();
 
 // @ts-ignore
-export class Chart extends Rect implements IVisactorGraphic {
+export class VChartGraphic extends Rect implements IVisactorGraphic {
   type: GraphicType = 'chart' as any;
   declare attribute: IChartGraphicAttribute;
   protected _vchart: IVChart;
   // 是否试一次空render，目的是只生成场景树，不会真实渲染
   // protected _emptyRenderCall: boolean;
-  protected declare _AABBBounds: AABBBounds;
+  // protected declare _AABBBounds: AABBBounds;
   declare valid: boolean;
   get vchart() {
     return this._vchart;
@@ -99,7 +99,7 @@ export class Chart extends Rect implements IVisactorGraphic {
 
     // 创建chart
     if (!params.vchart) {
-      params.vchart = this._vchart = new params.ClassType(
+      params.vchart = this._vchart = new VChart(
         params.spec,
         mergeChartOption(
           {
@@ -210,7 +210,7 @@ export class Chart extends Rect implements IVisactorGraphic {
   }
 
   private _setGlobalViewBox(viewBox: IBoundsLike) {
-    if (this._globalAABBBounds && isBoundsLikeEqual(this._globalAABBBounds, viewBox)) {
+    if (this._globalViewBox && isBoundsLikeEqual(this._globalViewBox, viewBox)) {
       // 尺寸没变化
       return false;
     }

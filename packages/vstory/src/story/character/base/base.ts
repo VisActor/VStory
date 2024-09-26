@@ -31,6 +31,14 @@ export abstract class CharacterBase implements ICharacter {
   }
   // 设置position、zIndex和options
   setConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>): void {
+    const diffConfig = this.diffConfig(config);
+
+    this.mergeConfig(diffConfig);
+
+    this.applyConfig(diffConfig);
+  }
+
+  protected mergeConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>) {
     if (config.position) {
       this._config.position = config.position;
     }
@@ -40,10 +48,20 @@ export abstract class CharacterBase implements ICharacter {
     if (config.options) {
       this._config.options = merge(this._config.options ?? {}, config.options);
     }
-    this.applyConfig(config);
+  }
+
+  protected diffConfig(
+    config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>
+  ): Omit<Partial<ICharacterConfig>, 'id' | 'type'> {
+    return config;
   }
 
   protected applyConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>) {
+    this.onConfigReady(config);
+    return;
+  }
+
+  protected onConfigReady(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>) {
     return;
   }
 

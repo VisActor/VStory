@@ -25,6 +25,7 @@ import { RankingBar } from './demos/template/RankingBar';
 import { UnitComponentDemo } from './demos/UnitViz/UnitDemo';
 import { GunDeath } from './demos/UnitViz/GunDeath';
 import { API } from './demos/API';
+import { Dapanji } from './demos/template/dapanji';
 
 type MenusType = (
   | {
@@ -129,6 +130,10 @@ const App = () => {
     {
       name: 'VChartGraphic',
       component: VChartGraphic
+    },
+    {
+      name: 'Dapanji',
+      component: Dapanji
     },
     {
       name: 'Unit Visualization',

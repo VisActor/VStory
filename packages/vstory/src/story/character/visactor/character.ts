@@ -40,9 +40,9 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
 
   protected abstract _initSpecProcess(): void;
 
-  onSpecReady = () => {
-    console.log('onSpecReady !');
-    this._runtime.forEach(r => r.onSpecReady?.());
+  onConfigReady = () => {
+    console.log('onConfigReady !');
+    this._runtime.forEach(r => r.onConfigReady?.());
     this._specProcess.dataTempTransform.specTemp?.standardizedSpec(this._specProcess.getVisSpec(), { character: this });
     this._updateVisactorSpec();
     this._afterRender();
@@ -53,14 +53,15 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
   protected abstract _updateVisactorSpec(): void;
 
   show(): void {
-    this._graphic.setAttribute('visibleAll', true);
+    this._graphic.show();
   }
   hide(): void {
-    this._graphic.setAttribute('visibleAll', false);
+    this._graphic.hide();
   }
 
   getGraphicParent() {
-    return this._graphic;
+    // TODO 这里不对，但是历史逻辑是这样的，后续要改成真正的parent
+    return this._graphic.graphic;
   }
 
   getViewBoxFromSpec() {
