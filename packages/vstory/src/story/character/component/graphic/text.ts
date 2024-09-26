@@ -44,6 +44,14 @@ export class GraphicText extends Graphic {
     if (attr.text) {
       attr.textConfig = this.transformTextAttrsToRichTextConfig();
     }
+    // 文字的对齐方式只能在box内
+    if (attr.textAlign) {
+      const textConfig = this._graphic.textConfig || this._graphic.attribute.textConfig || [];
+      textConfig.forEach((item: any) => {
+        item.textAlign = attr.textAlign;
+      });
+      attr = { ...attr, textAlign: 'left' };
+    }
     super.setAttributes(attr);
   }
 

@@ -19,8 +19,10 @@ export class CharacterComponentText extends CharacterComponent {
       this._graphic.setAttributes({ width: position.width, height: position.height });
     }
     if (options.graphic) {
-      const attrs = { ...options.graphic };
-      this._graphic.setAttributes(attrs);
+      this._graphic.setAttributes(options.graphic);
+    }
+    if (options.group) {
+      this._group.setAttributes(options.group);
     }
   }
 }

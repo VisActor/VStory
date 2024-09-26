@@ -74,14 +74,14 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
   }
 
   show(): void {
-    this._group.setAttributes({ visible: true });
-    this._text.show();
-    this._graphic.show();
+    this._group.setAttributes({ visibleAll: true });
+    // this._text.show();
+    // this._graphic.show();
   }
   hide(): void {
-    this._group.setAttributes({ visible: false });
-    this._text.hide();
-    this._graphic.hide();
+    this._group.setAttributes({ visibleAll: false });
+    // this._text.hide();
+    // this._graphic.hide();
   }
 
   getTextLayoutRatio(): { left: number; right: number; top: number; bottom: number } {
