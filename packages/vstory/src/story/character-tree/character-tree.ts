@@ -19,7 +19,10 @@ export class CharacterTree implements ICharacterTree {
   }
 
   removeCharacter(cId: string) {
-    this._characters[cId] = null;
+    const c = this._characters[cId];
+    // TODO 先直接release掉，后续如果需要复用再说
+    c && c.release();
+    delete this._characters[cId];
   }
 
   addCharacter(spec: ICharacterConfig) {

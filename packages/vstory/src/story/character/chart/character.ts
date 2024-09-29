@@ -1,10 +1,8 @@
 import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
-import { cloneDeep, merge } from '@visactor/vutils';
-import { VChart } from '@visactor/vchart';
-import type { ICharacterConfig, IChartCharacterConfig } from '../dsl-interface';
-import { VChartGraphic } from './graphic/vrender/vchart-graphic';
+import { cloneDeep } from '@visactor/vutils';
+import type { IChartCharacterConfig } from '../dsl-interface';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
 import { ChartDataTempTransform } from './spec-process/data-temp-transform';
@@ -17,7 +15,7 @@ import { getLayoutFromWidget } from '../../utils/layout';
 import { getChartModelWithEvent } from '../../utils/vchart-pick';
 import { mergeChartOption } from '../../utils/chart';
 import { Chart } from './graphic/chart';
-import { StoryChartType, StoryComponentType } from '../../../constants/character';
+import { StoryChartType } from '../../../constants/character';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';

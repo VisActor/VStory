@@ -92,7 +92,7 @@ export class Story implements IStory {
   //   this._player.addAct(spec, this._characters);
   // }
 
-  play(loop: boolean = true) {
+  play(loop: boolean = false) {
     // player 开始播放
     this._dsl && this.load(this._dsl);
     this._player.play();
