@@ -1,8 +1,7 @@
-import { IChartCharacterSpec } from '../../dsl-interface';
 import type { StandardData, DataInfo } from '../data/interface';
 import type { ISpec } from '@visactor/vchart';
 import type { IVisactorTemp } from '../../visactor/interface';
-import { CharacterChart } from '../character';
+import type { CharacterChart } from '../character';
 
 export interface IChartTemp extends IVisactorTemp {
   type: string;

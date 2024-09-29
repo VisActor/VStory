@@ -9,7 +9,7 @@ import type {
   IThemeAttribute
 } from '@visactor/vrender';
 import { injectable, DefaultCanvasRectRender } from '@visactor/vrender';
-import type { Chart } from './vchart-graphic';
+import type { VChartGraphic } from './vchart-graphic';
 import { CHART_NUMBER_TYPE } from './vchart-graphic';
 
 export const ChartRender = Symbol.for('VStoryChartRender');
@@ -45,7 +45,7 @@ export class VChartRender extends DefaultCanvasRectRender implements IGraphicRen
     context.baseGlobalAlpha *= baseOpacity;
     super.drawShape(chart, context, x, y, drawContext, params, fillCb, strokeCb);
     context.baseGlobalAlpha /= baseOpacity;
-    const vChart = (chart as Chart).vchart;
+    const vChart = (chart as VChartGraphic).vchart;
     const vchartStage = vChart.getStage();
     const vchartCtx = vchartStage.window.getContext();
     vchartCtx.baseGlobalAlpha *= baseOpacity;

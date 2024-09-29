@@ -12,19 +12,17 @@ export class CharacterComponentText extends CharacterComponent {
     return new GraphicText(StoryComponentType.TEXT, this as any);
   }
 
-  setAttributes(updateAttr: Record<string, any>): void {
+  applyConfig(updateAttr: Record<string, any>): void {
     const { position, options = {} } = updateAttr;
-    if (options) {
-      this.updateSpec(updateAttr);
-    }
     if (position) {
       this.group.setAttributes(position);
       this._graphic.setAttributes({ width: position.width, height: position.height });
     }
-
     if (options.graphic) {
-      const attrs = { ...options.graphic };
-      this._graphic.setAttributes(attrs);
+      this._graphic.setAttributes(options.graphic);
+    }
+    if (options.group) {
+      this._group.setAttributes(options.group);
     }
   }
 }

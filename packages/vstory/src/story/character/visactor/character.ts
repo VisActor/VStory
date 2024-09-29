@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import type { ICharacterSpec } from 'src/story/character/dsl-interface';
+import type { ICharacterConfig } from 'src/story/character/dsl-interface';
 import { CharacterBase } from '../base/base';
 import type { ISpecProcess, ICharacterVisactor } from './interface';
 import type { ICharacterInitOption } from '../runtime-interface';
@@ -25,7 +25,7 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
 
   protected _runtime: IChartCharacterRuntime[] = [];
 
-  constructor(spec: ICharacterSpec, option: ICharacterInitOption) {
+  constructor(spec: ICharacterConfig, option: ICharacterInitOption) {
     super(spec, option);
     this._initSpecProcess();
   }
@@ -40,9 +40,9 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
 
   protected abstract _initSpecProcess(): void;
 
-  onSpecReady = () => {
-    console.log('onSpecReady !');
-    this._runtime.forEach(r => r.onSpecReady?.());
+  onConfigReady = () => {
+    console.log('onConfigReady !');
+    this._runtime.forEach(r => r.onConfigReady?.());
     this._specProcess.dataTempTransform.specTemp?.standardizedSpec(this._specProcess.getVisSpec(), { character: this });
     this._updateVisactorSpec();
     this._afterRender();
@@ -53,18 +53,19 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
   protected abstract _updateVisactorSpec(): void;
 
   show(): void {
-    this._graphic.setAttribute('visibleAll', true);
+    this._graphic.show();
   }
   hide(): void {
-    this._graphic.setAttribute('visibleAll', false);
+    this._graphic.hide();
   }
 
   getGraphicParent() {
-    return this._graphic;
+    // TODO 这里不对，但是历史逻辑是这样的，后续要改成真正的parent
+    return this._graphic.graphic;
   }
 
   getViewBoxFromSpec() {
-    const layout = getLayoutFromWidget(this._spec.position);
+    const layout = getLayoutFromWidget(this._config.position);
     const viewBox = {
       x1: layout.x,
       x2: layout.x + layout.width,

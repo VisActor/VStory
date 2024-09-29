@@ -3,10 +3,10 @@ import { CharacterComponentRect } from './character/component/characters/charact
 import { StoryFactory } from './factory/factory';
 import { AutoEnablePlugins, ContainerModule, GraphicRender, RichTextEditPlugin, container } from '@visactor/vrender';
 import { CanvasPickerContribution } from '@visactor/vrender';
-import { ChartRender, VChartRender } from './character/chart/graphic/vchart-graphic-render';
+import { ChartRender, VChartRender } from './character/chart/graphic/vrender/vchart-graphic-render';
 import { CharacterComponentText } from './character/component/characters/character-text';
 // import { CharacterComponentRichText } from './character/component/characters/character-richtext';
-import { VChartPicker } from './character/chart/graphic/vchart-graphic-picker';
+import { VChartPicker } from './character/chart/graphic/vrender/vchart-graphic-picker';
 import { StoryComponentType } from '../constants/character';
 import { CharacterComponentLine } from './character/component/characters/character-line';
 import { CharacterComponentImage } from './character/component/characters/character-image';

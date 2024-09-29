@@ -1,7 +1,7 @@
 import type { IBoundsLike } from '@visactor/vutils';
 import type { IGroup } from '@visactor/vrender';
 import { GraphicBaseText } from './graphic/graphic-base-text';
-import type { IComponentCharacterSpec } from '../dsl-interface';
+import type { ICharacterConfig, IComponentCharacterConfig } from '../dsl-interface';
 import { CharacterBase } from '../base/base';
 import type { Graphic } from './graphic/graphic';
 import { getLayoutFromWidget } from '../../utils/layout';
@@ -11,9 +11,9 @@ import { ComponentGroup } from './character-group/component-group-graphic';
 
 export abstract class CharacterComponent extends CharacterBase implements ICharacter {
   visActorType: 'component';
-  protected declare _spec: IComponentCharacterSpec;
-  get spec() {
-    return this._spec;
+  protected declare _config: IComponentCharacterConfig;
+  get config() {
+    return this._config;
   }
   // protected declare _graphic: Graphic;
   // get graphic() {
@@ -35,15 +35,15 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
 
   readonly graphicType: string = 'rect';
 
-  protected _parserSpec(): void {
+  protected _parseConfig(): void {
     return;
   }
 
   protected _initGraphics(): void {
     this._group = new ComponentGroup({
-      ...getLayoutFromWidget(this._spec.position),
-      // angle: this._spec.options.angle,
-      zIndex: this._spec.zIndex
+      ...getLayoutFromWidget(this._config.position),
+      // angle: this._config.options.angle,
+      zIndex: this._config.zIndex
     });
     this.option.graphicParent.add(this._group);
 
@@ -52,29 +52,18 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
     this._graphic.init();
     this._text.init();
 
-    this.applySpec();
+    this._graphic.applyGraphicAttribute(this._config.options.graphic);
+    this._text.applyGraphicAttribute(this._config.options.text);
+
+    this._graphic.applyLayoutData(this._config.position);
+    this._text.applyLayoutData(this._config.position);
 
     this.hide();
   }
 
-  applySpec(): void {
-    this._graphic.applyGraphicAttribute(this._spec.options.graphic);
-    this._text.applyGraphicAttribute(this._spec.options.text);
-
-    this._graphic.applyLayoutData(this._spec.position);
-    this._text.applyLayoutData(this._spec.position);
-  }
-
-  setAttributes(updateAttr: Record<string, any>): void {
-    const { position, options = {}, ...rest } = updateAttr;
-    const attr = { ...(position ?? {}), ...rest };
-    this._spec.position = position;
-    this.group.setAttributes(attr);
-    if (options.graphic) {
-      this._graphic.setAttributes(options.graphic);
-    }
-    if (options.text) {
-      this._text.updateAttribute(options.text);
+  protected applyConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>): void {
+    if (config.position) {
+      this.group.setAttributes(config.position);
     }
   }
 
@@ -85,14 +74,14 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
   }
 
   show(): void {
-    this._group.setAttributes({ visible: true });
-    this._text.show();
-    this._graphic.show();
+    this._group.setAttributes({ visibleAll: true });
+    // this._text.show();
+    // this._graphic.show();
   }
   hide(): void {
-    this._group.setAttributes({ visible: false });
-    this._text.hide();
-    this._graphic.hide();
+    this._group.setAttributes({ visibleAll: false });
+    // this._text.hide();
+    // this._graphic.hide();
   }
 
   getTextLayoutRatio(): { left: number; right: number; top: number; bottom: number } {

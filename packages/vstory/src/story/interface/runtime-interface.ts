@@ -1,7 +1,7 @@
 import type { IGraphic, IStage } from '@visactor/vrender';
-import type { ICharacter, ICharacterSpec } from '../character';
+import type { ICharacter, ICharacterConfig } from '../character';
 import type { IPlayer } from '../../player/interface/player';
-import type { IActionSpec, IStorySpec } from '.';
+import type { IActionSpec, IStoryDSL } from './dsl-interface';
 
 export interface IStoryInitOption {
   dom?: string | HTMLDivElement; // dom id
@@ -42,19 +42,19 @@ export interface IStory {
   canvas: IStoryCanvas;
   getCharacters: () => { [key: string]: ICharacter };
   getCharactersById: (key: string) => ICharacter | null;
-  addCharacter: (spec: ICharacterSpec, actionParams?: IActionParams) => ICharacter;
-  addCharacterWithAppear: (spec: ICharacterSpec) => ICharacter;
+  addCharacter: (spec: ICharacterConfig, actionParams?: IActionParams) => ICharacter;
+  addCharacterWithAppear: (spec: ICharacterConfig) => ICharacter;
   removeCharacter: (cId: string) => void;
   addAction: (cId: string, actionParams: IActionParams) => void;
-  toDSL: () => IStorySpec;
+  toDSL: () => IStoryDSL;
 }
 export interface ICharacterTree {
   getCharacters: () => { [key: string]: ICharacter };
   getCharactersById: (key: string) => ICharacter | null;
-  addCharacter: (spec: ICharacterSpec) => ICharacter;
+  addCharacter: (spec: ICharacterConfig) => ICharacter;
   removeCharacter: (cId: string) => void;
-  initCharacters: (spec: ICharacterSpec[]) => void;
-  toDSL: () => ICharacterSpec[];
+  initCharacters: (spec: ICharacterConfig[]) => void;
+  toDSL: () => ICharacterConfig[];
 }
 
 export type StoryEvent = Event & {

@@ -50,7 +50,7 @@ function baseMerge(target: any, source: any, shallowArray = false) {
   }
 }
 
-function baseMergeDeep(target: object, source: object, key: string, shallowArray = false) {
+function baseMergeDeep(target: any, source: any, key: string, shallowArray = false) {
   const objValue = target[key];
   const srcValue = source[key];
   let newValue = source[key];
@@ -97,7 +97,7 @@ function baseMergeDeep(target: object, source: object, key: string, shallowArray
   assignMergeValue(target, key, newValue);
 }
 
-function assignMergeValue(target: object, key: string, value: any) {
+function assignMergeValue(target: any, key: string, value: any) {
   if ((value !== undefined && !eq(target[key], value)) || (value === undefined && !(key in target))) {
     // 不考虑 __proto__ 的赋值处理
     target[key] = value;
@@ -119,7 +119,7 @@ export function mergeSpec(target: any, ...sources: any[]): any {
 }
 
 export function findChartSpec(s: any, vchartSpec: ISpec) {
-  const chartSpec = vchartSpec[s.specKey];
+  const chartSpec = (vchartSpec as any)[s.specKey];
   if (!chartSpec) {
     return null;
   }

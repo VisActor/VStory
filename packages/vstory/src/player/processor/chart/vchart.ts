@@ -106,7 +106,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
   }
 
   run(character: ICharacter, actionSpec: IChartVisibilityAction): void {
-    const vchart = (character.graphic as any)._vchart as IVChart;
+    const vchart = (character.graphic.graphic as any)._vchart as IVChart;
     // 基于选择器做筛选
     // 同一个Action的payload数组中，项与项之间是覆盖关系，后项覆盖前项
     const runnedSeriesSet = new Set();
@@ -118,7 +118,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
         const { chart, seriesList, componentsList } = this.selectBySelector(payload.selector ?? '*', vchart);
         if (!runnedChart && chart) {
           // chart & panel
-          this.chartVisibility(character.graphic as any, actionSpec.action, payload);
+          this.chartVisibility(character.graphic.graphic as any, actionSpec.action, payload);
         }
         // 过滤seriesList
         const shouldRunSeriesList = seriesList.filter(item => !runnedSeriesSet.has(item));

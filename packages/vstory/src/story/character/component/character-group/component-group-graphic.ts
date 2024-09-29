@@ -7,7 +7,7 @@ import { genNumberType, Group } from '@visactor/vrender';
 export interface IChartGraphicAttribute extends IGroupGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
   spec: any;
-  ClassType: any;
+  // ClassType: any;
   vchart: IVChart;
   mode: string;
   modeParams?: any;

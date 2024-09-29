@@ -155,7 +155,7 @@ export class Player extends EventEmitter implements IPlayer {
     actions.forEach(action => {
       const character = this._story.getCharactersById(action.characterId);
       characterSet.add(character);
-      this._actionProcessor.doAction(character.spec.type, action.actionSpec.action, character, action.actionSpec);
+      this._actionProcessor.doAction(character.config.type, action.actionSpec.action, character, action.actionSpec);
     });
 
     // 将character show出来

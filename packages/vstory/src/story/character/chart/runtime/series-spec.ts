@@ -12,7 +12,7 @@ export class SeriesSpecRuntime implements IChartCharacterRuntime {
     this._character = character;
   }
 
-  onSpecReady() {
+  onConfigReady() {
     // const rawSpec = this._character.specProcess.getVisSpec();
     // const options = this._character.specProcess.getCharacterSpec().options;
     // if (!options) {

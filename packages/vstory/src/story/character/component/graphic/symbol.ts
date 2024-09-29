@@ -27,7 +27,7 @@ export class GraphicSymbol extends Graphic {
     if (!this._graphic) {
       const attributes = this._transformAttributes({
         ...this.getInitialAttributes(),
-        ...(this._character.spec.options?.graphic ?? {})
+        ...(this._character.config.options?.graphic ?? {})
       });
       this._graphic = createSymbol(attributes);
       this._graphic.name = `graphic-symbol-${this._character.id}`;
@@ -38,7 +38,7 @@ export class GraphicSymbol extends Graphic {
   applyLayoutData(layoutData: Partial<IWidgetData>): void {
     const attributes = this._transformAttributes({
       ...getLayoutFromWidget(layoutData),
-      shapePoints: this._character.spec.options.shapePoints
+      shapePoints: this._character.config.options.shapePoints
     });
     attributes.size = Math.min(attributes.width, attributes.height);
 

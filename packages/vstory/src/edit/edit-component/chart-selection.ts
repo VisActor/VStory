@@ -4,7 +4,6 @@ import { type IEditActionInfo, type IEditComponent } from '../interface';
 import type { Edit } from '../edit';
 import { BaseSelection } from './base-selection';
 import type { ICharacter } from '../../story/character';
-import type { Chart } from '../../story/character/chart/graphic/vchart-graphic';
 
 export class ChartSelection extends BaseSelection implements IEditComponent {
   readonly level = 3;
@@ -44,13 +43,13 @@ export class ChartSelection extends BaseSelection implements IEditComponent {
     // });
     // @ts-ignore;
     const character = this._actionInfo.character;
-    character.graphic.addEventListener('pointerdown', this.handlerChartClick);
+    character.graphic.graphic.addEventListener('pointerdown', this.handlerChartClick);
   }
 
   endEdit() {
     // @ts-ignore;
     const character = this._actionInfo.character;
-    character.graphic.removeEventListener('pointerdown', this.handlerChartClick);
+    character.graphic.graphic.removeEventListener('pointerdown', this.handlerChartClick);
     super.endEdit();
   }
 

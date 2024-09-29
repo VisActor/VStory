@@ -52,7 +52,7 @@ export class GraphicBaseText {
   }
 
   transformTextAttrsToRichTextConfig() {
-    const textAttr = (this._character.spec.options?.text ?? {}) as IRichTextGraphicAttribute;
+    const textAttr = (this._character.config.options?.text ?? {}) as IRichTextGraphicAttribute;
     let textConfig = textAttr.textConfig;
 
     // 如果是纯文本定义方式

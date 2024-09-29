@@ -11,10 +11,10 @@ export class CharacterComponentShape extends CharacterComponent {
     return new GraphicSymbol(StoryComponentType.SHAPE, this);
   }
 
-  setAttributes(attr: Record<string, any>): void {
+  setConfig(attr: Record<string, any>): void {
     const { position, options = {} } = attr;
     if (position) {
-      this._spec.position = position;
+      this._config.position = position;
       this.group.setAttributes({
         ...position,
         x: position.x,

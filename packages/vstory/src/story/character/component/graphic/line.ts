@@ -23,7 +23,7 @@ export class GraphicLine extends Graphic {
       this._graphic = createLine(
         this._transformAttributes({
           ...this.getInitialAttributes(),
-          ...(this._character.spec.options?.graphic ?? {})
+          ...(this._character.config.options?.graphic ?? {})
         })
       );
       this._graphic.name = `graphic-line-${this._character.id}`;

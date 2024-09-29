@@ -1,10 +1,10 @@
-import { IComponentCharacterSpec } from '../../dsl-interface';
+import type { IComponentCharacterConfig } from '../../dsl-interface';
 
 export const transformAttributesByType = (
   from: string,
   to: string,
-  attributes: IComponentCharacterSpec['options']
-): IComponentCharacterSpec['options'] => {
+  attributes: IComponentCharacterConfig['options']
+): IComponentCharacterConfig['options'] => {
   const graphic = attributes.graphic;
   // shapePoints will not be cloned
   delete graphic.shapePoints;

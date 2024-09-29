@@ -72,7 +72,7 @@ export class DataTempTransformBase implements IDataTempTransform {
       return false;
     }
     this._nextTemp?.clear();
-    this._nextTemp = StoryFactory.createChartTemp(temp, this._specProcess.getCharacterSpec());
+    this._nextTemp = StoryFactory.createChartTemp(temp, this._specProcess.getCharacterConfig());
     return !!this._nextTemp;
   }
 
@@ -80,14 +80,14 @@ export class DataTempTransformBase implements IDataTempTransform {
     if (!temp) {
       return false;
     }
-    if (temp.checkDataEnable(this._specProcess.getCharacterSpec().options.data)) {
+    if (temp.checkDataEnable(this._specProcess.getCharacterConfig().options.data)) {
       return true;
     }
     return false;
   }
 
   getBaseSpec() {
-    return this._specTemp.getSpec(this._specProcess.getCharacterSpec().options.data, { character: this._character });
+    return this._specTemp.getSpec(this._specProcess.getCharacterConfig().options.data, { character: this._character });
   }
 
   release() {

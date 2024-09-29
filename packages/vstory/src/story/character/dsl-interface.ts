@@ -23,7 +23,7 @@ export type IWidgetData = {
     }
 );
 
-export interface ICharacterSpecBase {
+export interface ICharacterConfigBase {
   id: string;
   type: string; // 类型
   position: IWidgetData; // 定位描述
@@ -35,7 +35,7 @@ export type IEditorTextGraphicAttribute = {
   graphicBaseline?: 'top' | 'middle' | 'bottom';
 } & Partial<ITextGraphicAttribute & IRichTextGraphicAttribute>;
 
-export interface IComponentCharacterSpec extends ICharacterSpecBase {
+export interface IComponentCharacterConfig extends ICharacterConfigBase {
   options: {
     graphic: any;
     text?: IEditorTextGraphicAttribute;
@@ -51,13 +51,13 @@ export interface IComponentMatch {
   [key: string]: any;
 }
 
-export interface IComponentSpec {
+export interface IComponentConfig {
   specKey: string;
   matchInfo: IComponentMatch;
   spec: any;
 }
 
-export interface IChartCharacterSpec extends ICharacterSpecBase {
+export interface IChartCharacterConfig extends ICharacterConfigBase {
   options: {
     // 图表spec
     spec?: any;
@@ -73,4 +73,4 @@ export interface IChartCharacterSpec extends ICharacterSpecBase {
   };
 }
 
-export type ICharacterSpec = IChartCharacterSpec | IComponentCharacterSpec;
+export type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig;

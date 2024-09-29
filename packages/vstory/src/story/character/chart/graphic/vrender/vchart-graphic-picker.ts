@@ -1,6 +1,6 @@
 import { injectable } from '@visactor/vrender';
 import type { IGraphicPicker, IPickParams } from '@visactor/vrender';
-import type { Chart } from './vchart-graphic';
+import type { VChartGraphic } from './vchart-graphic';
 import { CHART_NUMBER_TYPE } from './vchart-graphic';
 
 @injectable()
@@ -18,7 +18,7 @@ export class VChartPicker implements IGraphicPicker {
     toGlobalMatrix.transformPoint(point, nextP);
 
     // 得到 vchart stage
-    const vChart = (chart as Chart).vchart;
+    const vChart = (chart as VChartGraphic).vchart;
     const vchartStage = vChart.getStage();
     vchartStage.dirtyBounds?.clear();
     const toChartMatrix = vchartStage.window.getViewBoxTransform();

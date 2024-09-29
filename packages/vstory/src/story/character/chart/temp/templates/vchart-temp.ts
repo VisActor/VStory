@@ -10,6 +10,6 @@ export class VChartTemp extends BaseTemp {
   }
   getSpec(data: StandardData, opt: any) {
     // TODO 转换特定chart Spec到通用common spec
-    return opt.character.spec.options.spec as any;
+    return opt.character.config.options.spec as any;
   }
 }

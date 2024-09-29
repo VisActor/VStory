@@ -1,7 +1,7 @@
 import type { IGroup, IGraphic } from '@visactor/vrender';
 import type { IBoundsLike, IPointLike } from '@visactor/vutils';
 import type { IStory, IStoryCanvas, StoryEvent } from '../interface/runtime-interface';
-import type { ICharacterSpec } from './dsl-interface';
+import type { ICharacterConfig } from './dsl-interface';
 import type { Graphic } from './component/graphic/graphic';
 
 export interface ICharacterPickInfo {
@@ -14,7 +14,7 @@ export interface ICharacter {
   id: string;
   type: string;
   visActorType: string;
-  spec: ICharacterSpec;
+  config: ICharacterConfig;
   graphic: Graphic | IGroup;
 
   init: () => void;
@@ -28,9 +28,9 @@ export interface ICharacter {
   checkEvent: (event: StoryEvent) => false | (ICharacterPickInfo & any);
 
   // updateSpec: (spec: Omit<Partial<ICharacterSpec>, 'id' | 'type'>) => void;
-  toSpec: () => ICharacterSpec;
+  toJSON: () => ICharacterConfig;
 
-  setAttributes: (attr: Record<string, any>) => void;
+  setConfig: (config: Record<string, any>) => void;
   release: () => void;
 }
 
@@ -41,7 +41,7 @@ export interface ICharacterInitOption {
 }
 
 export interface ICharacterConstructor {
-  new (spec: ICharacterSpec, option: ICharacterInitOption): ICharacter;
+  new (spec: ICharacterConfig, option: ICharacterInitOption): ICharacter;
 }
 
 export interface ILayoutAttribute {
@@ -53,5 +53,5 @@ export interface ILayoutAttribute {
   anchor?: [number | string, number | string];
   dx?: number;
   dy?: number;
-  shapePoints?: IPointLike[];
+  // shapePoints?: IPointLike[];
 }

@@ -27,7 +27,7 @@ export class GraphicTimeline extends Graphic {
       this._graphic = new Timeline(
         this._transformAttributes({
           ...this.getInitialAttributes(),
-          ...(this._character.spec.options?.graphic ?? {})
+          ...(this._character.config.options?.graphic ?? {})
         })
       );
       this._graphic.name = `timeline-${this._character.id}`;
