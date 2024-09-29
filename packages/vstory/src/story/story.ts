@@ -84,8 +84,8 @@ export class Story implements IStory {
     return this._characterTree.getCharacters();
   }
 
-  getCharactersById(key: string) {
-    return this._characterTree.getCharactersById(key);
+  getCharacterById(key: string) {
+    return this._characterTree.getCharacterById(key);
   }
 
   // private _createAct(spec: IActSpec) {

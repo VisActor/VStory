@@ -153,7 +153,6 @@ export const API = () => {
       // 删除character
       document.addEventListener('keydown', e => {
         if (e.key === 'Backspace') {
-          debugger;
           const sc = selectedCharacter;
           edit.stopEdit();
           sc && story.removeCharacter(sc.id);
@@ -163,6 +162,10 @@ export const API = () => {
       });
       // 导出DSL
       console.log(story.toDSL());
+
+      setTimeout(() => {
+        edit.selectCharacter('test-chart-0');
+      }, 3000);
       // story读取DSL
     } catch (e) {
       console.error(e);

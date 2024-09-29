@@ -107,6 +107,16 @@ export class Edit {
     }
   }
 
+  selectCharacter(id: string) {
+    this.editAction.dispatchAction({
+      type: EditActionEnum.singleSelection,
+      characterId: id,
+      character: this.story.getCharacterById(id),
+      event: null,
+      detail: null
+    });
+  }
+
   startEdit(msg: IEditMessage) {
     this.dispatchEditAction('startEdit', msg);
   }
