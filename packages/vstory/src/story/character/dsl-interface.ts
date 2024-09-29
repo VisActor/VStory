@@ -28,6 +28,7 @@ export interface ICharacterConfigBase {
   type: string; // 类型
   position: IWidgetData; // 定位描述
   zIndex: number;
+  extra?: any; // 带着的额外信息
 }
 
 export type IEditorTextGraphicAttribute = {

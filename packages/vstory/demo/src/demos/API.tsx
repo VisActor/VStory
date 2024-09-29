@@ -126,7 +126,6 @@ export const API = () => {
         }
       });
 
-      debugger;
       text.setConfig({ options: { graphic: { text: '这是普通文本' } } });
       console.log(text);
 
@@ -136,15 +135,31 @@ export const API = () => {
       // 添加character
       // 更新character
       story.play();
+      let selectedCharacter: any = null;
       const edit = new Edit(story);
       edit.emitter.on('startEdit', msg => {
+        selectedCharacter = msg.actionInfo.character;
         if (msg.type === 'commonEdit' && msg.actionInfo.character) {
           msg.updateCharacter({ options: { graphic: { fill: 'green' } } });
           story.play();
         }
       });
+      edit.emitter.on('endEdit', msg => {
+        selectedCharacter = null;
+      });
       edit.emitter.on('resize', msg => {
         console.log('resize', msg);
+      });
+      // 删除character
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Backspace') {
+          debugger;
+          const sc = selectedCharacter;
+          edit.stopEdit();
+          sc && story.removeCharacter(sc.id);
+          story.play(false);
+          console.log('Backspace');
+        }
       });
       // 导出DSL
       console.log(story.toDSL());
