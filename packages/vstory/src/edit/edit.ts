@@ -87,7 +87,18 @@ export class Edit {
     this.editAction.onStoryEvent(event, type);
   }
 
+  // TODO: over不能正确的分发到全部selection
   onAction(actionInfo: IEditActionInfo) {
+    // over
+    if (
+      actionInfo.type === EditActionEnum.pointerOverCharacter ||
+      actionInfo.type === EditActionEnum.pointerOutCharacter
+    ) {
+      this._componentList.forEach(c => c.checkOver?.(actionInfo));
+      return;
+    }
+
+    // 选中
     if (this._currentComponent) {
       // 优先上一次的编辑组件
       if (this._currentComponent.checkAction(actionInfo)) {

@@ -28,6 +28,10 @@ export interface IEditSelectionInfo extends IEditActionInfoBase {
   detail: IEditSelectionDetailChart | IEditSelectionDetailComponent;
 }
 
+export interface IEditOverActionInfo extends IEditActionInfoBase, IEditSelectionInfo {
+  nextActionInfo?: IEditActionInfo;
+}
+
 export interface VREvent extends Event {
   pickParams?: {
     shadowTarget?: IGraphic;
@@ -39,7 +43,7 @@ export interface IEditActionInfoBase {
   event: VREvent;
 }
 
-export type IEditActionInfo = IEditActionInfoBase | IEditSelectionInfo;
+export type IEditActionInfo = IEditActionInfoBase | IEditSelectionInfo | IEditOverActionInfo;
 
 export type ContinuousActionType = 'boxSelection' | 'layerZoom' | 'layerMove';
 
@@ -50,6 +54,8 @@ export interface IEditComponent {
 
   // 是否 开始/继续 编辑 返回false的话，会导致当前编辑结束
   checkAction: (actionInfo: IEditActionInfo | IEditSelectionInfo) => boolean;
+
+  checkOver?: (actionInfo: IEditActionInfo | IEditSelectionInfo) => void;
 
   // 编辑开始
   startEdit: (actionInfo: IEditActionInfo | IEditSelectionInfo, emitEvent?: boolean) => void;

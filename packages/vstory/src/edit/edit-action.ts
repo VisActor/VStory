@@ -5,7 +5,7 @@ import type { BoxSelection } from './edit-component/box-selection';
 import { EventEmitter, isArray } from '@visactor/vutils';
 import { PickEventType } from './const';
 import type { Story } from '../story/story';
-import type { ContinuousActionType, IEditActionInfo } from './interface';
+import type { ContinuousActionType, IEditActionInfo, IEditOverActionInfo } from './interface';
 import { EditActionEnum } from './interface';
 import type { StoryEvent } from '../story/interface/runtime-interface';
 
@@ -147,8 +147,15 @@ export class EditAction {
           characterId: this.lastOverGraphic.character?.id,
           character: this.lastOverGraphic.character,
           event,
-          detail: this.lastOverGraphic.characterInfo
-        });
+          detail: this.lastOverGraphic.characterInfo,
+          nextAction: {
+            actionType: EditActionEnum.pointerOverCharacter,
+            characterId: character?.id,
+            character: character,
+            event,
+            detail: characterInfo
+          }
+        } as IEditOverActionInfo);
         actionType = EditActionEnum.pointerOverCharacter;
       } else {
         // 是同一个元素，并且是同一个target
