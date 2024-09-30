@@ -199,7 +199,7 @@ export function getGraphicModelMark(
   if (!graphic) {
     return null;
   }
-  if (graphic.layer !== chart.getStage().layer) {
+  if (graphic.layer !== chart.getStage().defaultLayer) {
     return null;
   }
   const modelPick = modelCheck.find(mc => mc.check(graphic, graphicPath));
