@@ -52,20 +52,6 @@ export interface QueryNode {
   children?: QueryNode[];
 }
 
-export interface UnitNode {
-  style?: ISymbolGraphicAttribute;
-  count: number;
-  children?: UnitNode[];
-}
-
-// type DeepRequired<T> = T extends object
-//   ? {
-//       [P in keyof T]-?: DeepRequired<T[P]>;
-//     }
-//   : T;
-
-// export type RequiredInput = DeepRequired<Input>;
-
 export const defaultInput = {
   layout: {
     width: 1920,
