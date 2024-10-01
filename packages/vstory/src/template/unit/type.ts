@@ -46,9 +46,3 @@ export interface QueryNode {
   style?: ISymbolGraphicAttribute;
   children?: QueryNode[];
 }
-
-export interface UnitNode {
-  style?: ISymbolGraphicAttribute;
-  count: number;
-  children?: UnitNode[];
-}
