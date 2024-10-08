@@ -1,4 +1,4 @@
-import type { IInitOption } from '@visactor/vchart';
+import type { IInitOption, ISpec } from '@visactor/vchart';
 import type { IRichTextGraphicAttribute, ITextGraphicAttribute } from '@visactor/vrender';
 import type { DirectionType } from './chart/const';
 
@@ -52,11 +52,17 @@ export interface IComponentMatch {
   [key: string]: any;
 }
 
-export interface IComponentConfig {
-  specKey: string;
-  matchInfo: IComponentMatch;
-  spec: any;
-}
+export type ChartModelMatch =
+  | {
+      usrId: string;
+    }
+  | {
+      specIndex: number | 'all'; // all 表示所有
+    };
+
+export type IComponentConfig<T = any> = ChartModelMatch & {
+  spec: T;
+};
 
 export interface IChartCharacterConfig extends ICharacterConfigBase {
   options: {
@@ -68,9 +74,13 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     // 数据源
     data?: any;
     // 标题
-    title?: any;
+    title?: IComponentConfig<ISpec['title']>[] | ISpec['title'];
     // 图例
-    legends?: any;
+    legends?: IComponentConfig<ISpec['legends']>[] | ISpec['legends'];
+    // axes
+    axes?: IComponentConfig<ISpec['axes']>[];
+    // 色板
+    color?: any;
   };
 }
 

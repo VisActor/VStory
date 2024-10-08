@@ -17,6 +17,18 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
     if (!options) {
       return;
     }
-    merge(rawSpec, { title: options.title, legends: options.legends, data: options.data });
+    if (options.title && !Array.isArray(options.title)) {
+      merge(rawSpec, { title: options.title });
+    }
+    if (options.legends && !Array.isArray(options.legends)) {
+      merge(rawSpec, { legends: options.legends });
+    }
+    if (options.data) {
+      merge(rawSpec, { data: options.data });
+    }
+    if (options.color) {
+      merge(rawSpec, { color: options.color });
+    }
+    // merge(rawSpec, { title: options.title, legends: options.legends, data: options.data, color: options.color });
   }
 }

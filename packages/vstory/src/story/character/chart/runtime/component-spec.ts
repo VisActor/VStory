@@ -19,7 +19,12 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
     if (!options) {
       return;
     }
-    // const componentSpec = options.componentSpec;
+    if (options.axes) {
+      options.axes.forEach(componentSpec => {
+        this._mergeAxesSpec(rawSpec, componentSpec);
+      });
+    }
+    // const componentSpec = options.;
     // componentSpec?.forEach(cSpec => {
     //   if (cSpec.specKey === 'axes') {
     //     this._mergeAxesSpec(rawSpec, cSpec);
@@ -33,10 +38,10 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
     this._mergeComponentSpec(
       rawSpec,
       componentSpec,
-      'axes',
-      (a: any, index: number, _componentSpec: IComponentConfig) => {
-        return a.orient === componentSpec.matchInfo.orient;
-      }
+      'axes'
+      // (a: any, index: number, _componentSpec: IComponentConfig) => {
+      //   return a.orient === componentSpec.matchInfo.orient;
+      // }
     );
   }
 
@@ -50,7 +55,7 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
       rawSpec[key] = [];
     }
     const s = rawSpec[key].find((a: any, index: number) => {
-      if (ChartSpecMatch(a, index, componentSpec.matchInfo)) {
+      if (ChartSpecMatch(a, index, componentSpec)) {
         return true;
       }
       if (additionalMatch) {
