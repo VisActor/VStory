@@ -11,6 +11,7 @@ export const API = () => {
 
   const chartSpec = {
     type: 'bar',
+    animation: false,
     data: [
       {
         id: 'barData',
@@ -39,7 +40,8 @@ export const API = () => {
           top: 40,
           left: 50,
           width: 250,
-          height: 100
+          height: 100,
+          angle: 0.3
         },
         options: {
           graphic: {
@@ -83,7 +85,8 @@ export const API = () => {
           top: 100,
           left: 100,
           width: 400,
-          height: 400
+          height: 400,
+          angle: 0.3
         },
         options: {
           spec: chartSpec
@@ -97,7 +100,8 @@ export const API = () => {
           x: 200,
           y: 200,
           width: 200,
-          height: 200
+          height: 200,
+          angle: 0.3
         },
         options: {
           graphic: {
