@@ -1,4 +1,3 @@
-import { isNumber } from '@visactor/vutils';
 import { EditEditingState, SeriesMarkMode } from './../../const';
 import { Logger } from './../../../util/logger';
 import type { CharacterChart } from './../../../story/character/chart/character';
