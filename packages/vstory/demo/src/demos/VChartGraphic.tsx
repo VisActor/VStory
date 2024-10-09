@@ -5,6 +5,7 @@ import '../../../src/story/index';
 import { Edit } from '../../../src/edit/edit';
 import { BoxSelection } from '../../../src/edit/edit-component/box-selection';
 import { TextSelection } from '../../../src/edit/edit-component/text-selection';
+import { SeriesMarkSelection } from '../../../src/edit/edit-component/series-mark/series-mark-selection';
 // import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
 import { loadAllSelection } from '../../../src/edit/edit-component';
 
@@ -12,6 +13,7 @@ loadAllSelection();
 Edit.registerEditComponent('text', TextSelection);
 // Edit.registerEditComponent('richtext', RichTextSelection);
 Edit.registerEditComponent('box-selection', BoxSelection);
+Edit.registerEditComponent('series-mark-selection', SeriesMarkSelection);
 
 const spec = {
   direction: 'vertical',
@@ -524,46 +526,279 @@ const spec = {
 };
 
 const spec1 = {
-  type: 'bar',
-  background: 'transparent',
-  data: {
-    values: [
-      { type: 'Nail polish', country: 'Africa', value: 4229 },
-      { type: 'Nail polish', country: 'EU', value: 4376 },
-      { type: 'Nail polish', country: 'China', value: 3054 },
-      { type: 'Nail polish', country: 'USA', value: 12814 },
-      { type: 'Eyebrow pencil', country: 'Africa', value: 3932 },
-      { type: 'Eyebrow pencil', country: 'EU', value: 3987 },
-      { type: 'Eyebrow pencil', country: 'China', value: 5067 },
-      { type: 'Eyebrow pencil', country: 'USA', value: 13012 },
-      { type: 'Rouge', country: 'Africa', value: 5221 },
-      { type: 'Rouge', country: 'EU', value: 3574 },
-      { type: 'Rouge', country: 'China', value: 7004 },
-      { type: 'Rouge', country: 'USA', value: 11624 },
-      { type: 'Lipstick', country: 'Africa', value: 9256 },
-      { type: 'Lipstick', country: 'EU', value: 4376 },
-      { type: 'Lipstick', country: 'China', value: 9054 },
-      { type: 'Lipstick', country: 'USA', value: 8814 },
-      { type: 'Eyeshadows', country: 'Africa', value: 3308 },
-      { type: 'Eyeshadows', country: 'EU', value: 4572 },
-      { type: 'Eyeshadows', country: 'China', value: 12043 },
-      { type: 'Eyeshadows', country: 'USA', value: 12998 }
-    ]
+  direction: 'vertical',
+  type: 'common',
+  color: ['#00295C', '#2568BD', '#9F9F9F', '#C5C5C5', '#00B0F0', '#4BCFFF', '#C2C2C2', '#D7D7D7'],
+  series: [
+    {
+      type: 'bar',
+      stack: true,
+      direction: 'vertical',
+      bar: {
+        style: {
+          stroke: '',
+          lineWidth: 1
+        },
+        state: {
+          hover: {
+            stroke: '#000',
+            lineWidth: 1
+          }
+        }
+      },
+      barBackground: {
+        style: {
+          stroke: '',
+          lineWidth: 1
+        }
+      },
+      label: {
+        visible: true,
+        position: 'inside',
+        style: {
+          lineHeight: '100%',
+          fontSize: 16,
+          fontWeight: 'bold'
+        },
+        overlap: {
+          strategy: []
+        },
+        smartInvert: true,
+        formatConfig: {},
+        interactive: true
+      },
+      xField: ['_editor_dimension_field', '_editor_type_field'],
+      yField: '_editor_value_field',
+      dataId: '0',
+      id: 'series-0',
+      EDITOR_SERIES_DATA_KEY: 'a',
+      seriesField: '_editor_type_field'
+    },
+    {
+      type: 'bar',
+      stack: true,
+      direction: 'vertical',
+      bar: {
+        style: {
+          stroke: '',
+          lineWidth: 1
+        },
+        state: {
+          hover: {
+            stroke: '#000',
+            lineWidth: 1
+          }
+        }
+      },
+      barBackground: {
+        style: {
+          stroke: '',
+          lineWidth: 1
+        }
+      },
+      label: {
+        visible: true,
+        position: 'inside',
+        style: {
+          lineHeight: '100%',
+          fontSize: 16,
+          fontWeight: 'bold'
+        },
+        overlap: {
+          strategy: []
+        },
+        smartInvert: true,
+        formatConfig: {},
+        interactive: true
+      },
+      xField: ['_editor_dimension_field', '_editor_type_field'],
+      yField: '_editor_value_field',
+      dataId: '1',
+      id: 'series-1',
+      EDITOR_SERIES_DATA_KEY: 'b',
+      seriesField: '_editor_type_field'
+    }
+  ],
+  legends: {
+    id: 'legend-discrete',
+    visible: false,
+    autoPage: false,
+    position: 'start',
+    interactive: false,
+    item: {
+      label: {
+        style: {
+          fill: '#1F2329',
+          fontSize: 16
+        }
+      }
+    },
+    _originalVisible: false
   },
-  xField: ['type', 'country'],
-  yField: 'value',
-  seriesField: 'country',
-  legends: [{ visible: true, position: 'middle', orient: 'bottom' }],
+  region: [
+    {
+      id: 'region-0'
+    }
+  ],
+  tooltip: {
+    visible: true,
+    mark: {
+      content: [{}],
+      title: {}
+    },
+    dimension: {
+      content: [{}],
+      title: {}
+    }
+  },
   axes: [
     {
       orient: 'left',
+      id: 'axis-left',
+      type: 'linear',
       label: {
-        formatMethod(val) {
-          return `${(val * 100).toFixed(2)}%`;
+        autoLimit: false,
+        style: {
+          fill: '#1F2329',
+          fontSize: 16
+        },
+        formatConfig: {}
+      },
+      domainLine: {
+        visible: true,
+        style: {
+          stroke: '#000000'
+        }
+      },
+      tick: {
+        visible: true,
+        style: {
+          stroke: '#000000'
+        }
+      },
+      grid: {
+        visible: false,
+        style: {
+          stroke: '#bbbfc4'
+        }
+      },
+      autoIndent: false,
+      maxWidth: null,
+      maxHeight: null
+    },
+    {
+      orient: 'bottom',
+      id: 'axis-bottom',
+      type: 'band',
+      label: {
+        autoLimit: false,
+        style: {
+          fill: '#1F2329',
+          fontSize: 16
+        },
+        formatConfig: {}
+      },
+      domainLine: {
+        visible: true,
+        style: {
+          stroke: '#000000'
+        },
+        onZero: true
+      },
+      tick: {
+        visible: true,
+        style: {
+          stroke: '#000000'
+        }
+      },
+      grid: {
+        visible: false,
+        style: {
+          stroke: '#bbbfc4'
+        }
+      },
+      autoIndent: false,
+      maxWidth: null,
+      maxHeight: null,
+      trimPadding: false,
+      paddingInner: [0.18791312559017942, 0],
+      paddingOuter: [0.18791312559017942, 0]
+    }
+  ],
+  data: [
+    {
+      id: '0',
+      sourceKey: 'a',
+      values: [
+        {
+          _editor_dimension_field: 'x1',
+          _editor_value_field: 20,
+          _editor_type_field: 'a'
+        },
+        {
+          _editor_dimension_field: 'x2',
+          _editor_value_field: 23,
+          _editor_type_field: 'a'
+        },
+        {
+          _editor_dimension_field: 'x3',
+          _editor_value_field: 26,
+          _editor_type_field: 'a'
+        }
+      ],
+      specField: {
+        _editor_dimension_field: {
+          type: 'dimension',
+          order: 0
+        },
+        _editor_type_field: {
+          type: 'series',
+          order: 0
+        },
+        _editor_value_field: {
+          type: 'value',
+          order: 0
+        }
+      }
+    },
+    {
+      id: '1',
+      sourceKey: 'b',
+      values: [
+        {
+          _editor_dimension_field: 'x1',
+          _editor_value_field: 20,
+          _editor_type_field: 'b'
+        },
+        {
+          _editor_dimension_field: 'x2',
+          _editor_value_field: 24,
+          _editor_type_field: 'b'
+        },
+        {
+          _editor_dimension_field: 'x3',
+          _editor_value_field: 29,
+          _editor_type_field: 'b'
+        }
+      ],
+      specField: {
+        _editor_dimension_field: {
+          type: 'dimension',
+          order: 0
+        },
+        _editor_type_field: {
+          type: 'series',
+          order: 0
+        },
+        _editor_value_field: {
+          type: 'value',
+          order: 0
         }
       }
     }
-  ]
+  ],
+  labelLayout: 'region',
+  background: 'transparent'
 };
 
 const storySpec: IStorySpec = {
@@ -671,7 +906,7 @@ const storySpec: IStorySpec = {
         height: 400
       },
       options: {
-        spec: spec,
+        spec: spec1,
         initOption: {
           animation: false,
           interactive: true,
@@ -728,6 +963,9 @@ export const VChartGraphic = () => {
     story.canvas.getCanvas().style.background = 'blue';
     const edit = new Edit(story);
     window.edit = edit;
+    edit.emitter.on('startEdit', (...args) => {
+      console.log(args);
+    });
 
     // const vchart = story.getCharactersById('vchart')?.graphic.vchart;
     // window.vchart = vchart;

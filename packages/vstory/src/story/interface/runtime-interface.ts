@@ -1,3 +1,4 @@
+import type { IPointLike } from '@visactor/vutils';
 import type { IGraphic, IStage } from '@visactor/vrender';
 import type { ICharacter, ICharacterConfig } from '../character';
 import type { IPlayer } from '../../player/interface/player';
@@ -62,4 +63,5 @@ export type StoryEvent = Event & {
   path: IGraphic[];
   canvasX?: number;
   canvasY?: number;
+  canvas?: IPointLike;
 };

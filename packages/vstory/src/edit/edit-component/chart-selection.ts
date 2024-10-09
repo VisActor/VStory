@@ -22,7 +22,6 @@ export class ChartSelection extends BaseSelection implements IEditComponent {
     const group = actionInfo.character.getGraphicParent();
     const { angle } = group.attribute;
     this._layoutComponent.updateBoundsAndAngle(actionInfo.character.getLayoutBounds(), angle);
-    // this._layoutComponent.updateBoundsAndAngle(actionInfo.character.getGraphicParent().AABBBounds, 0);
   }
 
   enableEditCharacter(character: ICharacter) {
