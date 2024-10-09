@@ -5,6 +5,7 @@ overrides:
   '@visactor/vrender-core': 0.20.1
   '@visactor/vrender-kits': 0.20.1
   '@visactor/vrender-components': 0.20.1
+  '@visactor/vscale': 0.18.5
 
 importers:
 
@@ -82,6 +83,7 @@ importers:
       '@visactor/vrender-components': 0.20.1
       '@visactor/vrender-core': 0.20.1
       '@visactor/vrender-kits': 0.20.1
+      '@visactor/vscale': 0.18.5
       '@visactor/vutils': ~0.18.4
       '@vitejs/plugin-react': 3.1.0
       canvas: 2.11.2
@@ -104,6 +106,7 @@ importers:
       '@visactor/vrender-components': 0.20.1
       '@visactor/vrender-core': 0.20.1
       '@visactor/vrender-kits': 0.20.1
+      '@visactor/vscale': 0.18.5
       '@visactor/vutils': 0.18.8
     devDependencies:
       '@douyinfe/semi-ui': 2.62.1_nnrd3gsncyragczmpvfhocinkq
@@ -3238,7 +3241,7 @@ packages:
       '@visactor/vrender-components': 0.20.1
       '@visactor/vrender-core': 0.20.1
       '@visactor/vrender-kits': 0.20.1
-      '@visactor/vscale': 0.18.15
+      '@visactor/vscale': 0.18.5
       '@visactor/vutils': 0.18.15
       '@visactor/vutils-extension': 1.12.4-alpha.1
     dev: false
@@ -3303,7 +3306,7 @@ packages:
       '@visactor/vrender-components': 0.20.1
       '@visactor/vrender-core': 0.20.1
       '@visactor/vrender-kits': 0.20.1
-      '@visactor/vscale': 0.18.15
+      '@visactor/vscale': 0.18.5
       '@visactor/vutils': 0.18.15
     dev: false
 
@@ -3360,7 +3363,7 @@ packages:
       '@visactor/vgrammar-util': 0.14.5
       '@visactor/vrender-core': 0.20.1
       '@visactor/vrender-kits': 0.20.1
-      '@visactor/vscale': 0.18.15
+      '@visactor/vscale': 0.18.5
       '@visactor/vutils': 0.18.15
     dev: false
 
@@ -3379,7 +3382,7 @@ packages:
     dependencies:
       '@visactor/vrender-core': 0.20.1
       '@visactor/vrender-kits': 0.20.1
-      '@visactor/vscale': 0.18.14
+      '@visactor/vscale': 0.18.5
       '@visactor/vutils': 0.18.14
     dev: false
 
@@ -3406,16 +3409,10 @@ packages:
       '@visactor/vrender-kits': 0.20.1
     dev: false
 
-  /@visactor/vscale/0.18.14:
-    resolution: {integrity: sha512-uhyI8yqOPyMurdwqz1oqcqfTXZebpY5kYdnOM5xG79Lz54L95YNZ1J5BNu+SOxOBWbul5hnyjVpdTbZIoujveQ==}
+  /@visactor/vscale/0.18.5:
+    resolution: {integrity: sha512-j4xRIQ0lKcJADqp4jCoZn5129aONrFlENb1BGULXzhdlI0dtj6ANFMzne19o54OMPO0TGAM+FubcWeYibfiHIA==}
     dependencies:
-      '@visactor/vutils': 0.18.14
-    dev: false
-
-  /@visactor/vscale/0.18.15:
-    resolution: {integrity: sha512-09dDWc6muJbOMxzp4odCsyLjqAF6u3BOx9kAJJ0tEpKE1AuHL4BTejNe697mJAnXqAo2ynAA+dn+cgWYiW1WQg==}
-    dependencies:
-      '@visactor/vutils': 0.18.15
+      '@visactor/vutils': 0.18.5
     dev: false
 
   /@visactor/vutils-extension/1.12.4-alpha.1:
@@ -3435,6 +3432,14 @@ packages:
 
   /@visactor/vutils/0.18.15:
     resolution: {integrity: sha512-gTw8n14SU4avmqZ6VwpHwqoDfOCq044M2QA43rViNaHBnOQ/ePOPRZHl0heSfGQoMIJSZUD7SowLnn5NJjVXYw==}
+    dependencies:
+      '@turf/helpers': 6.5.0
+      '@turf/invariant': 6.5.0
+      eventemitter3: 4.0.7
+    dev: false
+
+  /@visactor/vutils/0.18.5:
+    resolution: {integrity: sha512-FtJFWaoZlnVipdUvq9U8X1KCPuSd5G2pxfeybJeekLibcDd1nyHoAVV4gH2oZeN1hul4p4Rx9ZZMlHfbIW0Faw==}
     dependencies:
       '@turf/helpers': 6.5.0
       '@turf/invariant': 6.5.0
@@ -6317,7 +6322,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
+    deprecated: Upgrade to fsevents v2 to mitigate potential security issues
     requiresBuild: true
     dependencies:
       bindings: 1.5.0

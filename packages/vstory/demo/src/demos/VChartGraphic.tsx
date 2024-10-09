@@ -730,6 +730,9 @@ export const VChartGraphic = () => {
     story.canvas.getCanvas().style.background = 'blue';
     const edit = new Edit(story);
     window.edit = edit;
+    edit.emitter.on('startEdit', (...args) => {
+      console.log(args);
+    });
 
     // const vchart = story.getCharactersById('vchart')?.graphic.vchart;
     // window.vchart = vchart;

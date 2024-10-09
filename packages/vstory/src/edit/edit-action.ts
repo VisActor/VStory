@@ -147,14 +147,7 @@ export class EditAction {
           characterId: this.lastOverGraphic.character?.id,
           character: this.lastOverGraphic.character,
           event,
-          detail: this.lastOverGraphic.characterInfo,
-          nextAction: {
-            actionType: EditActionEnum.pointerOverCharacter,
-            characterId: character?.id,
-            character: character,
-            event,
-            detail: characterInfo
-          }
+          detail: this.lastOverGraphic.characterInfo
         } as IEditOverActionInfo);
         actionType = EditActionEnum.pointerOverCharacter;
       } else {

@@ -1,5 +1,5 @@
 import { createGroup, type IGroup } from '@visactor/vrender-core';
-import type { IEditActionInfo } from '../../../interface';
+import type { IEditSelectionInfo } from '../../../interface';
 import type { Edit } from '../../../edit';
 
 export interface IMarkControlConstructor {
@@ -8,7 +8,7 @@ export interface IMarkControlConstructor {
 
 // Todo 修改柱宽度，柱高度
 export class BaseMarkControl {
-  protected _actionInfo: IEditActionInfo;
+  protected _actionInfo: IEditSelectionInfo;
   protected _graphicGroup: IGroup;
 
   constructor(public readonly edit: Edit) {
@@ -16,7 +16,7 @@ export class BaseMarkControl {
     this.edit.getEditGroup().add(this._graphicGroup);
   }
 
-  startWithActionInfo(actionInfo: IEditActionInfo) {
+  startWithActionInfo(actionInfo: IEditSelectionInfo) {
     this._actionInfo = actionInfo;
   }
 
@@ -24,5 +24,13 @@ export class BaseMarkControl {
     this._actionInfo = null;
     this.edit.getEditGroup().removeChild(this._graphicGroup);
     this._graphicGroup = null;
+  }
+
+  onMarkPointOver(actionInfo: IEditSelectionInfo) {
+    // nothing
+  }
+
+  onMarkPointOut(actionInfo: IEditSelectionInfo) {
+    // nothing
   }
 }

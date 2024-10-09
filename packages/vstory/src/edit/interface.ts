@@ -29,7 +29,7 @@ export interface IEditSelectionInfo extends IEditActionInfoBase {
 }
 
 export interface IEditOverActionInfo extends IEditActionInfoBase, IEditSelectionInfo {
-  nextActionInfo?: IEditActionInfo;
+  nextAction?: IEditActionInfo;
 }
 
 export interface VREvent extends Event {

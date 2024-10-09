@@ -7,6 +7,7 @@ import { throwError } from '../../util/common';
 import type { VRenderPointerEvent } from '../../interface/type';
 import type { ICharacter } from '../../story/character/runtime-interface';
 import { createGroup, type IGroup } from '@visactor/vrender-core';
+import { EditEditingState } from '../const';
 
 export abstract class BaseSelection implements IEditComponent {
   declare readonly level: number;
@@ -25,8 +26,7 @@ export abstract class BaseSelection implements IEditComponent {
   declare type: string;
 
   protected _initOverGraphic() {
-    this._overGraphic = createGroup({ pickable: false });
-    this.edit.getEditGroup().add(this._overGraphic);
+    this._overGraphic = createGroup({ pickable: false, visible: false });
   }
 
   endEdit(emitEvent: boolean = true): void {
@@ -129,6 +129,13 @@ export abstract class BaseSelection implements IEditComponent {
       }
     });
 
+    component.onEditorStart(() => {
+      this.edit.clearOverGraphic();
+      this.edit.setEditGlobalState(EditEditingState.continuingEditing, true);
+    });
+    component.onEditorEnd(() => {
+      this.edit.setEditGlobalState(EditEditingState.continuingEditing, false);
+    });
     component.onUpdate(this.handlerTransformChange.bind(this));
     return component;
   }
@@ -159,6 +166,8 @@ export abstract class BaseSelection implements IEditComponent {
     // TODO 直接release
     this._layoutComponent.release();
     this._layoutComponent = null;
+
+    this.edit.setEditGlobalState(EditEditingState.continuingEditing, false);
   }
 
   updateComponent() {

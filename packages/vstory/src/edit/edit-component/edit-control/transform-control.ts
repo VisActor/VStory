@@ -276,6 +276,7 @@ export class TransformControl extends AbstractComponent<Required<TransformAttrib
   };
 
   protected _editorEnd = () => {
+    this.endEditCbs?.forEach(cb => cb());
     // this._endHandler(this._editorBox.getTransformAttribute());
     // this._editorBox.isEditor = false;
     // this._snapLineX.setAttributes({ visible: false });

@@ -11,6 +11,7 @@ import {
 } from './interface';
 import type { IGroup, IGraphic } from '@visactor/vrender';
 import { createGroup } from '@visactor/vrender';
+import { SeriesMarkMode } from './const';
 
 export class Edit {
   readonly editAction: EditAction;
@@ -29,6 +30,19 @@ export class Edit {
   protected _overGraphicGroup: IGroup;
 
   protected _editGroup: IGroup;
+
+  // 提供给组件一个编辑的全局状态，组件可以读取/设置。
+  // 比如当前的chart元素选中层级，全部/数据组/单个 这个状态在标签，系列mark 中共同使用
+  private _editGlobalState: { [key: string]: any } = {
+    seriesMarkMode: SeriesMarkMode.all
+  };
+  get editGlobalState(): { [key: string]: any } {
+    return this._editGlobalState;
+  }
+
+  setEditGlobalState(key: string, value: any) {
+    this._editGlobalState[key] = value;
+  }
 
   constructor(public readonly story: Story) {
     this.emitter = new EventEmitter();
@@ -65,6 +79,10 @@ export class Edit {
     return this._editGroup;
   }
 
+  getStage() {
+    return this._editGroup.stage;
+  }
+
   protected _initComponent() {
     this._componentMap = {};
     Object.keys(Edit.componentConstructorMap).forEach(key => {
@@ -80,7 +98,7 @@ export class Edit {
     if (event.path.find(g => g === this._editGroup || g === this._overGraphicGroup)) {
       // 具体判断是否编辑到交互元素，如果pick到group，就不算
       const pathTarget = event.path[event.path.length - 1];
-      if (!pathTarget.isContainer) {
+      if (!pathTarget.isContainer || pathTarget.attribute?.pickable === true) {
         return;
       }
     }
@@ -148,8 +166,12 @@ export class Edit {
 
   showOverGraphic(graphic: IGraphic, clearOther: boolean = true) {
     if (clearOther) {
-      this._overGraphicGroup.removeAllChild(true);
+      this._overGraphicGroup.removeAllChild();
     }
     this._overGraphicGroup.add(graphic);
+  }
+
+  clearOverGraphic() {
+    this._overGraphicGroup.removeAllChild();
   }
 }
