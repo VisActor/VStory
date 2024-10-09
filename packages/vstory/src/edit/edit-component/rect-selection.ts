@@ -27,8 +27,4 @@ export class RectSelection extends RichTextSelectionCommon implements IEditCompo
     this._layoutComponent.handleDragMouseDown(e);
     this.endRichTextEdit();
   };
-
-  protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
-    return super.handlerTransformChange(data, event);
-  }
 }

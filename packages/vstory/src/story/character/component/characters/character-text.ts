@@ -2,6 +2,8 @@ import type { Graphic } from '../graphic/graphic';
 import { GraphicText } from '../graphic/text';
 import { CharacterComponent } from '../character';
 import { StoryComponentType } from '../../../../constants/character';
+import { ComponentGroup } from '../character-group/component-group-graphic';
+import { getLayoutFromWidget } from '../../../utils/layout';
 
 /**
  * text component 没有关联 graphic，逻辑与 GraphicText 有所不同
@@ -10,6 +12,24 @@ export class CharacterComponentText extends CharacterComponent {
   readonly graphicType: string = 'text';
   protected _createGraphic(): Graphic {
     return new GraphicText(StoryComponentType.TEXT, this as any);
+  }
+
+  protected _initGraphics(): void {
+    this._group = new ComponentGroup({
+      ...getLayoutFromWidget(this._config.position),
+      // angle: this._config.options.angle,
+      zIndex: this._config.zIndex
+    });
+    this.option.graphicParent.add(this._group);
+
+    this._graphic = this._createGraphic();
+    this._graphic.init();
+
+    this._graphic.applyGraphicAttribute(this._config.options.graphic);
+
+    this._graphic.applyLayoutData(this._config.position);
+
+    this.hide();
   }
 
   applyConfig(updateAttr: Record<string, any>): void {
