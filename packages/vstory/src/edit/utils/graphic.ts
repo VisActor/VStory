@@ -12,7 +12,7 @@ export function cloneEditGraphic(graphic: IGraphic, matrix: Matrix, attribute?: 
     cornerRadius: 0,
     ...attribute
   });
-  transformGraphicWithMatrix(cloneItem, matrix);
+  matrix && transformGraphicWithMatrix(cloneItem, matrix);
   if (cloneItem.type === 'text') {
     return createRect({
       ...PickGraphicAttribute,

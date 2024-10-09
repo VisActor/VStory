@@ -26,7 +26,7 @@ export abstract class BaseSelection implements IEditComponent {
   declare type: string;
 
   protected _initOverGraphic() {
-    this._overGraphic = createGroup({ pickable: false });
+    this._overGraphic = createGroup({ pickable: false, visible: false });
   }
 
   endEdit(emitEvent: boolean = true): void {

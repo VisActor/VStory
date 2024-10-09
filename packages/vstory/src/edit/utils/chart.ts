@@ -1,8 +1,10 @@
 import type { ICartesianSeries, ISeries, IVChart } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
+import type { Matrix } from '@visactor/vutils';
 import { isArray } from '@visactor/vutils';
 import { VCHART_DATA_INDEX } from '../const';
 import type { ICharacter } from '../../story/character';
+import type { VChartGraphic } from '../../story/character/chart/graphic/vrender/vchart-graphic';
 
 // 特殊系列，会在获取系列数据的唯一key时，增加index
 const SpecialSeriesMap: { [key: string]: boolean } = {
@@ -76,4 +78,11 @@ export function getKeyValueMapWithScaleMap(keys: string[], scaleMap: { [key: str
 
 export function getVChartFromCharacter(character: ICharacter): IVChart {
   return character.graphic.graphic.vchart;
+}
+
+export function getChartRenderMatrix(chart: VChartGraphic): Matrix {
+  const matrix = chart.globalTransMatrix.clone();
+  const stageMatrix = chart.stage.window.getViewBoxTransform().clone();
+  stageMatrix.multiply(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
+  return stageMatrix;
 }

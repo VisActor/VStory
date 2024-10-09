@@ -1,6 +1,5 @@
 import { EditEditingState, SeriesMarkMode } from './../../const';
 import { Logger } from './../../../util/logger';
-import type { CharacterChart } from './../../../story/character/chart/character';
 import { SeriesMarkControl } from './../edit-control/series-mark-control/index';
 import type { BaseMarkControl } from './../edit-control/series-mark-control/base';
 import type { IEditOverActionInfo } from './../../interface';
@@ -10,11 +9,15 @@ import type { IEditSelectionInfo } from '../../interface';
 import { EditActionEnum, type IEditActionInfo, type IEditComponent } from '../../interface';
 
 import { BaseSelection } from './../base-selection';
-import { getChartToGlobalMatrix } from '../../utils/space';
 import { cloneEditGraphic } from '../../utils/graphic';
 import { SHAPE_OVER_COLOR, SHAPE_SELECT_COLOR } from '../../const';
 import type { Edit } from '../../edit';
-import { getKeyValueMapWithScaleMap, getSeriesKeyField, getSeriesKeyScalesMap } from '../../utils/chart';
+import {
+  getChartRenderMatrix,
+  getKeyValueMapWithScaleMap,
+  getSeriesKeyField,
+  getSeriesKeyScalesMap
+} from '../../utils/chart';
 
 export class SeriesMarkSelection extends BaseSelection implements IEditComponent {
   readonly level = 4;
@@ -111,6 +114,11 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
   startEdit(actionInfo: IEditSelectionInfo) {
     Logger.debug('series mark startEdit');
     super.startEdit(actionInfo, false);
+    // 设置绘图变换矩阵
+    const matrix = getChartRenderMatrix(this._actionInfo.character.graphic.graphic);
+    this._selectGraphic.setAttributes({ postMatrix: matrix });
+    this._overGraphic.setAttributes({ postMatrix: matrix });
+
     const seriesMarkInfo: {
       selectMode: string;
       markName?: string;
@@ -220,6 +228,9 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
   checkOver?(action: IEditActionInfo): void {
     // action
     if (action.type === EditActionEnum.pointerOverCharacter && action.detail?.part === 'seriesMark') {
+      // 设置绘图变换矩阵
+      const matrix = getChartRenderMatrix(action.character.graphic.graphic);
+      this._overGraphic.setAttributes({ postMatrix: matrix });
       // show over graphic
       this._showOverGraphic(action as IEditOverActionInfo);
     }
@@ -285,9 +296,9 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
 
   protected _addPickGraphic(action: IEditOverActionInfo, parent: IGroup, attr?: any) {
     const itemList = this._getChartItemInSeriesMark(action);
-    const matrix = getChartToGlobalMatrix(action.character as CharacterChart, this.edit);
+    // const matrix = getChartToGlobalMatrix(action.character as CharacterChart, this.edit);
     itemList.forEach((item: IGraphic) => {
-      const graphic = cloneEditGraphic(item, matrix, { ...(attr ?? {}) });
+      const graphic = cloneEditGraphic(item, null, { ...(attr ?? {}) });
       parent.add(graphic);
     });
   }

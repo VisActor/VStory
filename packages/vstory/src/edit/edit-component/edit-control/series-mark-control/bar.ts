@@ -1,21 +1,15 @@
-import type { CharacterChart } from './../../../../story/character/chart/character';
 import { Bounds, type IPointLike } from '@visactor/vutils';
 import type { IGroup, IGroupGraphicAttribute, IRect, IRectGraphicAttribute } from '@visactor/vrender-core';
 import { createGroup, createRect } from '@visactor/vrender-core';
-import { MaxAxisPaddingOuter, PickGraphicAttribute } from '../../../const';
+import { EditEditingState, MaxAxisPaddingOuter, PickGraphicAttribute } from '../../../const';
 import type { Edit } from '../../../edit';
 import type { IEditSelectionInfo } from '../../../interface';
 import { BaseMarkControl } from './base';
 import { SHAPE_HOVER_COLOR } from '../constants';
 import type { ICartesianSeries } from '@visactor/vchart';
-import { getVChartFromCharacter } from '../../../utils/chart';
+import { getChartRenderMatrix, getVChartFromCharacter } from '../../../utils/chart';
 import type { BandScale } from '@visactor/vscale';
-import {
-  getChartToGlobalMatrix,
-  transformBoundsWithMatrix,
-  transformPointToEditGroup,
-  transformPointWithMatrix
-} from '../../../utils/space';
+import { transformPointWithMatrix } from '../../../utils/space';
 import type { StoryEvent } from '../../../../story/interface';
 import { computeScalePadding } from '../../../utils/scale';
 
@@ -36,12 +30,12 @@ const defaultEditGroupAttribute: IGroupGraphicAttribute = {
   pickable: true,
   visible: true,
   zIndex: 10,
+  boundsPadding: 4,
   x: 0,
   y: 0,
   height: 100
 };
 
-// Todo 修改柱宽度，柱高度
 export class BarMarkControl extends BaseMarkControl {
   private _startGroup: IGroup;
   private _endGroup: IGroup;
@@ -109,21 +103,24 @@ export class BarMarkControl extends BaseMarkControl {
       });
 
       h.addEventListener('pointerover', (e: StoryEvent) => {
-        const borderIsVisible = this._barBorder.attribute.visible;
         this._showHandleGraphic();
-        this._barBorder.setAttributes({ visible: borderIsVisible });
       });
       h.addEventListener('pointerout', (e: StoryEvent) => {
         if (this._editState === 'dragging') {
           return;
         }
         this._hideHandleGraphic();
+        this._hideBorderGraphic();
       });
     });
   }
 
   startWithActionInfo(actionInfo: IEditSelectionInfo) {
     super.startWithActionInfo(actionInfo);
+    // 设置绘图变换矩阵
+    const matrix = getChartRenderMatrix(actionInfo.character.graphic.graphic);
+    this._graphicGroup.setAttributes({ postMatrix: matrix });
+
     this._setCurrentEditData(actionInfo);
     this._setEditGraphic();
   }
@@ -134,18 +131,19 @@ export class BarMarkControl extends BaseMarkControl {
 
     this._graphicGroup.setAttribute('visible', true);
     this._graphicGroup.showAll();
+    this._hideBorderGraphic();
   }
 
   private _setBorderAttribute() {
     const currentEditorElements = this._getAllElementInDimension();
     if (currentEditorElements.length) {
-      const matrix = getChartToGlobalMatrix(this._actionInfo.character as CharacterChart, this.edit);
+      // const matrix = getChartToGlobalMatrix(this._actionInfo.character as CharacterChart, this.edit);
       // 重新设置border属性
-      let bounds = new Bounds();
+      const bounds = new Bounds();
       currentEditorElements.forEach(e => {
         bounds.union(e.graphicItem.globalAABBBounds);
       });
-      bounds = transformBoundsWithMatrix(matrix, bounds) as unknown as Bounds;
+      // bounds = transformBoundsWithMatrix(matrix, bounds) as unknown as Bounds;
       this._barBorder.setAttributes({
         x: bounds.x1,
         x1: bounds.x2,
@@ -222,10 +220,13 @@ export class BarMarkControl extends BaseMarkControl {
   onMarkPointOver(actionInfo: IEditSelectionInfo) {
     super.onMarkPointOver(actionInfo);
     this._setCurrentEditData(actionInfo);
+    this._setEditGraphic();
   }
 
   onMarkPointOut(actionInfo: IEditSelectionInfo) {
     super.onMarkPointOut(actionInfo);
+    this._hideBorderGraphic();
+    this._hideHandleGraphic();
   }
 
   private _setCurrentEditData(actionInfo: IEditSelectionInfo) {
@@ -235,19 +236,23 @@ export class BarMarkControl extends BaseMarkControl {
   }
 
   private _showHandleGraphic() {
-    // TODO: 显示手柄
+    this._startHandle.setAttributes({ visible: true });
+    this._endHandle.setAttributes({ visible: true });
   }
 
   private _hideHandleGraphic() {
-    // TODO: 隐藏手柄
-  }
-
-  private _showBorderGraphic() {
-    // TODO: 显示边框
+    if (this._editState === 'dragging') {
+      return;
+    }
+    this._startHandle.setAttributes({ visible: false });
+    this._endHandle.setAttributes({ visible: false });
   }
 
   private _hideBorderGraphic() {
-    // TODO: 隐藏边框
+    if (this._editState === 'dragging') {
+      return;
+    }
+    this._barBorder.setAttributes({ visible: false });
   }
 
   private _onResizeStart(h: IGroup, e: StoryEvent) {
@@ -292,10 +297,11 @@ export class BarMarkControl extends BaseMarkControl {
     }
     this._barBorder.setAttributes({ visible: true });
     this._editState = 'dragging';
+    this.edit.setEditGlobalState(EditEditingState.continuingEditing, true);
     // drag 使用的临时数据
     // @ts-ignore
     this._dragInfo.handle = h === this._startGroup ? 'start' : 'end';
-    const layerPos = transformPointToEditGroup(this.edit, e.canvas);
+    const layerPos = transformPointWithMatrix(this._graphicGroup.globalTransMatrix, e.canvas);
     this._dragInfo.startPos.x = layerPos.x;
     this._dragInfo.startPos.y = layerPos.y;
     this._dragInfo.series = series;
@@ -316,7 +322,7 @@ export class BarMarkControl extends BaseMarkControl {
   }
 
   private _handleMove = (e: StoryEvent) => {
-    const layerPos = transformPointToEditGroup(this.edit, e.canvas);
+    const layerPos = transformPointWithMatrix(this._graphicGroup.globalTransMatrix, e.canvas);
     const dx = layerPos.x - this._dragInfo.startPos.x;
     const dy = layerPos.y - this._dragInfo.startPos.y;
 
@@ -370,10 +376,10 @@ export class BarMarkControl extends BaseMarkControl {
     } else {
       start = currentValue - this._dragInfo.tempScale[0].bandwidth();
     }
-    const matrix = getChartToGlobalMatrix(this._actionInfo.character as CharacterChart, this.edit);
+    // const matrix = getChartToGlobalMatrix(this._actionInfo.character as CharacterChart, this.edit);
     if (this._dragInfo.series.direction === 'vertical') {
-      start = transformPointWithMatrix(matrix, { x: start, y: 0 }).x;
-      end = transformPointWithMatrix(matrix, { x: end, y: 0 }).x;
+      // start = transformPointWithMatrix(matrix, { x: start, y: 0 }).x;
+      // end = transformPointWithMatrix(matrix, { x: end, y: 0 }).x;
       // console.log(`start = `, start - handlerSize * 0.5, 'end = ', end - handlerSize * 0.5);
       this._startGroup.setAttributes({
         x: start - handlerSize * 0.5
@@ -386,8 +392,8 @@ export class BarMarkControl extends BaseMarkControl {
         x1: end
       });
     } else {
-      start = transformPointWithMatrix(matrix, { x: 0, y: start }).y;
-      end = transformPointWithMatrix(matrix, { x: 0, y: end }).y;
+      // start = transformPointWithMatrix(matrix, { x: 0, y: start }).y;
+      // end = transformPointWithMatrix(matrix, { x: 0, y: end }).y;
       this._startGroup.setAttributes({
         y: start - handlerSize * 0.5
       });
@@ -434,9 +440,12 @@ export class BarMarkControl extends BaseMarkControl {
   private _handleUp = (e: StoryEvent) => {
     this._barBorder.setAttributes({ visible: false });
     this._editState = 'none';
+    this.edit.setEditGlobalState(EditEditingState.continuingEditing, false);
     this.edit.getStage().removeEventListener('pointermove', this._handleMove as any);
     window.removeEventListener('pointerup', this._handleUp, true);
     if (this._dragInfo.hasChange) {
+      // TODO  设置对应的轴 padding
+      // 这里的 setConfig 方法需要是增量设置
       this._actionInfo.character.setConfig({
         option: {
           axes: [
@@ -451,23 +460,13 @@ export class BarMarkControl extends BaseMarkControl {
           ]
         }
       });
+
       //  更新属性
-      // this._dragInfo.series = null;
-      // this._dragInfo.axis = null;
-      // this._dragInfo.rawScale = [];
-      // this.chart.reRenderWithUpdateSpec();
-      // // upgrade 更新当前的一些图表数据
-      // this._upgradeVChartLink();
-      // // 柱宽编辑事件
-      // CONTEXT.TeaEvent('edit_element', {
-      //   element_type: 'chart',
-      //   part: 'series',
-      //   chart_type: this._chart.vchartType,
-      //   data_source_type: this._chart.dataSourceType,
-      //   action_type: 'update',
-      //   edit_property: 'barWidth',
-      //   trigger_by: 'chart_interaction'
-      // });
+      this._dragInfo.series = null;
+      this._dragInfo.axis = null;
+      this._dragInfo.rawScale = [];
+      this._dragInfo.tempScale = [];
+      this._dragInfo.hasChange = false;
     }
   };
 

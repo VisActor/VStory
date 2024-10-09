@@ -70,7 +70,7 @@ export class Edit {
     editLayer.clipInViewBox = false;
     editLayer.add(this._editGroup);
 
-    this._overGraphicGroup = createGroup({});
+    this._overGraphicGroup = createGroup({ pickable: false });
     this._overGraphicGroup.name = 'over_group';
     editLayer.add(this._overGraphicGroup);
   }

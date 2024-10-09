@@ -12,7 +12,7 @@ export class BaseMarkControl {
   protected _graphicGroup: IGroup;
 
   constructor(public readonly edit: Edit) {
-    this._graphicGroup = createGroup({ visible: false });
+    this._graphicGroup = createGroup({ visible: false, zIndex: 10 });
     this.edit.getEditGroup().add(this._graphicGroup);
   }
 
