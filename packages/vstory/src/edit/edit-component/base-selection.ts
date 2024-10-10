@@ -6,6 +6,8 @@ import { TransformControl, type TransformAttributes } from './edit-control/trans
 import { throwError } from '../../util/common';
 import type { VRenderPointerEvent } from '../../interface/type';
 import type { ICharacter } from '../../story/character/runtime-interface';
+import { createGroup, type IGroup } from '@visactor/vrender-core';
+import { EditEditingState } from '../const';
 
 export abstract class BaseSelection implements IEditComponent {
   declare readonly level: number;
@@ -16,9 +18,16 @@ export abstract class BaseSelection implements IEditComponent {
   isEditing: boolean = false;
   protected _layoutComponent?: ITransformControl;
   protected _activeCharacter?: ICharacter | null;
+  protected _overGraphic: IGroup;
 
-  constructor(public readonly edit: Edit) {}
+  constructor(public readonly edit: Edit) {
+    this._initOverGraphic();
+  }
   declare type: string;
+
+  protected _initOverGraphic() {
+    this._overGraphic = createGroup({ pickable: false, visible: false });
+  }
 
   endEdit(emitEvent: boolean = true): void {
     this.isEditing = false;
@@ -45,13 +54,17 @@ export abstract class BaseSelection implements IEditComponent {
     return character.type === this.editCharacterType;
   }
 
+  enableEditActionInfo(actionInfo: IEditActionInfo | IEditSelectionInfo) {
+    return this.enableEditCharacter((actionInfo as IEditSelectionInfo).character);
+  }
+
   checkActionWhileEditing(actionInfo: IEditActionInfo | IEditSelectionInfo): boolean {
     if (actionInfo.type === EditActionEnum.unSelection) {
       return false;
     }
     if (actionInfo.type === EditActionEnum.singleSelection) {
       // 选中其他内容了，return false
-      if (!this.enableEditCharacter((actionInfo as IEditSelectionInfo).character)) {
+      if (!this.enableEditActionInfo(actionInfo)) {
         return false;
       } else if ((actionInfo as IEditSelectionInfo).character !== this._activeCharacter) {
         // 选中同类型其他元素
@@ -70,10 +83,7 @@ export abstract class BaseSelection implements IEditComponent {
   }
 
   checkActionWhileNoEditing(actionInfo: IEditActionInfo | IEditSelectionInfo): boolean {
-    if (
-      actionInfo.type === EditActionEnum.singleSelection &&
-      this.enableEditCharacter((actionInfo as IEditSelectionInfo).character)
-    ) {
+    if (actionInfo.type === EditActionEnum.singleSelection && this.enableEditActionInfo(actionInfo)) {
       // this.startEdit(actionInfo);
       // graphic
       return true;
@@ -119,6 +129,13 @@ export abstract class BaseSelection implements IEditComponent {
       }
     });
 
+    component.onEditorStart(() => {
+      this.edit.clearOverGraphic();
+      this.edit.setEditGlobalState(EditEditingState.continuingEditing, true);
+    });
+    component.onEditorEnd(() => {
+      this.edit.setEditGlobalState(EditEditingState.continuingEditing, false);
+    });
     component.onUpdate(this.handlerTransformChange.bind(this));
     return component;
   }
@@ -149,6 +166,8 @@ export abstract class BaseSelection implements IEditComponent {
     // TODO 直接release
     this._layoutComponent.release();
     this._layoutComponent = null;
+
+    this.edit.setEditGlobalState(EditEditingState.continuingEditing, false);
   }
 
   updateComponent() {
@@ -183,5 +202,11 @@ export abstract class BaseSelection implements IEditComponent {
       });
       this._activeCharacter.setConfig({ position: data });
     }
+  }
+
+  abstract checkOver?(actionInfo: IEditActionInfo): void;
+
+  release() {
+    this.inActiveLayoutComponent();
   }
 }

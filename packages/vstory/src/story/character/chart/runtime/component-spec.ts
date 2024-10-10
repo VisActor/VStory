@@ -1,4 +1,4 @@
-import { merge, isValid } from '@visactor/vutils';
+import { merge, isValid, array } from '@visactor/vutils';
 import type { IComponentConfig } from '../../dsl-interface';
 import type { CharacterChart } from '../character';
 import type { IChartCharacterRuntime } from './interface';
@@ -54,6 +54,7 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
     if (!rawSpec[key]) {
       rawSpec[key] = [];
     }
+    rawSpec[key] = array(rawSpec[key]);
     const s = rawSpec[key].find((a: any, index: number) => {
       if (ChartSpecMatch(a, index, componentSpec)) {
         return true;
