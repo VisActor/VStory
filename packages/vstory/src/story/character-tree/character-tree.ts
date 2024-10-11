@@ -14,7 +14,7 @@ export class CharacterTree implements ICharacterTree {
     return this._characters;
   }
 
-  getCharactersById(key: string) {
+  getCharacterById(key: string) {
     return this._characters[key] || null;
   }
 

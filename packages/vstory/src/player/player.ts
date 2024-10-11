@@ -153,7 +153,7 @@ export class Player extends EventEmitter implements IPlayer {
     const actions = this._scheduler.getActionsInRange(lastTime, t);
     const characterSet = new Set<ICharacter>();
     actions.forEach(action => {
-      const character = this._story.getCharactersById(action.characterId);
+      const character = this._story.getCharacterById(action.characterId);
       characterSet.add(character);
       this._actionProcessor.doAction(character.config.type, action.actionSpec.action, character, action.actionSpec);
     });

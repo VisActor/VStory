@@ -198,7 +198,8 @@ export abstract class BaseSelection implements IEditComponent {
   protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
     if (this._activeCharacter) {
       this.edit.emitter.emit('resize', {
-        position: data
+        position: data,
+        character: this._activeCharacter
       });
       this._activeCharacter.setConfig({ position: data });
     }

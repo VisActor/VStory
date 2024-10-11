@@ -60,7 +60,7 @@ export type ChartModelMatch =
       specIndex: number | 'all'; // all 表示所有
     };
 
-export type IComponentConfig<T> = ChartModelMatch & {
+export type IComponentConfig<T = any> = ChartModelMatch & {
   spec: T;
 };
 
@@ -74,11 +74,13 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     // 数据源
     data?: any;
     // 标题
-    title?: IComponentConfig<ISpec['title']>[];
+    title?: IComponentConfig<ISpec['title']>[] | ISpec['title'];
     // 图例
-    legends?: IComponentConfig<ISpec['legends']>[];
+    legends?: IComponentConfig<ISpec['legends']>[] | ISpec['legends'];
     // axes
     axes?: IComponentConfig<ISpec['axes']>[];
+    // 色板
+    color?: any;
   };
 }
 

@@ -50,7 +50,7 @@ export class ActionProcessor implements IActionProcessor {
     startTime: number;
     duration: number;
   } | null {
-    const character = this._story.getCharactersById(characterId);
+    const character = this._story.getCharacterById(characterId);
     if (!character) {
       logger('error', `获取character失败，请检查 ${characterId} 是否绑定到一个合法的character`);
       return null;

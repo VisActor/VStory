@@ -19,13 +19,13 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
   // get graphic() {
   //   return this._graphic;
   // }
-  protected declare _text: GraphicBaseText;
+  protected declare _text?: GraphicBaseText;
   get text() {
     return this._text;
   }
 
   get textGraphic() {
-    return this._text.graphic;
+    return this._text && this._text.graphic;
   }
 
   protected declare _group: IGroup;

@@ -1,13 +1,18 @@
 import { type IEditActionInfo, type IEditComponent } from '../interface';
 
 import type { Edit } from '../edit';
-import { BaseSelection } from './base-selection';
 import { StoryComponentType } from '../../constants/character';
+import { RichTextSelectionCommon } from './richtext-selection-common';
 
-export class TextSelection extends BaseSelection implements IEditComponent {
+export class TextSelection extends RichTextSelectionCommon implements IEditComponent {
   readonly level = 3;
   readonly type: string = 'text';
   readonly editCharacterType: string = StoryComponentType.TEXT;
+  protected mode: 'edit' | 'normal' = 'normal';
+
+  checkOver(actionInfo: IEditActionInfo): void {
+    return;
+  }
 
   constructor(public readonly edit: Edit) {
     super(edit);
@@ -15,23 +20,38 @@ export class TextSelection extends BaseSelection implements IEditComponent {
 
   startEdit(actionInfo: IEditActionInfo) {
     super.startEdit(actionInfo);
-    this.edit.startEdit({
-      type: 'textSelection',
-      actionInfo: this._actionInfo,
-      selection: this
-    });
-    const character = (this._actionInfo as any).character;
+    // @ts-ignore;
+    const character = this._actionInfo.character;
     character.graphic.graphic.addEventListener('pointerdown', this.handlerContentClick);
+    character.graphic.graphic.addEventListener('dblclick', this.handlerTextEdit);
   }
 
   endEdit() {
+    this.endRichTextEdit();
     // @ts-ignore;
     const character = this._actionInfo.character;
     character.graphic.graphic.removeEventListener('pointerdown', this.handlerContentClick);
+    character.graphic.graphic.removeEventListener('dblclick', this.handlerTextEdit);
     super.endEdit();
+    this.mode = 'normal';
   }
 
   handlerContentClick = (e: any) => {
+    if (this.mode === 'edit') {
+      return;
+    }
     this._layoutComponent.handleDragMouseDown(e);
+    this.endRichTextEdit();
   };
+  handlerTextEdit = (e: any) => {
+    this.mode = 'edit';
+    return;
+  };
+
+  protected _getRichText() {
+    // @ts-ignore
+    const character = (this._actionInfo as any).character;
+    const text = character.graphic.graphic;
+    return { character, text };
+  }
 }

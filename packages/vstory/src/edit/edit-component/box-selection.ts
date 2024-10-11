@@ -13,6 +13,10 @@ export class BoxSelection extends BaseSelection implements IEditComponent {
     super.endEdit();
     return;
   }
+
+  checkOver(actionInfo: IEditActionInfo): void {
+    return;
+  }
   checkAction(actionInfo: IEditActionInfo): boolean {
     if (this._isSelection) {
       if (actionInfo.type === 'pointerup') {

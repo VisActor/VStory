@@ -21,10 +21,17 @@ export class RichTextControl {
     this._edit.editAction.emitter.on(EditActionEnum.richTextPluginEdit, this.onRichTextPluginEdit);
   }
 
-  onRichTextPluginEdit = ({ type, p }: { type: string; p: RichTextEditPlugin }) => {
+  onRichTextPluginEdit = (msg: { type: string; p: RichTextEditPlugin }) => {
+    this._edit.emitter.emit(EditActionEnum.richTextPluginEdit, { data: msg, character: this._character });
+    const { type, p } = msg;
     if (p.currRt !== this._richText) {
       console.warn('current edit richtext not match in richtext-control.onRichTextPluginEdit');
       return;
+    }
+    if (msg.type === 'change' && this._character) {
+      this._character.setConfig({
+        options: { graphic: { textConfig: this._richText.attribute.textConfig } }
+      });
     }
     // do noting 富文本编辑消息的处理
     // console.log('onRichTextPluginEdit', type, p);

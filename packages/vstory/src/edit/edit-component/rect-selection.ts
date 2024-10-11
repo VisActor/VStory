@@ -10,6 +10,10 @@ export class RectSelection extends RichTextSelectionCommon implements IEditCompo
   readonly type: string = 'rect';
   readonly editCharacterType: string = StoryComponentType.RECT;
 
+  checkOver(actionInfo: IEditActionInfo): void {
+    return;
+  }
+
   startEdit(actionInfo: IEditActionInfo) {
     super.startEdit(actionInfo);
     // @ts-ignore;
@@ -27,8 +31,4 @@ export class RectSelection extends RichTextSelectionCommon implements IEditCompo
     this._layoutComponent.handleDragMouseDown(e);
     this.endRichTextEdit();
   };
-
-  protected handlerTransformChange(data: IUpdateParams, event?: VRenderPointerEvent): void {
-    return super.handlerTransformChange(data, event);
-  }
 }

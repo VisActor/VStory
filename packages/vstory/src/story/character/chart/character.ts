@@ -159,7 +159,7 @@ export class CharacterChart extends CharacterVisactor {
   }
 
   release(): void {
-    this.option.graphicParent.removeChild(this._graphic as any);
+    // this.option.graphicParent.removeChild(this._graphic.graphic);
     this._graphic.release && this._graphic.release();
   }
 

@@ -6,6 +6,7 @@ import { Edit } from '../../../src/edit/edit';
 import '../../../src/story/index';
 import { loadAllSelection } from '../../../src/edit/edit-component';
 import img from '../assets/scene3/chart-3.png';
+import { EditActionEnum } from '../../../src/edit/interface';
 
 loadAllSelection();
 
@@ -56,7 +57,7 @@ export const GraphicEdit = () => {
           options: {
             graphic: {
               fill: 'red',
-              visible: false
+              visible: true
             },
             text: {
               text: 'title2',
@@ -155,6 +156,10 @@ export const GraphicEdit = () => {
         console.log(cloneDeep(msg.actionInfo.character.config));
         // story.play();
       }
+    });
+
+    edit.emitter.on(EditActionEnum.richTextPluginEdit, msg => {
+      console.log(msg);
     });
 
     // let i = 0;

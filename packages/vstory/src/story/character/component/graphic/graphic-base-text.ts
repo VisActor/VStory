@@ -146,7 +146,7 @@ export class GraphicBaseText {
         y,
         textAlign: graphicAlign,
         textBaseline: graphicBaseline,
-        angle: layoutData.angle,
+        angle: 0,
         anchor: [layoutData.width / 2, layoutData.height / 2],
         scaleCenter: [layoutData.width / 2, layoutData.height / 2],
         maxWidth: layoutData.width,

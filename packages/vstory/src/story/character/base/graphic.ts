@@ -113,6 +113,7 @@ export abstract class BaseGraphic {
     transformedAttributes.scaleCenter = [width / 2, height / 2];
     transformedAttributes.x = 0;
     transformedAttributes.y = 0;
+    transformedAttributes.angle = 0;
     return transformedAttributes;
   }
 }

@@ -22,7 +22,7 @@ export class Story implements IStory {
 
   protected _characterTree: ICharacterTree;
 
-  protected _dsl: IStoryDSL;
+  // protected _dsl: IStoryDSL;
 
   get canvas() {
     return this._canvas;
@@ -53,7 +53,7 @@ export class Story implements IStory {
   }
 
   load(dsl: IStoryDSL) {
-    this._dsl = dsl;
+    // this._dsl = dsl;
     if (!dsl) {
       return;
     }
@@ -84,8 +84,8 @@ export class Story implements IStory {
     return this._characterTree.getCharacters();
   }
 
-  getCharactersById(key: string) {
-    return this._characterTree.getCharactersById(key);
+  getCharacterById(key: string) {
+    return this._characterTree.getCharacterById(key);
   }
 
   // private _createAct(spec: IActSpec) {
@@ -94,7 +94,8 @@ export class Story implements IStory {
 
   play(loop: boolean = false) {
     // player 开始播放
-    this._dsl && this.load(this._dsl);
+
+    // this._dsl && this.load(this._dsl);
     this._player.play();
     if (loop) {
       this._player.once('onstop', () => {
