@@ -1,4 +1,4 @@
-import type { IBoundsLike } from '@visactor/vutils';
+import { isValid, type IBoundsLike } from '@visactor/vutils';
 import type { IGroup } from '@visactor/vrender';
 import { GraphicBaseText } from './graphic/graphic-base-text';
 import type { ICharacterConfig, IComponentCharacterConfig } from '../dsl-interface';
@@ -64,6 +64,9 @@ export abstract class CharacterComponent extends CharacterBase implements IChara
   protected applyConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>): void {
     if (config.position) {
       this.group.setAttributes(config.position);
+    }
+    if (isValid(config.zIndex)) {
+      this.group.setAttributes({ zIndex: config.zIndex });
     }
   }
 

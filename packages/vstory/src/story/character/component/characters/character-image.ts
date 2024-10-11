@@ -4,6 +4,7 @@ import { StoryComponentType } from '../../../../constants/character';
 import { GraphicImage } from '../graphic/image';
 import type { StoryEvent } from '../../../interface';
 import type { ICharacterPickInfo } from '../../runtime-interface';
+import { isValid } from '@visactor/vutils';
 
 export class CharacterComponentImage extends CharacterComponent {
   readonly graphicType: string = 'image';
@@ -11,12 +12,15 @@ export class CharacterComponentImage extends CharacterComponent {
     return new GraphicImage(StoryComponentType.IMAGE, this as any);
   }
 
-  applyConfig(updateAttr: Record<string, any>): void {
-    const { position, options = {} } = updateAttr;
+  applyConfig(config: Record<string, any>): void {
+    const { position, options = {}, zIndex } = config;
     // const attr = { ...(position ?? {}), ...rest };
     if (position) {
       this.group.setAttributes(position);
       this._graphic.setAttributes({ width: position.width, height: position.height });
+    }
+    if (isValid(zIndex)) {
+      this.group.setAttributes({ zIndex });
     }
     if (options.graphic) {
       const attrs = { ...options.graphic };

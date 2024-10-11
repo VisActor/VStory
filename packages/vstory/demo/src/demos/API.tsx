@@ -135,6 +135,10 @@ export const API = () => {
 
       chart.setConfig({ zIndex: 100 });
 
+      setTimeout(() => {
+        rect.setConfig({ zIndex: -100 });
+      }, 1000);
+
       // 设置character
       // 添加character
       // 更新character
