@@ -4,6 +4,7 @@ import { CharacterComponent } from '../character';
 import { StoryComponentType } from '../../../../constants/character';
 import { ComponentGroup } from '../character-group/component-group-graphic';
 import { getLayoutFromWidget } from '../../../utils/layout';
+import { isValid } from '@visactor/vutils';
 
 /**
  * text component 没有关联 graphic，逻辑与 GraphicText 有所不同
@@ -32,11 +33,14 @@ export class CharacterComponentText extends CharacterComponent {
     this.hide();
   }
 
-  applyConfig(updateAttr: Record<string, any>): void {
-    const { position, options = {} } = updateAttr;
+  applyConfig(config: Record<string, any>): void {
+    const { position, options = {}, zIndex } = config;
     if (position) {
       this.group.setAttributes(position);
       this._graphic.setAttributes({ width: position.width, height: position.height });
+    }
+    if (isValid(zIndex)) {
+      this.group.setAttributes({ zIndex });
     }
     if (options.graphic) {
       this._graphic.setAttributes(options.graphic);
