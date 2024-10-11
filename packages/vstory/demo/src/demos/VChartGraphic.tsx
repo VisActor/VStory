@@ -966,6 +966,9 @@ export const VChartGraphic = () => {
     edit.emitter.on('startEdit', (...args) => {
       console.log(args);
     });
+    edit.emitter.on('resize', (...args) => {
+      console.log('resize', args);
+    });
 
     // const vchart = story.getCharactersById('vchart')?.graphic.vchart;
     // window.vchart = vchart;

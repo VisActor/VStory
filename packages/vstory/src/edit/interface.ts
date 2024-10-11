@@ -25,7 +25,7 @@ export type IEditSelectionDetailComponent = ICharacterPickInfo;
 export interface IEditSelectionInfo extends IEditActionInfoBase {
   characterId?: string | string[];
   character?: ICharacter;
-  detail: IEditSelectionDetailChart | IEditSelectionDetailComponent;
+  detail?: IEditSelectionDetailChart | IEditSelectionDetailComponent;
 }
 
 export interface IEditOverActionInfo extends IEditActionInfoBase, IEditSelectionInfo {

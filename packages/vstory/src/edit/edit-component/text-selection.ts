@@ -10,6 +10,10 @@ export class TextSelection extends RichTextSelectionCommon implements IEditCompo
   readonly editCharacterType: string = StoryComponentType.TEXT;
   protected mode: 'edit' | 'normal' = 'normal';
 
+  checkOver(actionInfo: IEditActionInfo): void {
+    return;
+  }
+
   constructor(public readonly edit: Edit) {
     super(edit);
   }

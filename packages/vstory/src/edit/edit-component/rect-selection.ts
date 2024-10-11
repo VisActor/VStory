@@ -10,6 +10,10 @@ export class RectSelection extends RichTextSelectionCommon implements IEditCompo
   readonly type: string = 'rect';
   readonly editCharacterType: string = StoryComponentType.RECT;
 
+  checkOver(actionInfo: IEditActionInfo): void {
+    return;
+  }
+
   startEdit(actionInfo: IEditActionInfo) {
     super.startEdit(actionInfo);
     // @ts-ignore;

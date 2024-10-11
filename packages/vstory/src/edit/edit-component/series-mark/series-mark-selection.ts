@@ -62,7 +62,8 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     if (result === false) {
       if (
         actionInfo.type === EditActionEnum.unSelection ||
-        (actionInfo.type === EditActionEnum.singleSelection && actionInfo.detail?.part !== 'seriesMark')
+        (actionInfo.type === EditActionEnum.singleSelection &&
+          (actionInfo as IEditSelectionInfo).detail?.part !== 'seriesMark')
         // TODO: 支持标签编辑后 打开注释
         //  && actionInfo.detail?.part !== 'label'
       ) {
@@ -225,11 +226,14 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     this._showOverGraphic(actionInfo);
   };
 
-  checkOver?(action: IEditActionInfo): void {
+  checkOver?(action: IEditActionInfo | IEditSelectionInfo): void {
     // action
-    if (action.type === EditActionEnum.pointerOverCharacter && action.detail?.part === 'seriesMark') {
+    if (
+      action.type === EditActionEnum.pointerOverCharacter &&
+      (action as IEditSelectionInfo).detail?.part === 'seriesMark'
+    ) {
       // 设置绘图变换矩阵
-      const matrix = getChartRenderMatrix(action.character.graphic.graphic);
+      const matrix = getChartRenderMatrix((action as IEditSelectionInfo).character.graphic.graphic);
       this._overGraphic.setAttributes({ postMatrix: matrix });
       // show over graphic
       this._showOverGraphic(action as IEditOverActionInfo);
@@ -266,7 +270,7 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
       const seriesList = action.character.graphic.graphic.vchart
         .getChart()
         .getAllSeries()
-        .filter(s => s.type === action.detail.modelInfo.model.type);
+        .filter((s: any) => s.type === action.detail.modelInfo.model.type);
       const markList = seriesList.reduce((pre: any, cur: any) => {
         return pre.concat(cur.getMarkInName(action.detail.modelInfo.mark.name));
       }, []);
@@ -281,7 +285,7 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
       const result: IGraphic[] = [];
       const seriesField = action.detail.modelInfo.model.getSeriesField();
       const seriesValue = action.detail.modelInfo.datum[0][seriesField];
-      action.detail.modelInfo.mark.getProduct().elements.forEach(el => {
+      action.detail.modelInfo.mark.getProduct().elements.forEach((el: any) => {
         if (el.data[0]?.[seriesField] === seriesValue) {
           result.push(el.graphicItem);
         }

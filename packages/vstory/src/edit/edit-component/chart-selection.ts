@@ -13,6 +13,10 @@ export class ChartSelection extends BaseSelection implements IEditComponent {
     super(edit);
   }
 
+  checkOver(actionInfo: IEditActionInfo): void {
+    return;
+  }
+
   updateComponent() {
     const actionInfo = this._actionInfo as IEditSelectionInfo;
     if (!(actionInfo && actionInfo.character)) {
