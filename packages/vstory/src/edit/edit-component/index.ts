@@ -6,6 +6,7 @@ import { ChartSelection } from './chart-selection';
 import { Edit } from '../edit';
 import { ShapeSelection } from './shape-selection';
 import { TextSelection } from './text-selection';
+import { SeriesMarkSelection } from './series-mark/series-mark-selection';
 // import { RichTextSelection } from './richtext-selection';
 
 export function loadAllSelection() {
@@ -17,4 +18,5 @@ export function loadAllSelection() {
   Edit.registerEditComponent('shape', ShapeSelection);
   Edit.registerEditComponent('chart', ChartSelection);
   Edit.registerEditComponent('box-selection', BoxSelection);
+  Edit.registerEditComponent('series-mark-selection', SeriesMarkSelection);
 }

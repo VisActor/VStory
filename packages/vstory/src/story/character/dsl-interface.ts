@@ -39,6 +39,7 @@ export type IEditorTextGraphicAttribute = {
 export interface IComponentCharacterConfig extends ICharacterConfigBase {
   options: {
     graphic: any;
+    group?: any;
     text?: IEditorTextGraphicAttribute;
     isResized?: boolean;
     // angle?: number;

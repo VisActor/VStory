@@ -126,12 +126,18 @@ export const API = () => {
             fill: 'black',
             text: 'black',
             symbolType: 'circle'
+          },
+          group: {
+            fill: 'red',
+            visible: true
           }
         }
       });
 
       text.setConfig({ options: { graphic: { text: '这是普通文本' } } });
-      console.log(text);
+      setTimeout(() => {
+        text.setConfig({ options: { group: { visible: false } } });
+      }, 1000);
 
       chart.setConfig({ zIndex: 100 });
 
