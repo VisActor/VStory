@@ -1,4 +1,4 @@
-import { EventEmitter } from '@visactor/vutils';
+import { EventEmitter, Point } from '@visactor/vutils';
 import type { IRichText, RichTextEditPlugin } from '@visactor/vrender';
 import type { ICharacter } from './../../../story/character/runtime-interface';
 import type { Edit } from '../../edit';
@@ -39,6 +39,20 @@ export class RichTextControl {
 
   startEdit() {
     this._richText.setAttributes({ editable: true });
+  }
+
+  // 聚焦到富文本上
+  focus(e: PointerEvent) {
+    // 找到plugin
+    const stage = this._richText.stage;
+    if (!stage) {
+      return;
+    }
+    const plugin = stage.pluginService.findPluginsByName('RichTextEditPlugin')[0];
+    if (!plugin) {
+      return;
+    }
+    (plugin as any).forceFocus && (plugin as any).forceFocus(e);
   }
 
   endEdit() {
