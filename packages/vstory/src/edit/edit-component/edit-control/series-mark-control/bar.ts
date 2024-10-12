@@ -118,7 +118,9 @@ export class BarMarkControl extends BaseMarkControl {
   startWithActionInfo(actionInfo: IEditSelectionInfo) {
     super.startWithActionInfo(actionInfo);
     // 设置绘图变换矩阵
-    const matrix = getChartRenderMatrix(actionInfo.character.graphic.graphic);
+    // const matrix = getChartRenderMatrix(actionInfo.character.graphic.graphic);
+    const chart = actionInfo.character.graphic.graphic;
+    const matrix = chart.transMatrix.clone();
     this._graphicGroup.setAttributes({ postMatrix: matrix });
 
     this._setCurrentEditData(actionInfo);

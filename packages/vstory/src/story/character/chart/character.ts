@@ -1,7 +1,7 @@
 import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
-import { cloneDeep } from '@visactor/vutils';
+import { cloneDeep, isValid } from '@visactor/vutils';
 import type { IChartCharacterConfig } from '../dsl-interface';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
@@ -164,13 +164,16 @@ export class CharacterChart extends CharacterVisactor {
   }
 
   protected applyConfig(config: any): void {
-    const { position } = config;
+    const { position, zIndex } = config;
     if (position) {
       // 位置属性
       this._graphic.setAttributes({
         ...position
       });
       this._graphic.updateViewBox(this.getViewBoxFromSpec().viewBox);
+    }
+    if (isValid(zIndex)) {
+      this._graphic.setAttributes({ zIndex });
     }
     super.applyConfig(config);
   }

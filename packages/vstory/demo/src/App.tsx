@@ -94,26 +94,26 @@ const App = () => {
       name: 'GraphicEdit',
       component: GraphicEdit
     },
-    {
-      name: 'Playground',
-      component: Playground
-    },
-    {
-      name: 'BarLineSeries',
-      component: BarLineSeries
-    },
-    {
-      name: 'BarLineSeriesSelector',
-      component: BarLineSeriesSelector
-    },
-    {
-      name: 'wordcloud',
-      component: wordcloud
-    },
-    {
-      name: 'BaseComponent',
-      component: BaseComponent
-    },
+    // {
+    //   name: 'Playground',
+    //   component: Playground
+    // },
+    // {
+    //   name: 'BarLineSeries',
+    //   component: BarLineSeries
+    // },
+    // {
+    //   name: 'BarLineSeriesSelector',
+    //   component: BarLineSeriesSelector
+    // },
+    // {
+    //   name: 'wordcloud',
+    //   component: wordcloud
+    // },
+    // {
+    //   name: 'BaseComponent',
+    //   component: BaseComponent
+    // },
     {
       name: 'lv_chart',
       subMenus: [

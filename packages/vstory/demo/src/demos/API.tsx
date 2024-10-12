@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { createRef, useEffect } from 'react';
 import { Story } from '../../../src/story/story';
 import Scene3ChartImage2 from '../assets/scene3/chart-2.png';
 import { loadAllSelection } from '../../../src/edit/edit-component';
@@ -24,13 +24,33 @@ export const API = () => {
         ]
       }
     ],
+    bar: {
+      style: {
+        fill: 'red'
+      }
+    },
     xField: 'month',
     yField: 'sales'
   };
 
+  const canvas = createRef<HTMLCanvasElement>();
+
   useEffect(() => {
     try {
-      const story = new Story(null, { dom: id });
+      const c = canvas.current!;
+      const story: any = new Story(null, {
+        canvas: c,
+        width: c.width / 2,
+        height: c.height / 2,
+        playerOption: {
+          scaleX: 0.6,
+          scaleY: 0.6,
+          offsetX: 100,
+          offsetY: 60
+        },
+        background: 'transparent',
+        layerBackground: 'white'
+      });
       // 创建character
       const rect = story.addCharacterWithAppear({
         type: 'Rect',
@@ -186,5 +206,14 @@ export const API = () => {
     }
   }, []);
 
-  return <div style={{ width: '100%', height: '100%' }} id={id}></div>;
+  return (
+    <div style={{ width: '100%', height: '100%' }} id={id}>
+      <canvas
+        ref={canvas as any}
+        width={3200}
+        height={2000}
+        style={{ width: '1600px', height: '1000px', background: 'grey' }}
+      ></canvas>
+    </div>
+  );
 };
