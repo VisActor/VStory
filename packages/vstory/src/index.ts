@@ -11,3 +11,4 @@ export * from './story/interface/index';
 export * from './story/character';
 export * from './template/unit';
 export * from './edit/edit-component';
+export { RichTextEditPlugin } from '@visactor/vrender-core';

@@ -13,7 +13,7 @@ loadAllSelection();
 Edit.registerEditComponent('text', TextSelection);
 // Edit.registerEditComponent('richtext', RichTextSelection);
 Edit.registerEditComponent('box-selection', BoxSelection);
-Edit.registerEditComponent('series-mark-selection', SeriesMarkSelection);
+// Edit.registerEditComponent('series-mark-selection', SeriesMarkSelection);
 
 const spec = {
   direction: 'vertical',

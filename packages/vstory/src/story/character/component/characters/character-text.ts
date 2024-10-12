@@ -19,7 +19,8 @@ export class CharacterComponentText extends CharacterComponent {
     this._group = new ComponentGroup({
       ...getLayoutFromWidget(this._config.position),
       // angle: this._config.options.angle,
-      zIndex: this._config.zIndex
+      zIndex: this._config.zIndex,
+      ...(this._config.options.group || {})
     });
     this.option.graphicParent.add(this._group);
 
