@@ -171,9 +171,9 @@ export const API = () => {
       // 导出DSL
       console.log(story.toDSL());
 
-      setTimeout(() => {
-        edit.selectCharacter('test-chart-0');
-      }, 3000);
+      // setTimeout(() => {
+      //   edit.selectCharacter('test-chart-0');
+      // }, 3000);
       // story读取DSL
     } catch (e) {
       console.error(e);

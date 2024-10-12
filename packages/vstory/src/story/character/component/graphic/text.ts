@@ -1,5 +1,5 @@
 import type { IRichText, IRichTextGraphicAttribute, IText } from '@visactor/vrender';
-import { createRichText, createText } from '@visactor/vrender';
+import { createRichText, createText, RichTextEditPlugin } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import { Graphic } from './graphic';
 import type { IWidgetData } from '../../dsl-interface';
@@ -41,18 +41,36 @@ export class GraphicText extends Graphic {
   }
 
   setAttributes(attr: Record<string, any>): void {
+    if (!this._graphic) {
+      return;
+    }
+
     if (attr.text) {
       attr.textConfig = this.transformTextAttrsToRichTextConfig();
     }
     // 文字的对齐方式只能在box内
-    if (attr.textAlign) {
-      const textConfig = this._graphic.textConfig || this._graphic.attribute.textConfig || [];
-      textConfig.forEach((item: any) => {
-        item.textAlign = attr.textAlign;
-      });
-      attr = { ...attr, textAlign: 'left' };
+    // if (attr.textAlign) {
+    //   const textConfig = this._graphic.textConfig || this._graphic.attribute.textConfig || [];
+    //   textConfig.forEach((item: any) => {
+    //     item.textAlign = attr.textAlign;
+    //   });
+    //   attr = { ...attr, textAlign: 'left' };
+    // }
+    // super.setAttributes(attr);
+
+    if (attr.text || attr.textConfig) {
+      // 强行更新富文本的textConfig
+      RichTextEditPlugin.tryUpdateRichtext(this._graphic);
     }
-    super.setAttributes(attr);
+
+    const textConfig = (this._graphic.attribute.textConfig ?? []).map(c => {
+      return {
+        ...c,
+        ...attr
+      };
+    });
+    const obj: any = { textConfig, ...attr, textAlign: 'left' };
+    this._graphic.setAttributes(obj);
   }
 
   protected transformTextAttrsToRichTextConfig() {

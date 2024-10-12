@@ -8,7 +8,7 @@ export class TextSelection extends RichTextSelectionCommon implements IEditCompo
   readonly level = 3;
   readonly type: string = 'text';
   readonly editCharacterType: string = StoryComponentType.TEXT;
-  protected mode: 'edit' | 'normal' = 'normal';
+  protected mode: 'edit-text' | 'normal' = 'normal';
 
   checkOver(actionInfo: IEditActionInfo): void {
     return;
@@ -23,7 +23,8 @@ export class TextSelection extends RichTextSelectionCommon implements IEditCompo
     // @ts-ignore;
     const character = this._actionInfo.character;
     character.graphic.graphic.addEventListener('pointerdown', this.handlerContentClick);
-    character.graphic.graphic.addEventListener('dblclick', this.handlerTextEdit);
+    // character.graphic.graphic.addEventListener('pointerup', this.handlerTextEdit);
+    // character.graphic.graphic.addEventListener('dblclick', this.handlerTextEdit);
   }
 
   endEdit() {
@@ -31,22 +32,25 @@ export class TextSelection extends RichTextSelectionCommon implements IEditCompo
     // @ts-ignore;
     const character = this._actionInfo.character;
     character.graphic.graphic.removeEventListener('pointerdown', this.handlerContentClick);
-    character.graphic.graphic.removeEventListener('dblclick', this.handlerTextEdit);
+    // character.graphic.graphic.removeEventListener('dblclick', this.handlerTextEdit);
+    // character.graphic.graphic.addEventListener('pointerup', this.handlerTextEdit);
     super.endEdit();
     this.mode = 'normal';
   }
 
   handlerContentClick = (e: any) => {
-    if (this.mode === 'edit') {
+    if (this.mode === 'edit-text') {
       return;
     }
     this._layoutComponent.handleDragMouseDown(e);
     this.endRichTextEdit();
   };
-  handlerTextEdit = (e: any) => {
-    this.mode = 'edit';
-    return;
-  };
+  // handlerTextEdit = (e: any) => {
+  //   if (this.isEditing) {
+  //     this.mode = 'edit';
+  //   }
+  //   return;
+  // };
 
   protected _getRichText() {
     // @ts-ignore
