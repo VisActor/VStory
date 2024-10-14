@@ -801,6 +801,223 @@ const spec1 = {
   background: 'transparent'
 };
 
+const spec2 = {
+  type: 'common',
+  animation: false,
+  series: [
+    {
+      type: 'bar',
+      xField: ['_editor_dimension_field', '_editor_type_field'],
+      yField: '_editor_value_field',
+      seriesField: '_editor_type_field',
+      direction: 'vertical',
+      stack: true,
+      dataId: '0',
+      label: {
+        visible: true,
+        style: {
+          stroke: false
+        },
+        smartInvert: false,
+        animation: false
+      },
+      bar: {
+        style: {}
+      }
+    },
+    {
+      type: 'bar',
+      xField: ['_editor_dimension_field', '_editor_type_field'],
+      yField: '_editor_value_field',
+      seriesField: '_editor_type_field',
+      direction: 'vertical',
+      stack: true,
+      dataId: '1',
+      label: {
+        visible: true,
+        style: {
+          stroke: false
+        },
+        smartInvert: false,
+        animation: false
+      },
+      bar: {
+        style: {}
+      }
+    }
+  ],
+  legends: {
+    orient: 'bottom',
+    position: 'middle',
+    visible: false
+  },
+  title: {
+    visible: true,
+    align: 'left',
+    text: ['这是标题', '这是第二行标题'],
+    subtext: '',
+    style: {},
+    textStyle: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      fontStyle: 'normal',
+      underline: 0,
+      fill: 'red',
+      stroke: 'transparent',
+      fontFamily: 'PingFang SC'
+    }
+  },
+  axes: [
+    {
+      animation: true,
+      id: 'y-axis',
+      orient: 'left',
+      sampling: false,
+      showAllGroupLayers: true,
+      tick: {
+        visible: false
+      },
+      title: {
+        visible: false,
+        style: {
+          fill: '#FFFFFF'
+        }
+      },
+      label: {
+        autoLimit: true,
+        style: {
+          fontSize: 11,
+          fontWeight: 'normal',
+          fontStyle: 'normal',
+          underline: 0
+        },
+        visible: true
+      },
+      domainLine: {
+        visible: true,
+        style: {
+          stroke: '#404349',
+          lineWidth: 1
+        }
+      },
+      grid: {
+        visible: false,
+        style: {
+          lineDash: [3, 3],
+          stroke: '#404349'
+        }
+      },
+      type: 'linear',
+      inverse: false
+    },
+    {
+      animation: true,
+      orient: 'bottom',
+      visible: true,
+      sampling: false,
+      showAllGroupLayers: true,
+      title: {
+        visible: false,
+        style: {
+          fill: '#FFFFFF'
+        }
+      },
+      label: {
+        autoLimit: true,
+        style: {
+          fontSize: 11,
+          fontWeight: 'normal',
+          fontStyle: 'normal',
+          underline: 0
+        },
+        visible: true
+      },
+      domainLine: {
+        visible: true,
+        style: {
+          stroke: '#404349',
+          lineWidth: 1
+        }
+      },
+      tick: {
+        visible: false
+      },
+      grid: {
+        visible: false,
+        style: {
+          lineDash: [3, 3],
+          stroke: '#404349'
+        }
+      },
+      type: 'band',
+      paddingInner: 0,
+      id: 'x-axis'
+    }
+  ],
+  data: [
+    {
+      id: '0',
+      values: [
+        {
+          _editor_dimension_field: '北京',
+          _editor_value_field: '16400',
+          _editor_type_field: '面积'
+        },
+        {
+          _editor_dimension_field: '广州',
+          _editor_value_field: '7238',
+          _editor_type_field: '面积'
+        },
+        {
+          _editor_dimension_field: '深圳',
+          _editor_value_field: '1997',
+          _editor_type_field: '面积'
+        },
+        {
+          _editor_dimension_field: '上海',
+          _editor_value_field: '6340',
+          _editor_type_field: '面积'
+        }
+      ]
+    },
+    {
+      id: '1',
+      values: [
+        {
+          _editor_dimension_field: '北京',
+          _editor_value_field: '12345',
+          _editor_type_field: 'GDP'
+        },
+        {
+          _editor_dimension_field: '广州',
+          _editor_value_field: '3356',
+          _editor_type_field: 'GDP'
+        },
+        {
+          _editor_dimension_field: '深圳',
+          _editor_value_field: '4567',
+          _editor_type_field: 'GDP'
+        },
+        {
+          _editor_dimension_field: '上海',
+          _editor_value_field: '5656',
+          _editor_type_field: 'GDP'
+        }
+      ]
+    }
+  ],
+  color: [
+    'linear-gradient(90deg, #222A70 0%, rgba(34, 42, 112, 0) 100%)',
+    'linear-gradient(90deg, #215F97 0%, rgba(33, 95, 151, 0) 100%)',
+    'linear-gradient(90deg, #99B4D2 0%, rgba(153, 180, 210, 0) 100%)',
+    'linear-gradient(90deg, #CBCBCB 0%, rgba(203, 203, 203, 0) 100%)',
+    'linear-gradient(90deg, #FFC2BF 0%, rgba(255, 194, 191, 0) 100%)',
+    'linear-gradient(90deg, #FF948F 0%, rgba(255, 148, 143, 0) 100%)',
+    'linear-gradient(90deg, #F14C44 0%, rgba(241, 76, 68, 0) 100%)',
+    'linear-gradient(90deg, #BE1519 0%, rgba(190, 21, 25, 0) 100%)'
+  ]
+};
+
 const storySpec: IStorySpec = {
   acts: [
     {
@@ -906,7 +1123,7 @@ const storySpec: IStorySpec = {
         height: 400
       },
       options: {
-        spec: spec1,
+        spec: spec2,
         initOption: {
           animation: false,
           interactive: true,
