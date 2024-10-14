@@ -1,6 +1,7 @@
 import type { IInitOption, ISpec } from '@visactor/vchart';
 import type { IRichTextGraphicAttribute, ITextGraphicAttribute } from '@visactor/vrender';
 import type { DirectionType } from './chart/const';
+import type { IMarkStyle } from './chart/spec-process/interface';
 
 export type IPercent = `${number}%`;
 export type WidgetNumber = number; // | IPercent;
@@ -82,6 +83,8 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     axes?: IComponentConfig<ISpec['axes']>[];
     // 色板
     color?: any;
+    // mark单元素样式
+    markStyle?: IMarkStyle[];
   };
 }
 

@@ -1,20 +1,20 @@
 import type { Edit } from './../edit';
 import type { IBoundsLike, IPointLike } from '@visactor/vutils';
-import { Matrix } from '@visactor/vutils';
+import type { Matrix } from '@visactor/vutils';
 import type { CharacterChart } from './../../story/character/chart/character';
 
 // character.graphic.graphic.vchart
 
-export function getChartToGlobalMatrix(character: CharacterChart, edit: Edit): Matrix {
-  if (!character.graphic?.graphic?.vchart) {
-    return new Matrix();
-  }
-  const vchartStage = character.graphic.graphic.vchart.getStage();
-  const chartToView = vchartStage.window.getViewBoxTransform().getInverse();
-  const viewToLayer = edit.getEditGroup().globalTransMatrix.getInverse();
-  viewToLayer.multiply(chartToView.a, chartToView.b, chartToView.c, chartToView.d, chartToView.e, chartToView.f);
-  return viewToLayer;
-}
+// export function getChartToGlobalMatrix(character: CharacterChart, edit: Edit): Matrix {
+//   if (!character.graphic?.graphic?.vchart) {
+//     return new Matrix();
+//   }
+//   const vchartStage = character.graphic.graphic.vchart.getStage();
+//   const chartToView = vchartStage.window.getViewBoxTransform().getInverse();
+//   const viewToLayer = edit.getEditGroup().globalTransMatrix.getInverse();
+//   viewToLayer.multiply(chartToView.a, chartToView.b, chartToView.c, chartToView.d, chartToView.e, chartToView.f);
+//   return viewToLayer;
+// }
 
 export function transformBoundsWithMatrix(m: Matrix, b: IBoundsLike) {
   const next1 = { x: 0, y: 0 };

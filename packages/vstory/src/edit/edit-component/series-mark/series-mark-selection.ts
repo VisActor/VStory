@@ -116,7 +116,9 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     Logger.debug('series mark startEdit');
     super.startEdit(actionInfo, false);
     // 设置绘图变换矩阵
-    const matrix = getChartRenderMatrix(this._actionInfo.character.graphic.graphic);
+    const chart = this._actionInfo.character.graphic.graphic;
+    const matrix = chart.transMatrix.clone();
+    // const matrix = getChartRenderMatrix(this._actionInfo.character.graphic.graphic);
     this._selectGraphic.setAttributes({ postMatrix: matrix });
     this._overGraphic.setAttributes({ postMatrix: matrix });
 
@@ -233,7 +235,9 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
       (action as IEditSelectionInfo).detail?.part === 'seriesMark'
     ) {
       // 设置绘图变换矩阵
-      const matrix = getChartRenderMatrix((action as IEditSelectionInfo).character.graphic.graphic);
+      // const matrix = getChartRenderMatrix((action as IEditSelectionInfo).character.graphic.graphic);
+      const chart = (action as IEditSelectionInfo).character.graphic.graphic;
+      const matrix = chart.transMatrix.clone();
       this._overGraphic.setAttributes({ postMatrix: matrix });
       // show over graphic
       this._showOverGraphic(action as IEditOverActionInfo);
