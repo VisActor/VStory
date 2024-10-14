@@ -1,7 +1,7 @@
 import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
-import { cloneDeep, isValid } from '@visactor/vutils';
+import { cloneDeep, isValid, merge } from '@visactor/vutils';
 import type { IChartCharacterConfig } from '../dsl-interface';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
@@ -156,6 +156,24 @@ export class CharacterChart extends CharacterVisactor {
       graphic,
       graphicType: graphic.type
     };
+  }
+
+  protected diffConfig(
+    config: Omit<Partial<IChartCharacterConfig>, 'id' | 'type'>
+  ): Omit<Partial<IChartCharacterConfig>, 'id' | 'type'> {
+    if (config.options?.markStyle && config.options?.markStyle.length) {
+      const nextMarkStyle = this.config.options.markStyle || [];
+      config.options.markStyle.forEach(item => {
+        const nm = nextMarkStyle.filter(nextItem => nextItem.id === item.id)[0];
+        if (nm) {
+          merge(nm, item);
+        } else {
+          nextMarkStyle.push(item);
+        }
+      });
+      config.options.markStyle = nextMarkStyle;
+    }
+    return config;
   }
 
   release(): void {
