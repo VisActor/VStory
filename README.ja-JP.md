@@ -41,8 +41,8 @@ VStoryは、VisActorの可視化システムにおけるチャートコンポー
 
 このリポジトリには以下のパッケージが含まれています：
 
-1. [`vstory`](https://sophon-ai.bytedance.net/paas/packages/vstory/): コアパッケージ、VStoryエディター
-2. [`docs`](https://sophon-ai.bytedance.net/paas/docs/): VStoryサイトのソースコード、サイト上のすべての日本語および英語のドキュメント、サンプルコードなどを含む。
+1. [`vstory`](./packages/vstory/): コアパッケージ、VStoryエディター
+2. [`docs`](./docs/): VStoryサイトのソースコード、サイト上のすべての日本語および英語のドキュメント、サンプルコードなどを含む。
 
 ## 🔨 使用方法
 
