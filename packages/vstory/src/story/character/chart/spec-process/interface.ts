@@ -1,9 +1,9 @@
-import { IChartTemp } from '../temp/interface';
-import { IDataTempTransform, ISpecProcess } from '../../visactor/interface';
+import type { IChartTemp } from '../temp/interface';
+import type { IDataTempTransform, ISpecProcess } from '../../visactor/interface';
+import type { IComponentMatch } from '../../dsl-interface';
 
 export interface IMarkStyle {
-  seriesType: string;
-  seriesIndex: number;
+  seriesMatch: { type: string } & IComponentMatch;
   markName: string;
   id: string; // 唯一id，避免单个元素有多个匹配样式
   itemKeys: string[]; // 数据匹配维度

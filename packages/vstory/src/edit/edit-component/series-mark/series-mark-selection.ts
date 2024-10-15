@@ -18,6 +18,7 @@ import {
   getSeriesKeyField,
   getSeriesKeyScalesMap
 } from '../../utils/chart';
+import { getMarkStyleId } from '../../../story/character/chart/runtime/utils';
 
 export class SeriesMarkSelection extends BaseSelection implements IEditComponent {
   readonly level = 4;
@@ -126,6 +127,8 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
       selectMode: string;
       markName?: string;
       datumMatch?: { [key: string]: number };
+      itemKeys?: string[];
+      markStyleId?: string;
       seriesMatch?: { specIndex?: number; userId?: string; type?: string };
     } = { selectMode: this.edit.editGlobalState.seriesMarkMode };
     seriesMarkInfo.markName = actionInfo.detail.modelInfo.mark.name;
@@ -136,6 +139,7 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     if (this.edit.editGlobalState.seriesMarkMode !== SeriesMarkMode.all) {
       seriesMarkInfo.markName = actionInfo.detail.modelInfo.mark.name;
       seriesMarkInfo.seriesMatch = {
+        type: actionInfo.detail.modelInfo.model.type,
         specIndex: actionInfo.detail.modelInfo.model.getSpecIndex(),
         userId: actionInfo.detail.modelInfo.model.userId
       };
@@ -144,7 +148,10 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
 
     // single
     if (this.edit.editGlobalState.seriesMarkMode === SeriesMarkMode.single) {
-      seriesMarkInfo.datumMatch = this._getSingleDatumMatch(actionInfo as IEditSelectionInfo);
+      const { itemKeys, datumMatch } = this._getSingleDatumMatch(actionInfo as IEditSelectionInfo);
+      seriesMarkInfo.datumMatch = datumMatch;
+      seriesMarkInfo.itemKeys = itemKeys;
+      seriesMarkInfo.markStyleId = getMarkStyleId(seriesMarkInfo.markName, itemKeys, datumMatch);
     }
     actionInfo = { ...actionInfo, seriesMarkInfo } as any;
     this.edit.emitter.emit('startEdit', {
@@ -314,7 +321,11 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
   private _getSingleDatumMatch(actionInfo: IEditSelectionInfo) {
     const itemKeys = getSeriesKeyField(actionInfo.detail.modelInfo.model);
     const keyScaleMap = getSeriesKeyScalesMap(actionInfo.detail.modelInfo.model);
-    return getKeyValueMapWithScaleMap(itemKeys, keyScaleMap, actionInfo.detail.modelInfo.datum);
+    return {
+      datumMatch: getKeyValueMapWithScaleMap(itemKeys, keyScaleMap, actionInfo.detail.modelInfo.datum),
+      itemKeys,
+      keyScaleMap
+    };
   }
   private _getSeriesGroupMatchMatch(actionInfo: IEditSelectionInfo) {
     const series = actionInfo.detail.modelInfo.model;

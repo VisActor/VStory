@@ -1,3 +1,4 @@
+import { MarkStyleRuntime } from './runtime/mark-style';
 import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
@@ -16,13 +17,15 @@ import { getChartModelWithEvent } from '../../utils/vchart-pick';
 import { mergeChartOption } from '../../utils/chart';
 import { Chart } from './graphic/chart';
 import { StoryChartType } from '../../../constants/character';
+import type { IVChart } from '@visactor/vchart';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
   static RunTime: IChartCharacterRuntimeConstructor[] = [
-    ComponentSpecRuntime as unknown as IChartCharacterRuntimeConstructor,
-    CommonSpecRuntime as unknown as IChartCharacterRuntimeConstructor,
-    SeriesSpecRuntime as unknown as IChartCharacterRuntimeConstructor
+    ComponentSpecRuntime,
+    CommonSpecRuntime,
+    SeriesSpecRuntime,
+    MarkStyleRuntime
   ];
 
   readonly visActorType = 'chart';
@@ -74,9 +77,9 @@ export class CharacterChart extends CharacterVisactor {
           animation: true,
           disableTriggerEvent: true,
           performanceHook: {
-            afterInitializeChart: () => {
+            afterInitializeChart: (vchart: IVChart) => {
               (<IChartTemp>this.specProcess.dataTempTransform?.specTemp)?.afterInitializeChart({ character: this });
-              this._runtime.forEach(r => r.afterInitializeChart?.());
+              this._runtime.forEach(r => r.afterInitializeChart?.(vchart));
             },
             afterVRenderDraw: () => {
               this._runtime.forEach(r => r.afterVRenderDraw?.());
@@ -161,16 +164,9 @@ export class CharacterChart extends CharacterVisactor {
   protected diffConfig(
     config: Omit<Partial<IChartCharacterConfig>, 'id' | 'type'>
   ): Omit<Partial<IChartCharacterConfig>, 'id' | 'type'> {
-    if (config.options?.markStyle && config.options?.markStyle.length) {
-      const nextMarkStyle = this.config.options.markStyle || [];
-      config.options.markStyle.forEach(item => {
-        const nm = nextMarkStyle.filter(nextItem => nextItem.id === item.id)[0];
-        if (nm) {
-          merge(nm, item);
-        } else {
-          nextMarkStyle.push(item);
-        }
-      });
+    if (config.options?.markStyle) {
+      const nextMarkStyle = this.config.options.markStyle || {};
+      merge(nextMarkStyle, config.options.markStyle);
       config.options.markStyle = nextMarkStyle;
     }
     return config;
