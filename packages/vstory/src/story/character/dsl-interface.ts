@@ -86,11 +86,17 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     // 数据源
     data?: any;
     // 标题
-    title?: IComponentConfig<ISpec['title']>[] | ISpec['title'];
+    title?: {
+      [key: string]: IComponentConfig<ISpec['title']>;
+    };
     // 图例
-    legends?: IComponentConfig<ISpec['legends']>[] | ISpec['legends'];
+    legends?: {
+      [key: string]: IComponentConfig<ISpec['legends']>;
+    };
     // axes
-    axes?: IComponentConfig<ISpec['axes']>[];
+    axes?: {
+      [key: string]: IComponentConfig<ISpec['axes']>;
+    };
     // 色板
     color?: any;
     // mark 单元素样式

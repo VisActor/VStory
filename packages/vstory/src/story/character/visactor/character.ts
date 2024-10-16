@@ -40,7 +40,10 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
 
   protected abstract _initSpecProcess(): void;
 
-  onConfigReady = () => {
+  onConfigReady = (config?: any) => {
+    if (!(config && config.options)) {
+      return;
+    }
     console.log('onConfigReady !');
     this._runtime.forEach(r => r.onConfigReady?.());
     this._specProcess.dataTempTransform.specTemp?.standardizedSpec(this._specProcess.getVisSpec(), { character: this });

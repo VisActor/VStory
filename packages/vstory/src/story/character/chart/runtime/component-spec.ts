@@ -19,11 +19,11 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
     if (!options) {
       return;
     }
-    if (options.axes) {
-      options.axes.forEach(componentSpec => {
-        this._mergeAxesSpec(rawSpec, componentSpec);
-      });
-    }
+    // if (options.axes) {
+    //   options.axes.forEach(componentSpec => {
+    //     this._mergeAxesSpec(rawSpec, componentSpec);
+    //   });
+    // }
     // const componentSpec = options.;
     // componentSpec?.forEach(cSpec => {
     //   if (cSpec.specKey === 'axes') {
@@ -34,42 +34,42 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
     // });
   }
 
-  protected _mergeAxesSpec(rawSpec: any, componentSpec: IComponentConfig) {
-    this._mergeComponentSpec(
-      rawSpec,
-      componentSpec,
-      'axes'
-      // (a: any, index: number, _componentSpec: IComponentConfig) => {
-      //   return a.orient === componentSpec.matchInfo.orient;
-      // }
-    );
-  }
+  // protected _mergeAxesSpec(rawSpec: any, componentSpec: IComponentConfig) {
+  //   this._mergeComponentSpec(
+  //     rawSpec,
+  //     componentSpec,
+  //     'axes'
+  //     // (a: any, index: number, _componentSpec: IComponentConfig) => {
+  //     //   return a.orient === componentSpec.matchInfo.orient;
+  //     // }
+  //   );
+  // }
 
-  protected _mergeComponentSpec(
-    rawSpec: any,
-    componentSpec: IComponentConfig,
-    key: string,
-    additionalMatch?: (rawComponentSpec: any, index: number, componentSpec: IComponentConfig) => boolean
-  ) {
-    if (!rawSpec[key]) {
-      rawSpec[key] = [];
-    }
-    rawSpec[key] = array(rawSpec[key]);
-    const s = rawSpec[key].find((a: any, index: number) => {
-      if (ChartSpecMatch(a, index, componentSpec)) {
-        return true;
-      }
-      if (additionalMatch) {
-        return additionalMatch(a, index, componentSpec);
-      }
-      return false;
-    });
-    if (s) {
-      merge(s, componentSpec.spec);
-    } else {
-      rawSpec[key].push(componentSpec.spec);
-    }
-  }
+  // protected _mergeComponentSpec(
+  //   rawSpec: any,
+  //   componentSpec: IComponentConfig,
+  //   key: string,
+  //   additionalMatch?: (rawComponentSpec: any, index: number, componentSpec: IComponentConfig) => boolean
+  // ) {
+  //   if (!rawSpec[key]) {
+  //     rawSpec[key] = [];
+  //   }
+  //   rawSpec[key] = array(rawSpec[key]);
+  //   const s = rawSpec[key].find((a: any, index: number) => {
+  //     if (ChartSpecMatch(a, index, componentSpec)) {
+  //       return true;
+  //     }
+  //     if (additionalMatch) {
+  //       return additionalMatch(a, index, componentSpec);
+  //     }
+  //     return false;
+  //   });
+  //   if (s) {
+  //     merge(s, componentSpec.spec);
+  //   } else {
+  //     rawSpec[key].push(componentSpec.spec);
+  //   }
+  // }
 
   afterInitializeChart() {
     //

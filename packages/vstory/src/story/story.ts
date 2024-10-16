@@ -61,13 +61,13 @@ export class Story implements IStory {
     this._player.initActs(dsl.acts);
   }
 
-  addCharacter(spec: ICharacterConfig, actionParams?: IActionParams): ICharacter {
-    const c = this._characterTree.addCharacter(spec);
+  addCharacter(config: ICharacterConfig, actionParams?: IActionParams): ICharacter {
+    const c = this._characterTree.addCharacter(config);
     actionParams && this.addAction(c.id, actionParams);
     return c;
   }
-  addCharacterWithAppear(spec: ICharacterConfig): ICharacter {
-    const c = this._characterTree.addCharacter(spec);
+  addCharacterWithAppear(config: ICharacterConfig): ICharacter {
+    const c = this._characterTree.addCharacter(config);
     this.addAction(c.id, { sceneId: '', actions: [{ action: 'appear' }] });
     return c;
   }

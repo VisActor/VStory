@@ -1,9 +1,10 @@
 import type { IBoundsLike } from '@visactor/vutils';
-import { isValid, merge } from '@visactor/vutils';
+import { cloneDeep, isValid, merge } from '@visactor/vutils';
 import type { ICharacterInitOption, ICharacterPickInfo } from '../runtime-interface';
 import type { ICharacter, ICharacterConfig } from '..';
 import type { IGroup } from '@visactor/vrender';
 import type { StoryEvent } from '../../interface';
+import { deepMergeWithDeletedAttr } from '../../../util/merge';
 
 export abstract class CharacterBase implements ICharacter {
   readonly id: string;
@@ -46,14 +47,14 @@ export abstract class CharacterBase implements ICharacter {
       this._config.zIndex = config.zIndex;
     }
     if (config.options) {
-      this._config.options = merge(this._config.options ?? {}, config.options);
+      this._config.options = deepMergeWithDeletedAttr(this._config.options ?? {}, config.options);
     }
   }
 
   protected diffConfig(
     config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>
   ): Omit<Partial<ICharacterConfig>, 'id' | 'type'> {
-    return config;
+    return cloneDeep(config);
   }
 
   protected applyConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>) {

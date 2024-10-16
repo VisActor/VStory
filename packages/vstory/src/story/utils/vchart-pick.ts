@@ -55,14 +55,18 @@ export const axisMarkPick = {
     let axisGraphic = graphicPath.find(g => g.name === 'axis');
     if (axisGraphic) {
       // @ts-ignore
-      const axis = axisModel.find(a => a._axisMark.getProduct().graphicItem === axisGraphic.parent);
-      return commonModelInfo(axis);
+      const axis = axisModel.find(a => a._axisMark && a._axisMark.getProduct().graphicItem === axisGraphic.parent);
+      if (axis) {
+        return commonModelInfo(axis);
+      }
     }
     axisGraphic = graphicPath.find(g => g.name === 'axis-grid');
     if (axisGraphic) {
       // @ts-ignore
-      const axis = axisModel.find(a => a._gridMark.getProduct().graphicItem === axisGraphic.parent);
-      return commonModelInfo(axis);
+      const axis = axisModel.find(a => a._gridMark && a._gridMark.getProduct().graphicItem === axisGraphic.parent);
+      if (axis) {
+        return commonModelInfo(axis);
+      }
     }
     return null;
   }

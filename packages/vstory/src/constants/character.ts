@@ -23,3 +23,5 @@ export const enum StoryChartComponentType {
   MARK_POINT = 'markPoint',
   TITLE = 'title'
 }
+
+export const DeletedAttr = Symbol('DeletedAttr');

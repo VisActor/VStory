@@ -43,8 +43,8 @@ export interface IStory {
   canvas: IStoryCanvas;
   getCharacters: () => { [key: string]: ICharacter };
   getCharacterById: (key: string) => ICharacter | null;
-  addCharacter: (spec: ICharacterConfig, actionParams?: IActionParams) => ICharacter;
-  addCharacterWithAppear: (spec: ICharacterConfig) => ICharacter;
+  addCharacter: (config: ICharacterConfig, actionParams?: IActionParams) => ICharacter;
+  addCharacterWithAppear: (config: ICharacterConfig) => ICharacter;
   removeCharacter: (cId: string) => void;
   addAction: (cId: string, actionParams: IActionParams) => void;
   toDSL: () => IStoryDSL;
@@ -52,7 +52,7 @@ export interface IStory {
 export interface ICharacterTree {
   getCharacters: () => { [key: string]: ICharacter };
   getCharacterById: (key: string) => ICharacter | null;
-  addCharacter: (spec: ICharacterConfig) => ICharacter;
+  addCharacter: (config: ICharacterConfig) => ICharacter;
   removeCharacter: (cId: string) => void;
   initCharacters: (spec: ICharacterConfig[]) => void;
   toDSL: () => ICharacterConfig[];

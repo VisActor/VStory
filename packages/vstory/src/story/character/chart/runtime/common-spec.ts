@@ -17,11 +17,11 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
     if (!options) {
       return;
     }
-    if (options.title && !Array.isArray(options.title)) {
-      merge(rawSpec, { title: options.title });
+    if (options.title) {
+      merge(rawSpec, { title: Array.from(Object.values(options.title)) });
     }
-    if (options.legends && !Array.isArray(options.legends)) {
-      merge(rawSpec, { legends: options.legends });
+    if (options.legends) {
+      merge(rawSpec, { legends: Array.from(Object.values(options.legends)) });
     }
     if (options.data) {
       merge(rawSpec, {
@@ -30,6 +30,9 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
     }
     if (options.color) {
       merge(rawSpec, { color: options.color });
+    }
+    if (options.axes) {
+      merge(rawSpec, { axes: Array.from(Object.values(options.axes)) });
     }
     // merge(rawSpec, { title: options.title, legends: options.legends, data: options.data, color: options.color });
   }

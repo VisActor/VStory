@@ -12,7 +12,7 @@ import { SeriesLabelSelection } from './series-mark/series-label-selection';
 
 export function loadAllSelection() {
   // Edit.registerEditComponent('common', CommonEditComponent);
-  // Edit.registerEditComponent('text', TextSelection);
+  Edit.registerEditComponent('text', TextSelection);
   // Edit.registerEditComponent('richtext', RichTextSelection);
   Edit.registerEditComponent('rect', RectSelection);
   Edit.registerEditComponent('image', ImageSelection);

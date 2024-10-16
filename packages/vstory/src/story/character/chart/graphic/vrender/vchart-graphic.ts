@@ -96,7 +96,6 @@ export class VChartGraphic extends Rect implements IVisactorGraphic {
   constructor(params: IChartGraphicAttribute) {
     super({ ...params, visible: false });
     this.numberType = CHART_NUMBER_TYPE;
-
     // 创建chart
     if (!params.vchart) {
       params.vchart = this._vchart = new VChart(

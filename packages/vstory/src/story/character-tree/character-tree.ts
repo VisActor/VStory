@@ -25,17 +25,20 @@ export class CharacterTree implements ICharacterTree {
     delete this._characters[cId];
   }
 
-  addCharacter(spec: ICharacterConfig) {
+  addCharacter(config: ICharacterConfig) {
     const option = {
       story: this._story,
       canvas: this._story.canvas,
       graphicParent: this._story.canvas.getStage().defaultLayer
     };
-    if ((<ICharacterConfig>spec).id) {
-      if (!this._characters[(<ICharacterConfig>spec).id]) {
-        this._characters[(<ICharacterConfig>spec).id] = StoryFactory.createCharacter(<ICharacterConfig>spec, option);
+    if ((<ICharacterConfig>config).id) {
+      if (!this._characters[(<ICharacterConfig>config).id]) {
+        this._characters[(<ICharacterConfig>config).id] = StoryFactory.createCharacter(
+          <ICharacterConfig>config,
+          option
+        );
       }
-      return this._characters[(<ICharacterConfig>spec).id];
+      return this._characters[(<ICharacterConfig>config).id];
     }
     return null;
   }

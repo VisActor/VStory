@@ -19,6 +19,7 @@ import { Chart } from './graphic/chart';
 import { StoryChartType } from '../../../constants/character';
 import type { IVChart } from '@visactor/vchart';
 import { LabelStyleRuntime } from './runtime/label-style';
+import { deepMergeWithDeletedAttr } from '../../../util/merge';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
@@ -56,11 +57,12 @@ export class CharacterChart extends CharacterVisactor {
     this._specProcess.updateConfig(this._config);
   }
   protected _initGraphics(): void {
-    const { spec, viewBox } = this._getChartOption();
+    const { viewBox } = this._getChartOption();
+    this.onConfigReady(this._config);
     // @ts-ignore
     this._graphic = new Chart(StoryChartType.VCHART, this, {
       renderCanvas: this._option.canvas.getCanvas(),
-      spec,
+      spec: this._specProcess.getVisSpec(),
       // ClassType: VChart,
       vchart: null,
       zIndex: this._config.zIndex,
@@ -163,16 +165,17 @@ export class CharacterChart extends CharacterVisactor {
     };
   }
 
-  protected diffConfig(
-    config: Omit<Partial<IChartCharacterConfig>, 'id' | 'type'>
-  ): Omit<Partial<IChartCharacterConfig>, 'id' | 'type'> {
-    if (config.options?.markStyle) {
-      const nextMarkStyle = this.config.options.markStyle || {};
-      merge(nextMarkStyle, config.options.markStyle);
-      config.options.markStyle = nextMarkStyle;
-    }
-    return config;
-  }
+  // protected diffConfig(
+  //   config: Omit<Partial<IChartCharacterConfig>, 'id' | 'type'>
+  // ): Omit<Partial<IChartCharacterConfig>, 'id' | 'type'> {
+  //   // if (config.options?.markStyle) {
+  //   //   deepMergeWithDeletedAttr(config.options, { markStyle: config.options.markStyle });
+  //   //   // const nextMarkStyle = this.config.options.markStyle || {};
+  //   //   // merge(nextMarkStyle, config.options.markStyle);
+  //   //   // config.options.markStyle = nextMarkStyle;
+  //   // }
+  //   return config;
+  // }
 
   release(): void {
     // this.option.graphicParent.removeChild(this._graphic.graphic);
