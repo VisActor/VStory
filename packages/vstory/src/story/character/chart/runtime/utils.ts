@@ -34,13 +34,13 @@ export function GetVChartSeriesWithMatch(vchart: IChart, seriesMatch: IComponent
 }
 
 export function isSeriesMatch(seriesMatch: IComponentMatch & { type: string }, series: ISeries) {
-  if (!isValid(seriesMatch.type) && series.type !== seriesMatch.type) {
+  if (isValid(seriesMatch.type) && series.type !== seriesMatch.type) {
     return false;
   }
-  if (!isValid(seriesMatch.usrId) && series.userId !== seriesMatch.usrId) {
+  if (isValid(seriesMatch.usrId) && series.userId !== seriesMatch.usrId) {
     return false;
   }
-  if (!isValid(seriesMatch.specIndex) && series.getSpecIndex() !== seriesMatch.specIndex) {
+  if (isValid(seriesMatch.specIndex) && series.getSpecIndex() !== seriesMatch.specIndex) {
     return false;
   }
   return true;

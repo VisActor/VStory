@@ -1026,7 +1026,8 @@ const spec3 = {
   yField: '面积',
   seriesField: '城市',
   label: {
-    visible: true
+    visible: true,
+    interactive: true
   },
   legends: {
     orient: 'bottom',
