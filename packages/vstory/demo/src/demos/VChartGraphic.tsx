@@ -1026,7 +1026,7 @@ const spec3 = {
   yField: '面积',
   seriesField: '城市',
   label: {
-    visible: false
+    visible: true
   },
   legends: {
     orient: 'bottom',
@@ -1285,12 +1285,29 @@ const storySpec: IStorySpec = {
               style: {
                 fill: 'black'
               }
+            },
+            label: {
+              visible: true,
+              style: {
+                fill: 'red',
+                fontSize: 40,
+                stroke: 'green',
+                lineWidth: 10
+              }
             }
           },
           北京: {
             bar: {
               style: {
                 fill: 'yellow'
+              }
+            },
+            label: {
+              visible: true,
+              style: {
+                fill: 'blue',
+                stroke: 'yellow',
+                lineWidth: 5
               }
             }
           }
@@ -1307,6 +1324,22 @@ const storySpec: IStorySpec = {
             itemKeyMap: { 城市: 4 }, // 匹配维度值
             style: {
               fill: 'red'
+            }
+          }
+        },
+        labelStyle: {
+          label_filedLink_城市_valueLink_4: {
+            seriesMatch: {
+              specIndex: 0,
+              type: 'bar'
+            },
+            markName: 'label',
+            id: 'label_filedLink_城市_valueLink_4', // 唯一id，避免单个元素有多个匹配样式
+            itemKeys: ['城市'], // 数据匹配维度
+            itemKeyMap: { 城市: 4 }, // 匹配维度值
+            style: {
+              fill: 'black',
+              lineWidth: 20
             }
           }
         },

@@ -11,6 +11,8 @@ export interface IDataGroupStyle {
   // markName , label 也在这里，需要 label runtime 处理
   [key: string]: {
     style: IMarkStyle['style']; // markStyle
+    visible: boolean; // 是否可见
+    [key: string]: any; // 其他可能存在的逻辑配置
   };
 }
 

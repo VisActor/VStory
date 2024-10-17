@@ -18,6 +18,7 @@ import { mergeChartOption } from '../../utils/chart';
 import { Chart } from './graphic/chart';
 import { StoryChartType } from '../../../constants/character';
 import type { IVChart } from '@visactor/vchart';
+import { LabelStyleRuntime } from './runtime/label-style';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
@@ -25,7 +26,8 @@ export class CharacterChart extends CharacterVisactor {
     ComponentSpecRuntime,
     CommonSpecRuntime,
     SeriesSpecRuntime,
-    MarkStyleRuntime
+    MarkStyleRuntime,
+    LabelStyleRuntime
   ];
 
   readonly visActorType = 'chart';

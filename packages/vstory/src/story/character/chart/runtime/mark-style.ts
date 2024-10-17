@@ -18,6 +18,27 @@ import { getSeriesKeyScalesMap, GetVChartSeriesWithMatch, matchDatumWithScaleMap
 export class MarkStyleRuntime implements IChartCharacterRuntime {
   type = 'MarkStyle';
 
+  static getMarkStyle(
+    mark: IMark,
+    dataGroupStyle: IChartCharacterConfig['options']['dataGroupStyle'],
+    key: string,
+    datum: any,
+    seriesField: string,
+    markName?: string
+  ) {
+    if (!dataGroupStyle) {
+      return null;
+    }
+    const value =
+      dataGroupStyle[datum[seriesField]]?.[markName ?? mark.name]?.style?.[key] ??
+      dataGroupStyle[StroyAllDataGroup]?.[markName ?? mark.name]?.style?.[key];
+
+    if (value === UseDefaultSeriesStyle) {
+      return null;
+    }
+    return value;
+  }
+
   protected declare _character: CharacterChart;
 
   constructor(character: CharacterChart) {
@@ -56,7 +77,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
         // 系列分组key
         if (groupValueList && groupValueList.length === 1) {
           // 一个 series 对应一组数据 简化处理，优化性能
-          const seriesStyle = dataGroupStyle[groupValue];
+          const seriesStyle = dataGroupStyle[groupValue] ?? dataGroupStyle[StroyAllDataGroup];
           if (!seriesStyle) {
             return;
           }
@@ -69,7 +90,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
             EDITOR_SERIES_MARK_STYLE_LEVEL
           );
         } else {
-          // 如果有 map 的话
+          // 如果有 style map 的话, 只有这些属性可以被设置
           const styleKeys =
             SeriesMarkStyleMap[s.type]?.[m.name]?.style ?? CommonMarkAttributeMap[m.type] ?? fillMarkAttribute;
 
@@ -82,7 +103,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
             }
 
             m.setPostProcess(key, (result, datum) => {
-              const temp = this._getMarkStyle(m, dataGroupStyle, key, datum, seriesField) ?? result;
+              const temp = MarkStyleRuntime.getMarkStyle(m, dataGroupStyle, key, datum, seriesField) ?? result;
               if (s.type === 'area' && key === 'stroke' && m.name === 'area') {
                 if (!isArray(temp)) {
                   return [temp, false, false, false];
@@ -96,34 +117,14 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     });
   }
 
-  private _getMarkStyle(
-    mark: IMark,
-    dataGroupStyle: IChartCharacterConfig['options']['dataGroupStyle'],
-    key: string,
-    datum: any,
-    seriesField: string
-  ) {
-    if (!dataGroupStyle) {
-      return null;
-    }
-    const value =
-      dataGroupStyle[datum[seriesField]]?.[mark.name]?.style?.[key] ??
-      dataGroupStyle[StroyAllDataGroup]?.[mark.name]?.style?.[key];
-
-    if (value === UseDefaultSeriesStyle) {
-      return null;
-    }
-    return value;
-  }
-
   private _setMarkStyle(vchart: IVChart) {
     const config = this._character.config;
     const markStyle = config.options?.markStyle;
     if (!markStyle) {
       return;
     }
+    const chart = vchart.getChart();
     Object.values(markStyle).forEach(i => {
-      const chart = vchart.getChart();
       const series = GetVChartSeriesWithMatch(chart, i.seriesMatch) as ISeries;
       if (!series) {
         return;
@@ -143,7 +144,9 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
       );
       chart.updateState({
         [stateKey]: {
-          filter: (datum: any) => matchDatumWithScaleMap(i.itemKeys, i.itemKeyMap, keyScaleMap, datum),
+          filter: (datum: any) => {
+            return matchDatumWithScaleMap(i.itemKeys, i.itemKeyMap, keyScaleMap, datum);
+          },
           level: 10
         }
       });
