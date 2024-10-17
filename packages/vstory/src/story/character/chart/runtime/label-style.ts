@@ -5,13 +5,8 @@ import type { CharacterChart } from '../character';
 import type { IChartCharacterRuntime } from './interface';
 import type { ISeries, ISpec, IVChart } from '@visactor/vchart';
 import type { IMark } from '@visactor/vchart/esm/mark/interface';
-import {
-  CommonMarkAttributeMap,
-  EDITOR_SERIES_MARK_SINGLE_LEVEL,
-  fillMarkAttribute,
-  SeriesMarkStyleMap
-} from './const';
-import { getSeriesKeyScalesMap, GetVChartSeriesWithMatch, isSeriesMatch, matchDatumWithScaleMap } from './utils';
+import { CommonMarkAttributeMap, fillMarkAttribute, SeriesMarkStyleMap } from './const';
+import { getSeriesKeyScalesMap, isSeriesMatch, matchDatumWithScaleMap } from './utils';
 import type { Label as VChartLabelComponent } from '@visactor/vchart/esm/component/label/label';
 import { StroyAllDataGroup } from '../../dsl-interface';
 
@@ -126,10 +121,6 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
 
     const labelComponent = this._vchart.getChart().getComponentsByKey('label')[0] as VChartLabelComponent;
     if (!labelComponent) {
-      return;
-    }
-    const vrenderLabelCmp = labelComponent.getVRenderComponents()?.[0];
-    if (!vrenderLabelCmp) {
       return;
     }
     // 遍历mark
