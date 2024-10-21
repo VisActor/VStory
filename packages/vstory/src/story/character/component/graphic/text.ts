@@ -71,7 +71,8 @@ export class GraphicText extends Graphic {
     obj.textConfig = (GraphicText.hiddenRT.attribute.textConfig ?? []).map(c => {
       const out = {
         ...c,
-        ...obj
+        ...obj,
+        textConfig: void 0
       };
       if (attr.innerTextAlign) {
         out.textAlign = attr.innerTextAlign;

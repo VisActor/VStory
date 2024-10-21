@@ -47,51 +47,51 @@ export const API = () => {
         layerBackground: 'white'
       });
       // 创建character
-      const rect = story.addCharacterWithAppear({
-        type: 'Rect',
-        id: 'rect0',
-        zIndex: 10,
-        position: {
-          top: 40,
-          left: 50,
-          width: 250,
-          height: 100,
-          angle: 0.3
-        },
-        options: {
-          graphic: {
-            fill: 'red'
-          },
-          text: {
-            text: 'haha',
-            fill: 'black'
-          },
-          angle: 0,
-          shapePoints: []
-        }
-      });
-      const image = story.addCharacterWithAppear({
-        type: 'Image',
-        id: 'image0',
-        zIndex: 0,
-        position: {
-          top: 140,
-          left: 250,
-          width: 200,
-          height: 100
-        },
-        options: {
-          graphic: {
-            image: Scene3ChartImage2
-          },
-          text: {
-            text: 'Image',
-            fill: 'black'
-          },
-          angle: 0,
-          shapePoints: []
-        }
-      });
+      // const rect = story.addCharacterWithAppear({
+      //   type: 'Rect',
+      //   id: 'rect0',
+      //   zIndex: 10,
+      //   position: {
+      //     top: 40,
+      //     left: 50,
+      //     width: 250,
+      //     height: 100,
+      //     angle: 0.3
+      //   },
+      //   options: {
+      //     graphic: {
+      //       fill: 'red'
+      //     },
+      //     text: {
+      //       text: 'haha',
+      //       fill: 'black'
+      //     },
+      //     angle: 0,
+      //     shapePoints: []
+      //   }
+      // });
+      // const image = story.addCharacterWithAppear({
+      //   type: 'Image',
+      //   id: 'image0',
+      //   zIndex: 0,
+      //   position: {
+      //     top: 140,
+      //     left: 250,
+      //     width: 200,
+      //     height: 100
+      //   },
+      //   options: {
+      //     graphic: {
+      //       image: Scene3ChartImage2
+      //     },
+      //     text: {
+      //       text: 'Image',
+      //       fill: 'black'
+      //     },
+      //     angle: 0,
+      //     shapePoints: []
+      //   }
+      // });
       const chart = story.addCharacterWithAppear({
         type: 'VChart',
         id: 'test-chart-0',
@@ -107,25 +107,25 @@ export const API = () => {
           spec: chartSpec
         }
       });
-      const shape = story.addCharacterWithAppear({
-        id: 'shape-0',
-        type: 'Shape',
-        zIndex: 0,
-        position: {
-          x: 200,
-          y: 200,
-          width: 200,
-          height: 200,
-          angle: 0.3
-        },
-        options: {
-          graphic: {
-            fill: 'white',
-            stroke: 'black',
-            symbolType: 'circle'
-          }
-        }
-      });
+      // const shape = story.addCharacterWithAppear({
+      //   id: 'shape-0',
+      //   type: 'Shape',
+      //   zIndex: 0,
+      //   position: {
+      //     x: 200,
+      //     y: 200,
+      //     width: 200,
+      //     height: 200,
+      //     angle: 0.3
+      //   },
+      //   options: {
+      //     graphic: {
+      //       fill: 'white',
+      //       stroke: 'black',
+      //       symbolType: 'circle'
+      //     }
+      //   }
+      // });
       const text = story.addCharacterWithAppear({
         id: '0',
         type: 'Text',
@@ -160,6 +160,62 @@ export const API = () => {
           editor: 'visactor-editor'
         }
       });
+      // const progress = story.addCharacterWithAppear({
+      //   id: '111',
+      //   type: 'VChart',
+      //   zIndex: 0,
+      //   position: {
+      //     left: 300,
+      //     top: 10,
+      //     width: 500,
+      //     height: 500
+      //   },
+      //   options: {
+      //     spec: {
+      //       type: 'circularProgress',
+      //       categoryField: '_editor_dimension_field',
+      //       valueField: '_editor_value_field',
+      //       radius: 0.8,
+      //       cornerRadius: 20
+      //     },
+      //     data: [
+      //       {
+      //         id: '0',
+      //         values: [
+      //           {
+      //             _editor_dimension_field: 'type',
+      //             _editor_value_field: '0.75'
+      //           }
+      //         ]
+      //       }
+      //     ],
+      //     color: [
+      //       'linear-gradient(90deg, #222A70 0%, rgba(34, 42, 112, 0) 100%)',
+      //       'linear-gradient(90deg, #215F97 0%, rgba(33, 95, 151, 0) 100%)',
+      //       'linear-gradient(90deg, #99B4D2 0%, rgba(153, 180, 210, 0) 100%)',
+      //       'linear-gradient(90deg, #CBCBCB 0%, rgba(203, 203, 203, 0) 100%)',
+      //       'linear-gradient(90deg, #FFC2BF 0%, rgba(255, 194, 191, 0) 100%)',
+      //       'linear-gradient(90deg, #FF948F 0%, rgba(255, 148, 143, 0) 100%)',
+      //       'linear-gradient(90deg, #F14C44 0%, rgba(241, 76, 68, 0) 100%)',
+      //       'linear-gradient(90deg, #BE1519 0%, rgba(190, 21, 25, 0) 100%)'
+      //     ],
+      //     initOption: {
+      //       animation: false,
+      //       interactive: true,
+      //       disableTriggerEvent: true
+      //     }
+      //   },
+      //   extra: {
+      //     temp: 'default-progress-ring-chart',
+      //     editor: 'visactor-editor',
+      //     data: [
+      //       {
+      //         name: 'type',
+      //         value: '0.75'
+      //       }
+      //     ]
+      //   }
+      // });
 
       // debugger;
       // text.setConfig({
@@ -171,6 +227,14 @@ export const API = () => {
       //   }
       // });
       console.log(text);
+      const button = document.createElement('button');
+      button.innerText = 'set color';
+      document.body.appendChild(button);
+      button.addEventListener('click', () => {
+        debugger;
+        text.setConfig({ options: { graphic: { fill: 'red' } } });
+      });
+      (window as any).story = story;
       // setTimeout(() => {
       //   text.setConfig({ options: { group: { visible: false } } });
       // }, 1000);
@@ -209,15 +273,15 @@ export const API = () => {
         console.log('resize', msg);
       });
       // 删除character
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Backspace') {
-          const sc = selectedCharacter;
-          edit.stopEdit();
-          sc && story.removeCharacter(sc.id);
-          story.play(false);
-          console.log('Backspace');
-        }
-      });
+      // document.addEventListener('keydown', e => {
+      //   if (e.key === 'Backspace') {
+      //     const sc = selectedCharacter;
+      //     edit.stopEdit();
+      //     sc && story.removeCharacter(sc.id);
+      //     story.play(false);
+      //     console.log('Backspace');
+      //   }
+      // });
       // 导出DSL
       console.log(story.toDSL());
 

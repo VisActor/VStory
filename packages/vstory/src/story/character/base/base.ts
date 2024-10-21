@@ -54,7 +54,7 @@ export abstract class CharacterBase implements ICharacter {
   protected diffConfig(
     config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>
   ): Omit<Partial<ICharacterConfig>, 'id' | 'type'> {
-    return cloneDeep(config);
+    return config;
   }
 
   protected applyConfig(config: Omit<Partial<ICharacterConfig>, 'id' | 'type'>) {

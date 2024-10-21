@@ -112,6 +112,8 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
       [StroyAllDataGroup]: IDataGroupStyle; // 全部分组的样式
       [key: string]: IDataGroupStyle; // 某一组
     };
+    // 直接合并的配置
+    rootConfig?: Record<string, any>;
   };
 }
 

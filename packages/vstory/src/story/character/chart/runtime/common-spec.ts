@@ -34,6 +34,7 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
     if (options.axes) {
       merge(rawSpec, { axes: Array.from(Object.values(options.axes)) });
     }
+    merge(rawSpec, { ...options.rootConfig });
     // merge(rawSpec, { title: options.title, legends: options.legends, data: options.data, color: options.color });
   }
 }
