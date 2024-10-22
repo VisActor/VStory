@@ -1,4 +1,4 @@
-import { EditEditingState, SeriesMarkMode } from './../../const';
+import { EditEditingState, SeriesMarkMode, SpecialSeriesMarkSelectMode } from './../../const';
 import { Logger } from './../../../util/logger';
 import { SeriesMarkControl } from './../edit-control/series-mark-control/index';
 import type { BaseMarkControl } from './../edit-control/series-mark-control/base';
@@ -12,7 +12,12 @@ import { BaseSelection } from './../base-selection';
 import { cloneEditGraphic } from '../../utils/graphic';
 import { SHAPE_OVER_COLOR, SHAPE_SELECT_COLOR } from '../../const';
 import type { Edit } from '../../edit';
-import { getKeyValueMapWithScaleMap, getSeriesKeyField, getSeriesKeyScalesMap } from '../../utils/chart';
+import {
+  getGraphicItemInMark,
+  getKeyValueMapWithScaleMap,
+  getSeriesKeyField,
+  getSeriesKeyScalesMap
+} from '../../utils/chart';
 import { getMarkStyleId } from '../../../story/character/chart/runtime/utils';
 
 export class SeriesMarkSelection extends BaseSelection implements IEditComponent {
@@ -111,6 +116,7 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
   startEdit(actionInfo: IEditSelectionInfo) {
     Logger.debug('series mark startEdit');
     super.startEdit(actionInfo, false);
+    this._checkSeriesMarkMode(actionInfo);
     // 设置绘图变换矩阵
     const chart = this._actionInfo.character.graphic.graphic;
     const matrix = chart.transMatrix.clone();
@@ -281,10 +287,7 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
         return pre.concat(cur.getMarkInName(action.detail.modelInfo.mark.name));
       }, []);
       return markList.reduce((pre: any, cur: any) => {
-        if (cur?.getProduct().graphicItem.children) {
-          return pre.concat([...cur.getProduct().graphicItem.children]);
-        }
-        return pre;
+        return pre.concat(getGraphicItemInMark(cur));
       }, []);
     }
     if (this.edit.editGlobalState.seriesMarkMode === SeriesMarkMode.seriesGroup) {
@@ -330,6 +333,13 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     return {
       [seriesField]: seriesValue
     };
+  }
+
+  private _checkSeriesMarkMode(actionInfo: IEditSelectionInfo) {
+    const series = actionInfo.detail.modelInfo.model;
+    if (SpecialSeriesMarkSelectMode[series.type]) {
+      this.edit.setEditGlobalState('seriesMarkMode', SpecialSeriesMarkSelectMode[series.type]);
+    }
   }
 
   release(): void {

@@ -1279,84 +1279,60 @@ const storySpec: IStorySpec = {
         height: 400
       },
       options: {
-        spec: spec3,
-        dataGroupStyle: {
-          [StroyAllDataGroup]: {
-            bar: {
-              style: {
-                fill: 'black'
-              }
-            },
-            label: {
-              visible: true,
-              style: {
+        spec: {
+          type: 'circularProgress',
+          categoryField: '_editor_dimension_field',
+          valueField: '_editor_value_field',
+          title: [
+            {
+              text: ['这是第一行标题', '这是第二行标题'],
+              align: 'left',
+              textStyle: {
+                fontSize: 16,
+                fontWeight: 'bold',
+                fontStyle: 'normal',
+                underline: 0,
                 fill: 'red',
-                fontSize: 40,
-                stroke: 'green',
-                lineWidth: 10
-              }
+                stroke: 'transparent',
+                fontFamily: 'PingFang SC'
+              },
+              visible: false
             }
-          },
-          北京: {
-            bar: {
-              style: {
-                fill: 'yellow'
-              }
+          ],
+          data: [{ id: '0', values: [{ _editor_dimension_field: 'type', _editor_value_field: '0.75' }] }],
+          color: ['#C71414', '#FF533B', '#BD00FF', '#6356F8', '#56A1F8', '#00D9E7', '#00C5A6', '#007F67'],
+          innerRadius: 0.8,
+          outerRadius: 1,
+          cornerRadius: 200,
+          progress: { style: { innerPadding: 0, outerPadding: 0 } },
+          legends: [],
+          axes: [],
+          width: 255.86025747508313,
+          height: 162.34487904900334
+        },
+        data: [{ id: '0', values: [{ _editor_dimension_field: 'type', _editor_value_field: '0.75' }] }],
+        title: {
+          default: {
+            text: ['这是第一行标题', '这是第二行标题'],
+            align: 'left',
+            textStyle: {
+              fontSize: 16,
+              fontWeight: 'bold',
+              fontStyle: 'normal',
+              underline: 0,
+              fill: 'red',
+              stroke: 'transparent',
+              fontFamily: 'PingFang SC'
             },
-            label: {
-              visible: true,
-              style: {
-                fill: 'blue',
-                stroke: 'yellow',
-                lineWidth: 5
-              }
-            }
+            visible: false
           }
         },
-        markStyle: {
-          bar_filedLink_城市_valueLink_4: {
-            seriesMatch: {
-              specIndex: 0,
-              type: 'bar'
-            },
-            markName: 'bar',
-            id: 'bar_filedLink_城市_valueLink_4', // 唯一id，避免单个元素有多个匹配样式
-            itemKeys: ['城市'], // 数据匹配维度
-            itemKeyMap: { 城市: 4 }, // 匹配维度值
-            style: {
-              fill: 'red'
-            }
-          }
-        },
-        labelStyle: {
-          label_filedLink_城市_valueLink_4: {
-            seriesMatch: {
-              specIndex: 0,
-              type: 'bar'
-            },
-            markName: 'label',
-            id: 'label_filedLink_城市_valueLink_4', // 唯一id，避免单个元素有多个匹配样式
-            itemKeys: ['城市'], // 数据匹配维度
-            itemKeyMap: { 城市: 4 }, // 匹配维度值
-            style: {
-              fill: 'black',
-              lineWidth: 20
-            }
-          }
-        },
-        initOption: {
-          animation: false,
-          interactive: true,
-          disableTriggerEvent: true,
-          performanceHook: {
-            afterInitializeChart: () => {
-              console.log('afterInitializeChart');
-            },
-            afterVRenderDraw: () => {
-              console.log('afterVRenderDraw');
-            }
-          }
-        }
+        color: ['#C71414', '#FF533B', '#BD00FF', '#6356F8', '#56A1F8', '#00D9E7', '#00C5A6', '#007F67'],
+        rootConfig: { progress: { style: {} } },
+        initOption: { animation: false, interactive: true, disableTriggerEvent: true },
+        legends: {},
+        axes: {},
+        label: {}
       }
     }
     // {

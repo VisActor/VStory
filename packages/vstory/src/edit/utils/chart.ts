@@ -1,3 +1,4 @@
+import type { IGraphic } from '@visactor/vrender';
 import type { ICartesianSeries, ISeries, IVChart } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
 import type { Matrix } from '@visactor/vutils';
@@ -5,6 +6,7 @@ import { isArray } from '@visactor/vutils';
 import { VCHART_DATA_INDEX } from '../const';
 import type { ICharacter } from '../../story/character';
 import type { VChartGraphic } from '../../story/character/chart/graphic/vrender/vchart-graphic';
+import type { ICompilableMark } from '@visactor/vchart/esm/compile/mark';
 
 // 特殊系列，会在获取系列数据的唯一key时，增加index
 const SpecialSeriesMap: { [key: string]: boolean } = {
@@ -24,7 +26,7 @@ export function getSeriesKeyField(series: ISeries) {
   if (SpecialSeriesMap[series.type] === true) {
     dimensionFields.push(VCHART_DATA_INDEX);
   }
-  return dimensionFields;
+  return dimensionFields.filter(f => f !== undefined);
 }
 
 export function getSeriesKeyScalesMap(series: ISeries) {
@@ -73,6 +75,7 @@ export function getKeyValueMapWithScaleMap(keys: string[], scaleMap: { [key: str
       result[key] = datum[key];
     }
   });
+  Object.keys(result).forEach(key => result[key] === undefined && delete result[key]); // 过滤掉undefined
   return result;
 }
 
@@ -85,4 +88,19 @@ export function getChartRenderMatrix(chart: VChartGraphic): Matrix {
   const stageMatrix = chart.stage.window.getViewBoxTransform().clone();
   stageMatrix.multiply(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
   return stageMatrix;
+}
+
+export function getGraphicItemInMark(mark: ICompilableMark): IGraphic[] {
+  const product = mark.getProduct();
+  if (product.graphicItem) {
+    return [...product.graphicItem.children];
+  }
+  const markList = (mark as any).getMarks?.();
+  if (markList) {
+    return markList.reduce((pre: IGraphic[], cur: ICompilableMark) => {
+      pre = pre.concat(getGraphicItemInMark(cur));
+      return pre;
+    }, []);
+  }
+  return [];
 }
