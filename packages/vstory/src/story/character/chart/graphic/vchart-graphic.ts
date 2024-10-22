@@ -214,6 +214,8 @@ export class Chart extends Rect implements IVisactorGraphic {
       spec.height = this._globalViewBox.y2 - this._globalViewBox.y1;
     }
     this._vchart.updateSpecSync(spec, forceMerge, { reuse: false, morph: morphConfig });
+    // 需要设置为false，否则会导致擦除下层内容
+    this._vchart.getStage() && (this._vchart.getStage().background = false as any);
     if (this._BoundsViewBox) {
       const rootBounds = this._getVChartBounds();
       if (isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {
