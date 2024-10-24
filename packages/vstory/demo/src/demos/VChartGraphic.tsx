@@ -1269,14 +1269,16 @@ const storySpec: IStorySpec = {
     //   }
     // },
     {
+      id: '2',
       type: 'VChart',
-      id: 'vchart',
-      zIndex: 100,
+      zIndex: 0,
       position: {
-        x: 100,
-        y: 100,
-        width: 400,
-        height: 400
+        x: 248.11027045265757,
+        y: 384.82046823089814,
+        width: 255.86025747508307,
+        height: 162.34487904900334,
+        angle: 0,
+        anchor: [376.0403991901991, 465.9929077553998]
       },
       options: {
         spec: {
@@ -1332,7 +1334,30 @@ const storySpec: IStorySpec = {
         initOption: { animation: false, interactive: true, disableTriggerEvent: true },
         legends: {},
         axes: {},
-        label: {}
+        label: {},
+        markStyle: {
+          group_filedLink__editor_dimension_field_valueLink_type: {
+            seriesMatch: {
+              type: 'circularProgress',
+              specIndex: 0
+            },
+            markName: 'progress',
+            itemKeys: ['_editor_dimension_field'],
+            itemKeyMap: {
+              _editor_dimension_field: 'type'
+            },
+            id: 'group_filedLink__editor_dimension_field_valueLink_type',
+            style: {
+              fill: 'green',
+              fillOpacity: 1
+            }
+          }
+        }
+      },
+      extra: {
+        temp: 'default-progress-ring-chart',
+        editor: 'visactor-editor',
+        data: [{ name: 'type', value: '0.75' }]
       }
     }
     // {

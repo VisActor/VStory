@@ -27,8 +27,19 @@ export const seriesMarkPick = {
   modelInfo: (chart: IVChart, graphic: IGraphic, graphicPath: IGraphic[], index: number) => {
     const nameInfo = graphic.name.split('_');
     const seriesId = +nameInfo[2];
-    const markGraphic = graphicPath[index + 1];
-    const markId = +markGraphic.name.split('_')[1];
+    let markId = null;
+    for (let i = index + 1; i < graphicPath.length; i++) {
+      const markGraphic = graphicPath[i];
+      const tempInfo = markGraphic.name.split('_');
+      if (tempInfo[0] === 'group') {
+        continue;
+      }
+      markId = +tempInfo[1];
+      break;
+    }
+    if (markId === null) {
+      return null;
+    }
     const series = chart.getChart().getSeriesInIds([seriesId])[0];
     const datum = graphicPath[graphicPath.length - 1].__vgrammar_scene_item__.data;
     return {
