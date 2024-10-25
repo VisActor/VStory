@@ -1,6 +1,6 @@
 import type { IGroup } from '@visactor/vrender-core';
 import type { IVisactorGraphic } from '../../../visactor/interface';
-import { Bounds, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
+import { Bounds, isNumberClose, type AABBBounds, type IAABBBounds, type IBoundsLike } from '@visactor/vutils';
 import { VChart, type IInitOption, type ISpec, type IVChart } from '@visactor/vchart';
 import type { GraphicType, IGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Rect } from '@visactor/vrender';
@@ -234,15 +234,17 @@ export class VChartGraphic extends Rect implements IVisactorGraphic {
     const rect = this._vchart.getChart().getCanvasRect();
     // 只有当尺寸变化时才resize
     if (
-      rect.width !== this._globalViewBox.x2 - this._globalViewBox.x1 ||
-      rect.height !== this._globalViewBox.y2 - this._globalViewBox.y1
+      !(
+        isNumberClose(rect.width, this._globalViewBox.x2 - this._globalViewBox.x1) &&
+        isNumberClose(rect.height, this._globalViewBox.y2 - this._globalViewBox.y1)
+      )
     ) {
-      this._vchart.resize(
+      (this._vchart as any).resizeSync(
         this._globalViewBox.x2 - this._globalViewBox.x1,
         this._globalViewBox.y2 - this._globalViewBox.y1
       );
     }
-    const rootBounds = this._getVChartBounds().expand(VIEW_BOX_EXPEND);
+    const rootBounds = this._getVChartBounds().expand(0);
     // 先更新位置
     this.setAttributes({
       // x: this._globalViewBox.x1 + rootBounds.x1,
