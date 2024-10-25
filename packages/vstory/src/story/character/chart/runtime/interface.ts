@@ -1,3 +1,4 @@
+import type { IVChart } from '@visactor/vchart';
 import type { ICharacterVisactor } from '../../visactor/interface';
 export interface IChartCharacterRuntime {
   readonly type: string;
@@ -5,7 +6,7 @@ export interface IChartCharacterRuntime {
   onConfigReady?: () => void;
 
   // 图表初始化完成
-  afterInitializeChart?: () => void;
+  afterInitializeChart?: (vchart: IVChart) => void;
 
   // 图表绘制完成
   afterVRenderDraw?: () => void;

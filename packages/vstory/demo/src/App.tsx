@@ -94,10 +94,10 @@ const App = () => {
       name: 'GraphicEdit',
       component: GraphicEdit
     },
-    // {
-    //   name: 'Playground',
-    //   component: Playground
-    // },
+    {
+      name: 'Playground',
+      component: Playground
+    },
     // {
     //   name: 'BarLineSeries',
     //   component: BarLineSeries

@@ -1,10 +1,20 @@
 import type { IInitOption, ISpec } from '@visactor/vchart';
 import type { IRichTextGraphicAttribute, ITextGraphicAttribute } from '@visactor/vrender';
-import type { DirectionType } from './chart/const';
 import type { IMarkStyle } from './chart/spec-process/interface';
 
 export type IPercent = `${number}%`;
 export type WidgetNumber = number; // | IPercent;
+
+export const StroyAllDataGroup = '_STORY_ALL_DATA_GROUP';
+
+export interface IDataGroupStyle {
+  // markName , label 也在这里，需要 label runtime 处理
+  [key: string]: {
+    style: IMarkStyle['style']; // markStyle
+    visible: boolean; // 是否可见
+    [key: string]: any; // 其他可能存在的逻辑配置
+  };
+}
 
 export type IWidgetData = {
   left?: WidgetNumber;
@@ -76,15 +86,34 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     // 数据源
     data?: any;
     // 标题
-    title?: IComponentConfig<ISpec['title']>[] | ISpec['title'];
+    title?: {
+      [key: string]: IComponentConfig<ISpec['title']>;
+    };
     // 图例
-    legends?: IComponentConfig<ISpec['legends']>[] | ISpec['legends'];
+    legends?: {
+      [key: string]: IComponentConfig<ISpec['legends']>;
+    };
     // axes
-    axes?: IComponentConfig<ISpec['axes']>[];
+    axes?: {
+      [key: string]: IComponentConfig<ISpec['axes']>;
+    };
     // 色板
     color?: any;
-    // mark单元素样式
-    markStyle?: IMarkStyle[];
+    // mark 单元素样式
+    markStyle?: {
+      [key: string]: IMarkStyle;
+    };
+    // label 单元素样式 与 mark 区分开，runtime逻辑完全不同
+    labelStyle?: {
+      [key: string]: IMarkStyle;
+    };
+    // 组样式配置
+    dataGroupStyle?: {
+      [StroyAllDataGroup]: IDataGroupStyle; // 全部分组的样式
+      [key: string]: IDataGroupStyle; // 某一组
+    };
+    // 直接合并的配置
+    rootConfig?: Record<string, any>;
   };
 }
 

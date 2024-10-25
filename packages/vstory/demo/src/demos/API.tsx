@@ -10,220 +10,22 @@ export const API = () => {
   const id = 'Appear';
 
   const chartSpec = {
-    type: 'common',
+    type: 'bar',
     animation: false,
-    series: [
-      {
-        type: 'bar',
-        xField: ['_editor_dimension_field', '_editor_type_field'],
-        yField: '_editor_value_field',
-        seriesField: '_editor_type_field',
-        direction: 'vertical',
-        stack: true,
-        dataId: '0',
-        label: {
-          visible: true,
-          style: {
-            stroke: false
-          },
-          smartInvert: false,
-          animation: false
-        },
-        bar: {
-          style: {}
-        }
-      },
-      {
-        type: 'bar',
-        xField: ['_editor_dimension_field', '_editor_type_field'],
-        yField: '_editor_value_field',
-        seriesField: '_editor_type_field',
-        direction: 'vertical',
-        stack: true,
-        dataId: '1',
-        label: {
-          visible: true,
-          style: {
-            stroke: false
-          },
-          smartInvert: false,
-          animation: false
-        },
-        bar: {
-          style: {}
-        }
-      }
-    ],
-    legends: {
-      orient: 'bottom',
-      position: 'middle',
-      visible: false
-    },
-    title: {
-      visible: true,
-      align: 'left',
-      text: ['这是标题', '这是第二行标题'],
-      subtext: '',
-      style: {},
-      textStyle: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        fontStyle: 'normal',
-        underline: 0,
-        fill: 'red',
-        stroke: 'transparent',
-        fontFamily: 'PingFang SC'
-      }
-    },
-    axes: [
-      {
-        animation: true,
-        id: 'y-axis',
-        orient: 'left',
-        sampling: false,
-        showAllGroupLayers: true,
-        tick: {
-          visible: false
-        },
-        title: {
-          visible: false,
-          style: {
-            fill: '#FFFFFF'
-          }
-        },
-        label: {
-          autoLimit: true,
-          style: {
-            fontSize: 11,
-            fontWeight: 'normal',
-            fontStyle: 'normal',
-            underline: 0
-          },
-          visible: true
-        },
-        domainLine: {
-          visible: true,
-          style: {
-            stroke: '#404349',
-            lineWidth: 1
-          }
-        },
-        grid: {
-          visible: false,
-          style: {
-            lineDash: [3, 3],
-            stroke: '#404349'
-          }
-        },
-        type: 'linear',
-        inverse: false
-      },
-      {
-        animation: true,
-        orient: 'bottom',
-        visible: true,
-        sampling: false,
-        showAllGroupLayers: true,
-        title: {
-          visible: false,
-          style: {
-            fill: '#FFFFFF'
-          }
-        },
-        label: {
-          autoLimit: true,
-          style: {
-            fontSize: 11,
-            fontWeight: 'normal',
-            fontStyle: 'normal',
-            underline: 0
-          },
-          visible: true
-        },
-        domainLine: {
-          visible: true,
-          style: {
-            stroke: '#404349',
-            lineWidth: 1
-          }
-        },
-        tick: {
-          visible: false
-        },
-        grid: {
-          visible: false,
-          style: {
-            lineDash: [3, 3],
-            stroke: '#404349'
-          }
-        },
-        type: 'band',
-        paddingInner: 0,
-        id: 'x-axis'
-      }
-    ],
     data: [
       {
-        id: '0',
+        id: 'barData',
         values: [
-          {
-            _editor_dimension_field: '北京',
-            _editor_value_field: '16400',
-            _editor_type_field: '面积'
-          },
-          {
-            _editor_dimension_field: '广州',
-            _editor_value_field: '7238',
-            _editor_type_field: '面积'
-          },
-          {
-            _editor_dimension_field: '深圳',
-            _editor_value_field: '1997',
-            _editor_type_field: '面积'
-          },
-          {
-            _editor_dimension_field: '上海',
-            _editor_value_field: '6340',
-            _editor_type_field: '面积'
-          }
-        ]
-      },
-      {
-        id: '1',
-        values: [
-          {
-            _editor_dimension_field: '北京',
-            _editor_value_field: '12345',
-            _editor_type_field: 'GDP'
-          },
-          {
-            _editor_dimension_field: '广州',
-            _editor_value_field: '3356',
-            _editor_type_field: 'GDP'
-          },
-          {
-            _editor_dimension_field: '深圳',
-            _editor_value_field: '4567',
-            _editor_type_field: 'GDP'
-          },
-          {
-            _editor_dimension_field: '上海',
-            _editor_value_field: '5656',
-            _editor_type_field: 'GDP'
-          }
+          { month: 'Monday', sales: 22 },
+          { month: 'Tuesday', sales: 13 },
+          { month: 'Wednesday', sales: 25 },
+          { month: 'Thursday', sales: 29 },
+          { month: 'Friday', sales: 38 }
         ]
       }
     ],
-    color: [
-      'linear-gradient(90deg, #222A70 0%, rgba(34, 42, 112, 0) 100%)',
-      'linear-gradient(90deg, #215F97 0%, rgba(33, 95, 151, 0) 100%)',
-      'linear-gradient(90deg, #99B4D2 0%, rgba(153, 180, 210, 0) 100%)',
-      'linear-gradient(90deg, #CBCBCB 0%, rgba(203, 203, 203, 0) 100%)',
-      'linear-gradient(90deg, #FFC2BF 0%, rgba(255, 194, 191, 0) 100%)',
-      'linear-gradient(90deg, #FF948F 0%, rgba(255, 148, 143, 0) 100%)',
-      'linear-gradient(90deg, #F14C44 0%, rgba(241, 76, 68, 0) 100%)',
-      'linear-gradient(90deg, #BE1519 0%, rgba(190, 21, 25, 0) 100%)'
-    ]
+    xField: 'month',
+    yField: 'sales'
   };
 
   const canvas = createRef<HTMLCanvasElement>();
@@ -245,51 +47,51 @@ export const API = () => {
         layerBackground: 'white'
       });
       // 创建character
-      const rect = story.addCharacterWithAppear({
-        type: 'Rect',
-        id: 'rect0',
-        zIndex: 10,
-        position: {
-          top: 40,
-          left: 50,
-          width: 250,
-          height: 100,
-          angle: 0.3
-        },
-        options: {
-          graphic: {
-            fill: 'red'
-          },
-          text: {
-            text: 'haha',
-            fill: 'black'
-          },
-          angle: 0,
-          shapePoints: []
-        }
-      });
-      const image = story.addCharacterWithAppear({
-        type: 'Image',
-        id: 'image0',
-        zIndex: 0,
-        position: {
-          top: 140,
-          left: 250,
-          width: 200,
-          height: 100
-        },
-        options: {
-          graphic: {
-            image: Scene3ChartImage2
-          },
-          text: {
-            text: 'Image',
-            fill: 'black'
-          },
-          angle: 0,
-          shapePoints: []
-        }
-      });
+      // const rect = story.addCharacterWithAppear({
+      //   type: 'Rect',
+      //   id: 'rect0',
+      //   zIndex: 10,
+      //   position: {
+      //     top: 40,
+      //     left: 50,
+      //     width: 250,
+      //     height: 100,
+      //     angle: 0.3
+      //   },
+      //   options: {
+      //     graphic: {
+      //       fill: 'red'
+      //     },
+      //     text: {
+      //       text: 'haha',
+      //       fill: 'black'
+      //     },
+      //     angle: 0,
+      //     shapePoints: []
+      //   }
+      // });
+      // const image = story.addCharacterWithAppear({
+      //   type: 'Image',
+      //   id: 'image0',
+      //   zIndex: 0,
+      //   position: {
+      //     top: 140,
+      //     left: 250,
+      //     width: 200,
+      //     height: 100
+      //   },
+      //   options: {
+      //     graphic: {
+      //       image: Scene3ChartImage2
+      //     },
+      //     text: {
+      //       text: 'Image',
+      //       fill: 'black'
+      //     },
+      //     angle: 0,
+      //     shapePoints: []
+      //   }
+      // });
       const chart = story.addCharacterWithAppear({
         type: 'VChart',
         id: 'test-chart-0',
@@ -305,58 +107,151 @@ export const API = () => {
           spec: chartSpec
         }
       });
-      const shape = story.addCharacterWithAppear({
-        id: 'shape-0',
-        type: 'Shape',
-        zIndex: 0,
-        position: {
-          x: 200,
-          y: 200,
-          width: 200,
-          height: 200,
-          angle: 0.3
-        },
-        options: {
-          graphic: {
-            fill: 'white',
-            stroke: 'black',
-            symbolType: 'circle'
-          }
-        }
-      });
+      // const shape = story.addCharacterWithAppear({
+      //   id: 'shape-0',
+      //   type: 'Shape',
+      //   zIndex: 0,
+      //   position: {
+      //     x: 200,
+      //     y: 200,
+      //     width: 200,
+      //     height: 200,
+      //     angle: 0.3
+      //   },
+      //   options: {
+      //     graphic: {
+      //       fill: 'white',
+      //       stroke: 'black',
+      //       symbolType: 'circle'
+      //     }
+      //   }
+      // });
       const text = story.addCharacterWithAppear({
-        id: 'text-0',
+        id: '0',
         type: 'Text',
         zIndex: 0,
         position: {
-          x: 200,
-          y: 200,
-          width: 200,
-          height: 200
+          x: 45.921826774691255,
+          y: 51.289400077160394,
+          width: 197.8617380401235,
+          height: 182.78187692901236,
+          angle: 0,
+          anchor: [144.852695794753, 142.68033854166657]
         },
         options: {
           graphic: {
-            fill: 'black',
-            text: 'black',
-            symbolType: 'circle'
+            text: 'This is Text',
+            fontSize: 16,
+            fontWeight: 'bold',
+            verticalDirection: 'top'
           },
           group: {
-            fill: 'red',
-            visible: true
+            lineWidth: 0,
+            opacity: 1,
+            background: false,
+            color: 'black',
+            cornerRadius: 0,
+            fill: 'rgba(143, 29, 204, 1)',
+            stroke: false
           }
+        },
+        extra: {
+          temp: 'default-text-component',
+          editor: 'visactor-editor'
         }
       });
+      // const progress = story.addCharacterWithAppear({
+      //   id: '111',
+      //   type: 'VChart',
+      //   zIndex: 0,
+      //   position: {
+      //     left: 300,
+      //     top: 10,
+      //     width: 500,
+      //     height: 500
+      //   },
+      //   options: {
+      //     spec: {
+      //       type: 'circularProgress',
+      //       categoryField: '_editor_dimension_field',
+      //       valueField: '_editor_value_field',
+      //       radius: 0.8,
+      //       cornerRadius: 20
+      //     },
+      //     data: [
+      //       {
+      //         id: '0',
+      //         values: [
+      //           {
+      //             _editor_dimension_field: 'type',
+      //             _editor_value_field: '0.75'
+      //           }
+      //         ]
+      //       }
+      //     ],
+      //     color: [
+      //       'linear-gradient(90deg, #222A70 0%, rgba(34, 42, 112, 0) 100%)',
+      //       'linear-gradient(90deg, #215F97 0%, rgba(33, 95, 151, 0) 100%)',
+      //       'linear-gradient(90deg, #99B4D2 0%, rgba(153, 180, 210, 0) 100%)',
+      //       'linear-gradient(90deg, #CBCBCB 0%, rgba(203, 203, 203, 0) 100%)',
+      //       'linear-gradient(90deg, #FFC2BF 0%, rgba(255, 194, 191, 0) 100%)',
+      //       'linear-gradient(90deg, #FF948F 0%, rgba(255, 148, 143, 0) 100%)',
+      //       'linear-gradient(90deg, #F14C44 0%, rgba(241, 76, 68, 0) 100%)',
+      //       'linear-gradient(90deg, #BE1519 0%, rgba(190, 21, 25, 0) 100%)'
+      //     ],
+      //     initOption: {
+      //       animation: false,
+      //       interactive: true,
+      //       disableTriggerEvent: true
+      //     }
+      //   },
+      //   extra: {
+      //     temp: 'default-progress-ring-chart',
+      //     editor: 'visactor-editor',
+      //     data: [
+      //       {
+      //         name: 'type',
+      //         value: '0.75'
+      //       }
+      //     ]
+      //   }
+      // });
 
-      text.setConfig({ options: { graphic: { text: '这是普通文本' } } });
-      setTimeout(() => {
-        text.setConfig({ options: { group: { visible: false } } });
-      }, 1000);
+      // debugger;
+      // text.setConfig({
+      //   options: {
+      //     graphic: {
+      //       innerTextAlign: 'center'
+      //     },
+      //     group: {}
+      //   }
+      // });
+      console.log(text);
+      const button = document.createElement('button');
+      button.innerText = 'set color';
+      document.body.appendChild(button);
+      button.addEventListener('click', () => {
+        debugger;
+        text.setConfig({ options: { graphic: { fill: 'red' } } });
+      });
+      (window as any).story = story;
+      // setTimeout(() => {
+      //   text.setConfig({ options: { group: { visible: false } } });
+      // }, 1000);
 
-      chart.setConfig({ zIndex: 100 });
+      chart.setConfig({ zIndex: -100 });
 
-      setTimeout(() => {
-        rect.setConfig({ zIndex: -100 });
-      }, 1000);
+      // setTimeout(() => {
+      //   chart.setConfig({
+      //     options: {
+      //       title: {
+      //         default: {
+      //           text: '这是标题'
+      //         }
+      //       }
+      //     }
+      //   });
+      // }, 2000);
 
       // 设置character
       // 添加character
@@ -378,15 +273,15 @@ export const API = () => {
         console.log('resize', msg);
       });
       // 删除character
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Backspace') {
-          const sc = selectedCharacter;
-          edit.stopEdit();
-          sc && story.removeCharacter(sc.id);
-          story.play(false);
-          console.log('Backspace');
-        }
-      });
+      // document.addEventListener('keydown', e => {
+      //   if (e.key === 'Backspace') {
+      //     const sc = selectedCharacter;
+      //     edit.stopEdit();
+      //     sc && story.removeCharacter(sc.id);
+      //     story.play(false);
+      //     console.log('Backspace');
+      //   }
+      // });
       // 导出DSL
       console.log(story.toDSL());
 

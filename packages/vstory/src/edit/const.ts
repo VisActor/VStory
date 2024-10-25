@@ -30,3 +30,8 @@ export enum EditEditingState {
 export const VCHART_DATA_INDEX = '__VCHART_DEFAULT_DATA_INDEX';
 
 export const MaxAxisPaddingOuter = 0.9;
+
+// 特殊图表只有部分系列mark选中模式
+export const SpecialSeriesMarkSelectMode: { [key: string]: SeriesMarkMode } = {
+  circularProgress: SeriesMarkMode.single
+};

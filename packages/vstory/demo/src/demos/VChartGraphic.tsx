@@ -8,6 +8,7 @@ import { TextSelection } from '../../../src/edit/edit-component/text-selection';
 import { SeriesMarkSelection } from '../../../src/edit/edit-component/series-mark/series-mark-selection';
 // import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
 import { loadAllSelection } from '../../../src/edit/edit-component';
+import { StroyAllDataGroup } from '../../../src/story/character';
 
 loadAllSelection();
 Edit.registerEditComponent('text', TextSelection);
@@ -1018,6 +1019,161 @@ const spec2 = {
   ]
 };
 
+const spec3 = {
+  type: 'bar',
+  animation: false,
+  xField: '城市',
+  yField: '面积',
+  seriesField: '城市',
+  label: {
+    visible: true,
+    interactive: true
+  },
+  legends: {
+    orient: 'bottom',
+    position: 'middle',
+    visible: false
+  },
+  title: {
+    visible: true,
+    align: 'left',
+    text: ['这是标题', '这是第二行标题'],
+    subtext: '',
+    style: {},
+    textStyle: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      fontStyle: 'normal',
+      underline: 0,
+      fill: 'red',
+      stroke: 'transparent',
+      fontFamily: 'PingFang SC'
+    }
+  },
+  axes: [
+    {
+      animation: true,
+      id: 'y-axis',
+      orient: 'left',
+      sampling: false,
+      showAllGroupLayers: true,
+      tick: {
+        visible: false
+      },
+      title: {
+        visible: false,
+        style: {
+          fill: '#FFFFFF'
+        }
+      },
+      label: {
+        autoLimit: true,
+        style: {
+          fontSize: 11,
+          fontWeight: 'normal',
+          fontStyle: 'normal',
+          underline: 0
+        },
+        visible: true
+      },
+      domainLine: {
+        visible: true,
+        style: {
+          stroke: '#404349',
+          lineWidth: 1
+        }
+      },
+      grid: {
+        visible: false,
+        style: {
+          lineDash: [3, 3],
+          stroke: '#404349'
+        }
+      },
+      type: 'linear',
+      inverse: false
+    },
+    {
+      animation: true,
+      orient: 'bottom',
+      visible: true,
+      sampling: false,
+      showAllGroupLayers: true,
+      title: {
+        visible: false,
+        style: {
+          fill: '#FFFFFF'
+        }
+      },
+      label: {
+        autoLimit: true,
+        style: {
+          fontSize: 11,
+          fontWeight: 'normal',
+          fontStyle: 'normal',
+          underline: 0
+        },
+        visible: true
+      },
+      domainLine: {
+        visible: true,
+        style: {
+          stroke: '#404349',
+          lineWidth: 1
+        }
+      },
+      tick: {
+        visible: false
+      },
+      grid: {
+        visible: false,
+        style: {
+          lineDash: [3, 3],
+          stroke: '#404349'
+        }
+      },
+      type: 'band',
+      paddingInner: 0,
+      id: 'x-axis'
+    }
+  ],
+  data: {
+    id: 'id0',
+    values: [
+      {
+        城市: '北京',
+        面积: '16400',
+        GDP: '12345'
+      },
+      {
+        城市: '广州',
+        面积: '7238',
+        GDP: '3356'
+      },
+      {
+        城市: '深圳',
+        面积: '1997',
+        GDP: '4567'
+      },
+      {
+        城市: '上海',
+        面积: '6340',
+        GDP: '5656'
+      }
+    ]
+  },
+  color: [
+    'linear-gradient(90deg, #222A70 0%, rgba(34, 42, 112, 0) 100%)',
+    'linear-gradient(90deg, #215F97 0%, rgba(33, 95, 151, 0) 100%)',
+    'linear-gradient(90deg, #99B4D2 0%, rgba(153, 180, 210, 0) 100%)',
+    'linear-gradient(90deg, #CBCBCB 0%, rgba(203, 203, 203, 0) 100%)',
+    'linear-gradient(90deg, #FFC2BF 0%, rgba(255, 194, 191, 0) 100%)',
+    'linear-gradient(90deg, #FF948F 0%, rgba(255, 148, 143, 0) 100%)',
+    'linear-gradient(90deg, #F14C44 0%, rgba(241, 76, 68, 0) 100%)',
+    'linear-gradient(90deg, #BE1519 0%, rgba(190, 21, 25, 0) 100%)'
+  ]
+};
+
 const storySpec: IStorySpec = {
   acts: [
     {
@@ -1113,30 +1269,95 @@ const storySpec: IStorySpec = {
     //   }
     // },
     {
+      id: '2',
       type: 'VChart',
-      id: 'vchart',
-      zIndex: 100,
+      zIndex: 0,
       position: {
-        x: 100,
-        y: 100,
-        width: 400,
-        height: 400
+        x: 248.11027045265757,
+        y: 384.82046823089814,
+        width: 255.86025747508307,
+        height: 162.34487904900334,
+        angle: 0,
+        anchor: [376.0403991901991, 465.9929077553998]
       },
       options: {
-        spec: spec2,
-        initOption: {
-          animation: false,
-          interactive: true,
-          disableTriggerEvent: false,
-          performanceHook: {
-            afterInitializeChart: () => {
-              console.log('afterInitializeChart');
+        spec: {
+          type: 'circularProgress',
+          categoryField: '_editor_dimension_field',
+          valueField: '_editor_value_field',
+          title: [
+            {
+              text: ['这是第一行标题', '这是第二行标题'],
+              align: 'left',
+              textStyle: {
+                fontSize: 16,
+                fontWeight: 'bold',
+                fontStyle: 'normal',
+                underline: 0,
+                fill: 'red',
+                stroke: 'transparent',
+                fontFamily: 'PingFang SC'
+              },
+              visible: false
+            }
+          ],
+          data: [{ id: '0', values: [{ _editor_dimension_field: 'type', _editor_value_field: '0.75' }] }],
+          color: ['#C71414', '#FF533B', '#BD00FF', '#6356F8', '#56A1F8', '#00D9E7', '#00C5A6', '#007F67'],
+          innerRadius: 0.8,
+          outerRadius: 1,
+          cornerRadius: 200,
+          progress: { style: { innerPadding: 0, outerPadding: 0 } },
+          legends: [],
+          axes: [],
+          width: 255.86025747508313,
+          height: 162.34487904900334
+        },
+        data: [{ id: '0', values: [{ _editor_dimension_field: 'type', _editor_value_field: '0.75' }] }],
+        title: {
+          default: {
+            text: ['这是第一行标题', '这是第二行标题'],
+            align: 'left',
+            textStyle: {
+              fontSize: 16,
+              fontWeight: 'bold',
+              fontStyle: 'normal',
+              underline: 0,
+              fill: 'red',
+              stroke: 'transparent',
+              fontFamily: 'PingFang SC'
             },
-            afterVRenderDraw: () => {
-              console.log('afterVRenderDraw');
+            visible: false
+          }
+        },
+        color: ['#C71414', '#FF533B', '#BD00FF', '#6356F8', '#56A1F8', '#00D9E7', '#00C5A6', '#007F67'],
+        rootConfig: { progress: { style: {} } },
+        initOption: { animation: false, interactive: true, disableTriggerEvent: true },
+        legends: {},
+        axes: {},
+        label: {},
+        markStyle: {
+          group_filedLink__editor_dimension_field_valueLink_type: {
+            seriesMatch: {
+              type: 'circularProgress',
+              specIndex: 0
+            },
+            markName: 'progress',
+            itemKeys: ['_editor_dimension_field'],
+            itemKeyMap: {
+              _editor_dimension_field: 'type'
+            },
+            id: 'group_filedLink__editor_dimension_field_valueLink_type',
+            style: {
+              fill: 'green',
+              fillOpacity: 1
             }
           }
         }
+      },
+      extra: {
+        temp: 'default-progress-ring-chart',
+        editor: 'visactor-editor',
+        data: [{ name: 'type', value: '0.75' }]
       }
     }
     // {

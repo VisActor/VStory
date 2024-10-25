@@ -1,7 +1,8 @@
+import { MarkStyleRuntime } from './runtime/mark-style';
 import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
-import { cloneDeep, isValid } from '@visactor/vutils';
+import { cloneDeep, isValid, merge } from '@visactor/vutils';
 import type { IChartCharacterConfig } from '../dsl-interface';
 import { CharacterVisactor } from '../visactor/character';
 import { SpecProcess } from './spec-process/spec-process';
@@ -16,13 +17,18 @@ import { getChartModelWithEvent } from '../../utils/vchart-pick';
 import { mergeChartOption } from '../../utils/chart';
 import { Chart } from './graphic/chart';
 import { StoryChartType } from '../../../constants/character';
+import type { IVChart } from '@visactor/vchart';
+import { LabelStyleRuntime } from './runtime/label-style';
+import { deepMergeWithDeletedAttr } from '../../../util/merge';
 
 export class CharacterChart extends CharacterVisactor {
   static type = 'CharacterChart';
   static RunTime: IChartCharacterRuntimeConstructor[] = [
-    ComponentSpecRuntime as unknown as IChartCharacterRuntimeConstructor,
-    CommonSpecRuntime as unknown as IChartCharacterRuntimeConstructor,
-    SeriesSpecRuntime as unknown as IChartCharacterRuntimeConstructor
+    ComponentSpecRuntime,
+    CommonSpecRuntime,
+    SeriesSpecRuntime,
+    MarkStyleRuntime,
+    LabelStyleRuntime
   ];
 
   readonly visActorType = 'chart';
@@ -51,11 +57,12 @@ export class CharacterChart extends CharacterVisactor {
     this._specProcess.updateConfig(this._config);
   }
   protected _initGraphics(): void {
-    const { spec, viewBox } = this._getChartOption();
+    const { viewBox } = this._getChartOption();
+    this.onConfigReady(this._config);
     // @ts-ignore
     this._graphic = new Chart(StoryChartType.VCHART, this, {
       renderCanvas: this._option.canvas.getCanvas(),
-      spec,
+      spec: this._specProcess.getVisSpec(),
       // ClassType: VChart,
       vchart: null,
       zIndex: this._config.zIndex,
@@ -74,9 +81,9 @@ export class CharacterChart extends CharacterVisactor {
           animation: true,
           disableTriggerEvent: true,
           performanceHook: {
-            afterInitializeChart: () => {
+            afterInitializeChart: (vchart: IVChart) => {
               (<IChartTemp>this.specProcess.dataTempTransform?.specTemp)?.afterInitializeChart({ character: this });
-              this._runtime.forEach(r => r.afterInitializeChart?.());
+              this._runtime.forEach(r => r.afterInitializeChart?.(vchart));
             },
             afterVRenderDraw: () => {
               this._runtime.forEach(r => r.afterVRenderDraw?.());
@@ -157,6 +164,18 @@ export class CharacterChart extends CharacterVisactor {
       graphicType: graphic.type
     };
   }
+
+  // protected diffConfig(
+  //   config: Omit<Partial<IChartCharacterConfig>, 'id' | 'type'>
+  // ): Omit<Partial<IChartCharacterConfig>, 'id' | 'type'> {
+  //   // if (config.options?.markStyle) {
+  //   //   deepMergeWithDeletedAttr(config.options, { markStyle: config.options.markStyle });
+  //   //   // const nextMarkStyle = this.config.options.markStyle || {};
+  //   //   // merge(nextMarkStyle, config.options.markStyle);
+  //   //   // config.options.markStyle = nextMarkStyle;
+  //   // }
+  //   return config;
+  // }
 
   release(): void {
     // this.option.graphicParent.removeChild(this._graphic.graphic);

@@ -96,7 +96,6 @@ export class VChartGraphic extends Rect implements IVisactorGraphic {
   constructor(params: IChartGraphicAttribute) {
     super({ ...params, visible: false });
     this.numberType = CHART_NUMBER_TYPE;
-
     // 创建chart
     if (!params.vchart) {
       params.vchart = this._vchart = new VChart(
@@ -199,7 +198,7 @@ export class VChartGraphic extends Rect implements IVisactorGraphic {
       spec.width = this._globalViewBox.x2 - this._globalViewBox.x1;
       spec.height = this._globalViewBox.y2 - this._globalViewBox.y1;
     }
-    this._vchart.updateSpecSync(spec, forceMerge, { reuse: false, morph: morphConfig });
+    this._vchart.updateSpecSync(spec, forceMerge, { reuse: false, morph: morphConfig }, { reMake: true, change: true });
     if (this._BoundsViewBox) {
       const rootBounds = this._getVChartBounds();
       if (isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {

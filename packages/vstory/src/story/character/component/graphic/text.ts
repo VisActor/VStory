@@ -20,6 +20,7 @@ const richtextCombinedAttrs = [
 
 export class GraphicText extends Graphic {
   protected _graphic: IRichText;
+  static hiddenRT: IRichText = createRichText({});
 
   getInitialAttributes() {
     return {
@@ -45,8 +46,9 @@ export class GraphicText extends Graphic {
       return;
     }
 
+    let textConfig = null;
     if (attr.text) {
-      attr.textConfig = this.transformTextAttrsToRichTextConfig();
+      textConfig = this.transformTextAttrsToRichTextConfig();
     }
     // 文字的对齐方式只能在box内
     // if (attr.textAlign) {
@@ -58,18 +60,26 @@ export class GraphicText extends Graphic {
     // }
     // super.setAttributes(attr);
 
-    if (attr.text || attr.textConfig) {
-      // 强行更新富文本的textConfig
-      RichTextEditPlugin.tryUpdateRichtext(this._graphic);
-    }
+    const obj: any = { ...attr };
+    delete obj.text;
+    // if (textConfig) {
+    textConfig = textConfig || this._graphic.attribute.textConfig;
+    GraphicText.hiddenRT.setAttributes({ textConfig });
+    // 强行更新富文本的textConfig
+    RichTextEditPlugin.tryUpdateRichtext(GraphicText.hiddenRT);
 
-    const textConfig = (this._graphic.attribute.textConfig ?? []).map(c => {
-      return {
+    obj.textConfig = (GraphicText.hiddenRT.attribute.textConfig ?? []).map(c => {
+      const out = {
         ...c,
-        ...attr
+        ...obj,
+        textConfig: void 0
       };
+      if (attr.innerTextAlign) {
+        out.textAlign = attr.innerTextAlign;
+      }
+      return out;
     });
-    const obj: any = { textConfig, ...attr, textAlign: 'left' };
+    // }
     this._graphic.setAttributes(obj);
   }
 
@@ -82,7 +92,7 @@ export class GraphicText extends Graphic {
       const textList = Array.isArray(textAttr.text) ? textAttr.text : [textAttr.text];
       textConfig = textList.map((item, i) => {
         return {
-          textAlign: textAttr.textAlign,
+          textAlign: (textAttr as any).innerTextAlign,
           textBaseline: textAttr.textBaseline,
           // ...((textAttr || {}) as any),
           text: item + (i < textList.length - 1 ? '\n' : '')
@@ -97,11 +107,10 @@ export class GraphicText extends Graphic {
     if (!this._graphic) {
       this._graphic = createRichText(
         this._transformAttributes({
-          ...this.getInitialAttributes(),
-          ...(this._character.config.options?.graphic ?? {}),
-          textConfig: this.transformTextAttrsToRichTextConfig()
+          ...this.getInitialAttributes()
         })
       );
+      this.setAttributes(this._character.config.options?.graphic ?? {});
       this._graphic.name = `graphic-text-${this._character.id}`;
       this._character.getGraphicParent().add(this._graphic);
     }

@@ -45,6 +45,8 @@ export class CharacterComponentText extends CharacterComponent {
     }
     if (options.graphic) {
       this._graphic.setAttributes(options.graphic);
+      // TODO rt设置的时候会重新计算textConfig，考虑更合适的方式将textConfig同步回options
+      this._config.options.graphic.textConfig = this._graphic.graphic.attribute.textConfig;
     }
     if (options.group) {
       this._group.setAttributes(options.group);

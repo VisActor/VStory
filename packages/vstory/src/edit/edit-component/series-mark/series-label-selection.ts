@@ -1,7 +1,5 @@
-import { EditEditingState, SeriesMarkMode, SpecialSeriesMarkSelectMode } from './../../const';
+import { EditEditingState, SeriesMarkMode } from './../../const';
 import { Logger } from './../../../util/logger';
-import { SeriesMarkControl } from './../edit-control/series-mark-control/index';
-import type { BaseMarkControl } from './../edit-control/series-mark-control/base';
 import type { IEditOverActionInfo } from './../../interface';
 import type { IGroup, IGraphic } from '@visactor/vrender-core';
 import { createGroup } from '@visactor/vrender-core';
@@ -12,24 +10,18 @@ import { BaseSelection } from './../base-selection';
 import { cloneEditGraphic } from '../../utils/graphic';
 import { SHAPE_OVER_COLOR, SHAPE_SELECT_COLOR } from '../../const';
 import type { Edit } from '../../edit';
-import {
-  getGraphicItemInMark,
-  getKeyValueMapWithScaleMap,
-  getSeriesKeyField,
-  getSeriesKeyScalesMap
-} from '../../utils/chart';
+import { getKeyValueMapWithScaleMap, getSeriesKeyField, getSeriesKeyScalesMap } from '../../utils/chart';
 import { getMarkStyleId } from '../../../story/character/chart/runtime/utils';
+import type { Label as VChartLabelComponent } from '@visactor/vchart/esm/component/label/label';
+import type { ISeries } from '@visactor/vchart';
+import { findLabelGraphic } from '../../../story/utils/render';
 
-export class SeriesMarkSelection extends BaseSelection implements IEditComponent {
+export class SeriesLabelSelection extends BaseSelection implements IEditComponent {
   readonly level = 4;
   editCharacterType = 'VChart';
   type = 'chart';
 
   protected declare _actionInfo: IEditSelectionInfo;
-
-  //TODO series mark control
-  // 根据不同的当前选中系列，加载对应的control
-  protected _seriesMarkControl: BaseMarkControl;
 
   protected _selectGraphic: IGroup;
 
@@ -49,7 +41,7 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
       return result;
     }
     // 如果不是系列mark
-    if ((actionInfo as IEditSelectionInfo).detail?.part !== 'seriesMark') {
+    if ((actionInfo as IEditSelectionInfo).detail?.part !== 'label') {
       return false;
     }
     return true;
@@ -85,17 +77,17 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     if (this.edit.editGlobalState.seriesMarkMode === SeriesMarkMode.all) {
       if (
         actionInfo.detail.modelInfo.model.type === this._actionInfo.detail.modelInfo.model.type &&
-        actionInfo.detail.modelInfo.mark.name === this._actionInfo.detail.modelInfo.mark.name
+        actionInfo.detail.modelInfo.model.name === this._actionInfo.detail.modelInfo.model.name
       ) {
         return;
       }
     }
     // 数据组选中下 同series + 数据key 不用切换
     if (this.edit.editGlobalState.seriesMarkMode === SeriesMarkMode.all) {
-      const seriesField = this._actionInfo.detail.modelInfo.model.getSeriesField();
+      const seriesField = this._actionInfo.detail.modelInfo.series.getSeriesField();
       if (
         actionInfo.detail.modelInfo.model === this._actionInfo.detail.modelInfo.model &&
-        actionInfo.detail.modelInfo.datum[0][seriesField] === this._actionInfo.detail.modelInfo.datum[0][seriesField]
+        actionInfo.detail.modelInfo.datum[seriesField] === this._actionInfo.detail.modelInfo.datum[seriesField]
       ) {
         return;
       }
@@ -116,7 +108,6 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
   startEdit(actionInfo: IEditSelectionInfo) {
     Logger.debug('series mark startEdit');
     super.startEdit(actionInfo, false);
-    this._checkSeriesMarkMode(actionInfo);
     // 设置绘图变换矩阵
     const chart = this._actionInfo.character.graphic.graphic;
     const matrix = chart.transMatrix.clone();
@@ -132,17 +123,20 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
       markStyleId?: string;
       seriesMatch?: { specIndex?: number; userId?: string; type?: string };
     } = { selectMode: this.edit.editGlobalState.seriesMarkMode };
-    seriesMarkInfo.markName = actionInfo.detail.modelInfo.mark.name;
+    seriesMarkInfo.markName = 'label';
     seriesMarkInfo.seriesMatch = {
-      type: actionInfo.detail.modelInfo.model.type
+      // 默认全系列可选
+      // type: actionInfo.detail.modelInfo.model.type
     };
     // single + group
     if (this.edit.editGlobalState.seriesMarkMode !== SeriesMarkMode.all) {
-      seriesMarkInfo.markName = actionInfo.detail.modelInfo.mark.name;
+      const series = this._getLabelSeriesInfo(actionInfo as IEditSelectionInfo);
+      actionInfo.detail.modelInfo.series = series;
+      seriesMarkInfo.markName = 'label';
       seriesMarkInfo.seriesMatch = {
-        type: actionInfo.detail.modelInfo.model.type,
-        specIndex: actionInfo.detail.modelInfo.model.getSpecIndex(),
-        userId: actionInfo.detail.modelInfo.model.userId
+        type: series.type,
+        specIndex: series.getSpecIndex(),
+        userId: series.userId as string
       };
       seriesMarkInfo.datumMatch = this._getSeriesGroupMatchMatch(actionInfo as IEditSelectionInfo);
     }
@@ -156,20 +150,43 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     }
     actionInfo = { ...actionInfo, seriesMarkInfo } as any;
     this.edit.emitter.emit('startEdit', {
-      type: 'seriesMarkSelection',
+      type: 'labelMarkSelection',
       actionInfo,
       selection: this
     });
     this._actionInfo = actionInfo;
     // @ts-ignore;
     const character = this._actionInfo.character;
-    character.graphic.graphic.vchart.on('pointerdown', { level: 'mark' }, this.handlerChartClick);
-    character.graphic.graphic.vchart.on('dblclick', { level: 'mark' }, this.handlerDoubleClick);
+    character.graphic.graphic.vchart.on('pointerdown', { level: 'model', type: 'label' }, this.handlerChartClick);
+    character.graphic.graphic.vchart.on('dblclick', { level: 'model', type: 'label' }, this.handlerDoubleClick);
 
     // 添加编辑时框选效果
     this.addSelectedBorder();
-    // 添加系列编辑模块
-    this.loadSeriesMarkControl();
+  }
+
+  private _getLabelSeriesInfo(actionInfo: IEditSelectionInfo): ISeries {
+    const labelGraphic = actionInfo.detail.graphic;
+    const labelVChartComponent = actionInfo.detail.modelInfo.model as VChartLabelComponent;
+    const labelVRenderComponent = labelVChartComponent.getMarks().find(m => {
+      let temp = labelGraphic;
+      while (temp) {
+        if (temp === m.getProduct().graphicItem) {
+          return true;
+        }
+        temp = temp.parent;
+      }
+      return false;
+    });
+    if (!labelVRenderComponent) {
+      console.error('没有找到对应的labelVRenderComponent');
+    }
+    // @ts-ignore
+    const info = labelVChartComponent._labelComponentMap.get(labelVRenderComponent)();
+    if (!info) {
+      console.error('没有找到对应的info');
+    }
+    // @ts-ignore
+    return info.series;
   }
 
   endEdit() {
@@ -185,7 +202,6 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
 
     // 删除
     this.removeSelectedBorder();
-    this.unLoadSeriesMarkControl();
   }
 
   addSelectedBorder() {
@@ -198,22 +214,6 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
       this._selectGraphic.removeAllChild();
       this._selectGraphic.setAttribute('visible', false);
     }
-  }
-
-  unLoadSeriesMarkControl() {
-    if (this._seriesMarkControl) {
-      this._seriesMarkControl.release();
-      this._seriesMarkControl = null;
-    }
-  }
-  loadSeriesMarkControl() {
-    this.unLoadSeriesMarkControl();
-    const markControlC = SeriesMarkControl[this._actionInfo.detail.modelInfo.model.type];
-    if (!markControlC) {
-      return;
-    }
-    this._seriesMarkControl = new markControlC(this.edit);
-    this._seriesMarkControl.startWithActionInfo(this._actionInfo);
   }
 
   handlerChartClick = (e: any) => {
@@ -240,7 +240,7 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     // action
     if (
       action.type === EditActionEnum.pointerOverCharacter &&
-      (action as IEditSelectionInfo).detail?.part === 'seriesMark'
+      (action as IEditSelectionInfo).detail?.part === 'label'
     ) {
       // 设置绘图变换矩阵
       // const matrix = getChartRenderMatrix((action as IEditSelectionInfo).character.graphic.graphic);
@@ -262,7 +262,6 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
         this._overGraphic.removeAllChild();
         this._overGraphic.setAttribute('visible', false);
       }
-      this._seriesMarkControl?.onMarkPointOut(action);
     }
   }
 
@@ -270,7 +269,7 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     if (this.edit.editGlobalState[EditEditingState.continuingEditing] === true) {
       return;
     }
-    this._seriesMarkControl?.onMarkPointOver(action);
+    action.detail.modelInfo.series = this._getLabelSeriesInfo(action);
     this._overGraphic.removeAllChild();
     this._overGraphic.setAttribute('visible', true);
     this._addPickGraphic(action, this._overGraphic, { stroke: SHAPE_OVER_COLOR });
@@ -279,32 +278,43 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
 
   protected _getChartItemInSeriesMark(action: IEditOverActionInfo): IGraphic[] {
     if (this.edit.editGlobalState.seriesMarkMode === SeriesMarkMode.all) {
-      const seriesList = action.character.graphic.graphic.vchart
-        .getChart()
-        .getAllSeries()
-        .filter((s: any) => s.type === action.detail.modelInfo.model.type);
-      const markList = seriesList.reduce((pre: any, cur: any) => {
-        return pre.concat(cur.getMarkInName(action.detail.modelInfo.mark.name));
-      }, []);
-      return markList.reduce((pre: any, cur: any) => {
-        return pre.concat(getGraphicItemInMark(cur));
-      }, []);
+      return this._getAllSeriesLabel(action);
     }
     if (this.edit.editGlobalState.seriesMarkMode === SeriesMarkMode.seriesGroup) {
-      const result: IGraphic[] = [];
-      const seriesField = action.detail.modelInfo.model.getSeriesField();
-      const seriesValue = action.detail.modelInfo.datum[0][seriesField];
-      action.detail.modelInfo.mark.getProduct().elements.forEach((el: any) => {
-        if (el.data[0]?.[seriesField] === seriesValue) {
-          result.push(el.graphicItem);
-        }
+      const labelVChartComponent = action.detail.modelInfo.model as VChartLabelComponent;
+      // 匹配系列
+      const labelVRenderComponent = labelVChartComponent.getMarks().find(m => {
+        // @ts-ignore
+        const info = labelVChartComponent._labelComponentMap.get(m)();
+        return info.series === action.detail.modelInfo.series;
       });
-      return result;
+      if (!labelVRenderComponent) {
+        console.error('labelVChartComponent is null');
+        return [];
+      }
+      const labelGraphic: IGraphic[] = [];
+      // 系列标签
+      findLabelGraphic(labelVRenderComponent.getProduct().graphicItem, labelGraphic);
+
+      const seriesField = action.detail.modelInfo.series.getSeriesField();
+      const seriesValue = action.detail.modelInfo.datum[seriesField];
+      return labelGraphic.filter((l: IGraphic) => l.attribute.data[seriesField] === seriesValue);
     }
     if (this.edit.editGlobalState.seriesMarkMode === SeriesMarkMode.single) {
       return [action.detail.graphic];
     }
     return [];
+  }
+
+  private _getAllSeriesLabel(action: IEditOverActionInfo): IGraphic[] {
+    const labelVChartComponent = action.detail.modelInfo.model as VChartLabelComponent;
+    const labelGraphic: IGraphic[] = [];
+    // 全部标签
+    labelVChartComponent.getMarks().forEach(m => {
+      findLabelGraphic(m.getProduct().graphicItem, labelGraphic);
+    });
+
+    return labelGraphic;
   }
 
   protected _addPickGraphic(action: IEditOverActionInfo, parent: IGroup, attr?: any) {
@@ -317,8 +327,8 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
   }
 
   private _getSingleDatumMatch(actionInfo: IEditSelectionInfo) {
-    const itemKeys = getSeriesKeyField(actionInfo.detail.modelInfo.model);
-    const keyScaleMap = getSeriesKeyScalesMap(actionInfo.detail.modelInfo.model);
+    const itemKeys = getSeriesKeyField(actionInfo.detail.modelInfo.series);
+    const keyScaleMap = getSeriesKeyScalesMap(actionInfo.detail.modelInfo.series);
     return {
       datumMatch: getKeyValueMapWithScaleMap(itemKeys, keyScaleMap, actionInfo.detail.modelInfo.datum),
       itemKeys,
@@ -326,24 +336,16 @@ export class SeriesMarkSelection extends BaseSelection implements IEditComponent
     };
   }
   private _getSeriesGroupMatchMatch(actionInfo: IEditSelectionInfo) {
-    const series = actionInfo.detail.modelInfo.model;
+    const series = actionInfo.detail.modelInfo.series;
     const seriesField = series.getSeriesField();
-    const seriesValue = actionInfo.detail.modelInfo.datum[0][seriesField];
+    const seriesValue = actionInfo.detail.modelInfo.datum[seriesField];
 
     return {
       [seriesField]: seriesValue
     };
   }
 
-  private _checkSeriesMarkMode(actionInfo: IEditSelectionInfo) {
-    const series = actionInfo.detail.modelInfo.model;
-    if (SpecialSeriesMarkSelectMode[series.type]) {
-      this.edit.setEditGlobalState('seriesMarkMode', SpecialSeriesMarkSelectMode[series.type]);
-    }
-  }
-
   release(): void {
-    this.unLoadSeriesMarkControl();
     this.endEdit();
     super.release();
   }
