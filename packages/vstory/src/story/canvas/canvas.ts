@@ -78,6 +78,7 @@ export class StoryCanvas implements IStoryCanvas {
         clickInterval: 300
       }
     });
+    stage.id = 'vstory';
     // @ts-ignore
     this._stage = stage;
   }
@@ -99,6 +100,7 @@ export class StoryCanvas implements IStoryCanvas {
         clickInterval: 300
       }
     });
+    stage.id = 'vstory';
     // @ts-ignore
     this._stage = stage;
   }

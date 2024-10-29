@@ -2,7 +2,7 @@ import { CharacterComponentQipao } from './character/component/characters/charac
 import { CharacterComponentRect } from './character/component/characters/character-rect';
 import { StoryFactory } from './factory/factory';
 import { AutoEnablePlugins, ContainerModule, GraphicRender, RichTextEditPlugin, container } from '@visactor/vrender';
-import { CanvasPickerContribution } from '@visactor/vrender';
+import { CanvasPickerContribution, PickServiceInterceptor } from '@visactor/vrender';
 import { ChartRender, VChartRender } from './character/chart/graphic/vrender/vchart-graphic-render';
 import { CharacterComponentText } from './character/component/characters/character-text';
 // import { CharacterComponentRichText } from './character/component/characters/character-richtext';
@@ -16,6 +16,7 @@ import { ComponentGroupRender } from './character/component/character-group/comp
 import { CharacterComponentTimeline } from './character/component/characters/character-timeline';
 import { RankingBarCharacter } from './character/chart/characters/rankingBar';
 import { CharacterComponentUnit } from './character/component/characters/character-unit';
+import { VChartPickServiceInterceptorContribution } from './character/chart/graphic/vrender/picker-interceptor';
 
 const splitModule = new ContainerModule(bind => {
   // chart渲染器注入
@@ -24,6 +25,8 @@ const splitModule = new ContainerModule(bind => {
   bind(GraphicRender).toService(ChartRender);
   bind(VChartPicker).to(VChartPicker).inSingletonScope();
   bind(CanvasPickerContribution).toService(VChartPicker);
+  bind(VChartPickServiceInterceptorContribution).toSelf().inSingletonScope();
+  bind(PickServiceInterceptor).toService(VChartPickServiceInterceptorContribution);
 
   // component渲染器注入
   bind(ComponentGroupRender).toSelf().inSingletonScope();

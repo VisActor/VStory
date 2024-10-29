@@ -1183,7 +1183,7 @@ const storySpec: IStorySpec = {
           id: 'scene0',
           actions: [
             {
-              characterId: 'vchart',
+              characterId: '2',
               characterActions: [
                 {
                   startTime: 0,

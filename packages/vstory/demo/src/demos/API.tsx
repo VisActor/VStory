@@ -3,6 +3,11 @@ import { Story } from '../../../src/story/story';
 import Scene3ChartImage2 from '../assets/scene3/chart-2.png';
 import { loadAllSelection } from '../../../src/edit/edit-component';
 import { Edit } from '../../../src/edit/edit';
+import VChart from '@visactor/vchart';
+
+const response = await fetch('https://tosv.byted.org/obj/dpvis/yjt/a.json');
+const geojson = await response.json();
+VChart.registerMap('china', geojson);
 
 loadAllSelection();
 
@@ -24,6 +29,9 @@ export const API = () => {
         ]
       }
     ],
+    label: {
+      animation: false
+    },
     xField: 'month',
     yField: 'sales'
   };
@@ -46,6 +54,35 @@ export const API = () => {
         background: 'transparent',
         layerBackground: 'white'
       });
+
+      setTimeout(() => {
+        console.log('aaaaaaaaa');
+        story.addCharacterWithAppear({
+          type: 'VChart',
+          id: 'test-chart-1',
+          zIndex: 9,
+          position: {
+            top: 300,
+            left: 300,
+            width: 400,
+            height: 400
+            // angle: 0.3
+          },
+          options: {
+            panel: {
+              fill: 'red'
+            },
+            spec: {
+              type: 'map',
+              nameField: 'name',
+              valueField: 'value',
+              nameProperty: 'name',
+              map: 'china'
+            }
+          }
+        });
+        story.play();
+      }, 6000);
       // 创建character
       // const rect = story.addCharacterWithAppear({
       //   type: 'Rect',
@@ -104,6 +141,9 @@ export const API = () => {
           angle: 0.3
         },
         options: {
+          panel: {
+            fill: 'red'
+          },
           spec: chartSpec
         }
       });
@@ -231,7 +271,6 @@ export const API = () => {
       button.innerText = 'set color';
       document.body.appendChild(button);
       button.addEventListener('click', () => {
-        debugger;
         text.setConfig({ options: { graphic: { fill: 'red' } } });
       });
       (window as any).story = story;
@@ -239,7 +278,7 @@ export const API = () => {
       //   text.setConfig({ options: { group: { visible: false } } });
       // }, 1000);
 
-      chart.setConfig({ zIndex: -100 });
+      // chart.setConfig({ zIndex: -100 });
 
       // setTimeout(() => {
       //   chart.setConfig({
