@@ -36,7 +36,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       }
     });
   }
-  afterInitializeChart(vchart: IVChart) {
+  afterInitialize(vchart: IVChart) {
     this._vchart = vchart;
     const labelComponent = vchart.getChart().getComponentsByKey('label')[0] as VChartLabelComponent;
     if (!labelComponent) {

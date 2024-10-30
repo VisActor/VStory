@@ -1,7 +1,7 @@
-import { StoryChartType } from '../../../../constants/character';
+import { StoryVisactorType } from '../../../../constants/character';
 
 export const TemplateChartType = {
-  vchart: StoryChartType.VCHART,
-  rankingBar: StoryChartType.RANKINGBAR,
-  progressPie: StoryChartType.PROGRESS_PIE
+  vchart: StoryVisactorType.VCHART,
+  rankingBar: StoryVisactorType.RANKINGBAR,
+  progressPie: StoryVisactorType.PROGRESS_PIE
 };

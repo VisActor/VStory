@@ -95,3 +95,14 @@ export interface IComponentVisibilityAction extends IAction<IComponentAppearPayL
 }
 
 export type AppearOption = Omit<IChartVisibilityAction, 'action' | 'data'>;
+
+export interface ITableVisibilityPayload extends IActionPayload {
+  animation: IAnimationParams & {
+    effect: string | string[];
+  };
+  fade?: { isBaseOpacity?: boolean };
+}
+
+export interface ITableVisibilityAction extends IAction<ITableVisibilityPayload> {
+  action: 'appear';
+}

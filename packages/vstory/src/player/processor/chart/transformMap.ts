@@ -1,3 +1,4 @@
+import { runTableAppear } from '../table/common/tableAppear';
 import { runChartAppear } from './common/chartAppear';
 import { runAxisAppear } from './component/axisAppear';
 import { runAppearOrDisAppear } from './component/commonAppear';
@@ -24,6 +25,8 @@ export const transformMap = {
     axis: runAxisAppear,
     title: runTitleAppear,
     // chart:
-    chart: runChartAppear
+    chart: runChartAppear,
+    // table
+    table: runTableAppear
   }
 };

@@ -1,8 +1,9 @@
-import type { IChartCharacterConfig } from '../dsl-interface';
+import type { ICharacterConfig, IChartCharacterConfig, IVisactorCharacterConfig } from '../dsl-interface';
 import type { EventEmitter, IBoundsLike } from '@visactor/vutils';
 import type { ICharacter } from '../runtime-interface';
 import type { ISpec, IVChart } from '@visactor/vchart';
-import type { IGroup } from '@visactor/vrender';
+import type { ListTable } from '@visactor/vtable';
+import type { IGroup, IRect } from '@visactor/vrender';
 
 export type StandardData = IDataValue | IDataValue[];
 export type IParserValue = any;
@@ -52,7 +53,7 @@ export interface ISpecProcess {
   // 得到visactor元素的spec
   getVisSpec: () => ISpec;
   // 得到角色的spec
-  getCharacterConfig: () => IChartCharacterConfig;
+  getCharacterConfig: () => IVisactorCharacterConfig;
 
   // temp
   getCharacterType: () => string;
@@ -110,7 +111,7 @@ export interface IVisactorTemp {
   type: string;
   getSpec: (data: StandardData, ctx: any, opt?: any) => ISpec | null;
   standardizedSpec: (spec: any, ctx: any, opt?: any) => void;
-  getChartType: () => string;
+  getType: () => string;
   checkDataEnable: (data: StandardData, opt?: any) => boolean;
   getTempInfo?: () => any;
   clear: () => void;
@@ -121,8 +122,8 @@ export interface IVisactorTempConstructor {
 }
 
 // 绘图元素
-export interface IVisactorGraphic extends IGroup {
-  readonly vProduct: IVChart;
+export interface IVisactorGraphic extends IRect {
+  readonly vProduct: IVChart | ListTable;
 
   updateSpec: (spec: any) => void;
   release: () => void;
@@ -132,7 +133,8 @@ export interface IVisactorGraphic extends IGroup {
 export interface ICharacterVisactor extends ICharacter {
   // 清除编辑数据
   clearConfig: (opt: { clearCurrent: false | { [key: string]: any } }) => void;
-  getGraphicParent: () => IVisactorGraphic;
+  // TODO 这里函数定义和命名在逻辑上有问题，后续修改
+  getGraphicParent: () => IVisactorGraphic | any;
 }
 
 export interface IUpdateAttributeOption {

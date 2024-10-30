@@ -4,11 +4,6 @@ import Scene3ChartImage2 from '../assets/scene3/chart-2.png';
 import { loadAllSelection } from '../../../src/edit/edit-component';
 import { Edit } from '../../../src/edit/edit';
 import VChart from '@visactor/vchart';
-
-const response = await fetch('https://tosv.byted.org/obj/dpvis/yjt/a.json');
-const geojson = await response.json();
-VChart.registerMap('china', geojson);
-
 loadAllSelection();
 
 export const API = () => {
@@ -46,8 +41,8 @@ export const API = () => {
         width: c.width / 2,
         height: c.height / 2,
         playerOption: {
-          scaleX: 0.6,
-          scaleY: 0.6,
+          // scaleX: 0.6,
+          // scaleY: 0.6,
           offsetX: 100,
           offsetY: 60
         },
@@ -55,34 +50,6 @@ export const API = () => {
         layerBackground: 'white'
       });
 
-      setTimeout(() => {
-        console.log('aaaaaaaaa');
-        story.addCharacterWithAppear({
-          type: 'VChart',
-          id: 'test-chart-1',
-          zIndex: 9,
-          position: {
-            top: 300,
-            left: 300,
-            width: 400,
-            height: 400
-            // angle: 0.3
-          },
-          options: {
-            panel: {
-              fill: 'red'
-            },
-            spec: {
-              type: 'map',
-              nameField: 'name',
-              valueField: 'value',
-              nameProperty: 'name',
-              map: 'china'
-            }
-          }
-        });
-        story.play();
-      }, 6000);
       // 创建character
       // const rect = story.addCharacterWithAppear({
       //   type: 'Rect',
@@ -137,8 +104,8 @@ export const API = () => {
           top: 100,
           left: 100,
           width: 400,
-          height: 400,
-          angle: 0.3
+          height: 400
+          // angle: 0.3
         },
         options: {
           panel: {
@@ -147,25 +114,6 @@ export const API = () => {
           spec: chartSpec
         }
       });
-      // const shape = story.addCharacterWithAppear({
-      //   id: 'shape-0',
-      //   type: 'Shape',
-      //   zIndex: 0,
-      //   position: {
-      //     x: 200,
-      //     y: 200,
-      //     width: 200,
-      //     height: 200,
-      //     angle: 0.3
-      //   },
-      //   options: {
-      //     graphic: {
-      //       fill: 'white',
-      //       stroke: 'black',
-      //       symbolType: 'circle'
-      //     }
-      //   }
-      // });
       const text = story.addCharacterWithAppear({
         id: '0',
         type: 'Text',
@@ -200,73 +148,6 @@ export const API = () => {
           editor: 'visactor-editor'
         }
       });
-      // const progress = story.addCharacterWithAppear({
-      //   id: '111',
-      //   type: 'VChart',
-      //   zIndex: 0,
-      //   position: {
-      //     left: 300,
-      //     top: 10,
-      //     width: 500,
-      //     height: 500
-      //   },
-      //   options: {
-      //     spec: {
-      //       type: 'circularProgress',
-      //       categoryField: '_editor_dimension_field',
-      //       valueField: '_editor_value_field',
-      //       radius: 0.8,
-      //       cornerRadius: 20
-      //     },
-      //     data: [
-      //       {
-      //         id: '0',
-      //         values: [
-      //           {
-      //             _editor_dimension_field: 'type',
-      //             _editor_value_field: '0.75'
-      //           }
-      //         ]
-      //       }
-      //     ],
-      //     color: [
-      //       'linear-gradient(90deg, #222A70 0%, rgba(34, 42, 112, 0) 100%)',
-      //       'linear-gradient(90deg, #215F97 0%, rgba(33, 95, 151, 0) 100%)',
-      //       'linear-gradient(90deg, #99B4D2 0%, rgba(153, 180, 210, 0) 100%)',
-      //       'linear-gradient(90deg, #CBCBCB 0%, rgba(203, 203, 203, 0) 100%)',
-      //       'linear-gradient(90deg, #FFC2BF 0%, rgba(255, 194, 191, 0) 100%)',
-      //       'linear-gradient(90deg, #FF948F 0%, rgba(255, 148, 143, 0) 100%)',
-      //       'linear-gradient(90deg, #F14C44 0%, rgba(241, 76, 68, 0) 100%)',
-      //       'linear-gradient(90deg, #BE1519 0%, rgba(190, 21, 25, 0) 100%)'
-      //     ],
-      //     initOption: {
-      //       animation: false,
-      //       interactive: true,
-      //       disableTriggerEvent: true
-      //     }
-      //   },
-      //   extra: {
-      //     temp: 'default-progress-ring-chart',
-      //     editor: 'visactor-editor',
-      //     data: [
-      //       {
-      //         name: 'type',
-      //         value: '0.75'
-      //       }
-      //     ]
-      //   }
-      // });
-
-      // debugger;
-      // text.setConfig({
-      //   options: {
-      //     graphic: {
-      //       innerTextAlign: 'center'
-      //     },
-      //     group: {}
-      //   }
-      // });
-      console.log(text);
       const button = document.createElement('button');
       button.innerText = 'set color';
       document.body.appendChild(button);

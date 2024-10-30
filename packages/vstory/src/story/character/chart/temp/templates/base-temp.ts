@@ -13,11 +13,11 @@ export abstract class BaseTemp implements IChartTemp {
     // do nothing
   }
 
-  getChartType() {
+  getType() {
     return this.type;
   }
 
-  afterInitializeChart(ctx: { character: CharacterChart }) {
+  afterInitialize(ctx: { character: CharacterChart }) {
     // do nothing
   }
 

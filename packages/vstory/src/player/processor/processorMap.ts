@@ -1,5 +1,5 @@
 import { ACTION_TYPE, VCHART_ACTION_TYPE } from '../../constants/action';
-import { StoryChartType, StoryComponentType } from '../../constants/character';
+import { StoryVisactorType, StoryComponentType } from '../../constants/character';
 import { ImageVisibilityActionProcessor } from './component/image/image-visibility';
 import { VChartAddActionProcessor, VChartUpdateActionProcessor, VChartVisibilityActionProcessor } from './chart/vchart';
 import { LineVisibilityActionProcessor } from './component/line/line-visibility';
@@ -18,20 +18,31 @@ import {
 } from './component/common-component';
 import { RankingBarPlayActionProcessor } from './chart/rankingBar/rankingBar';
 import { UnitVisibilityActionProcessor, UnitStyleActionProcessor } from './component/unit/unit-action';
+import { VTableVisibilityActionProcessor } from './table/vtable';
 
 export const processorChartMap = {
-  [StoryChartType.VCHART]: {
+  [StoryVisactorType.VCHART]: {
     [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor(),
     [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor(),
     [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor(),
     [VCHART_ACTION_TYPE.UPDATE]: new VChartUpdateActionProcessor(),
     [VCHART_ACTION_TYPE.ADD]: new VChartAddActionProcessor()
   },
-  [StoryChartType.RANKINGBAR]: {
+  [StoryVisactorType.RANKINGBAR]: {
     [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor(),
     [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor(),
     [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor(),
     play: new RankingBarPlayActionProcessor()
+  }
+};
+export const processorTableMap = {
+  [StoryVisactorType.VTABLE]: {
+    [ACTION_TYPE.APPEAR]: new VTableVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new VTableVisibilityActionProcessor()
+  },
+  [StoryVisactorType.WEATHERTABLE]: {
+    [ACTION_TYPE.APPEAR]: new VTableVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new VTableVisibilityActionProcessor()
   }
 };
 
@@ -97,5 +108,6 @@ export const processorComponentMap = {
 
 export const processorMap = {
   ...processorChartMap,
+  ...processorTableMap,
   ...processorComponentMap
 };

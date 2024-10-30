@@ -71,7 +71,7 @@ export class ComponentSpecRuntime implements IChartCharacterRuntime {
   //   }
   // }
 
-  afterInitializeChart() {
+  afterInitialize() {
     //
   }
   afterVRenderDraw() {

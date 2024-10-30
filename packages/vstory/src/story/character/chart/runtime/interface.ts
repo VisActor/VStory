@@ -6,7 +6,7 @@ export interface IChartCharacterRuntime {
   onConfigReady?: () => void;
 
   // 图表初始化完成
-  afterInitializeChart?: (vchart: IVChart) => void;
+  afterInitialize?: (vchart: IVChart) => void;
 
   // 图表绘制完成
   afterVRenderDraw?: () => void;

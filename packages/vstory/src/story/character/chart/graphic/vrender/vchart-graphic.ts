@@ -7,9 +7,6 @@ import { genNumberType, Rect } from '@visactor/vrender';
 import { isBoundsLikeEqual, isPointInBounds } from '../../../../../util/space';
 import { mergeChartOption } from '../../../../utils/chart';
 
-//TODO vrender升级文本的精确测量后，设置为0或者删除对应的代码逻辑
-const VIEW_BOX_EXPEND = 4;
-
 export interface IChartGraphicAttribute extends IGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
   spec: any;
@@ -81,40 +78,54 @@ export class VChartGraphic extends Rect implements IVisactorGraphic {
     return bounds;
   }
 
-  doUpdateAABBBounds(full?: boolean): IAABBBounds {
-    if (!this._vchart) {
-      return super.doUpdateAABBBounds();
-    }
-    const b = new Bounds();
-    b.x1 = this.attribute.x;
-    b.x2 = this.attribute.x + this.attribute.width;
-    b.y1 = this.attribute.y;
-    b.y2 = this.attribute.y + this.attribute.height;
-    return b;
-  }
+  // doUpdateAABBBounds(full?: boolean): IAABBBounds {
+  //   if (!this._vchart) {
+  //     return super.doUpdateAABBBounds();
+  //   }
+  //   const b = new Bounds();
+  //   b.x1 = this.attribute.x;
+  //   b.x2 = this.attribute.x + this.attribute.width;
+  //   b.y1 = this.attribute.y;
+  //   b.y2 = this.attribute.y + this.attribute.height;
+  //   return b;
+  // }
 
   constructor(params: IChartGraphicAttribute) {
     super({ ...params, visible: false });
     this.numberType = CHART_NUMBER_TYPE;
     // 创建chart
-    if (!params.vchart) {
-      params.vchart = this._vchart = new VChart(
-        params.spec,
+    const {
+      spec,
+      renderCanvas,
+      mode,
+      modeParams,
+      dpr,
+      interactive,
+      disableTriggerEvent,
+      disableDirtyBounds,
+      ticker,
+      chartInitOptions,
+      viewBox
+    } = params;
+    this._vchart =
+      params.vchart ||
+      new VChart(
+        spec,
         mergeChartOption(
           {
-            renderCanvas: params.renderCanvas,
-            mode: params.mode,
-            modeParams: params.modeParams,
+            renderCanvas,
+            mode,
+            modeParams,
             canvasControled: false,
             // viewBox: params.vi
-            dpr: params.dpr,
-            interactive: params.interactive,
+            dpr,
+            interactive,
             animation: false,
             autoFit: false,
-            disableTriggerEvent: params.disableTriggerEvent,
-            disableDirtyBounds: params.disableDirtyBounds,
+            disableTriggerEvent,
+            disableDirtyBounds,
             // @ts-ignore
-            ticker: params.ticker,
+            ticker,
             beforeRender: () => {
               if (!this.stage) {
                 return;
@@ -138,12 +149,9 @@ export class VChartGraphic extends Rect implements IVisactorGraphic {
               this._vchart.getStage().stage.resumeRender();
             }
           },
-          params.chartInitOptions ?? {}
+          chartInitOptions ?? {}
         )
       );
-    } else {
-      this._vchart = params.vchart;
-    }
 
     // 背景设置为false后，不会擦除画布内容，可以实现元素正常堆叠绘制
     const stage = this._vchart.getStage();
@@ -155,8 +163,8 @@ export class VChartGraphic extends Rect implements IVisactorGraphic {
       // 关闭交互
       // stage.pauseTriggerEvent();
     }
-    if (params.viewBox) {
-      this.updateViewBox(params.viewBox);
+    if (viewBox) {
+      this.updateViewBox(viewBox);
     }
     stage.resumeRender();
   }
@@ -273,8 +281,6 @@ export class VChartGraphic extends Rect implements IVisactorGraphic {
     renderViewBox.y2 -= renderViewBox.y1;
     renderViewBox.x1 = 0;
     renderViewBox.y1 = 0;
-    renderViewBox.x2 += VIEW_BOX_EXPEND;
-    renderViewBox.y2 += VIEW_BOX_EXPEND;
     // 这个时候需要改的是vrender的viewBox
     // @ts-ignore
     this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);

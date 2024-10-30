@@ -72,7 +72,7 @@ export class DataTempTransformBase implements IDataTempTransform {
       return false;
     }
     this._nextTemp?.clear();
-    this._nextTemp = StoryFactory.createChartTemp(temp, this._specProcess.getCharacterConfig());
+    this._nextTemp = StoryFactory.createVisActorTemp(temp, this._specProcess.getCharacterConfig());
     return !!this._nextTemp;
   }
 

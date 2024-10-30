@@ -38,6 +38,7 @@ export interface ICharacterConfigBase {
   id: string;
   type: string; // 类型
   position: IWidgetData; // 定位描述
+  padding?: number | [number, number, number, number];
   zIndex: number;
   extra?: any; // 带着的额外信息
 }
@@ -117,4 +118,29 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
   };
 }
 
-export type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig;
+interface ITableCharacterConfigOptionsType {
+  records: any;
+  columns: any;
+  widthMode?: 'standard' | 'adaptive' | 'autoWidth';
+  defaultRowHeight: number;
+  theme: any;
+  // 数据源
+  data?: any;
+
+  panel?: any;
+  padding?: number | [number, number] | [number, number, number, number];
+}
+
+export interface ITableCharacterConfig extends ICharacterConfigBase {
+  options: ITableCharacterConfigOptionsType;
+}
+
+export interface IWeatherTableCharacterConfig extends ITableCharacterConfig {
+  options: ITableCharacterConfigOptionsType & {
+    leftTitleStyle?: any;
+    topTitleStyle?: any;
+  };
+}
+
+export type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig | ITableCharacterConfig;
+export type IVisactorCharacterConfig = IChartCharacterConfig | ITableCharacterConfig;

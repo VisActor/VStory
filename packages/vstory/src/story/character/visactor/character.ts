@@ -16,7 +16,7 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
   }
 
   get chartType() {
-    return this._specProcess.dataTempTransform.specTemp?.getChartType();
+    return this._specProcess.dataTempTransform.specTemp?.getType();
   }
 
   get tempType() {
@@ -38,7 +38,13 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
     // do nothing
   }
 
-  protected abstract _initSpecProcess(): void;
+  clearCharacter(): void {
+    this._graphic.release();
+  }
+
+  protected _initSpecProcess(): void {
+    return;
+  }
 
   onConfigReady = (config?: any) => {
     if (!(config && config.options)) {
@@ -51,7 +57,9 @@ export abstract class CharacterVisactor extends CharacterBase implements ICharac
     this._afterRender();
   };
 
-  protected abstract _afterRender(): void;
+  protected _afterRender(): void {
+    return;
+  }
 
   protected abstract _updateVisactorSpec(): void;
 

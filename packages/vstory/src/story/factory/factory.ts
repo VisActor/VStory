@@ -2,7 +2,7 @@ import type { IDataParserConstructor } from '../character/visactor/interface';
 import type { IGraphicConstructor } from '../character/component/graphic/graphic';
 import type { ICharacterConstructor, ICharacterInitOption } from '../character/runtime-interface';
 import type { ICharacterConfig } from '../character/dsl-interface';
-import type { IChartTempConstructor } from '../character/chart/temp/interface';
+import type { IChartTempConstructor, ITableTempConstructor } from '../character/chart/temp/interface';
 
 export class StoryFactory {
   static characterMap: { [key: string]: ICharacterConstructor } = {};
@@ -54,5 +54,20 @@ export class StoryFactory {
       return null;
     }
     return new classC(opt);
+  }
+  static tableTempMap: { [key: string]: ITableTempConstructor } = {};
+  static registerTableTemp(type: string, c: ITableTempConstructor) {
+    StoryFactory.tableTempMap[type] = c;
+  }
+  static createTableTemp(type: string, opt: any) {
+    const classC = StoryFactory.tableTempMap[type];
+    if (!classC) {
+      return null;
+    }
+    return new classC(opt);
+  }
+
+  static createVisActorTemp(type: string, opt: any) {
+    return StoryFactory.createChartTemp(type, opt) || StoryFactory.createTableTemp(type, opt);
   }
 }
