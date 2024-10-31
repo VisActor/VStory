@@ -1,10 +1,10 @@
 ---
 category: examples
-group: unit
-title: unit-infographic
-keywords: unit-infographic
-order: 2-1
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-infographic.png
+group: weather
+title: weather-table
+keywords: weather-table
+order: 1-1
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/weather/weather-table.png
 ---
 
 # 天气表格可视化模板
