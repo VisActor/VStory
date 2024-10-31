@@ -109,6 +109,8 @@ const spec = {
           textAlign: 'center',
           fill: 'white',
           fontWeight: 200,
+          textAlign: 'center',
+          textBaseline: 'middle',
           textConfig: [
             {
               text: 'According to a study conducted by ',
@@ -184,6 +186,8 @@ const spec = {
         graphic: {
           text: '67%',
           fill: '#48A0CF',
+          textAlign: 'center',
+          textBaseline: 'middle',
           fontSize: 110,
           fontWeight: 600
         }
@@ -206,6 +210,8 @@ const spec = {
           width: 460,
           height: 108,
           wordBreak: 'break-word',
+          textAlign: 'center',
+          textBaseline: 'middle',
           textConfig: [
             {
               text: 'Of over 120 CEOs plan to spend less time on hiring permanent recruits'
@@ -230,7 +236,9 @@ const spec = {
           fill: '#48A0CF',
           fontSize: 110,
           fontWeight: 600,
-          stroke: '#48A0CF'
+          stroke: '#48A0CF',
+          textAlign: 'center',
+          textBaseline: 'middle',
         }
       }
     },
@@ -251,6 +259,8 @@ const spec = {
           width: 460,
           height: 108,
           wordBreak: 'break-word',
+          textAlign: 'center',
+          textBaseline: 'middle',
           textConfig: [
             {
               text: 'Plan to grow their IT and tech teams in response to changing  ways of working'
@@ -364,8 +374,7 @@ const spec = {
     }
   ]
 };
-const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 1, scaleY: 1 } });
-vstory.canvas.getStage().defaultLayer.scale(0.4, 0.4);
+const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 0.4, scaleY: 0.4 } });
 
 vstory.play(false);
 window.vstory = vstory;

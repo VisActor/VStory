@@ -146,7 +146,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
           if (!isValid(style.fill) && !isValid(style.stroke)) {
             return;
           }
-          const labels = labelGraphics.filter(l => l.attribute.data[seriesField] === seriesValue);
+          const labels = labelGraphics.filter(l => (l.attribute as any).data[seriesField] === seriesValue);
           labels.forEach(l => {
             isValid(style.fill) && l.setAttribute('fill', style.fill);
             isValid(style.fill) && l.setAttribute('stroke', style.stroke);
@@ -167,7 +167,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
           }
           // 找到对应的标签
           const label = labelGraphics.find(l =>
-            matchDatumWithScaleMap(item.itemKeys, item.itemKeyMap, keyScaleMap, l.attribute.data as any)
+            matchDatumWithScaleMap(item.itemKeys, item.itemKeyMap, keyScaleMap, (l.attribute as any).data as any)
           );
           if (!label) {
             return;

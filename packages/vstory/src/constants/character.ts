@@ -17,6 +17,7 @@ export enum StoryComponentType {
   // RICH_TEXT = 'RichText',
   QIPAO = 'Qipao',
   IMAGE = 'Image',
+  WEATHERBOX = 'WeatherBox',
   TIMELINE = 'Timeline',
   UNIT = 'Unit'
 }

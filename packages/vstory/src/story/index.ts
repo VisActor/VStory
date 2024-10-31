@@ -21,6 +21,8 @@ import { TableRender, VTableRender } from './character/table/graphic/vtable/vtab
 import { VTablePicker } from './character/table/graphic/vtable/vchart-graphic-picker';
 import { VTableCharacter } from './character/table/characters/vtable';
 import { WeatherTableCharacter } from './character/table/characters/weatherTable';
+import { CharacterComponentWeatherBox } from './character/component/characters/character-weatherBox';
+import { lottieCanvasPickModule, lottieModule } from '@visactor/vrender-kits';
 
 const splitModule = new ContainerModule(bind => {
   // chart渲染器注入
@@ -71,12 +73,15 @@ export function registerCharacter() {
   StoryFactory.registerCharacter(StoryComponentType.QIPAO, CharacterComponentQipao);
   StoryFactory.registerCharacter(StoryComponentType.LINE, CharacterComponentLine);
   StoryFactory.registerCharacter(StoryComponentType.IMAGE, CharacterComponentImage);
+  StoryFactory.registerCharacter(StoryComponentType.WEATHERBOX, CharacterComponentWeatherBox);
   StoryFactory.registerCharacter(StoryComponentType.SHAPE, CharacterComponentShape);
   StoryFactory.registerCharacter(StoryComponentType.TIMELINE, CharacterComponentTimeline);
   StoryFactory.registerCharacter(StoryComponentType.UNIT, CharacterComponentUnit);
 
   container.load(splitModule);
   container.load(editPlugin);
+  container.load(lottieModule);
+  container.load(lottieCanvasPickModule);
 }
 
 registerCharacter();

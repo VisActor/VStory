@@ -285,7 +285,7 @@ export class SeriesLabelSelection extends BaseSelection implements IEditComponen
       // 匹配系列
       const labelVRenderComponent = labelVChartComponent.getMarks().find(m => {
         // @ts-ignore
-        const info = labelVChartComponent._labelComponentMap.get(m)();
+        const info = labelVChartComponent._labelComponentMap.get(m)() as any;
         return info.series === action.detail.modelInfo.series;
       });
       if (!labelVRenderComponent) {
@@ -298,7 +298,7 @@ export class SeriesLabelSelection extends BaseSelection implements IEditComponen
 
       const seriesField = action.detail.modelInfo.series.getSeriesField();
       const seriesValue = action.detail.modelInfo.datum[seriesField];
-      return labelGraphic.filter((l: IGraphic) => l.attribute.data[seriesField] === seriesValue);
+      return labelGraphic.filter((l: IGraphic) => (l.attribute as any).data[seriesField] === seriesValue);
     }
     if (this.edit.editGlobalState.seriesMarkMode === SeriesMarkMode.single) {
       return [action.detail.graphic];

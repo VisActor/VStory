@@ -62,6 +62,22 @@
           }
         }
       ]
+    },
+    {
+      "path": "weather",
+      "title": {
+        "zh": "天气可视化模板",
+        "en": "weather Visualization template"
+      },
+      "children": [
+        {
+          "path": "weather-table",
+          "title": {
+            "zh": "天气表格",
+            "en": "weather table"
+          }
+        }
+      ]
     }
   ]
 }

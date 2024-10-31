@@ -5,6 +5,9 @@ import { WeatherBox } from '@visactor/vrender-components';
 import { themes } from '@visactor/vtable';
 import { text } from 'stream/consumers';
 import type { ITableCharacterConfig, IWeatherTableCharacterConfig } from '../../dsl-interface';
+import { getGlobalTimeline } from '../../../../animate/global';
+import { createGroup } from '@visactor/vrender-core';
+import { createLottie } from '@visactor/vrender-kits';
 
 type IDataType = {
   city: string;
@@ -67,6 +70,7 @@ export class WeatherTableRuntime implements ITableCharacterRuntime {
         const datum = data.find(d => d.city === item && d.date === date);
         if (datum) {
           out[date as any] = {
+            ...datum,
             rain: datum.rain,
             wind: datum.wind,
             snow: datum.snow
@@ -83,18 +87,39 @@ export class WeatherTableRuntime implements ITableCharacterRuntime {
       const { height, width } = rect ?? table.getCellRect(col, row);
 
       const value = record[key];
+      if (value.type && value.type.includes('lottie')) {
+        const group = createGroup({ width, height, background: value.background });
+        const lottie = createLottie({
+          data: value.data,
+          width,
+          height,
+          x: 0,
+          y: 0,
+          background: 'transparent'
+        });
+        group.add(lottie);
+        return {
+          rootContainer: group,
+          renderDefault: false
+        };
+      }
       // TODO WeatherBox自执行，会重复绘制，每次执行的时候需要重新调用player的渲染
-      const weatherBox = new WeatherBox({
-        width: width,
-        height: height,
-        rainRatio: value.rain,
-        snowRatio: value.snow,
-        windRatio: value.wind,
-        rainCountThreshold: 9,
-        snowCountThreshold: 6,
-        stroke: 'white',
-        lineWidth: 2
-      });
+      const weatherBox = new WeatherBox(
+        {
+          width: width,
+          height: height,
+          rainRatio: value.rain,
+          snowRatio: value.snow,
+          windRatio: value.wind,
+          windAnimateEffect: value.windAnimateEffect,
+          rainCountThreshold: 9,
+          snowCountThreshold: 6,
+          stroke: 'white',
+          lineWidth: 2,
+          ...value
+        },
+        { timeline: getGlobalTimeline() }
+      );
 
       // container.add(weatherBox as any);
       return {

@@ -19,6 +19,7 @@ import {
 import { RankingBarPlayActionProcessor } from './chart/rankingBar/rankingBar';
 import { UnitVisibilityActionProcessor, UnitStyleActionProcessor } from './component/unit/unit-action';
 import { VTableVisibilityActionProcessor } from './table/vtable';
+import { WeatherBoxVisibilityActionProcessor } from './component/weatherBox/weatherBox-visibility';
 
 export const processorChartMap = {
   [StoryVisactorType.VCHART]: {
@@ -78,6 +79,10 @@ export const processorComponentMap = {
     [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
     [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
     [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
+  },
+  [StoryComponentType.WEATHERBOX]: {
+    [ACTION_TYPE.APPEAR]: new WeatherBoxVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new WeatherBoxVisibilityActionProcessor()
   },
   [StoryComponentType.TEXT]: {
     [ACTION_TYPE.APPEAR]: new TextVisibilityActionProcessor(),
