@@ -135,7 +135,8 @@ const spec = {
     }
   ]
 };
-const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 0.4, scaleY: 0.4 } });
+const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 1, scaleY: 1 } });
+vstory.canvas.getStage().defaultLayer.scale(0.4, 0.4);
 
 vstory.play(false);
 window.vstory = vstory;
