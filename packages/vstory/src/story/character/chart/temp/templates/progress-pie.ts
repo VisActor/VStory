@@ -35,8 +35,8 @@ export class ProgressPieTemp extends BaseTemp {
     // });
   }
 
-  afterInitializeChart(ctx: { character: CharacterChart }): void {
+  afterInitialize(ctx: { character: CharacterChart }): void {
     // eslint-disable-next-line no-console
-    console.log('afterInitializeChart');
+    console.log('afterInitialize');
   }
 }

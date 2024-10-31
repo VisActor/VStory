@@ -139,8 +139,7 @@ const spec = {
   ]
 };
 
-const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 1, scaleY: 1 } });
-vstory.canvas.getStage().defaultLayer.scale(0.9, 0.9);
+const vstory = new VStory.Story(spec, { dom: CONTAINER_ID, playerOption: { scaleX: 0.9, scaleY: 0.9 } });
 window.vstory = vstory;
 vstory.play();
 ```

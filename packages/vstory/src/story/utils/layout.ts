@@ -1,3 +1,4 @@
+import { normalizePadding } from '@visactor/vutils';
 import type { IRect } from '../../type/space';
 import type { ILayoutAttribute, IWidgetData } from '../character';
 

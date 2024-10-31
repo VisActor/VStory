@@ -4,7 +4,7 @@ import type { ICharacterTree, IStory, IStoryCanvas, IStoryInitOption } from './i
 import type { ICharacter } from './character/runtime-interface';
 import { StoryCanvas } from './canvas/canvas';
 import type { IStoryDSL, IActionParams } from './interface';
-import { defaultTicker, defaultTimeline } from '@visactor/vrender';
+import { DefaultTicker, defaultTicker, defaultTimeline } from '@visactor/vrender';
 import { CharacterTree } from './character-tree/character-tree';
 import type { IPlayer } from '../player/interface/player';
 import { Player } from '../player/player';

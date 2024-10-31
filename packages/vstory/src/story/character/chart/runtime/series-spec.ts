@@ -40,7 +40,7 @@ export class SeriesSpecRuntime implements IChartCharacterRuntime {
     // });
   }
 
-  afterInitializeChart() {
+  afterInitialize() {
     return;
   }
   afterVRenderDraw() {

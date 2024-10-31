@@ -14,3 +14,5 @@ export * from './template/unit';
 export * from './edit/edit-component';
 export { DeletedAttr } from './constants';
 export { RichTextEditPlugin } from '@visactor/vrender-core';
+
+export * from './dsl-creator/weather-table';

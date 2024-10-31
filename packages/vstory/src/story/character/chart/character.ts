@@ -16,7 +16,7 @@ import { getLayoutFromWidget } from '../../utils/layout';
 import { getChartModelWithEvent } from '../../utils/vchart-pick';
 import { mergeChartOption } from '../../utils/chart';
 import { Chart } from './graphic/chart';
-import { StoryChartType } from '../../../constants/character';
+import { StoryVisactorType } from '../../../constants/character';
 import type { IVChart } from '@visactor/vchart';
 import { LabelStyleRuntime } from './runtime/label-style';
 import { deepMergeWithDeletedAttr } from '../../../util/merge';
@@ -60,7 +60,7 @@ export class CharacterChart extends CharacterVisactor {
     const { viewBox } = this._getChartOption();
     this.onConfigReady(this._config);
     // @ts-ignore
-    this._graphic = new Chart(StoryChartType.VCHART, this, {
+    this._graphic = new Chart(StoryVisactorType.VCHART, this, {
       renderCanvas: this._option.canvas.getCanvas(),
       spec: this._specProcess.getVisSpec(),
       // ClassType: VChart,
@@ -82,8 +82,8 @@ export class CharacterChart extends CharacterVisactor {
           disableTriggerEvent: true,
           performanceHook: {
             afterInitializeChart: (vchart: IVChart) => {
-              (<IChartTemp>this.specProcess.dataTempTransform?.specTemp)?.afterInitializeChart({ character: this });
-              this._runtime.forEach(r => r.afterInitializeChart?.(vchart));
+              (<IChartTemp>this.specProcess.dataTempTransform?.specTemp)?.afterInitialize({ character: this });
+              this._runtime.forEach(r => r.afterInitialize?.(vchart));
             },
             afterVRenderDraw: () => {
               this._runtime.forEach(r => r.afterVRenderDraw?.());
@@ -128,10 +128,6 @@ export class CharacterChart extends CharacterVisactor {
     this._graphic?.setAttributes({
       spec: this._specProcess.getVisSpec()
     });
-  }
-
-  clearCharacter(): void {
-    this._graphic.release();
   }
 
   tickTo(t: number): void {

@@ -1,4 +1,4 @@
-import type { IChartCharacterConfig } from '../dsl-interface';
+import type { IVisactorCharacterConfig } from '../dsl-interface';
 import { EventEmitter, cloneDeep } from '@visactor/vutils';
 import type {
   IDataTempTransform,
@@ -12,7 +12,7 @@ import type {
 export abstract class SpecProcessBase implements ISpecProcess {
   // 编辑器config 存储和加载都是这个数据结构
   // 保证结构可序列化。
-  protected _characterConfig: IChartCharacterConfig;
+  protected _characterConfig: IVisactorCharacterConfig;
   protected _onConfigReadyCall: () => void = null;
   // vTableSpec 只作为临时转换结果，传递给vTable，不会存储。
   protected _visSpec: any;

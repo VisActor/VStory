@@ -49,7 +49,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     return;
   }
 
-  afterInitializeChart(vchart: IVChart) {
+  afterInitialize(vchart: IVChart) {
     this._setDataGroupStyle(vchart);
     this._setMarkStyle(vchart);
     return;

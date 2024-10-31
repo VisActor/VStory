@@ -1377,8 +1377,8 @@ const storySpec: IStorySpec = {
     //       interactive: true,
     //       disableTriggerEvent: false,
     //       performanceHook: {
-    //         afterInitializeChart: () => {
-    //           console.log('afterInitializeChart');
+    //         afterInitialize: () => {
+    //           console.log('afterInitialize');
     //         },
     //         afterVRenderDraw: () => {
     //           console.log('afterVRenderDraw');

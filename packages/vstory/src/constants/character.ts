@@ -1,5 +1,7 @@
-export const enum StoryChartType {
+export const enum StoryVisactorType {
   VCHART = 'VChart',
+  VTABLE = 'VTable',
+  WEATHERTABLE = 'WeatherTable',
   RANKINGBAR = 'RankingBar',
   PROGRESS_PIE = 'ProgressPie'
 }
@@ -15,6 +17,7 @@ export enum StoryComponentType {
   // RICH_TEXT = 'RichText',
   QIPAO = 'Qipao',
   IMAGE = 'Image',
+  WEATHERBOX = 'WeatherBox',
   TIMELINE = 'Timeline',
   UNIT = 'Unit'
 }

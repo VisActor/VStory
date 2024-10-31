@@ -26,6 +26,7 @@ import { UnitComponentDemo } from './demos/UnitViz/UnitDemo';
 import { GunDeath } from './demos/UnitViz/GunDeath';
 import { API } from './demos/API';
 import { Dapanji } from './demos/template/dapanji';
+import { VTable } from './demos/VTable';
 
 type MenusType = (
   | {
@@ -65,6 +66,10 @@ const App = () => {
     {
       name: 'API',
       component: API
+    },
+    {
+      name: 'VTable',
+      component: VTable
     },
     // {
     //   name: 'AreaWithTag',

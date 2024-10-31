@@ -72,11 +72,12 @@ export class Player extends EventEmitter implements IPlayer {
     } else {
       stage.forEachChildren((layer: any) => {
         const maxScale = Math.max(scaleX, scaleY);
+        // debugger;
         layer.setAttributes({
           x: offsetX,
           y: offsetY,
-          width: (stage.width * scaleX) / maxScale,
-          height: (stage.height * scaleY) / maxScale,
+          width: stage.width / maxScale,
+          height: stage.height / maxScale,
           scaleX: maxScale,
           scaleY: maxScale
         });
