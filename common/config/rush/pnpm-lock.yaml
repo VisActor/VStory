@@ -19,7 +19,7 @@ importers:
       '@types/markdown-it': ^13.0.0
       '@types/react': ^18.0.0
       '@types/react-dom': ^18.0.0
-      '@visactor/vstory': workspace:0.0.8-alpha.2
+      '@visactor/vstory': workspace:0.0.9-alpha.2
       '@vitejs/plugin-react': 3.1.0
       axios: ^1.4.0
       chalk: ^3.0.0
@@ -76,6 +76,144 @@ importers:
       '@types/jest': ^26.0.0
       '@types/react': ^18.0.0
       '@types/react-dom': ^18.0.0
+      '@visactor/vstory-animate': workspace:0.0.9-alpha.2
+      '@visactor/vstory-core': workspace:0.0.9-alpha.2
+      '@visactor/vstory-editor': workspace:0.0.9-alpha.2
+      '@visactor/vstory-player': workspace:0.0.9-alpha.2
+      '@visactor/vstory-templates': workspace:0.0.9-alpha.2
+      '@vitejs/plugin-react': 3.1.0
+      canvas: 2.11.2
+      eslint: ~8.18.0
+      jest: ^26.0.0
+      jest-electron: ^0.1.12
+      jest-extended: ^1.2.1
+      monaco-editor: ^0.49.0
+      re-resizable: ^6.9.17
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      ts-jest: ^26.0.0
+      typescript: 4.9.5
+      vite: 3.2.6
+    dependencies:
+      '@visactor/vstory-animate': link:../vstory-animate
+      '@visactor/vstory-core': link:../vstory-core
+      '@visactor/vstory-editor': link:../vstory-editor
+      '@visactor/vstory-player': link:../vstory-player
+      '@visactor/vstory-templates': link:../vstory-templates
+    devDependencies:
+      '@douyinfe/semi-ui': 2.67.0_nnrd3gsncyragczmpvfhocinkq
+      '@ffmpeg/core': 0.11.0
+      '@ffmpeg/ffmpeg': 0.11.6
+      '@internal/bundler': link:../../tools/bundler
+      '@internal/eslint-config': link:../../share/eslint-config
+      '@internal/ts-config': link:../../share/ts-config
+      '@monaco-editor/react': 4.6.0_attssj7v74q6tdwjgncsnxmc4e
+      '@rushstack/eslint-patch': 1.1.4
+      '@types/jest': 26.0.24
+      '@types/react': 18.3.11
+      '@types/react-dom': 18.3.0
+      '@vitejs/plugin-react': 3.1.0_vite@3.2.6
+      canvas: 2.11.2
+      eslint: 8.18.0
+      jest: 26.6.3_canvas@2.11.2
+      jest-electron: 0.1.12_jest@26.6.3
+      jest-extended: 1.2.1
+      monaco-editor: 0.49.0
+      re-resizable: 6.10.0_nnrd3gsncyragczmpvfhocinkq
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+      ts-jest: 26.5.6_xuote2qreek47x2di7kesslrai
+      typescript: 4.9.5
+      vite: 3.2.6
+
+  ../../packages/vstory-animate:
+    specifiers:
+      '@douyinfe/semi-ui': ^2.62.1
+      '@ffmpeg/core': ^0.11.0
+      '@ffmpeg/ffmpeg': ^0.11.6
+      '@internal/bundler': workspace:*
+      '@internal/eslint-config': workspace:*
+      '@internal/ts-config': workspace:*
+      '@monaco-editor/react': ^4.6.0
+      '@rushstack/eslint-patch': ~1.1.4
+      '@types/jest': ^26.0.0
+      '@types/react': ^18.0.0
+      '@types/react-dom': ^18.0.0
+      '@visactor/vchart': 1.12.9
+      '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': ~0.18.17
+      '@visactor/vrender': 0.20.11-alpha.3
+      '@visactor/vrender-components': 0.20.11-alpha.3
+      '@visactor/vrender-core': 0.20.11-alpha.3
+      '@visactor/vrender-kits': 0.20.11-alpha.3
+      '@visactor/vscale': 0.18.5
+      '@visactor/vstory-core': workspace:0.0.9-alpha.2
+      '@visactor/vtable': 1.10.1
+      '@visactor/vutils': ~0.18.17
+      '@vitejs/plugin-react': 3.1.0
+      canvas: 2.11.2
+      eslint: ~8.18.0
+      jest: ^26.0.0
+      jest-electron: ^0.1.12
+      jest-extended: ^1.2.1
+      monaco-editor: ^0.49.0
+      re-resizable: ^6.9.17
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      ts-jest: ^26.0.0
+      typescript: 4.9.5
+      vite: 3.2.6
+    dependencies:
+      '@visactor/vchart': 1.12.9
+      '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': 0.18.17
+      '@visactor/vrender': 0.20.11-alpha.3
+      '@visactor/vrender-components': 0.20.11-alpha.3
+      '@visactor/vrender-core': 0.20.11-alpha.3
+      '@visactor/vrender-kits': 0.20.11-alpha.3
+      '@visactor/vscale': 0.18.5
+      '@visactor/vstory-core': link:../vstory-core
+      '@visactor/vtable': 1.10.1
+      '@visactor/vutils': 0.18.17
+    devDependencies:
+      '@douyinfe/semi-ui': 2.67.0_nnrd3gsncyragczmpvfhocinkq
+      '@ffmpeg/core': 0.11.0
+      '@ffmpeg/ffmpeg': 0.11.6
+      '@internal/bundler': link:../../tools/bundler
+      '@internal/eslint-config': link:../../share/eslint-config
+      '@internal/ts-config': link:../../share/ts-config
+      '@monaco-editor/react': 4.6.0_attssj7v74q6tdwjgncsnxmc4e
+      '@rushstack/eslint-patch': 1.1.4
+      '@types/jest': 26.0.24
+      '@types/react': 18.3.11
+      '@types/react-dom': 18.3.0
+      '@vitejs/plugin-react': 3.1.0_vite@3.2.6
+      canvas: 2.11.2
+      eslint: 8.18.0
+      jest: 26.6.3_canvas@2.11.2
+      jest-electron: 0.1.12_jest@26.6.3
+      jest-extended: 1.2.1
+      monaco-editor: 0.49.0
+      re-resizable: 6.10.0_nnrd3gsncyragczmpvfhocinkq
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+      ts-jest: 26.5.6_xuote2qreek47x2di7kesslrai
+      typescript: 4.9.5
+      vite: 3.2.6
+
+  ../../packages/vstory-core:
+    specifiers:
+      '@douyinfe/semi-ui': ^2.62.1
+      '@ffmpeg/core': ^0.11.0
+      '@ffmpeg/ffmpeg': ^0.11.6
+      '@internal/bundler': workspace:*
+      '@internal/eslint-config': workspace:*
+      '@internal/ts-config': workspace:*
+      '@monaco-editor/react': ^4.6.0
+      '@rushstack/eslint-patch': ~1.1.4
+      '@types/jest': ^26.0.0
+      '@types/react': ^18.0.0
+      '@types/react-dom': ^18.0.0
       '@visactor/vchart': 1.12.9
       '@visactor/vchart-extension': 0.0.2
       '@visactor/vdataset': ~0.18.17
@@ -108,6 +246,233 @@ importers:
       '@visactor/vrender-core': 0.20.11-alpha.3
       '@visactor/vrender-kits': 0.20.11-alpha.3
       '@visactor/vscale': 0.18.5
+      '@visactor/vtable': 1.10.1
+      '@visactor/vutils': 0.18.17
+    devDependencies:
+      '@douyinfe/semi-ui': 2.67.0_nnrd3gsncyragczmpvfhocinkq
+      '@ffmpeg/core': 0.11.0
+      '@ffmpeg/ffmpeg': 0.11.6
+      '@internal/bundler': link:../../tools/bundler
+      '@internal/eslint-config': link:../../share/eslint-config
+      '@internal/ts-config': link:../../share/ts-config
+      '@monaco-editor/react': 4.6.0_attssj7v74q6tdwjgncsnxmc4e
+      '@rushstack/eslint-patch': 1.1.4
+      '@types/jest': 26.0.24
+      '@types/react': 18.3.11
+      '@types/react-dom': 18.3.0
+      '@vitejs/plugin-react': 3.1.0_vite@3.2.6
+      canvas: 2.11.2
+      eslint: 8.18.0
+      jest: 26.6.3_canvas@2.11.2
+      jest-electron: 0.1.12_jest@26.6.3
+      jest-extended: 1.2.1
+      monaco-editor: 0.49.0
+      re-resizable: 6.10.0_nnrd3gsncyragczmpvfhocinkq
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+      ts-jest: 26.5.6_xuote2qreek47x2di7kesslrai
+      typescript: 4.9.5
+      vite: 3.2.6
+
+  ../../packages/vstory-editor:
+    specifiers:
+      '@douyinfe/semi-ui': ^2.62.1
+      '@ffmpeg/core': ^0.11.0
+      '@ffmpeg/ffmpeg': ^0.11.6
+      '@internal/bundler': workspace:*
+      '@internal/eslint-config': workspace:*
+      '@internal/ts-config': workspace:*
+      '@monaco-editor/react': ^4.6.0
+      '@rushstack/eslint-patch': ~1.1.4
+      '@types/jest': ^26.0.0
+      '@types/react': ^18.0.0
+      '@types/react-dom': ^18.0.0
+      '@visactor/vchart': 1.12.9
+      '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': ~0.18.17
+      '@visactor/vrender': 0.20.11-alpha.3
+      '@visactor/vrender-components': 0.20.11-alpha.3
+      '@visactor/vrender-core': 0.20.11-alpha.3
+      '@visactor/vrender-kits': 0.20.11-alpha.3
+      '@visactor/vscale': 0.18.5
+      '@visactor/vstory-core': workspace:0.0.9-alpha.2
+      '@visactor/vtable': 1.10.1
+      '@visactor/vutils': ~0.18.17
+      '@vitejs/plugin-react': 3.1.0
+      canvas: 2.11.2
+      eslint: ~8.18.0
+      jest: ^26.0.0
+      jest-electron: ^0.1.12
+      jest-extended: ^1.2.1
+      monaco-editor: ^0.49.0
+      re-resizable: ^6.9.17
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      ts-jest: ^26.0.0
+      typescript: 4.9.5
+      vite: 3.2.6
+    dependencies:
+      '@visactor/vchart': 1.12.9
+      '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': 0.18.17
+      '@visactor/vrender': 0.20.11-alpha.3
+      '@visactor/vrender-components': 0.20.11-alpha.3
+      '@visactor/vrender-core': 0.20.11-alpha.3
+      '@visactor/vrender-kits': 0.20.11-alpha.3
+      '@visactor/vscale': 0.18.5
+      '@visactor/vstory-core': link:../vstory-core
+      '@visactor/vtable': 1.10.1
+      '@visactor/vutils': 0.18.17
+    devDependencies:
+      '@douyinfe/semi-ui': 2.67.0_nnrd3gsncyragczmpvfhocinkq
+      '@ffmpeg/core': 0.11.0
+      '@ffmpeg/ffmpeg': 0.11.6
+      '@internal/bundler': link:../../tools/bundler
+      '@internal/eslint-config': link:../../share/eslint-config
+      '@internal/ts-config': link:../../share/ts-config
+      '@monaco-editor/react': 4.6.0_attssj7v74q6tdwjgncsnxmc4e
+      '@rushstack/eslint-patch': 1.1.4
+      '@types/jest': 26.0.24
+      '@types/react': 18.3.11
+      '@types/react-dom': 18.3.0
+      '@vitejs/plugin-react': 3.1.0_vite@3.2.6
+      canvas: 2.11.2
+      eslint: 8.18.0
+      jest: 26.6.3_canvas@2.11.2
+      jest-electron: 0.1.12_jest@26.6.3
+      jest-extended: 1.2.1
+      monaco-editor: 0.49.0
+      re-resizable: 6.10.0_nnrd3gsncyragczmpvfhocinkq
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+      ts-jest: 26.5.6_xuote2qreek47x2di7kesslrai
+      typescript: 4.9.5
+      vite: 3.2.6
+
+  ../../packages/vstory-player:
+    specifiers:
+      '@douyinfe/semi-ui': ^2.62.1
+      '@ffmpeg/core': ^0.11.0
+      '@ffmpeg/ffmpeg': ^0.11.6
+      '@internal/bundler': workspace:*
+      '@internal/eslint-config': workspace:*
+      '@internal/ts-config': workspace:*
+      '@monaco-editor/react': ^4.6.0
+      '@rushstack/eslint-patch': ~1.1.4
+      '@types/jest': ^26.0.0
+      '@types/react': ^18.0.0
+      '@types/react-dom': ^18.0.0
+      '@visactor/vchart': 1.12.9
+      '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': ~0.18.17
+      '@visactor/vrender': 0.20.11-alpha.3
+      '@visactor/vrender-components': 0.20.11-alpha.3
+      '@visactor/vrender-core': 0.20.11-alpha.3
+      '@visactor/vrender-kits': 0.20.11-alpha.3
+      '@visactor/vscale': 0.18.5
+      '@visactor/vstory-animate': workspace:0.0.9-alpha.2
+      '@visactor/vstory-core': workspace:0.0.9-alpha.2
+      '@visactor/vtable': 1.10.1
+      '@visactor/vutils': ~0.18.17
+      '@vitejs/plugin-react': 3.1.0
+      canvas: 2.11.2
+      eslint: ~8.18.0
+      jest: ^26.0.0
+      jest-electron: ^0.1.12
+      jest-extended: ^1.2.1
+      monaco-editor: ^0.49.0
+      re-resizable: ^6.9.17
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      ts-jest: ^26.0.0
+      typescript: 4.9.5
+      vite: 3.2.6
+    dependencies:
+      '@visactor/vchart': 1.12.9
+      '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': 0.18.17
+      '@visactor/vrender': 0.20.11-alpha.3
+      '@visactor/vrender-components': 0.20.11-alpha.3
+      '@visactor/vrender-core': 0.20.11-alpha.3
+      '@visactor/vrender-kits': 0.20.11-alpha.3
+      '@visactor/vscale': 0.18.5
+      '@visactor/vstory-animate': link:../vstory-animate
+      '@visactor/vstory-core': link:../vstory-core
+      '@visactor/vtable': 1.10.1
+      '@visactor/vutils': 0.18.17
+    devDependencies:
+      '@douyinfe/semi-ui': 2.67.0_nnrd3gsncyragczmpvfhocinkq
+      '@ffmpeg/core': 0.11.0
+      '@ffmpeg/ffmpeg': 0.11.6
+      '@internal/bundler': link:../../tools/bundler
+      '@internal/eslint-config': link:../../share/eslint-config
+      '@internal/ts-config': link:../../share/ts-config
+      '@monaco-editor/react': 4.6.0_attssj7v74q6tdwjgncsnxmc4e
+      '@rushstack/eslint-patch': 1.1.4
+      '@types/jest': 26.0.24
+      '@types/react': 18.3.11
+      '@types/react-dom': 18.3.0
+      '@vitejs/plugin-react': 3.1.0_vite@3.2.6
+      canvas: 2.11.2
+      eslint: 8.18.0
+      jest: 26.6.3_canvas@2.11.2
+      jest-electron: 0.1.12_jest@26.6.3
+      jest-extended: 1.2.1
+      monaco-editor: 0.49.0
+      re-resizable: 6.10.0_nnrd3gsncyragczmpvfhocinkq
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+      ts-jest: 26.5.6_xuote2qreek47x2di7kesslrai
+      typescript: 4.9.5
+      vite: 3.2.6
+
+  ../../packages/vstory-templates:
+    specifiers:
+      '@douyinfe/semi-ui': ^2.62.1
+      '@ffmpeg/core': ^0.11.0
+      '@ffmpeg/ffmpeg': ^0.11.6
+      '@internal/bundler': workspace:*
+      '@internal/eslint-config': workspace:*
+      '@internal/ts-config': workspace:*
+      '@monaco-editor/react': ^4.6.0
+      '@rushstack/eslint-patch': ~1.1.4
+      '@types/jest': ^26.0.0
+      '@types/react': ^18.0.0
+      '@types/react-dom': ^18.0.0
+      '@visactor/vchart': 1.12.9
+      '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': ~0.18.17
+      '@visactor/vrender': 0.20.11-alpha.3
+      '@visactor/vrender-components': 0.20.11-alpha.3
+      '@visactor/vrender-core': 0.20.11-alpha.3
+      '@visactor/vrender-kits': 0.20.11-alpha.3
+      '@visactor/vscale': 0.18.5
+      '@visactor/vstory-core': workspace:0.0.9-alpha.2
+      '@visactor/vtable': 1.10.1
+      '@visactor/vutils': ~0.18.17
+      '@vitejs/plugin-react': 3.1.0
+      canvas: 2.11.2
+      eslint: ~8.18.0
+      jest: ^26.0.0
+      jest-electron: ^0.1.12
+      jest-extended: ^1.2.1
+      monaco-editor: ^0.49.0
+      re-resizable: ^6.9.17
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      ts-jest: ^26.0.0
+      typescript: 4.9.5
+      vite: 3.2.6
+    dependencies:
+      '@visactor/vchart': 1.12.9
+      '@visactor/vchart-extension': 0.0.2
+      '@visactor/vdataset': 0.18.17
+      '@visactor/vrender': 0.20.11-alpha.3
+      '@visactor/vrender-components': 0.20.11-alpha.3
+      '@visactor/vrender-core': 0.20.11-alpha.3
+      '@visactor/vrender-kits': 0.20.11-alpha.3
+      '@visactor/vscale': 0.18.5
+      '@visactor/vstory-core': link:../vstory-core
       '@visactor/vtable': 1.10.1
       '@visactor/vutils': 0.18.17
     devDependencies:
@@ -183,7 +548,7 @@ importers:
       '@rushstack/eslint-patch': ~1.1.4
       '@types/node': '*'
       '@types/node-fetch': 2.6.4
-      '@visactor/vstory': workspace:0.0.8-alpha.2
+      '@visactor/vstory': workspace:0.0.9-alpha.2
       eslint: ~8.18.0
       form-data: ~4.0.0
       node-fetch: 2.6.6
@@ -4262,6 +4627,7 @@ packages:
 
   /boolean/3.2.0:
     resolution: {integrity: sha512-d0II/GO9uf9lfUHH2BQsjxzRJZBdsjgsBiW4BvhWk/3qoKwQFjIDVN19PfX8F2D/r9PCMTtLWjYVCFrpeYUzsw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dev: true
     optional: true
 

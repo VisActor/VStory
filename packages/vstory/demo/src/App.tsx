@@ -1,32 +1,10 @@
 import React, { Component, useCallback, useState } from 'react';
 import { Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
-import { StoryBarDemo } from './demos/StoryBarDemo';
-import { StorySceneDemo } from './demos/StoryScene';
-// import { AreaWithTag } from './demos/AreaWithTag';
-// import { StoryLineDemo } from './demos/StoryLineDemo';
 import { useLocalStorage } from './hooks/useLocalStorage';
-// import { StoryPieDemo } from './demos/StoryPieDemo';
-import { GraphicActionDemo } from './demos/graphicAction';
-import { VChartSiteDemo } from './demos/VChartSite/VChartSite';
-import { DisAppear } from './demos/DisAppear';
-import { StoryEdit } from './demos/StoryEdit';
-import { Appear } from './demos/Appear';
-import { GraphicEdit } from './demos/GraphicEdit';
-import { Playground } from './demos/Playground';
-import { Pictogram } from './demos/UnitViz/Pictogram';
-import { LV_BAR1 } from './demos/lv/bar1';
-import { BarLineSeries } from './demos/BarLineSeries';
-import { wordcloud } from './demos/wordcloud';
-import { VChartGraphic } from './demos/VChartGraphic';
-import { BaseComponent } from './demos/BaseComponent';
-import { BarLineSeriesSelector } from './demos/BarLineSeriesSelector';
-import { RankingBar } from './demos/template/RankingBar';
-import { UnitComponentDemo } from './demos/UnitViz/UnitDemo';
-import { GunDeath } from './demos/UnitViz/GunDeath';
 import { API } from './demos/API';
-import { Dapanji } from './demos/template/dapanji';
-import { VTable } from './demos/VTable';
+import { BarChart1 } from './demos/BarChart1';
+import { TextAnimate } from './demos/text';
 
 type MenusType = (
   | {
@@ -48,112 +26,24 @@ const App = () => {
   const [activeName, setActiveName] = useLocalStorage('menuName', '');
   const menus = [
     {
-      name: 'Bar',
-      component: StoryBarDemo
-    },
-    // {
-    //   name: 'Line',
-    //   component: StoryLineDemo
-    // },
-    // {
-    //   name: 'Pie',
-    //   component: StoryPieDemo
-    // },
-    {
-      name: 'StoryScene',
-      component: StorySceneDemo
-    },
-    {
-      name: 'API',
-      component: API
-    },
-    {
-      name: 'VTable',
-      component: VTable
-    },
-    // {
-    //   name: 'AreaWithTag',
-    //   component: AreaWithTag
-    // },
-    {
-      name: 'DisAppear',
-      component: DisAppear
-    },
-    {
-      name: 'Appear',
-      component: Appear
-    },
-    {
-      name: 'Graphic-Action',
-      component: GraphicActionDemo
-    },
-    {
-      name: 'VChart-Site',
-      component: VChartSiteDemo
-    },
-    {
-      name: 'StoryEdit',
-      component: StoryEdit
-    },
-    {
-      name: 'GraphicEdit',
-      component: GraphicEdit
-    },
-    {
-      name: 'Playground',
-      component: Playground
-    },
-    // {
-    //   name: 'BarLineSeries',
-    //   component: BarLineSeries
-    // },
-    // {
-    //   name: 'BarLineSeriesSelector',
-    //   component: BarLineSeriesSelector
-    // },
-    // {
-    //   name: 'wordcloud',
-    //   component: wordcloud
-    // },
-    // {
-    //   name: 'BaseComponent',
-    //   component: BaseComponent
-    // },
-    {
-      name: 'lv_chart',
+      name: 'Base',
       subMenus: [
         {
-          name: 'bar1',
-          component: LV_BAR1
+          name: 'API Demo',
+          component: API
         }
       ]
     },
     {
-      name: 'RankingBar',
-      component: RankingBar
-    },
-    {
-      name: 'VChartGraphic',
-      component: VChartGraphic
-    },
-    {
-      name: 'Dapanji',
-      component: Dapanji
-    },
-    {
-      name: 'Unit Visualization',
+      name: 'Arrange',
       subMenus: [
         {
-          name: 'Unit Component Demo',
-          component: UnitComponentDemo
+          name: 'BarChart1',
+          component: BarChart1
         },
         {
-          name: 'Gun Death',
-          component: GunDeath
-        },
-        {
-          name: 'Infographic Pictogram',
-          component: Pictogram
+          name: 'Text',
+          component: TextAnimate
         }
       ]
     }
