@@ -9,8 +9,8 @@ registerTextAction();
 registerCommonBounceAction();
 initVR();
 
-export const Bounce = () => {
-  const id = 'Bounce';
+export const Leap = () => {
+  const id = 'Leap';
   const canvas = createRef();
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export const Bounce = () => {
                 animation: {
                   duration: 3000,
                   easing: 'linear',
-                  effect: 'barBounce',
+                  effect: 'barLeap',
                   oneByOne: true,
                   dimensionCount: 5
                 } as any
@@ -118,9 +118,11 @@ export const Bounce = () => {
       valueField: 'value',
       categoryField: 'type',
       label: {
-        visible: true
+        visible: true,
+        position: 'inside'
       }
     };
+
     story.addCharacter(
       {
         id: '1',
@@ -148,7 +150,7 @@ export const Bounce = () => {
             action: 'appear',
             payload: [
               {
-                selector: ':not(arc)',
+                selector: ':not(pie)',
                 animation: {
                   duration: 2000,
                   easing: 'linear'
@@ -162,11 +164,11 @@ export const Bounce = () => {
             action: 'appear',
             payload: [
               {
-                selector: 'arc',
+                selector: 'pie',
                 animation: {
                   duration: 3000,
                   easing: 'linear',
-                  effect: 'arcBounce',
+                  effect: 'pieLeap',
                   oneByOne: true,
                   dimensionCount: 5
                 } as any
@@ -177,7 +179,6 @@ export const Bounce = () => {
       }
     );
 
-    console.log(story);
     player.play();
 
     return () => {

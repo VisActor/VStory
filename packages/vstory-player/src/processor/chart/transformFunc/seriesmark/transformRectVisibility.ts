@@ -3,6 +3,7 @@ import type { IOrientType } from '@visactor/vrender-components';
 import { BarBounce, BarLeap } from '@visactor/vstory-animate';
 import { commonFade } from './commonTransformMarkAppear';
 import type { IChartVisibilityPayload } from '../../interface';
+import { getCustomParams } from './utils';
 
 // 将payload转换为chart内置的动画type
 export const transformRectVisibility = (
@@ -106,36 +107,17 @@ const getXYAxis = (instance: VChart) => {
   return [xAxis, yAxis];
 };
 
-const getCustomBarParams = (
-  instance: VChart,
-  animation: IChartVisibilityPayload['animation'],
-  option = { dimensionCount: 1 }
-) => {
-  const { duration: totalTime, loop, oneByOne, easing } = animation;
-  const { dimensionCount = 1 } = option;
-
-  const delayPerTime = BarBounce.delayPerTime ?? 50;
-  const enterPerTime = BarBounce.enterPerTime ?? 300;
-  // 柱子+label
-  const standTime = delayPerTime * (dimensionCount - 1) + enterPerTime + enterPerTime;
-  const ratio = totalTime / standTime;
-
-  const duration = oneByOne ? enterPerTime * ratio : totalTime;
-
-  return {
-    duration,
-    loop,
-    oneByOne: oneByOne ? duration + (delayPerTime - enterPerTime) * ratio : oneByOne,
-    easing
-  };
-};
-
 const barBounce = (
   instance: VChart,
   animation: IChartVisibilityPayload['animation'],
   option = { dimensionCount: 1 }
 ) => {
-  const { duration, loop, oneByOne, easing } = getCustomBarParams(instance, animation, option);
+  const { duration, loop, oneByOne, easing } = getCustomParams(
+    animation,
+    BarBounce.delayPerTime ?? 50,
+    BarBounce.enterPerTime ?? 300,
+    option
+  );
 
   return {
     channel: ['x', 'y', 'x1', 'y1', 'width', 'height'],
@@ -148,7 +130,12 @@ const barBounce = (
 };
 
 const barLeap = (instance: VChart, animation: IChartVisibilityPayload['animation'], option = { dimensionCount: 1 }) => {
-  const { duration, loop, oneByOne, easing } = getCustomBarParams(instance, animation, option);
+  const { duration, loop, oneByOne, easing } = getCustomParams(
+    animation,
+    BarBounce.delayPerTime ?? 50,
+    BarBounce.enterPerTime ?? 300,
+    option
+  );
 
   return {
     channel: ['x', 'y', 'x1', 'y1', 'width', 'height', 'cornerRadius'],

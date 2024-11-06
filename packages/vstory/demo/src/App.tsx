@@ -6,6 +6,7 @@ import { API } from './demos/API';
 import { BarChart1 } from './demos/BarChart1';
 import { TextAnimate } from './demos/Text';
 import { Bounce } from './demos/animate/Bounce';
+import { Leap } from './demos/animate/Leap';
 
 type MenusType = (
   | {
@@ -41,6 +42,10 @@ const App = () => {
         {
           name: 'Bounce',
           component: Bounce
+        },
+        {
+          name: 'Leap',
+          component: Leap
         }
       ]
     },
