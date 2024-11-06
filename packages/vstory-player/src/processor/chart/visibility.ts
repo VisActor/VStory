@@ -27,10 +27,13 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     array(actionSpec.payload)
       .reverse()
       .forEach(payload => {
-        const { chart, seriesList, componentsList } = this.selectBySelector(payload.selector ?? '*', vchart);
+        const { chart, seriesList, componentsList, panel } = this.selectBySelector(payload.selector ?? '*', vchart);
         if (!runnedChart && chart) {
           // chart & panel
           this.chartVisibility(character.graphic as any, actionSpec.action, payload);
+        } else if (!runnedChart && panel) {
+          // panel
+          this.panelVisibility(character.graphic as any, actionSpec.action, payload);
         }
         // 过滤seriesList
         const shouldRunSeriesList = seriesList.filter(item => !runnedSeriesSet.has(item));
@@ -50,6 +53,12 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
 
   protected chartVisibility(chartGraphic: any, action: 'appear' | 'disappear', payload: IChartVisibilityPayload) {
     const appearTransformFunc = transformMap.appear.chart;
+    const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
+    this.runTransformFunc(chartGraphic as any, appearTransformFunc, action, payload, defaultPayload);
+  }
+
+  protected panelVisibility(chartGraphic: any, action: 'appear' | 'disappear', payload: IChartVisibilityPayload) {
+    const appearTransformFunc = transformMap.appear.panel;
     const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     this.runTransformFunc(chartGraphic as any, appearTransformFunc, action, payload, defaultPayload);
   }
@@ -187,7 +196,8 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       const mergePayload = merge({}, defaultPayload, payload) as IChartVisibilityPayload;
       appearTransformFunc(instance, mergePayload.animation, {
         disappear: action === 'disappear',
-        ...actionOption
+        ...actionOption,
+        payload: mergePayload
       });
     }
   }
@@ -215,7 +225,8 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
         appearTransform &&
         appearTransform(vchart as any, mergePayload.animation, {
           index: markIndex,
-          disappear: action === 'disappear'
+          disappear: action === 'disappear',
+          payload: mergePayload
         });
       // @ts-ignore
       product && product.animate && product.animate.run(config || {});

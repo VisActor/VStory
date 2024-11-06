@@ -20,3 +20,21 @@ export const runChartAppear = (
     }
   }
 };
+
+export const runPanelAppear = (
+  instance: IGroup,
+  animation: IChartVisibilityPayload['animation'],
+  option: { disappear: boolean }
+) => {
+  switch (animation.effect) {
+    case 'grow': {
+      return commonGrow(instance, animation, option);
+    }
+    case 'fade': {
+      return commonFade(instance, animation, option, 'opacity');
+    }
+    default: {
+      return commonFade(instance, animation, option, 'opacity');
+    }
+  }
+};

@@ -4,15 +4,16 @@ import type { IChartVisibilityPayload } from '../../interface';
 export const commonFade = (
   instance: IGroup,
   animation: IChartVisibilityPayload['animation'],
-  option: { disappear: boolean }
+  option: { disappear: boolean },
+  key: string = 'baseOpacity'
 ) => {
   const { duration, easing } = animation;
   const { disappear } = option;
-  const currOpacity = instance.attribute.baseOpacity;
-  const opacityMap = disappear ? { from: currOpacity ?? 1, to: 0 } : { from: 0, to: currOpacity ?? 1 };
+  const currOpacity = (instance.attribute as any)[key] ?? 1;
+  const opacityMap = disappear ? { from: currOpacity, to: 0 } : { from: 0, to: currOpacity };
 
-  instance.setAttributes({ baseOpacity: opacityMap.from });
-  instance.animate().to({ baseOpacity: opacityMap.to }, duration, easing);
+  instance.setAttributes({ [key]: opacityMap.from });
+  instance.animate().to({ [key]: opacityMap.to }, duration, easing);
 };
 export const commonGrow = (
   instance: IGroup,

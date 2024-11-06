@@ -6,5 +6,8 @@ export const enum CharacterType {
   PROGRESS_PIE = 'ProgressPie',
 
   // component
-  TEXT = 'Text'
+  TEXT = 'Text',
+
+  // 通用的类型，一般在查找effect的时候所有类型都可以匹配
+  COMMON = 'Common'
 }

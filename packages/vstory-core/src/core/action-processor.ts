@@ -2,9 +2,9 @@ import type { IProcessorRegistry } from './processorRegistry';
 import { globalProcessorRegistry } from './processorRegistry';
 import type { IActionProcessor, IActionProcessorItem } from '../interface/action-processor';
 import type { ICharacter } from '../interface/character';
-import { ICharacterTree } from '../interface/character-tree';
 import type { IActionSpec } from '../interface/dsl/dsl';
 import type { IStory } from '../interface/story';
+import { CharacterType } from '../constants/character';
 
 export type IProcessorMap = Record<string, Record<string, IActionProcessorItem>>;
 
@@ -56,7 +56,11 @@ export class ActionProcessor implements IActionProcessor {
   }
 
   getProcessor(name: string, actionName: string): IActionProcessorItem {
-    return this._processorRegistry.getProcessor(name, actionName);
+    // 获取processor，找不到就用common的processor
+    return (
+      this._processorRegistry.getProcessor(name, actionName) ||
+      this._processorRegistry.getProcessor(CharacterType.COMMON, actionName)
+    );
   }
 
   /**

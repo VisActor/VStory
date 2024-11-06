@@ -1,15 +1,16 @@
 import React, { createRef, useEffect } from 'react';
-import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../vstory-core/src';
-import { registerTextAction, registerVChartAction } from '../../../../vstory-player/src';
+import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
+import { registerCommonBounceAction, registerTextAction, registerVChartAction } from '../../../../../vstory-player/src';
 
 registerGraphics();
 registerCharacters();
 registerVChartAction();
 registerTextAction();
+registerCommonBounceAction();
 initVR();
 
-export const BarChart1 = () => {
-  const id = 'BarChart1';
+export const Bounce = () => {
+  const id = 'Bounce';
   const canvas = createRef();
 
   useEffect(() => {
@@ -52,34 +53,43 @@ export const BarChart1 = () => {
                   characterActions: [
                     {
                       startTime: 0,
-                      action: 'appear',
+                      action: 'bounce',
                       payload: [
                         {
-                          selector: ':not(bar)',
+                          // selector: 'cartesianAxis-band',
                           animation: {
                             duration: 2000,
                             easing: 'linear'
-                            // effect: 'fade'
-                          } as any
-                        }
-                      ]
-                    },
-                    {
-                      startTime: 0,
-                      action: 'appear',
-                      payload: [
-                        {
-                          selector: 'bar',
-                          animation: {
-                            duration: 3000,
-                            easing: 'linear',
-                            effect: 'barLeap',
-                            oneByOne: true,
-                            dimensionCount: 5
                           } as any
                         }
                       ]
                     }
+                    // {
+                    //   startTime: 2000,
+                    //   action: 'appear',
+                    //   payload: [
+                    //     {
+                    //       selector: 'cartesianAxis-linear',
+                    //       animation: {
+                    //         duration: 2000,
+                    //         easing: 'linear'
+                    //       } as any
+                    //     }
+                    //   ]
+                    // },
+                    // {
+                    //   startTime: 4000,
+                    //   action: 'appear',
+                    //   payload: [
+                    //     {
+                    //       selector: ':not(cartesianAxis-band) :not(cartesianAxis-linear)',
+                    //       animation: {
+                    //         duration: 2000,
+                    //         easing: 'linear'
+                    //       } as any
+                    //     }
+                    //   ]
+                    // }
                   ]
                 }
               ]
@@ -93,13 +103,19 @@ export const BarChart1 = () => {
           type: 'VChart',
           zIndex: 0,
           position: {
-            x: 100,
-            y: 100,
-            width: 300,
-            height: 300,
+            x: 50,
+            y: 50,
+            width: 100,
+            height: 100,
             angle: 0
           },
           options: {
+            padding: {
+              left: 6,
+              top: 6,
+              right: 6,
+              bottom: 6
+            },
             panel: {
               fill: 'white'
             },

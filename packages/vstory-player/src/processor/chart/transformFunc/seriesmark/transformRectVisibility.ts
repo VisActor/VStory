@@ -1,5 +1,6 @@
 import type VChart from '@visactor/vchart';
 import type { IOrientType } from '@visactor/vrender-components';
+import { BarBounce, BarLeap } from '@visactor/vstory-animate';
 import { commonFade } from './commonTransformMarkAppear';
 import type { IChartVisibilityPayload } from '../../interface';
 
@@ -7,7 +8,7 @@ import type { IChartVisibilityPayload } from '../../interface';
 export const transformRectVisibility = (
   instance: VChart,
   animation: IChartVisibilityPayload['animation'],
-  option: { markIndex: number; disappear: boolean }
+  option: { markIndex: number; disappear: boolean; payload: any }
 ) => {
   switch (animation.effect) {
     case 'grow': {
@@ -20,6 +21,16 @@ export const transformRectVisibility = (
       return rectGrow(instance, animation, {
         ...option,
         center: true
+      });
+    }
+    case 'barBounce': {
+      return barBounce(instance, animation, {
+        ...option.payload
+      });
+    }
+    case 'barLeap': {
+      return barLeap(instance, animation, {
+        ...option.payload
       });
     }
     case 'fade':
@@ -93,4 +104,58 @@ const getXYAxis = (instance: VChart) => {
   }) as any;
 
   return [xAxis, yAxis];
+};
+
+const getCustomBarParams = (
+  instance: VChart,
+  animation: IChartVisibilityPayload['animation'],
+  option = { dimensionCount: 1 }
+) => {
+  const { duration: totalTime, loop, oneByOne, easing } = animation;
+  const { dimensionCount = 1 } = option;
+
+  const delayPerTime = BarBounce.delayPerTime ?? 50;
+  const enterPerTime = BarBounce.enterPerTime ?? 300;
+  // 柱子+label
+  const standTime = delayPerTime * (dimensionCount - 1) + enterPerTime + enterPerTime;
+  const ratio = totalTime / standTime;
+
+  const duration = oneByOne ? enterPerTime * ratio : totalTime;
+
+  return {
+    duration,
+    loop,
+    oneByOne: oneByOne ? duration + (delayPerTime - enterPerTime) * ratio : oneByOne,
+    easing
+  };
+};
+
+const barBounce = (
+  instance: VChart,
+  animation: IChartVisibilityPayload['animation'],
+  option = { dimensionCount: 1 }
+) => {
+  const { duration, loop, oneByOne, easing } = getCustomBarParams(instance, animation, option);
+
+  return {
+    channel: ['x', 'y', 'x1', 'y1', 'width', 'height'],
+    custom: BarBounce,
+    duration,
+    loop,
+    oneByOne,
+    easing
+  };
+};
+
+const barLeap = (instance: VChart, animation: IChartVisibilityPayload['animation'], option = { dimensionCount: 1 }) => {
+  const { duration, loop, oneByOne, easing } = getCustomBarParams(instance, animation, option);
+
+  return {
+    channel: ['x', 'y', 'x1', 'y1', 'width', 'height', 'cornerRadius'],
+    custom: BarLeap,
+    duration,
+    loop,
+    oneByOne,
+    easing
+  };
 };

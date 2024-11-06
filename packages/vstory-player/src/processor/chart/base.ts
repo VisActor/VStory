@@ -14,6 +14,8 @@ export class VChartBaseActionProcessor extends ActionProcessorItem {
     let seriesList = vchart.getChart().getAllSeries();
     let componentsList = vchart.getChart().getAllComponents();
     const selectorList = selector.split(' ');
+    // 是否包含panel, >0为包含
+    let includePanel = 1;
     selectorList.forEach(subSelector => {
       if (subSelector === '*') {
         chart = true;
@@ -22,15 +24,24 @@ export class VChartBaseActionProcessor extends ActionProcessorItem {
         const data = this.selectByNameOrType(seriesList, componentsList, match, false);
         seriesList = data.seriesList;
         componentsList = data.componentsList;
+        if (match === 'panel') {
+          includePanel = -Infinity; // 如果被排除，那么一定不包含了
+        }
       } else {
         const data = this.selectByNameOrType(seriesList, componentsList, subSelector);
         seriesList = data.seriesList;
         componentsList = data.componentsList;
+        if (subSelector === 'panel') {
+          includePanel = Infinity; // 如果有正选，那么选中才算
+        } else {
+          includePanel--;
+        }
       }
     });
 
     return {
       chart,
+      panel: includePanel > 0,
       seriesList,
       componentsList
     };

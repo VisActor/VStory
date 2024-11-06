@@ -4,7 +4,8 @@ import { createRoot } from 'react-dom/client';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { API } from './demos/API';
 import { BarChart1 } from './demos/BarChart1';
-import { TextAnimate } from './demos/text';
+import { TextAnimate } from './demos/Text';
+import { Bounce } from './demos/animate/Bounce';
 
 type MenusType = (
   | {
@@ -31,6 +32,15 @@ const App = () => {
         {
           name: 'API Demo',
           component: API
+        }
+      ]
+    },
+    {
+      name: 'Animate',
+      subMenus: [
+        {
+          name: 'Bounce',
+          component: Bounce
         }
       ]
     },
