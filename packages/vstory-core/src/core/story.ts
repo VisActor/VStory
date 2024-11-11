@@ -68,6 +68,11 @@ export class Story implements IStory {
     this.load(this._dsl);
   }
 
+  reset() {
+    this._characterTree.reset();
+    this.player.reset();
+  }
+
   load(dsl: IStoryDSL) {
     this._dsl = dsl;
     if (!dsl) {

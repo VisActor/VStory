@@ -17,8 +17,13 @@ import { CommonSpecRuntime } from './runtime/common-spec';
 import { CommonLayoutRuntime } from './runtime/common-layout';
 import { ChartConfigProcess } from './chart-config-process';
 import type { ICharacterChart } from './interface/character-chart';
+import { mergeChartOption } from '../../utils/chart';
+import type { IVChart } from '@visactor/vchart';
 
-export class CharacterChart extends CharacterBase<IChartGraphicAttribute> implements ICharacterChart {
+export class CharacterChart<T extends IChartGraphicAttribute>
+  extends CharacterBase<IChartGraphicAttribute>
+  implements ICharacterChart
+{
   visActorType: 'chart' | 'component' | 'table' | 'common' = 'chart';
   protected declare _graphic: VChartGraphic;
   protected declare _config: IChartCharacterConfig;
@@ -117,7 +122,23 @@ export class CharacterChart extends CharacterBase<IChartGraphicAttribute> implem
       height: 500,
       mode: 'desktop-browser',
       interactive: false,
-      panel: {}
+      panel: {},
+      ticker: this._ticker,
+      chartInitOptions: mergeChartOption(
+        {
+          performanceHook: {
+            afterInitializeChart: (vchart: IVChart) => {
+              // (<IChartTemp>this.configProcess.dataTempTransform?.specTemp)?.afterInitialize({ character: this });
+              this._runtime.forEach(r => r.afterInitialize?.(vchart));
+            },
+
+            afterVRenderDraw: () => {
+              this._runtime.forEach(r => r.afterVRenderDraw?.());
+            }
+          }
+        },
+        this._config.options.initOption ?? {}
+      )
     };
   }
 }

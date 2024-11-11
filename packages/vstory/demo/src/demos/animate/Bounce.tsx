@@ -11,12 +11,11 @@ initVR();
 
 export const Bounce = () => {
   const id = 'Bounce';
-  const canvas = createRef();
 
   useEffect(() => {
-    if (!canvas.current) {
-      return;
-    }
+    const container = document.getElementById(id);
+    const canvas = document.createElement('canvas');
+    container?.appendChild(canvas);
 
     const chartSpec = {
       type: 'bar',
@@ -40,7 +39,7 @@ export const Bounce = () => {
       yField: 'sales'
     };
 
-    const story = new Story(null, { canvas: canvas.current, width: 800, height: 500, background: 'pink' });
+    const story = new Story(null, { canvas, width: 800, height: 500, background: 'pink' });
     const player = new Player(story);
     story.init(player);
 
@@ -185,9 +184,5 @@ export const Bounce = () => {
     };
   }, []);
 
-  return (
-    <div style={{ width: '100%', height: '100%' }} id={id}>
-      <canvas ref={canvas as any}></canvas>
-    </div>
-  );
+  return <div style={{ width: '100%', height: '100%' }} id={id}></div>;
 };

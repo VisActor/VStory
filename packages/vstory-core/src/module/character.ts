@@ -1,4 +1,5 @@
 import { VChartCharacter } from '../character/chart/character/vchart';
+import { WaveScatterCharacter } from '../character/chart/character/wave-scatter';
 import { TextCharacter } from '../character/component/character/text';
 import { StoryFactory } from '../utils/factory';
 
@@ -9,5 +10,6 @@ export function registerCharacters() {
   }
   _register = true;
   StoryFactory.registerCharacter(VChartCharacter.type, VChartCharacter);
+  StoryFactory.registerCharacter(WaveScatterCharacter.type, WaveScatterCharacter);
   StoryFactory.registerCharacter(TextCharacter.type, TextCharacter);
 }

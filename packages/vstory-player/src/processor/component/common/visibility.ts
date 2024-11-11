@@ -27,6 +27,8 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IActionSpec): void {
+    // 首先展示出来
+    character.show();
     const { animation = {} } = getPayload(actionSpec);
     const { effect = 'fade' } = animation as any;
     array(effect).forEach(_effect => {

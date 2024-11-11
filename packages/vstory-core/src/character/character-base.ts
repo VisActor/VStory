@@ -96,8 +96,8 @@ export abstract class CharacterBase<T> implements ICharacter {
   protected _clearGraphic(): void {
     // 卸载group，卸载graphic和text
     this._graphic.release();
-    this._graphic = null;
     this.canvas.removeGraphic(this._graphic);
+    this._graphic = null;
   }
 
   protected abstract getDefaultAttribute(): Partial<T>;

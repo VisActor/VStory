@@ -9,5 +9,6 @@ export interface ICharacterTree {
   addCharacter: (config: ICharacterConfig) => ICharacter;
   removeCharacter: (cId: string) => void;
   initCharacters: (spec: ICharacterConfig[]) => void;
+  reset: () => void;
   toDSL: () => ICharacterConfig[];
 }

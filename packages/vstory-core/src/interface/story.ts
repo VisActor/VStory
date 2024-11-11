@@ -15,6 +15,7 @@ export interface IStory extends IReleaseable {
   readonly player: IPlayer;
 
   load: (dsl: IStoryDSL) => void;
+  reset: () => void;
   toDSL: () => IStoryDSL;
 
   getCharacters: () => { [key: string]: ICharacter };

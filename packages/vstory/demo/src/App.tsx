@@ -7,6 +7,7 @@ import { BarChart1 } from './demos/BarChart1';
 import { TextAnimate } from './demos/Text';
 import { Bounce } from './demos/animate/Bounce';
 import { Leap } from './demos/animate/Leap';
+import { WaveScatter } from './demos/story-chart/wave-scatter';
 
 type MenusType = (
   | {
@@ -58,6 +59,19 @@ const App = () => {
         },
         {
           name: 'Text',
+          component: TextAnimate
+        }
+      ]
+    },
+    {
+      name: 'Story Chart',
+      subMenus: [
+        {
+          name: 'Wave Scatter',
+          component: WaveScatter
+        },
+        {
+          name: 'Dynamic Bar Chart',
           component: TextAnimate
         }
       ]

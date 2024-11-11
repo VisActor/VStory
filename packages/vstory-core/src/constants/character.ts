@@ -3,6 +3,7 @@ export const enum CharacterType {
   VTABLE = 'VTable',
   WEATHERTABLE = 'WeatherTable',
   RANKINGBAR = 'RankingBar',
+  WAVE_SCATTER = 'WaveScatter',
   PROGRESS_PIE = 'ProgressPie',
 
   // component

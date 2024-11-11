@@ -80,6 +80,13 @@ export class CharacterTree implements ICharacterTree {
     });
   }
 
+  reset() {
+    for (const k in this._characters) {
+      const character = this._characters[k];
+      character.reset();
+    }
+  }
+
   toDSL() {
     return Object.keys(this._characters).map(k => {
       return this._characters[k].toDSL();

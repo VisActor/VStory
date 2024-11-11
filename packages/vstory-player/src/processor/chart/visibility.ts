@@ -18,6 +18,8 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
   }
 
   run(character: ICharacter, actionSpec: IChartVisibilityAction): void {
+    // 首先展示出来
+    character.show();
     const vchart = character.graphic._vchart as IVChart;
     // 基于选择器做筛选
     // 同一个Action的payload数组中，项与项之间是覆盖关系，后项覆盖前项

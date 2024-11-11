@@ -14,7 +14,10 @@ export interface IPlayer extends IReleaseable {
 
   // 因为场景树节点是相对定位的，所以播放器只能控制画面的缩放，不能控制大小
   setViewScale: (offsetX: number, offsetY: number, scaleX: number, scaleY: number, params: IViewSizeParams) => void;
-  play: (loop?: boolean) => void;
+  // loop小于0的话，不循环持续播放，loop等于0的话，仅放一次，loop大于0的话，持续循环播放
+  play: (loop?: number) => void;
+
+  reset: () => void;
 
   toDSL: () => IActSpec[];
 
