@@ -16,6 +16,7 @@ export interface IAnimationParams {
   duration: number;
   easing?: EasingType;
   loop?: number | boolean;
+  params?: Record<string, any>;
 }
 
 export interface IActionPayload {

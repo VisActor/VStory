@@ -4,6 +4,7 @@ export const enum CharacterType {
   WEATHERTABLE = 'WeatherTable',
   RANKINGBAR = 'RankingBar',
   WAVE_SCATTER = 'WaveScatter',
+  SCATTER_BAR = 'ScatterBar',
   PROGRESS_PIE = 'ProgressPie',
 
   // component

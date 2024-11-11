@@ -8,6 +8,9 @@ import { TextAnimate } from './demos/Text';
 import { Bounce } from './demos/animate/Bounce';
 import { Leap } from './demos/animate/Leap';
 import { WaveScatter } from './demos/story-chart/wave-scatter';
+import { ScatterBar } from './demos/story-chart/scatter-bar';
+import { ScatterBarSwing } from './demos/story-chart/scatter-bar-swing';
+import { ScatterBarThrow } from './demos/story-chart/scatter-bar-throw';
 
 type MenusType = (
   | {
@@ -69,6 +72,14 @@ const App = () => {
         {
           name: 'Wave Scatter',
           component: WaveScatter
+        },
+        {
+          name: 'Scatter Bar Throw',
+          component: ScatterBarThrow
+        },
+        {
+          name: 'Scatter Bar Swing',
+          component: ScatterBarSwing
         },
         {
           name: 'Dynamic Bar Chart',

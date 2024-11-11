@@ -4,12 +4,13 @@ import { BarBounce, BarLeap } from '@visactor/vstory-animate';
 import { commonFade } from './commonTransformMarkAppear';
 import type { IChartVisibilityPayload } from '../../interface';
 import { getCustomParams } from './utils';
+import type { ICharacter } from '@visactor/vstory-core';
 
 // 将payload转换为chart内置的动画type
 export const transformRectVisibility = (
   instance: VChart,
   animation: IChartVisibilityPayload['animation'],
-  option: { markIndex: number; disappear: boolean; payload: any }
+  option: { markIndex: number; disappear: boolean; payload: any; character?: ICharacter }
 ) => {
   switch (animation.effect) {
     case 'grow': {

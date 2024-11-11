@@ -12,6 +12,7 @@ import { ACTION_TYPE } from '../constants/action';
 
 export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
   name: 'appearOrDisAppear';
+  protected character: ICharacter | null;
 
   constructor() {
     super();
@@ -20,6 +21,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
   run(character: ICharacter, actionSpec: IChartVisibilityAction): void {
     // 首先展示出来
     character.show();
+    this.character = character;
     const vchart = character.graphic._vchart as IVChart;
     // 基于选择器做筛选
     // 同一个Action的payload数组中，项与项之间是覆盖关系，后项覆盖前项
@@ -51,6 +53,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
         seriesList.forEach(item => runnedSeriesSet.add(item));
         componentsList.forEach(item => runnedComponentsSet.add(item));
       });
+    this.character = null;
   }
 
   protected chartVisibility(chartGraphic: any, action: 'appear' | 'disappear', payload: IChartVisibilityPayload) {
@@ -215,24 +218,42 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       return;
     }
     marks.forEach((mark, markIndex) => {
-      const defaultMarkPayload = (VChartVisibilityActionProcessor as any)[`${mark.type}Payload`];
-      const mergePayload = merge(
-        {},
-        isFunction(defaultMarkPayload) ? defaultMarkPayload(series.type) : defaultMarkPayload || {},
-        payload
-      ) as IChartVisibilityPayload;
+      const config = this.getMarkAnimateConfig(vchart, mark, markIndex, action, series, payload);
       const product = mark.getProduct();
-      const appearTransform = (transformMap.appear as any)[mark.type];
-      const config =
-        appearTransform &&
-        appearTransform(vchart as any, mergePayload.animation, {
-          index: markIndex,
-          disappear: action === 'disappear',
-          payload: mergePayload
-        });
       // @ts-ignore
       product && product.animate && product.animate.run(config || {});
     });
+  }
+
+  getMarkPayload(mark: any, series: ISeries, payload: IChartVisibilityPayload) {
+    const defaultMarkPayload = (VChartVisibilityActionProcessor as any)[`${mark.type}Payload`];
+    const mergePayload = merge(
+      {},
+      isFunction(defaultMarkPayload) ? defaultMarkPayload(series.type) : defaultMarkPayload || {},
+      payload
+    ) as IChartVisibilityPayload;
+
+    return mergePayload;
+  }
+  getMarkAnimateConfig(
+    vchart: IVChart,
+    mark: any,
+    markIndex: number,
+    action: 'appear' | 'disappear',
+    series: ISeries,
+    payload: IChartVisibilityPayload
+  ) {
+    const mergePayload = this.getMarkPayload(mark, series, payload);
+    const appearTransform = (transformMap.appear as any)[mark.type];
+    return (
+      appearTransform &&
+      appearTransform(vchart as any, mergePayload.animation, {
+        index: markIndex,
+        disappear: action === 'disappear',
+        payload: mergePayload,
+        character: this.character
+      })
+    );
   }
 
   static rectPayload = (seriesType: string) => {

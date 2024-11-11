@@ -49,15 +49,16 @@ export class WaveScatterRuntime implements IChartCharacterRuntime {
       amplitude = 6,
       frequency = 2
     } = config.options;
-    const { viewBox } = rawAttribute;
-    const width = viewBox.x2 - viewBox.x1;
-    const height = viewBox.y2 - viewBox.y1;
+    // const { viewBox } = rawAttribute;
+    // const width = viewBox.x2 - viewBox.x1;
+    // const height = viewBox.y2 - viewBox.y1;
+    // console.log(rawAttribute);
     rawAttribute.waveAnimate = {
       duration: waveDuration,
-      customParameters: () => ({
-        width,
-        height
-      }),
+      // customParameters: () => ({
+      //   width,
+      //   height
+      // }),
       custom: WaveAnimate,
       easing: 'linear',
       loop: true

@@ -38,19 +38,6 @@ export class WaveScatterCharacter extends CharacterChart<IWaveScatterChartGraphi
         type: 'circlePacking',
         drill: true,
         layoutPadding: 5,
-        // animationAppear: {
-        //   circlePacking: {
-        //     channel: ['x', 'y'],
-        //     custom: WaveAnimate,
-        //     easing: 'linear',
-        //     // duration: 1000,
-        //     // customParameters: () => ({
-        //     //   width: 800,
-        //     //   height: 500,
-        //     // }),
-        //     loop: true
-        //   },
-        // },
         circlePacking: {
           customShape: (data: any, attrs: any, path: any) => {
             waterDrop(path, attrs.outerRadius * 2, 0, 0);

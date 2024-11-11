@@ -81,7 +81,7 @@ export const WaveScatter = () => {
         background: 'linear-gradient(180deg, #0099ff11 100%, #0099ff33 0%)',
         amplitude: 6,
         frequency: 2
-      }
+      } as any
     });
     player.play(0);
 
