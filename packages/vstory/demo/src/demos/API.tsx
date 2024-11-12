@@ -156,6 +156,45 @@ export const API = () => {
         ]
       }
     );
+    story.addCharacter(
+      {
+        type: 'Line',
+        id: 'line',
+        zIndex: 1,
+        position: {
+          top: 200,
+          left: 300,
+          width: 80,
+          height: 60
+        },
+        options: {
+          graphic: {
+            stroke: 'red',
+            point: [
+              { x: 0, y: 0 },
+              { x: 60, y: 30 }
+            ]
+          }
+        }
+      },
+      {
+        sceneId: 'defaultScene',
+        actions: [
+          {
+            action: 'appear',
+            payload: [
+              {
+                animation: {
+                  duration: 2000,
+                  easing: 'linear',
+                  effect: 'wipe'
+                } as any
+              }
+            ]
+          }
+        ]
+      }
+    );
     player.play();
 
     return () => {

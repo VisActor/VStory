@@ -17,13 +17,18 @@ export class BaseRuntime implements IComponentCharacterRuntime {
     const { options, position } = this._character.config;
     const layout = getLayoutFromWidget(position);
 
-    const { graphic = {}, text = {} } = options;
+    const { graphic = {}, text = {}, panel = {}, padding } = options;
 
-    merge(rawAttribute, graphic);
+    merge(rawAttribute, panel);
+    rawAttribute.padding = padding;
     merge(rawAttribute, layout);
     if (!rawAttribute.textStyle) {
       rawAttribute.textStyle = {};
     }
     merge(rawAttribute.textStyle, text);
+    if (!rawAttribute.graphic) {
+      rawAttribute.graphic = {};
+    }
+    merge(rawAttribute.graphic, graphic);
   }
 }
