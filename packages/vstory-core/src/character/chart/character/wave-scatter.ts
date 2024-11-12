@@ -58,9 +58,6 @@ export class WaveScatterCharacter extends CharacterChart<IWaveScatterChartGraphi
             //   }
             // },
           }
-        },
-        animationEnter: {
-          easing: 'cubicInOut'
         }
       }
     };

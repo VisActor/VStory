@@ -13,6 +13,7 @@ export class ScatterBarVisibilityActionProcessor extends VChartVisibilityActionP
 
 export function registerScatterBarVisibilityAction() {
   globalProcessorRegistry.registerProcessor(CharacterType.SCATTER_BAR, {
-    [ACTION_TYPE.APPEAR]: new ScatterBarVisibilityActionProcessor()
+    [ACTION_TYPE.APPEAR]: new ScatterBarVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new ScatterBarVisibilityActionProcessor()
   });
 }

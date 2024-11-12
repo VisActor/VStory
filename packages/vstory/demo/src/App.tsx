@@ -11,6 +11,7 @@ import { WaveScatter } from './demos/story-chart/wave-scatter';
 import { ScatterBar } from './demos/story-chart/scatter-bar';
 import { ScatterBarSwing } from './demos/story-chart/scatter-bar-swing';
 import { ScatterBarThrow } from './demos/story-chart/scatter-bar-throw';
+import { RankingBar } from './demos/story-chart/ranking-bar';
 
 type MenusType = (
   | {
@@ -83,7 +84,7 @@ const App = () => {
         },
         {
           name: 'Dynamic Bar Chart',
-          component: TextAnimate
+          component: RankingBar
         }
       ]
     }

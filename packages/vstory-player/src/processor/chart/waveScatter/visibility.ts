@@ -42,6 +42,7 @@ export class WaveScatterVisibilityActionProcessor extends VChartVisibilityAction
 
 export function registerWaveScatterVisibilityAction() {
   globalProcessorRegistry.registerProcessor(CharacterType.WAVE_SCATTER, {
-    [ACTION_TYPE.APPEAR]: new WaveScatterVisibilityActionProcessor()
+    [ACTION_TYPE.APPEAR]: new WaveScatterVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new WaveScatterVisibilityActionProcessor()
   });
 }

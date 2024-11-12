@@ -305,6 +305,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
 
 export function registerVChartVisibilityAction() {
   globalProcessorRegistry.registerProcessor(CharacterType.VCHART, {
-    [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor()
+    [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor()
   });
 }

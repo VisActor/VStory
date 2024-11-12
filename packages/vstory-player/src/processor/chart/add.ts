@@ -32,6 +32,6 @@ export class VChartAddActionProcessor extends VChartBaseActionProcessor {
 
 export function registerVChartAddAction() {
   globalProcessorRegistry.registerProcessor(CharacterType.VCHART, {
-    [ACTION_TYPE.APPEAR]: new VChartAddActionProcessor()
+    [ACTION_TYPE.ADD]: new VChartAddActionProcessor()
   });
 }

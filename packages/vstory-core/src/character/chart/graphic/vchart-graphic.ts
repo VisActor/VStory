@@ -81,7 +81,7 @@ export class VChartGraphic extends Rect {
           // viewBox: params.vi
           dpr,
           interactive,
-          animation: false,
+          // animation: false,
           autoFit: false,
           disableTriggerEvent,
           disableDirtyBounds,
@@ -176,56 +176,62 @@ export class VChartGraphic extends Rect {
     return stage.defaultLayer.getChildByName('root').AABBBounds.clone();
   }
 
+  // 不考虑标注什么的，只考虑图表的bounds
+  _updateViewBoxSimple() {
+    this._vchart.updateViewBox(this._localViewBox, true);
+  }
+
   protected _updateViewBox() {
-    if (!this._vchart) {
-      return;
-    }
-    this._boundsChangeTag = true;
-    const rect = this._vchart.getChart().getCanvasRect();
-    // 只有当尺寸变化时才resize
-    if (
-      !(
-        isNumberClose(rect.width, this._globalViewBox.x2 - this._globalViewBox.x1) &&
-        isNumberClose(rect.height, this._globalViewBox.y2 - this._globalViewBox.y1)
-      )
-    ) {
-      (this._vchart as any).resizeSync(
-        this._globalViewBox.x2 - this._globalViewBox.x1,
-        this._globalViewBox.y2 - this._globalViewBox.y1
-      );
-    }
-    const rootBounds = this._getVChartBounds().expand(0);
-    // 先更新位置
-    this.setAttributes({
-      // x: this._globalViewBox.x1 + rootBounds.x1,
-      // y: this._globalViewBox.y1 + rootBounds.y1,
-      // @ts-ignore
-      width: rootBounds.x2 - rootBounds.x1,
-      height: rootBounds.y2 - rootBounds.y1
-    });
+    return this._updateViewBoxSimple();
+    // if (!this._vchart) {
+    //   return;
+    // }
+    // this._boundsChangeTag = true;
+    // const rect = this._vchart.getChart().getCanvasRect();
+    // // 只有当尺寸变化时才resize
+    // if (
+    //   !(
+    //     isNumberClose(rect.width, this._globalViewBox.x2 - this._globalViewBox.x1) &&
+    //     isNumberClose(rect.height, this._globalViewBox.y2 - this._globalViewBox.y1)
+    //   )
+    // ) {
+    //   (this._vchart as any).resizeSync(
+    //     this._globalViewBox.x2 - this._globalViewBox.x1,
+    //     this._globalViewBox.y2 - this._globalViewBox.y1
+    //   );
+    // }
+    // const rootBounds = this._getVChartBounds().expand(0);
+    // // 先更新位置
+    // this.setAttributes({
+    //   // x: this._globalViewBox.x1 + rootBounds.x1,
+    //   // y: this._globalViewBox.y1 + rootBounds.y1,
+    //   // @ts-ignore
+    //   width: rootBounds.x2 - rootBounds.x1,
+    //   height: rootBounds.y2 - rootBounds.y1
+    // });
 
-    // 如果 图表bounds 没有变化，则不更新
-    if (this._BoundsViewBox && isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {
-      return;
-    }
+    // // 如果 图表bounds 没有变化，则不更新
+    // if (this._BoundsViewBox && isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {
+    //   return;
+    // }
 
-    this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1, -rootBounds.y1);
-    this._BoundsViewBox = rootBounds;
+    // this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1, -rootBounds.y1);
+    // this._BoundsViewBox = rootBounds;
 
-    // viewBox 在展示 bounds 下的位置
-    this._localViewBox.x1 = -rootBounds.x1;
-    this._localViewBox.y1 = -rootBounds.y1;
-    this._localViewBox.x2 += -rootBounds.x1;
-    this._localViewBox.y2 += -rootBounds.y1;
+    // // viewBox 在展示 bounds 下的位置
+    // this._localViewBox.x1 = -rootBounds.x1;
+    // this._localViewBox.y1 = -rootBounds.y1;
+    // this._localViewBox.x2 += -rootBounds.x1;
+    // this._localViewBox.y2 += -rootBounds.y1;
 
-    const renderViewBox = { ...rootBounds };
-    renderViewBox.x2 -= renderViewBox.x1;
-    renderViewBox.y2 -= renderViewBox.y1;
-    renderViewBox.x1 = 0;
-    renderViewBox.y1 = 0;
-    // 这个时候需要改的是vrender的viewBox
-    // @ts-ignore
-    this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);
+    // const renderViewBox = { ...rootBounds };
+    // renderViewBox.x2 -= renderViewBox.x1;
+    // renderViewBox.y2 -= renderViewBox.y1;
+    // renderViewBox.x1 = 0;
+    // renderViewBox.y1 = 0;
+    // // 这个时候需要改的是vrender的viewBox
+    // // @ts-ignore
+    // this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);
   }
 
   release() {

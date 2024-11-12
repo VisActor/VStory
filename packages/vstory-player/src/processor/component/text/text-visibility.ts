@@ -49,6 +49,7 @@ export class TextVisibilityActionProcessor extends CommonVisibilityActionProcess
 
 export function registerTextVisibilityAction() {
   globalProcessorRegistry.registerProcessor(CharacterType.TEXT, {
-    [ACTION_TYPE.APPEAR]: new TextVisibilityActionProcessor()
+    [ACTION_TYPE.APPEAR]: new TextVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new TextVisibilityActionProcessor()
   });
 }

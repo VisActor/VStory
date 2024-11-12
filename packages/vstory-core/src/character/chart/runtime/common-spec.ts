@@ -37,6 +37,7 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
     if (padding) {
       merge(spec, { padding });
     }
+    spec.animation = false;
     merge(spec, { ...rootConfig });
   }
 }
