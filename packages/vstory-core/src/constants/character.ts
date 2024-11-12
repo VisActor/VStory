@@ -9,6 +9,7 @@ export const enum CharacterType {
 
   // component
   TEXT = 'Text',
+  RECT = 'Rect',
 
   // 通用的类型，一般在查找effect的时候所有类型都可以匹配
   COMMON = 'Common'

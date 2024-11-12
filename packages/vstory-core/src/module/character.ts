@@ -2,6 +2,7 @@ import { RankingBarCharacter, registerRankingBarTemp } from '../character/chart/
 import { ScatterBarCharacter } from '../character/chart/character/scatter-bar';
 import { VChartCharacter } from '../character/chart/character/vchart';
 import { WaveScatterCharacter } from '../character/chart/character/wave-scatter';
+import { RectCharacter } from '../character/component/character/rect';
 import { TextCharacter } from '../character/component/character/text';
 import { StoryFactory } from '../utils/factory';
 
@@ -17,4 +18,5 @@ export function registerCharacters() {
   StoryFactory.registerCharacter(WaveScatterCharacter.type, WaveScatterCharacter);
   StoryFactory.registerCharacter(ScatterBarCharacter.type, ScatterBarCharacter);
   StoryFactory.registerCharacter(TextCharacter.type, TextCharacter);
+  StoryFactory.registerCharacter(RectCharacter.type, RectCharacter);
 }

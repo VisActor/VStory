@@ -1,11 +1,15 @@
 import React, { createRef, useEffect } from 'react';
 import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
-import { registerCommonBounceAction, registerTextAction, registerVChartAction } from '../../../../../vstory-player/src';
+import {
+  registerCommonBounceAction,
+  registerVComponentAction,
+  registerVChartAction
+} from '../../../../../vstory-player/src';
 
 registerGraphics();
 registerCharacters();
 registerVChartAction();
-registerTextAction();
+registerVComponentAction();
 registerCommonBounceAction();
 initVR();
 

@@ -7,7 +7,7 @@ export interface IComponentCharacterConfig extends ICharacterConfigBase {
     // 面板配置
     panel?: any;
     // 文字配置
-    text?: IEditorTextGraphicAttribute;
+    text?: any;
     // 边距
     padding?: { left: number; top: number; right: number; bottom: number };
   };

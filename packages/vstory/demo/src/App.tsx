@@ -12,6 +12,7 @@ import { ScatterBar } from './demos/story-chart/scatter-bar';
 import { ScatterBarSwing } from './demos/story-chart/scatter-bar-swing';
 import { ScatterBarThrow } from './demos/story-chart/scatter-bar-throw';
 import { RankingBar } from './demos/story-chart/ranking-bar';
+import { UnitInfographic } from './demos/template/unit-infographic';
 
 type MenusType = (
   | {
@@ -85,6 +86,15 @@ const App = () => {
         {
           name: 'Dynamic Bar Chart',
           component: RankingBar
+        }
+      ]
+    },
+    {
+      name: 'Template',
+      subMenus: [
+        {
+          name: 'Unit Infographic',
+          component: UnitInfographic
         }
       ]
     }

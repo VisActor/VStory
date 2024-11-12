@@ -1,11 +1,11 @@
 import React, { createRef, useEffect } from 'react';
 import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
-import { registerTextAction, registerVChartAction } from '../../../../../vstory-player/src';
+import { registerVComponentAction, registerVChartAction } from '../../../../../vstory-player/src';
 
 registerGraphics();
 registerCharacters();
 registerVChartAction();
-registerTextAction();
+registerVComponentAction();
 initVR();
 
 async function loadDSL() {
