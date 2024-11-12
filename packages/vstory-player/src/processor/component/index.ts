@@ -1,7 +1,9 @@
-import { registerRectVisibilityAction } from './rect/rect-visibility';
-import { registerTextVisibilityAction } from './text/text-visibility';
+import { registerImageAction } from './image';
+import { registerRectAction } from './rect';
+import { registerTextAction } from './text';
 
 export function registerVComponentAction() {
-  registerTextVisibilityAction();
-  registerRectVisibilityAction();
+  registerTextAction();
+  registerRectAction();
+  registerImageAction();
 }

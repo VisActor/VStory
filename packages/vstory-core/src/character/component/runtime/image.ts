@@ -1,6 +1,6 @@
 import type { IComponentCharacterRuntime } from '../interface/runtime';
 import { BaseRuntime } from './base';
 
-export class RectRuntime extends BaseRuntime implements IComponentCharacterRuntime {
-  type = 'Rect';
+export class ImageRuntime extends BaseRuntime implements IComponentCharacterRuntime {
+  type = 'Image';
 }

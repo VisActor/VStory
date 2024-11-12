@@ -1,24 +1,17 @@
 import type { ComponentOptions } from '@visactor/vrender-components';
-import type { ITextComponentAttributes } from '../interface/character-text';
 import { merge } from '@visactor/vutils';
 import { TextComponent } from './TextComponent';
+import type { IRectComponentAttributes } from '../interface/character-rect';
 
 export class RectComponent extends TextComponent {
-  static defaultAttributes: Partial<ITextComponentAttributes> = {
+  static defaultAttributes: Partial<IRectComponentAttributes> = {
     visible: true,
     textStyle: {},
     width: 100,
-    height: 100,
-    fill: 'green',
-    padding: {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
-    }
+    height: 100
   };
 
-  constructor(attributes: ITextComponentAttributes, options?: ComponentOptions) {
+  constructor(attributes: IRectComponentAttributes, options?: ComponentOptions) {
     super(options?.skipDefault ? attributes : merge({}, RectComponent.defaultAttributes, attributes));
   }
 }
