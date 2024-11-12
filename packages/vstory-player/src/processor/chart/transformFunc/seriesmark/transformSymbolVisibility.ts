@@ -3,13 +3,19 @@ import { commonFade, commonGrow } from './commonTransformMarkAppear';
 import type { IChartVisibilityPayload } from '../../interface';
 import type { ICharacter } from '@visactor/vstory-core';
 import { SymbolSwing, SymbolThrow } from '@visactor/vstory-animate';
+import { getCustomParams } from './utils';
 
 export const throwBounce = (
   instance: VChart,
   animation: IChartVisibilityPayload['animation'],
   option: { markIndex: number; disappear: boolean; character?: ICharacter }
 ) => {
-  const { duration, loop, oneByOne, easing } = animation;
+  const { duration, oneByOne, easing } = getCustomParams(
+    animation,
+    animation.delayPerTime ?? 50,
+    animation.enterPerTime ?? 300
+  );
+  const { params = {} } = animation;
   const { disappear, character } = option;
   if (disappear || !character) {
     return commonFade(instance, animation, option);
@@ -22,10 +28,11 @@ export const throwBounce = (
     custom: SymbolThrow,
     easing,
     duration,
-    oneByOne: oneByOne && (-duration / 3) * 2,
+    oneByOne,
     customParameters: {
       width,
-      height
+      height,
+      ...params
     },
     reverse: true,
     reversed: true
@@ -36,7 +43,12 @@ export const swing = (
   animation: IChartVisibilityPayload['animation'],
   option: { markIndex: number; disappear: boolean; character?: ICharacter }
 ) => {
-  const { duration, loop, oneByOne, easing, params = {} } = animation;
+  const { duration, oneByOne, easing } = getCustomParams(
+    animation,
+    animation.delayPerTime ?? 30,
+    animation.enterPerTime ?? 200
+  );
+  const { params = {} } = animation;
   const { disappear, character } = option;
   if (disappear || !character) {
     return commonFade(instance, animation, option);
@@ -53,6 +65,7 @@ export const swing = (
     customParameters: {
       width,
       height,
+      delta: 30,
       ...params
     },
     reverse: true,

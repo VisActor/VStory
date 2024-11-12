@@ -27,9 +27,7 @@ export const transformArcVisibility = (
       return arcFade(instance, animation, option);
     }
     case 'pieLeap': {
-      return pieLeap(instance, animation, {
-        ...option.payload
-      });
+      return pieLeap(instance, animation);
     }
     default: {
       return arcFade(instance, animation, option);
@@ -103,12 +101,11 @@ const arcFade = (
   };
 };
 
-const pieLeap = (instance: VChart, animation: IChartVisibilityPayload['animation'], option = { dimensionCount: 1 }) => {
+const pieLeap = (instance: VChart, animation: IChartVisibilityPayload['animation']) => {
   const { duration, loop, oneByOne, easing } = getCustomParams(
     animation,
-    PieLeap.delayPerTime ?? 50,
-    PieLeap.enterPerTime ?? 300,
-    option
+    animation.delayPerTime ?? PieLeap.delayPerTime ?? 50,
+    animation.enterPerTime ?? PieLeap.enterPerTime ?? 300
   );
   return {
     channel: ['x', 'y', 'innerRadius', 'outerRadius'],

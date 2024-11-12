@@ -96,8 +96,10 @@ export const ScatterBarSwing = () => {
                   duration: 2000,
                   easing: 'linear',
                   effect: 'swing',
+                  oneByOne: true,
+                  dimensionCount: 6,
                   params: {
-                    delta: 60
+                    delta: 100
                   }
                 } as any
               }

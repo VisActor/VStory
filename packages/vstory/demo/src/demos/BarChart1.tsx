@@ -72,7 +72,6 @@ export const BarChart1 = () => {
                           animation: {
                             duration: 3000,
                             easing: 'linear',
-                            effect: 'barLeap',
                             oneByOne: true,
                             dimensionCount: 5
                           } as any

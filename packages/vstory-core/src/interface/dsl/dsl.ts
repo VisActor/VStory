@@ -16,6 +16,9 @@ export interface IAnimationParams {
   duration: number;
   easing?: EasingType;
   loop?: number | boolean;
+  dimensionCount?: number;
+  delayPerTime?: number;
+  enterPerTime?: number;
   params?: Record<string, any>;
 }
 

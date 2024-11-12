@@ -7,6 +7,7 @@ export class SymbolThrow extends ACustomAnimate<{ x?: number; y?: number }> {
   static enterPerTime: number = 300;
 
   declare valid: boolean;
+  declare showLine: boolean;
 
   constructor(
     from: { x?: number; y?: number },
@@ -21,6 +22,7 @@ export class SymbolThrow extends ACustomAnimate<{ x?: number; y?: number }> {
     };
 
     super(f, to, duration, easing, params);
+    this.showLine = params.showLine ?? true;
   }
 
   getEndProps(): Record<string, any> {
@@ -33,8 +35,10 @@ export class SymbolThrow extends ACustomAnimate<{ x?: number; y?: number }> {
 
   onBind(): void {
     this.target && this.target.setAttributes(this.from);
-    const shadowRoot = this.target.attachShadow();
-    shadowRoot.add(createLine({ lineDash: [3, 3] }));
+    if (this.showLine) {
+      const shadowRoot = this.target.attachShadow();
+      shadowRoot.add(createLine({ lineDash: [3, 3] }));
+    }
   }
 
   static getPowIn(pow: number) {
@@ -71,14 +75,16 @@ export class SymbolThrow extends ACustomAnimate<{ x?: number; y?: number }> {
     const { _layoutHeight, fill } = this.target.attribute;
     out.y = _layoutHeight - (_layoutHeight - this.to.y!) * ratio;
     const shadowRoot = this.target.shadowRoot;
-    const line = shadowRoot.children[0];
-    const height = _layoutHeight - out.y!;
-    line.setAttributes({
-      stroke: fill,
-      points: [
-        { x: 0, y: 0 },
-        { x: 0, y: height }
-      ]
-    });
+    if (shadowRoot) {
+      const line = shadowRoot.children[0];
+      const height = _layoutHeight - out.y!;
+      line.setAttributes({
+        stroke: fill,
+        points: [
+          { x: 0, y: 0 },
+          { x: 0, y: height }
+        ]
+      });
+    }
   }
 }

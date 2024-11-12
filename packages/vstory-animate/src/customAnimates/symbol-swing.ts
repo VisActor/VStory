@@ -12,6 +12,7 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
 
   declare valid: boolean;
   declare delta: number;
+  declare showLine: boolean;
 
   constructor(
     from: { x?: number; y?: number },
@@ -22,6 +23,7 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
   ) {
     super(from, to, duration, easing, params);
     this.delta = params.delta ?? 10;
+    this.showLine = params.showLine ?? true;
   }
 
   getEndProps(): Record<string, any> {
@@ -34,8 +36,10 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
 
   onBind(): void {
     this.target && this.target.setAttributes({ ...this.from, y: this.target.attribute._layoutHeight });
-    const shadowRoot = this.target.attachShadow();
-    shadowRoot.add(createLine({ lineDash: [3, 3], curveType: 'basis' }));
+    if (this.showLine) {
+      const shadowRoot = this.target.attachShadow();
+      shadowRoot.add(createLine({ lineDash: [3, 3], curveType: 'basis' }));
+    }
   }
 
   onUpdate(end: boolean, ratio: number, out: Record<string, any>): void {
@@ -65,16 +69,18 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
     const { _layoutHeight, fill } = this.target.attribute;
 
     const shadowRoot = this.target.shadowRoot;
-    const line = shadowRoot.children[0];
-    const height = _layoutHeight - out.y!;
-    line.setAttributes({
-      stroke: fill,
-      points: [
-        { x: 0, y: 0 },
-        { x: -deltaX, y: height / 2 },
-        // { x: -deltaX, y: height / 3 * 2 },
-        { x: -deltaX, y: height }
-      ]
-    });
+    if (shadowRoot) {
+      const line = shadowRoot.children[0];
+      const height = _layoutHeight - out.y!;
+      line.setAttributes({
+        stroke: fill,
+        points: [
+          { x: 0, y: 0 },
+          { x: -deltaX, y: height / 2 },
+          // { x: -deltaX, y: height / 3 * 2 },
+          { x: -deltaX, y: height }
+        ]
+      });
+    }
   }
 }

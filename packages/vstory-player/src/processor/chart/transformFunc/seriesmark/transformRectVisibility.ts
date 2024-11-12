@@ -26,14 +26,10 @@ export const transformRectVisibility = (
       });
     }
     case 'barBounce': {
-      return barBounce(instance, animation, {
-        ...option.payload
-      });
+      return barBounce(instance, animation);
     }
     case 'barLeap': {
-      return barLeap(instance, animation, {
-        ...option.payload
-      });
+      return barLeap(instance, animation);
     }
     case 'fade':
     default: {
@@ -49,7 +45,11 @@ const rectGrow = (
   animation: IChartVisibilityPayload['animation'],
   option = { center: false, disappear: false }
 ) => {
-  const { duration, loop, oneByOne, easing } = animation;
+  const { duration, loop, oneByOne, easing } = getCustomParams(
+    animation,
+    animation.delayPerTime ?? 60,
+    animation.enterPerTime ?? 100
+  );
   const { center, disappear } = option;
   const direction = instance.getChart().getSpec().direction ?? 'vertical';
   const xField = instance.getChart().getSpec().xField;
@@ -108,16 +108,11 @@ const getXYAxis = (instance: VChart) => {
   return [xAxis, yAxis];
 };
 
-const barBounce = (
-  instance: VChart,
-  animation: IChartVisibilityPayload['animation'],
-  option = { dimensionCount: 1 }
-) => {
+const barBounce = (instance: VChart, animation: IChartVisibilityPayload['animation']) => {
   const { duration, loop, oneByOne, easing } = getCustomParams(
     animation,
-    BarBounce.delayPerTime ?? 50,
-    BarBounce.enterPerTime ?? 300,
-    option
+    animation.delayPerTime ?? BarBounce.delayPerTime ?? 50,
+    animation.enterPerTime ?? BarBounce.enterPerTime ?? 300
   );
 
   return {
@@ -130,12 +125,11 @@ const barBounce = (
   };
 };
 
-const barLeap = (instance: VChart, animation: IChartVisibilityPayload['animation'], option = { dimensionCount: 1 }) => {
+const barLeap = (instance: VChart, animation: IChartVisibilityPayload['animation']) => {
   const { duration, loop, oneByOne, easing } = getCustomParams(
     animation,
-    BarBounce.delayPerTime ?? 50,
-    BarBounce.enterPerTime ?? 300,
-    option
+    animation.delayPerTime ?? BarBounce.delayPerTime ?? 50,
+    animation.enterPerTime ?? BarBounce.enterPerTime ?? 300
   );
 
   return {

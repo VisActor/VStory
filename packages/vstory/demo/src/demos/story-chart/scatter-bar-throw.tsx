@@ -95,7 +95,12 @@ export const ScatterBarThrow = () => {
                 animation: {
                   duration: 2000,
                   easing: 'linear',
-                  effect: 'throwBounce'
+                  effect: 'throwBounce',
+                  oneByOne: true,
+                  dimensionCount: 6,
+                  params: {
+                    showLine: false
+                  }
                 } as any
               }
             ]
