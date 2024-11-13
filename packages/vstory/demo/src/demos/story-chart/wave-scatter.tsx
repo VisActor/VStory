@@ -83,7 +83,7 @@ export const WaveScatter = () => {
         frequency: 2
       } as any
     });
-    player.play(0);
+    player.play(-1);
 
     return () => {
       story.release();

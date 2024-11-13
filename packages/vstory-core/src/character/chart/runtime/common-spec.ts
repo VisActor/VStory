@@ -37,7 +37,10 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
     if (padding) {
       merge(spec, { padding });
     }
-    spec.animation = false;
+    spec.animation = true;
+    // 关闭默认的入场动画
+    spec.animationAppear = false;
+    spec.animationEnter = false;
     merge(spec, { ...rootConfig });
   }
 }

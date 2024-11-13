@@ -19,10 +19,10 @@ export class CommonLayoutRuntime implements IChartCharacterRuntime {
     const layoutData = getLayoutFromWidget(config.position);
     const layout = getLayoutFromWidget(config.position);
     const viewBox = {
-      x1: layout.x,
-      x2: layout.x + layout.width,
-      y1: layout.y,
-      y2: layout.y + layout.height
+      x1: 0,
+      x2: layout.width,
+      y1: 0,
+      y2: layout.height
     };
     rawAttribute.viewBox = viewBox;
     rawAttribute.renderCanvas = this._character.canvas.getNativeCanvas();

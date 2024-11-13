@@ -3,9 +3,8 @@ import VChart from '@visactor/vchart';
 import type { GraphicType, IRectGraphicAttribute, ITicker } from '@visactor/vrender-core';
 import { genNumberType, IGraphicAttribute, Rect } from '@visactor/vrender-core';
 import type { IBoundsLike } from '@visactor/vutils';
-import { isNumberClose } from '@visactor/vutils';
+import { pointInAABB } from '@visactor/vutils';
 import { mergeChartOption } from '../../../utils/chart';
-import { isBoundsLikeEqual, isPointInBounds } from '../../../utils/space';
 
 export interface IChartGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
@@ -46,11 +45,6 @@ export class VChartGraphic extends Rect {
   }
 
   protected _boundsChangeTag: boolean = true;
-  // 设置的 viewBox 是全局值
-  private _globalViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
-  // 设置的 viewBox 相对于 vchart-graphic 的位置
-  private _localViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
-  private _BoundsViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
 
   constructor(params: IChartGraphicAttribute) {
     const { panel, zIndex } = params;
@@ -78,7 +72,7 @@ export class VChartGraphic extends Rect {
           mode,
           modeParams,
           canvasControled: false,
-          // viewBox: params.vi
+          viewBox,
           dpr,
           interactive,
           // animation: false,
@@ -116,9 +110,6 @@ export class VChartGraphic extends Rect {
       // 关闭交互
       // stage.pauseTriggerEvent();
     }
-    if (viewBox) {
-      this.updateViewBox(viewBox);
-    }
     stage.resumeRender();
   }
 
@@ -130,108 +121,7 @@ export class VChartGraphic extends Rect {
   pointInViewBox(canvasX: number, canvasY: number): boolean {
     const target = { x: 0, y: 0 };
     this.globalTransMatrix.transformPoint({ x: canvasX, y: canvasY }, target);
-    return isPointInBounds(target, this._localViewBox);
-  }
-
-  updateSpec(spec: ISpec, viewBox?: IBoundsLike, forceMerge = false, morphConfig = false) {
-    this._boundsChangeTag = true;
-    // 如果有新的viewBox
-    if (viewBox) {
-      this._setGlobalViewBox(viewBox);
-    }
-    if (this._globalViewBox) {
-      spec.width = this._globalViewBox.x2 - this._globalViewBox.x1;
-      spec.height = this._globalViewBox.y2 - this._globalViewBox.y1;
-    }
-    this._vchart.updateSpecSync(spec, forceMerge, { reuse: false, morph: morphConfig }, { reMake: true, change: true });
-    if (this._BoundsViewBox) {
-      const rootBounds = this._getVChartBounds();
-      if (isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {
-        return;
-      }
-    }
-    this._updateViewBox();
-  }
-
-  private _setGlobalViewBox(viewBox: IBoundsLike) {
-    if (this._globalViewBox && isBoundsLikeEqual(this._globalViewBox, viewBox)) {
-      // 尺寸没变化
-      return false;
-    }
-    // 图表的设置大小
-    this._globalViewBox = { ...viewBox };
-    this._localViewBox = { x1: 0, y1: 0, x2: viewBox.x2 - viewBox.x1, y2: viewBox.y2 - viewBox.y1 };
-    return true;
-  }
-
-  protected updateViewBox(viewBox: IBoundsLike) {
-    if (!this._setGlobalViewBox(viewBox)) {
-      return;
-    }
-    this._updateViewBox();
-  }
-
-  protected _getVChartBounds() {
-    const stage = this._vchart.getStage();
-    return stage.defaultLayer.getChildByName('root').AABBBounds.clone();
-  }
-
-  // 不考虑标注什么的，只考虑图表的bounds
-  _updateViewBoxSimple() {
-    this._vchart.updateViewBox(this._localViewBox, true);
-  }
-
-  protected _updateViewBox() {
-    return this._updateViewBoxSimple();
-    // if (!this._vchart) {
-    //   return;
-    // }
-    // this._boundsChangeTag = true;
-    // const rect = this._vchart.getChart().getCanvasRect();
-    // // 只有当尺寸变化时才resize
-    // if (
-    //   !(
-    //     isNumberClose(rect.width, this._globalViewBox.x2 - this._globalViewBox.x1) &&
-    //     isNumberClose(rect.height, this._globalViewBox.y2 - this._globalViewBox.y1)
-    //   )
-    // ) {
-    //   (this._vchart as any).resizeSync(
-    //     this._globalViewBox.x2 - this._globalViewBox.x1,
-    //     this._globalViewBox.y2 - this._globalViewBox.y1
-    //   );
-    // }
-    // const rootBounds = this._getVChartBounds().expand(0);
-    // // 先更新位置
-    // this.setAttributes({
-    //   // x: this._globalViewBox.x1 + rootBounds.x1,
-    //   // y: this._globalViewBox.y1 + rootBounds.y1,
-    //   // @ts-ignore
-    //   width: rootBounds.x2 - rootBounds.x1,
-    //   height: rootBounds.y2 - rootBounds.y1
-    // });
-
-    // // 如果 图表bounds 没有变化，则不更新
-    // if (this._BoundsViewBox && isBoundsLikeEqual(rootBounds, this._BoundsViewBox)) {
-    //   return;
-    // }
-
-    // this._vchart.getStage().defaultLayer.translateTo(-rootBounds.x1, -rootBounds.y1);
-    // this._BoundsViewBox = rootBounds;
-
-    // // viewBox 在展示 bounds 下的位置
-    // this._localViewBox.x1 = -rootBounds.x1;
-    // this._localViewBox.y1 = -rootBounds.y1;
-    // this._localViewBox.x2 += -rootBounds.x1;
-    // this._localViewBox.y2 += -rootBounds.y1;
-
-    // const renderViewBox = { ...rootBounds };
-    // renderViewBox.x2 -= renderViewBox.x1;
-    // renderViewBox.y2 -= renderViewBox.y1;
-    // renderViewBox.x1 = 0;
-    // renderViewBox.y1 = 0;
-    // // 这个时候需要改的是vrender的viewBox
-    // // @ts-ignore
-    // this._vchart._compiler._view.renderer.setViewBox(renderViewBox, true);
+    return pointInAABB(target, this._vchart.getStage().viewBox);
   }
 
   release() {

@@ -46,7 +46,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   }
 
   tickTo(t: number): void {
-    this._graphic.vchart.getStage().ticker.tickAt(t);
+    this._graphic.vchart.getStage().ticker.tickAt && this._graphic.vchart.getStage().ticker.tickAt(t);
   }
 
   checkEvent(event: IStoryEvent): false | ICharacterPickInfo {

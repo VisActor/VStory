@@ -3,7 +3,6 @@ import { CharacterType, globalProcessorRegistry, globalTickerStore } from '@visa
 import { ACTION_TYPE } from '../../constants/action';
 import { VChartVisibilityActionProcessor } from '../visibility';
 import type { IChartVisibilityAction } from '../interface';
-import { IChartVisibilityPayload } from '../interface';
 import type { IVChart } from '@visactor/vchart';
 
 export class WaveScatterVisibilityActionProcessor extends VChartVisibilityActionProcessor {
