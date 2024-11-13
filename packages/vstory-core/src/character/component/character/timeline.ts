@@ -28,7 +28,6 @@ export class TimelineCharacter extends CharacterComponent<TimelineComponent, ITi
     return {
       ...super.getDefaultAttribute(),
       graphic: {
-        clipRange: 0,
         activeSymbolStyle: {
           size: 26
         },

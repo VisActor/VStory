@@ -40,7 +40,8 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
     spec.animation = true;
     // 关闭默认的入场动画
     spec.animationAppear = false;
-    spec.animationEnter = false;
+    // TODO 这个先不关闭，ADD的时候会调用
+    // spec.animationEnter = false;
     merge(spec, { ...rootConfig });
   }
 }

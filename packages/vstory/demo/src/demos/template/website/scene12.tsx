@@ -729,17 +729,30 @@ scene12.actions.forEach(({ characterId, characterActions }) => {
   if (characterId.includes('background') || characterId.includes('decoration') || characterId === 'timeline') {
     // do nothing
   } else {
-    characterActions.push({
-      action: 'disappear',
-      startTime: 7500,
-      payload: {
-        animation: {
-          duration: 1000,
-          easing: 'easeInOutQuad',
-          effect: 'move',
-          move: { pos: 'left', isVariableSpeed: false }
+    characterActions.push(
+      {
+        action: 'disappear',
+        startTime: 7500,
+        payload: {
+          animation: {
+            duration: 1000,
+            easing: 'easeInOutQuad',
+            effect: 'move',
+            move: { pos: 'left', isVariableSpeed: false }
+          }
+        }
+      },
+      {
+        action: 'disappear',
+        startTime: 7500,
+        payload: {
+          animation: {
+            duration: 1000,
+            easing: 'easeInOutQuad',
+            effect: 'fade'
+          }
         }
       }
-    });
+    );
   }
 });

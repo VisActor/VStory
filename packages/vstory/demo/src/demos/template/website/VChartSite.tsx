@@ -68,6 +68,9 @@ export const VChartSiteDemo = () => {
     story.init(player);
     (window as any).story = story;
     player.play(1);
+    return () => {
+      story.release();
+    };
   }, []);
   /** 视频 1920*1080, 等比例缩小 0.75 */
   return <div style={{ width: '1440px', height: '810px' }} id={id}></div>;
