@@ -13,6 +13,7 @@ export const enum CharacterType {
   SHAPE = 'Shape',
   IMAGE = 'Image',
   LINE = 'Line',
+  TIMELINE = 'Timeline',
 
   // 通用的类型，一般在查找effect的时候所有类型都可以匹配
   COMMON = 'Common'

@@ -1,12 +1,13 @@
 import type { IAction, IActionPayload, IActionSpec, ICharacter } from '@visactor/vstory-core';
 import { ActionProcessorItem } from '../../processor-item';
-import { getCharacterGraphic } from '../../common/common';
+import { getCharacterGraphic, getCharacterParentGraphic } from '../../common/common';
 import type { EasingType } from '@visactor/vrender-core';
 import { getPayload } from './utils';
 
 export interface IComponentStylePayLoad extends IActionPayload {
   graphic?: Record<string, any>;
   text?: Record<string, any>;
+  panel?: Record<string, any>;
 }
 
 export interface IComponentStyleAction extends IAction<IComponentStylePayLoad> {
@@ -33,17 +34,62 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentStyleAction): void {
-    const { animation = {}, graphic: graphicStyle, text: textStyle } = getPayload(actionSpec) as IComponentStylePayLoad;
+    const {
+      animation = {},
+      graphic: graphicStyle,
+      text: textStyle,
+      panel: panelStyle
+    } = getPayload(actionSpec) as IComponentStylePayLoad;
 
     const { duration, easing } = animation as any;
-    const graphic = getCharacterGraphic(character)[0];
-    const text = getCharacterGraphic(character)[1];
+    const characters = getCharacterGraphic(character);
+    const component = getCharacterParentGraphic(character);
+    const text = characters[0];
+    const graphic = characters[characters.length - 1];
 
     if (graphic && graphicStyle) {
+      const componentStyle: any = {};
+      if ('x' in graphicStyle) {
+        componentStyle.x = graphicStyle.x;
+        delete graphicStyle.x;
+      }
+      if ('y' in graphicStyle) {
+        componentStyle.y = graphicStyle.y;
+        delete graphicStyle.y;
+      }
+      if ('dx' in graphicStyle) {
+        componentStyle.dx = graphicStyle.dx;
+        delete graphicStyle.dx;
+      }
+      if ('dy' in graphicStyle) {
+        componentStyle.dy = graphicStyle.dy;
+        delete graphicStyle.dy;
+      }
+      if ('scaleX' in graphicStyle) {
+        componentStyle.scaleX = graphicStyle.scaleX;
+        delete graphicStyle.scaleX;
+      }
+      if ('scaleY' in graphicStyle) {
+        componentStyle.scaleY = graphicStyle.scaleY;
+        delete graphicStyle.scaleY;
+      }
+      if ('width' in graphicStyle) {
+        componentStyle.width = graphicStyle.width;
+        delete graphicStyle.width;
+      }
+      if ('height' in graphicStyle) {
+        componentStyle.height = graphicStyle.height;
+        delete graphicStyle.height;
+      }
       graphic.animate().to(graphicStyle, duration, easing as EasingType);
+      // 获取到x，y，width，height，scaleX，scaleY，将这些属性应用到component上
+      component.animate().to(componentStyle, duration, easing as EasingType);
     }
     if (text && textStyle) {
-      graphic.animate().to(textStyle, duration, easing as EasingType);
+      text.animate().to(textStyle, duration, easing as EasingType);
     }
+    // if (component && panelStyle) {
+    //   component.animate().to(panelStyle, duration, easing as EasingType);
+    // }
   }
 }

@@ -2,9 +2,9 @@ import type { ComponentOptions } from '@visactor/vrender-components';
 import { merge } from '@visactor/vutils';
 import type { IImage, ILine } from '@visactor/vrender-core';
 import type { ILineComponentAttributes } from '../interface/character-line';
-import { TextComponent } from './TextComponent';
+import { BaseComponent } from './BaseComponent';
 
-export class LineComponent extends TextComponent {
+export class LineComponent extends BaseComponent {
   static defaultAttributes: Partial<ILineComponentAttributes> = {
     visible: true,
     textStyle: {},
@@ -30,12 +30,13 @@ export class LineComponent extends TextComponent {
   }
   protected renderLine() {
     const { graphic, padding } = this.attribute as ILineComponentAttributes;
-    if (!graphic.x) {
-      graphic.x = padding.left;
+    const attrs = { ...graphic };
+    if (!attrs.x) {
+      attrs.x = padding.left;
     }
-    if (!graphic.y) {
-      graphic.y = padding.top;
+    if (!attrs.y) {
+      attrs.y = padding.top;
     }
-    this.createOrUpdateChild('line', { ...graphic, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null }, 'line') as ILine;
+    this.createOrUpdateChild('line', { ...attrs, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null }, 'line') as ILine;
   }
 }

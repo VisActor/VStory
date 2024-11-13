@@ -7,6 +7,10 @@ import type { ITypeWriterParams } from './interface';
 import { getCharacterByEffect } from '../../common/common';
 import { CommonVisibilityActionProcessor } from '../common/visibility';
 import { ACTION_TYPE } from '../../constants/action';
+import { CommonStyleActionProcessor } from '../common/style';
+import { CommonMoveToActionProcessor } from '../common/move';
+import { CommonScaleToActionProcessor } from '../common/scale';
+import { CommonBounceActionProcessor } from '../common/bounce';
 
 function typewriterIn(character: ICharacter, animation: ITypeWriterParams, effect: string) {
   const graphics = getCharacterByEffect(character, effect) as IGraphic[];
@@ -50,6 +54,10 @@ export class TextVisibilityActionProcessor extends CommonVisibilityActionProcess
 export function registerTextVisibilityAction() {
   globalProcessorRegistry.registerProcessor(CharacterType.TEXT, {
     [ACTION_TYPE.APPEAR]: new TextVisibilityActionProcessor(),
-    [ACTION_TYPE.DISAPPEAR]: new TextVisibilityActionProcessor()
+    [ACTION_TYPE.DISAPPEAR]: new TextVisibilityActionProcessor(),
+    [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),
+    [ACTION_TYPE.MOVETO]: new CommonMoveToActionProcessor(),
+    [ACTION_TYPE.SCALETO]: new CommonScaleToActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor()
   });
 }

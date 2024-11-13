@@ -20,6 +20,8 @@ export interface IAnimationParams {
   delayPerTime?: number;
   enterPerTime?: number;
   params?: Record<string, any>;
+  effect?: string | string[];
+  [key: string]: any;
 }
 
 export interface IActionPayload {

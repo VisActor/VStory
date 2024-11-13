@@ -26,12 +26,9 @@ export class RectCharacter extends CharacterComponent<RectComponent, IRectCompon
 
   protected getDefaultAttribute(): Partial<IRectComponentAttributes> {
     return {
-      visible: true,
-      x: 0,
-      y: 0,
+      ...super.getDefaultAttribute(),
       width: 100,
-      height: 100,
-      textStyle: {}
+      height: 100
     };
   }
 

@@ -81,6 +81,7 @@ importers:
       '@visactor/vstory-editor': workspace:0.0.9-alpha.2
       '@visactor/vstory-player': workspace:0.0.9-alpha.2
       '@visactor/vstory-templates': workspace:0.0.9-alpha.2
+      '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
       canvas: 2.11.2
       eslint: ~8.18.0
@@ -112,6 +113,7 @@ importers:
       '@types/jest': 26.0.24
       '@types/react': 18.3.11
       '@types/react-dom': 18.3.0
+      '@visactor/vutils': 0.18.17
       '@vitejs/plugin-react': 3.1.0_vite@3.2.6
       canvas: 2.11.2
       eslint: 8.18.0
@@ -3148,13 +3150,11 @@ packages:
 
   /@turf/helpers/6.5.0:
     resolution: {integrity: sha512-VbI1dV5bLFzohYYdgqwikdMVpe7pJ9X3E+dlr425wa2/sMJqYDhTO++ec38/pcPvPE6oD9WEEeU3Xu3gza+VPw==}
-    dev: false
 
   /@turf/invariant/6.5.0:
     resolution: {integrity: sha512-Wv8PRNCtPD31UVbdJE/KVAWKe7l6US+lJItRR/HOEW3eh+U/JwRCSUl/KZ7bmjM/C+zLNoreM2TU6OoLACs4eg==}
     dependencies:
       '@turf/helpers': 6.5.0
-    dev: false
 
   /@turf/meta/3.14.0:
     resolution: {integrity: sha512-OtXqLQuR9hlQ/HkAF/OdzRea7E0eZK1ay8y8CBXkoO2R6v34CsDrWYLMSo0ZzMsaQDpKo76NPP2GGo+PyG1cSg==}
@@ -3855,7 +3855,6 @@ packages:
       '@turf/helpers': 6.5.0
       '@turf/invariant': 6.5.0
       eventemitter3: 4.0.7
-    dev: false
 
   /@visactor/vutils/0.18.5:
     resolution: {integrity: sha512-FtJFWaoZlnVipdUvq9U8X1KCPuSd5G2pxfeybJeekLibcDd1nyHoAVV4gH2oZeN1hul4p4Rx9ZZMlHfbIW0Faw==}
@@ -6333,7 +6332,6 @@ packages:
 
   /eventemitter3/4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
-    dev: false
 
   /exec-sh/0.3.6:
     resolution: {integrity: sha512-nQn+hI3yp+oD0huYhKwvYI32+JFeq+XkNcD1GAo3Y/MjxsfVGmrrzrnzjWiNY6f+pUCP440fThsFh5gZrRAU/w==}

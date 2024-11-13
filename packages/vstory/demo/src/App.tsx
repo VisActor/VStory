@@ -13,6 +13,8 @@ import { ScatterBarSwing } from './demos/story-chart/scatter-bar-swing';
 import { ScatterBarThrow } from './demos/story-chart/scatter-bar-throw';
 import { RankingBar } from './demos/story-chart/ranking-bar';
 import { UnitInfographic } from './demos/template/unit-infographic';
+import { VChartSiteDemo } from './demos/template/website/VChartSite';
+import { TimelineAnimate } from './component/timeline';
 
 type MenusType = (
   | {
@@ -95,6 +97,19 @@ const App = () => {
         {
           name: 'Unit Infographic',
           component: UnitInfographic
+        },
+        {
+          name: 'VChart Demo',
+          component: VChartSiteDemo
+        }
+      ]
+    },
+    {
+      name: 'Component',
+      subMenus: [
+        {
+          name: 'Timeline',
+          component: TimelineAnimate
         }
       ]
     }

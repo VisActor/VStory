@@ -26,7 +26,7 @@ export interface IImageComponentAttributes extends IGroupGraphicAttribute {
 interface IImageCharacterConfig extends IComponentCharacterConfig {
   options: {
     text?: Partial<ITextGraphicAttribute & { textConfig: IRichTextAttribute['textConfig'] }>;
-    graphic: IGroupGraphicAttribute;
+    graphic: IGroupGraphicAttribute & IImageComponentAttributes;
     panel?: IGroupGraphicAttribute;
     padding?: { left: number; top: number; right: number; bottom: number };
   };

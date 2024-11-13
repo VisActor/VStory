@@ -26,12 +26,9 @@ export class ImageCharacter extends CharacterComponent<ImageComponent, IImageCom
 
   protected getDefaultAttribute(): Partial<IImageComponentAttributes> {
     return {
-      visible: true,
-      x: 0,
-      y: 0,
+      ...super.getDefaultAttribute(),
       width: 100,
-      height: 100,
-      textStyle: {}
+      height: 100
     };
   }
 

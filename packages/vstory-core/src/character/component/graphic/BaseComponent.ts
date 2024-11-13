@@ -5,8 +5,7 @@ import { merge } from '@visactor/vutils';
 import type { GraphicType, IRichText } from '@visactor/vrender-core';
 import { COMPONENT_NUMBER_TYPE } from './GroupComponent/component-group-graphic';
 
-// 文字组件可以根据锚点进行定位
-export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
+export class BaseComponent extends AbstractComponent<ITextComponentAttributes> {
   type: GraphicType = 'vstory-component-group' as any;
   numberType: number = COMPONENT_NUMBER_TYPE;
 
@@ -27,7 +26,7 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
   };
 
   constructor(attributes: ITextComponentAttributes, options?: ComponentOptions) {
-    super(options?.skipDefault ? attributes : merge({}, TextComponent.defaultAttributes, attributes));
+    super(options?.skipDefault ? attributes : merge({}, BaseComponent.defaultAttributes, attributes));
   }
 
   protected render(): void {
@@ -67,34 +66,18 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
     }
 
     // 重新设置richtext的位置，align设置在textConfig中，baseline设置到verticalDirection
-    textConfig = this.transformTextAttrsToRichTextConfig(textStyle, 'center');
+    textConfig = this.transformTextAttrsToRichTextConfig(textStyle, richtextTextAlign);
     richtext.setAttributes({
       textConfig,
-      verticalDirection: 'middle',
+      verticalDirection: richtextBaseline,
       width: boxWidth,
-      height: boxHeight
-      // x: boxWidth / 2,
-      // y: boxHeight / 2
+      height: boxHeight,
+      x: padding.left,
+      y: padding.top
     });
 
     this.attribute.width = boxWidth;
     this.attribute.height = boxHeight;
-
-    if (richtextTextAlign === 'left') {
-      this.attribute.dx = 0;
-    } else if (richtextTextAlign === 'right') {
-      this.attribute.dx = -boxWidth;
-    } else {
-      this.attribute.dx = -boxWidth / 2;
-    }
-
-    if (richtextBaseline === 'top') {
-      this.attribute.dy = 0;
-    } else if (richtextBaseline === 'bottom') {
-      this.attribute.dy = -boxHeight;
-    } else {
-      this.attribute.dy = -boxHeight / 2;
-    }
   }
 
   protected transformTextAttrsToRichTextConfig(

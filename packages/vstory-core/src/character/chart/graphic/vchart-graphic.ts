@@ -30,7 +30,7 @@ export interface IChartGraphicAttribute {
   y?: number;
   angle?: number;
   anchor?: [number, number];
-
+  zIndex?: number;
   panel?: Partial<IRectGraphicAttribute>;
 }
 
@@ -53,8 +53,8 @@ export class VChartGraphic extends Rect {
   private _BoundsViewBox: IBoundsLike = { x1: 0, y1: 0, x2: 100, y2: 100 };
 
   constructor(params: IChartGraphicAttribute) {
-    const { panel } = params;
-    super({ ...(panel || {}), visible: false });
+    const { panel, zIndex } = params;
+    super({ ...(panel || {}), zIndex, visible: false });
     this.numberType = CHART_NUMBER_TYPE;
     // 创建chart
     const {

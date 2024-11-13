@@ -9,6 +9,10 @@ import type { AxisBaseAttributes } from '@visactor/vrender-components';
 import { checkArrayOrder } from '../../utils/checkArrayOrder';
 import type { IGroup } from '@visactor/vrender-core';
 import { ACTION_TYPE } from '../constants/action';
+import { CommonBounceActionProcessor } from '../component/common/bounce';
+import { VChartUpdateActionProcessor } from './update';
+import { VChartAddActionProcessor } from './add';
+import { CommonStyleActionProcessor } from '../component/common/style';
 
 export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
   name: 'appearOrDisAppear';
@@ -306,6 +310,10 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
 export function registerVChartVisibilityAction() {
   globalProcessorRegistry.registerProcessor(CharacterType.VCHART, {
     [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor(),
-    [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor()
+    [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor(),
+    [ACTION_TYPE.UPDATE]: new VChartUpdateActionProcessor(),
+    [ACTION_TYPE.ADD]: new VChartAddActionProcessor(),
+    [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor()
   });
 }

@@ -1,17 +1,12 @@
-import type {
-  IGroupGraphicAttribute,
-  IRectGraphicAttribute,
-  IRichTextAttribute,
-  ITextGraphicAttribute
-} from '@visactor/vrender-core';
+import type { IGroupGraphicAttribute, IRichTextAttribute, ITextGraphicAttribute } from '@visactor/vrender-core';
 import type { ICharacter } from '../../../interface/character';
 import type { IComponentCharacterConfig } from '../../../interface/dsl/component';
 
 // graphic 配置
-export interface IRectComponentAttributes extends IGroupGraphicAttribute {
+export interface ITimelineComponentAttributes extends IGroupGraphicAttribute {
   // 结合富文本textConfig的文本配置
   textStyle?: Partial<ITextGraphicAttribute & { textConfig: IRichTextAttribute['textConfig'] }>;
-  graphic?: IRectGraphicAttribute;
+  graphic?: ITimelineComponentAttributes;
   /**
    * 内部边距
    */
@@ -23,15 +18,15 @@ export interface IRectComponentAttributes extends IGroupGraphicAttribute {
   };
 }
 
-interface IRectCharacterConfig extends IComponentCharacterConfig {
+interface ITimelineCharacterConfig extends IComponentCharacterConfig {
   options: {
     text?: Partial<ITextGraphicAttribute & { textConfig: IRichTextAttribute['textConfig'] }>;
-    graphic: IGroupGraphicAttribute & IRectComponentAttributes;
+    graphic: IGroupGraphicAttribute & ITimelineComponentAttributes;
     panel?: IGroupGraphicAttribute;
     padding?: { left: number; top: number; right: number; bottom: number };
   };
 }
 
-export interface ICharacterRect extends ICharacter {
-  config: IRectCharacterConfig;
+export interface ICharacterTimeline extends ICharacter {
+  config: ITimelineCharacterConfig;
 }

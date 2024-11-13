@@ -3,6 +3,7 @@ import { registerLineAction } from './line';
 import { registerRectAction } from './rect';
 import { registerShapeAction } from './shape';
 import { registerTextAction } from './text';
+import { registerTimelineVisibilityAction } from './timeline/timeline-visibility';
 
 export function registerVComponentAction() {
   registerTextAction();
@@ -10,4 +11,5 @@ export function registerVComponentAction() {
   registerImageAction();
   registerLineAction();
   registerShapeAction();
+  registerTimelineVisibilityAction();
 }

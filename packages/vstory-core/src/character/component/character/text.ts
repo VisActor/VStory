@@ -27,11 +27,9 @@ export class TextCharacter extends CharacterComponent<TextComponent, ITextCompon
 
   protected getDefaultAttribute(): Partial<ITextComponentAttributes> {
     return {
-      visible: true,
-      x: 0,
-      y: 0,
+      ...super.getDefaultAttribute(),
       textStyle: {
-        textAlign: 'left',
+        textAlign: 'center',
         textBaseline: 'top',
         text: 'input your text',
         fontSize: 16,

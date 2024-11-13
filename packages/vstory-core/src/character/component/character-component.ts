@@ -53,7 +53,13 @@ export abstract class CharacterComponent<T extends IGraphic, T1>
   }
 
   protected getDefaultAttribute(): Partial<T1> {
-    return {};
+    return {
+      zIndex: this._config.zIndex ?? 0,
+      visibleAll: false,
+      x: 0,
+      y: 0,
+      textStyle: {}
+    } as any;
   }
 
   protected applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void {

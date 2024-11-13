@@ -50,33 +50,171 @@ export const BarChart1 = () => {
                   characterId: '0',
                   characterActions: [
                     {
-                      startTime: 0,
                       action: 'appear',
-                      payload: [
-                        {
-                          selector: ':not(bar)',
-                          animation: {
-                            duration: 2000,
+                      startTime: 0,
+                      payload: {
+                        animation: {
+                          duration: 1000,
+                          easing: 'cubicOut',
+                          fade: {
+                            opacity: 1,
                             easing: 'linear'
-                            // effect: 'fade'
-                          } as any
+                          }
                         }
-                      ]
+                      }
                     },
                     {
-                      startTime: 0,
-                      action: 'appear',
-                      payload: [
-                        {
-                          selector: 'bar',
-                          animation: {
-                            duration: 3000,
-                            easing: 'linear',
-                            oneByOne: true,
-                            dimensionCount: 5
-                          } as any
+                      action: 'update',
+                      startTime: 1500,
+                      payload: {
+                        id: 'data',
+                        duration: 1000,
+                        data: [
+                          {
+                            x: '1',
+                            y: 100,
+                            type: 'Category1'
+                          },
+                          {
+                            x: '2',
+                            y: 100,
+                            type: 'Category1'
+                          },
+                          {
+                            x: '3',
+                            y: 100,
+                            type: 'Category1'
+                          },
+                          {
+                            x: '4',
+                            y: 100,
+                            type: 'Category1'
+                          }
+                        ].map((v, index) => {
+                          return {
+                            sourceValue: v,
+                            targetValue: {
+                              ...v,
+                              y: (index + 1) * 10
+                            }
+                          };
+                        })
+                      }
+                    },
+                    {
+                      action: 'update',
+                      startTime: 4500,
+                      payload: {
+                        duration: 1000,
+                        id: 'data',
+                        data: [
+                          {
+                            x: '1',
+                            y: 100,
+                            type: 'Category2'
+                          },
+                          {
+                            x: '2',
+                            y: 100,
+                            type: 'Category2'
+                          },
+                          {
+                            x: '3',
+                            y: 100,
+                            type: 'Category2'
+                          },
+                          {
+                            x: '4',
+                            y: 100,
+                            type: 'Category2'
+                          }
+                        ]
+                          .slice(0, 4)
+                          .map((v, index) => {
+                            return {
+                              sourceValue: v,
+                              targetValue: {
+                                ...v,
+                                y: (index + 1) * 10
+                              }
+                            };
+                          })
+                      }
+                    },
+                    {
+                      action: 'update',
+                      startTime: 5500,
+                      payload: {
+                        id: 'data',
+                        duration: 1000,
+                        data: [
+                          {
+                            x: '1',
+                            y: 100,
+                            type: 'Category1'
+                          },
+                          {
+                            x: '2',
+                            y: 100,
+                            type: 'Category1'
+                          },
+                          {
+                            x: '3',
+                            y: 100,
+                            type: 'Category1'
+                          },
+                          {
+                            x: '4',
+                            y: 100,
+                            type: 'Category1'
+                          },
+                          {
+                            x: '1',
+                            y: 100,
+                            type: 'Category2'
+                          },
+                          {
+                            x: '2',
+                            y: 100,
+                            type: 'Category2'
+                          },
+                          {
+                            x: '3',
+                            y: 100,
+                            type: 'Category2'
+                          },
+                          {
+                            x: '4',
+                            y: 100,
+                            type: 'Category2'
+                          }
+                        ].map((v, index) => {
+                          return {
+                            sourceValue: {
+                              ...v,
+                              y: ((index % 4) + 1) * 10
+                            },
+                            targetValue: {
+                              ...v,
+                              y: 100
+                            }
+                          };
+                        })
+                      }
+                    },
+                    {
+                      action: 'disappear',
+                      startTime: 6500,
+                      payload: {
+                        animation: {
+                          easing: 'cubicInOut',
+                          duration: 1000,
+                          fade: {
+                            opacity: 0.1,
+                            isBaseOpacity: true
+                          }
                         }
-                      ]
+                      }
                     }
                   ]
                 }
@@ -87,21 +225,135 @@ export const BarChart1 = () => {
       ],
       characters: [
         {
-          id: '0',
           type: 'VChart',
-          zIndex: 0,
+          id: `0`,
+          zIndex: 1,
           position: {
-            x: 100,
-            y: 100,
-            width: 300,
-            height: 300,
-            angle: 0
+            top: 100,
+            left: 199,
+            width: 260,
+            height: 335
           },
           options: {
             panel: {
-              fill: 'white'
+              fill: '#ffffff',
+              shadowColor: 'rgba(0, 0, 0, 0.05)',
+              shadowBlur: 10,
+              shadowOffsetX: 4,
+              shadowOffsetY: 4
             },
-            spec: chartSpec
+            spec: {
+              type: 'bar',
+              title: {
+                text: 'BarChart',
+                orient: 'bottom',
+                align: 'center',
+                textStyle: {
+                  fontSize: 10,
+                  lineHeight: 10
+                }
+              },
+              padding: [120, 60, 75, 60],
+              data: [
+                {
+                  id: 'data',
+                  values: [
+                    {
+                      x: '1',
+                      y: 100,
+                      type: 'Category1'
+                    },
+                    {
+                      x: '2',
+                      y: 100,
+                      type: 'Category1'
+                    },
+                    {
+                      x: '3',
+                      y: 100,
+                      type: 'Category1'
+                    },
+                    {
+                      x: '4',
+                      y: 100,
+                      type: 'Category1'
+                    },
+                    {
+                      x: '1',
+                      y: 100,
+                      type: 'Category2'
+                    },
+                    {
+                      x: '2',
+                      y: 100,
+                      type: 'Category2'
+                    },
+                    {
+                      x: '3',
+                      y: 100,
+                      type: 'Category2'
+                    },
+                    {
+                      x: '4',
+                      y: 100,
+                      type: 'Category2'
+                    }
+                  ]
+                }
+              ],
+              xField: ['x', 'type'],
+              yField: 'y',
+              seriesField: 'type',
+              bar: {
+                style: {
+                  fill: {
+                    gradient: 'linear',
+                    stops: [
+                      {
+                        offset: 1
+                      },
+                      {
+                        offset: 0,
+                        opacity: 0.6
+                      }
+                    ]
+                  }
+                },
+                state: {
+                  selected: {
+                    stroke: '#000',
+                    strokeWidth: 1
+                  }
+                }
+              },
+              label: {
+                style: {
+                  visible: false
+                }
+              },
+              axes: [
+                {
+                  orient: 'bottom',
+                  bandPadding: 0,
+                  paddingInner: 0,
+                  paddingOuter: 0,
+                  tick: { visible: false },
+                  label: { visible: false },
+                  grid: { visible: false }
+                },
+                {
+                  orient: 'left',
+                  tick: { visible: false },
+                  label: { visible: false },
+                  grid: { visible: false }
+                }
+              ],
+              animationUpdate: {
+                easing: 'cubicInOut',
+                duration: 1000
+              },
+              color: ['#4CC9E4', '#4954E6']
+            }
           }
         }
       ]
@@ -111,7 +363,7 @@ export const BarChart1 = () => {
     const player = new Player(story);
     story.init(player);
     console.log(story);
-    player.play(1);
+    player.play(0);
 
     return () => {
       story.release();

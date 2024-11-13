@@ -124,6 +124,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
       interactive: false,
       panel: {},
       ticker: this._ticker,
+      zIndex: this._config.zIndex ?? 0,
       chartInitOptions: mergeChartOption(
         {
           performanceHook: {

@@ -24,15 +24,6 @@ export class ShapeCharacter extends CharacterComponent<ShapeComponent, IShapeCom
     });
   }
 
-  protected getDefaultAttribute(): Partial<IShapeComponentAttributes> {
-    return {
-      visible: true,
-      x: 0,
-      y: 0,
-      textStyle: {}
-    };
-  }
-
   protected _clearGraphic(): void {
     super._clearGraphic();
   }

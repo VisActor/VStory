@@ -33,6 +33,8 @@ export class StoryCanvas implements IStoryCanvas {
       dpr?: number;
       background: string;
       layerBackground: string;
+      scaleX?: number;
+      scaleY?: number;
     }
   ) {
     this._story = story;
@@ -44,13 +46,17 @@ export class StoryCanvas implements IStoryCanvas {
       height = 500,
       background = 'transparent',
       layerBackground = 'transparent',
-      dpr = vglobal.devicePixelRatio
+      dpr = vglobal.devicePixelRatio,
+      scaleX = 1,
+      scaleY = 1
     } = params;
     this._container && this._initCanvasByContainer(dpr);
     params.canvas && this._initCanvasByCanvas(canvas, width, height, dpr);
 
     this._stage.background = background;
     this._stage.defaultLayer.setAttributes({ background: layerBackground });
+
+    this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 
   protected _initCanvasByContainer(dpr: number) {

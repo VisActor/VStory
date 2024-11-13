@@ -2,9 +2,9 @@ import type { ComponentOptions } from '@visactor/vrender-components';
 import { merge } from '@visactor/vutils';
 import type { IImage } from '@visactor/vrender-core';
 import type { IImageComponentAttributes } from '../interface/character-image';
-import { TextComponent } from './TextComponent';
+import { BaseComponent } from './BaseComponent';
 
-export class ImageComponent extends TextComponent {
+export class ImageComponent extends BaseComponent {
   static defaultAttributes: Partial<IImageComponentAttributes> = {
     visible: true,
     textStyle: {},
@@ -34,21 +34,22 @@ export class ImageComponent extends TextComponent {
   }
   protected renderImage() {
     const { graphic, padding, width, height } = this.attribute as IImageComponentAttributes;
-    if (!graphic.x) {
-      graphic.x = padding.left;
+    const attrs = { ...graphic };
+    if (!attrs.x) {
+      attrs.x = padding.left;
     }
-    if (!graphic.y) {
-      graphic.y = padding.top;
+    if (!attrs.y) {
+      attrs.y = padding.top;
     }
-    if (!graphic.width) {
-      graphic.width = width - padding.left - padding.right;
+    if (!attrs.width) {
+      attrs.width = width - padding.left - padding.right;
     }
-    if (!graphic.height) {
-      graphic.height = height - padding.top - padding.bottom;
+    if (!attrs.height) {
+      attrs.height = height - padding.top - padding.bottom;
     }
     this.createOrUpdateChild(
       'image',
-      { ...graphic, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null },
+      { ...attrs, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null },
       'image'
     ) as IImage;
   }
