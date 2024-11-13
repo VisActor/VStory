@@ -1,6 +1,7 @@
 import { registerImageAction } from './image';
 import { registerLineAction } from './line';
 import { registerRectAction } from './rect';
+import { registerShapeAction } from './shape';
 import { registerTextAction } from './text';
 
 export function registerVComponentAction() {
@@ -8,4 +9,5 @@ export function registerVComponentAction() {
   registerRectAction();
   registerImageAction();
   registerLineAction();
+  registerShapeAction();
 }

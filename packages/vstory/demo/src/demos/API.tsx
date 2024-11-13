@@ -163,7 +163,7 @@ export const API = () => {
         zIndex: 1,
         position: {
           top: 200,
-          left: 300,
+          left: 100,
           width: 80,
           height: 60
         },
@@ -188,6 +188,42 @@ export const API = () => {
                   duration: 2000,
                   easing: 'linear',
                   effect: 'wipe'
+                } as any
+              }
+            ]
+          }
+        ]
+      }
+    );
+    story.addCharacter(
+      {
+        type: 'Shape',
+        id: 'shape',
+        zIndex: 1,
+        position: {
+          top: 200,
+          left: 200,
+          width: 80,
+          height: 60
+        },
+        options: {
+          graphic: {
+            stroke: 'red',
+            symbolType: 'star'
+          }
+        }
+      },
+      {
+        sceneId: 'defaultScene',
+        actions: [
+          {
+            action: 'appear',
+            payload: [
+              {
+                animation: {
+                  duration: 2000,
+                  easing: 'linear',
+                  effect: 'clipRange'
                 } as any
               }
             ]

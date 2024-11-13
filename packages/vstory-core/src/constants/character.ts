@@ -10,6 +10,7 @@ export const enum CharacterType {
   // component
   TEXT = 'Text',
   RECT = 'Rect',
+  SHAPE = 'Shape',
   IMAGE = 'Image',
   LINE = 'Line',
 

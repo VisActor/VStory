@@ -5,6 +5,7 @@ import { WaveScatterCharacter } from '../character/chart/character/wave-scatter'
 import { ImageCharacter } from '../character/component/character/image';
 import { LineCharacter } from '../character/component/character/line';
 import { RectCharacter } from '../character/component/character/rect';
+import { ShapeCharacter } from '../character/component/character/shape';
 import { TextCharacter } from '../character/component/character/text';
 import { StoryFactory } from '../utils/factory';
 
@@ -23,4 +24,5 @@ export function registerCharacters() {
   StoryFactory.registerCharacter(RectCharacter.type, RectCharacter);
   StoryFactory.registerCharacter(ImageCharacter.type, ImageCharacter);
   StoryFactory.registerCharacter(LineCharacter.type, LineCharacter);
+  StoryFactory.registerCharacter(ShapeCharacter.type, ShapeCharacter);
 }

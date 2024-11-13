@@ -3,7 +3,7 @@ import { CommonVisibilityActionProcessor } from '../common/visibility';
 import { ACTION_TYPE } from '../../constants/action';
 import { clipRangeIn, clipRangeOut } from '../../common/clipRange-processor';
 
-export class LineVisibilityActionProcessor extends CommonVisibilityActionProcessor {
+export class ShapeVisibilityActionProcessor extends CommonVisibilityActionProcessor {
   name: 'appearOrDisAppear';
 
   getEffectFunc(effect: string, appear: boolean) {
@@ -15,9 +15,9 @@ export class LineVisibilityActionProcessor extends CommonVisibilityActionProcess
   }
 }
 
-export function registerLineVisibilityAction() {
-  globalProcessorRegistry.registerProcessor(CharacterType.LINE, {
-    [ACTION_TYPE.APPEAR]: new LineVisibilityActionProcessor(),
-    [ACTION_TYPE.DISAPPEAR]: new LineVisibilityActionProcessor()
+export function registerShapeVisibilityAction() {
+  globalProcessorRegistry.registerProcessor(CharacterType.SHAPE, {
+    [ACTION_TYPE.APPEAR]: new ShapeVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new ShapeVisibilityActionProcessor()
   });
 }
