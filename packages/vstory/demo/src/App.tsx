@@ -16,6 +16,7 @@ import { UnitInfographic } from './demos/template/unit-infographic';
 import { VChartSiteDemo } from './demos/template/website/VChartSite';
 import { TimelineAnimate } from './demos/component/timeline';
 import { BasicUnit } from './demos/component/basic-unit';
+import { BarChart2 } from './demos/BarChart2';
 
 type MenusType = (
   | {
@@ -64,6 +65,10 @@ const App = () => {
         {
           name: 'BarChart1',
           component: BarChart1
+        },
+        {
+          name: 'BarChart2',
+          component: BarChart2
         },
         {
           name: 'Text',

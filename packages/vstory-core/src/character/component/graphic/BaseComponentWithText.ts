@@ -50,7 +50,8 @@ export class BaseComponentWithText extends AbstractComponent<ITextComponentAttri
         textAlign: 'left',
         textBaseline: 'top',
         verticalDirection: 'top',
-        textConfig
+        textConfig,
+        zIndex: 9999 // 保持文字在最上层
       },
       'richtext'
     ) as IRichText;

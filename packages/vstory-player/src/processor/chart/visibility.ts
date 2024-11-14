@@ -312,8 +312,6 @@ export function registerVChartVisibilityAction() {
     [ACTION_TYPE.APPEAR]: new VChartVisibilityActionProcessor(),
     [ACTION_TYPE.DISAPPEAR]: new VChartVisibilityActionProcessor(),
     [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor(),
-    [ACTION_TYPE.UPDATE]: new VChartUpdateActionProcessor(),
-    [ACTION_TYPE.ADD]: new VChartAddActionProcessor(),
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor()
   });
 }

@@ -3,8 +3,8 @@ import { registerLineAction } from './line';
 import { registerRectAction } from './rect';
 import { registerShapeAction } from './shape';
 import { registerTextAction } from './text';
-import { registerTimelineVisibilityAction } from './timeline/timeline-visibility';
-import { registerUnitVisibilityAction } from './unit/unit-visibility';
+import { registerTimelineAction } from './timeline';
+import { registerUnitAction } from './unit';
 
 export function registerVComponentAction() {
   registerTextAction();
@@ -12,6 +12,6 @@ export function registerVComponentAction() {
   registerImageAction();
   registerLineAction();
   registerShapeAction();
-  registerTimelineVisibilityAction();
-  registerUnitVisibilityAction();
+  registerTimelineAction();
+  registerUnitAction();
 }

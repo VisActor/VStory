@@ -31,11 +31,23 @@ export const TimelineAnimate = () => {
                       action: 'appear',
                       payload: {
                         animation: {
-                          duration: 5000,
+                          duration: 2000,
                           effect: 'default'
                         }
                       }
-                    }
+                    },
+                    ...new Array(5).fill(0).map((item, index) => {
+                      return {
+                        startTime: 3000 + index * 3100,
+                        action: 'state',
+                        payload: {
+                          animation: {
+                            duration: 3000,
+                            effect: 'forward'
+                          }
+                        }
+                      };
+                    })
                   ]
                 }
               ]
@@ -51,7 +63,7 @@ export const TimelineAnimate = () => {
           position: {
             top: 100,
             left: 100,
-            width: 1200,
+            width: 500,
             height: 100
           },
           options: {
@@ -60,18 +72,8 @@ export const TimelineAnimate = () => {
                 { label: '1486', desc: '' },
                 { label: '1644', desc: '' },
                 { label: '1765', desc: '' },
-                { label: '1786', desc: '' },
-                { label: '1801', desc: '' },
-                { label: '1833', desc: '' },
-                { label: '1856', desc: '' },
-                { label: '1877', desc: '' },
-                { label: '1976', desc: '' },
-                { label: '1990s', desc: '' },
-                { label: '', desc: '' }
+                { label: '1786', desc: '' }
               ],
-              lineStyle: {
-                lineDash: [1, 1]
-              },
               labelStyle: {
                 fontSize: 16,
                 fontWeight: 'bold'

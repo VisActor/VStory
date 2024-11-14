@@ -1,5 +1,5 @@
-import { registerRectVisibilityAction } from './rect-visibility';
+import { registerTimelineVisibilityAction } from './timeline-visibility';
 
-export function registerRectAction() {
-  registerRectVisibilityAction();
+export function registerTimelineAction() {
+  registerTimelineVisibilityAction();
 }

@@ -15,75 +15,149 @@ export const WaveScatter = () => {
     const container = document.getElementById(id);
     const canvas = document.createElement('canvas');
     container?.appendChild(canvas);
-
-    const story = new Story(null, { canvas, width: 800, height: 500, background: 'pink' });
-    const player = new Player(story);
-    story.init(player);
-
-    story.addCharacterWithAppear({
-      type: 'WaveScatter',
-      id: 'title1',
-      zIndex: 1,
-      position: {
-        top: 100,
-        left: 200,
-        width: 300,
-        height: 300
-      },
-      options: {
-        data: [
+    const data = [
+      { city: '北京', value: 35 },
+      { city: '上海', value: 30 },
+      { city: '广州', value: 27 },
+      { city: '深圳', value: 26 },
+      { city: '成都', value: 15 }
+    ];
+    const story = new Story(
+      {
+        characters: [
           {
-            id: 'id0',
-            values: [
-              {
-                city: '北京',
-                temperature: 35,
-                value: 35
+            type: 'WaveScatter',
+            id: 'wave-scatter',
+            zIndex: 1,
+            position: {
+              top: 50,
+              left: 50,
+              width: 300,
+              height: 300
+            },
+            options: {
+              data: {
+                values: data
               },
+              categoryField: 'city',
+              valueField: 'value',
+              /* 水波动画的配置 */
+              waveDuration: 2000,
+              waveRatio: 0.0125,
+              waveColor: '#0099ff',
+              background: 'linear-gradient(180deg, #0099ff11 100%, #0099ff33 0%)',
+              amplitude: 6,
+              frequency: 2,
+              panel: {
+                fill: '#ffffff',
+                shadowColor: 'rgba(0, 0, 0, 0.05)',
+                shadowBlur: 10,
+                shadowOffsetX: 4,
+                shadowOffsetY: 4,
+                cornerRadius: 8,
+                clip: true
+              }
+            }
+          }
+        ],
+        acts: [
+          {
+            id: 'defaultAct',
+            scenes: [
               {
-                city: '上海',
-                temperature: 30,
-                value: 30
-              },
-              {
-                city: '广州',
-                temperature: 27,
-                value: 27
-              },
-              {
-                city: '深圳',
-                temperature: 26,
-                value: 26
-              },
-              {
-                city: '成都',
-                temperature: 15,
-                value: 15
-              },
-              {
-                city: '杭州',
-                temperature: 12,
-                value: 12
-              },
-              {
-                city: '南京',
-                temperature: 8,
-                value: 8
+                id: 'defaultScene',
+                actions: [
+                  {
+                    startTime: 0,
+                    characterId: 'wave-scatter',
+                    characterActions: [
+                      {
+                        action: 'appear',
+                        payload: {
+                          animation: {
+                            duration: 1000
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
-        ],
-        categoryField: 'city',
-        valueField: 'value',
-        waveDuration: 2000,
-        waveRatio: 0.0125,
-        waveColor: '#0099ff',
-        background: 'linear-gradient(180deg, #0099ff11 100%, #0099ff33 0%)',
-        amplitude: 6,
-        frequency: 2
-      } as any
-    });
+        ]
+      },
+      { canvas, width: 800, height: 500, background: 'pink' }
+    );
+    const player = new Player(story);
+    story.init(player);
+
+    // story.addCharacterWithAppear({
+    //   type: 'WaveScatter',
+    //   id: 'title1',
+    //   zIndex: 1,
+    //   position: {
+    //     top: 100,
+    //     left: 200,
+    //     width: 300,
+    //     height: 300
+    //   },
+    //   options: {
+    //     data: [
+    //       {
+    //         id: 'id0',
+    //         values: [
+    //           {
+    //             city: '北京',
+    //             temperature: 35,
+    //             value: 35
+    //           },
+    //           {
+    //             city: '上海',
+    //             temperature: 30,
+    //             value: 30
+    //           },
+    //           {
+    //             city: '广州',
+    //             temperature: 27,
+    //             value: 27
+    //           },
+    //           {
+    //             city: '深圳',
+    //             temperature: 26,
+    //             value: 26
+    //           },
+    //           {
+    //             city: '成都',
+    //             temperature: 15,
+    //             value: 15
+    //           },
+    //           {
+    //             city: '杭州',
+    //             temperature: 12,
+    //             value: 12
+    //           },
+    //           {
+    //             city: '南京',
+    //             temperature: 8,
+    //             value: 8
+    //           }
+    //         ]
+    //       }
+    //     ],
+    //     categoryField: 'city',
+    //     valueField: 'value',
+    //     waveDuration: 2000,
+    //     waveRatio: 0.0125,
+    //     waveColor: '#0099ff',
+    //     background: 'linear-gradient(180deg, #0099ff11 100%, #0099ff33 0%)',
+    //     amplitude: 6,
+    //     frequency: 2
+    //   } as any
+    // });
     player.play(-1);
+
+    console.log(story.toDSL());
 
     return () => {
       story.release();

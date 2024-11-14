@@ -116,20 +116,10 @@ export const BasicUnit = () => {
                           ]
                         }
                       }
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              id: '2',
-              actions: [
-                {
-                  characterId: 'unit-test',
-                  characterActions: [
+                    },
                     {
                       action: 'style',
-                      startTime: 0,
+                      startTime: 2000,
                       payload: {
                         animation: {
                           duration: 2000,

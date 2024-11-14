@@ -2,49 +2,144 @@
   "menu": "examples",
   "children": [
     {
-      "path": "site-scene",
+      "path": "animate",
       "title": {
-        "zh": "官网场景",
-        "en": "site-scene"
+        "zh": "动画",
+        "en": "animate"
       },
       "children": [
         {
-          "path": "basic",
+          "path": "bar-leap",
           "title": {
-            "zh": "基本场景",
-            "en": "basic"
+            "zh": "bar leap 动画",
+            "en": "bar leap animate"
+          }
+        },
+        {
+          "path": "pie-leap",
+          "title": {
+            "zh": "pie leap 动画",
+            "en": "pie leap animate"
+          }
+        },
+        {
+          "path": "bar-bounce",
+          "title": {
+            "zh": "bar bounce 动画",
+            "en": "bar bounce animate"
           }
         }
       ]
     },
     {
-      "path": "ranking-bar",
+      "path": "character",
       "title": {
-        "zh": "动态排行榜条形图",
-        "en": "Dynamic Ranking Bar Chart"
+        "zh": "character 元素",
+        "en": "character element"
       },
       "children": [
         {
-          "path": "basic",
+          "path": "timeline",
           "title": {
-            "zh": "基本场景",
-            "en": "basic"
+            "zh": "时间轴组件",
+            "en": "timeline component"
+          }
+        },
+        {
+          "path": "unit",
+          "title": {
+            "zh": "unit 组件",
+            "en": "unit component"
+          }
+        },
+        {
+          "path": "balloon-bar",
+          "title": {
+            "zh": "balloon bar 图表",
+            "en": "balloon bar chart"
+          }
+        },
+        {
+          "path": "ranking-bar",
+          "title": {
+            "zh": "动态条形图",
+            "en": "ranking bar chart"
+          }
+        },
+        {
+          "path": "wave-scatter",
+          "title": {
+            "zh": "水波散点图",
+            "en": "wave scatter"
+          }
+        },
+        {
+          "path": "vchart",
+          "title": {
+            "zh": "vchart 图表",
+            "en": "vchart chart"
+          }
+        },
+        {
+          "path": "vgraphic",
+          "title": {
+            "zh": "图元",
+            "en": "graphics"
           }
         }
       ]
     },
     {
-      "path": "unit",
+      "path": "arrange",
       "title": {
-        "zh": "单元可视化组件",
-        "en": "Unit Visualization component"
+        "zh": "动画编排",
+        "en": "Animation arrangement"
       },
       "children": [
         {
-          "path": "basic-component",
+          "path": "vchart-arrange",
           "title": {
-            "zh": "基础组件",
-            "en": "Basic Unit Component"
+            "zh": "VChart动画编排",
+            "en": "VChart Animation arrangement"
+          }
+        },
+        {
+          "path": "character-arrange",
+          "title": {
+            "zh": "Character元素编排",
+            "en": "Character element arrangement"
+          }
+        }
+      ]
+    },
+    {
+      "path": "templates",
+      "title": {
+        "zh": "模板",
+        "en": "templates"
+      },
+      "children": [
+        {
+          "path": "unit-visualize-template",
+          "title": {
+            "zh": "单元可视化模板",
+            "en": "unit visualize template"
+          }
+        }
+      ]
+    },
+    {
+      "path": "works-show",
+      "title": {
+        "zh": "作品展示",
+        "en": "works show"
+      },
+      "children": [
+        {
+          "path": "visualize-history",
+          "title": {
+            "zh": "可视化历史",
+            "en": "Visualize History"
           }
         },
         {
@@ -59,22 +154,6 @@
           "title": {
             "zh": "单元可视化叙事示例",
             "en": "Unit Story Telling"
-          }
-        }
-      ]
-    },
-    {
-      "path": "weather",
-      "title": {
-        "zh": "天气可视化模板",
-        "en": "weather Visualization template"
-      },
-      "children": [
-        {
-          "path": "weather-table",
-          "title": {
-            "zh": "天气表格",
-            "en": "weather table"
           }
         }
       ]

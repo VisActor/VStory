@@ -1,5 +1,5 @@
-import { registerRectVisibilityAction } from './rect-visibility';
+import { registerUnitVisibilityAction } from './unit-visibility';
 
-export function registerRectAction() {
-  registerRectVisibilityAction();
+export function registerUnitAction() {
+  registerUnitVisibilityAction();
 }
