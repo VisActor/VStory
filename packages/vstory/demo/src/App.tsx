@@ -14,7 +14,8 @@ import { ScatterBarThrow } from './demos/story-chart/scatter-bar-throw';
 import { RankingBar } from './demos/story-chart/ranking-bar';
 import { UnitInfographic } from './demos/template/unit-infographic';
 import { VChartSiteDemo } from './demos/template/website/VChartSite';
-import { TimelineAnimate } from './component/timeline';
+import { TimelineAnimate } from './demos/component/timeline';
+import { BasicUnit } from './demos/component/basic-unit';
 
 type MenusType = (
   | {
@@ -110,6 +111,10 @@ const App = () => {
         {
           name: 'Timeline',
           component: TimelineAnimate
+        },
+        {
+          name: 'BasicUnit',
+          component: BasicUnit
         }
       ]
     }

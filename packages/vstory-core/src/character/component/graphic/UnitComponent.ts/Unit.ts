@@ -1,9 +1,8 @@
 import type { ComponentOptions } from '@visactor/vrender-components';
 import { AbstractComponent } from '@visactor/vrender-components';
 import type { IUnitGraphicAttributes, IUnitItemAttributes } from './interface';
-import { isEqual, merge } from '@visactor/vutils';
+import { merge } from '@visactor/vutils';
 import type { ISymbol } from '@visactor/vrender-core';
-import { createSymbol } from '@visactor/vrender-core';
 import { allParamsEqualTo } from '../../../../utils/equal';
 
 interface IGridConfig {
@@ -34,6 +33,8 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
     units: []
   };
 
+  duration: number;
+
   constructor(attributes: IUnitGraphicAttributes, options?: ComponentOptions) {
     super(options?.skipDefault ? attributes : merge({}, Unit.defaultAttributes, attributes));
   }
@@ -42,7 +43,7 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
     const gridConfig = this._calculateGrid(this.attribute as IUnitGraphicAttributes);
 
     const { rows, cols, unitWidth, unitHeight, offsetX, offsetY } = gridConfig;
-    const { count, units, padding, gap, direction, duration } = this.attribute;
+    const { count, units, padding, gap, direction } = this.attribute;
     const startX = padding.left + unitWidth / 2;
     const startY = padding.top + unitHeight / 2;
     const isHorizontal = direction === 'horizontal';
@@ -63,7 +64,7 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
 
       const name = `unit-${i}`;
       // 执行update动画
-      if (duration) {
+      if (this.duration) {
         const graphic = this.getChildByName(name) as ISymbol;
         if (graphic) {
           // 属性有diff，走动画去更新
@@ -74,7 +75,7 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
             size: Math.max(unitWidth, unitHeight)
           };
           if (!allParamsEqualTo(nextAttrs, graphic.attribute)) {
-            graphic.animateTo(nextAttrs, { duration, easing: 'linear' });
+            graphic.animate().to(nextAttrs, this.duration, 'linear');
           }
         } else {
           // 入场执行另外的入场动画
@@ -127,6 +128,12 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
       g.animate().to({ opacity: 1 }, duration, easing as any);
     });
     return;
+  }
+
+  styleAnimate(attrs: any, duration?: number, easing?: string) {
+    this.duration = duration || 0;
+    this.setAttributes(attrs);
+    this.duration = 0;
   }
 
   protected _calculateMinPrimaryCount(

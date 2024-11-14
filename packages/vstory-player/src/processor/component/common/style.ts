@@ -40,7 +40,6 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
       text: textStyle,
       panel: panelStyle
     } = getPayload(actionSpec) as IComponentStylePayLoad;
-
     const { duration, easing } = animation as any;
     const characters = getCharacterGraphic(character);
     const component = getCharacterParentGraphic(character);
@@ -57,10 +56,19 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
     });
     if (component) {
       // 获取到x，y，width，height，scaleX，scaleY，将这些属性应用到component上
-      component.animate().to(componentStyle, duration, easing as EasingType);
+      // TODO component动画优化
+      if (component.styleAnimate) {
+        component.styleAnimate(componentStyle, duration, easing as EasingType);
+      } else {
+        component.animate().to(componentStyle, duration, easing as EasingType);
+      }
     }
     if (graphic && graphicStyle) {
-      graphic.animate().to(graphicStyle, duration, easing as EasingType);
+      if (graphic.styleAnimate) {
+        graphic.styleAnimate(graphicStyle, duration, easing as EasingType);
+      } else {
+        graphic.animate().to(graphicStyle, duration, easing as EasingType);
+      }
     }
     if (text && textStyle) {
       text.animate().to(textStyle, duration, easing as EasingType);
