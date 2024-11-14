@@ -7,7 +7,7 @@ export class LineRuntime extends BaseRuntime implements IComponentCharacterRunti
     super.applyConfigToAttribute();
     const rawAttribute = this._character.getAttribute();
     const { width = 1, height = 1 } = rawAttribute;
-    rawAttribute.graphic.points = [
+    rawAttribute.graphic.points = rawAttribute.graphic.points ?? [
       { x: 0, y: 0 },
       { x: width, y: height }
     ];

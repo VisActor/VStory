@@ -2,9 +2,9 @@ import type { ComponentOptions } from '@visactor/vrender-components';
 import { merge } from '@visactor/vutils';
 import type { IImage } from '@visactor/vrender-core';
 import type { IImageComponentAttributes } from '../interface/character-image';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponentWithText } from './BaseComponentWithText';
 
-export class ImageComponent extends BaseComponent {
+export class ImageComponent extends BaseComponentWithText {
   static defaultAttributes: Partial<IImageComponentAttributes> = {
     visible: true,
     textStyle: {},

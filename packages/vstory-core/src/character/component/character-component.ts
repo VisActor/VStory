@@ -1,5 +1,4 @@
 import type { IGraphic } from '@visactor/vrender-core';
-import { IGraphicAttribute } from '@visactor/vrender-core';
 import { CharacterBase } from '../character-base';
 import type { IComponentCharacterConfig } from '../../interface/dsl/component';
 import type { IComponentCharacterRuntime, IUpdateConfigParams } from './interface/runtime';

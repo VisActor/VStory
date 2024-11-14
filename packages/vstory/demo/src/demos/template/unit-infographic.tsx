@@ -95,15 +95,14 @@ async function loadDSL() {
           top: 254 / 2,
           left: 1920 / 2,
           width: 1920,
-          height: 1080
+          height: 100
         },
         options: {
           graphic: {
-            width: 1920 - 300,
-            height: 1080,
             fontSize: 40,
             wordBreak: 'break-word',
             textAlign: 'center',
+            textBaseline: 'middle',
             fill: 'white',
             fontWeight: 200,
             textConfig: [
@@ -150,10 +149,10 @@ async function loadDSL() {
         id: 'Star',
         zIndex: 3,
         position: {
-          top: 340 + 560,
-          left: 1920 / 2,
-          width: 100,
-          height: 100
+          top: 340 + 560 - 70,
+          left: 1920 / 2 - 70,
+          width: 140,
+          height: 140
         },
         options: {
           graphic: {
@@ -161,9 +160,7 @@ async function loadDSL() {
             stroke: false,
             symbolType:
               'M 0.63 -1.1 c -0.61 1.06 -0.64 1.06 -1.25 0 c 0.61 1.06 0.6 1.08 -0.63 1.08 c 1.22 0 1.24 0.02 0.63 1.08 c 0.61 -1.06 0.64 -1.06 1.25 0 c -0.61 -1.06 -0.6 -1.08 0.63 -1.08 C 0.03 -0.01 0.01 -0.04 0.63 -1.1 z',
-            size: 140,
-            dx: -50,
-            dy: -50
+            size: 140
           }
         }
       },
@@ -181,6 +178,8 @@ async function loadDSL() {
           graphic: {
             text: '67%',
             fill: '#48A0CF',
+            textAlign: 'center',
+            textBaseline: 'middle',
             fontSize: 110,
             fontWeight: 600
           }
@@ -200,6 +199,8 @@ async function loadDSL() {
           graphic: {
             fill: 'white',
             fontSize: 30,
+            textAlign: 'center',
+            textBaseline: 'middle',
             width: 460,
             height: 108,
             wordBreak: 'break-word',
@@ -225,6 +226,8 @@ async function loadDSL() {
           graphic: {
             text: '63%',
             fill: '#48A0CF',
+            textAlign: 'center',
+            textBaseline: 'middle',
             fontSize: 110,
             fontWeight: 600,
             stroke: '#48A0CF'
@@ -248,6 +251,8 @@ async function loadDSL() {
             width: 460,
             height: 108,
             wordBreak: 'break-word',
+            textAlign: 'center',
+            textBaseline: 'middle',
             textConfig: [
               {
                 text: 'Plan to grow their IT and tech teams in response to changing  ways of working'
@@ -276,12 +281,22 @@ async function loadDSL() {
               left: 100
             },
             count: 120,
-            styleFunc: (index: number) => {
-              return {
-                symbolType: icon[left[index]],
-                fill: index > 40 ? '#48A0CF' : 'white'
-              };
-            },
+            units: [
+              {
+                range: [0, 40],
+                style: {
+                  symbolType: icon[0],
+                  fill: 'white'
+                }
+              },
+              {
+                range: [40],
+                style: {
+                  symbolType: icon[1],
+                  fill: '#48A0CF'
+                }
+              }
+            ],
             gap: [0, 0.2],
             aspect: 0.5,
             direction: 'vertical'
@@ -308,12 +323,22 @@ async function loadDSL() {
               left: 100
             },
             count: 120,
-            styleFunc: (index: number) => {
-              return {
-                symbolType: icon[right[index]],
-                fill: index > 44 ? '#48A0CF' : 'white'
-              };
-            },
+            units: [
+              {
+                range: [0, 44],
+                style: {
+                  symbolType: icon[0],
+                  fill: 'white'
+                }
+              },
+              {
+                range: [44],
+                style: {
+                  symbolType: icon[1],
+                  fill: '#48A0CF'
+                }
+              }
+            ],
             gap: [0, 0.2],
             aspect: 0.5,
             direction: 'vertical'
@@ -371,7 +396,7 @@ export const UnitInfographic = () => {
     const canvas = document.createElement('canvas');
     container?.appendChild(canvas);
 
-    const story = new Story(null, { canvas, width: 800, height: 500, background: 'pink' });
+    const story = new Story(null, { canvas, width: 1000, height: 500, background: 'pink', scaleX: 0.5, scaleY: 0.5 });
     const player = new Player(story);
     story.init(player);
 

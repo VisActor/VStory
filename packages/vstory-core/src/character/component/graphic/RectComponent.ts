@@ -2,9 +2,9 @@ import type { ComponentOptions } from '@visactor/vrender-components';
 import { merge } from '@visactor/vutils';
 import type { IRectComponentAttributes } from '../interface/character-rect';
 import type { IRect } from '@visactor/vrender-core';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponentWithText } from './BaseComponentWithText';
 
-export class RectComponent extends BaseComponent {
+export class RectComponent extends BaseComponentWithText {
   static defaultAttributes: Partial<IRectComponentAttributes> = {
     visible: true,
     textStyle: {},

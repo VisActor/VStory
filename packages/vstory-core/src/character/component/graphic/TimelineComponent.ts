@@ -2,9 +2,9 @@ import type { ComponentOptions } from '@visactor/vrender-components';
 import { Timeline } from '@visactor/vrender-components';
 import { merge } from '@visactor/vutils';
 import type { ITimelineComponentAttributes } from '../interface/character-timeline';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponentWithText } from './BaseComponentWithText';
 
-export class TimelineComponent extends BaseComponent {
+export class TimelineComponent extends BaseComponentWithText {
   static defaultAttributes: Partial<ITimelineComponentAttributes> = {
     visible: true,
     textStyle: {},
@@ -34,16 +34,16 @@ export class TimelineComponent extends BaseComponent {
     const { graphic, padding, width, height } = this.attribute as ITimelineComponentAttributes;
     const attrs: any = { ...graphic, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null };
     if (!attrs.x) {
-      graphic.x = padding.left;
+      attrs.x = padding.left;
     }
     if (!attrs.y) {
-      graphic.y = padding.top;
+      attrs.y = padding.top;
     }
     if (!attrs.width) {
-      graphic.width = width - padding.left - padding.right;
+      attrs.width = width - padding.left - padding.right;
     }
     if (!attrs.height) {
-      graphic.height = height - padding.top - padding.bottom;
+      attrs.height = height - padding.top - padding.bottom;
     }
     if (!this.timeline) {
       this.timeline = new Timeline(attrs);

@@ -47,49 +47,23 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
     const text = characters[0];
     const graphic = characters[characters.length - 1];
 
-    if (graphic && graphicStyle) {
-      const componentStyle: any = {};
-      if ('x' in graphicStyle) {
-        componentStyle.x = graphicStyle.x;
-        delete graphicStyle.x;
+    // 这些属性都设置给component，由component下发给graphic
+    const componentStyle: any = { ...panelStyle };
+    ['x', 'y', 'dx', 'dy', 'scaleX', 'scaleY', 'width', 'height'].forEach(key => {
+      if (key in componentStyle) {
+        componentStyle[key] = graphicStyle[key];
+        delete componentStyle[key];
       }
-      if ('y' in graphicStyle) {
-        componentStyle.y = graphicStyle.y;
-        delete graphicStyle.y;
-      }
-      if ('dx' in graphicStyle) {
-        componentStyle.dx = graphicStyle.dx;
-        delete graphicStyle.dx;
-      }
-      if ('dy' in graphicStyle) {
-        componentStyle.dy = graphicStyle.dy;
-        delete graphicStyle.dy;
-      }
-      if ('scaleX' in graphicStyle) {
-        componentStyle.scaleX = graphicStyle.scaleX;
-        delete graphicStyle.scaleX;
-      }
-      if ('scaleY' in graphicStyle) {
-        componentStyle.scaleY = graphicStyle.scaleY;
-        delete graphicStyle.scaleY;
-      }
-      if ('width' in graphicStyle) {
-        componentStyle.width = graphicStyle.width;
-        delete graphicStyle.width;
-      }
-      if ('height' in graphicStyle) {
-        componentStyle.height = graphicStyle.height;
-        delete graphicStyle.height;
-      }
-      graphic.animate().to(graphicStyle, duration, easing as EasingType);
+    });
+    if (component) {
       // 获取到x，y，width，height，scaleX，scaleY，将这些属性应用到component上
       component.animate().to(componentStyle, duration, easing as EasingType);
+    }
+    if (graphic && graphicStyle) {
+      graphic.animate().to(graphicStyle, duration, easing as EasingType);
     }
     if (text && textStyle) {
       text.animate().to(textStyle, duration, easing as EasingType);
     }
-    // if (component && panelStyle) {
-    //   component.animate().to(panelStyle, duration, easing as EasingType);
-    // }
   }
 }

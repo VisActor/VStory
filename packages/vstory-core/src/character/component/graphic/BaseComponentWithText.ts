@@ -5,7 +5,7 @@ import { merge } from '@visactor/vutils';
 import type { GraphicType, IRichText } from '@visactor/vrender-core';
 import { COMPONENT_NUMBER_TYPE } from './GroupComponent/component-group-graphic';
 
-export class BaseComponent extends AbstractComponent<ITextComponentAttributes> {
+export class BaseComponentWithText extends AbstractComponent<ITextComponentAttributes> {
   type: GraphicType = 'vstory-component-group' as any;
   numberType: number = COMPONENT_NUMBER_TYPE;
 
@@ -26,7 +26,7 @@ export class BaseComponent extends AbstractComponent<ITextComponentAttributes> {
   };
 
   constructor(attributes: ITextComponentAttributes, options?: ComponentOptions) {
-    super(options?.skipDefault ? attributes : merge({}, BaseComponent.defaultAttributes, attributes));
+    super(options?.skipDefault ? attributes : merge({}, BaseComponentWithText.defaultAttributes, attributes));
   }
 
   protected render(): void {

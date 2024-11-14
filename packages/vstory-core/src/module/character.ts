@@ -8,6 +8,7 @@ import { RectCharacter } from '../character/component/character/rect';
 import { ShapeCharacter } from '../character/component/character/shape';
 import { TextCharacter } from '../character/component/character/text';
 import { TimelineCharacter } from '../character/component/character/timeline';
+import { UnitCharacter } from '../character/component/character/unit';
 import { StoryFactory } from '../utils/factory';
 
 let _register = false;
@@ -27,4 +28,5 @@ export function registerCharacters() {
   StoryFactory.registerCharacter(LineCharacter.type, LineCharacter);
   StoryFactory.registerCharacter(ShapeCharacter.type, ShapeCharacter);
   StoryFactory.registerCharacter(TimelineCharacter.type, TimelineCharacter);
+  StoryFactory.registerCharacter(UnitCharacter.type, UnitCharacter);
 }

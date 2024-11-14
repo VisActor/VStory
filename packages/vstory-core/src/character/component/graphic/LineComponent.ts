@@ -2,9 +2,9 @@ import type { ComponentOptions } from '@visactor/vrender-components';
 import { merge } from '@visactor/vutils';
 import type { IImage, ILine } from '@visactor/vrender-core';
 import type { ILineComponentAttributes } from '../interface/character-line';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponentWithText } from './BaseComponentWithText';
 
-export class LineComponent extends BaseComponent {
+export class LineComponent extends BaseComponentWithText {
   static defaultAttributes: Partial<ILineComponentAttributes> = {
     visible: true,
     textStyle: {},
