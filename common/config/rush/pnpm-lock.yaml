@@ -2418,7 +2418,7 @@ packages:
       jest-resolve: 26.6.2
       jest-resolve-dependencies: 26.6.3
       jest-runner: 26.6.3_canvas@2.11.2
-      jest-runtime: 26.6.3
+      jest-runtime: 26.6.3_canvas@2.11.2
       jest-snapshot: 26.6.2
       jest-util: 26.6.2
       jest-validate: 26.6.2
@@ -2589,7 +2589,7 @@ packages:
       graceful-fs: 4.2.11
       jest-haste-map: 26.6.2
       jest-runner: 26.6.3_canvas@2.11.2
-      jest-runtime: 26.6.3
+      jest-runtime: 26.6.3_canvas@2.11.2
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -8626,7 +8626,7 @@ packages:
       jest-leak-detector: 26.6.2
       jest-message-util: 26.6.2
       jest-resolve: 26.6.2
-      jest-runtime: 26.6.3
+      jest-runtime: 26.6.3_canvas@2.11.2
       jest-util: 26.6.2
       jest-worker: 26.6.2
       source-map-support: 0.5.21
@@ -8690,7 +8690,7 @@ packages:
       exit: 0.1.2
       glob: 7.2.3
       graceful-fs: 4.2.11
-      jest-config: 26.6.3_canvas@2.11.2
+      jest-config: 26.6.3
       jest-haste-map: 26.6.2
       jest-message-util: 26.6.2
       jest-mock: 26.6.2
@@ -8703,7 +8703,12 @@ packages:
       strip-bom: 4.0.0
       yargs: 15.4.1
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
+    dev: true
 
   /jest-runtime/26.6.3_canvas@2.11.2:
     resolution: {integrity: sha512-lrzyR3N8sacTAMeonbqpnSka1dHNux2uk0qqDXVkMv2c/A3wYnvQ4EXuI013Y6+gSKSCxdaczvf4HF0mVXHRdw==}
