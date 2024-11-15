@@ -20,13 +20,6 @@
   "allowedProjectTags": ["tool", "share", "package", "doc"],
   "projects": [
     {
-      "packageName": "@visactor/vstory",
-      "projectFolder": "packages/vstory",
-      "tags": ["package"],
-      "shouldPublish": true,
-      "versionPolicyName": "vstoryMain"
-    },
-    {
       "packageName": "@visactor/vstory-core",
       "projectFolder": "packages/vstory-core",
       "tags": ["package"],
@@ -60,6 +53,13 @@
       "tags": ["package"],
       "shouldPublish": true,
       "versionPolicyName": "vstoryPlayer"
+    },
+    {
+      "packageName": "@visactor/vstory",
+      "projectFolder": "packages/vstory",
+      "tags": ["package"],
+      "shouldPublish": true,
+      "versionPolicyName": "vstoryMain"
     },
     {
       "packageName": "@internal/bundler",
