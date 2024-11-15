@@ -4,7 +4,7 @@ group: works-show
 title: unit-gun-death
 keywords: unit-gun-death
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-gun-death.gif
 ---
 
 # `Unit Visualization of Gun Deaths in the United States` Project Showcase

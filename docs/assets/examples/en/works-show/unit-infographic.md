@@ -4,7 +4,7 @@ group: works-show
 title: unit-infographic
 keywords: unit-infographic
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-infographic.png
 ---
 
 # `Unit Visualization Infographic` Work Display

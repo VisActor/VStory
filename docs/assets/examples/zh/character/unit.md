@@ -4,7 +4,7 @@ group: character
 title: unit
 keywords: unit
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit.gif
 ---
 
 # 单元可视化组件

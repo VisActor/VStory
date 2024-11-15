@@ -4,7 +4,7 @@ group: works-show
 title: visualize-history
 keywords: visualize-history
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/screenshot-20240715-204217.png
 ---
 
 # `可视化历史` 作品展示

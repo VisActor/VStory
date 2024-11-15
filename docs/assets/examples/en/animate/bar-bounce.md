@@ -4,7 +4,7 @@ group: animate
 title: bar-bounce
 keywords: bar-bounce
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/bar-bounce.gif
 ---
 
 # Bar Chart Bounce Animation

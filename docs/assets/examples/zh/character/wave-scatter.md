@@ -4,7 +4,7 @@ group: character
 title: wave-scatter
 keywords: wave-scatter
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/wave-scatter.gif
 ---
 
 # wave-scatter图表元素

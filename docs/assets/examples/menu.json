@@ -11,7 +11,7 @@
         {
           "path": "visualize-history",
           "title": {
-            "zh": "可视化历史",
+            "zh": "可视化历史展示",
             "en": "Visualize History"
           }
         },
@@ -25,7 +25,7 @@
         {
           "path": "unit-gun-death",
           "title": {
-            "zh": "单元可视化叙事示例",
+            "zh": "美国枪支死亡单元可视化",
             "en": "Unit Story Telling"
           }
         }

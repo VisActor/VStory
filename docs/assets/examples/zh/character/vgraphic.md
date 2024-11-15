@@ -4,7 +4,7 @@ group: character
 title: vgraphic
 keywords: vgraphic
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vgraphic.gif
 ---
 
 # 图元元素

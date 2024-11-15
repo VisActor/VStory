@@ -4,7 +4,7 @@ group: templates
 title: unit-visualize-template
 keywords: unit-visualize-template
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-visualize-template.gif
 ---
 
 # 单元可视化模板

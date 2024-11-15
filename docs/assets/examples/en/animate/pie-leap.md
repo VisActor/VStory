@@ -4,7 +4,7 @@ group: animate
 title: pie-leap
 keywords: pie-leap
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/pie-leap.gif
 ---
 
 # Pie Chart Leap Animation

@@ -4,7 +4,7 @@ group: arrange
 title: vchart-arrange
 keywords: vchart-arrange
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vchart-arrange.gif
 ---
 
 # vchart动画编排

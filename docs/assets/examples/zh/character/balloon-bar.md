@@ -4,7 +4,7 @@ group: character
 title: balloon-bar
 keywords: balloon-bar
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/balloon-bar.gif
 ---
 
 # balloon-bar图表元素

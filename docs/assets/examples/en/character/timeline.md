@@ -4,7 +4,7 @@ group: character
 title: timeline
 keywords: timeline
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
+cover: ttps://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/timeline.gif
 ---
 
 # Timeline Component
