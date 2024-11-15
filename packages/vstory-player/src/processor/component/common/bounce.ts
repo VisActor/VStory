@@ -26,6 +26,7 @@ export class CommonBounceActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentBounceAction): void {
+    super.preRun(character, actionSpec);
     const payload = getPayload(actionSpec);
     const { animation = {} } = payload;
     bounce(character, animation as any, payload);

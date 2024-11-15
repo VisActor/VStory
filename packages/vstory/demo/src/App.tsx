@@ -12,11 +12,12 @@ import { ScatterBar } from './demos/story-chart/scatter-bar';
 import { ScatterBarSwing } from './demos/story-chart/scatter-bar-swing';
 import { ScatterBarThrow } from './demos/story-chart/scatter-bar-throw';
 import { RankingBar } from './demos/story-chart/ranking-bar';
-import { UnitInfographic } from './demos/template/unit-infographic';
-import { VChartSiteDemo } from './demos/template/website/VChartSite';
+import { UnitInfographic } from './demos/works/unit-infographic';
+import { VChartSiteDemo } from './demos/works/website/VChartSite';
 import { TimelineAnimate } from './demos/component/timeline';
 import { BasicUnit } from './demos/component/basic-unit';
 import { BarChart2 } from './demos/BarChart2';
+import { UnitTemplate1 } from './demos/templates/unit-template1';
 
 type MenusType = (
   | {
@@ -98,7 +99,7 @@ const App = () => {
       ]
     },
     {
-      name: 'Template',
+      name: 'Works',
       subMenus: [
         {
           name: 'Unit Infographic',
@@ -107,6 +108,15 @@ const App = () => {
         {
           name: 'VChart Demo',
           component: VChartSiteDemo
+        }
+      ]
+    },
+    {
+      name: 'template',
+      subMenus: [
+        {
+          name: 'Unit Template1',
+          component: UnitTemplate1
         }
       ]
     },

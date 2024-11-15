@@ -102,13 +102,6 @@
             "zh": "VChart动画编排",
             "en": "VChart Animation arrangement"
           }
-        },
-        {
-          "path": "character-arrange",
-          "title": {
-            "zh": "Character元素编排",
-            "en": "Character element arrangement"
-          }
         }
       ]
     },

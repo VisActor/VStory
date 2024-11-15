@@ -30,6 +30,7 @@ export class CommonMoveToActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentMoveToAction): void {
+    super.preRun(character, actionSpec);
     const { animation = {}, destination } = getPayload(actionSpec) as IComponentMoveToPayLoad;
 
     moveTo(character, animation as any, destination);

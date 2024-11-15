@@ -1,13 +1,13 @@
 ---
 category: examples
-group: character
+group: works-show
 title: visualize-history
 keywords: visualize-history
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
 ---
 
-# *可视化历史* 作品展示
+# `可视化历史` 作品展示
 
 该作品展示了可视化发展历史中不同图表是如何被创造和发展的，深入探讨了各类图表在数据表达中的演变过程。通过对比历史上重要的图表设计与技术创新，作品揭示了从简单的线条和符号到复杂的交互式可视化界面，图表形式如何不断适应人类对信息理解和传达的需求。
 

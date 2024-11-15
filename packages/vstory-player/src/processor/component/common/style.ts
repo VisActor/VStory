@@ -34,6 +34,7 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentStyleAction): void {
+    super.preRun(character, actionSpec);
     const {
       animation = {},
       graphic: graphicStyle,
@@ -58,14 +59,14 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
       // 获取到x，y，width，height，scaleX，scaleY，将这些属性应用到component上
       // TODO component动画优化
       if (component.styleAnimate) {
-        component.styleAnimate(componentStyle, duration, easing as EasingType);
+        component.styleAnimate(componentStyle, animation);
       } else {
         component.animate().to(componentStyle, duration, easing as EasingType);
       }
     }
     if (graphic && graphicStyle) {
       if (graphic.styleAnimate) {
-        graphic.styleAnimate(graphicStyle, duration, easing as EasingType);
+        graphic.styleAnimate(graphicStyle, animation);
       } else {
         graphic.animate().to(graphicStyle, duration, easing as EasingType);
       }

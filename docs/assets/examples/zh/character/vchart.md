@@ -7,7 +7,7 @@ order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
 ---
 
-# vchart图表元素
+# VChart图表元素
 
 `VChart`是一种通用的Character元素，你可以去vchart官网查看更多图表类型。配置你想要的图表，然后放在VStory中进行二次的定义和配置。
 设置`type: 'VChart'`即可使用该图表作为Character。

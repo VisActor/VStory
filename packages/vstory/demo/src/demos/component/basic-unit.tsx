@@ -88,7 +88,10 @@ export const BasicUnit = () => {
                         animation: {
                           duration: 1000,
                           easing: 'linear',
-                          effect: 'default'
+                          effect: 'default',
+                          stagger: {
+                            enable: true
+                          }
                         },
                         graphic: {
                           units: [
@@ -119,12 +122,15 @@ export const BasicUnit = () => {
                     },
                     {
                       action: 'style',
-                      startTime: 2000,
+                      startTime: 6000,
                       payload: {
                         animation: {
                           duration: 2000,
                           easing: 'linear',
-                          effect: 'default'
+                          effect: 'default',
+                          stagger: {
+                            enable: true
+                          }
                         },
                         graphic: {
                           units: [

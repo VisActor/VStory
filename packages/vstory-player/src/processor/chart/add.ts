@@ -13,6 +13,7 @@ export class VChartAddActionProcessor extends VChartBaseActionProcessor {
   }
 
   run(character: ICharacter, actionSpec: IChartAddAction): void {
+    super.preRun(character, actionSpec);
     const instance = (character.graphic as any)._vchart as IVChart;
     if (!instance) {
       return;

@@ -42,6 +42,12 @@ export interface IUnitGraphicAttributes extends IGroupAttribute {
   count?: number;
 
   /**
+   * 每个symbol代表多少数量
+   * @default 1
+   */
+  countPerSymbol?: number;
+
+  /**
    * The gap between units, represented as a percentage of the unit's width and height.
    * The first value specifies the horizontal gap, and the second value specifies the vertical gap.
    * @default [0.5, 0.5]

@@ -1,13 +1,13 @@
 ---
 category: examples
-group: character
+group: works-show
 title: unit-infographic
 keywords: unit-infographic
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/rankingbar-preview.gif
 ---
 
-# *单元可视化信息图* 作品展示
+# `单元可视化信息图` 作品展示
 
 该作品是一个单元可视化的信息图作品，展示了VStory在制作信息图模板方面的能力
 

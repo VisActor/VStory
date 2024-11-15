@@ -15,8 +15,8 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
     textStyle: {
       fontSize: 12,
       fill: '#000',
-      textAlign: 'left',
-      textBaseline: 'top'
+      textAlign: 'center',
+      textBaseline: 'middle'
     },
     padding: {
       top: 0,
@@ -36,9 +36,10 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
     const { textStyle, padding, width, height } = this.attribute as ITextComponentAttributes;
 
     const { textAlign, textBaseline } = textStyle;
+    const { align = textAlign, baseline = textBaseline } = textStyle;
 
-    const richtextTextAlign = textAlign === 'start' ? 'left' : textAlign === 'end' ? 'right' : textAlign;
-    const richtextBaseline = textBaseline === 'alphabetic' ? 'middle' : textBaseline;
+    const boxAlign = align === 'start' ? 'left' : align === 'end' ? 'right' : align;
+    const boxBaseline = baseline;
     let textConfig = this.transformTextAttrsToRichTextConfig(textStyle, 'left');
 
     // 先设置一个初始richtext，用于计算bounds
@@ -67,10 +68,13 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
     }
 
     // 重新设置richtext的位置，align设置在textConfig中，baseline设置到verticalDirection
-    textConfig = this.transformTextAttrsToRichTextConfig(textStyle, 'center');
+    textConfig = this.transformTextAttrsToRichTextConfig(
+      textStyle,
+      textAlign === 'start' ? 'left' : textAlign === 'end' ? 'right' : textAlign
+    );
     richtext.setAttributes({
       textConfig,
-      verticalDirection: 'middle',
+      verticalDirection: textBaseline === 'alphabetic' ? 'middle' : textBaseline,
       width: boxWidth,
       height: boxHeight
       // x: boxWidth / 2,
@@ -80,17 +84,17 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
     this.attribute.width = boxWidth;
     this.attribute.height = boxHeight;
 
-    if (richtextTextAlign === 'left') {
+    if (boxAlign === 'left') {
       this.attribute.dx = 0;
-    } else if (richtextTextAlign === 'right') {
+    } else if (boxAlign === 'right') {
       this.attribute.dx = -boxWidth;
     } else {
       this.attribute.dx = -boxWidth / 2;
     }
 
-    if (richtextBaseline === 'top') {
+    if (boxBaseline === 'top') {
       this.attribute.dy = 0;
-    } else if (richtextBaseline === 'bottom') {
+    } else if (boxBaseline === 'bottom') {
       this.attribute.dy = -boxHeight;
     } else {
       this.attribute.dy = -boxHeight / 2;

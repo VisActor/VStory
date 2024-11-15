@@ -30,8 +30,8 @@ export class CommonScaleToActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: IComponentScaleToAction): void {
+    super.preRun(character, actionSpec);
     const { animation = {}, scale } = getPayload(actionSpec) as IComponentScaleToPayLoad;
-
     scaleTo(character, animation as any, scale);
   }
 }

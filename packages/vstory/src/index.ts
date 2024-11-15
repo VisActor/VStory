@@ -3,6 +3,7 @@ import { registerCommonBounceAction, registerVChartAction, registerVComponentAct
 
 export * from '@visactor/vstory-core';
 export * from '@visactor/vstory-player';
+export * from '@visactor/vstory-templates';
 
 export function registerAll() {
   registerGraphics();

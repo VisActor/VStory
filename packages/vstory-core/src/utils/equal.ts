@@ -59,3 +59,16 @@ export function allParamsEqualTo(a: any, b: any): boolean {
 
   return true;
 }
+
+export function getDiffedParams(from: any, to: any): any {
+  if (from === to) {
+    return null;
+  }
+  const obj: any = {};
+  for (const key in from) {
+    if (from[key] !== to[key]) {
+      obj[key] = to[key];
+    }
+  }
+  return obj;
+}

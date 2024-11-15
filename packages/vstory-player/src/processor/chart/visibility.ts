@@ -23,8 +23,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
   }
 
   run(character: ICharacter, actionSpec: IChartVisibilityAction): void {
-    // 首先展示出来
-    character.show();
+    super.preRun(character, actionSpec);
     this.character = character;
     const vchart = character.graphic._vchart as IVChart;
     // 基于选择器做筛选

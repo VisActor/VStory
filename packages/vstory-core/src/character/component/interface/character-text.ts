@@ -6,7 +6,12 @@ import type { IComponentCharacterConfig } from '../../../interface/dsl/component
 // graphic 配置
 export interface ITextComponentAttributes extends IGroupGraphicAttribute {
   // 结合富文本textConfig的文本配置
-  textStyle?: Partial<ITextGraphicAttribute & { textConfig: IRichTextAttribute['textConfig'] }>;
+  textStyle?: Partial<
+    ITextGraphicAttribute & { textConfig: IRichTextAttribute['textConfig'] } & {
+      align: 'left' | 'center' | 'right' | 'start' | 'end';
+      baseline: 'top' | 'middle' | 'bottom';
+    }
+  >;
   /**
    * 内部边距
    */

@@ -38,6 +38,119 @@ export const BarChart1 = () => {
       yField: 'sales'
     };
 
+    const spec = {
+      type: 'bar',
+      title: {
+        text: 'BarChart',
+        orient: 'bottom',
+        align: 'center',
+        textStyle: {
+          fontSize: 10,
+          lineHeight: 10
+        }
+      },
+      padding: [120, 60, 75, 60],
+      data: [
+        {
+          id: 'data',
+          values: [
+            {
+              x: '1',
+              y: 100,
+              type: 'Category1'
+            },
+            {
+              x: '2',
+              y: 100,
+              type: 'Category1'
+            },
+            {
+              x: '3',
+              y: 100,
+              type: 'Category1'
+            },
+            {
+              x: '4',
+              y: 100,
+              type: 'Category1'
+            },
+            {
+              x: '1',
+              y: 100,
+              type: 'Category2'
+            },
+            {
+              x: '2',
+              y: 100,
+              type: 'Category2'
+            },
+            {
+              x: '3',
+              y: 100,
+              type: 'Category2'
+            },
+            {
+              x: '4',
+              y: 100,
+              type: 'Category2'
+            }
+          ]
+        }
+      ],
+      xField: ['x', 'type'],
+      yField: 'y',
+      seriesField: 'type',
+      bar: {
+        style: {
+          fill: {
+            gradient: 'linear',
+            stops: [
+              {
+                offset: 1
+              },
+              {
+                offset: 0,
+                opacity: 0.6
+              }
+            ]
+          }
+        },
+        state: {
+          selected: {
+            stroke: '#000',
+            strokeWidth: 1
+          }
+        }
+      },
+      label: {
+        style: {
+          visible: false
+        }
+      },
+      axes: [
+        {
+          orient: 'bottom',
+          bandPadding: 0,
+          paddingInner: 0,
+          paddingOuter: 0,
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
+        },
+        {
+          orient: 'left',
+          tick: { visible: false },
+          label: { visible: false },
+          grid: { visible: false }
+        }
+      ],
+      animationUpdate: {
+        easing: 'cubicInOut',
+        duration: 1000
+      },
+      color: ['#4CC9E4', '#4954E6']
+    };
+
     const dsl = {
       acts: [
         {
@@ -242,118 +355,7 @@ export const BarChart1 = () => {
               shadowOffsetX: 4,
               shadowOffsetY: 4
             },
-            spec: {
-              type: 'bar',
-              title: {
-                text: 'BarChart',
-                orient: 'bottom',
-                align: 'center',
-                textStyle: {
-                  fontSize: 10,
-                  lineHeight: 10
-                }
-              },
-              padding: [120, 60, 75, 60],
-              data: [
-                {
-                  id: 'data',
-                  values: [
-                    {
-                      x: '1',
-                      y: 100,
-                      type: 'Category1'
-                    },
-                    {
-                      x: '2',
-                      y: 100,
-                      type: 'Category1'
-                    },
-                    {
-                      x: '3',
-                      y: 100,
-                      type: 'Category1'
-                    },
-                    {
-                      x: '4',
-                      y: 100,
-                      type: 'Category1'
-                    },
-                    {
-                      x: '1',
-                      y: 100,
-                      type: 'Category2'
-                    },
-                    {
-                      x: '2',
-                      y: 100,
-                      type: 'Category2'
-                    },
-                    {
-                      x: '3',
-                      y: 100,
-                      type: 'Category2'
-                    },
-                    {
-                      x: '4',
-                      y: 100,
-                      type: 'Category2'
-                    }
-                  ]
-                }
-              ],
-              xField: ['x', 'type'],
-              yField: 'y',
-              seriesField: 'type',
-              bar: {
-                style: {
-                  fill: {
-                    gradient: 'linear',
-                    stops: [
-                      {
-                        offset: 1
-                      },
-                      {
-                        offset: 0,
-                        opacity: 0.6
-                      }
-                    ]
-                  }
-                },
-                state: {
-                  selected: {
-                    stroke: '#000',
-                    strokeWidth: 1
-                  }
-                }
-              },
-              label: {
-                style: {
-                  visible: false
-                }
-              },
-              axes: [
-                {
-                  orient: 'bottom',
-                  bandPadding: 0,
-                  paddingInner: 0,
-                  paddingOuter: 0,
-                  tick: { visible: false },
-                  label: { visible: false },
-                  grid: { visible: false }
-                },
-                {
-                  orient: 'left',
-                  tick: { visible: false },
-                  label: { visible: false },
-                  grid: { visible: false }
-                }
-              ],
-              animationUpdate: {
-                easing: 'cubicInOut',
-                duration: 1000
-              },
-              color: ['#4CC9E4', '#4954E6']
-            }
+            spec
           }
         }
       ]

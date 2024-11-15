@@ -17,6 +17,11 @@ export class ActionProcessorItem implements IActionProcessorItem {
     };
   }
 
+  protected preRun(character: ICharacter, actionSpec: IActionSpec) {
+    // 首先展示出来
+    character.show();
+  }
+
   run(character: ICharacter, actionSpec: IActionSpec): void {
     return;
   }

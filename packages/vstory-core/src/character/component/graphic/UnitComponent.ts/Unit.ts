@@ -2,8 +2,8 @@ import type { ComponentOptions } from '@visactor/vrender-components';
 import { AbstractComponent } from '@visactor/vrender-components';
 import type { IUnitGraphicAttributes, IUnitItemAttributes } from './interface';
 import { merge } from '@visactor/vutils';
-import type { ISymbol } from '@visactor/vrender-core';
-import { allParamsEqualTo } from '../../../../utils/equal';
+import { createSymbol, type ISymbol } from '@visactor/vrender-core';
+import { allParamsEqualTo, getDiffedParams } from '../../../../utils/equal';
 
 interface IGridConfig {
   rows: number;
@@ -30,25 +30,48 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
       left: 0
     },
     count: 250,
+    countPerSymbol: 1,
     units: []
   };
 
-  duration: number;
+  _duration: number;
+  _stagger: number;
 
   constructor(attributes: IUnitGraphicAttributes, options?: ComponentOptions) {
     super(options?.skipDefault ? attributes : merge({}, Unit.defaultAttributes, attributes));
+    this._skipRenderAttributes.push('visible', 'visibleAll');
   }
 
   protected render(): void {
     const gridConfig = this._calculateGrid(this.attribute as IUnitGraphicAttributes);
 
     const { rows, cols, unitWidth, unitHeight, offsetX, offsetY } = gridConfig;
-    const { count, units, padding, gap, direction } = this.attribute;
+    const { count, countPerSymbol, units, padding, gap, direction } = this.attribute;
     const startX = padding.left + unitWidth / 2;
     const startY = padding.top + unitHeight / 2;
     const isHorizontal = direction === 'horizontal';
 
-    for (let i = 0; i < count; i++) {
+    const symbolCount = Math.ceil(count / countPerSymbol);
+
+    // 判断子元素数量
+    const currChildCount = this.count - 1;
+    const expectChildCount = symbolCount;
+    if (currChildCount > expectChildCount) {
+      // 要删子元素
+      for (let i = currChildCount; i > expectChildCount; i--) {
+        this.removeChild(this._lastChild as ISymbol);
+      }
+    } else if (currChildCount < expectChildCount) {
+      // 要增加子元素
+      for (let i = currChildCount; i < expectChildCount; i++) {
+        const symbol = createSymbol({});
+        // 设置新元素标记
+        symbol._new = true;
+        this.add(symbol);
+      }
+    }
+
+    this.forEachChildren((graphic: ISymbol, i: number) => {
       const col = isHorizontal ? Math.floor(i / rows) : i % cols;
       const row = isHorizontal ? i % rows : Math.floor(i / cols);
       const dx =
@@ -62,44 +85,56 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
         (!isHorizontal && rows <= 1 ? offsetY : 0) +
         (isHorizontal && cols <= 1 ? offsetY : 0);
 
-      const name = `unit-${i}`;
       // 执行update动画
-      if (this.duration) {
-        const graphic = this.getChildByName(name) as ISymbol;
-        if (graphic) {
+      if (this._duration) {
+        if (!graphic._new) {
           // 属性有diff，走动画去更新
           const nextAttrs = {
-            ...(this.getUnitStyle(i, units, count) || {}),
+            ...(this.getUnitStyle(i, units, count, symbolCount) || {}),
             dx,
             dy,
             size: Math.max(unitWidth, unitHeight)
           };
           if (!allParamsEqualTo(nextAttrs, graphic.attribute)) {
-            graphic.animate().to(nextAttrs, this.duration, 'linear');
+            const diffedAttrs = getDiffedParams(graphic.attribute, nextAttrs);
+            if (this._stagger) {
+              const delay = Math.random() * this._duration * (1 - this._stagger);
+              graphic
+                .animate()
+                .wait(delay)
+                .to(diffedAttrs, this._stagger * this._duration, 'linear');
+            } else {
+              graphic.animate().to(diffedAttrs, this._duration, 'linear');
+            }
           }
         } else {
           // 入场执行另外的入场动画
-          this.createOrUpdateChild(
-            name,
-            { ...(this.getUnitStyle(i, units, count) || {}), dx, dy, size: Math.max(unitWidth, unitHeight) },
-            'symbol'
-          );
+          graphic.setAttributes({
+            ...(this.getUnitStyle(i, units, count, symbolCount) || {}),
+            dx,
+            dy,
+            size: Math.max(unitWidth, unitHeight)
+          });
         }
       } else {
         // 不执行动画
-        this.createOrUpdateChild(
-          name,
-          { ...(this.getUnitStyle(i, units, count) || {}), dx, dy, size: Math.max(unitWidth, unitHeight) },
-          'symbol'
-        );
+        graphic.setAttributes({
+          ...(this.getUnitStyle(i, units, count, symbolCount) || {}),
+          dx,
+          dy,
+          size: Math.max(unitWidth, unitHeight)
+        });
       }
-    }
+
+      graphic._new = false;
+    });
   }
 
   protected getUnitStyle(
     index: number,
     units: IUnitItemAttributes[],
-    count: number
+    count: number,
+    symbolCount: number
   ): IUnitItemAttributes['style'] | void {
     const unit =
       units.find(item => {
@@ -110,7 +145,8 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
         if (range[1] == null) {
           range[1] = count - 1;
         }
-        return range[0] <= index && range[1] >= index;
+        const actualIdx = (count / symbolCount) * index;
+        return range[0] <= actualIdx && range[1] >= actualIdx;
       }) || units[0];
 
     return unit && unit.style;
@@ -130,10 +166,18 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
     return;
   }
 
-  styleAnimate(attrs: any, duration?: number, easing?: string) {
-    this.duration = duration || 0;
+  styleAnimate(
+    attrs: any,
+    animation: { duration?: number; easing?: string; stagger?: { enable?: boolean; ratio?: number } }
+  ) {
+    const { duration, easing, stagger = {} } = animation;
+    this._duration = duration || 0;
+    if (stagger?.enable) {
+      this._stagger = stagger?.ratio ?? 0.7;
+    }
     this.setAttributes(attrs);
-    this.duration = 0;
+    this._stagger = 0;
+    this._duration = 0;
   }
 
   protected _calculateMinPrimaryCount(
@@ -175,7 +219,8 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
   }
 
   protected _calculateGrid(attributes: IUnitGraphicAttributes): IGridConfig {
-    const { width, height, padding, count, gap, aspect, direction } = attributes;
+    const { width, height, padding, count, gap, aspect, direction, countPerSymbol } = attributes;
+    const symbolCount = Math.ceil(count / countPerSymbol);
     const innerWidth = width - padding.left - padding.right;
     const innerHeight = height - padding.top - padding.bottom;
 
@@ -190,11 +235,11 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
       secondaryLength,
       adjustedAspect,
       adjustedGap,
-      count
+      symbolCount
     );
     const { primaryCount, secondaryCount, unitPrimarySize, unitSecondarySize } = this._convergeGrid(
       minPrimaryCount,
-      count,
+      symbolCount,
       primaryLength,
       secondaryLength,
       adjustedAspect,
@@ -209,11 +254,12 @@ export class Unit extends AbstractComponent<Required<IUnitGraphicAttributes>> {
 
     let primaryOffset;
     if (secondaryCount <= 1) {
-      if (count <= 1) {
+      if (symbolCount <= 1) {
         primaryOffset = (primaryLength - unitPrimarySize) / 2;
       } else {
         primaryOffset =
-          (primaryLength - count * unitPrimarySize - (count - 1) * unitPrimarySize * adjustedGap[1]) / (count - 1);
+          (primaryLength - symbolCount * unitPrimarySize - (symbolCount - 1) * unitPrimarySize * adjustedGap[1]) /
+          (symbolCount - 1);
       }
     } else {
       primaryOffset = 0;

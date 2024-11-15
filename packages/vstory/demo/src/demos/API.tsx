@@ -46,16 +46,18 @@ export const API = () => {
         zIndex: 1,
         position: {
           top: 100,
-          left: 200
+          left: 200,
+          width: 300,
+          height: 300
         },
         options: {
           graphic: {
+            // "width": 1450,
+            // "height": 800,
             text: 'A BRIEF HISTORY',
             fontSize: 12,
             fontWeight: 'bold',
-            fill: 'red',
-            textAlign: 'center',
-            textBaseline: 'middle'
+            fill: 'red'
           },
           panel: {
             fill: 'blue',

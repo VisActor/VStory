@@ -11,6 +11,7 @@ export class VChartUpdateActionProcessor extends VChartBaseActionProcessor {
   name: 'update';
 
   run(character: ICharacter, actionSpec: IChartUpdateAction): void {
+    super.preRun(character, actionSpec);
     const instance = (character.graphic as any)._vchart as IVChart;
     if (!instance) {
       return;
