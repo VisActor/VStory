@@ -24,14 +24,14 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vchart": "0.14.14-vstory.1",
+    "@visactor/vchart": "1.12.11-vstory.1",
     "@visactor/vtable": "1.10.1",
-    "@visactor/vrender": "0.21.0-vstory.1",
-    "@visactor/vrender-core": "0.21.0-vstory.1",
-    "@visactor/vrender-kits": "0.21.0-vstory.1",
-    "@visactor/vrender-components": "0.21.0-vstory.1",
+    "@visactor/vrender": "0.21.0-vstory.2",
+    "@visactor/vrender-core": "0.21.0-vstory.2",
+    "@visactor/vrender-kits": "0.21.0-vstory.2",
+    "@visactor/vrender-components": "0.21.0-vstory.2",
     "@visactor/vutils": "~0.18.17",
-    "@visactor/vchart-extension": "0.0.2",
+    "@visactor/vchart-extension": "0.0.3-vstory.2",
     "@visactor/vdataset": "~0.18.17",
     "@visactor/vscale": "~0.18.17",
     "@visactor/vstory-core": "workspace:0.0.9-alpha.2"
