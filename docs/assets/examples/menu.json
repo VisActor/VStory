@@ -2,6 +2,36 @@
   "menu": "examples",
   "children": [
     {
+      "path": "works-show",
+      "title": {
+        "zh": "作品展示",
+        "en": "works show"
+      },
+      "children": [
+        {
+          "path": "visualize-history",
+          "title": {
+            "zh": "可视化历史",
+            "en": "Visualize History"
+          }
+        },
+        {
+          "path": "unit-infographic",
+          "title": {
+            "zh": "单元可视化信息图示例",
+            "en": "Unit Infographic Example"
+          }
+        },
+        {
+          "path": "unit-gun-death",
+          "title": {
+            "zh": "单元可视化叙事示例",
+            "en": "Unit Story Telling"
+          }
+        }
+      ]
+    },
+    {
       "path": "animate",
       "title": {
         "zh": "动画",
@@ -117,36 +147,6 @@
           "title": {
             "zh": "单元可视化模板",
             "en": "unit visualize template"
-          }
-        }
-      ]
-    },
-    {
-      "path": "works-show",
-      "title": {
-        "zh": "作品展示",
-        "en": "works show"
-      },
-      "children": [
-        {
-          "path": "visualize-history",
-          "title": {
-            "zh": "可视化历史",
-            "en": "Visualize History"
-          }
-        },
-        {
-          "path": "unit-infographic",
-          "title": {
-            "zh": "单元可视化信息图示例",
-            "en": "Unit Infographic Example"
-          }
-        },
-        {
-          "path": "unit-gun-death",
-          "title": {
-            "zh": "单元可视化叙事示例",
-            "en": "Unit Story Telling"
           }
         }
       ]
