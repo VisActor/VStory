@@ -1,4 +1,17 @@
 {
   "name": "@visactor/vstory",
-  "entries": []
+  "entries": [
+    {
+      "version": "0.0.8",
+      "tag": "@visactor/vstory_v0.0.8",
+      "date": "Mon, 18 Nov 2024 08:14:14 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "fix: fix the issue of ranking bar character dose not update data"
+          }
+        ]
+      }
+    }
+  ]
 }
