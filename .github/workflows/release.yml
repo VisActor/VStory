@@ -35,7 +35,7 @@ jobs:
           env
           # Install rush
       - name: Install rush
-        run: node common/scripts/install-run-rush.js install --bypass-policy
+        run: node common/scripts/install-run-rush.js update --bypass-policy
 
       - name: Parse semver version from branch name
         id: semver_parser
