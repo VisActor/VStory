@@ -30,10 +30,24 @@
           },
           "children": [
             {
-              "path": "How_to_Get_VChart",
+              "path": "How_to_Get_VStory",
               "title": {
                 "zh": "如何获取 VStory",
-                "en": "How to Obtain VChart"
+                "en": "How to Obtain VStory"
+              }
+            },
+            {
+              "path": "How_to_Import_VStory",
+              "title": {
+                "zh": "如何在项目中引用 VStory",
+                "en": "How to Reference VStory in Projects"
+              }
+            },
+            {
+              "path": "A_Basic_DSL",
+              "title": {
+                "zh": "一份基础的 dsl",
+                "en": "A Basic DSL"
               }
             }
           ]

@@ -65,6 +65,8 @@ import VStory from '@visactor/vstory';
 接下来，我们创建一个 `VStory` 实例，准备一个柱状图的VChart图表和 DOM 容器的 ID， 生成DSL然后传入：
 
 ```ts
+// 注册所有需要的内容
+VStory.registerAll();
 // 准备一个VChart图表
 const spec = {
   data: [
@@ -138,8 +140,8 @@ const dsl = {
 }
 
 // 创建 vstory 实例
-const story = new Story(null, { canvas, width: 800, height: 500, background: 'pink' });
-const player = new Player(story);
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: 'pink' });
+const player = new VStory.Player(story);
 story.init(player);
 
 player.play(0);
@@ -148,12 +150,31 @@ player.play(0);
 至此，你已经成功使用VStory绘制出了一个简单的柱状图！
 
 ```javascript livedemo
+// 注册所有需要的内容
+VStory.registerAll();
+const spec = {
+  data: [
+    {
+      id: 'barData',
+      values: [
+        { month: 'Monday', sales: 22 },
+        { month: 'Tuesday', sales: 13 },
+        { month: 'Wednesday', sales: 25 },
+        { month: 'Thursday', sales: 29 },
+        { month: 'Friday', sales: 38 }
+      ]
+    }
+  ],
+  type: 'bar',
+  xField: 'month',
+  yField: 'sales'
+};
+
 const dsl = {
   characters: [
     {
       type: 'VChart',
       id: '0',
-      zIndex: 1,
       position: {
         top: 50,
         left: 50,
@@ -161,6 +182,7 @@ const dsl = {
         height: 300
       },
       options: {
+        spec,
         panel: {
           fill: '#ffffff',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -168,9 +190,8 @@ const dsl = {
           shadowOffsetX: 4,
           shadowOffsetY: 4,
           cornerRadius: 8
-        }
-      },
-      spec
+        },
+      }
     }
   ],
   acts: [
@@ -187,7 +208,7 @@ const dsl = {
                   action: 'appear',
                   payload: {
                     animation: {
-                      duration: 1000
+                      duration: 3000
                     }
                   }
                 }
@@ -201,11 +222,13 @@ const dsl = {
 }
 
 // 创建 vstory 实例
-const story = new Story(null, { canvas, width: 800, height: 500, background: 'pink' });
-const player = new Player(story);
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: 'pink' });
+const player = new VStory.Player(story);
 story.init(player);
 
 player.play(0);
+
+window.vstory = story;
 ```
 
 希望这篇教程对你学习如何使用 VStory 有所帮助。现在，你可以尝试添加不同类型的元素，并通过深入了解 VStory 的各种配置选项，组合出更加丰富多样的叙事效果。勇敢开始你的 VStory 之旅吧！
