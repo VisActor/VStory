@@ -115,7 +115,7 @@ function Content(props: IContentProps) {
     content = content.replace(pre, `<div id="${containerId}" class="markdown-demo"></div>`);
     const evaluateCode = code
       .replaceAll('CONTAINER_ID', `"${containerId}"`)
-      .concat(`window['${containerId}'] = stage;`);
+      .concat(`window['${containerId}'] = vstory;`);
     return {
       code: htmlRestore(evaluateCode),
       id: containerId

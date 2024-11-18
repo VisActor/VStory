@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory",
-  "version": "0.0.1",
+  "version": "0.0.8",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -24,19 +24,21 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vchart": "1.11.1",
-    "@visactor/vrender-core": "0.19.6",
-    "@visactor/vrender-kits": "0.19.6",
-    "@visactor/vrender-components": "0.19.6"
+    "@visactor/vstory-core": "workspace:0.0.7",
+    "@visactor/vstory-animate": "workspace:0.0.7",
+    "@visactor/vstory-editor": "workspace:0.0.7",
+    "@visactor/vstory-player": "workspace:0.0.7",
+    "@visactor/vstory-templates": "workspace:0.0.7"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",
     "@internal/eslint-config": "workspace:*",
     "@internal/ts-config": "workspace:*",
     "@rushstack/eslint-patch": "~1.1.4",
-    "@visactor/vutils": "~0.18.4",
     "@ffmpeg/core": "^0.11.0",
     "@ffmpeg/ffmpeg": "^0.11.6",
+    "@douyinfe/semi-ui": "^2.62.1",
+    "@visactor/vutils": "~0.18.17",
     "canvas": "2.11.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

@@ -19,7 +19,7 @@ VStory，整合 VisActor 底层能力，提供开箱即用的数据叙事解决�
 
 <div align="center">
 
-[English](./README.md) | 简体中文
+[English](./README.md) | 简体中文 | [日本語](./README.ja-JP.md)
 
 </div>
 

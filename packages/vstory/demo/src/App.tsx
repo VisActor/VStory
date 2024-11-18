@@ -1,95 +1,188 @@
-import React, { useState } from 'react';
+import React, { Component, useCallback, useState } from 'react';
+import { Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
-import { SimpleBar } from './demos/SimpleBar';
-import { RankingBar } from './demos/RankingBar';
-import { StoryBarDemo } from './demos/StoryBarDemo';
-import { StorySceneDemo } from './demos/StoryScene';
-import { AreaWithTag } from './demos/AreaWithTag';
-import { StoryLineDemo } from './demos/StoryLineDemo';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { StoryPieDemo } from './demos/StoryPieDemo';
-import { GraphicActionDemo } from './demos/graphicAction';
-import { VChartSiteDemo } from './demos/VChartSite/VChartSite';
-import { DisAppear } from './demos/DisAppear';
-import { StoryEdit } from './demos/StoryEdit';
-import { Appear } from './demos/Appear';
-import { GraphicEdit } from './demos/GraphicEdit';
-import { Playground } from './demos/Playground';
+import { API } from './demos/API';
+import { BarChart1 } from './demos/BarChart1';
+import { TextAnimate } from './demos/Text';
+import { Bounce } from './demos/animate/Bounce';
+import { Leap } from './demos/animate/Leap';
+import { WaveScatter } from './demos/story-chart/wave-scatter';
+import { ScatterBar } from './demos/story-chart/scatter-bar';
+import { ScatterBarSwing } from './demos/story-chart/scatter-bar-swing';
+import { ScatterBarThrow } from './demos/story-chart/scatter-bar-throw';
+import { RankingBar } from './demos/story-chart/ranking-bar';
+import { UnitInfographic } from './demos/works/unit-infographic';
+import { VChartSiteDemo } from './demos/works/website/VChartSite';
+import { TimelineAnimate } from './demos/component/timeline';
+import { BasicUnit } from './demos/component/basic-unit';
+import { BarChart2 } from './demos/BarChart2';
+import { UnitTemplate1 } from './demos/templates/unit-template1';
+
+type MenusType = (
+  | {
+      name: string;
+      component: () => React.JSX.Element;
+      subMenus?: undefined;
+    }
+  | {
+      name: string;
+      subMenus: {
+        name: string;
+        component: () => React.JSX.Element;
+      }[];
+      component?: undefined;
+    }
+)[];
 
 const App = () => {
-  const [activeIndex, setActiveIndex] = useLocalStorage('menuIndex', 0);
+  const [activeName, setActiveName] = useLocalStorage('menuName', '');
   const menus = [
     {
-      name: 'SimpleBar',
-      component: SimpleBar
+      name: 'Base',
+      subMenus: [
+        {
+          name: 'API Demo',
+          component: API
+        }
+      ]
     },
     {
-      name: 'RankingBar',
-      component: RankingBar
+      name: 'Animate',
+      subMenus: [
+        {
+          name: 'Bounce',
+          component: Bounce
+        },
+        {
+          name: 'Leap',
+          component: Leap
+        }
+      ]
     },
     {
-      name: 'Bar',
-      component: StoryBarDemo
+      name: 'Arrange',
+      subMenus: [
+        {
+          name: 'BarChart1',
+          component: BarChart1
+        },
+        {
+          name: 'BarChart2',
+          component: BarChart2
+        },
+        {
+          name: 'Text',
+          component: TextAnimate
+        }
+      ]
     },
     {
-      name: 'Line',
-      component: StoryLineDemo
+      name: 'Story Chart',
+      subMenus: [
+        {
+          name: 'Wave Scatter',
+          component: WaveScatter
+        },
+        {
+          name: 'Scatter Bar Throw',
+          component: ScatterBarThrow
+        },
+        {
+          name: 'Scatter Bar Swing',
+          component: ScatterBarSwing
+        },
+        {
+          name: 'Dynamic Bar Chart',
+          component: RankingBar
+        }
+      ]
     },
     {
-      name: 'Pie',
-      component: StoryPieDemo
+      name: 'Works',
+      subMenus: [
+        {
+          name: 'Unit Infographic',
+          component: UnitInfographic
+        },
+        {
+          name: 'VChart Demo',
+          component: VChartSiteDemo
+        }
+      ]
     },
     {
-      name: 'StoryScene',
-      component: StorySceneDemo
+      name: 'template',
+      subMenus: [
+        {
+          name: 'Unit Template1',
+          component: UnitTemplate1
+        }
+      ]
     },
     {
-      name: 'AreaWithTag',
-      component: AreaWithTag
-    },
-    {
-      name: 'DisAppear',
-      component: DisAppear
-    },
-    {
-      name: 'Appear',
-      component: Appear
-    },
-    {
-      name: 'Graphic-Action',
-      component: GraphicActionDemo
-    },
-    {
-      name: 'VChart-Site',
-      component: VChartSiteDemo
-    },
-    {
-      name: 'StoryEdit',
-      component: StoryEdit
-    },
-    {
-      name: 'GraphicEdit',
-      component: GraphicEdit
-    },
-    {
-      name: 'Playground',
-      component: Playground
+      name: 'Component',
+      subMenus: [
+        {
+          name: 'Timeline',
+          component: TimelineAnimate
+        },
+        {
+          name: 'BasicUnit',
+          component: BasicUnit
+        }
+      ]
     }
   ];
-  const selectedMenu = menus[activeIndex ?? menus.length - 1];
+  const getSelectedMenu = useCallback<(menus: MenusType) => any>(
+    (menus: MenusType) => {
+      for (let i = 0; i < menus.length; i++) {
+        const menu = menus[i];
+        if (menu.name === activeName) {
+          console.log(menu);
+          return menus[i];
+        }
+        if (menu.subMenus) {
+          const data = getSelectedMenu(menu.subMenus);
+          if (data) {
+            return data;
+          }
+        }
+      }
+    },
+    [activeName]
+  );
+  const selectedMenu = getSelectedMenu(menus);
+  console.log('selectedMenu', selectedMenu);
 
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      <div style={{ flexBasis: 200, height: '90vh', border: '1px solid #eee' }}>
-        {menus.map((menu, index) => (
-          <div key={index} onClick={() => setActiveIndex(index)} style={{ color: 'blueviolet' }}>
-            <button>{menu.name}</button>
-          </div>
-        ))}
+      <div style={{ flex: '0 0 200px', height: '90vh', overflowY: 'auto', border: '1px solid #eee' }}>
+        <Nav
+          style={{ width: 200 }}
+          onSelect={data => setActiveName(data.itemKey)}
+          selectedKeys={[activeName]}
+          footer={{
+            collapseButton: false
+          }}
+        >
+          {menus.map(item => {
+            if (!item.subMenus) {
+              return <Nav.Item key={item.name} itemKey={item.name} text={item.name} />;
+            }
+            return (
+              <Nav.Sub key={item.name} itemKey={item.name} text={item.name}>
+                {item.subMenus.map(menu => (
+                  <Nav.Item key={menu.name} itemKey={menu.name} text={menu.name} />
+                ))}
+              </Nav.Sub>
+            );
+          })}
+        </Nav>
       </div>
 
       <div style={{ flexGrow: 1, border: '1px solid #eee', height: '90vh' }}>
-        <selectedMenu.component />
+        {selectedMenu && <selectedMenu.component />}
       </div>
     </div>
   );

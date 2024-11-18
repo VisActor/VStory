@@ -36,12 +36,12 @@
   /**
    * Environment variables that will be provided to PNPM.
    */
-  // "environmentVariables": {
-  //   "NODE_OPTIONS": {
-  //     "value": "--max-old-space-size=4096",
-  //     "override": false
-  //   }
-  // },
+  "environmentVariables": {
+    "NODE_OPTIONS": {
+      "value": "--max-old-space-size=8192000 --max_semi_space_size=8192000",
+      "override": false
+    }
+  },
 
   /**
    * Specifies the location of the PNPM store.  There are two possible values:
@@ -89,7 +89,11 @@
    * PNPM documentation: https://pnpm.io/package_json#pnpmoverrides
    */
   "globalOverrides": {
-    // "example1": "^1.0.0",
+    "@visactor/vrender": "0.21.0-vstory.2",
+    "@visactor/vrender-core": "0.21.0-vstory.2",
+    "@visactor/vrender-kits": "0.21.0-vstory.2",
+    "@visactor/vrender-components": "0.21.0-vstory.2",
+    "@visactor/vscale": "0.18.5"
     // "example2": "npm:@company/example2@^1.0.0"
   },
 

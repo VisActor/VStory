@@ -1,4 +1,21 @@
 {
-  "menu": "scripts",
-  "children": []
+  "menu": "tutorials",
+  "children": [
+    {
+      "path": "tutorial_docs",
+      "title": {
+        "zh": "站点指引",
+        "en": "Site Guide"
+      },
+      "children": [
+        {
+          "path": "VChart_Website_Guide",
+          "title": {
+            "zh": "站点指引",
+            "en": "Site Guide"
+          }
+        }
+      ]
+    }
+  ]
 }

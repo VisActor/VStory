@@ -19,7 +19,7 @@ VStory integrates the underlying capabilities of VisActor to provide an out-of-t
 
 <div align="center">
 
-[English](./README.md) | 简体中文
+[English](./README.md) | 简体中文 | [日本語](./README.ja-JP.md)
 
 </div>
 
@@ -41,8 +41,8 @@ VStory is a chart component library in the VisActor visualization system. It is 
 
 This repository contains the following packages:
 
-1. [`vstory`](https://sophon-ai.bytedance.net/paas/packages/vstory/): Core package, VStory editor
-2. [`docs`](https://sophon-ai.bytedance.net/paas/docs/): VStory site source code, including all Chinese and English documents, sample code, etc. on the site.
+1. [`vstory`](./packages/vstory/): Core package, VStory editor
+2. [`docs`](./docs/): VStory site source code, including all Chinese and English documents, sample code, etc. on the site.
 
 ## 🔨 Usage
 
