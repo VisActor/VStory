@@ -24,11 +24,11 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vstory-core": "workspace:0.0.10",
-    "@visactor/vstory-animate": "workspace:0.0.10",
-    "@visactor/vstory-editor": "workspace:0.0.10",
-    "@visactor/vstory-player": "workspace:0.0.10",
-    "@visactor/vstory-templates": "workspace:0.0.10"
+    "@visactor/vstory-core": "workspace:0.0.11",
+    "@visactor/vstory-animate": "workspace:0.0.11",
+    "@visactor/vstory-editor": "workspace:0.0.11",
+    "@visactor/vstory-player": "workspace:0.0.11",
+    "@visactor/vstory-templates": "workspace:0.0.11"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",

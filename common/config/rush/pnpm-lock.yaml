@@ -78,11 +78,11 @@ importers:
       '@types/jest': ^26.0.0
       '@types/react': ^18.0.0
       '@types/react-dom': ^18.0.0
-      '@visactor/vstory-animate': workspace:0.0.10
-      '@visactor/vstory-core': workspace:0.0.10
-      '@visactor/vstory-editor': workspace:0.0.10
-      '@visactor/vstory-player': workspace:0.0.10
-      '@visactor/vstory-templates': workspace:0.0.10
+      '@visactor/vstory-animate': workspace:0.0.11
+      '@visactor/vstory-core': workspace:0.0.11
+      '@visactor/vstory-editor': workspace:0.0.11
+      '@visactor/vstory-player': workspace:0.0.11
+      '@visactor/vstory-templates': workspace:0.0.11
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
       canvas: 2.11.2
@@ -151,7 +151,7 @@ importers:
       '@visactor/vrender-core': 0.21.0-vstory.2
       '@visactor/vrender-kits': 0.21.0-vstory.2
       '@visactor/vscale': 0.18.5
-      '@visactor/vstory-core': workspace:0.0.10
+      '@visactor/vstory-core': workspace:0.0.11
       '@visactor/vtable': 1.10.1
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
@@ -299,7 +299,7 @@ importers:
       '@visactor/vrender-core': 0.21.0-vstory.2
       '@visactor/vrender-kits': 0.21.0-vstory.2
       '@visactor/vscale': 0.18.5
-      '@visactor/vstory-core': workspace:0.0.10
+      '@visactor/vstory-core': workspace:0.0.11
       '@visactor/vtable': 1.10.1
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
@@ -374,8 +374,8 @@ importers:
       '@visactor/vrender-core': 0.21.0-vstory.2
       '@visactor/vrender-kits': 0.21.0-vstory.2
       '@visactor/vscale': 0.18.5
-      '@visactor/vstory-animate': workspace:0.0.10
-      '@visactor/vstory-core': workspace:0.0.10
+      '@visactor/vstory-animate': workspace:0.0.11
+      '@visactor/vstory-core': workspace:0.0.11
       '@visactor/vtable': 1.10.1
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
@@ -451,7 +451,7 @@ importers:
       '@visactor/vrender-core': 0.21.0-vstory.2
       '@visactor/vrender-kits': 0.21.0-vstory.2
       '@visactor/vscale': 0.18.5
-      '@visactor/vstory-core': workspace:0.0.10
+      '@visactor/vstory-core': workspace:0.0.11
       '@visactor/vtable': 1.10.1
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
