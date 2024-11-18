@@ -11,7 +11,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-gun-death
 
 This project is a unit visualization about gun deaths in the United States, aiming to raise public awareness of this serious issue. In this visualization, each dot represents an American who lost their life due to gun violence. Over time, these dots are presented dynamically, showing the impact of gun violence on different genders, races, and age groups. The work uses various colors to distinguish these different groups, allowing the audience to intuitively feel the complexity and diversity of gun death incidents. Through smooth animation effects, this narrative process not only enhances the visual experience but also allows the audience to resonate emotionally with these tragic events, thereby understanding the social problems caused by gun violence more deeply.
 
-The core component of this work is the [unit visualization component](/vstory/examples/character/unit). And it is implemented based on the [unit visualization template]().
+The core component of this work is the [unit visualization component](/vstory/demo/character/unit). And it is implemented based on the [unit visualization template]().
 
 ## Code Demonstration
 

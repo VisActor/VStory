@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vchart-arrange
 
 # vchart动画编排
 
-`VChart`图表组件可以参考[VChart图表元素](/vstory/examples/character/vchart)是一种通用的Character元素，可以配置任意的VChart spec。那么当配置好了一个VChart的spec之后，我们就基于VStory的动画编排能力，去控制该图表不同组件、系列、坐标轴、图例等组件的动画效果。
+`VChart`图表组件可以参考[VChart图表元素](/vstory/demo/character/vchart)是一种通用的Character元素，可以配置任意的VChart spec。那么当配置好了一个VChart的spec之后，我们就基于VStory的动画编排能力，去控制该图表不同组件、系列、坐标轴、图例等组件的动画效果。
 这个demo，我们将演示VChart入场 -> 更新 -> 出场的连续生命周期。
 
 ## 代码演示

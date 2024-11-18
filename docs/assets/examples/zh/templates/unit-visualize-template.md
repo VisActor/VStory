@@ -10,7 +10,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-visualize
 # 单元可视化模板
 
 为了更方便的使用单元可视化组件，我们只做了此模板，可以轻松制作自己的单元可视化作品。
-该模板的核心组件是[单元可视化组件](/vstory/examples/character/unit)。我们基于此模板制作了作品：[美国枪支死亡单元可视化](/vstory/examples/works-show/unit-gun-death)，可以查看作品的详细介绍。
+该模板的核心组件是[单元可视化组件](/vstory/demo/character/unit)。我们基于此模板制作了作品：[美国枪支死亡单元可视化](/vstory/demo/works-show/unit-gun-death)，可以查看作品的详细介绍。
 
 你仅需准备一份spec，传入`createUnitTemplate`函数中，就可以得到一份作品的DSL。大致的制作流程如下：
 1. 首先你需要准备一份数据，并将其设置到spec的data字段

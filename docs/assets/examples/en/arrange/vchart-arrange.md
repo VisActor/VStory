@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vchart-arrange
 
 # Vchart Animation Arrangement
 
-The `VChart` chart component can refer to [VChart chart elements](/vstory/examples/character/vchart) is a general Character element that can configure any VChart spec. So after configuring a VChart spec, we can control the animation effects of different components, series, axes, legends, etc. of the chart based on the animation arrangement capabilities of VStory.
+The `VChart` chart component can refer to [VChart chart elements](/vstory/demo/character/vchart) is a general Character element that can configure any VChart spec. So after configuring a VChart spec, we can control the animation effects of different components, series, axes, legends, etc. of the chart based on the animation arrangement capabilities of VStory.
 In this demo, we will demonstrate the continuous lifecycle of VChart entering -> updating -> exiting.
 
 ## Code Demonstration

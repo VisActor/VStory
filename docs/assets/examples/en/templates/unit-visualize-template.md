@@ -10,7 +10,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-visualize
 # Unit Visualization Template
 
 In order to use the unit visualization component more conveniently, we have made this template, which can easily create your own unit visualization works.
-The core component of this template is the [unit visualization component](/vstory/examples/character/unit). We have created a work based on this template: [American Gun Death Unit Visualization](/vstory/examples/works-show/unit-gun-death), you can view the detailed introduction of the work.
+The core component of this template is the [unit visualization component](/vstory/demo/character/unit). We have created a work based on this template: [American Gun Death Unit Visualization](/vstory/demo/works-show/unit-gun-death), you can view the detailed introduction of the work.
 
 You only need to prepare a spec, pass it into the `createUnitTemplate` function, and you can get a DSL of a work. The general production process is as follows:
 1. First, you need to prepare a set of data and set it to the data field of the spec
