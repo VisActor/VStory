@@ -65,7 +65,7 @@ export class StoryCanvas implements IStoryCanvas {
       return;
     }
     const canvas = document.createElement('canvas');
-    canvas.style.position = 'absolute';
+    // canvas.style.position = 'absolute';
     canvas.id = `_visactor_story_canvas_${this._story.id}`;
     this._canvas = canvas as any;
     container.appendChild(canvas);
