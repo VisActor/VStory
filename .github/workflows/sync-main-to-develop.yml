@@ -36,7 +36,7 @@ jobs:
 
         # Install rush
       - name: Install rush
-        run: node common/scripts/install-run-rush.js install --bypass-policy
+        run: node common/scripts/install-run-rush.js update --bypass-policy
 
       - name: Get version
         id: package-version
