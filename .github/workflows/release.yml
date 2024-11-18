@@ -70,7 +70,7 @@ jobs:
         run: node common/scripts/install-run-rush.js build --only @visactor/vstory-player
 
       - name: Build vstory
-        run: node common/scripts/install-run-rush.js build --only @visactor/vstory
+        run: node --max-old-space-size=8192000 --max_semi_space_size=8192000 common/scripts/install-run-rush.js build --only @visactor/vstory
 
       - name: Build bugserver
         run: node common/scripts/install-run-rush.js build --only @internal/bugserver-trigger
