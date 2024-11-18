@@ -54,6 +54,24 @@ jobs:
       - name: Update version
         run: node common/scripts/install-run-rush.js version --bump
 
+      - name: Build vstory-core
+        run: node common/scripts/install-run-rush.js build --only @visactor/vstory-core
+
+      - name: Build vstory-templates
+        run: node common/scripts/install-run-rush.js build --only @visactor/vstory-templates
+
+      - name: Build vstory-editor
+        run: node common/scripts/install-run-rush.js build --only @visactor/vstory-editor
+
+      - name: Build vstory-animate
+        run: node common/scripts/install-run-rush.js build --only @visactor/vstory-animate
+
+      - name: Build vstory-player
+        run: node common/scripts/install-run-rush.js build --only @visactor/vstory-player
+
+      - name: Build vstory
+        run: node common/scripts/install-run-rush.js build --only @visactor/vstory
+
       - name: Build bugserver
         run: node common/scripts/install-run-rush.js build --only @internal/bugserver-trigger
 
