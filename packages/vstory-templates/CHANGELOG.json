@@ -1,4 +1,11 @@
 {
   "name": "@visactor/vstory-templates",
-  "entries": []
+  "entries": [
+    {
+      "version": "0.0.12",
+      "tag": "@visactor/vstory-templates_v0.0.12",
+      "date": "Mon, 18 Nov 2024 10:35:05 GMT",
+      "comments": {}
+    }
+  ]
 }
