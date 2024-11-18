@@ -86,7 +86,9 @@ async function loadDSL() {
     },
     timeLabel: {
       visible: true,
-      style: {}
+      style: {
+        fontSize: 60,
+      }
     },
     nameLabel: {
       visible: true,

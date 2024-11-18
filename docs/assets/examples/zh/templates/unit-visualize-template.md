@@ -24,7 +24,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-visualize
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
-const data = new Array(20000).fill(0).map(() => ({ color: Math.random() > 0.5 ? 'B' : 'R', size: Math.random() * 100 }));
+const data = new Array(20000).fill(0).map(() => ({ color: Math.random() > 0.5 ? 'B' : 'R', size: Math.random() * 80 }));
 // 处理一下数据，将数据按照颜色和大小排序
 const count = (datum) => (datum.color === 'B'? 10 : 5) + (datum.size > 50 ? 2 : 1);
 data.sort((d1, d2) => {
@@ -152,7 +152,7 @@ const spec = {
 }
 const dsl = VStory.createUnitTemplate(spec);
 
-const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0', scaleX: 0.5, scaleY: 0.5 });
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0', scaleX: 0.35, scaleY: 0.35 });
 const player = new VStory.Player(story);
 story.init(player);
 
