@@ -9,11 +9,34 @@
       },
       "children": [
         {
-          "path": "VChart_Website_Guide",
+          "path": "VStory_Website_Guide",
           "title": {
             "zh": "站点指引",
             "en": "Site Guide"
           }
+        },
+        {
+          "path": "Getting_Started",
+          "title": {
+            "zh": "快速上手",
+            "en": "Quick Start"
+          }
+        },
+        {
+          "path": "Basic",
+          "title": {
+            "zh": "入门",
+            "en": "Basic"
+          },
+          "children": [
+            {
+              "path": "How_to_Get_VChart",
+              "title": {
+                "zh": "如何获取 VStory",
+                "en": "How to Obtain VChart"
+              }
+            }
+          ]
         }
       ]
     }
