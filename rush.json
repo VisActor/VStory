@@ -30,36 +30,31 @@
       "packageName": "@visactor/vstory-core",
       "projectFolder": "packages/vstory-core",
       "tags": ["package"],
-      "shouldPublish": true,
-      "versionPolicyName": "vstoryCore"
+      "shouldPublish": true
     },
     {
       "packageName": "@visactor/vstory-animate",
       "projectFolder": "packages/vstory-animate",
       "tags": ["package"],
-      "shouldPublish": true,
-      "versionPolicyName": "vstoryAnimate"
+      "shouldPublish": true
     },
     {
       "packageName": "@visactor/vstory-editor",
       "projectFolder": "packages/vstory-editor",
       "tags": ["package"],
-      "shouldPublish": true,
-      "versionPolicyName": "vstoryEditor"
+      "shouldPublish": true
     },
     {
       "packageName": "@visactor/vstory-templates",
       "projectFolder": "packages/vstory-templates",
       "tags": ["package"],
-      "shouldPublish": true,
-      "versionPolicyName": "vstoryTemplates"
+      "shouldPublish": true
     },
     {
       "packageName": "@visactor/vstory-player",
       "projectFolder": "packages/vstory-player",
       "tags": ["package"],
-      "shouldPublish": true,
-      "versionPolicyName": "vstoryPlayer"
+      "shouldPublish": true
     },
     {
       "packageName": "@internal/bundler",
