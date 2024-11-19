@@ -38,33 +38,36 @@ import VStory from '@visactor/vstory';
 
 ### 使用 script 标签引入
 
-通过直接在 HTML 文件中添加 `<script>` 标签，引入构建好的 vchart 文件：
+通过直接在 HTML 文件中添加 `<script>` 标签，引入构建好的 vstory 文件：
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <!-- 引入 vchart 文件 -->
-    <script src="https://unpkg.com/@visactor/vchart/build/index.min.js"></script>
+    <!-- 引入 vstory 文件 -->
+    <script src="https://unpkg.com/@visactor/vstory/build/index.min.js"></script>
   </head>
 </html>
 ```
 
-## 绘制一个简单的图表
+## 放置一个图表
 
-在绘图前我们需要为 VChart 准备一个具备高宽的 DOM 容器。
+在绘图前我们需要为 VStory 准备一个具备高宽的 DOM 容器。
 
 ```html
 <body>
-  <!-- 为 vchart 准备一个具备大小（宽高）的 DOM，当然你也可以在 spec 配置中指定 -->
-  <div id="chart" style="width: 600px;height:400px;"></div>
+  <!-- 为 vstory 准备一个具备大小（宽高）的 DOM，当然你也可以在 spec 配置中指定 -->
+  <div id="story" style="width: 600px;height:400px;"></div>
 </body>
 ```
 
-接下来，我们创建一个 `VChart` 实例，传入图表配置项和 DOM 容器的 ID：
+接下来，我们创建一个 `VStory` 实例，准备一个柱状图的VChart图表和 DOM 容器的 ID， 生成DSL然后传入：
 
 ```ts
+// 注册所有需要的内容
+VStory.registerAll();
+// 准备一个VChart图表
 const spec = {
   data: [
     {
@@ -83,22 +86,79 @@ const spec = {
   yField: 'sales'
 };
 
-// 创建 vchart 实例
+// 生成一个DSL，该DSL只包含一个VChart元素
+const dsl = {
+  characters: [
+    {
+      type: 'VChart',
+      id: '0',
+      zIndex: 1,
+      // 图表在画布中的位置
+      position: {
+        top: 50,
+        left: 50,
+        width: 300,
+        height: 300
+      },
+      options: {
+        // 图表的背景板配置
+        panel: {
+          fill: '#ffffff',
+          shadowColor: 'rgba(0, 0, 0, 0.05)',
+          shadowBlur: 10,
+          shadowOffsetX: 4,
+          shadowOffsetY: 4,
+          cornerRadius: 8
+        }
+      },
+      spec
+    }
+  ],
+  // 图表的具体动画编排
+  acts: [
+    // 幕数组，一个故事可以包含多个幕，幕与幕之间是有先后顺序的串联结构
+    {
+      id: 'default-chapter',
+      scenes: [
+        // 场景数组，可以包含多个场景，场景与场景是有先后顺序的串联结构
+        {
+          id:'scene0',
+          // 场景中包含的动作数组，动作中描述了一个或多个character的具体行为，一个场景中可以包含多个动作，动作之间是并行执行的
+          actions: [
+            {
+              characterId: '0',
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 
-/**
- * 说明：cdn 方式引入的时候，VChart 的引用方式需要注意：
- * const vchart = new VChart.default(spec, { dom: 'chart' });
- */
-const vchart = new VChart(spec, { dom: 'chart' });
-// 绘制
-vchart.renderSync();
+// 创建 vstory 实例
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: 'pink' });
+const player = new VStory.Player(story);
+story.init(player);
+
+player.play(0);
 ```
 
-至此，你已经成功绘制出了一个简单的柱状图！
+至此，你已经成功使用VStory绘制出了一个简单的柱状图！
 
 ```javascript livedemo
+// 注册所有需要的内容
+VStory.registerAll();
 const spec = {
-  type: 'bar',
   data: [
     {
       id: 'barData',
@@ -111,16 +171,70 @@ const spec = {
       ]
     }
   ],
+  type: 'bar',
   xField: 'month',
   yField: 'sales'
 };
 
-/**
- * 说明：cdn 方式引入的时候，VChart 的引用方式需要注意：
- * const vchart = new VChart.default(spec, { dom: 'chart' });
- */
-const vchart = new VChart(spec, { dom: CONTAINER_ID });
-vchart.renderSync();
+const dsl = {
+  characters: [
+    {
+      type: 'VChart',
+      id: '0',
+      position: {
+        top: 50,
+        left: 50,
+        width: 300,
+        height: 300
+      },
+      options: {
+        spec,
+        panel: {
+          fill: '#ffffff',
+          shadowColor: 'rgba(0, 0, 0, 0.05)',
+          shadowBlur: 10,
+          shadowOffsetX: 4,
+          shadowOffsetY: 4,
+          cornerRadius: 8
+        },
+      }
+    }
+  ],
+  acts: [
+    {
+      id: 'default-chapter',
+      scenes: [
+        {
+          id:'scene0',
+          actions: [
+            {
+              characterId: '0',
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 3000
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+// 创建 vstory 实例
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: 'pink' });
+const player = new VStory.Player(story);
+story.init(player);
+
+player.play(0);
+
+window.vstory = story;
 ```
 
-希望这篇教程对你学习如何使用 VChart 有所帮助。现在，你可以尝试绘制不同类型的图表，并通过深入了解 VChart 的各种配置选项，定制出更加丰富多样的图表效果。勇敢开始你的 VChart 之旅吧！
+希望这篇教程对你学习如何使用 VStory 有所帮助。现在，你可以尝试添加不同类型的元素，并通过深入了解 VStory 的各种配置选项，组合出更加丰富多样的叙事效果。勇敢开始你的 VStory 之旅吧！
