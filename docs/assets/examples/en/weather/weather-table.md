@@ -268,6 +268,9 @@ const vstory = new VStory.Story(dsl, {
   playerOption: { scaleX: 0.5, scaleY: 0.5 }
 });
 
-vstory.play(false);
+vstory.play(0);
 window.vstory = vstory;
+
+window['story'] = story;
+window['vstory'] = story;
 ```

@@ -1,257 +1,1001 @@
-# 一份基础的 dsl
+# 一份基础的 DSL
 
-在前面的章节中，我们已经大致了解了如何快速绘制制作一个 VStory 作品。本教程将以一个简单的大屏为例，细致介绍 VStory 的一份基础的 dsl 组成。一份基础的 dsl 需包含以下部分：
+在前面的章节中，我们已经大致了解了如何快速绘制制作一个 VStory 作品。本教程将以一个简单的仪表盘为例，细致介绍 VStory 的一份基础的 dsl 组成。一份基础的 dsl 需包含以下部分：
 
 1. `character` 作品中会使用到的角色
 2. `acts` 角色在不同时刻的不同行为
 
-## 1. 配置图表类型
+教程最终，我们将会实现如下图片中的效果
+![](https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/dashboard.gif)
 
-在 VChart spec 中，我们首先需要指定图表的类型。于柱状图来说，需要将图表类型为 `'bar'`：
+## 1. 物料准备
 
-```json
-{
-  "type": "bar"
-}
-```
+一个仪表盘会包含多种图表、以及标题、表格等模块、这些模块一部分可以使用VStory中提供的特定character实现，还有一些可以通过VChart自行去配置。在本教程中，我们将简化物料准备过程，直接给到所有用到的图表spec。
 
-目前 VChart 支持的图表类型列表如下：
+1. 一个基于VChart的简单的柱状图
+```javascript livedemo template=vchart
+const mockData: any = [];
+const types = ['A', 'B', 'C'];
 
-| 图表类型             | 说明          |
-| -------------------- | ------------- |
-| `'common'`           | 组合图        |
-| `'area'`             | 面积图        |
-| `'line'`             | 折线图        |
-| `'bar'`              | 柱状图        |
-| `'bar3d'`            | 3D 柱状图     |
-| `'histogram'`        | 直方图        |
-| `'histogram3d'`      | 3D 直方图     |
-| `'rangeColumn'`      | 区间柱图      |
-| `'rangeColumn3d'`    | 3D 区间柱图   |
-| `'rangeArea'`        | 区间面积图    |
-| `'map'`              | 地图          |
-| `'pie'`              | 饼图          |
-| `'pie3d'`            | 3D 饼图       |
-| `'radar'`            | 雷达图        |
-| `'rose'`             | 玫瑰图        |
-| `'scatter'`          | 散点图        |
-| `'sequence'`         | 时序图        |
-| `'circularProgress'` | 环形进度条    |
-| `'linearProgress'`   | 条形进度条    |
-| `'wordCloud'`        | 词云          |
-| `'wordCloud3d'`      | 3D 词云       |
-| `'funnel'`           | 漏斗图        |
-| `'funnel3d'`         | 3D 漏斗图     |
-| `'waterfall'`        | 瀑布图        |
-| `'boxPlot'`          | 箱型图        |
-| `'gauge'`            | 仪表盘        |
-| `'sankey'`           | 桑基图        |
-| `'treemap'`          | 矩形树图      |
-| `'sunburst'`         | 旭日图        |
-| `'circlePacking'`    | circlePacking |
-| `'heatmap'`          | 热力图        |
-
-## 2. 数据源
-
-数据是图表可视化的基础，我们需要在 spec 中指定数据源。通常情况下，数据以 JSON 格式表示，使用 `data` 字段指定。例如，我们可以将数据源指定为如下格式：
-
-```json
-{
-  "data": [
-    {
-      "id": "barData",
-      "values": [
-        { "type": "A", "year": "1930", "value": 129 },
-        { "type": "A", "year": "1940", "value": 133 },
-        { "type": "A", "year": "1950", "value": 130 },
-        { "type": "A", "year": "1960", "value": 126 },
-        { "type": "A", "year": "1970", "value": 117 },
-        { "type": "A", "year": "1980", "value": 114 },
-        { "type": "A", "year": "1990", "value": 111 },
-        { "type": "A", "year": "2000", "value": 89 },
-        { "type": "A", "year": "2010", "value": 80 },
-        { "type": "A", "year": "2018", "value": 80 },
-        { "type": "B", "year": "1930", "value": 22 },
-        { "type": "B", "year": "1940", "value": 13 },
-        { "type": "B", "year": "1950", "value": 25 },
-        { "type": "B", "year": "1960", "value": 29 },
-        { "type": "B", "year": "1970", "value": 38 },
-        { "type": "B", "year": "1980", "value": 41 },
-        { "type": "B", "year": "1990", "value": 57 },
-        { "type": "B", "year": "2000", "value": 87 },
-        { "type": "B", "year": "2010", "value": 98 },
-        { "type": "B", "year": "2018", "value": 99 }
-      ]
-    }
-  ]
-}
-```
-
-其中 `id` 字段用于标识数据源，`values` 字段用于指定数据源的数据。
-
-## 3. 数据映射
-
-接下来我们需要将数据映射到图的基本图形元素（marks）上。对于本教程的分组柱状图来说，我们指定 `xField`，`yField` 和 `seriesField`。其中 `xField`，`yField` 用于位置映射，`seriesField` 用于颜色映射
-
-```json
-{
-  "xField": ["year", "type"],
-  "yField": "value",
-  "seriesField": "type"
-}
-```
-
-## 4. 系列配置
-
-柱状图对应 `'bar'` 系列，`'bar'` 系列包含 `'bar'` 图元和 label，我们可以对这些图元和 label 进行配置。更多关于系列的介绍详见[系列教程](../Chart_Concepts/Series/Composition_and_Effect_of_Series)。
-
-### 4.1 图元样式配置
-
-我们可以对 `'bar'` 图元进行样式配置，例如，我们可以为柱状图加上圆角：
-
-```json
-{
-  "bar": {
-    "style": {
-      "cornerRadius": 4
-    }
+types.forEach(type => {
+  for (let i = 1; i <= 12; i++) {
+    mockData.push({ month: i + 'th', value: Math.random() * 100 + 10, type });
   }
-}
-```
+});
 
-### 4.2 图元标签配置
-
-我们可以为 `'bar'` 图元加上 label，因为 label 默认不展示，所以我们需要将 label 的 `visible` 属性设置为 `true`。此外，我们还可以设置 label 的位置，例如，我们可以将 label 放置在柱状图的顶部：
-
-```json
-{
-  "bar": {
-    "label": {
-      "visible": true,
-      "position": "top"
-    }
-  }
-}
-```
-
-## 5. 组件配置
-
-VChart 还支持配置图表的各种组件，如坐标轴（axes）、图例(legends)、crosshair 和提示框（tooltip）等。目前 VChart 支持的组件有：
-
-| 组件类型属性  | 组件说明     |
-| ------------- | ------------ |
-| `'axes'`      | 坐标轴       |
-| `'legends'`   | 图例         |
-| `'tooltip'`   | 提示框       |
-| `'crosshair'` | crosshair    |
-| `'brush'`     | 框选交互组件 |
-| `'scrollbar'` | 滚动条       |
-| `'dataZoom'`  | 数据筛选滑块 |
-| `'player'`    | 播放器       |
-| `'markLine'`  | 标记线       |
-| `'markArea'`  | 标记区域     |
-| `'markPoint'` | 标记点       |
-| `'indicator'` | 指标卡       |
-| `'title'`     | 标题         |
-
-在本教程中，我们介绍如何配置图例和 crosshair。
-
-### 5.1 配置图例
-
-要显示图例，我们需要设置将图例的 `visible` 属性设置为 `true`。此外，我们还可以设置图例的位置，例如，我们可以将图例放置在图表顶部的起始位置：
-
-```json
-{
-  "legends": {
-    "visible": true,
-    "orient": "top",
-    "position": "start"
-  }
-}
-```
-
-### 5.2 配置 crosshair
-
-与此同时，还可以配置横轴和纵轴上的 crosshair。例如，我们可以让横轴上的 crosshair 可见，而纵轴上的 crosshair 不可见：
-
-```json
-{
-  "crosshair": {
-    "xField": { "visible": true },
-    "yField": { "visible": false }
-  }
-```
-
-## 完整示例
-
-结合以上部分内容，我们可以得到如下完整的 spec：
-
-```javascript livedemo
 const spec = {
-  // 声明图表类型
   type: 'bar',
-  // 声明数据
   data: [
     {
-      id: 'barData',
-      values: [
-        { type: 'A', year: '1930', value: 129 },
-        { type: 'A', year: '1940', value: 133 },
-        { type: 'A', year: '1950', value: 130 },
-        { type: 'A', year: '1960', value: 126 },
-        { type: 'A', year: '1970', value: 117 },
-        { type: 'A', year: '1980', value: 114 },
-        { type: 'A', year: '1990', value: 111 },
-        { type: 'A', year: '2000', value: 89 },
-        { type: 'A', year: '2010', value: 80 },
-        { type: 'A', year: '2018', value: 80 },
-        { type: 'B', year: '1930', value: 22 },
-        { type: 'B', year: '1940', value: 13 },
-        { type: 'B', year: '1950', value: 25 },
-        { type: 'B', year: '1960', value: 29 },
-        { type: 'B', year: '1970', value: 38 },
-        { type: 'B', year: '1980', value: 41 },
-        { type: 'B', year: '1990', value: 57 },
-        { type: 'B', year: '2000', value: 87 },
-        { type: 'B', year: '2010', value: 98 },
-        { type: 'B', year: '2018', value: 99 }
-      ]
+      id: 'id0',
+      values: mockData
     }
   ],
-  // 声明 x 轴字段，当存在分组时
-  xField: ['year', 'type'],
-  // 声明 y 轴字段
+  xField: ['month', 'type'],
   yField: 'value',
-  // 用于颜色映射
   seriesField: 'type',
-  // 系列配置: 图元样式
-  bar: {
-    style: {
-      cornerRadius: 4
-    }
-  },
-  // 系列配置: 图元标签
-  label: {
-    visible: true,
-    position: 'top'
-  },
-  // 配置图例
-  legends: {
-    visible: true,
-    orient: 'top',
-    position: 'start'
-  },
-  // 配置 crosshair
-  crosshair: {
-    xField: { visible: true },
-    yField: { visible: false }
-  },
-  // 配置坐标轴，对于 type 不为 'common'(即组合图)的图表，轴的配置会默认生成，所以如果不需要特殊的定制，也可以不声明
-  axes: [{ orient: 'bottom' }, { orient: 'left', domainLine: { visible: true } }]
+  legends: { visible: true }
 };
 
 const vchart = new VChart(spec, { dom: CONTAINER_ID });
 vchart.renderSync();
+
+// Just for the convenience of console debugging, DO NOT COPY!
+window['vchart'] = vchart;
 ```
 
-通过本教程，您已经了解了一份基础的 spec 配置组成，后面你可以尝试更改数据和对应的配置项，探索 VChart 的强大功能和灵活性，编绘出绚丽多彩的图表。祝您编码愉快！
+2. 一个基于VChart的简单的面积图
+```javascript livedemo template=vchart
+const mockData: any = [];
+const types = ['A', 'B', 'C'];
+
+types.forEach(type => {
+  for (let i = 1; i <= 12; i++) {
+    mockData.push({ month: i + 'th', value: Math.random() * 100 + 10, type });
+  }
+});
+
+const spec = {
+  type: 'area',
+  data: [
+    {
+      id: 'id0',
+      values: mockData.filter((item: any) => item.type !== 'C')
+    }
+  ],
+  xField: 'month',
+  yField: 'value',
+  seriesField:  'type',
+  line: {
+    style: {
+      curveType: 'monotone'
+    }
+  },
+  legends: { visible: true }
+};
+
+const vchart = new VChart(spec, { dom: CONTAINER_ID });
+vchart.renderSync();
+
+// Just for the convenience of console debugging, DO NOT COPY!
+window['vchart'] = vchart;
+```
+
+3. 一个基于VChart的简单的雷达图
+```javascript livedemo template=vchart
+const mockData: any = [];
+const types = ['A', 'B', 'C'];
+
+types.forEach(type => {
+  for (let i = 1; i <= 12; i++) {
+    mockData.push({ month: i + 'th', value: Math.random() * 100 + 10, type });
+  }
+});
+
+const spec = {
+  type: 'radar',
+  data: [
+    {
+      values: mockData
+    }
+  ],
+  categoryField: 'month',
+  valueField: 'value',
+  seriesField: 'type',
+  point: {
+    visible: false
+  },
+  area: {
+    visible: true,
+    style: {
+      fillOpacity: 0.15,
+      curveType: 'catmullRomClosed',
+      curveTension: 0.6
+    }
+  },
+  line: {
+    visible: true,
+    style: {
+      curveType: 'catmullRomClosed',
+      curveTension: 0.6
+    }
+  },
+  legends: {
+    visible: true,
+    orient: 'top'
+  }
+};
+
+const vchart = new VChart(spec, { dom: CONTAINER_ID });
+vchart.renderSync();
+
+// Just for the convenience of console debugging, DO NOT COPY!
+window['vchart'] = vchart;
+```
+4. 一个基于VChart的简单的玫瑰图
+```javascript livedemo template=vchart
+const mockData: any = [];
+const types = ['A', 'B', 'C'];
+
+types.forEach(type => {
+  for (let i = 1; i <= 12; i++) {
+    mockData.push({ month: i + 'th', value: Math.random() * 100 + 10, type });
+  }
+});
+
+const spec = {
+  type: 'rose',
+  data: [
+    {
+      values: mockData
+    }
+  ],
+  categoryField: 'month',
+  valueField: 'value',
+  seriesField: 'type',
+  outerRadius: 1,
+  stack: true,
+  legends: [{ visible: true }],
+  axes: [
+    {
+      orient: 'angle',
+      bandPadding: 0.02
+    },
+  ]
+};
+
+const vchart = new VChart(spec, { dom: CONTAINER_ID });
+vchart.renderSync();
+
+// Just for the convenience of console debugging, DO NOT COPY!
+window['vchart'] = vchart;
+```
+5. 一个基于VChart的简单的仪表盘图
+```javascript livedemo template=vchart
+const mockData: any = [];
+const types = ['A', 'B', 'C'];
+
+types.forEach(type => {
+  for (let i = 1; i <= 12; i++) {
+    mockData.push({ month: i + 'th', value: Math.random() * 100 + 10, type });
+  }
+});
+
+const spec = {
+  type: 'gauge',
+  data: [
+    {
+      id: 'id0',
+      values: [
+        {
+          type: '目标A',
+          value: 0.6
+        }
+      ]
+    }
+  ],
+  categoryField: 'type',
+  valueField: 'value',
+  outerRadius: 0.8,
+  innerRadius: 0.5,
+  startAngle: -225,
+  endAngle: 45,
+};
+
+const vchart = new VChart(spec, { dom: CONTAINER_ID });
+vchart.renderSync();
+
+// Just for the convenience of console debugging, DO NOT COPY!
+window['vchart'] = vchart;
+```
+
+6. 使用一个VStory的Text类型作为标题
+```javascript livedemo template=vstory
+// 注册所有需要的内容
+VStory.registerAll();
+story.addCharacterWithAppear({
+  type: 'Text',
+  id: 'title',
+  zIndex: 1,
+  position: {
+    top: 50,
+    left: 50,
+    width: 800,
+    height: 100
+  },
+  options: {
+    graphic: {
+      text: '这是一个文本',
+      fontSize: 12,
+      fontWeight: 'bold',
+      fill: 'red',
+      textAlign: 'left',
+      textBaseline: 'top'
+    },
+    panel: {
+      fill: 'blue',
+      cornerRadius: 30
+    }
+  }
+});
+
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const player = new VStory.Player(story);
+story.init(player);
+
+player.play(-1);
+window.vstory = story;
+```
+7. 使用一个VStory的WaveScatter图表类型
+
+```javascript livedemo template=vstory
+// 注册所有需要的内容
+VStory.registerAll();
+const mockData: any = [];
+const types = ['A', 'B', 'C'];
+
+types.forEach(type => {
+  for (let i = 1; i <= 12; i++) {
+    mockData.push({ month: i + 'th', value: Math.random() * 100 + 10, type });
+  }
+});
+
+story.addCharacterWithAppear({
+  type: 'WaveScatter',
+  id: 'wave-scatter',
+  zIndex: 1,
+  position: {
+    top: 50,
+    left: 50,
+    width: 300,
+    height: 300
+  },
+  options: {
+    data: {
+      values: mockData.filter((item: any) => item.type === 'A')
+    },
+    categoryField: 'month',
+    valueField: 'value',
+    /* 水波动画的配置 */
+    waveDuration: 2000,
+    waveRatio: 0.00525,
+    waveColor: '#0099ff',
+    background: 'linear-gradient(180deg, #0099ff11 100%, #0099ff33 0%)',
+    amplitude: 10,
+    frequency: 2,
+    panel: {
+      fill: '#ffffff',
+      shadowColor: 'rgba(0, 0, 0, 0.05)',
+      shadowBlur: 10,
+      shadowOffsetX: 4,
+      shadowOffsetY: 4,
+      cornerRadius: 8,
+      clip: true
+    }
+  }
+});
+
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const player = new VStory.Player(story);
+story.init(player);
+
+player.play(-1);
+window.vstory = story;
+```
+
+## 2. 拼接
+
+接下来，我们将这些素材拼接到VStory的大画布中，形成一个完整的作品，我们使用1920 * 1080作为画布的完整尺寸，图表之间的margin为30px，距离左右边界的margin也是30px。具体的布局如下图所示
+
+![](https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/dashboard_layout_detail.png)
+
+完成了布局的设计之后，接下来我们开始DSL的编写，来实现上图中的效果，DSL核心包括一个character数组和一个acts数组，character数组包含了作品中的所有角色（元素），acts数组包含了作品中的各种角色的各种动作（动画），具体的接口定义如下：
+
+```ts
+interface IStoryDSL {
+  acts: IActSpec[]; // 作品的章节
+  characters: ICharacterConfig[]; // 作品中的元素
+}
+/* character定义 */
+type ICharacterConfig = {
+  id: string;
+  type: string; // 类型
+  position: IWidgetData; // 定位描述
+  zIndex: number;
+  extra?: any; // 带着的额外信息
+  options?: any; // 具体的配置信息
+}
+
+/* act定义 */
+interface IActSpec {
+  id: string; // 这一幕的id
+  scenes: ISceneSpec[]; // 这一幕包含的场景
+}
+interface ISceneSpec {
+  id: string; // 这个场景的id
+  delay?: number; // 场景的入场延迟，可以是正数或者负数
+  actions: IActions[]; // 这个场景包含的动作
+};
+
+interface IActions { // 行为定义，角色和行为都可以配数组，可以定义多个角色执行多个行为
+  characterId: string | string[]; // 执行行为的角色id
+  characterActions: IActionSpec[]; // 执行的具体行为
+}
+
+// 具体的行为定义
+interface IAction {
+  action: string; // 行为名称
+  startTime?: number; // 开始时间
+  payload?: { // 行为的参数
+    animation?: IAnimationParams;
+    selector?: string;
+    [key?: string]: any;
+  };
+}
+
+```
+
+### 2.1 character数组配置
+根据我们提供的每个character的配置，以及接口定义，我们可以组装我们的character数组。
+
+```ts
+const characters = [
+  {
+    type: 'Text',
+    id: 'Title',
+    zIndex: 3,
+    position: {
+      top: 100,
+      left: 1920 / 2,
+      width: 1920,
+      height: 90
+    },
+    options: {
+      graphic: {
+        fontSize: 70,
+        wordBreak: 'break-word',
+        textAlign: 'center',
+        textBaseline: 'bottom',
+        fill: 'black',
+        fontWeight: 200,
+        text: 'VStory简易仪表盘'
+      }
+    }
+  },
+  {
+    type: 'WaveScatter',
+    id: 'wave-scatter',
+    zIndex: 1,
+    position: {
+      top: 130,
+      left: 30,
+      width: 600,
+      height: 630
+    },
+    options: {
+      data: {
+        values: mockData.filter((item: any) => item.type === 'A')
+      },
+      categoryField: 'month',
+      valueField: 'value',
+      /* 水波动画的配置 */
+      waveDuration: 2000,
+      waveRatio: 0.00525,
+      waveColor: '#0099ff',
+      background: 'linear-gradient(180deg, #0099ff11 100%, #0099ff33 0%)',
+      amplitude: 10,
+      frequency: 2,
+      panel: {
+        fill: '#ffffff',
+        shadowColor: 'rgba(0, 0, 0, 0.05)',
+        shadowBlur: 10,
+        shadowOffsetX: 4,
+        shadowOffsetY: 4,
+        cornerRadius: 8,
+        clip: true
+      }
+    }
+  },
+  {
+    type: 'VChart',
+    id: 'radar1',
+    zIndex: 3,
+    position: {
+      top: 130,
+      left: 660,
+      width: 600,
+      height: 630
+    },
+    options: {
+      spec: radar1,
+      panel: {
+        fill: '#ffffff',
+        shadowColor: 'rgba(0, 0, 0, 0.05)',
+        shadowBlur: 10,
+        shadowOffsetX: 4,
+        shadowOffsetY: 4,
+        cornerRadius: 20
+      }
+    }
+  },
+  {
+    type: 'VChart',
+    id: 'rose1',
+    zIndex: 3,
+    position: {
+      top: 130,
+      left: 1290,
+      width: 600,
+      height: 630
+    },
+    options: {
+      spec: rose1,
+      panel: {
+        fill: '#ffffff',
+        shadowColor: 'rgba(0, 0, 0, 0.05)',
+        shadowBlur: 10,
+        shadowOffsetX: 4,
+        shadowOffsetY: 4,
+        cornerRadius: 20
+      }
+    }
+  },
+  {
+    type: 'VChart',
+    id: 'gauge1',
+    zIndex: 3,
+    position: {
+      top: 790,
+      left: 30,
+      width: 600,
+      height: 260
+    },
+    options: {
+      spec: gauge1,
+      padding: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0
+      },
+      panel: {
+        fill: '#ffffff',
+        shadowColor: 'rgba(0, 0, 0, 0.05)',
+        shadowBlur: 10,
+        shadowOffsetX: 4,
+        shadowOffsetY: 4,
+        cornerRadius: 20
+      }
+    }
+  },
+  {
+    type: 'VChart',
+    id: 'bar1',
+    zIndex: 3,
+    position: {
+      top: 790,
+      left: 660,
+      width: 600,
+      height: 260
+    },
+    options: {
+      spec: bar1,
+      panel: {
+        fill: '#ffffff',
+        shadowColor: 'rgba(0, 0, 0, 0.05)',
+        shadowBlur: 10,
+        shadowOffsetX: 4,
+        shadowOffsetY: 4,
+        cornerRadius: 20
+      }
+    }
+  },
+  {
+    type: 'VChart',
+    id: 'area1',
+    zIndex: 3,
+    position: {
+      top: 790,
+      left: 1290,
+      width: 600,
+      height: 260
+    },
+    options: {
+      spec: area1,
+      panel: {
+        fill: '#ffffff',
+        shadowColor: 'rgba(0, 0, 0, 0.05)',
+        shadowBlur: 10,
+        shadowOffsetX: 4,
+        shadowOffsetY: 4,
+        cornerRadius: 20
+      }
+    }
+  },
+]
+```
+### 2.2 acts数组配置
+characters数组中只是定义了作品中有这些元素可用，具体的动作还没有定义，如果不定义动作的话，元素将不会展示，所以接下来我们开始定义acts数组。我们期望作品中的元素有如下动作
+
+1. 柱状图和玫瑰图会有`oneByOne`(图元一个接着一个)的`appear`(入场)动画效果，其他图表都是默认的`appear`（入场）的动画效果
+2. 包含图表本身的面板也要有一个`bounce`(弹跳)的`appear`(入场)的动画效果
+
+由于行为都很简单，所以只需要一幕，一个场景就能完成。
+```ts
+const acts = [
+  {
+    id: 'page1', // 这一幕的id
+    scenes: [
+      {
+        id: 'singleScene', // 这一幕包含的场景
+        actions: [
+          // 除了柱状图和玫瑰图以外，其他character都做默认的appear的动画效果
+          {
+            characterId: ['Title', 'area1', 'radar1', 'gauge1', 'wave-scatter'],
+            characterActions: [
+              {
+                action: 'appear',
+                startTime: 0,
+                payload: {
+                  animation: {
+                    duration: 2000
+                  }
+                }
+              }
+            ]
+          },
+          // 柱状图和玫瑰图做oneByOne的appear动画效果
+          {
+            characterId: ['bar1', 'rose1'],
+            characterActions: [
+              {
+                action: 'appear',
+                startTime: 0,
+                payload: {
+                  animation: {
+                    duration: 3000,
+                    oneByOne: true,
+                    dimensionCount: mockData.length
+                  }
+                }
+              }
+            ]
+          },
+          // 包含图表本身的面板做bounce的appear动画效果
+          {
+            characterId: ['area1', 'radar1', 'bar1', 'rose1', 'gauge1', 'wave-scatter'],
+            characterActions: [
+              {
+                action: 'bounce',
+                payload: {
+                  animation: {
+                    duration: 2000,
+                    easing: 'quadOut'
+                  },
+                  type: 'bounce4',
+                  flipY: true,
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+## 3. 播放
+
+至此，我们已经完成了一个简易的仪表盘的制作步骤，接下来，我们将character和acts数组拼起来合成一个DSL，然后使用 VStory 进行播放。
+
+```ts
+// 注册所有需要的内容
+VStory.registerAll();
+
+// 创建一个VStory实例，将DSL传入
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
+// 创建一个player实例，用于播放这个Story
+const player = new VStory.Player(story);
+story.init(player);
+
+// 开始播放，传入1表示循环播放
+// 传入0表示单次播放，播放到结束时间就停止
+// 传入-1表示单次播放，但是播放结束后，时间会继续往后走，不会停止
+// 我们这里因为有一个永久在播放的波浪动画（wave），所以这里传入-1，不循环，但是时间不停止
+player.play(-1);
+```
+
+```javascript livedemo template=vstory
+// 注册所有需要的内容
+VStory.registerAll();
+
+function loadDSL() {
+  const mockData = [];
+  const types = ['A', 'B', 'C'];
+
+  types.forEach(type => {
+    for (let i = 1; i <= 12; i++) {
+      mockData.push({ month: i + 'th', value: Math.random() * 100 + 10, type });
+    }
+  });
+
+  const bar1 = {
+    type: 'bar',
+    data: [
+      {
+        id: 'id0',
+        values: mockData
+      }
+    ],
+    xField: ['month', 'type'],
+    yField: 'value',
+    seriesField: 'type',
+    legends: { visible: true }
+  };
+
+  const area1 = {
+    type: 'area',
+    data: [
+      {
+        id: 'id0',
+        values: mockData.filter((item) => item.type !== 'C')
+      }
+    ],
+    xField: 'month',
+    yField: 'value',
+    seriesField:  'type',
+    line: {
+      style: {
+        curveType: 'monotone'
+      }
+    },
+    legends: { visible: true }
+  };
+
+  const radar1 = {
+    type: 'radar',
+    data: [
+      {
+        values: mockData
+      }
+    ],
+    categoryField: 'month',
+    valueField: 'value',
+    seriesField: 'type',
+    point: {
+      visible: false
+    },
+    area: {
+      visible: true,
+      style: {
+        fillOpacity: 0.15,
+        curveType: 'catmullRomClosed',
+        curveTension: 0.6
+      }
+    },
+    line: {
+      visible: true,
+      style: {
+        curveType: 'catmullRomClosed',
+        curveTension: 0.6
+      }
+    },
+    legends: {
+      visible: true,
+      orient: 'top'
+    }
+  };
+
+  const rose1 = {
+    type: 'rose',
+    data: [
+      {
+        values: mockData
+      }
+    ],
+    categoryField: 'month',
+    valueField: 'value',
+    seriesField: 'type',
+    outerRadius: 1,
+    stack: true,
+    legends: [{ visible: true }],
+    axes: [
+      {
+        orient: 'angle',
+        bandPadding: 0.02
+      },
+    ]
+  };
+
+  const gauge1 = {
+    type: 'gauge',
+    data: [
+      {
+        id: 'id0',
+        values: [
+          {
+            type: '目标A',
+            value: 0.6
+          }
+        ]
+      }
+    ],
+    categoryField: 'type',
+    valueField: 'value',
+    outerRadius: 0.8,
+    innerRadius: 0.5,
+    startAngle: -225,
+    endAngle: 45,
+  };
+
+  return {
+    characters: [
+      {
+        type: 'Text',
+        id: 'Title',
+        zIndex: 3,
+        position: {
+          top: 100,
+          left: 1920 / 2,
+          width: 1920,
+          height: 90
+        },
+        options: {
+          graphic: {
+            fontSize: 70,
+            wordBreak: 'break-word',
+            textAlign: 'center',
+            textBaseline: 'bottom',
+            fill: 'black',
+            fontWeight: 200,
+            text: 'VStory简易仪表盘'
+          }
+        }
+      },
+      {
+        type: 'WaveScatter',
+        id: 'wave-scatter',
+        zIndex: 1,
+        position: {
+          top: 130,
+          left: 30,
+          width: 600,
+          height: 630
+        },
+        options: {
+          data: {
+            values: mockData.filter((item) => item.type === 'A')
+          },
+          categoryField: 'month',
+          valueField: 'value',
+          /* 水波动画的配置 */
+          waveDuration: 2000,
+          waveRatio: 0.00525,
+          waveColor: '#0099ff',
+          background: 'linear-gradient(180deg, #0099ff11 100%, #0099ff33 0%)',
+          amplitude: 10,
+          frequency: 2,
+          panel: {
+            fill: '#ffffff',
+            shadowColor: 'rgba(0, 0, 0, 0.05)',
+            shadowBlur: 10,
+            shadowOffsetX: 4,
+            shadowOffsetY: 4,
+            cornerRadius: 8,
+            clip: true
+          }
+        }
+      },
+      {
+        type: 'VChart',
+        id: 'radar1',
+        zIndex: 3,
+        position: {
+          top: 130,
+          left: 660,
+          width: 600,
+          height: 630
+        },
+        options: {
+          spec: radar1,
+          panel: {
+            fill: '#ffffff',
+            shadowColor: 'rgba(0, 0, 0, 0.05)',
+            shadowBlur: 10,
+            shadowOffsetX: 4,
+            shadowOffsetY: 4,
+            cornerRadius: 20
+          }
+        }
+      },
+      {
+        type: 'VChart',
+        id: 'rose1',
+        zIndex: 3,
+        position: {
+          top: 130,
+          left: 1290,
+          width: 600,
+          height: 630
+        },
+        options: {
+          spec: rose1,
+          panel: {
+            fill: '#ffffff',
+            shadowColor: 'rgba(0, 0, 0, 0.05)',
+            shadowBlur: 10,
+            shadowOffsetX: 4,
+            shadowOffsetY: 4,
+            cornerRadius: 20
+          }
+        }
+      },
+      {
+        type: 'VChart',
+        id: 'gauge1',
+        zIndex: 3,
+        position: {
+          top: 790,
+          left: 30,
+          width: 600,
+          height: 260
+        },
+        options: {
+          spec: gauge1,
+          padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
+          },
+          panel: {
+            fill: '#ffffff',
+            shadowColor: 'rgba(0, 0, 0, 0.05)',
+            shadowBlur: 10,
+            shadowOffsetX: 4,
+            shadowOffsetY: 4,
+            cornerRadius: 20
+          }
+        }
+      },
+      {
+        type: 'VChart',
+        id: 'bar1',
+        zIndex: 3,
+        position: {
+          top: 790,
+          left: 660,
+          width: 600,
+          height: 260
+        },
+        options: {
+          spec: bar1,
+          panel: {
+            fill: '#ffffff',
+            shadowColor: 'rgba(0, 0, 0, 0.05)',
+            shadowBlur: 10,
+            shadowOffsetX: 4,
+            shadowOffsetY: 4,
+            cornerRadius: 20
+          }
+        }
+      },
+      {
+        type: 'VChart',
+        id: 'area1',
+        zIndex: 3,
+        position: {
+          top: 790,
+          left: 1290,
+          width: 600,
+          height: 260
+        },
+        options: {
+          spec: area1,
+          panel: {
+            fill: '#ffffff',
+            shadowColor: 'rgba(0, 0, 0, 0.05)',
+            shadowBlur: 10,
+            shadowOffsetX: 4,
+            shadowOffsetY: 4,
+            cornerRadius: 20
+          }
+        }
+      },
+    ],
+    acts: [
+      {
+        id: 'page1',
+        scenes: [
+          {
+            id: 'singleScene',
+            actions: [
+              {
+                characterId: ['Title', 'area1', 'radar1', 'gauge1', 'wave-scatter'],
+                characterActions: [
+                  {
+                    action: 'appear',
+                    startTime: 0,
+                    payload: {
+                      animation: {
+                        duration: 2000
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                characterId: ['bar1', 'rose1'],
+                characterActions: [
+                  {
+                    action: 'appear',
+                    startTime: 0,
+                    payload: {
+                      animation: {
+                        duration: 3000,
+                        oneByOne: true,
+                        dimensionCount: mockData.length
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                characterId: ['area1', 'radar1', 'bar1', 'rose1', 'gauge1', 'wave-scatter'],
+                characterActions: [
+                  {
+                    action: 'bounce',
+                    payload: {
+                      animation: {
+                        duration: 2000,
+                        easing: 'quadOut'
+                      },
+                      type: 'bounce4',
+                      flipY: true,
+                      // dy: 30,
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+}
+
+const dsl = loadDSL();
+
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, width: 1920 / 3, height: 1080 / 3, background: '#ebecf0', scaleX: 1/3, scaleY: 1/3 });
+const player = new VStory.Player(story);
+story.init(player);
+
+player.play(-1);
+
+window['story'] = story;
+window['vstory'] = story;
+```
+
+通过本教程，您已经了解了一份基础的 DSL 配置组成，后面你可以尝试更改Character和Acts，探索 VStory 的强大功能和灵活性，编绘出绚丽多彩的作品。祝您编码愉快！

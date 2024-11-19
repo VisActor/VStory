@@ -163,4 +163,6 @@ const player = new VStory.Player(story);
 story.init(player);
 
 player.play(0);
+window['story'] = story;
+window['vstory'] = story;
 ```

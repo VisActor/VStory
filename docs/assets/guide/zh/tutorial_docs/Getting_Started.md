@@ -51,7 +51,7 @@ import VStory from '@visactor/vstory';
 </html>
 ```
 
-## 绘制一个简单的图表
+## 放置一个图表
 
 在绘图前我们需要为 VStory 准备一个具备高宽的 DOM 容器。
 
@@ -93,6 +93,7 @@ const dsl = {
       type: 'VChart',
       id: '0',
       zIndex: 1,
+      // 图表在画布中的位置
       position: {
         top: 50,
         left: 50,
@@ -100,6 +101,7 @@ const dsl = {
         height: 300
       },
       options: {
+        // 图表的背景板配置
         panel: {
           fill: '#ffffff',
           shadowColor: 'rgba(0, 0, 0, 0.05)',
@@ -112,12 +114,16 @@ const dsl = {
       spec
     }
   ],
+  // 图表的具体动画编排
   acts: [
+    // 幕数组，一个故事可以包含多个幕，幕与幕之间是有先后顺序的串联结构
     {
       id: 'default-chapter',
       scenes: [
+        // 场景数组，可以包含多个场景，场景与场景是有先后顺序的串联结构
         {
           id:'scene0',
+          // 场景中包含的动作数组，动作中描述了一个或多个character的具体行为，一个场景中可以包含多个动作，动作之间是并行执行的
           actions: [
             {
               characterId: '0',

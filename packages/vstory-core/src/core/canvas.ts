@@ -50,7 +50,7 @@ export class StoryCanvas implements IStoryCanvas {
       scaleX = 1,
       scaleY = 1
     } = params;
-    this._container && this._initCanvasByContainer(dpr);
+    this._container && this._initCanvasByContainer(width, height, dpr);
     params.canvas && this._initCanvasByCanvas(canvas, width, height, dpr);
 
     this._stage.background = background;
@@ -59,7 +59,7 @@ export class StoryCanvas implements IStoryCanvas {
     this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 
-  protected _initCanvasByContainer(dpr: number) {
+  protected _initCanvasByContainer(width: number, height: number, dpr: number) {
     const container = this._container;
     if (!container) {
       return;
@@ -69,7 +69,7 @@ export class StoryCanvas implements IStoryCanvas {
     canvas.id = `_visactor_story_canvas_${this._story.id}`;
     this._canvas = canvas as any;
     container.appendChild(canvas);
-    const stage = this._initCanvas(canvas, container.clientWidth, container.clientHeight, dpr);
+    const stage = this._initCanvas(canvas, width ?? container.clientWidth, height ?? container.clientHeight, dpr);
     // @ts-ignore
     this._stage = stage;
   }

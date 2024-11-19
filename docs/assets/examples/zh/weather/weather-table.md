@@ -269,5 +269,7 @@ const vstory = new VStory.Story(dsl, {
 });
 
 vstory.play(false);
-window.vstory = vstory;
+
+window['story'] = story;
+window['vstory'] = story;
 ```
