@@ -1,0 +1,92 @@
+{
+  "name": "@visactor/vstory-animate",
+  "version": "0.0.12",
+  "description": "",
+  "sideEffects": true,
+  "main": "cjs/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
+  "files": [
+    "cjs",
+    "es",
+    "dist"
+  ],
+  "scripts": {
+    "compile": "tsc --noEmit",
+    "eslint": "eslint --debug --fix src/",
+    "build": "bundle --clean",
+    "build-umd": "bundle --clean -f umd",
+    "dev": "bundle --clean -f es -w",
+    "start": "vite ./demo --host --port=6789",
+    "test": "jest",
+    "test-cov": "jest -w 16 --coverage",
+    "test-live": "",
+    "test-watch": "DEBUG_MODE=1 jest --watch"
+  },
+  "dependencies": {
+    "@visactor/vchart": "1.12.11-vstory.1",
+    "@visactor/vtable": "1.10.1",
+    "@visactor/vrender": "0.21.0-vstory.2",
+    "@visactor/vrender-core": "0.21.0-vstory.2",
+    "@visactor/vrender-kits": "0.21.0-vstory.2",
+    "@visactor/vrender-components": "0.21.0-vstory.2",
+    "@visactor/vutils": "~0.18.17",
+    "@visactor/vchart-extension": "0.0.3-vstory.2",
+    "@visactor/vdataset": "~0.18.17",
+    "@visactor/vscale": "~0.18.17",
+    "@visactor/vstory-core": "workspace:0.0.12"
+  },
+  "devDependencies": {
+    "@internal/bundler": "workspace:*",
+    "@internal/eslint-config": "workspace:*",
+    "@internal/ts-config": "workspace:*",
+    "@rushstack/eslint-patch": "~1.1.4",
+    "@ffmpeg/core": "^0.11.0",
+    "@ffmpeg/ffmpeg": "^0.11.6",
+    "@douyinfe/semi-ui": "^2.62.1",
+    "canvas": "2.11.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@monaco-editor/react": "^4.6.0",
+    "monaco-editor": "^0.49.0",
+    "re-resizable": "^6.9.17",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "3.1.0",
+    "@types/jest": "^26.0.0",
+    "jest": "^26.0.0",
+    "jest-electron": "^0.1.12",
+    "jest-extended": "^1.2.1",
+    "ts-jest": "^26.0.0",
+    "eslint": "~8.18.0",
+    "vite": "3.2.6",
+    "typescript": "4.9.5"
+  },
+  "keywords": [
+    "VisActor",
+    "graphics",
+    "renderer",
+    "vstory"
+  ],
+  "homepage": "",
+  "bugs": "https://github.com/VisActor/VStory/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VisActor/VStory.git",
+    "directory": "packages/vstory"
+  },
+  "author": {
+    "name": "VisActor",
+    "url": "https://VisActor.io/"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./cjs/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

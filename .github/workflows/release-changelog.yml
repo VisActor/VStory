@@ -30,7 +30,7 @@ jobs:
 
           # Install rush
       - name: Install rush
-        run: node common/scripts/install-run-rush.js install --bypass-policy
+        run: node common/scripts/install-run-rush.js update --bypass-policy
 
       - name: Create branch
         run: |
@@ -61,7 +61,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: '[Auto changelog] changlog of ${{  github.event.release.tag_name }}'
-          base: develop
+          base: feat/vstory-next
           head: 'docs/generate-changelog-${{  github.event.release.tag_name }}'
           labels: changelog
           body: 'update changelog of ${{  github.event.release.tag_name }}'

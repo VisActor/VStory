@@ -1,32 +1,25 @@
 import React, { Component, useCallback, useState } from 'react';
 import { Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
-import { StoryBarDemo } from './demos/StoryBarDemo';
-import { StorySceneDemo } from './demos/StoryScene';
-// import { AreaWithTag } from './demos/AreaWithTag';
-// import { StoryLineDemo } from './demos/StoryLineDemo';
 import { useLocalStorage } from './hooks/useLocalStorage';
-// import { StoryPieDemo } from './demos/StoryPieDemo';
-import { GraphicActionDemo } from './demos/graphicAction';
-import { VChartSiteDemo } from './demos/VChartSite/VChartSite';
-import { DisAppear } from './demos/DisAppear';
-import { StoryEdit } from './demos/StoryEdit';
-import { Appear } from './demos/Appear';
-import { GraphicEdit } from './demos/GraphicEdit';
-import { Playground } from './demos/Playground';
-import { Pictogram } from './demos/UnitViz/Pictogram';
-import { LV_BAR1 } from './demos/lv/bar1';
-import { BarLineSeries } from './demos/BarLineSeries';
-import { wordcloud } from './demos/wordcloud';
-import { VChartGraphic } from './demos/VChartGraphic';
-import { BaseComponent } from './demos/BaseComponent';
-import { BarLineSeriesSelector } from './demos/BarLineSeriesSelector';
-import { RankingBar } from './demos/template/RankingBar';
-import { UnitComponentDemo } from './demos/UnitViz/UnitDemo';
-import { GunDeath } from './demos/UnitViz/GunDeath';
 import { API } from './demos/API';
-import { Dapanji } from './demos/template/dapanji';
-import { VTable } from './demos/VTable';
+import { BarChart1 } from './demos/BarChart1';
+import { TextAnimate } from './demos/Text';
+import { Bounce } from './demos/animate/Bounce';
+import { Leap } from './demos/animate/Leap';
+import { WaveScatter } from './demos/story-chart/wave-scatter';
+import { ScatterBar } from './demos/story-chart/scatter-bar';
+import { ScatterBarSwing } from './demos/story-chart/scatter-bar-swing';
+import { ScatterBarThrow } from './demos/story-chart/scatter-bar-throw';
+import { RankingBar } from './demos/story-chart/ranking-bar';
+import { UnitInfographic } from './demos/works/unit-infographic';
+import { VChartSiteDemo } from './demos/works/website/VChartSite';
+import { TimelineAnimate } from './demos/component/timeline';
+import { BasicUnit } from './demos/component/basic-unit';
+import { BarChart2 } from './demos/BarChart2';
+import { UnitTemplate1 } from './demos/templates/unit-template1';
+import { VScreen } from './demos/works/vscreen';
+import { Lottie } from './demos/component/lottie';
 
 type MenusType = (
   | {
@@ -48,112 +41,105 @@ const App = () => {
   const [activeName, setActiveName] = useLocalStorage('menuName', '');
   const menus = [
     {
-      name: 'Bar',
-      component: StoryBarDemo
-    },
-    // {
-    //   name: 'Line',
-    //   component: StoryLineDemo
-    // },
-    // {
-    //   name: 'Pie',
-    //   component: StoryPieDemo
-    // },
-    {
-      name: 'StoryScene',
-      component: StorySceneDemo
-    },
-    {
-      name: 'API',
-      component: API
-    },
-    {
-      name: 'VTable',
-      component: VTable
-    },
-    // {
-    //   name: 'AreaWithTag',
-    //   component: AreaWithTag
-    // },
-    {
-      name: 'DisAppear',
-      component: DisAppear
-    },
-    {
-      name: 'Appear',
-      component: Appear
-    },
-    {
-      name: 'Graphic-Action',
-      component: GraphicActionDemo
-    },
-    {
-      name: 'VChart-Site',
-      component: VChartSiteDemo
-    },
-    {
-      name: 'StoryEdit',
-      component: StoryEdit
-    },
-    {
-      name: 'GraphicEdit',
-      component: GraphicEdit
-    },
-    {
-      name: 'Playground',
-      component: Playground
-    },
-    // {
-    //   name: 'BarLineSeries',
-    //   component: BarLineSeries
-    // },
-    // {
-    //   name: 'BarLineSeriesSelector',
-    //   component: BarLineSeriesSelector
-    // },
-    // {
-    //   name: 'wordcloud',
-    //   component: wordcloud
-    // },
-    // {
-    //   name: 'BaseComponent',
-    //   component: BaseComponent
-    // },
-    {
-      name: 'lv_chart',
+      name: 'Base',
       subMenus: [
         {
-          name: 'bar1',
-          component: LV_BAR1
+          name: 'API Demo',
+          component: API
         }
       ]
     },
     {
-      name: 'RankingBar',
-      component: RankingBar
-    },
-    {
-      name: 'VChartGraphic',
-      component: VChartGraphic
-    },
-    {
-      name: 'Dapanji',
-      component: Dapanji
-    },
-    {
-      name: 'Unit Visualization',
+      name: 'Animate',
       subMenus: [
         {
-          name: 'Unit Component Demo',
-          component: UnitComponentDemo
+          name: 'Bounce',
+          component: Bounce
         },
         {
-          name: 'Gun Death',
-          component: GunDeath
+          name: 'Leap',
+          component: Leap
+        }
+      ]
+    },
+    {
+      name: 'Arrange',
+      subMenus: [
+        {
+          name: 'BarChart1',
+          component: BarChart1
         },
         {
-          name: 'Infographic Pictogram',
-          component: Pictogram
+          name: 'BarChart2',
+          component: BarChart2
+        },
+        {
+          name: 'Text',
+          component: TextAnimate
+        }
+      ]
+    },
+    {
+      name: 'Story Chart',
+      subMenus: [
+        {
+          name: 'Wave Scatter',
+          component: WaveScatter
+        },
+        {
+          name: 'Scatter Bar Throw',
+          component: ScatterBarThrow
+        },
+        {
+          name: 'Scatter Bar Swing',
+          component: ScatterBarSwing
+        },
+        {
+          name: 'Dynamic Bar Chart',
+          component: RankingBar
+        }
+      ]
+    },
+    {
+      name: 'Works',
+      subMenus: [
+        {
+          name: 'Unit Infographic',
+          component: UnitInfographic
+        },
+        {
+          name: 'VChart Demo',
+          component: VChartSiteDemo
+        },
+        {
+          name: 'VScreen',
+          component: VScreen
+        }
+      ]
+    },
+    {
+      name: 'template',
+      subMenus: [
+        {
+          name: 'Unit Template1',
+          component: UnitTemplate1
+        }
+      ]
+    },
+    {
+      name: 'Component',
+      subMenus: [
+        {
+          name: 'Timeline',
+          component: TimelineAnimate
+        },
+        {
+          name: 'BasicUnit',
+          component: BasicUnit
+        },
+        {
+          name: 'Lottie',
+          component: Lottie
         }
       ]
     }

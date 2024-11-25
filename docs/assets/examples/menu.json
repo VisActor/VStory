@@ -2,49 +2,17 @@
   "menu": "examples",
   "children": [
     {
-      "path": "site-scene",
+      "path": "works-show",
       "title": {
-        "zh": "官网场景",
-        "en": "site-scene"
+        "zh": "作品展示",
+        "en": "works show"
       },
       "children": [
         {
-          "path": "basic",
+          "path": "visualize-history",
           "title": {
-            "zh": "基本场景",
-            "en": "basic"
-          }
-        }
-      ]
-    },
-    {
-      "path": "ranking-bar",
-      "title": {
-        "zh": "动态排行榜条形图",
-        "en": "Dynamic Ranking Bar Chart"
-      },
-      "children": [
-        {
-          "path": "basic",
-          "title": {
-            "zh": "基本场景",
-            "en": "basic"
-          }
-        }
-      ]
-    },
-    {
-      "path": "unit",
-      "title": {
-        "zh": "单元可视化组件",
-        "en": "Unit Visualization component"
-      },
-      "children": [
-        {
-          "path": "basic-component",
-          "title": {
-            "zh": "基础组件",
-            "en": "Basic Unit Component"
+            "zh": "可视化历史展示",
+            "en": "Visualize History"
           }
         },
         {
@@ -57,24 +25,128 @@
         {
           "path": "unit-gun-death",
           "title": {
-            "zh": "单元可视化叙事示例",
+            "zh": "美国枪支死亡单元可视化",
             "en": "Unit Story Telling"
           }
         }
       ]
     },
     {
-      "path": "weather",
+      "path": "animate",
       "title": {
-        "zh": "天气可视化模板",
-        "en": "weather Visualization template"
+        "zh": "动画",
+        "en": "animate"
       },
       "children": [
         {
-          "path": "weather-table",
+          "path": "bar-leap",
           "title": {
-            "zh": "天气表格",
-            "en": "weather table"
+            "zh": "bar leap 动画",
+            "en": "bar leap animate"
+          }
+        },
+        {
+          "path": "pie-leap",
+          "title": {
+            "zh": "pie leap 动画",
+            "en": "pie leap animate"
+          }
+        },
+        {
+          "path": "bar-bounce",
+          "title": {
+            "zh": "bar bounce 动画",
+            "en": "bar bounce animate"
+          }
+        }
+      ]
+    },
+    {
+      "path": "character",
+      "title": {
+        "zh": "character 元素",
+        "en": "character element"
+      },
+      "children": [
+        {
+          "path": "timeline",
+          "title": {
+            "zh": "时间轴组件",
+            "en": "timeline component"
+          }
+        },
+        {
+          "path": "unit",
+          "title": {
+            "zh": "unit 组件",
+            "en": "unit component"
+          }
+        },
+        {
+          "path": "balloon-bar",
+          "title": {
+            "zh": "balloon bar 图表",
+            "en": "balloon bar chart"
+          }
+        },
+        {
+          "path": "ranking-bar",
+          "title": {
+            "zh": "动态条形图",
+            "en": "ranking bar chart"
+          }
+        },
+        {
+          "path": "wave-scatter",
+          "title": {
+            "zh": "水波散点图",
+            "en": "wave scatter"
+          }
+        },
+        {
+          "path": "vchart",
+          "title": {
+            "zh": "vchart 图表",
+            "en": "vchart chart"
+          }
+        },
+        {
+          "path": "vgraphic",
+          "title": {
+            "zh": "图元",
+            "en": "graphics"
+          }
+        }
+      ]
+    },
+    {
+      "path": "arrange",
+      "title": {
+        "zh": "动画编排",
+        "en": "Animation arrangement"
+      },
+      "children": [
+        {
+          "path": "vchart-arrange",
+          "title": {
+            "zh": "VChart动画编排",
+            "en": "VChart Animation arrangement"
+          }
+        }
+      ]
+    },
+    {
+      "path": "templates",
+      "title": {
+        "zh": "模板",
+        "en": "templates"
+      },
+      "children": [
+        {
+          "path": "unit-visualize-template",
+          "title": {
+            "zh": "单元可视化模板",
+            "en": "unit visualize template"
           }
         }
       ]
