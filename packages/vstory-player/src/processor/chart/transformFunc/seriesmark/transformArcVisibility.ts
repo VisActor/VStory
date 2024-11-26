@@ -43,7 +43,12 @@ const arcGrowRadius = (
     markIndex: number;
   }
 ) => {
-  const { duration, loop, oneByOne, easing } = animation;
+  const { duration, loop, oneByOne, easing } = getCustomParams(
+    animation,
+    animation.delayPerTime ?? 60,
+    animation.enterPerTime ?? 100
+  );
+
   const { disappear } = option;
   const type = disappear ? 'growRadiusOut' : 'growRadiusIn';
 
@@ -64,7 +69,11 @@ const arcGrowAngle = (
     markIndex: number;
   }
 ) => {
-  const { duration, loop, oneByOne, easing } = animation;
+  const { duration, loop, oneByOne, easing } = getCustomParams(
+    animation,
+    animation.delayPerTime ?? 60,
+    animation.enterPerTime ?? 100
+  );
   const { disappear } = option;
   const type = disappear ? 'growAngleOut' : 'growAngleIn';
 
@@ -88,7 +97,11 @@ const arcFade = (
     markIndex: number;
   }
 ) => {
-  const { duration, loop, oneByOne, easing } = animation;
+  const { duration, loop, oneByOne, easing } = getCustomParams(
+    animation,
+    animation.delayPerTime ?? 60,
+    animation.enterPerTime ?? 100
+  );
   const { disappear } = option;
   const type = disappear ? 'fadeOut' : 'fadeIn';
 

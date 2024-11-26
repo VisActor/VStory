@@ -16,7 +16,12 @@ export default {
   },
   resolve: {
     alias: {
-      '@visactor/vstory': path.resolve('../packages/vstory/src/index.ts')
+      '@visactor/vstory': path.resolve(__dirname, '../packages/vstory/src/index.ts'),
+      '@visactor/vstory-core': path.resolve(__dirname, '../packages/vstory-core/src/index.ts'),
+      '@visactor/vstory-render': path.resolve(__dirname, '../packages/vstory-render/src/index.ts'),
+      '@visactor/vstory-animate': path.resolve(__dirname, '../packages/vstory-animate/src/index.ts'),
+      '@visactor/vstory-player': path.resolve(__dirname, '../packages/vstory-player/src/index.ts'),
+      '@visactor/vstory-templates': path.resolve(__dirname, '../packages/vstory-templates/src/index.ts')
     }
   },
   plugins: [react()]

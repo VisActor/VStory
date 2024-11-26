@@ -18,6 +18,8 @@ import { TimelineAnimate } from './demos/component/timeline';
 import { BasicUnit } from './demos/component/basic-unit';
 import { BarChart2 } from './demos/BarChart2';
 import { UnitTemplate1 } from './demos/templates/unit-template1';
+import { VScreen } from './demos/works/vscreen';
+import { Lottie } from './demos/component/lottie';
 
 type MenusType = (
   | {
@@ -108,6 +110,10 @@ const App = () => {
         {
           name: 'VChart Demo',
           component: VChartSiteDemo
+        },
+        {
+          name: 'VScreen',
+          component: VScreen
         }
       ]
     },
@@ -130,6 +136,10 @@ const App = () => {
         {
           name: 'BasicUnit',
           component: BasicUnit
+        },
+        {
+          name: 'Lottie',
+          component: Lottie
         }
       ]
     }

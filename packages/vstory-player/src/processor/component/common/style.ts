@@ -50,9 +50,9 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
     // 这些属性都设置给component，由component下发给graphic
     const componentStyle: any = { ...panelStyle };
     ['x', 'y', 'dx', 'dy', 'scaleX', 'scaleY', 'width', 'height'].forEach(key => {
-      if (key in componentStyle) {
+      if (key in graphicStyle) {
         componentStyle[key] = graphicStyle[key];
-        delete componentStyle[key];
+        delete graphicStyle[key];
       }
     });
     if (component) {

@@ -160,6 +160,19 @@ export const API = () => {
                 } as any
               }
             ]
+          },
+          {
+            action: 'style',
+            startTime: 3000,
+            payload: {
+              graphic: {
+                width: 150
+              },
+              animation: {
+                duration: 1000,
+                easing: 'easeInOutQuad'
+              }
+            }
           }
         ]
       }

@@ -62,6 +62,13 @@
       "versionPolicyName": "vstoryMain"
     },
     {
+      "packageName": "@visactor/vstory-external",
+      "projectFolder": "packages/vstory-external",
+      "tags": ["package"],
+      "shouldPublish": true,
+      "versionPolicyName": "vstoryMain"
+    },
+    {
       "packageName": "@internal/bundler",
       "projectFolder": "tools/bundler",
       "tags": ["tool"],

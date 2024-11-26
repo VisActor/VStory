@@ -157,5 +157,7 @@ const player = new VStory.Player(story);
 story.init(player);
 
 player.play(-1);
-window.vstory = story;
+
+window['story'] = story;
+window['vstory'] = story;
 ```
