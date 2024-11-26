@@ -14,7 +14,7 @@
 
 1. 一个基于VChart的简单的柱状图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -46,7 +46,7 @@ window['vchart'] = vchart;
 
 2. 一个基于VChart的简单的面积图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -60,7 +60,7 @@ const spec = {
   data: [
     {
       id: 'id0',
-      values: mockData.filter((item: any) => item.type !== 'C')
+      values: mockData.filter((item) => item.type !== 'C')
     }
   ],
   xField: 'month',
@@ -83,7 +83,7 @@ window['vchart'] = vchart;
 
 3. 一个基于VChart的简单的雷达图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -134,7 +134,7 @@ window['vchart'] = vchart;
 ```
 4. 一个基于VChart的简单的玫瑰图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -172,7 +172,7 @@ window['vchart'] = vchart;
 ```
 5. 一个基于VChart的简单的仪表盘图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -213,6 +213,11 @@ window['vchart'] = vchart;
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
+
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const player = new VStory.Player(story);
+story.init(player);
+
 story.addCharacterWithAppear({
   type: 'Text',
   id: 'title',
@@ -239,10 +244,6 @@ story.addCharacterWithAppear({
   }
 });
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
-const player = new VStory.Player(story);
-story.init(player);
-
 player.play(-1);
 window.vstory = story;
 ```
@@ -251,7 +252,7 @@ window.vstory = story;
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -259,6 +260,10 @@ types.forEach(type => {
     mockData.push({ month: i + 'th', value: Math.random() * 100 + 10, type });
   }
 });
+
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const player = new VStory.Player(story);
+story.init(player);
 
 story.addCharacterWithAppear({
   type: 'WaveScatter',
@@ -272,7 +277,7 @@ story.addCharacterWithAppear({
   },
   options: {
     data: {
-      values: mockData.filter((item: any) => item.type === 'A')
+      values: mockData.filter((item) => item.type === 'A')
     },
     categoryField: 'month',
     valueField: 'value',
@@ -294,10 +299,6 @@ story.addCharacterWithAppear({
     }
   }
 });
-
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
-const player = new VStory.Player(story);
-story.init(player);
 
 player.play(-1);
 window.vstory = story;
@@ -394,7 +395,7 @@ const characters = [
     },
     options: {
       data: {
-        values: mockData.filter((item: any) => item.type === 'A')
+        values: mockData.filter((item) => item.type === 'A')
       },
       categoryField: 'month',
       valueField: 'value',
