@@ -1,6 +1,6 @@
 # Story和Player
 
-首先建议大家阅读[dsl]()的章节，了解如何编写一个VStory的DSL描述。当我们有了一个DSL的JSON描述之后，我们就需要进行VStory的实例化，然后使用播放器去播放作品了。
+首先建议大家阅读[dsl](./dsl)的章节，了解如何编写一个VStory的DSL描述。当我们有了一个DSL的JSON描述之后，我们就需要进行VStory的实例化，然后使用播放器去播放作品了。
 
 ## 注册
 
@@ -40,7 +40,7 @@ story.load(dsl);
 
 ## 命令添加character（可选）
 
-如果您的DSL中没有包含character，那么您可以使用命令添加character。如果您已经静态的定义好了DSL，这个步骤就不需要
+如果您的DSL中没有包含`character`，那么您可以使用命令添加`character`。如果您已经静态的定义好了DSL，这个步骤就不需要
 
 ```ts
 // 接口定义如下
@@ -108,7 +108,7 @@ story.addCharacterWithAppear({
 
 ## 创建Player并绑定Story
 
-创建好Story之后，我们就可以进行播放流程了，我们需要创建一个Player实例，然后绑定Story实例。
+创建好`Story`之后，我们就可以进行播放流程了，我们需要创建一个`Player`实例，然后绑定`Story`实例。
 
 ```ts
 // 创建Player实例
@@ -116,7 +116,7 @@ const player = new Player(story);
 // 初始化Story
 story.init(player);
 ```
-接下来调用`player.play()`即可播放。play方法接收一个number类型的参数，可传入0,-1,1
+接下来调用`player.play()`即可播放。`play`方法接收一个`number`类型的参数，可传入0,-1,1
 传入0表示只播放一次，播放到结尾就停止
 传入1表示循环播放，播放到结尾就从头开始播放
 传入-1表示不循环也不停止，播放到结尾之后时间线继续往后走，适用于有循环动画的场景，比如有一个持续播放的背景动画
@@ -130,4 +130,4 @@ player.play(1);
 player.play(-1);
 ```
 
-到这里，story和player的定义就介绍完了，大家可以自己动手试一下，或者去example[/vstory/example]里去改一改试一试。
+到这里，`story`和`player`的定义就介绍完了，大家可以自己动手试一下，或者去example[/vstory/example]里去改一改试一试。

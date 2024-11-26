@@ -3,11 +3,11 @@
 DSL是描述一个VStory作品的JSON格式。其中定义了这个作品中使用了哪些元素，以及相关配置。描述了这个作品是如何编排的，什么元素在什么时刻做了什么行为。关于DSL的快速实战入门请参考[一份基础的 DSL](../Basic/A_Basic_DSL)。本节教程将详细介绍DSL的具体定义。
 
 ## 结构
-DSL 是一个 JSON 格式的对象，包含以下几个字段：
-1. character数组
-  character 数组用于描述这个作品中使用了哪些元素，以及相关配置。
-2. acts数组
-  acts 数组用于描述这个作品是如何编排的，什么元素在什么时刻做了什么行为。
+`DSL` 是一个 JSON 格式的对象，包含以下几个字段：
+1. `character`数组
+  `character` 数组用于描述这个作品中使用了哪些元素，以及相关配置。
+2. `acts`数组
+  `acts` 数组用于描述这个作品是如何编排的，什么元素在什么时刻做了什么行为。
 
 ```ts
 interface IStoryDSL {
@@ -17,7 +17,7 @@ interface IStoryDSL {
 ```
 
 ### character数组
-character 数组用于描述这个作品中使用了哪些类型的元素，以及相关配置。其中包含位置大小（position），层级（layout）。
+`character` 数组用于描述这个作品中使用了哪些类型的元素，以及相关配置。其中包含位置大小（`position`），层级（`layout`）。
 
 ```ts
 type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig;
@@ -50,7 +50,7 @@ interface ICharacterConfigBase {
 }
 ```
 
-目前character有三大类型，分别是图表、组件、表格。主要是因为这三大类型的配置有较大差异，然后每个类型下面还有无数的子类型，比如组件类型，你可以自定义任意的组件，然后注册到VStory中在DSL中使用。
+目前`character`有三大类型，分别是图表、组件、表格。主要是因为这三大类型的配置有较大差异，然后每个类型下面还有无数的子类型，比如组件类型，你可以自定义任意的组件，然后注册到VStory中在DSL中使用。
 
 #### 图表类型
 
@@ -103,7 +103,7 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
 #### 组件类型
 
 文字、图片等都属于组件类型，如果需要在VStory中使用自定义组件，需要先注册到VStory中，然后在DSL中使用。这个在[自定义组件](./Custom_Component)中会详细介绍。
-注意的是，组件可以携带一个额外的文本，这个文本通过text属性配置，而graphic属性则是组件本身的配置。
+注意的是，组件可以携带一个额外的文本，这个文本通过`text`属性配置，而`graphic`属性则是组件本身的配置。
 ```ts
 interface IComponentCharacterConfig extends ICharacterConfigBase {
   options: {
@@ -122,7 +122,8 @@ interface IComponentCharacterConfig extends ICharacterConfigBase {
 正在开发中
 
 ### Acts数组
-通过characters数组，我们可以在画布中放置多个元素，接下来我们需要通过acts数组来描述这个作品是如何编排的，什么元素在什么时刻做了什么行为。Acts由幕、场景、动作组成。acts数组中可以包含多个幕，幕与幕之间是有先后顺序的串联结构。每一个幕中可以包含多个场景，场景与场景默认是有先后顺序的串联结构。但是场景和场景的时间线是可以重叠的，通过配置场景的delay字段，可以控制该场景与上一个场景时间线的偏移。每一个场景中可以包含多个动作，动作中描述了一个或多个character的具体行为，一个场景中可以包含多个character和多个动作，动作之间是并行执行的，通过配置startTime来控制该动作的开始时间。
+通过`characters`数组，我们可以在画布中放置多个元素，接下来我们需要通过`acts`数组来描述这个作品是如何编排的，什么元素在什么时刻做了什么行为。`acts`由幕、场景、动作组成。
+`acts`数组中可以包含多个幕，幕与幕之间是有先后顺序的串联结构。每一个幕中可以包含多个场景，场景与场景默认是有先后顺序的串联结构。但是场景和场景的时间线是可以重叠的，通过配置场景的`delay`字段，可以控制该场景与上一个场景时间线的偏移。每一个场景中可以包含多个动作，动作中描述了一个或多个`character`的具体行为，一个场景中可以包含多个`character`和多个动作，动作之间是并行执行的，通过配置`startTime`来控制该动作的开始时间。
 
 #### 幕
 幕是作品中最大的章节，一个作品可以包含多个幕，幕与幕之间是有先后顺序的串联结构。
@@ -133,7 +134,7 @@ interface IActSpec {
 }
 ```
 #### 场景
-场景是一个时间线，一个场景包含一个动作数组，场景与场景默认是有先后顺序的串联结构，但也可以通过配置delay字段来控制该场景与上一个场景时间线的偏移。
+场景是一个时间线，一个场景包含一个动作数组，场景与场景默认是有先后顺序的串联结构，但也可以通过配置`delay`字段来控制该场景与上一个场景时间线的偏移。
 ```ts
 type ISceneSpec = {
   id: string;
@@ -142,7 +143,7 @@ type ISceneSpec = {
 };
 ```
 #### 动作
-一个动作包含一个或多个character的具体行为，一个场景中可以包含多个动作，动作之间是并行执行的，通过配置startTime来控制该动作的开始时间。
+一个动作包含一个或多个`character`的具体行为，一个场景中可以包含多个动作，动作之间是并行执行的，通过配置`startTime`来控制该动作的开始时间。
 ```ts
 interface IActions {
   characterId: string | string[]; // 要执行动作的character的id或者数组
@@ -174,4 +175,4 @@ export interface IAnimationParams {
 }
 ```
 
-到这里，一个DSL的完整定义就完成了，大家可以自己动手试一下，或者去example[/vstory/example]里去改一改试一试。
+到这里，一个DSL的完整定义就完成了，大家可以自己动手试一下，或者去[example](/vstory/example)里去改一改试一试。

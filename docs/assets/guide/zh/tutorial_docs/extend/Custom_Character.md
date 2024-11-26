@@ -6,6 +6,8 @@
 
 我们提供了`@visactor/vstory-external`包，用于方便用户进行自定义Character的开发。一些扩展功能都可以在这个包中实现。下面我们通过一个接入Lottie的例子来介绍如何在这个包中进行扩展。
 
+![](https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vstory-external.png)
+
 ## 自定义一个Lottie的Character
 
 如果需要在作品中现在需要展示一个Lottie动画，但是VStory的主包里并没有提供这样的Character。现在我们就需要在`@visactor/vstory-external`包中进行扩展。
@@ -173,3 +175,44 @@ export class LottieVisibilityActionProcessor extends CommonVisibilityActionProce
 
 接下来我们导出`Character`和`Processor`的注册方法即可。
 具体的代码大家在`packages/vstory-external/src/character/lottie`和`packages/vstory-external/src/processor/lottie`中可以看到。
+
+最终，我们就可以在`DSL`中使用`Lottie`了。
+
+```javascript livedemo template=vstory
+// 注册所有需要的内容
+VStory.registerAll();
+// 注册Lottie
+VStory.registerLottie();
+VStory.registerLottieAction();
+
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const player = new VStory.Player(story);
+story.init(player);
+
+story.addCharacterWithAppear({
+  type: 'Lottie',
+  id: 'lottie-test',
+  zIndex: 2,
+  position: {
+    top: 50,
+    left: 50,
+    width: 300,
+    height: 300
+  },
+  options: {
+    graphic: {
+      data: 'loading1'
+    },
+    panel: {
+      fill: '#ffffff',
+      shadowColor: 'rgba(0, 0, 0, 0.05)',
+      shadowBlur: 10,
+      shadowOffsetX: 4,
+      shadowOffsetY: 4
+    }
+  }
+});
+
+player.play(-1);
+window.vstory = story;
+```

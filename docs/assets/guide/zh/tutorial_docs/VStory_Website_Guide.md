@@ -17,9 +17,10 @@
 VStory 的文档提供了有关功能和配置的详细信息。根据你的需求，你可以查看以下几个部分：
 
 - [教程](./VStory_Website_Guide)：介绍了 VStory 的基本概念和各种使用方法。
-- [组件](../../components)：提供了 VStory 图表的所有组件配置及其详细说明。
+- [概念](./VStory_Concepts/dsl)：提供了 VStory `DSL` 的定义以及核心类的介绍。
+- [扩展](./extend/Custom_Character)：提供了自定义扩展的教程和指南。
 
-另外，为了更好的使用VStory，建议你再了解一下[VChart](/Vchart)、[VTable](/VTable)。
+另外，为了更好的使用VStory，建议你再了解一下[VChart](/Vchart)、[VTable](/VTable)、[VRender](/VRender)。
 
 ## 图表示例
 
