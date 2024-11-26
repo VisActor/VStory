@@ -28,7 +28,8 @@
     "@visactor/vstory-animate": "workspace:0.0.12",
     "@visactor/vstory-editor": "workspace:0.0.12",
     "@visactor/vstory-player": "workspace:0.0.12",
-    "@visactor/vstory-templates": "workspace:0.0.12"
+    "@visactor/vstory-templates": "workspace:0.0.12",
+    "@visactor/vstory-external": "workspace:0.0.12"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",

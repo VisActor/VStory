@@ -81,6 +81,7 @@ importers:
       '@visactor/vstory-animate': workspace:0.0.12
       '@visactor/vstory-core': workspace:0.0.12
       '@visactor/vstory-editor': workspace:0.0.12
+      '@visactor/vstory-external': workspace:0.0.12
       '@visactor/vstory-player': workspace:0.0.12
       '@visactor/vstory-templates': workspace:0.0.12
       '@visactor/vutils': ~0.18.17
@@ -101,6 +102,7 @@ importers:
       '@visactor/vstory-animate': link:../vstory-animate
       '@visactor/vstory-core': link:../vstory-core
       '@visactor/vstory-editor': link:../vstory-editor
+      '@visactor/vstory-external': link:../vstory-external
       '@visactor/vstory-player': link:../vstory-player
       '@visactor/vstory-templates': link:../vstory-templates
     devDependencies:
