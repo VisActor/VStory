@@ -61,7 +61,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: '[Auto changelog] changlog of ${{  github.event.release.tag_name }}'
-          base: feat/vstory-next
+          base: develop
           head: 'docs/generate-changelog-${{  github.event.release.tag_name }}'
           labels: changelog
           body: 'update changelog of ${{  github.event.release.tag_name }}'

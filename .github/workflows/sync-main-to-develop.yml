@@ -55,7 +55,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: '[Auto Sync] Sync the code from branch main to branch develop after release ${{ steps.package-version.outputs.current_version }}'
-          base: feat/vstory-next
+          base: develop
           head: sync/main-${{ steps.package-version.outputs.current_version }}
           reviewers: xile611
           body: 'Sync the code from branch main to branch develop after release ${{ steps.package-version.outputs.current_version }}'

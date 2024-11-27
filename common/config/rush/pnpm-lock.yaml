@@ -101,6 +101,7 @@ importers:
       '@visactor/vstory-animate': link:../vstory-animate
       '@visactor/vstory-core': link:../vstory-core
       '@visactor/vstory-editor': link:../vstory-editor
+      '@visactor/vstory-external': link:../vstory-external
       '@visactor/vstory-player': link:../vstory-player
       '@visactor/vstory-templates': link:../vstory-templates
     devDependencies:
