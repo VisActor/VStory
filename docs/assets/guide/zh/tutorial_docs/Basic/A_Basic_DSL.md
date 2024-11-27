@@ -12,9 +12,9 @@
 
 一个仪表盘会包含多种图表、以及标题、表格等模块、这些模块一部分可以使用VStory中提供的特定character实现，还有一些可以通过VChart自行去配置。在本教程中，我们将简化物料准备过程，直接给到所有用到的图表spec。
 
-1. 一个基于VChart的简单的柱状图
+1. 一个基于`VChart`的简单的柱状图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -44,9 +44,9 @@ vchart.renderSync();
 window['vchart'] = vchart;
 ```
 
-2. 一个基于VChart的简单的面积图
+2. 一个基于`VChart`的简单的面积图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -60,7 +60,7 @@ const spec = {
   data: [
     {
       id: 'id0',
-      values: mockData.filter((item: any) => item.type !== 'C')
+      values: mockData.filter((item) => item.type !== 'C')
     }
   ],
   xField: 'month',
@@ -81,9 +81,9 @@ vchart.renderSync();
 window['vchart'] = vchart;
 ```
 
-3. 一个基于VChart的简单的雷达图
+3. 一个基于`VChart`的简单的雷达图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -132,9 +132,9 @@ vchart.renderSync();
 // Just for the convenience of console debugging, DO NOT COPY!
 window['vchart'] = vchart;
 ```
-4. 一个基于VChart的简单的玫瑰图
+4. 一个基于`VChart`的简单的玫瑰图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -170,9 +170,9 @@ vchart.renderSync();
 // Just for the convenience of console debugging, DO NOT COPY!
 window['vchart'] = vchart;
 ```
-5. 一个基于VChart的简单的仪表盘图
+5. 一个基于`VChart`的简单的仪表盘图
 ```javascript livedemo template=vchart
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -209,10 +209,15 @@ vchart.renderSync();
 window['vchart'] = vchart;
 ```
 
-6. 使用一个VStory的Text类型作为标题
+6. 使用一个`VStory`的`Text`类型作为标题
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
+
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const player = new VStory.Player(story);
+story.init(player);
+
 story.addCharacterWithAppear({
   type: 'Text',
   id: 'title',
@@ -239,19 +244,15 @@ story.addCharacterWithAppear({
   }
 });
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
-const player = new VStory.Player(story);
-story.init(player);
-
 player.play(-1);
 window.vstory = story;
 ```
-7. 使用一个VStory的WaveScatter图表类型
+7. 使用一个`VStory`的`WaveScatter`图表类型
 
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
-const mockData: any = [];
+const mockData = [];
 const types = ['A', 'B', 'C'];
 
 types.forEach(type => {
@@ -259,6 +260,10 @@ types.forEach(type => {
     mockData.push({ month: i + 'th', value: Math.random() * 100 + 10, type });
   }
 });
+
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const player = new VStory.Player(story);
+story.init(player);
 
 story.addCharacterWithAppear({
   type: 'WaveScatter',
@@ -272,7 +277,7 @@ story.addCharacterWithAppear({
   },
   options: {
     data: {
-      values: mockData.filter((item: any) => item.type === 'A')
+      values: mockData.filter((item) => item.type === 'A')
     },
     categoryField: 'month',
     valueField: 'value',
@@ -295,21 +300,17 @@ story.addCharacterWithAppear({
   }
 });
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
-const player = new VStory.Player(story);
-story.init(player);
-
 player.play(-1);
 window.vstory = story;
 ```
 
 ## 2. 拼接
 
-接下来，我们将这些素材拼接到VStory的大画布中，形成一个完整的作品，我们使用1920 * 1080作为画布的完整尺寸，图表之间的margin为30px，距离左右边界的margin也是30px。具体的布局如下图所示
+接下来，我们将这些素材拼接到`VStory`的大画布中，形成一个完整的作品，我们使用1920 * 1080作为画布的完整尺寸，图表之间的`margin`为30px，距离左右边界的`margin`也是30px。具体的布局如下图所示
 
 ![](https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/dashboard_layout_detail.png)
 
-完成了布局的设计之后，接下来我们开始DSL的编写，来实现上图中的效果，DSL核心包括一个character数组和一个acts数组，character数组包含了作品中的所有角色（元素），acts数组包含了作品中的各种角色的各种动作（动画），具体的接口定义如下：
+完成了布局的设计之后，接下来我们开始DSL的编写，来实现上图中的效果，DSL核心包括一个`character`数组和一个`acts`数组，`character`数组包含了作品中的所有角色（元素），`acts`数组包含了作品中的各种角色的各种动作（动画），具体的接口定义如下：
 
 ```ts
 interface IStoryDSL {
@@ -356,7 +357,7 @@ interface IAction {
 ```
 
 ### 2.1 character数组配置
-根据我们提供的每个character的配置，以及接口定义，我们可以组装我们的character数组。
+根据我们提供的每个`character`的配置，以及接口定义，我们可以组装我们的`character`数组。
 
 ```ts
 const characters = [
@@ -394,7 +395,7 @@ const characters = [
     },
     options: {
       data: {
-        values: mockData.filter((item: any) => item.type === 'A')
+        values: mockData.filter((item) => item.type === 'A')
       },
       categoryField: 'month',
       valueField: 'value',
@@ -535,7 +536,7 @@ const characters = [
 ]
 ```
 ### 2.2 acts数组配置
-characters数组中只是定义了作品中有这些元素可用，具体的动作还没有定义，如果不定义动作的话，元素将不会展示，所以接下来我们开始定义acts数组。我们期望作品中的元素有如下动作
+`characters`数组中只是定义了作品中有这些元素可用，具体的动作还没有定义，如果不定义动作的话，元素将不会展示，所以接下来我们开始定义`acts`数组。我们期望作品中的元素有如下动作
 
 1. 柱状图和玫瑰图会有`oneByOne`(图元一个接着一个)的`appear`(入场)动画效果，其他图表都是默认的`appear`（入场）的动画效果
 2. 包含图表本身的面板也要有一个`bounce`(弹跳)的`appear`(入场)的动画效果
@@ -607,7 +608,7 @@ const acts = [
 
 ## 3. 播放
 
-至此，我们已经完成了一个简易的仪表盘的制作步骤，接下来，我们将character和acts数组拼起来合成一个DSL，然后使用 VStory 进行播放。
+至此，我们已经完成了一个简易的仪表盘的制作步骤，接下来，我们将`character`和`acts`数组拼起来合成一个DSL，然后使用 VStory 进行播放。
 
 ```ts
 // 注册所有需要的内容
@@ -998,4 +999,4 @@ window['story'] = story;
 window['vstory'] = story;
 ```
 
-通过本教程，您已经了解了一份基础的 DSL 配置组成，后面你可以尝试更改Character和Acts，探索 VStory 的强大功能和灵活性，编绘出绚丽多彩的作品。祝您编码愉快！
+通过本教程，您已经了解了一份基础的 DSL 配置组成，后面你可以尝试更改`character`和`acts`，探索 VStory 的强大功能和灵活性，编绘出绚丽多彩的作品。祝您编码愉快！
