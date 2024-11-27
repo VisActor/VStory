@@ -230,16 +230,13 @@ story.addCharacterWithAppear({
   },
   options: {
     graphic: {
-      text: '这是一个文本',
-      fontSize: 12,
-      fontWeight: 'bold',
-      fill: 'red',
+      text: 'VStory简易仪表盘',
+      fontSize: 70,
+      wordBreak: 'break-word',
       textAlign: 'left',
-      textBaseline: 'top'
-    },
-    panel: {
-      fill: 'blue',
-      cornerRadius: 30
+      textBaseline: 'top',
+      fill: 'black',
+      fontWeight: 200,
     }
   }
 });
