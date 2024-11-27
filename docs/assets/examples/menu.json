@@ -150,6 +150,22 @@
           }
         }
       ]
+    },
+    {
+      "path": "infographic",
+      "title": {
+        "zh": "信息图模板",
+        "en": "infographic templates"
+      },
+      "children": [
+        {
+          "path": "line-chart-leftRight",
+          "title": {
+            "zh": "信息图模板-折线图（左右布局）",
+            "en": "Line Chart Infographic(Left-right Layout)"
+          }
+        }
+      ]
     }
   ]
 }
