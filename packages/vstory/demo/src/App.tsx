@@ -20,6 +20,7 @@ import { BarChart2 } from './demos/BarChart2';
 import { UnitTemplate1 } from './demos/templates/unit-template1';
 import { VScreen } from './demos/works/vscreen';
 import { Lottie } from './demos/component/lottie';
+import { Infographic } from './demos/infographic/infographic';
 
 type MenusType = (
   | {
@@ -140,6 +141,15 @@ const App = () => {
         {
           name: 'Lottie',
           component: Lottie
+        }
+      ]
+    },
+    {
+      name: 'Infographic',
+      subMenus: [
+        {
+          name: 'infographic',
+          component: Infographic
         }
       ]
     }
