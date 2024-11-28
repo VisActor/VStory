@@ -130,4 +130,4 @@ player.play(1);
 player.play(-1);
 ```
 
-到这里，`story`和`player`的定义就介绍完了，大家可以自己动手试一下，或者去[example](/vstory/example)里去改一改试一试。
+到这里，`story`和`player`的定义就介绍完了，大家可以自己动手试一下，或者去[examples](/vstory/examples)里去改一改试一试。

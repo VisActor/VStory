@@ -67,6 +67,20 @@
               }
             },
             {
+              "path": "character",
+              "title": {
+                "zh": "character",
+                "en": "character"
+              }
+            },
+            {
+              "path": "action",
+              "title": {
+                "zh": "action",
+                "en": "action"
+              }
+            },
+            {
               "path": "story-player",
               "title": {
                 "zh": "Story 和 Player",
