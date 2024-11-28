@@ -175,4 +175,4 @@ export interface IAnimationParams {
 }
 ```
 
-With this, the complete definition of a DSL is finished. You can try it out yourself or make changes in the [example](/vstory/example) to experiment.
+With this, the complete definition of a DSL is finished. You can try it out yourself or make changes in the [examples](/vstory/examples) to experiment.

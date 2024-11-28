@@ -131,6 +131,6 @@ export class Player implements IPlayer {
     this._scheduler.release();
     this._ticker.removeListener('tick', this.handlerTick);
     this._ticker = null;
-    globalTickerStore.releaseGlobalTicker();
+    // globalTickerStore.releaseGlobalTicker();
   }
 }

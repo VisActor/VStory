@@ -130,4 +130,4 @@ player.play(1);
 player.play(-1);
 ```
 
-That's all for the definitions of `story` and `player`. You can try it out yourself or make changes in the [example](/vstory/example) to see how it works.
+That's all for the definitions of `story` and `player`. You can try it out yourself or make changes in the [examples](/vstory/examples) to see how it works.
