@@ -1,6 +1,11 @@
 # Change Log - @visactor/vstory
 
-This log was last generated on Wed, 27 Nov 2024 09:07:10 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Nov 2024 12:02:04 GMT and should not be manually modified.
+
+## 0.0.15
+Thu, 28 Nov 2024 12:02:04 GMT
+
+_Version update only_
 
 ## 0.0.14
 Wed, 27 Nov 2024 09:07:10 GMT
