@@ -42,8 +42,8 @@ export class StoryCanvas implements IStoryCanvas {
 
     const {
       canvas,
-      width = 500,
-      height = 500,
+      width,
+      height,
       background = 'transparent',
       layerBackground = 'transparent',
       dpr = vglobal.devicePixelRatio,
@@ -51,7 +51,7 @@ export class StoryCanvas implements IStoryCanvas {
       scaleY = 1
     } = params;
     this._container && this._initCanvasByContainer(width, height, dpr);
-    params.canvas && this._initCanvasByCanvas(canvas, width, height, dpr);
+    params.canvas && this._initCanvasByCanvas(canvas, width ?? 500, height ?? 500, dpr);
 
     this._stage.background = background;
     this._stage.defaultLayer.setAttributes({ background: layerBackground });
