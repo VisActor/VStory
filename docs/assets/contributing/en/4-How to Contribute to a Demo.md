@@ -1,7 +1,7 @@
 ---
 title: 4. How to Contribute Demo
 
-key words: VisActor, VChart, VTable, VStrory, VMind, VGrammar, VRender, Visualization, Chart, Data, Table, Graph, Gis, LLM
+key words: VisActor, VChart, VTable, VStory, VMind, VGrammar, VRender, Visualization, Chart, Data, Table, Graph, Gis, LLM
 ---
 
 # Create Branch
@@ -53,7 +53,7 @@ For example:
 
 The location of VStory documents and demos in the project is as follows (examples):
 
-<img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/ObSbbLIPio1un5xZGv7cZ7m8nrh.gif' alt='' width='1000' height='auto'>
+<img src='https://cdn.jsdelivr.net/gh/xiaoluoHe/articles/visactor/img/SCR-20241202-oujh.png' alt='' width='500' height='auto'>
 
 Taking the example document of the bar leap animation as an example (currently one example contains both Chinese and English versions, located in the zh & en paths):
 
@@ -61,23 +61,29 @@ Taking the example document of the bar leap animation as an example (currently o
 
 The example Markdown content is divided into several parts:
 
-* Metadata: Defines the attributes of the example content, including chart category, cover image, keywords, etc.
-* Title: The content under the first-level title corresponds to the description of the example.
-* Key Configurations: Key configuration explanations included in the example, which will be displayed on the right side of the example page under "Key Configurations".
-* Code Demo: The specific code content executed in the example, currently only supports native JavaScript code.
+- Metadata: Defines the attributes of the example content, including chart category, cover image, keywords, etc.
+- Title: The content under the first-level title corresponds to the description of the example.
+- Key Configurations: Key configuration explanations included in the example, which will be displayed on the right side of the example page under "Key Configurations".
+- Code Demo: The specific code content executed in the example, currently only supports native JavaScript code.
 
 The metadata fields in Markdown are defined as follows:
 
-* group: The category information of the example, describing what chart category the current example belongs to.
-* title: The title of the example.
-* keywords: Keywords of the example.
-* order: The sorting basis of the example under the same group.
-* cover: The cover image of the example.
-* tutorial: Link to the tutorial (the default example tutorial will jump to the tutorial corresponding to the example group).
+- group: The category information of the example, describing what chart category the current example belongs to.
+- title: The title of the example.
+- keywords: Keywords of the example.
+- order: The sorting basis of the example under the same group.
+- cover: The cover image of the example.
+- tutorial: Link to the tutorial (the default example tutorial will jump to the tutorial corresponding to the example group).
 
 Currently, the group of chart examples contains multiple categories, such as animate, works-show, etc., corresponding to the categories under all charts in the VStory example gallery. You can refer to existing example documents to fill in specific category fields.
 
 <img src='https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vstory-contributing-examples-page.png' alt='' width='1000' height='auto'>
+
+After completing the new demo, you can add the demo path and title in the `docs/assets/examples/menu.json` file:
+
+<img src='https://cdn.jsdelivr.net/gh/xiaoluoHe/articles/visactor/img/SCR-20241202-skwm.png' alt='' width='800' height='auto'>
+
+> For image resources needed during the demo creation process, please refer to [6. How to Upload Image](./6-How%20to%20upload%20image) chapter.
 
 # Use Marscode AI Programming Assistant for Demo Writing
 
@@ -199,15 +205,15 @@ Or create one through the `contribute` button:
 
 Fill in the modifications for this submission according to the template:
 
-* Check the type of modification.
+- Check the type of modification.
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/V7xpbJhhEoSoCExC31WcyKvHnDe.gif' alt='' width='692' height='auto'>
 
-* Fill in the associated issue.
+- Fill in the associated issue.
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/O6YqbpdxgodBjfxHXEpcwob4n5E.gif' alt='' width='470' height='auto'>
 
-* If there are complex changes, explain the background and solution.
+- If there are complex changes, explain the background and solution.
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/QsnYbfLCio4u3MxK2uIc8epKnXh.gif' alt='' width='1000' height='auto'>
 

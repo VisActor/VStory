@@ -1,6 +1,6 @@
 ---
 title: 3. How to Contribute to Documentation
-key words: VisActor, VChart, VTable, VStrory, VMind, VGrammar, VRender, Visualization, Chart, Data, Table, Graph, Gis, LLM
+key words: VisActor, VChart, VTable, VStory, VMind, VGrammar, VRender, Visualization, Chart, Data, Table, Graph, Gis, LLM
 ---
 
 # Create a Branch

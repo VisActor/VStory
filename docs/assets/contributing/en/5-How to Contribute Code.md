@@ -1,8 +1,9 @@
 ---
 title: 5. How to Contribute Code
 
-key words: VisActor, VChart, VTable, VStrory, VMind, VGrammar, VRender, Visualization, Chart, Data, Table, Graph, Gis, LLM
+key words: VisActor, VChart, VTable, VStory, VMind, VGrammar, VRender, Visualization, Chart, Data, Table, Graph, Gis, LLM
 ---
+
 # Create a Branch
 
 The default branch for VStory is the develop branch. Whether it's for feature development, bug fixes, or documentation writing, please create a new branch and then merge it into the develop branch. Use the following code to create a branch:
@@ -12,7 +13,6 @@ The default branch for VStory is the develop branch. Whether it's for feature de
 git checkout -b docs/add-funnel-demo
 
 ```
-
 
 # Find or Create an Issue
 
@@ -41,8 +41,6 @@ If you want to contribute code, you can leave a message under the issue to claim
 For example:
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/MMCpb9MvEomle4xYIe1cauFUnCe.gif' alt='' width='988' height='auto>
-
-
 
 # Write Code
 
@@ -74,8 +72,6 @@ Search and select functions or classes in the code repository as context.
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/FDTHbZ2Hko9WrSx2JqWcJRRnnUf.gif' alt='' width='1000' height='auto>
 
-
-
 Below are examples of how to use the [Marscode AI Programming Assistant](https://www.marscode.cn/home?utm_source=developer&utm_medium=oss&utm_campaign=visactor_a) for code writing.
 
 ## 5.1 Quickly Familiarize Yourself with the Entire Repository
@@ -106,19 +102,13 @@ You can also use the #Code context mentioned above to combine Explain with your 
 
 Explain can be used in conjunction with Context or Files commands to generate explanations for the entire file.
 
-
-
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/HyeabsSvjoHYZ9xAbLRc55j8nDg.gif' alt='' width='1000' height='auto'>
-
-
 
 ## 5.3 Content Retrieval
 
 Usually, each Q&A session with [Marscode](https://www.marscode.cn/home?utm_source=developer&utm_medium=oss&utm_campaign=visactor_a) will provide reference documents, which can provide more context for further analysis.
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/OeF0bP4jPoUZWGxqDqScyHzhnvf.gif' alt='' width='1000' height='auto'>
-
-
 
 You can also directly search for files:
 
@@ -136,11 +126,9 @@ Use the "/doc" command to generate code comments.
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/KAS2bRAVWo1K5ixXvfDceiZinEh.gif' alt='' width='1000' height='auto>
 
-
-
 ## 5.6 Generate Unit Tests
 
-The VStory unit test code is located in the "__**tests__" directory of each package.
+The VStory unit test code is located in the "**\*\*tests**" directory of each package.
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/DHbGbulZ5onHbtx3KFscOLgXnFg.gif' alt='' width='1000' height='auto'>
 
@@ -148,13 +136,9 @@ Using [Marscode](https://www.marscode.cn/home?utm_source=developer&utm_medium=os
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/OnTDbxBAzoQ9h7xEk6vcpYjAnNd.gif' alt='' width='1000' height='auto>
 
-
-
 ## 5.7 Intelligent Suggestions
 
 During the writing process, intelligent code suggestions are a standard feature of the programming assistant. Feel free to experience it yourself.
-
-
 
 # Submit Code
 
@@ -164,7 +148,6 @@ After completing the documentation, push the code to your remote branch. For exa
 git commit -a -m "docs: add custom funnel demo and related docs"
 
 ```
-
 
 VisActor's commit messages follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification, with "docs" used for demos.
 
@@ -182,30 +165,35 @@ A common issue is when the upstream (@visactor/vstroy) has been updated, which m
 git checkout develop
 
 ```
+
 Pull the latest code from the remote:
 
 ```
 git pull upstream develop
 
 ```
+
 Switch back to your development branch:
 
 ```
 git checkout docs/add-funnel-demo
 
 ```
+
 Merge the commits from develop into your branch:
 
 ```
 git rebase develop
 
 ```
+
 Push the updated code to your branch:
 
 ```
 git push origin docs/add-funnel-demo
 
 ```
+
 # Submit a PR
 
 You can click on the `Compare & pull request` button on your GitHub repository page.
@@ -216,15 +204,15 @@ Or create one through the `contribute` button:
 
 Fill in the modifications for this submission according to the template:
 
-* Check the type of modification
+- Check the type of modification
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/AgIOb5bRAo7UUVxS52AcNZCanad.gif' alt='' width='692' height='auto'>
 
-* Fill in the associated issue
+- Fill in the associated issue
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/VGonbJeFJoc68XxDzkOc7j8Lnjd.gif' alt='' width='470' height='auto'>
 
-* If there are complex changes, explain the background and solution
+- If there are complex changes, explain the background and solution
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/HYy2bLtuCopGfxxdeKkc2pt0n4e.gif' alt='' width='1000' height='auto'>
 
@@ -251,7 +239,6 @@ Feishu Group:
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/F0GRbKlLOoHUwRx9JBVcKxk0n6g.gif' alt='' width='264' height='auto'>
 
 Discord: https://discord.com/invite/3wPyxVyH6m
-
 
 # This Document is Contributed by the Following Individuals
 

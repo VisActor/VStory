@@ -1,8 +1,9 @@
 ---
 title: 1. Setting up Development Environment
 
-key words: VisActor, VChart, VTable, VStrory, VMind, VGrammar, VRender, Visualization, Chart, Data, Table, Graph, Gis, LLM
+key words: VisActor, VChart, VTable, VStory, VMind, VGrammar, VRender, Visualization, Chart, Data, Table, Graph, Gis, LLM
 ---
+
 # Github
 
 ## 1.1 Register an Account
@@ -15,15 +16,11 @@ If, due to special circumstances, you are unable to access the Github site, plea
 
 First, you need to fork this project. Go to the [VStory project page](https://github.com/VisActor/VStory) and click the Fork button in the upper right corner.
 
-
-
-<img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/LQbyb5XWgoV8w2x3D5uc8bIkn1c.gif' alt='' width='1000' height='auto'>
-
-
+<img src='https://cdn.jsdelivr.net/gh/xiaoluoHe/articles/visactor/img/SCR-20241202-oosd.png' alt='' width='1000' height='auto'>
 
 Your github account will show the project xxxx(your github username)/vstory
 
-<img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/OuwMbtoyPof0S8xrisscWJ3Hneb.gif' alt='' width='849' height='auto'>
+<img src='https://cdn.jsdelivr.net/gh/xiaoluoHe/articles/visactor/img/SCR-20241202-okqc.png' alt='' width='600' height='auto'>
 
 # Local Development Environment
 
@@ -33,19 +30,20 @@ Since the code is hosted on Github, we use git for version control.
 
 Git is a version control system used to track and manage code changes in software development projects. It helps developers record and manage the history of code, facilitating team collaboration, code version control, code merging, and other operations. With Git, you can track every version of each file and easily switch and compare between different versions. Git also provides branch management functionality, allowing multiple parallel development tasks to be carried out simultaneously.
 
-* Visit the Git official website: [https://git-scm.com/](https://git-scm.com/)
+- Visit the Git official website: [https://git-scm.com/](https://git-scm.com/)
 
-* Download the latest version of the Git installer.
+- Download the latest version of the Git installer.
 
-* Run the downloaded installer and follow the installation wizard instructions.
+- Run the downloaded installer and follow the installation wizard instructions.
 
-* After installation, you can confirm the successful installation by using the `git version` command in the command line.
+- After installation, you can confirm the successful installation by using the `git version` command in the command line.
 
 ```
-HM4G2J09L6:~ xuanhun$ git version
+git version
 **git version 2.39.2 (Apple Git-143)**
 
 ```
+
 ## 2.2 Install Development Tools (Recommended: VSCode)
 
 VisActor is mainly based on the front-end technology stack, and there are many tools available for front-end development. We recommend using VSCode. Of course, you can also use your preferred development tool.
@@ -64,8 +62,6 @@ With Marscode, VisActor developers can easily perform tasks such as code underst
 
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/BQeib7E2gonoOaxLPqjcRtAYngh.gif' alt='' width='1000' height='auto'>
 
-
-
 ## 2.4 Clone the Code to Local
 
 Navigate to the VStory folder and add the remote address of VStory.
@@ -74,12 +70,14 @@ Navigate to the VStory folder and add the remote address of VStory.
 git remote add upstream https://github.com/VisActor/VStory.git
 
 ```
+
 Get the latest source code of VStory.
 
 ```
 git pull upstream develop
 
 ```
+
 # Initialize the Project
 
 First, globally install [<u>@microsoft/rush</u>](https://rushjs.io/pages/intro/get_started/)
@@ -88,6 +86,7 @@ First, globally install [<u>@microsoft/rush</u>](https://rushjs.io/pages/intro/g
 $ npm i --global @microsoft/rush
 
 ```
+
 Next, run the command to view the demo.
 
 ```
@@ -99,6 +98,7 @@ $ rush start
 $ rush docs
 
 ```
+
 # Next Steps
 
 By now, you have prepared for developing the code. Please continue reading the next section of the tutorial to start different types of tasks.
@@ -116,7 +116,6 @@ Feishu Group:
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/Cv9xb0zzLoUWyaxMVgccWuGPn7d.gif' alt='' width='264' height='auto'>
 
 Discord: [https://discord.com/invite/3wPyxVyH6m](https://discord.com/invite/3wPyxVyH6m)
-
 
 # This document is contributed by the following individuals
 

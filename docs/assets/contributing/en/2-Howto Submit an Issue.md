@@ -3,6 +3,7 @@ title: 2. How to Raise an Issue
 
 key words: VisActor, VChart, VTable, VStory, VMind, VGrammar, VRender, Visualization, Chart, Data, Table, Graph, Gis, LLM
 ---
+
 Under the issues section of each project, you can create and search for issues.
 
 For example, in the VStory project: [VStory issues](https://github.com/VisActor/VStory/issues)
@@ -54,7 +55,6 @@ Feishu Group:
 <img src='https://cdn.jsdelivr.net/gh/xuanhun/articles/visactor/img/BOeVb2CDmozsl9xl8vcc7hzVn8c.gif' alt='' width='264' height='auto'>
 
 Discord: [https://discord.com/invite/3wPyxVyH6m](https://discord.com/invite/3wPyxVyH6m)
-
 
 # Contributors to this Document
 
