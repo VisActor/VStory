@@ -65,7 +65,8 @@ export class VChartGraphic extends Rect {
     }
     this.updateAABBBoundsStamp++;
     const graphicTheme = this.getGraphicTheme();
-    const bounds = transformBoundsWithMatrix(this._displayBounds, this._displayBounds, this.globalTransMatrix);
+    const bounds = this._displayBounds.clone();
+    transformBoundsWithMatrix(bounds, bounds, this.transMatrix);
     // @ts-ignore
     const { boundsPadding = graphicTheme.boundsPadding } = this.attribute;
     const paddingArray = parsePadding(boundsPadding);

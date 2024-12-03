@@ -537,9 +537,7 @@ async function loadDSL() {
           }
         }
       }
-    ],
-    width: 608,
-    height: 360
+    ]
   };
   return {
     characters: [
@@ -580,7 +578,7 @@ async function loadDSL() {
 
             interactive: true,
             animation: false,
-            disableTriggerEvent: true,
+            disableTriggerEvent: false,
             disableDirtyBounds: true
           }
         }
@@ -630,31 +628,31 @@ export const BaseChart = () => {
 
       const chart1 = story.getCharacterById('chart1');
 
-      setTimeout(() => {
-        chart1?.setConfig(
-          merge(chart1?.config, {
-            position: {
-              top: 100,
-              left: 200,
-              width: 400,
-              height: 300
-            }
-          })
-        );
-      }, 1000);
+      // setTimeout(() => {
+      //   chart1?.setConfig(
+      //     merge(chart1?.config, {
+      //       position: {
+      //         top: 100,
+      //         left: 200,
+      //         width: 400,
+      //         height: 300
+      //       }
+      //     })
+      //   );
+      // }, 1000);
 
-      setTimeout(() => {
-        chart1?.setConfig(
-          merge(chart1?.config, {
-            position: {
-              top: 150,
-              left: 200,
-              width: 300,
-              height: 200
-            }
-          })
-        );
-      }, 2000);
+      // setTimeout(() => {
+      //   chart1?.setConfig(
+      //     merge(chart1?.config, {
+      //       position: {
+      //         top: 150,
+      //         left: 200,
+      //         width: 300,
+      //         height: 200
+      //       }
+      //     })
+      //   );
+      // }, 2000);
     });
 
     return () => {
