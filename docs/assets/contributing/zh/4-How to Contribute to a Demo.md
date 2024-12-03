@@ -187,7 +187,7 @@ VisActor 的 commit 提交信息遵循 [Conventional Commits](https://www.conven
 
 请用简短精确的英文描述编写 description
 
-提交 commit 之前，我们会进行 commit lint 检查，具体可以查看[检查规则](https://github.com/VisActor/VStory/blob/98711490e90532d896dd9e44dd00a3af5b95f06d/common/autoinstallers/lint/commitlint.config.js)。
+提交 commit 之前，我们会进行 commit lint 检查，具体可以查看[检查规则](https://github.com/VisActor/VStory/blob/develop/common/autoinstallers/lint/commitlint.config.js)。
 
 一个常见的问题是远程的 upstream (@visactor/vstory) 有了新的更新， 从而会导致我们提交的 Pull Request 时会导致冲突。 因此我们可以在提交前先把远程其他开发者的 commit 和我们的 commit 合并。使用以下代码切换到 develop 分支:
 
@@ -273,14 +273,6 @@ VisActor 官网：[www.visactor.io/](https://link.juejin.cn/?target=https%3A%2F%
 
 discord：https://discord.com/invite/3wPyxVyH6m
 
-# 本文档由由以下人员贡献
+# 本文档由以下人员贡献
 
 [玄魂](https://github.com/xuanhun)
-
-```
-
-```
-
-```
-
-```

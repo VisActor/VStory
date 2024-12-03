@@ -158,7 +158,7 @@ Common `type` values include docs (documentation, log changes), feat (new featur
 
 Write a brief and precise description in English before committing.
 
-Before submitting the commit, we will perform commit lint checks. You can check the [lint rules](https://github.com/VisActor/VStory/blob/98711490e90532d896dd9e44dd00a3af5b95f06d/common/autoinstallers/lint/commitlint.config.js) for details.
+Before submitting the commit, we will perform commit lint checks. You can check the [lint rules](https://github.com/VisActor/VStory/blob/develop/common/autoinstallers/lint/commitlint.config.js) for details.
 
 A common issue is when the remote upstream (@visactor/vstory) has been updated, which may cause conflicts when submitting the Pull Request. Therefore, before submitting, merge the commits from other developers with your own commits. Switch to the develop branch using the following code:
 
