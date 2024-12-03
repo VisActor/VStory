@@ -1,6 +1,7 @@
 // Adapted from https://github.com/antvis/F2/blob/master/packages/f2/src/base/equal.ts by zengyue
 // License: https://github.com/antvis/F2/blob/master/packages/f2/LICENSE
 
+import type { IBoundsLike } from '@visactor/vutils';
 import { isArray, isPlainObject } from '@visactor/vutils';
 
 /**
@@ -71,4 +72,8 @@ export function getDiffedParams(from: any, to: any): any {
     }
   }
   return obj;
+}
+
+export function isBoundsLikeEqual(a: IBoundsLike, b: IBoundsLike) {
+  return a.x1 === b.x1 && a.x2 === b.x2 && a.y1 === b.y1 && a.y2 === b.y2;
 }
