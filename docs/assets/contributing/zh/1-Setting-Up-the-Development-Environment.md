@@ -93,7 +93,7 @@ $ npm i --global @microsoft/rush
 # 安装依赖
 $ rush update
 # 启动 vstory 的 demo 页
-$ rush start
+$ rush story
 # 启动本地文档站点
 $ rush docs
 
@@ -117,6 +117,6 @@ VisActor 官网：[www.visactor.io/](https://link.juejin.cn/?target=https%3A%2F%
 
 discord：https://discord.com/invite/3wPyxVyH6m
 
-# 本文档由由以下人员贡献
+# 本文档由以下人员贡献
 
 [玄魂](https://github.com/xuanhun)
