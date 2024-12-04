@@ -4,7 +4,7 @@ group: works-show
 title: chart-join
 keywords: chart-join
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/screenshot-20240715-204217.png
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/chart-join.gif
 ---
 
 # `Chart Join` Work Showcase
