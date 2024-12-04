@@ -171,6 +171,13 @@
             "zh": "信息图模板-韦恩图",
             "en": "Venn Chart Infographic"
           }
+        },
+        {
+          "path": "scatter-chart-matrix",
+          "title": {
+            "zh": "信息图模板-散点图： Eurovision Winners",
+            "en": "Scatter Chart Infographic: Eurovision Winners"
+          }
         }
       ]
     }
