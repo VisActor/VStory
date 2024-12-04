@@ -28,6 +28,13 @@
             "zh": "美国枪支死亡单元可视化",
             "en": "Unit Story Telling"
           }
+        },
+        {
+          "path": "chart-join",
+          "title": {
+            "zh": "多图表join",
+            "en": "charts join"
+          }
         }
       ]
     },
