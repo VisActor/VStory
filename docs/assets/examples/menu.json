@@ -171,6 +171,20 @@
             "zh": "信息图模板-折线图（左右布局）",
             "en": "Line Chart Infographic(Left-right Layout)"
           }
+        },
+        {
+          "path": "venn-chart",
+          "title": {
+            "zh": "信息图模板-韦恩图",
+            "en": "Venn Chart Infographic"
+          }
+        },
+        {
+          "path": "scatter-chart-matrix",
+          "title": {
+            "zh": "信息图模板-散点图： Eurovision Winners",
+            "en": "Scatter Chart Infographic: Eurovision Winners"
+          }
         }
       ]
     }
