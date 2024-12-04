@@ -21,6 +21,7 @@ import { UnitTemplate1 } from './demos/templates/unit-template1';
 import { VScreen } from './demos/works/vscreen';
 import { Lottie } from './demos/component/lottie';
 import { Infographic } from './demos/infographic/infographic';
+import { SomeCharts } from './demos/works/some-charts';
 
 type MenusType = (
   | {
@@ -115,6 +116,10 @@ const App = () => {
         {
           name: 'VScreen',
           component: VScreen
+        },
+        {
+          name: 'SomeCharts',
+          component: SomeCharts
         }
       ]
     },
