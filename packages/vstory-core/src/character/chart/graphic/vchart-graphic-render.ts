@@ -52,6 +52,8 @@ export class VChartRender extends DefaultCanvasRectRender implements IGraphicRen
     // @ts-ignore
     vchartStage._editor_needRender = true;
     const matrix = chart.globalTransMatrix.clone();
+    // auto 模式下，需要将vchart.stage的viewBoxTransform 设置到包含偏移量的位置
+    matrix.translate(chart.vchartAutoTranslate.x, chart.vchartAutoTranslate.y);
     const stageMatrix = chart.stage.window.getViewBoxTransform().clone();
     stageMatrix.multiply(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
     vchartStage.window.setViewBoxTransform(

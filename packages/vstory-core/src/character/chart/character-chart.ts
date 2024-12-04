@@ -125,6 +125,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
       panel: {},
       ticker: this._ticker,
       zIndex: this._config.zIndex ?? 0,
+      vchartBoundsMode: this._config.options.initOption?.vchartBoundsMode ?? 'auto',
       chartInitOptions: mergeChartOption(
         {
           performanceHook: {

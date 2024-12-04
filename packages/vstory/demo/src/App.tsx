@@ -23,6 +23,8 @@ import { Lottie } from './demos/component/lottie';
 import { Infographic } from './demos/infographic/infographic';
 import { SomeCharts } from './demos/works/some-charts';
 
+import { BaseChart } from './demos/vchart-editor/base-chart';
+
 type MenusType = (
   | {
       name: string;
@@ -155,6 +157,15 @@ const App = () => {
         {
           name: 'infographic',
           component: Infographic
+        }
+      ]
+    },
+    {
+      name: 'VChart Editor',
+      subMenus: [
+        {
+          name: 'Base Chart',
+          component: BaseChart
         }
       ]
     }
