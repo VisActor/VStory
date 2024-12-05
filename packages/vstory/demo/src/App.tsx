@@ -26,6 +26,7 @@ import { SomeCharts } from './demos/works/some-charts';
 import { BaseChart } from './demos/vchart-editor/base-chart';
 import { Dapanji } from './demos/infographic/dapanji';
 import { Insta } from './demos/infographic/insta';
+import { CancerUSA } from './demos/infographic/cancer-usa';
 
 type MenusType = (
   | {
@@ -167,6 +168,10 @@ const App = () => {
         {
           name: 'Insta',
           component: Insta
+        },
+        {
+          name: 'CancerUSA',
+          component: CancerUSA
         }
       ]
     },

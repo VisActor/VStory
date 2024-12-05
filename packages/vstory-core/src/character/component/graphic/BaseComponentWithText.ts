@@ -93,6 +93,7 @@ export class BaseComponentWithText extends AbstractComponent<ITextComponentAttri
       textConfig = textList.map((item, i) => {
         return {
           textAlign: align,
+          lineHeight: textStyle.lineHeight,
           text: item + (i < textList.length - 1 ? '\n' : '')
         };
       });
@@ -100,6 +101,7 @@ export class BaseComponentWithText extends AbstractComponent<ITextComponentAttri
       // 设置align
       textConfig.forEach(item => {
         item.textAlign = align;
+        item.lineHeight = item.lineHeight ?? textStyle.lineHeight;
       });
     }
 
