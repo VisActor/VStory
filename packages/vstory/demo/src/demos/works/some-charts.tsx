@@ -1,6 +1,6 @@
 import React, { createRef, useEffect } from 'react';
 import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction } from '../../../../../vstory-player/src';
+import { registerVComponentAction, registerVChartAction, encodeToVideo } from '../../../../../vstory-player/src';
 import { registerAll } from '../../../../src';
 
 registerAll();
@@ -106,7 +106,7 @@ export const SomeCharts = () => {
       // canvas的宽高，设置后仅对canvas大小生效，不影响内容，如果内容过大会被裁剪
       width: 2000 / 2,
       height: 800 / 2,
-      background: 'rgb(245, 246, 247)',
+      background: 'transparent',
       // 对内容的缩放，不影响canvas的宽高
       scaleX: 0.5,
       scaleY: 0.5
@@ -454,7 +454,27 @@ export const SomeCharts = () => {
       }
     );
 
-    player.play(-1);
+    // player.play(-1);
+
+    const btn = document.createElement('button');
+    btn.innerText = '导出mp4';
+    document.body.appendChild(btn);
+    btn.addEventListener('click', () => {
+      encodeToVideo(3000, 30, story)
+        .then(objUrl => {
+          const video = document.createElement('video');
+          (video as any).muted = 'muted';
+          video.controls = true;
+          video.src = objUrl;
+          video.play();
+          video.style.width = '500px';
+          video.style.height = '300px';
+          document.body.appendChild(video);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
 
     return () => {
       story.release();

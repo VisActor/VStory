@@ -1,6 +1,6 @@
 import React, { createRef, useEffect } from 'react';
 import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction } from '../../../../../vstory-player/src';
+import { registerVComponentAction, registerVChartAction, encodeToVideo } from '../../../../../vstory-player/src';
 
 registerGraphics();
 registerCharacters();
