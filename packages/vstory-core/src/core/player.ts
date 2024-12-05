@@ -97,8 +97,11 @@ export class Player implements IPlayer {
       if (totalTime <= 0) {
         currTime = 0;
       } else {
-        while (currTime + delta > totalTime) {
-          currTime = currTime + delta - totalTime;
+        if (currTime + delta > totalTime) {
+          currTime = currTime + delta;
+          while (currTime > totalTime) {
+            currTime = currTime - totalTime;
+          }
         }
       }
     }
