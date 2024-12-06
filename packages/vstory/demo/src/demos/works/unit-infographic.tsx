@@ -1,6 +1,6 @@
 import React, { createRef, useEffect } from 'react';
 import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction, encodeToVideo } from '../../../../../vstory-player/src';
+import { registerVComponentAction, registerVChartAction } from '../../../../../vstory-player/src';
 
 registerGraphics();
 registerCharacters();
@@ -383,8 +383,10 @@ export const UnitInfographic = () => {
 
     loadDSL().then(dsl => {
       story.load(dsl);
-      player.play(0);
+      player.play();
     });
+
+    console.log(story);
 
     return () => {
       story.release();

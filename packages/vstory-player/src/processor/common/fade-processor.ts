@@ -1,35 +1,33 @@
 import type { EasingType, IGraphic } from '@visactor/vrender-core';
-import { getCharacterParentGraphic } from './common';
 import type { IFadeInParams } from './interface';
-import type { ICharacter } from '@visactor/vstory-core';
 import { canDoGraphicAnimation } from './utils';
 
-export function fadeIn(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphic = getCharacterParentGraphic(character);
-  _fade(graphic, animation as any, true);
-}
-export function fadeOut(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphic = getCharacterParentGraphic(character);
-  _fade(graphic, animation as any, false);
-}
-
-function _fade(graphic: IGraphic, params: IFadeInParams, appear: boolean): boolean {
-  if (!canDoGraphicAnimation(graphic, params)) {
-    return false;
+export class FadeVisibility {
+  setInitAttributes(graphic: IGraphic, params: IFadeInParams, appear: boolean) {
+    if (!canDoGraphicAnimation(graphic, params)) {
+      return false;
+    }
+    if (!appear) {
+      return;
+    }
+    const opacity = params.opacity ?? 0;
+    graphic.setAttributes({
+      baseOpacity: opacity
+    } as any);
   }
-  const { fade = {} } = params;
-  const opacity = fade.opacity ?? params.opacity ?? 1;
-  const duration = fade.duration ?? params.duration;
-  const easing = fade.easing ?? params.easing;
-  const currOpacity = (graphic.attribute as any).baseOpacity;
+  run(graphic: IGraphic, params: IFadeInParams, appear: boolean) {
+    if (!canDoGraphicAnimation(graphic, params)) {
+      return false;
+    }
+    const duration = params.duration;
+    const easing = params.easing;
 
-  const opacityMap = appear ? { from: 0, to: currOpacity ?? 1 } : { from: currOpacity ?? 1, to: 0 };
+    const toOpacity = appear ? 1 : 0;
 
-  graphic.setAttributes({
-    baseOpacity: opacityMap.from
-  } as any);
+    graphic.animate().to({ baseOpacity: toOpacity }, duration, easing as EasingType);
 
-  graphic.animate().to({ baseOpacity: opacityMap.to }, duration, easing as EasingType);
-
-  return true;
+    return true;
+  }
 }
+
+export const fadeInstance = new FadeVisibility();

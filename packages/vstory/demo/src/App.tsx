@@ -27,6 +27,7 @@ import { BaseChart } from './demos/vchart-editor/base-chart';
 import { Dapanji } from './demos/infographic/dapanji';
 import { Insta } from './demos/infographic/insta';
 import { CancerUSA } from './demos/infographic/cancer-usa';
+import { SinglePie } from './demos/component/single-pie';
 
 type MenusType = (
   | {
@@ -151,6 +152,10 @@ const App = () => {
         {
           name: 'Lottie',
           component: Lottie
+        },
+        {
+          name: 'SinglePie',
+          component: SinglePie
         }
       ]
     },

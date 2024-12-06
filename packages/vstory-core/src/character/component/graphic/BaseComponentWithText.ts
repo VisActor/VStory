@@ -27,6 +27,7 @@ export class BaseComponentWithText extends AbstractComponent<ITextComponentAttri
 
   constructor(attributes: ITextComponentAttributes, options?: ComponentOptions) {
     super(options?.skipDefault ? attributes : merge({}, BaseComponentWithText.defaultAttributes, attributes));
+    this._skipRenderAttributes.push('visible', 'visibleAll');
   }
 
   protected render(): void {

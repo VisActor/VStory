@@ -1342,21 +1342,21 @@ export const scene5: ISceneSpec = {
               }
             }
           }
-        },
-        {
-          startTime: 4000,
-          action: 'disappear',
-          payload: {
-            animation: {
-              easing: 'easeInOutQuad',
-              duration: 700,
-              fade: {
-                opacity: 0,
-                isBaseOpacity: true
-              }
-            }
-          }
         }
+        // {
+        //   startTime: 4000,
+        //   action: 'disappear',
+        //   payload: {
+        //     animation: {
+        //       easing: 'easeInOutQuad',
+        //       duration: 700,
+        //       fade: {
+        //         opacity: 0,
+        //         isBaseOpacity: true
+        //       }
+        //     }
+        //   }
+        // }
       ]
     },
     {

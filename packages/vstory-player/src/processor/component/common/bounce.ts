@@ -5,6 +5,7 @@ import { getPayload } from './utils';
 import type { IComponentBounceAction } from '../../common/bounce-processor';
 import { bounce } from '../../common/bounce-processor';
 import { ACTION_TYPE } from '../../constants/action';
+import { getCharacterParentGraphic } from '../../common/common';
 
 export class CommonBounceActionProcessor extends ActionProcessorItem {
   name: 'bounce';
@@ -29,7 +30,7 @@ export class CommonBounceActionProcessor extends ActionProcessorItem {
     super.preRun(character, actionSpec);
     const payload = getPayload(actionSpec);
     const { animation = {} } = payload;
-    bounce(character, animation as any, payload);
+    bounce(getCharacterParentGraphic(character), animation as any, payload);
   }
 }
 

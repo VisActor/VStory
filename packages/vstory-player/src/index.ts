@@ -7,5 +7,6 @@ export * from './processor/common/common';
 export * from './processor/component/common/visibility';
 export * from './processor/constants/action';
 export * from './processor/component/common';
+export * from './processor/common/base-visibility-processor';
 
-export * from './encode';
+// export * from './encode';

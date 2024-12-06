@@ -40,12 +40,16 @@ class ActionItem implements IActionItem {
 export class Scheduler implements IScheduler {
   protected _actionProcessor: IActionProcessor;
   protected _actsInfo: IActInfo[];
+  // 保存执行过的act
   protected _runnedAct: Set<IActionItem>;
+  // 保存应用过初始属性的Appear的act
+  protected _applyedAppearAct: Set<IActionItem>;
   protected _actSpec: IActSpec[];
 
   constructor(actionProcessor: IActionProcessor) {
     this._actionProcessor = actionProcessor;
     this._runnedAct = new Set();
+    this._applyedAppearAct = new Set();
     this._actSpec = [
       {
         id: 'defaultAct',
@@ -63,10 +67,29 @@ export class Scheduler implements IScheduler {
     // 重新设置所有属性
     this.clearState();
     this._actsInfo = [];
-    this._runnedAct.clear();
+    this.clearState();
 
     this._initActs(acts);
     this._actSpec = cloneDeep(acts);
+  }
+
+  getUnAppliedAppearAction() {
+    if (this._applyedAppearAct.size) {
+      return [];
+    }
+    const actionList: IActionItem[] = [];
+    this._actsInfo.forEach(actInfo => {
+      actInfo.sceneInfoList.forEach(sceneInfo => {
+        sceneInfo.actionList.forEach(action => {
+          if (this._applyedAppearAct.has(action) || action.actionSpec.action !== 'appear') {
+            return;
+          }
+          this._applyedAppearAct.add(action);
+          actionList.push(action);
+        });
+      });
+    });
+    return actionList;
   }
 
   addAction(sceneId: string, characterId: string, actions: IActionSpec[]) {
@@ -93,6 +116,7 @@ export class Scheduler implements IScheduler {
 
   clearState(): void {
     this._runnedAct.clear();
+    this._applyedAppearAct.clear();
   }
 
   getTotalTime(): number {
@@ -261,7 +285,7 @@ export class Scheduler implements IScheduler {
 
   release(): void {
     this._actsInfo = [];
-    this._runnedAct.clear();
     this._actSpec = [];
+    this.clearState();
   }
 }
