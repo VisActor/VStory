@@ -18,27 +18,49 @@ export const SinglePie = () => {
     const canvas = document.createElement('canvas');
     container?.appendChild(canvas);
 
-    const dsl: any = {
-      characters: [
+    const story = new Story(null, { canvas, width: 800, height: 500, background: 'pink', scaleX: 0.5, scaleY: 0.5 });
+    const player = new Player(story);
+    story.init(player);
+
+    ['default', 'montage', 'contain'].forEach((temp, index) => {
+      const effect = ['fade', 'angle', 'scale'];
+      const easing = ['flicker5', 'quadOut', 'quadOut'];
+      story.addCharacter(
         {
           type: 'SinglePie',
-          id: 'lottie-test',
+          id: `pie-${temp}`,
           zIndex: 2,
           position: {
-            top: 50,
-            left: 50,
-            width: 300,
-            height: 300
+            top: 200,
+            left: 200 + index * 300,
+            width: 200,
+            height: 200
           },
           options: {
             graphic: {
               trackPie: {
-                fill: 'red'
+                fill: 'rgb(247, 233, 108)'
               },
               pie: {
-                fill: 'orange',
-                endAngle: Math.PI / 3
-              }
+                boundsMode: 'imprecise',
+                fill:
+                  index === 1
+                    ? {
+                        gradient: 'radial',
+                        x0: 0.5,
+                        y0: 0.5,
+                        x1: 0.5,
+                        y1: 0.5,
+                        stops: [
+                          { color: 'rgba(226, 149, 59, 1)', offset: 0 },
+                          { color: 'rgba(226, 149, 59, 0.2)', offset: 1 }
+                        ]
+                      }
+                    : 'rgba(226, 149, 59, 1)',
+                endAngle: (Math.PI / 3) * 2,
+                scaleCenter: ['50%', '100%']
+              },
+              template: temp
             },
             panel: {
               fill: '#ffffff',
@@ -48,56 +70,40 @@ export const SinglePie = () => {
               shadowOffsetY: 4
             }
           }
-        }
-      ],
-      acts: [
+        },
         {
-          id: 'page1',
-          scenes: [
+          sceneId: 'defaultScene',
+          actions: [
             {
-              id: '1',
-              actions: [
-                {
-                  characterId: 'lottie-test',
-                  characterActions: [
-                    {
-                      action: 'appear',
-                      startTime: 0,
-                      payload: {
-                        selector: '#trackPie',
-                        animation: {
-                          duration: 300,
-                          easing: 'linear',
-                          effect: 'scale',
-                          ratio: 0.9
-                        }
-                      }
-                    },
-                    {
-                      action: 'appear',
-                      startTime: 200,
-                      payload: {
-                        selector: '#pie',
-                        animation: {
-                          duration: 1000,
-                          easing: 'linear',
-                          effect: 'angle'
-                        }
-                      }
-                    }
-                  ]
+              action: 'appear',
+              startTime: 0,
+              payload: {
+                selector: '#trackPie',
+                animation: {
+                  duration: 500,
+                  easing: 'quadOut',
+                  effect: 'scale',
+                  ratio: 0.9
                 }
-              ]
+              }
+            },
+            {
+              action: 'appear',
+              startTime: 300,
+              payload: {
+                selector: '#pie',
+                animation: {
+                  duration: 500,
+                  easing: easing[index],
+                  effect: effect[index]
+                }
+              }
             }
           ]
         }
-      ]
-    };
+      );
+    });
 
-    const story = new Story(dsl, { canvas, width: 800, height: 500, background: 'pink', scaleX: 0.5, scaleY: 0.5 });
-    const player = new Player(story);
-    story.init(player);
-    console.log(story);
     player.play(-1);
 
     return () => {

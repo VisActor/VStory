@@ -9,6 +9,7 @@ import type { ICharacter, IComponentCharacterConfig } from '@visactor/vstory-cor
 export interface ISinglePieGraphicAttribute extends IGroupGraphicAttribute {
   trackPie?: IArcGraphicAttribute;
   pie?: IArcGraphicAttribute;
+  template?: 'default' | 'montage' | 'contain';
 }
 
 // graphic 配置

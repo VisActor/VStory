@@ -10,10 +10,18 @@ export class FadeVisibility {
     if (!appear) {
       return;
     }
-    const opacity = params.opacity ?? 0;
-    graphic.setAttributes({
-      baseOpacity: opacity
-    } as any);
+    if (graphic.isContainer) {
+      const opacity = 0;
+      graphic.setAttributes({
+        baseOpacity: opacity
+      } as any);
+    } else {
+      const opacity = params.opacity ?? 0;
+      graphic._vstory_lastOpacity = graphic.attribute.opacity ?? 1;
+      graphic.setAttributes({
+        opacity
+      } as any);
+    }
   }
   run(graphic: IGraphic, params: IFadeInParams, appear: boolean) {
     if (!canDoGraphicAnimation(graphic, params)) {
@@ -22,9 +30,13 @@ export class FadeVisibility {
     const duration = params.duration;
     const easing = params.easing;
 
-    const toOpacity = appear ? 1 : 0;
-
-    graphic.animate().to({ baseOpacity: toOpacity }, duration, easing as EasingType);
+    if (graphic.isContainer) {
+      graphic.animate().to({ baseOpacity: appear ? 1 : 0 }, duration, easing as EasingType);
+    } else {
+      const opacity = graphic._vstory_lastOpacity ?? 1;
+      graphic.animate().to({ opacity: appear ? opacity : 0 }, duration, easing as EasingType);
+      delete graphic._vstory_lastOpacity;
+    }
 
     return true;
   }
