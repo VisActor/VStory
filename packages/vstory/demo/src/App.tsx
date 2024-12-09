@@ -28,6 +28,9 @@ import { Dapanji } from './demos/infographic/dapanji';
 import { Insta } from './demos/infographic/insta';
 import { CancerUSA } from './demos/infographic/cancer-usa';
 import { SinglePie } from './demos/component/single-pie';
+import { DynamicLine } from './demos/story-chart/dynamic-line';
+import { Pie1 } from './demos/arrange/Pie1';
+import { UnitTemplate2 } from './demos/templates/unit-template2';
 
 type MenusType = (
   | {
@@ -84,6 +87,10 @@ const App = () => {
         {
           name: 'Text',
           component: TextAnimate
+        },
+        {
+          name: 'Pie1',
+          component: Pie1
         }
       ]
     },
@@ -105,6 +112,10 @@ const App = () => {
         {
           name: 'Dynamic Bar Chart',
           component: RankingBar
+        },
+        {
+          name: 'Dynamic Line Chart',
+          component: DynamicLine
         }
       ]
     },
@@ -135,6 +146,10 @@ const App = () => {
         {
           name: 'Unit Template1',
           component: UnitTemplate1
+        },
+        {
+          name: 'Unit Template2',
+          component: UnitTemplate2
         }
       ]
     },

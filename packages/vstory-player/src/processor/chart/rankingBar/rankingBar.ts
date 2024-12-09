@@ -79,50 +79,50 @@ export class RankingBarPlayActionProcessor extends ActionProcessorItem {
   }
 
   run(character: ICharacter, actionSpec: any): void {
-    // const instance = (character.graphic as any)._vchart as IVChart;
-    // if (!instance) {
-    //   return;
-    // }
-    // const vchartPlayer = instance.getComponents().find(cmp => cmp.type === 'player') as Player;
-    // if (!vchartPlayer) {
-    //   return;
-    // }
-    // const vrenderPlayer = vchartPlayer.getVRenderComponents()[0] as BasePlayer<any>;
-    // if (!vrenderPlayer) {
-    //   return;
-    // }
-    // this.vchartPlayer = vchartPlayer;
-    // this.vrenderPlayer = vrenderPlayer;
-    // this.rafId = vglobal.getRequestAnimationFrame()(this.forward.bind(this));
+    const instance = (character.graphic as any)._vchart as IVChart;
+    if (!instance) {
+      return;
+    }
+    const vchartPlayer = instance.getComponents().find(cmp => cmp.type === 'player') as Player;
+    if (!vchartPlayer) {
+      return;
+    }
+    const vrenderPlayer = vchartPlayer.getVRenderComponents()[0] as BasePlayer<any>;
+    if (!vrenderPlayer) {
+      return;
+    }
+    this.vchartPlayer = vchartPlayer;
+    this.vrenderPlayer = vrenderPlayer;
+    this.rafId = vglobal.getRequestAnimationFrame()(this.forward.bind(this));
   }
 
-  // forward = (timestamp: number) => {
-  //   if (!isValid(this.start)) {
-  //     this.start = timestamp;
-  //     this.vrenderPlayer.play();
-  //   }
-  //   const elapsed = timestamp - this.start;
-  //   const progress = elapsed / this.duration;
-  //   const curIndex = Math.floor(Math.min(progress * this.count, this.count));
+  forward = (timestamp: number) => {
+    if (!isValid(this.start)) {
+      this.start = timestamp;
+      this.vrenderPlayer.play();
+    }
+    const elapsed = timestamp - this.start;
+    const progress = elapsed / this.duration;
+    const curIndex = Math.floor(Math.min(progress * this.count, this.count));
 
-  //   if (curIndex < this.count - 1) {
-  //     if (this.prevIndex !== curIndex) {
-  //       const result = _forward(this.vchartPlayer, this.vrenderPlayer, { index: curIndex, progress });
-  //       if (result) {
-  //         this.prevIndex = curIndex;
-  //       }
-  //     } else {
-  //       _forward(this.vchartPlayer, this.vrenderPlayer, { progress });
-  //     }
+    if (curIndex < this.count - 1) {
+      if (this.prevIndex !== curIndex) {
+        const result = _forward(this.vchartPlayer, this.vrenderPlayer, { index: curIndex, progress });
+        if (result) {
+          this.prevIndex = curIndex;
+        }
+      } else {
+        _forward(this.vchartPlayer, this.vrenderPlayer, { progress });
+      }
 
-  //     // this.rafId = vglobal.getRequestAnimationFrame()(this.forward.bind(this));
-  //   } else {
-  //     this.start = undefined;
-  //     this.prevIndex = undefined;
-  //     // vglobal.getCancelAnimationFrame()(this.rafId);
-  //     return;
-  //   }
-  // };
+      // this.rafId = vglobal.getRequestAnimationFrame()(this.forward.bind(this));
+    } else {
+      this.start = undefined;
+      this.prevIndex = undefined;
+      // vglobal.getCancelAnimationFrame()(this.rafId);
+      return;
+    }
+  };
 }
 
 export function registerRankingBarPlayAction() {

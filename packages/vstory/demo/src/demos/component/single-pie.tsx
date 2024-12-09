@@ -39,10 +39,12 @@ export const SinglePie = () => {
           options: {
             graphic: {
               trackPie: {
-                fill: 'rgb(247, 233, 108)'
+                stroke: 'white',
+                fill: false
               },
               pie: {
                 boundsMode: 'imprecise',
+                stroke: 'white',
                 fill:
                   index === 1
                     ? {
@@ -57,18 +59,18 @@ export const SinglePie = () => {
                         ]
                       }
                     : 'rgba(226, 149, 59, 1)',
-                endAngle: (Math.PI / 3) * 2,
+                endAngle: Math.PI / 3,
                 scaleCenter: ['50%', '100%']
               },
               template: temp
-            },
-            panel: {
-              fill: '#ffffff',
-              shadowColor: 'rgba(0, 0, 0, 0.05)',
-              shadowBlur: 10,
-              shadowOffsetX: 4,
-              shadowOffsetY: 4
             }
+            // panel: {
+            //   fill: '#ffffff',
+            //   shadowColor: 'rgba(0, 0, 0, 0.05)',
+            //   shadowBlur: 10,
+            //   shadowOffsetX: 4,
+            //   shadowOffsetY: 4
+            // }
           }
         },
         {
