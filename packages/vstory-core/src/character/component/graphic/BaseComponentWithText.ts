@@ -27,6 +27,7 @@ export class BaseComponentWithText extends AbstractComponent<ITextComponentAttri
 
   constructor(attributes: ITextComponentAttributes, options?: ComponentOptions) {
     super(options?.skipDefault ? attributes : merge({}, BaseComponentWithText.defaultAttributes, attributes));
+    this._skipRenderAttributes.push('visible', 'visibleAll');
   }
 
   protected render(): void {
@@ -93,8 +94,15 @@ export class BaseComponentWithText extends AbstractComponent<ITextComponentAttri
       textConfig = textList.map((item, i) => {
         return {
           textAlign: align,
+          lineHeight: textStyle.lineHeight,
           text: item + (i < textList.length - 1 ? '\n' : '')
         };
+      });
+    } else if (textConfig && textConfig.length) {
+      // 设置align
+      textConfig.forEach(item => {
+        item.textAlign = align;
+        item.lineHeight = item.lineHeight ?? textStyle.lineHeight;
       });
     }
 

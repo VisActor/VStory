@@ -44,11 +44,13 @@ export class LottieComponent extends BaseComponentWithText {
     if (!attrs.height) {
       attrs.height = height - padding.top - padding.bottom;
     }
+    const attribute: any = { ...attrs, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null };
     if (!this.lottieInstance) {
-      const lottie = new Lottie({});
+      const lottie = new Lottie(attribute);
       this.lottieInstance = lottie;
       this.addChild(lottie);
+    } else {
+      this.lottieInstance.setAttributes(attribute);
     }
-    this.lottieInstance.setAttributes({ ...attrs, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null });
   }
 }

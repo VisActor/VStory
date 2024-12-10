@@ -39,12 +39,16 @@ export interface IDataGroupStyle {
   };
 }
 
+export interface IChartCharacterInitOption {
+  vchartBoundsMode?: 'clip' | 'auto';
+}
+
 export interface IChartCharacterConfig extends ICharacterConfigBase {
   options: {
     // 图表spec
     spec?: any;
     // 初始化参数
-    initOption?: IInitOption;
+    initOption?: IInitOption & IChartCharacterInitOption;
     // 边距
     padding?: { left: number; top: number; right: number; bottom: number };
     // 图表容器

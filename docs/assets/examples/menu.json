@@ -28,6 +28,13 @@
             "zh": "美国枪支死亡单元可视化",
             "en": "Unit Story Telling"
           }
+        },
+        {
+          "path": "chart-join",
+          "title": {
+            "zh": "多图表join",
+            "en": "charts join"
+          }
         }
       ]
     },
@@ -69,10 +76,24 @@
       },
       "children": [
         {
-          "path": "timeline",
+          "path": "ranking-bar",
           "title": {
-            "zh": "时间轴组件",
-            "en": "timeline component"
+            "zh": "动态条形图",
+            "en": "ranking bar chart"
+          }
+        },
+        {
+          "path": "dynamic-line",
+          "title": {
+            "zh": "动态折线图",
+            "en": "dynamic line chart"
+          }
+        },
+        {
+          "path": "single-pie",
+          "title": {
+            "zh": "单饼图",
+            "en": "single pie chart"
           }
         },
         {
@@ -90,13 +111,6 @@
           }
         },
         {
-          "path": "ranking-bar",
-          "title": {
-            "zh": "动态条形图",
-            "en": "ranking bar chart"
-          }
-        },
-        {
           "path": "wave-scatter",
           "title": {
             "zh": "水波散点图",
@@ -108,6 +122,13 @@
           "title": {
             "zh": "vchart 图表",
             "en": "vchart chart"
+          }
+        },
+        {
+          "path": "timeline",
+          "title": {
+            "zh": "时间轴组件",
+            "en": "timeline component"
           }
         },
         {
@@ -163,6 +184,34 @@
           "title": {
             "zh": "信息图模板-折线图（左右布局）",
             "en": "Line Chart Infographic(Left-right Layout)"
+          }
+        },
+        {
+          "path": "venn-chart",
+          "title": {
+            "zh": "信息图模板-韦恩图",
+            "en": "Venn Chart Infographic"
+          }
+        },
+        {
+          "path": "scatter-chart-matrix",
+          "title": {
+            "zh": "信息图模板-散点图： Eurovision Winners",
+            "en": "Scatter Chart Infographic: Eurovision Winners"
+          }
+        },
+        {
+          "path": "social-media",
+          "title": {
+            "zh": "信息图模板-漏斗图: Social Media",
+            "en": "Funnel Chart Infographic: Social Media"
+          }
+        },
+        {
+          "path": "usa-cancer-map",
+          "title": {
+            "zh": "信息图模板-地图: USA Cancer",
+            "en": "Map Chart Infographic: USA Cancer"
           }
         }
       ]

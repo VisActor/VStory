@@ -383,8 +383,10 @@ export const UnitInfographic = () => {
 
     loadDSL().then(dsl => {
       story.load(dsl);
-      player.play(0);
+      player.play();
     });
+
+    console.log(story);
 
     return () => {
       story.release();

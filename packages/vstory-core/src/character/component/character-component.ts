@@ -30,6 +30,33 @@ export abstract class CharacterComponent<T extends IGraphic, T1>
     return;
   }
 
+  getGraphicBySelector(selector: string) {
+    const g = this._graphic;
+    if (!selector) {
+      return [g];
+    }
+    const selectorList = selector.split(' ');
+    let graphics: IGraphic[] = [];
+    selectorList.forEach(subSelector => {
+      if (subSelector === '*') {
+        graphics.push(g);
+      } else if (/:not\(([^)]+)\)/.test(subSelector)) {
+        const match = /:not\(([^)]+)\)/.exec(subSelector)[1];
+        graphics = graphics.filter(g => `#${g.name}` !== match && g.type !== match);
+      } else {
+        let g1: IGraphic[] = [];
+        if (subSelector[0] === '#') {
+          const name = subSelector.substring(1);
+          g1 = g.getElementsByName(name) as IGraphic[];
+        } else {
+          g1 = g.getElementsByType(subSelector) as IGraphic[];
+        }
+        graphics = graphics.concat(g1);
+      }
+    });
+    return graphics;
+  }
+
   checkEvent(event: IStoryEvent): false | ICharacterPickInfo {
     return false;
   }

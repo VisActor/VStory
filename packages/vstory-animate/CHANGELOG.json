@@ -2,6 +2,12 @@
   "name": "@visactor/vstory-animate",
   "entries": [
     {
+      "version": "0.0.16",
+      "tag": "@visactor/vstory-animate_v0.0.16",
+      "date": "Tue, 10 Dec 2024 09:19:39 GMT",
+      "comments": {}
+    },
+    {
       "version": "0.0.15",
       "tag": "@visactor/vstory-animate_v0.0.15",
       "date": "Thu, 28 Nov 2024 12:02:04 GMT",

@@ -11,30 +11,40 @@ import { CommonStyleActionProcessor } from '../common/style';
 import { CommonMoveToActionProcessor } from '../common/move';
 import { CommonScaleToActionProcessor } from '../common/scale';
 import { CommonBounceActionProcessor } from '../common/bounce';
+import { BaseVisibility } from '../../common/base-visibility-processor';
 
-function typewriterIn(character: ICharacter, animation: ITypeWriterParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach((graphic: any) => _typewriter(graphic, animation as any, true));
-}
-function typewriterOut(character: ICharacter, animation: ITypeWriterParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach((graphic: any) => _typewriter(graphic, animation as any, false));
-}
-
-function _typewriter(graphic: IText, params: any, appear: boolean) {
-  if (graphic && (graphic.type === 'text' || graphic.type === 'richtext')) {
-    const { duration, easing } = params;
-    const { text } = graphic.attribute;
-    if (isString(text)) {
-      let from = '';
-      let to = text;
-      if (!appear) {
-        [from, to] = [to, from];
-      }
-      graphic.animate().play(new TypeWriter({ text: from }, { text: to }, duration, easing as EasingType));
+export class TypeWriterVisibility extends BaseVisibility {
+  protected _setInitAttributes(graphic: IGraphic, params: ITypeWriterParams, appear: boolean) {
+    if (!appear) {
+      return;
     }
+    const fromClipRange = params.clipRange ?? 0;
+    graphic._vstory_lastScaleClipRange = (graphic.attribute as any).clipRange;
+    graphic.setAttributes({
+      clipRange: fromClipRange
+    } as any);
+  }
+  protected _run(graphic: IGraphic, params: ITypeWriterParams, appear: boolean) {
+    if (graphic && (graphic.type === 'text' || graphic.type === 'richtext')) {
+      const { duration, easing } = params;
+      const { text } = graphic.attribute as any;
+      if (isString(text)) {
+        let from = '';
+        let to = text;
+        if (!appear) {
+          [from, to] = [to, from];
+        }
+        const a = graphic.animate().play(new TypeWriter({ text: from }, { text: to }, duration, easing as EasingType));
+        if (!appear) {
+          a.reversed(true);
+        }
+      }
+    }
+    return true;
   }
 }
+
+const typewriterIn = new TypeWriterVisibility();
 
 export class TextVisibilityActionProcessor extends CommonVisibilityActionProcessor {
   name: 'appearOrDisAppear';
@@ -42,12 +52,12 @@ export class TextVisibilityActionProcessor extends CommonVisibilityActionProcess
     super();
   }
 
-  getEffectFunc(effect: string, appear: boolean) {
+  getEffectInstance(effect: string, appear: boolean) {
     switch (effect) {
       case 'typewriter':
-        return appear ? typewriterIn : typewriterOut;
+        return typewriterIn;
     }
-    return super.getEffectFunc(effect, appear);
+    return super.getEffectInstance(effect, appear);
   }
 }
 

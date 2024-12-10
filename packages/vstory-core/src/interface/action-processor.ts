@@ -8,6 +8,7 @@ export interface IActionProcessorItem {
   getStartTimeAndDuration: (action: IActionSpec, character?: ICharacter) => { startTime: number; duration: number };
 
   run: (...actionParams: any) => any;
+  applyAttrs?: (...actionParams: any) => any;
 }
 
 export interface IActionProcessor extends IReleaseable {
@@ -23,4 +24,5 @@ export interface IActionProcessor extends IReleaseable {
   getProcessor: (name: string, actionName: string) => IActionProcessorItem;
 
   doAction: (name: string, actionName: string, character: ICharacter, actionSpec: IActionSpec) => void;
+  applyAppearAttrs: (name: string, actionName: string, character: ICharacter, actionSpec: IActionSpec) => void;
 }

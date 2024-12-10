@@ -28,7 +28,8 @@ export default defineConfig({
       '@visactor/vstory-render': path.resolve(__dirname, '../../vstory-render/src/index.ts'),
       '@visactor/vstory-animate': path.resolve(__dirname, '../../vstory-animate/src/index.ts'),
       '@visactor/vstory-player': path.resolve(__dirname, '../../vstory-player/src/index.ts'),
-      '@visactor/vstory-templates': path.resolve(__dirname, '../../vstory-templates/src/index.ts')
+      '@visactor/vstory-templates': path.resolve(__dirname, '../../vstory-templates/src/index.ts'),
+      '@visactor/vstory-external': path.resolve(__dirname, '../../vstory-external/src/index.ts')
     }
   }
 });

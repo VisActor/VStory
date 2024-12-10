@@ -1,4 +1,4 @@
-import type { ITicker, ITimeline } from '@visactor/vrender-core';
+import type { IGraphic, ITicker, ITimeline } from '@visactor/vrender-core';
 import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
@@ -18,7 +18,7 @@ import { CommonLayoutRuntime } from './runtime/common-layout';
 import { ChartConfigProcess } from './chart-config-process';
 import type { ICharacterChart } from './interface/character-chart';
 import { mergeChartOption } from '../../utils/chart';
-import type { IVChart } from '@visactor/vchart';
+import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
 
 export class CharacterChart<T extends IChartGraphicAttribute>
   extends CharacterBase<IChartGraphicAttribute>
@@ -47,6 +47,72 @@ export class CharacterChart<T extends IChartGraphicAttribute>
 
   tickTo(t: number): void {
     this._graphic.vchart.getStage().ticker.tickAt && this._graphic.vchart.getStage().ticker.tickAt(t);
+  }
+
+  getGraphicBySelector(selector: string) {
+    const vchart = this._graphic.vchart;
+    let chart = false;
+    let seriesList = vchart.getChart().getAllSeries();
+    let componentsList = vchart.getChart().getAllComponents();
+    const selectorList = selector.split(' ');
+    // 是否包含panel, >0为包含
+    let includePanel = 1;
+    selectorList.forEach(subSelector => {
+      if (subSelector === '*') {
+        chart = true;
+      } else if (/:not\(([^)]+)\)/.test(subSelector)) {
+        const match = /:not\(([^)]+)\)/.exec(subSelector)[1];
+        const data = this.selectByNameOrType(seriesList, componentsList, match, false);
+        seriesList = data.seriesList;
+        componentsList = data.componentsList;
+        if (match === 'panel') {
+          includePanel = -Infinity; // 如果被排除，那么一定不包含了
+        }
+      } else {
+        const data = this.selectByNameOrType(seriesList, componentsList, subSelector);
+        seriesList = data.seriesList;
+        componentsList = data.componentsList;
+        if (subSelector === 'panel') {
+          includePanel = Infinity; // 如果有正选，那么选中才算
+        } else {
+          includePanel--;
+        }
+      }
+    });
+
+    return {
+      chart,
+      panel: includePanel > 0,
+      seriesList,
+      componentsList
+    };
+  }
+
+  protected selectByNameOrType(
+    seriesList: ISeries[],
+    componentsList: IComponent[],
+    select: string,
+    match: boolean = true
+  ) {
+    if (select[0] === '#') {
+      return this.selectByName(seriesList, componentsList, select, match);
+    }
+    return this.selectByType(seriesList, componentsList, select, match);
+  }
+
+  protected selectByName(seriesList: ISeries[], componentsList: IComponent[], select: string, match: boolean = true) {
+    const name = select.substring(1);
+    return {
+      seriesList: seriesList.filter(item => (item.name === name) === match),
+      componentsList: componentsList.filter(item => (item.name === name) === match)
+    };
+  }
+
+  protected selectByType(seriesList: ISeries[], componentsList: IComponent[], name: string, match: boolean = true) {
+    return {
+      seriesList: seriesList.filter(item => (item.type === name || item.specKey === name) === match),
+      componentsList: componentsList.filter(item => (item.type === name || item.specKey === name) === match)
+    };
   }
 
   checkEvent(event: IStoryEvent): false | ICharacterPickInfo {
@@ -125,6 +191,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
       panel: {},
       ticker: this._ticker,
       zIndex: this._config.zIndex ?? 0,
+      vchartBoundsMode: this._config.options.initOption?.vchartBoundsMode ?? 'auto',
       chartInitOptions: mergeChartOption(
         {
           performanceHook: {

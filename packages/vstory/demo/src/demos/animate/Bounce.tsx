@@ -181,7 +181,7 @@ export const Bounce = () => {
     );
 
     console.log(story);
-    player.play();
+    player.play(1);
 
     return () => {
       story.release();

@@ -1,34 +1,37 @@
 import type { EasingType, IGraphic } from '@visactor/vrender-core';
-import { getCharacterByEffect, getCharacterParentGraphic } from './common';
-import type { IFadeInParams } from './interface';
-import type { ICharacter } from '@visactor/vstory-core';
+import type { IClipRangeParams } from './interface';
 import { canDoGraphicAnimation } from './utils';
+import { BaseVisibility } from './base-visibility-processor';
 
-export function clipRangeIn(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect);
-  graphics.forEach(graphic => _clipRange(graphic, animation as any, true));
-}
-export function clipRangeOut(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect);
-  graphics.forEach(graphic => _clipRange(graphic, animation as any, false));
-}
-
-function _clipRange(graphic: IGraphic, params: IFadeInParams, appear: boolean): boolean {
-  if (!canDoGraphicAnimation(graphic, params)) {
-    return false;
+export class ClipRangeVisibility extends BaseVisibility {
+  protected _setInitAttributes(graphic: IGraphic, params: IClipRangeParams, appear: boolean) {
+    if (!canDoGraphicAnimation(graphic, params)) {
+      return false;
+    }
+    if (!appear) {
+      return;
+    }
+    const fromClipRange = params.clipRange ?? 0;
+    graphic._vstory_lastScaleClipRange = (graphic.attribute as any).clipRange ?? 1;
+    graphic.setAttributes({
+      clipRange: fromClipRange
+    } as any);
   }
-  const { fade = {} } = params;
-  const duration = fade.duration ?? params.duration;
-  const easing = fade.easing ?? params.easing;
-  const currClipRange = (graphic.attribute as any).clipRange ?? 1;
+  protected _run(graphic: IGraphic, params: IClipRangeParams, appear: boolean) {
+    if (!canDoGraphicAnimation(graphic, params)) {
+      return false;
+    }
+    const { fade = {} } = params;
+    const duration = fade.duration ?? params.duration;
+    const easing = fade.easing ?? params.easing;
+    const currClipRange = graphic._vstory_lastScaleClipRange ?? 1;
 
-  const clipRangeMap = appear ? { from: 0, to: currClipRange } : { from: currClipRange, to: 0 };
+    const toRange = appear ? currClipRange : 0;
 
-  graphic.setAttributes({
-    clipRange: clipRangeMap.from
-  } as any);
+    graphic.animate().to({ clipRange: toRange }, duration, easing as EasingType);
 
-  graphic.animate().to({ clipRange: clipRangeMap.to }, duration, easing as EasingType);
-
-  return true;
+    return true;
+  }
 }
+
+export const clipRangeInstance = new ClipRangeVisibility();

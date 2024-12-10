@@ -113,6 +113,7 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
       textConfig = textList.map((item, i) => {
         return {
           textAlign: align,
+          lineHeight: textStyle.lineHeight,
           text: item + (i < textList.length - 1 ? '\n' : '')
         };
       });

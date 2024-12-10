@@ -1,11 +1,13 @@
 import type { IActionSpec, ICharacter } from '@visactor/vstory-core';
 import { ActionProcessorItem } from '../../processor-item';
 import { array } from '@visactor/vutils';
-import { scaleIn, scaleOut } from '../../common/scale-processor';
-import { fadeIn, fadeOut } from '../../common/fade-processor';
-import { moveIn, moveOut } from '../../common/move-processor';
-import { wipeIn, wipeOut } from '../../common/wipe-processor';
+import { scaleInstance } from '../../common/scale-processor';
+import { fadeInstance } from '../../common/fade-processor';
+import { moveInstance } from '../../common/move-processor';
+import { wipeInstance } from '../../common/wipe-processor';
 import { getPayload } from './utils';
+import { getCharacterParentGraphic } from '../../common/common';
+import type { IGraphic } from '@visactor/vrender-core';
 
 export class CommonVisibilityActionProcessor extends ActionProcessorItem {
   name: string = 'appearOrDisAppear';
@@ -28,27 +30,53 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
 
   run(character: ICharacter, actionSpec: IActionSpec): void {
     super.preRun(character, actionSpec);
-    const { animation = {} } = getPayload(actionSpec);
-    const { effect = 'fade' } = animation as any;
+    const { animation = {}, selector } = getPayload(actionSpec);
+    const { effect = 'default' } = animation as any;
     array(effect).forEach(_effect => {
-      const effectFunc = this.getEffectFunc(_effect, actionSpec.action === 'appear');
-      if (effectFunc) {
-        effectFunc(character, animation as any, _effect);
+      const graphics = this.selectBySelector(selector, character);
+      const appear = actionSpec.action === 'appear';
+      const effectInstance = this.getEffectInstance(_effect, appear);
+      if (effectInstance) {
+        graphics.forEach(graphic => {
+          effectInstance.run(graphic, animation as any, appear);
+        });
       }
     });
   }
 
-  getEffectFunc(effect: string, appear: boolean) {
+  applyAttrs(character: ICharacter, actionSpec: IActionSpec): void {
+    const { animation = {}, selector } = getPayload(actionSpec);
+    const { effect = 'default' } = animation as any;
+    array(effect).forEach(_effect => {
+      const graphics = this.selectBySelector(selector, character);
+      const appear = actionSpec.action === 'appear';
+      const effectInstance = this.getEffectInstance(_effect, appear);
+      if (effectInstance) {
+        graphics.forEach(graphic => {
+          effectInstance.setInitAttributes(graphic, animation as any, appear);
+        });
+      }
+    });
+  }
+
+  selectBySelector(selector: string, character: ICharacter): IGraphic[] {
+    if (character.getGraphicBySelector) {
+      return character.getGraphicBySelector(selector);
+    }
+    return [getCharacterParentGraphic(character)];
+  }
+
+  getEffectInstance(effect: string, appear: boolean) {
     switch (effect) {
       case 'scale':
-        return appear ? scaleIn : scaleOut;
+        return scaleInstance;
       case 'wipe':
-        return appear ? wipeIn : wipeOut;
+        return wipeInstance;
       case 'fade':
-        return appear ? fadeIn : fadeOut;
+        return fadeInstance;
       case 'move':
-        return appear ? moveIn : moveOut;
+        return moveInstance;
     }
-    return fadeIn;
+    return fadeInstance;
   }
 }

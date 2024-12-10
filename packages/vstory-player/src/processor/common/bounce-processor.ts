@@ -1,6 +1,7 @@
 import { Bounce } from '@visactor/vstory-animate';
 import type { IAction, IActionPayload, ICharacter } from '@visactor/vstory-core';
 import { getCharacterParentGraphic } from './common';
+import type { IGraphic } from '@visactor/vrender-core';
 
 export interface IComponentBouncePayLoad extends IActionPayload {
   /**
@@ -34,11 +35,10 @@ const bounceMap: any = {
 };
 
 export function bounce(
-  character: ICharacter,
+  graphic: IGraphic,
   animation: IComponentBouncePayLoad['animation'],
   params: IComponentBouncePayLoad
 ) {
-  const graphic = getCharacterParentGraphic(character);
   if (graphic) {
     const { duration, easing } = animation;
     const { dy } = params;
@@ -50,13 +50,11 @@ export function bounce(
     if (visible === false) {
       graphic.setAttribute('visible', false);
     }
-    graphic
-      .animate()
-      .play(
-        new Bounce({}, {}, duration, easing, {
-          dy: (params.flipY ? -1 : 1) * (dy ?? height * 0.2),
-          customEase: params.customEase || bounceMap[params.type]
-        })
-      );
+    graphic.animate().play(
+      new Bounce({}, {}, duration, easing, {
+        dy: (params.flipY ? -1 : 1) * (dy ?? height * 0.2),
+        customEase: params.customEase || bounceMap[params.type]
+      })
+    );
   }
 }

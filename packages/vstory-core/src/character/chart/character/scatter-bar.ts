@@ -1,16 +1,16 @@
 import { CharacterType } from '../../../constants/character';
 import { CharacterChart } from '../character-chart';
 import type { IChartGraphicAttribute } from '../graphic/vchart-graphic';
-import { WaveScatterRuntime } from '../runtime/wave-scatter';
+// import { WaveScatterRuntime } from '../runtime/wave-scatter';
 
-function waterDrop(ctx: any, size: number, topX: number, topY: number) {
-  ctx.beginPath();
-  const centerX = topX;
-  const centerY = topY - size / 2;
-  ctx.moveTo(centerX, centerY);
-  ctx.quadraticCurveTo(centerX + size / 2, centerY + size, centerX, centerY + size);
-  ctx.quadraticCurveTo(centerX - size / 2, centerY + size, centerX, centerY);
-}
+// function waterDrop(ctx: any, size: number, topX: number, topY: number) {
+//   ctx.beginPath();
+//   const centerX = topX;
+//   const centerY = topY - size / 2;
+//   ctx.moveTo(centerX, centerY);
+//   ctx.quadraticCurveTo(centerX + size / 2, centerY + size, centerX, centerY + size);
+//   ctx.quadraticCurveTo(centerX - size / 2, centerY + size, centerX, centerY);
+// }
 
 interface IWaveScatterChartGraphicAttribute extends IChartGraphicAttribute {
   symbolType: string;
