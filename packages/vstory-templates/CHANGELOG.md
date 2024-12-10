@@ -1,6 +1,13 @@
 # Change Log - @visactor/vstory-templates
 
-This log was last generated on Tue, 10 Dec 2024 09:19:39 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Dec 2024 10:34:00 GMT and should not be manually modified.
+
+## 0.0.17
+Tue, 10 Dec 2024 10:34:00 GMT
+
+### Updates
+
+- fix: issue with unit-template animate caused by time
 
 ## 0.0.16
 Tue, 10 Dec 2024 09:19:39 GMT

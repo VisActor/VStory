@@ -2,6 +2,18 @@
   "name": "@visactor/vstory-templates",
   "entries": [
     {
+      "version": "0.0.17",
+      "tag": "@visactor/vstory-templates_v0.0.17",
+      "date": "Tue, 10 Dec 2024 10:34:00 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "fix: issue with unit-template animate caused by time"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.0.16",
       "tag": "@visactor/vstory-templates_v0.0.16",
       "date": "Tue, 10 Dec 2024 09:19:39 GMT",

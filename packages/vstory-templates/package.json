@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory-templates",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -34,7 +34,7 @@
     "@visactor/vchart-extension": "0.0.3-vstory.2",
     "@visactor/vdataset": "~0.18.17",
     "@visactor/vscale": "~0.18.17",
-    "@visactor/vstory-core": "workspace:0.0.16"
+    "@visactor/vstory-core": "workspace:0.0.17"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",
