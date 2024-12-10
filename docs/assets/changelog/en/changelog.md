@@ -1,3 +1,16 @@
+# v0.0.16
+
+2024-12-10
+
+
+**🆕 New feature**
+
+- **@visactor/vstory-external**: support dynamic line chart and single pie
+
+
+
+[more detail about v0.0.16](https://github.com/VisActor/VStory/releases/tag/v0.0.16)
+
 # v0.0.14
 
 2024-11-27
