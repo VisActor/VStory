@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-templates",
+      "comment": "fix: issue with unit-template animate caused by time",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-templates"
+}
