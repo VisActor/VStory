@@ -76,10 +76,24 @@
       },
       "children": [
         {
-          "path": "timeline",
+          "path": "ranking-bar",
           "title": {
-            "zh": "时间轴组件",
-            "en": "timeline component"
+            "zh": "动态条形图",
+            "en": "ranking bar chart"
+          }
+        },
+        {
+          "path": "dynamic-line",
+          "title": {
+            "zh": "动态折线图",
+            "en": "dynamic line chart"
+          }
+        },
+        {
+          "path": "single-pie",
+          "title": {
+            "zh": "单饼图",
+            "en": "single pie chart"
           }
         },
         {
@@ -97,13 +111,6 @@
           }
         },
         {
-          "path": "ranking-bar",
-          "title": {
-            "zh": "动态条形图",
-            "en": "ranking bar chart"
-          }
-        },
-        {
           "path": "wave-scatter",
           "title": {
             "zh": "水波散点图",
@@ -115,6 +122,13 @@
           "title": {
             "zh": "vchart 图表",
             "en": "vchart chart"
+          }
+        },
+        {
+          "path": "timeline",
+          "title": {
+            "zh": "时间轴组件",
+            "en": "timeline component"
           }
         },
         {
@@ -184,6 +198,20 @@
           "title": {
             "zh": "信息图模板-散点图： Eurovision Winners",
             "en": "Scatter Chart Infographic: Eurovision Winners"
+          }
+        },
+        {
+          "path": "social-media",
+          "title": {
+            "zh": "信息图模板-漏斗图: Social Media",
+            "en": "Funnel Chart Infographic: Social Media"
+          }
+        },
+        {
+          "path": "usa-cancer-map",
+          "title": {
+            "zh": "信息图模板-地图: USA Cancer",
+            "en": "Map Chart Infographic: USA Cancer"
           }
         }
       ]
