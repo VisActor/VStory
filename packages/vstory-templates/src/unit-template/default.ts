@@ -1,6 +1,6 @@
 import type { IUnitTemplateSpec } from './interface';
 
-export const DEFAULT_SCENE_DURATION = 2000;
+export const DEFAULT_SCENE_DURATION = 5000;
 export const DEFAULT_ANIMATION_DURATION = 1000;
 
 export const defaultConfig: Partial<IUnitTemplateSpec> = {

@@ -1,10 +1,10 @@
 ---
 category: examples
 group: infographic
-title: Line Chart Infographic(Left-right Layout)
+title: Global Social Media
 keywords: templates, visualization, line, trend, left-right
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/singleArea-leftRight.png
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/global-media.png
 ---
 
 # Social Media Template - Funnel Chart
