@@ -1,6 +1,13 @@
 # Change Log - @visactor/vstory-external
 
-This log was last generated on Thu, 28 Nov 2024 12:02:04 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Dec 2024 09:19:39 GMT and should not be manually modified.
+
+## 0.0.16
+Tue, 10 Dec 2024 09:19:39 GMT
+
+### Updates
+
+- feat: support dynamic line chart and single pie
 
 ## 0.0.15
 Thu, 28 Nov 2024 12:02:04 GMT
