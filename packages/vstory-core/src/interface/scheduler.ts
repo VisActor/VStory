@@ -7,6 +7,7 @@ export interface IScheduler extends IReleaseable {
   addAction: (sceneId: string, characterId: string, actions: IActionSpec[]) => void;
   removeCharacterActions: (characterId: string) => void;
   getActionsInRange: (fromTime: number, toTime: number) => IActionItem[];
+  getUnAppliedAppearAction: () => IActionItem[];
   clearState: () => void;
   getTotalTime: () => number;
   getScenes: () => ISceneSpec[];

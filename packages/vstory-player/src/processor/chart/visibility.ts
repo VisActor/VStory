@@ -34,7 +34,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     array(actionSpec.payload)
       .reverse()
       .forEach(payload => {
-        const { chart, seriesList, componentsList, panel } = this.selectBySelector(payload.selector ?? '*', vchart);
+        const { chart, seriesList, componentsList, panel } = this.selectBySelector(payload.selector ?? '*', character);
         if (!runnedChart && chart) {
           // chart & panel
           this.chartVisibility(character.graphic as any, actionSpec.action, payload);

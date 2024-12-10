@@ -29,6 +29,7 @@ export interface ICharacter extends IReleaseable {
   hide: () => void;
 
   getGraphic: () => IGraphic;
+  getGraphicBySelector?: (selector: string) => any;
   tickTo: (t: number) => void;
 
   checkEvent: (event: IStoryEvent) => false | (ICharacterPickInfo & any);

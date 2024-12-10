@@ -13,6 +13,7 @@ export * from './core/processorRegistry';
 export * from './tools/global-ticker';
 export * from './character/component/character-component';
 export * from './character/component/graphic/BaseComponentWithText';
+export * from './character/chart';
 export * from './interface/dsl/component';
 export * from './character/component/runtime/base';
 export * from './character/component/interface/runtime';

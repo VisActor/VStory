@@ -1,46 +1,39 @@
-import type { EasingType, IGraphic } from '@visactor/vrender-core';
-import type { ICharacter } from '@visactor/vstory-core';
-import { IAnimationParams } from '@visactor/vstory-core';
-import type { IFadeInParams, IScaleInParams, IScaleToParams } from './interface';
-import { getCharacterByEffect, getCharacterParentGraphic } from './common';
+import type { IGraphic } from '@visactor/vrender-core';
+import type { IScaleInParams } from './interface';
 import { canDoGraphicAnimation } from './utils';
 
-export function scaleTo(character: ICharacter, animation: IScaleToParams, scaleTo: { scaleX: number; scaleY: number }) {
-  const graphic = getCharacterParentGraphic(character);
-  if (graphic) {
-    const { duration, easing } = animation;
-    if (scaleTo) {
-      graphic.animate().to(scaleTo, duration, easing as EasingType);
+export class ScaleVisibility {
+  setInitAttributes(graphic: IGraphic, animation: IScaleInParams, appear: boolean) {
+    if (!appear) {
+      return;
     }
+    const { ratio = 0 } = animation;
+    graphic._vstory_lastScaleX = graphic.attribute.scaleX ?? 1;
+    graphic._vstory_lastScaleY = graphic.attribute.scaleY ?? 1;
+
+    graphic.setAttributes({ scaleX: ratio, scaleY: ratio });
+  }
+  run(graphic: IGraphic, animation: IScaleInParams, appear: boolean) {
+    if (!canDoGraphicAnimation(graphic, animation)) {
+      return false;
+    }
+    if (!canDoGraphicAnimation(graphic, animation)) {
+      return false;
+    }
+
+    const duration = animation.duration;
+    const easing = animation.easing;
+
+    const currScaleX = graphic._vstory_lastScaleX ?? graphic.attribute.scaleX;
+    const currScaleY = graphic._vstory_lastScaleY ?? graphic.attribute.scaleY;
+    const opacityMap = appear ? { toX: currScaleX ?? 1, toY: currScaleY ?? 1 } : { toX: 0, toY: 0 };
+    delete graphic._vstory_lastScaleX;
+    delete graphic._vstory_lastScaleY;
+
+    graphic.animate().to({ scaleX: opacityMap.toX, scaleY: opacityMap.toY }, duration, easing);
+
+    return true;
   }
 }
 
-export function scaleIn(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach(graphic => _scale(graphic, animation as any, true));
-}
-export function scaleOut(character: ICharacter, animation: IFadeInParams, effect: string) {
-  const graphics = getCharacterByEffect(character, effect) as IGraphic[];
-  graphics.forEach(graphic => _scale(graphic, animation as any, false));
-}
-
-function _scale(graphic: IGraphic, params: IScaleInParams, appear: boolean): boolean {
-  if (!canDoGraphicAnimation(graphic, params)) {
-    return false;
-  }
-  const { scale = {} } = params;
-  const ratio = scale.ratio ?? params.ratio ?? 1;
-  const duration = scale.duration ?? params.duration;
-  const easing = scale.easing ?? params.easing;
-
-  const currScaleX = graphic.attribute.scaleX;
-  const currScaleY = graphic.attribute.scaleY;
-  const opacityMap = appear
-    ? { fromX: 0, fromY: 0, toX: currScaleX ?? ratio, toY: currScaleY ?? ratio }
-    : { fromX: currScaleX ?? ratio, fromY: currScaleY ?? ratio, toX: 0, toY: 0 };
-
-  graphic.setAttributes({ scaleX: opacityMap.fromX, scaleY: opacityMap.fromY });
-  graphic.animate().to({ scaleX: opacityMap.toX, scaleY: opacityMap.toY }, duration, easing);
-
-  return true;
-}
+export const scaleInstance = new ScaleVisibility();

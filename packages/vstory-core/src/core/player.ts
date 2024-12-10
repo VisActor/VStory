@@ -43,6 +43,18 @@ export class Player implements IPlayer {
       this._story.reset();
     }
 
+    // 初始化 appear 的属性
+    const appearActionList = this._scheduler.getUnAppliedAppearAction();
+    appearActionList.forEach(action => {
+      const character = this._story.getCharacterById(action.characterId);
+      this._actionProcessor.applyAppearAttrs(
+        character.config.type,
+        action.actionSpec.action,
+        character,
+        action.actionSpec
+      );
+    });
+
     const actions = this._scheduler.getActionsInRange(lastTime, t);
     const characterSet = new Set<ICharacter>();
     actions.forEach(action => {

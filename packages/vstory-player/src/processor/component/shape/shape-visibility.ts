@@ -1,21 +1,21 @@
 import { CharacterType, globalProcessorRegistry } from '@visactor/vstory-core';
 import { CommonVisibilityActionProcessor } from '../common/visibility';
 import { ACTION_TYPE } from '../../constants/action';
-import { clipRangeIn, clipRangeOut } from '../../common/clipRange-processor';
 import { CommonStyleActionProcessor } from '../common/style';
 import { CommonMoveToActionProcessor } from '../common/move';
 import { CommonScaleToActionProcessor } from '../common/scale';
 import { CommonBounceActionProcessor } from '../common/bounce';
+import { clipRangeInstance } from '../../common/clipRange-processor';
 
 export class ShapeVisibilityActionProcessor extends CommonVisibilityActionProcessor {
   name: 'appearOrDisAppear';
 
-  getEffectFunc(effect: string, appear: boolean) {
+  getEffectInstance(effect: string, appear: boolean) {
     switch (effect) {
       case 'clipRange':
-        return appear ? clipRangeIn : clipRangeOut;
+        return clipRangeInstance;
     }
-    return super.getEffectFunc(effect, appear);
+    return super.getEffectInstance(effect, appear);
   }
 }
 

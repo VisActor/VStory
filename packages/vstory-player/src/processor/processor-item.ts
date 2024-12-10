@@ -1,6 +1,7 @@
 import type { IActionProcessorItem } from '@visactor/vstory-core';
 import type { IActionSpec } from '@visactor/vstory-core';
 import type { ICharacter } from '@visactor/vstory-core';
+import { getPayload } from './component/common/utils';
 
 export class ActionProcessorItem implements IActionProcessorItem {
   getStartTime(action: IActionSpec): number {
@@ -11,9 +12,14 @@ export class ActionProcessorItem implements IActionProcessorItem {
   }
 
   getStartTimeAndDuration(action: IActionSpec): { startTime: number; duration: number } {
+    const { startTime: globalStartTime = 0 } = action;
+    const { startTime = 0, duration = 0 } = getPayload(action).animation ?? ({} as any);
+
+    const st = globalStartTime + startTime;
+    const d = duration;
     return {
-      startTime: 0,
-      duration: 0
+      startTime: st,
+      duration: d
     };
   }
 
