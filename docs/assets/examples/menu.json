@@ -213,6 +213,20 @@
             "zh": "信息图模板-地图: USA Cancer",
             "en": "Map Chart Infographic: USA Cancer"
           }
+        },
+        {
+          "path": "bar-chart-leftRight",
+          "title": {
+            "zh": "信息图模板-柱状图（左右布局）",
+            "en": "Bar Chart Infographic(Left-right Layout)"
+          }
+        },
+        {
+          "path": "pie-chart-leftRight",
+          "title": {
+            "zh": "信息图模板-饼图（左右布局）",
+            "en": "Pie Chart Infographic(Left-right Layout)"
+          }
         }
       ]
     }

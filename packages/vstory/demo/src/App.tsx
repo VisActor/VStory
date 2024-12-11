@@ -31,6 +31,8 @@ import { SinglePie } from './demos/component/single-pie';
 import { DynamicLine } from './demos/story-chart/dynamic-line';
 import { Pie1 } from './demos/arrange/Pie1';
 import { UnitTemplate2 } from './demos/templates/unit-template2';
+import { ReadyToEat } from './demos/infographic/ready-to-eat';
+import { FamousTravel } from './demos/infographic/famous-travel';
 
 type MenusType = (
   | {
@@ -192,6 +194,14 @@ const App = () => {
         {
           name: 'CancerUSA',
           component: CancerUSA
+        },
+        {
+          name: 'ReadyToEat',
+          component: ReadyToEat
+        },
+        {
+          name: 'FamouseTravel',
+          component: FamousTravel
         }
       ]
     },
