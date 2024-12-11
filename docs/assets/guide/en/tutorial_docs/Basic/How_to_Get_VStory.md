@@ -26,10 +26,10 @@ You can get VStory from the following free CDNs:
 
 ```html
 <!-- unpkg -->
-<script src="https://unpkg.com/@visactor/vstory/build/index.min.js"></script>
+<script src="https://unpkg.com/@visactor/vstory/dist/index.min.js"></script>
 
 <!-- jsDelivr -->
-<script src="https://cdn.jsdelivr.net/npm/@visactor/vstory/build/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@visactor/vstory/dist/index.min.js"></script>
 ```
 
 ## Get from GitHub

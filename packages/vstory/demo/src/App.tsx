@@ -31,6 +31,8 @@ import { SinglePie } from './demos/component/single-pie';
 import { DynamicLine } from './demos/story-chart/dynamic-line';
 import { Pie1 } from './demos/arrange/Pie1';
 import { UnitTemplate2 } from './demos/templates/unit-template2';
+import { PopTipAnimate } from './demos/component/poptip';
+import { LabelItemAnimate } from './demos/component/label-item';
 
 type MenusType = (
   | {
@@ -171,6 +173,14 @@ const App = () => {
         {
           name: 'SinglePie',
           component: SinglePie
+        },
+        {
+          name: 'PopTip',
+          component: PopTipAnimate
+        },
+        {
+          name: 'LabelItemAnimate',
+          component: LabelItemAnimate
         }
       ]
     },
