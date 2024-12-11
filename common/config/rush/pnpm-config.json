@@ -89,10 +89,10 @@
    * PNPM documentation: https://pnpm.io/package_json#pnpmoverrides
    */
   "globalOverrides": {
-    // "@visactor/vrender": "0.21.2-vstory.1",
-    // "@visactor/vrender-core": "0.21.2-vstory.1",
-    // "@visactor/vrender-kits": "0.21.2-vstory.1",
-    // "@visactor/vrender-components": "0.21.2-vstory.1",
+    // "@visactor/vrender": "0.21.2-vstory.2",
+    // "@visactor/vrender-core": "0.21.2-vstory.2",
+    // "@visactor/vrender-kits": "0.21.2-vstory.2",
+    // "@visactor/vrender-components": "0.21.2-vstory.2",
     // "@visactor/vscale": "0.18.5"
     // "example2": "npm:@company/example2@^1.0.0"
   },

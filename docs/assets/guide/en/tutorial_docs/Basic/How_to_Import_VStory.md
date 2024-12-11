@@ -15,7 +15,7 @@ After we get the VStory file from [cdn](./How_to_Get_VStory#cdn-获取), we can 
   <div id="chart" style="outline: solid red 1px; width: 100%; height: 500px"></div>
 </body>
 <!-- Import VStory -->
-<script src="https://unpkg.com/@visactor/vstory/build/index.min.js"></script>
+<script src="https://unpkg.com/@visactor/vstory/dist/index.min.js"></script>
 
 <script>
   // Register all content

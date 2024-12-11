@@ -15,7 +15,7 @@
   <div id="chart" style="outline: solid red 1px; width: 100%; height: 500px"></div>
 </body>
 <!-- 引入 VStory -->
-<script src="https://unpkg.com/@visactor/vstory/build/index.min.js"></script>
+<script src="https://unpkg.com/@visactor/vstory/dist/index.min.js"></script>
 
 <script>
   // 注册所有内容
