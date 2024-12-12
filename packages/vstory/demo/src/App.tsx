@@ -33,6 +33,7 @@ import { Pie1 } from './demos/arrange/Pie1';
 import { UnitTemplate2 } from './demos/templates/unit-template2';
 import { PopTipAnimate } from './demos/component/poptip';
 import { LabelItemAnimate } from './demos/component/label-item';
+import { LabelWorks } from './demos/works/label';
 
 type MenusType = (
   | {
@@ -135,6 +136,10 @@ const App = () => {
         {
           name: 'VScreen',
           component: VScreen
+        },
+        {
+          name: 'LabelComponent',
+          component: LabelWorks
         },
         {
           name: 'SomeCharts',
