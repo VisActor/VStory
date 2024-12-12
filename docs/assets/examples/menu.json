@@ -227,6 +227,13 @@
             "zh": "信息图模板-饼图（左右布局）",
             "en": "Pie Chart Infographic(Left-right Layout)"
           }
+        },
+        {
+          "path": "bar-hiv-chart",
+          "title": {
+            "zh": "信息图模版-柱图: HIV Treatment Access",
+            "en": "Bar Chart Infographic: HIV Treatment Access"
+          }
         }
       ]
     }
