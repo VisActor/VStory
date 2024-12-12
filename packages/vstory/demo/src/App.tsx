@@ -35,6 +35,7 @@ import { ReadyToEat } from './demos/infographic/ready-to-eat';
 import { FamousTravel } from './demos/infographic/famous-travel';
 import { PopTipAnimate } from './demos/component/poptip';
 import { LabelItemAnimate } from './demos/component/label-item';
+import { BarHIV } from './demos/infographic/bar-hiv';
 
 type MenusType = (
   | {
@@ -212,6 +213,10 @@ const App = () => {
         {
           name: 'FamouseTravel',
           component: FamousTravel
+        },
+        {
+          name: 'BarHIV',
+          component: BarHIV
         }
       ]
     },
