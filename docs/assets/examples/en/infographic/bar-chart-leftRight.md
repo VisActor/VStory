@@ -4,7 +4,7 @@ group: infographic
 title: Bar Chart Infographic(Left Right Layout)
 keywords: templates, visualization, bar, left-right, comparison, horizon
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/singleArea-leftRight.png
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/bar-chart-leftRight.jpeg
 ---
 
 # Bar Chart Infographic(Left-right Layout)

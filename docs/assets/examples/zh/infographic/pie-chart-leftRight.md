@@ -4,7 +4,7 @@ group: infographic
 title: Pie Chart Infographic(Left Right Layout)
 keywords: templates, visualization, Pie, left-right, comparison, horizon
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/singleArea-leftRight.png
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/pie-chart-leftRight.jpeg
 ---
 
 # 信息图模板-饼图（左右布局）
