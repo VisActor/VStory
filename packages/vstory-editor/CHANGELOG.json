@@ -2,6 +2,12 @@
   "name": "@visactor/vstory-editor",
   "entries": [
     {
+      "version": "0.0.18",
+      "tag": "@visactor/vstory-editor_v0.0.18",
+      "date": "Thu, 12 Dec 2024 09:47:28 GMT",
+      "comments": {}
+    },
+    {
       "version": "0.0.17",
       "tag": "@visactor/vstory-editor_v0.0.17",
       "date": "Tue, 10 Dec 2024 10:34:00 GMT",
