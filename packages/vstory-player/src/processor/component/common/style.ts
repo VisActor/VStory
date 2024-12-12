@@ -72,6 +72,11 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
       }
     }
     if (text && textStyle) {
+      // TODO 鲁棒性，考虑更兼容的方式
+      // 特殊处理textConfig
+      if (textStyle.text && (text.attribute as any).textConfig) {
+        textStyle.textConfig = [{ ...((text.attribute as any).textConfig || [])[0], text: textStyle.text }];
+      }
       text.animate().to(textStyle, duration, easing as EasingType);
     }
   }

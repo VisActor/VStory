@@ -35,6 +35,7 @@ import { ReadyToEat } from './demos/infographic/ready-to-eat';
 import { FamousTravel } from './demos/infographic/famous-travel';
 import { PopTipAnimate } from './demos/component/poptip';
 import { LabelItemAnimate } from './demos/component/label-item';
+import { LabelWorks } from './demos/works/label';
 
 type MenusType = (
   | {
@@ -137,6 +138,10 @@ const App = () => {
         {
           name: 'VScreen',
           component: VScreen
+        },
+        {
+          name: 'LabelComponent',
+          component: LabelWorks
         },
         {
           name: 'SomeCharts',

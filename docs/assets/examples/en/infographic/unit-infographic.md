@@ -1,17 +1,17 @@
 ---
 category: examples
-group: works-show
+group: infographic
 title: unit-infographic
 keywords: unit-infographic
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-infographic.png
 ---
 
-# `单元可视化信息图` 作品展示
+# Showcase of `Unit Infographic`
 
-该作品是一个单元可视化的信息图作品，展示了VStory在制作信息图模板方面的能力
+This work is a unit visualization infographic showcasing VStory's ability to create infographic templates.
 
-## 代码演示
+## Code Demo
 
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
