@@ -20,7 +20,7 @@ yarn add @visactor/vstory
 
 ### 使用 CDN
 
-你还可以通过 CDN 获取构建好的 VShart 文件。将以下代码添加到 HTML 文件的 `<script>` 标签中：
+你还可以通过 CDN 获取构建好的 `VStory` 文件。将以下代码添加到 HTML 文件的 `<script>` 标签中：
 
 ```html
 <script src="https://unpkg.com/@visactor/vstory/dist/index.min.js"></script>

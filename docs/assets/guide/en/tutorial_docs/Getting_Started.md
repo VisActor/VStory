@@ -20,7 +20,7 @@ yarn add @visactor/vstory
 
 ### Using CDN
 
-You can also get the built VStory file through CDN. Add the following code to the `<script>` tag in your HTML file:
+You can also get the built `VStory` file through CDN. Add the following code to the `<script>` tag in your HTML file:
 
 ```html
 <script src="https://unpkg.com/@visactor/vstory/dist/index.min.js"></script>
