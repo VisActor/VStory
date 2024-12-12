@@ -62,6 +62,9 @@ const getChartSpec = (i: number, showLeftAxis: boolean) => {
       position: 'top',
       overlap: false
     },
+    // tooltip: {
+    //   visible: false,
+    // },
     axes: [
       {
         orient: 'left',
@@ -136,7 +139,11 @@ export const SomeCharts = () => {
             //   fill: 'red',
             //   cornerRadius: 10
             // },
-            spec: getChartSpec(index, index === 0)
+            spec: getChartSpec(index, index === 0),
+            initOption: {
+              disableTriggerEvent: false,
+              interactive: true
+            }
           }
         },
         {

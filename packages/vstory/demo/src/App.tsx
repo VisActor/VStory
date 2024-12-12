@@ -31,6 +31,12 @@ import { SinglePie } from './demos/component/single-pie';
 import { DynamicLine } from './demos/story-chart/dynamic-line';
 import { Pie1 } from './demos/arrange/Pie1';
 import { UnitTemplate2 } from './demos/templates/unit-template2';
+import { ReadyToEat } from './demos/infographic/ready-to-eat';
+import { FamousTravel } from './demos/infographic/famous-travel';
+import { PopTipAnimate } from './demos/component/poptip';
+import { LabelItemAnimate } from './demos/component/label-item';
+import { BarHIV } from './demos/infographic/bar-hiv';
+import { LabelWorks } from './demos/works/label';
 
 type MenusType = (
   | {
@@ -135,6 +141,10 @@ const App = () => {
           component: VScreen
         },
         {
+          name: 'LabelComponent',
+          component: LabelWorks
+        },
+        {
           name: 'SomeCharts',
           component: SomeCharts
         }
@@ -171,6 +181,14 @@ const App = () => {
         {
           name: 'SinglePie',
           component: SinglePie
+        },
+        {
+          name: 'PopTip',
+          component: PopTipAnimate
+        },
+        {
+          name: 'LabelItemAnimate',
+          component: LabelItemAnimate
         }
       ]
     },
@@ -192,6 +210,18 @@ const App = () => {
         {
           name: 'CancerUSA',
           component: CancerUSA
+        },
+        {
+          name: 'ReadyToEat',
+          component: ReadyToEat
+        },
+        {
+          name: 'FamouseTravel',
+          component: FamousTravel
+        },
+        {
+          name: 'BarHIV',
+          component: BarHIV
         }
       ]
     },
