@@ -117,6 +117,10 @@ export const NationalMemorial = () => {
               textAlign: 'center',
               textBaseline: 'middle',
               fontWeight: 'bold'
+              // shadowBlur: 300,
+              // shadowColor: 'blue',
+              // shadowOffsetX: 30,
+              // shadowOffsetY: 30
             }
           }
         },
@@ -467,17 +471,22 @@ export const NationalMemorial = () => {
               valueField: 'value',
               categoryField: 'name',
               color: ['#1F1F1F', '#383838', '#505050', '#686868', '#909090', '#B8B8B8'],
-              animationAppear: {
+              animationNormal: {
                 pie: {
-                  startTime: 0,
-                  loop: 0,
+                  loop: 1,
+                  partitioner: data => {
+                    return data.name === '开枪';
+                  },
                   timeSlices: [
                     {
                       effects: {
                         channel: {
-                          outerRadius: { to: 400 }
-                        }
+                          outerRadius: { to: 240 },
+                          fill: { to: 'red' }
+                        },
+                        easing: 'elasticInOut'
                       },
+                      delay: 5500,
                       duration: 500
                     }
                   ]
