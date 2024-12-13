@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/pr
 
 # Bar Chart Infographic(Left-right Layout)
 
-## Demo Code
+## Code Demo
 
 ```javascript livedemo template=vstory
 VStory.registerAll();
@@ -22,10 +22,33 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['0', '1', '2', 'text-1', 'text-2'],
+              characterId: ['0', 'text-1', 'text-2'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 500
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: [
+                    {
+                      selector: ':not(bar)',
+                      animation: { duration: 2000 }
+                    },
+                    {
+                      selector: 'bar',
+                      animation: { duration: 2000, effect: 'barLeap', oneByOne: true, dimensionCount: 5 }
+                    }
+                  ]
                 }
               ]
             }
@@ -150,9 +173,8 @@ const dsl = {
 };
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
-  background: '#ebecf0',
-  scaleX: 0.5,
-  scaleY: 0.5
+  scaleX: 0.7,
+  scaleY: 0.7
 });
 const player = new VStory.Player(story);
 story.init(player);

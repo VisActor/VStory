@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/pr
 
 # Venn Chart Infographic
 
-## Demo Code
+## Code Demo
 
 ```javascript livedemo template=vstory
 VStory.registerAll();
@@ -22,10 +22,29 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['bg', '0', '1', '2', 'topLeftText', 'rect', 'line', 'logo', 'rectVS', 'vs', 'youtube'],
+              characterId: ['bg', '0', '2', 'topLeftText', 'rect', 'line', 'logo', 'rectVS', 'vs', 'youtube'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000,
+                      effect: 'grow'
+                    }
+                  }
                 }
               ]
             }
@@ -339,9 +358,8 @@ const dsl = {
 };
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
-  background: '#ebecf0',
-  scaleX: 0.5,
-  scaleY: 0.5
+  scaleX: 0.7,
+  scaleY: 0.7
 });
 const player = new VStory.Player(story);
 story.init(player);

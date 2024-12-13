@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/pr
 
 # Line Chart Infographic(Left-right Layout)
 
-## Demo Code
+## Code Demo
 
 ```javascript livedemo template=vstory
 VStory.registerAll();
@@ -22,10 +22,38 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['0', '1', '2', 'rect', 'icon'],
+              characterId: ['0', 'rect', 'icon'],
               characterActions: [
                 {
                   action: 'appear'
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  startTime: 500,
+                  payload: {
+                    animation: {
+                      duration: 1000
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['2'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000,
+                      effect: 'typewriter'
+                    }
+                  }
                 }
               ]
             }
@@ -82,7 +110,6 @@ const dsl = {
       options: {
         spec: {
           type: 'common',
-          animation: false,
           series: [
             {
               type: 'line',
@@ -239,9 +266,8 @@ const dsl = {
 };
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
-  background: '#ebecf0',
-  scaleX: 0.5,
-  scaleY: 0.5
+  scaleX: 0.7,
+  scaleY: 0.7
 });
 const player = new VStory.Player(story);
 story.init(player);

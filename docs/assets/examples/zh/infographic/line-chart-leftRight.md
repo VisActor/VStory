@@ -23,10 +23,38 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['0', '1', '2', 'rect', 'icon'],
+              characterId: ['0', 'rect', 'icon'],
               characterActions: [
                 {
                   action: 'appear'
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  startTime: 500,
+                  payload: {
+                    animation: {
+                      duration: 1000
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['2'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000,
+                      effect: 'typewriter'
+                    }
+                  }
                 }
               ]
             }
@@ -240,9 +268,8 @@ const dsl = {
 };
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
-  background: '#ebecf0',
-  scaleX: 0.5,
-  scaleY: 0.5
+  scaleX: 0.7,
+  scaleY: 0.7
 });
 const player = new VStory.Player(story);
 story.init(player);

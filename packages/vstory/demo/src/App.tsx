@@ -39,6 +39,7 @@ import { BarHIV } from './demos/infographic/bar-hiv';
 import { LabelWorks } from './demos/works/label';
 import { NanJinWordCloud } from './demos/works/nanjin-wordcloud';
 import { NationalMemorial } from './demos/works/NationalMemorial';
+import { BarWorkingInSameIndustry } from './demos/infographic/bar-work-in-same-industry';
 
 type MenusType = (
   | {
@@ -232,6 +233,10 @@ const App = () => {
         {
           name: 'BarHIV',
           component: BarHIV
+        },
+        {
+          name: 'WorkingInSameIndustry',
+          component: BarWorkingInSameIndustry
         }
       ]
     },

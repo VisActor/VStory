@@ -359,10 +359,9 @@ const dsl = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 0,
                   payload: {
                     animation: {
-                      duration: 0
+                      duration: 1000
                     }
                   }
                 }
@@ -375,7 +374,7 @@ const dsl = {
   ]
 };
 
-const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0', scaleX: 0.35, scaleY: 0.35 });
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, scaleX: 0.5, scaleY: 0.5 });
 const player = new VStory.Player(story);
 story.init(player);
 

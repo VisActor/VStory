@@ -1,8 +1,8 @@
 ---
 category: examples
 group: infographic
-title: Venn Chart Infographic
-keywords: templates, visualization, venn, percentage, left-right
+title: Bar Chart Infographic
+keywords: templates, visualization, bar
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/hiv-chart.png
 ---
@@ -27,7 +27,6 @@ const dsl = {
                 'bg0',
                 'bg1',
                 'bg2',
-                'chart',
                 'icon-yes',
                 'icon-no',
                 'text0',
@@ -47,7 +46,26 @@ const dsl = {
               ],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 200
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['chart'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  startTime: 200,
+                  payload: {
+                    animation: {
+                      duration: 500
+                    }
+                  }
                 }
               ]
             }
@@ -554,9 +572,8 @@ const dsl = {
 };
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
-  background: '#ebecf0',
-  scaleX: 0.5,
-  scaleY: 0.5
+  scaleX: 0.7,
+  scaleY: 0.7
 });
 const player = new VStory.Player(story);
 story.init(player);

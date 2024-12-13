@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/pr
 
 # Scatter Chart Infographic: Eurovision Winners
 
-## Demo Code
+## Code Demo
 
 ```javascript livedemo template=vstory
 VStory.registerAll();
@@ -27,10 +27,31 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['bg', '1', 'Title', 'SubTitle', 'Data', 'PoweredBy'],
+              characterId: ['bg', 'Title', 'SubTitle', 'Data', 'PoweredBy'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 500
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  startTime: 500,
+                  payload: [
+                    {
+                      animation: {
+                        duration: 1000
+                      }
+                    }
+                  ]
                 }
               ]
             }
@@ -259,9 +280,8 @@ const dsl = {
 };
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
-  background: '#ebecf0',
-  scaleX: 0.5,
-  scaleY: 0.5
+  scaleX: 0.7,
+  scaleY: 0.7
 });
 const player = new VStory.Player(story);
 story.init(player);
