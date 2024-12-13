@@ -1,3 +1,15 @@
+# v0.0.17
+
+2024-12-13
+
+
+**🐛 Bug fix**
+
+- **@visactor/vstory**: issue with unit-template animate caused by time
+- **@visactor/vstory-templates**: issue with unit-template animate caused by time
+
+[more detail about v0.0.17](https://github.com/VisActor/VStory/releases/tag/v0.0.17)
+
 # v0.0.16
 
 2024-12-10
