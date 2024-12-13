@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/pr
 
 # Bar Chart Infographic(Left-right Layout)
 
-## Demo Code
+## Code Demo
 
 ```javascript livedemo template=vstory
 VStory.registerAll();
