@@ -9,6 +9,13 @@
       },
       "children": [
         {
+          "path": "national-memorial",
+          "title": {
+            "zh": "国家公祭日",
+            "en": "national memorial"
+          }
+        },
+        {
           "path": "visualize-history",
           "title": {
             "zh": "可视化历史展示",
