@@ -257,6 +257,13 @@
           }
         },
         {
+          "path": "bar-work-in-same-industry",
+          "title": {
+            "zh": "信息图模版-柱图: Industry Stability",
+            "en": "Bar Chart Infographic: Industry Stability"
+          }
+        },
+        {
           "path": "sprint-burndown",
           "title": {
             "zh": "信息图模板-线图: Sprint Burndown",

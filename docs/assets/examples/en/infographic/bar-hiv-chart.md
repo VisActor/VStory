@@ -1,8 +1,8 @@
 ---
 category: examples
 group: infographic
-title: Venn Chart Infographic
-keywords: templates, visualization, venn, percentage, left-right
+title: Bar Chart Infographic
+keywords: templates, visualization, bar
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/hiv-chart.png
 ---
