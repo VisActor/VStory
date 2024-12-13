@@ -37,6 +37,7 @@ import { PopTipAnimate } from './demos/component/poptip';
 import { LabelItemAnimate } from './demos/component/label-item';
 import { BarHIV } from './demos/infographic/bar-hiv';
 import { LabelWorks } from './demos/works/label';
+import { NationalMemorial } from './demos/works/NationalMemorial';
 
 type MenusType = (
   | {
@@ -147,6 +148,10 @@ const App = () => {
         {
           name: 'SomeCharts',
           component: SomeCharts
+        },
+        {
+          name: 'NationalMemorial',
+          component: NationalMemorial
         }
       ]
     },
