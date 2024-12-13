@@ -37,6 +37,7 @@ import { PopTipAnimate } from './demos/component/poptip';
 import { LabelItemAnimate } from './demos/component/label-item';
 import { BarHIV } from './demos/infographic/bar-hiv';
 import { LabelWorks } from './demos/works/label';
+import { BarWorkingInSameIndustry } from './demos/infographic/bar-work-in-same-industry';
 
 type MenusType = (
   | {
@@ -222,6 +223,10 @@ const App = () => {
         {
           name: 'BarHIV',
           component: BarHIV
+        },
+        {
+          name: 'WorkingInSameIndustry',
+          component: BarWorkingInSameIndustry
         }
       ]
     },

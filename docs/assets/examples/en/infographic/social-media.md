@@ -35,7 +35,7 @@ const data = [
   },
   {
     value: 100,
-    name: 'United States'
+    name: 'Unite State'
   }
 ];
 const spec = {
@@ -76,9 +76,19 @@ const dsl = {
       scenes: [
         {
           id: 'defaultScene',
-          actions: new Array(6)
-            .fill(0)
-            .map((_, index) => ({ characterId: index.toString(), characterActions: [{ action: 'appear' }] }))
+          actions: new Array(6).fill(0).map((_, index) => ({
+            characterId: index.toString(),
+            characterActions: [
+              {
+                action: 'appear',
+                payload: {
+                  animation: {
+                    duration: 500
+                  }
+                }
+              }
+            ]
+          }))
         }
       ]
     }
@@ -142,8 +152,8 @@ const dsl = {
       options: {
         graphic: {
           textConfig: [
-            { text: 'Social Media\n', fontSize: 30, lineHeight: 50 },
-            { text: 'Global User Ranking', fontSize: 36, fontWeight: 'bold' }
+            { text: '社交媒体\n', fontSize: 30, lineHeight: 50 },
+            { text: '全球用户排行', fontSize: 36, fontWeight: 'bold' }
           ],
           fill: 'white',
           textAlign: 'left',
@@ -225,70 +235,121 @@ const pos = [
   { top: 570, left: 520 }
 ];
 pos.forEach((item, index) => {
-  story.addCharacterWithAppear({
-    id: `line_${index}`,
-    type: 'Line',
-    zIndex: -1,
-    position: {
-      top: item.top,
-      left: item.left - 200,
-      width: 200,
-      height: 12
-    },
-    options: {
-      graphic: {
-        points: [
-          { x: 0, y: 0 },
-          { x: item.left - 200, y: 0 }
-        ],
-        stroke: colors[index],
-        lineWidth: 2
-      }
-    }
-  });
-  story.addCharacterWithAppear({
-    id: `symbol_${index}`,
-    type: 'Shape',
-    zIndex: 1,
-    position: {
-      top: item.top - 6,
-      left: item.left - 6,
-      width: 12,
-      height: 12
-    },
-    options: {
-      graphic: {
-        symbolType: 'circle',
-        fill: colors[index],
-        size: 12
-      }
-    }
-  });
-  const text = data[index].name;
-  story.addCharacterWithAppear({
-    id: `text_${index}`,
-    type: 'Text',
-    zIndex: 1,
-    position: {
-      top: item.top,
-      left: item.left + 100,
-      width: 150
-    },
-    options: {
-      padding: { top: 5, bottom: 5, left: 0, right: 0 },
-      graphic: {
-        text,
-        fill: 'white',
-        fontSize: 16,
-        textAlign: 'center',
-        textBaseline: 'middle'
+  story.addCharacter(
+    {
+      id: `line_${index}`,
+      type: 'Line',
+      zIndex: -1,
+      position: {
+        top: item.top,
+        left: item.left - 200,
+        width: 200,
+        height: 12
       },
-      panel: {
-        fill: colors[index],
-        cornerRadius: 100
+      options: {
+        graphic: {
+          points: [
+            { x: 0, y: 0 },
+            { x: item.left - 200, y: 0 }
+          ],
+          stroke: colors[index],
+          lineWidth: 2
+        }
       }
+    },
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 500,
+          payload: {
+            animation: {
+              effect: 'clipRange',
+              duration: 500
+            }
+          }
+        }
+      ]
     }
-  });
+  );
+  story.addCharacter(
+    {
+      id: `symbol_${index}`,
+      type: 'Shape',
+      zIndex: 1,
+      position: {
+        top: item.top - 6,
+        left: item.left - 6,
+        width: 12,
+        height: 12
+      },
+      options: {
+        graphic: {
+          symbolType: 'circle',
+          fill: colors[index],
+          size: 12
+        }
+      }
+    },
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 800,
+          payload: {
+            animation: {
+              effect: 'wipe',
+              duration: 200
+            }
+          }
+        }
+      ]
+    }
+  );
+  const text = data[index].name;
+  story.addCharacter(
+    {
+      id: `text_${index}`,
+      type: 'Text',
+      zIndex: 1,
+      position: {
+        top: item.top,
+        left: item.left + 100,
+        width: 150
+      },
+      options: {
+        padding: { top: 5, bottom: 5, left: 0, right: 0 },
+        graphic: {
+          text,
+          fill: 'white',
+          fontSize: 16,
+          textAlign: 'center',
+          textBaseline: 'middle'
+        },
+        panel: {
+          fill: colors[index],
+          cornerRadius: 100
+        }
+      }
+    },
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000,
+          payload: {
+            animation: {
+              effect: 'wipe',
+              duration: 200
+            }
+          }
+        }
+      ]
+    }
+  );
 });
 
 player.play(-1);

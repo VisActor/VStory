@@ -22,10 +22,29 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['bg', '0', '1', '2', 'topLeftText', 'rect', 'line', 'logo', 'rectVS', 'vs', 'youtube'],
+              characterId: ['bg', '0', '2', 'topLeftText', 'rect', 'line', 'logo', 'rectVS', 'vs', 'youtube'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000,
+                      effect: 'grow'
+                    }
+                  }
                 }
               ]
             }

@@ -1,5 +1,5 @@
-import { registerLiquidChart, registerMosaicChart, registerVennChart } from '@visactor/vchart';
-export { registerLiquidChart, registerMosaicChart, registerVennChart } from '@visactor/vchart';
+import { registerLiquidChart, registerMosaicChart, registerVennChart, registerPictogramChart } from '@visactor/vchart';
+export { registerLiquidChart, registerMosaicChart, registerVennChart, registerPictogramChart } from '@visactor/vchart';
 
 import { CharacterType } from '../../../constants/character';
 import { CharacterChart } from '../character-chart';
@@ -13,4 +13,5 @@ export const registerAllVChart = () => {
   registerVennChart();
   registerLiquidChart();
   registerMosaicChart();
+  registerPictogramChart();
 };

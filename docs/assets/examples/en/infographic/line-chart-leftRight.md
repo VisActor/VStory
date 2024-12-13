@@ -22,10 +22,38 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['0', '1', '2', 'rect', 'icon'],
+              characterId: ['0', 'rect', 'icon'],
               characterActions: [
                 {
                   action: 'appear'
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  startTime: 500,
+                  payload: {
+                    animation: {
+                      duration: 1000
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['2'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000,
+                      effect: 'typewriter'
+                    }
+                  }
                 }
               ]
             }
@@ -82,7 +110,6 @@ const dsl = {
       options: {
         spec: {
           type: 'common',
-          animation: false,
           series: [
             {
               type: 'line',

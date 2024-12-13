@@ -22,10 +22,15 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['0', '1', '2', 'bag', 'explosion', 'text-1', 'text-2'],
+              characterId: ['0', '1', 'bag', 'explosion', 'text-1', 'text-2'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000
+                    }
+                  }
                 }
               ]
             }
