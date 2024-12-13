@@ -1,6 +1,11 @@
 # Change Log - @visactor/vstory-player
 
-This log was last generated on Thu, 12 Dec 2024 09:47:28 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Dec 2024 09:04:19 GMT and should not be manually modified.
+
+## 0.0.19
+Fri, 13 Dec 2024 09:04:19 GMT
+
+_Version update only_
 
 ## 0.0.18
 Thu, 12 Dec 2024 09:47:28 GMT
