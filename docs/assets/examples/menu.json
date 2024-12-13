@@ -276,6 +276,13 @@
             "zh": "信息图模板-饼图: Client Breakdown",
             "en": "Pie Chart Infographic: Client Breakdown"
           }
+        },
+        {
+          "path": "cat-stroke",
+          "title": {
+            "zh": "信息图模板-象形图: 新手撸猫指南",
+            "en": "Pictogram Infographic: Cat Stroking Guide"
+          }
         }
       ]
     }

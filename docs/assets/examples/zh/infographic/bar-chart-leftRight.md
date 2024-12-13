@@ -22,10 +22,33 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['0', '1', '2', 'text-1', 'text-2'],
+              characterId: ['0', 'text-1', 'text-2'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 500
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: [
+                    {
+                      selector: ':not(bar)', // 其他组件使用默认动画就行
+                      animation: { duration: 2000 }
+                    },
+                    {
+                      selector: 'bar', // 柱子使用leap动画
+                      animation: { duration: 2000, effect: 'barLeap', oneByOne: true, dimensionCount: 5 }
+                    }
+                  ]
                 }
               ]
             }

@@ -27,7 +27,6 @@ const dsl = {
                 'bg0',
                 'bg1',
                 'bg2',
-                'chart',
                 'icon-yes',
                 'icon-no',
                 'text0',
@@ -47,7 +46,26 @@ const dsl = {
               ],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 200
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['chart'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  startTime: 200,
+                  payload: {
+                    animation: {
+                      duration: 500
+                    }
+                  }
                 }
               ]
             }

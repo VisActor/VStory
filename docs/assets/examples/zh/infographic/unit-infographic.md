@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/unit-infograph
 
 # `单元可视化信息图` 作品展示
 
-该作品是一个单元可视化的信息图作品，展示了VStory在制作信息图模板方面的能力
+该作品是一个单元可视化的信息图作品，展示了 VStory 在制作信息图模板方面的能力
 
 ## 代码演示
 
@@ -359,10 +359,9 @@ const dsl = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 0,
                   payload: {
                     animation: {
-                      duration: 0
+                      duration: 1000
                     }
                   }
                 }

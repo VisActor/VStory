@@ -24,10 +24,57 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['0', '1', '2', 'rect', 'icon'],
+              characterId: ['0'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 200
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['2', 'icon'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  startTime: 200,
+                  payload: {
+                    animation: {
+                      duration: 200
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['rect'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      effect: 'scale',
+                      duration: 200
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              startTime: 500,
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1000
+                    }
+                  }
                 }
               ]
             }
@@ -70,6 +117,9 @@ const dsl = {
           fill: 'white',
           fillOpacity: 0.9,
           cornerRadius: 20
+        },
+        panel: {
+          scaleCenter: [500, 300]
         }
       }
     },
