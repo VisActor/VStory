@@ -1,4 +1,12 @@
 
+# v0.0.19
+
+2024-12-13
+
+
+**What's Changed**
+
+
 # v0.0.18
 
 # v0.0.17
@@ -9,6 +17,7 @@
 
 
 **What's Changed**
+
 
 * [Auto Sync] Sync the code from branch main to branch develop after release 0.0.16 by @github-actions in https://github.com/VisActor/VStory/pull/139
 * docs: fix document errors by @neuqzxy in https://github.com/VisActor/VStory/pull/140
@@ -26,6 +35,18 @@
 * docs: add Sprint Burndown and Client Breakdown template by @fangsmile in https://github.com/VisActor/VStory/pull/153
 * docs: add animation to infographic demo by @xiaoluoHe in https://github.com/VisActor/VStory/pull/155
 * [Auto release] release 0.0.19 by @github-actions in https://github.com/VisActor/VStory/pull/156
+
+
+
+
+[更多详情请查看 v0.0.19](https://github.com/VisActor/VStory/releases/tag/v0.0.19)
+
+# v0.0.16
+
+2024-12-10
+
+
+**🆕 新增功能**
 
 
 
