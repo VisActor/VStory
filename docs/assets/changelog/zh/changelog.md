@@ -1,3 +1,15 @@
+# v0.0.17
+
+2024-12-13
+
+
+**🐛 功能修复**
+
+- **@visactor/vstory**: issue with unit-template animate caused by time
+- **@visactor/vstory-templates**: issue with unit-template animate caused by time
+
+[更多详情请查看 v0.0.17](https://github.com/VisActor/VStory/releases/tag/v0.0.17)
+
 # v0.0.16
 
 2024-12-10
