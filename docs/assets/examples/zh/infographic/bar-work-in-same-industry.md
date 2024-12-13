@@ -26,7 +26,13 @@ const dsl = {
               characterId: ['bg2', 'chart', 'icon', 'icon-border', 'title1', 'title2', 'line', 'line2'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 1200,
+                      effect: 'grow'
+                    }
+                  }
                 }
               ]
             }

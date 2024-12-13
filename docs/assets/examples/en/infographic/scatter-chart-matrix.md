@@ -27,10 +27,31 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['bg', '1', 'Title', 'SubTitle', 'Data', 'PoweredBy'],
+              characterId: ['bg', 'Title', 'SubTitle', 'Data', 'PoweredBy'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 500
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['1'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  startTime: 500,
+                  payload: [
+                    {
+                      animation: {
+                        duration: 1000
+                      }
+                    }
+                  ]
                 }
               ]
             }

@@ -37,7 +37,12 @@ const dsl = {
               ],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 500
+                    }
+                  }
                 }
               ]
             }

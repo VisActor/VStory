@@ -2,7 +2,7 @@
 category: examples
 group: infographic
 title: U.S. Cancer Map
-keywords: templates, visualization, line, trend, left-right
+keywords: templates, visualization, map, trend, left-right
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/us-cancer.png
 ---
@@ -103,9 +103,15 @@ const dsl = {
       scenes: [
         {
           id: 'defaultScene',
-          actions: new Array(4)
-            .fill(0)
-            .map((_, index) => ({ characterId: index.toString(), characterActions: [{ action: 'appear' }] }))
+          actions: new Array(4).fill(0).map((_, index) => ({
+            characterId: index.toString(),
+            characterActions: [
+              {
+                action: 'appear',
+                payload: { animation: index === 2 ? { duration: 1000, effect: 'grow' } : { duration: 1000 } }
+              }
+            ]
+          }))
         }
       ]
     }
@@ -163,7 +169,10 @@ const dsl = {
       },
       options: {
         padding: { top: 60, bottom: 0, left: 0, right: 0 },
-        spec
+        spec,
+        panel: {
+          scaleCenter: [620, 350]
+        }
       }
     },
     {
