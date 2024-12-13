@@ -49,7 +49,7 @@ export class TypeWriter extends ACustomAnimate<{ text: string }> {
     // update text
     // const { textConfig = [] } = this.target.attribute;
     const totalLength = this.targetTextConfig.reduce(
-      (a, b) => (a + (b as any).text ? (b as any).text.toString().length : 1),
+      (a, b) => a + ((b as any).text ? (b as any).text.toString().length : 1),
       0
     );
     const nextLength = totalLength * ratio;

@@ -4,12 +4,12 @@ group: infographic
 title: Pictogram Infographic(Cat Stroking Guide)
 keywords: templates, visualization, pictogram, distribution
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/cat-stroke-guide.png
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/cat-stroke-preview.png
 ---
 
 # Pictogram Infographic: Cat Stroke Guide
 
-## Demo Code
+## Code Demo
 
 ```javascript livedemo template=vstory
 VStory.registerAll();
@@ -234,9 +234,8 @@ const dsl = {
 };
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
-  background: '#ebecf0',
-  scaleX: 0.5,
-  scaleY: 0.5
+  scaleX: 0.7,
+  scaleY: 0.7
 });
 const player = new VStory.Player(story);
 story.init(player);

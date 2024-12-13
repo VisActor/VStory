@@ -9,6 +9,13 @@
       },
       "children": [
         {
+          "path": "national-memorial",
+          "title": {
+            "zh": "国家公祭日",
+            "en": "national memorial"
+          }
+        },
+        {
           "path": "visualize-history",
           "title": {
             "zh": "可视化历史展示",
@@ -254,6 +261,20 @@
           "title": {
             "zh": "信息图模版-柱图: HIV Treatment Access",
             "en": "Bar Chart Infographic: HIV Treatment Access"
+          }
+        },
+        {
+          "path": "bar-chart-regional-sales",
+          "title": {
+            "zh": "信息图模板-条形图: Regional Sales",
+            "en": "Bar Chart Infographic: Regional Sales"
+          }
+        },
+        {
+          "path": "pie-chart-transportation",
+          "title": {
+            "zh": "信息图模板-饼图: Transportation",
+            "en": "Pie Chart Infographic: Transportation"
           }
         },
         {

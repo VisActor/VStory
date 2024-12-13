@@ -1,6 +1,11 @@
 # Change Log - @visactor/vstory-animate
 
-This log was last generated on Fri, 13 Dec 2024 09:04:19 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Dec 2024 11:12:52 GMT and should not be manually modified.
+
+## 0.0.20
+Fri, 13 Dec 2024 11:12:52 GMT
+
+_Version update only_
 
 ## 0.0.19
 Fri, 13 Dec 2024 09:04:19 GMT

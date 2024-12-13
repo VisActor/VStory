@@ -17,3 +17,4 @@ export function registerAll() {
   registerEasing();
   initVR();
 }
+export * as VUtils from '@visactor/vutils';
