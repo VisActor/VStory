@@ -1,9 +1,21 @@
+
 # v0.0.19
 
 2024-12-13
 
 
 **What's Changed**
+
+
+# v0.0.18
+
+# v0.0.17
+
+2024-12-13
+
+
+**What's Changed**
+
 
 * [Auto Sync] Sync the code from branch main to branch develop after release 0.0.16 by @github-actions in https://github.com/VisActor/VStory/pull/139
 * docs: fix document errors by @neuqzxy in https://github.com/VisActor/VStory/pull/140
@@ -24,6 +36,7 @@
 
 
 
+
 [more detail about v0.0.19](https://github.com/VisActor/VStory/releases/tag/v0.0.19)
 
 # v0.0.16
@@ -32,6 +45,26 @@
 
 
 **🆕 New feature**
+
+
+
+[more detail about v0.0.18](https://github.com/VisActor/VStory/releases/tag/v0.0.18)
+
+**🐛 Bug fix**
+
+- **@visactor/vstory**: issue with unit-template animate caused by time
+- **@visactor/vstory-templates**: issue with unit-template animate caused by time
+
+[more detail about v0.0.17](https://github.com/VisActor/VStory/releases/tag/v0.0.17)
+
+
+# v0.0.16
+
+2024-12-10
+
+
+**🆕 New feature**
+
 
 - **@visactor/vstory-external**: support dynamic line chart and single pie
 
