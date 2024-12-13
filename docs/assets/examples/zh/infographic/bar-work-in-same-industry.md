@@ -1,8 +1,8 @@
 ---
 category: examples
 group: infographic
-title: Venn Chart Infographic
-keywords: templates, visualization, venn, percentage, left-right
+title: Bar Chart Infographic
+keywords: templates, visualization, bar, percentage
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/bar-work-in-same-industry.png
 ---
