@@ -1593,7 +1593,7 @@ const story = new VStory.Story(dsl, { dom: CONTAINER_ID, width: width / 2, heigh
 const player = new VStory.Player(story);
 story.init(player);
 
-player.play(0);
+player.play(-1);
 
 window['story'] = story;
 window['vstory'] = story;
