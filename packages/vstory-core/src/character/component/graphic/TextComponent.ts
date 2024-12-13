@@ -117,6 +117,12 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
           text: item + (i < textList.length - 1 ? '\n' : '')
         };
       });
+    } else if (textConfig && textConfig.length) {
+      // 设置align
+      textConfig.forEach(item => {
+        item.textAlign = align;
+        item.lineHeight = item.lineHeight ?? textStyle.lineHeight;
+      });
     }
 
     return textConfig;

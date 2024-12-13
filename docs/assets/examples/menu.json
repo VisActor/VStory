@@ -255,6 +255,13 @@
             "zh": "信息图模版-柱图: HIV Treatment Access",
             "en": "Bar Chart Infographic: HIV Treatment Access"
           }
+        },
+        {
+          "path": "bar-work-in-same-industry",
+          "title": {
+            "zh": "信息图模版-柱图: Industry Stability",
+            "en": "Bar Chart Infographic: Industry Stability"
+          }
         }
       ]
     }
