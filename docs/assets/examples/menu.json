@@ -255,6 +255,34 @@
             "zh": "信息图模版-柱图: HIV Treatment Access",
             "en": "Bar Chart Infographic: HIV Treatment Access"
           }
+        },
+        {
+          "path": "bar-work-in-same-industry",
+          "title": {
+            "zh": "信息图模版-柱图: Industry Stability",
+            "en": "Bar Chart Infographic: Industry Stability"
+          }
+        },
+        {
+          "path": "sprint-burndown",
+          "title": {
+            "zh": "信息图模板-线图: Sprint Burndown",
+            "en": "Line Chart Infographic: Sprint Burndown"
+          }
+        },
+        {
+          "path": "client-breakdown",
+          "title": {
+            "zh": "信息图模板-饼图: Client Breakdown",
+            "en": "Pie Chart Infographic: Client Breakdown"
+          }
+        },
+        {
+          "path": "cat-stroke",
+          "title": {
+            "zh": "信息图模板-象形图: 新手撸猫指南",
+            "en": "Pictogram Infographic: Cat Stroking Guide"
+          }
         }
       ]
     }

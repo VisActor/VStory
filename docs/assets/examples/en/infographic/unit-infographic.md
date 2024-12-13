@@ -359,10 +359,9 @@ const dsl = {
               characterActions: [
                 {
                   action: 'appear',
-                  startTime: 0,
                   payload: {
                     animation: {
-                      duration: 0
+                      duration: 1000
                     }
                   }
                 }
