@@ -1,3 +1,21 @@
+# v0.0.20
+
+2024-12-13
+
+
+**What's Changed**
+
+* feat: add single bar and pie templates by @skie1997 in https://github.com/VisActor/VStory/pull/152
+* [Auto Sync] Sync the code from branch main to branch develop after release 0.0.19 by @github-actions in https://github.com/VisActor/VStory/pull/157
+* Docs/update infographic demo size by @xiaoluoHe in https://github.com/VisActor/VStory/pull/158
+* docs: rename title of code demo by @xiaoluoHe in https://github.com/VisActor/VStory/pull/159
+* Feat/national memorial by @neuqzxy in https://github.com/VisActor/VStory/pull/160
+* [Auto release] release 0.0.20 by @github-actions in https://github.com/VisActor/VStory/pull/164
+
+
+
+[更多详情请查看 v0.0.20](https://github.com/VisActor/VStory/releases/tag/v0.0.20)
+
 
 # v0.0.19
 
