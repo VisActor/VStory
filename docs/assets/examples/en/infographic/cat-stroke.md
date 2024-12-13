@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/pr
 
 # Pictogram Infographic: Cat Stroke Guide
 
-## Demo Code
+## Code Demo
 
 ```javascript livedemo template=vstory
 VStory.registerAll();
