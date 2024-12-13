@@ -1,18 +1,14 @@
 import type { IGroup } from '@visactor/vrender-core';
-import { createRichText, IText, ITextGraphicAttribute } from '@visactor/vrender-core';
 import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import type { ITextComponentAttributes } from '../interface/character-text';
 import { TextComponent } from '../graphic/TextComponent';
-import type { IComponentCharacterRuntimeConstructor } from '../interface/runtime';
-import { TextRuntime } from '../runtime/text';
+import { TextRuntimeInstance } from '../runtime/text';
 
 export class TextCharacter extends CharacterComponent<TextComponent, ITextComponentAttributes> {
   static type = CharacterType.TEXT;
 
   protected _group: IGroup;
-
-  static RunTime: IComponentCharacterRuntimeConstructor[] = [TextRuntime];
 
   protected createAndAddGraphic(attribute: ITextComponentAttributes): void {
     this._graphic = new TextComponent(attribute);
@@ -20,9 +16,8 @@ export class TextCharacter extends CharacterComponent<TextComponent, ITextCompon
   }
 
   protected _initRuntime(): void {
-    TextCharacter.RunTime.forEach(R => {
-      this._runtime.push(new R(this));
-    });
+    super._initRuntime();
+    this._runtime.push(TextRuntimeInstance);
   }
 
   protected getDefaultAttribute(): Partial<ITextComponentAttributes> {

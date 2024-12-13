@@ -4,17 +4,17 @@ import type { ICharacterConfig } from '../../../interface/dsl/dsl';
 export interface IChartCharacterRuntime {
   readonly type: string;
   // 应用config到attribute
-  applyConfigToAttribute?: () => void;
+  applyConfigToAttribute?: (character: ICharacter) => void;
 
   // 图表初始化完成
-  afterInitialize?: (vchart: IVChart) => void;
+  afterInitialize?: (character: ICharacter, vchart: IVChart) => void;
 
   // 图表绘制完成
-  afterVRenderDraw?: () => void;
+  afterVRenderDraw?: (character: ICharacter) => void;
 }
 
 export interface IChartCharacterRuntimeConstructor {
-  new (character: ICharacter): IChartCharacterRuntime;
+  new (): IChartCharacterRuntime;
 }
 
 export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;

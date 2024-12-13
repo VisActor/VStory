@@ -1,4 +1,4 @@
-import { CharacterChart, IChartGraphicAttribute } from '@visactor/vstory-core';
+import { CharacterChart } from '@visactor/vstory-core';
 import { DYNAMIC_LINE } from './constant';
 import type { IDynamicLineChartGraphicAttribute } from './dynamic-line-interface';
 import { DynamicLineRuntime } from './dynamic-line-runtime';

@@ -1,17 +1,14 @@
 import type { IGroup } from '@visactor/vrender-core';
 import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
-import type { IComponentCharacterRuntimeConstructor } from '../interface/runtime';
 import { ShapeComponent } from '../graphic/ShapeComponent';
 import type { IShapeComponentAttributes } from '../interface/character-shape';
-import { ShapeRuntime } from '../runtime/shape';
+import { ShapeRuntimeInstance } from '../runtime/shape';
 
 export class ShapeCharacter extends CharacterComponent<ShapeComponent, IShapeComponentAttributes> {
   static type = CharacterType.SHAPE;
 
   protected _group: IGroup;
-
-  static RunTime: IComponentCharacterRuntimeConstructor[] = [ShapeRuntime];
 
   protected createAndAddGraphic(attribute: IShapeComponentAttributes): void {
     this._graphic = new ShapeComponent(attribute);
@@ -19,9 +16,8 @@ export class ShapeCharacter extends CharacterComponent<ShapeComponent, IShapeCom
   }
 
   protected _initRuntime(): void {
-    ShapeCharacter.RunTime.forEach(R => {
-      this._runtime.push(new R(this));
-    });
+    super._initRuntime();
+    this._runtime.push(ShapeRuntimeInstance);
   }
 
   protected _clearGraphic(): void {

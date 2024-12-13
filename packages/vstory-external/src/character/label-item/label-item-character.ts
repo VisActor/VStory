@@ -1,9 +1,8 @@
 import type { IGroup } from '@visactor/vrender-core';
-import type { IComponentCharacterRuntimeConstructor } from '@visactor/vstory-core';
 import { CharacterComponent } from '@visactor/vstory-core';
 import { PopTipComponent } from './LabelItemComponent';
 import type { ILabelItemComponentAttributes } from './label-item-interface';
-import { LabelItemRuntime } from './label-item-runtime';
+import { LabelItemRuntimeInstance } from './label-item-runtime';
 import { LABEL_ITEM } from './constant';
 
 export class LabelItemCharacter extends CharacterComponent<PopTipComponent, ILabelItemComponentAttributes> {
@@ -11,17 +10,14 @@ export class LabelItemCharacter extends CharacterComponent<PopTipComponent, ILab
 
   protected _group: IGroup;
 
-  static RunTime: IComponentCharacterRuntimeConstructor[] = [LabelItemRuntime];
-
   protected createAndAddGraphic(attribute: ILabelItemComponentAttributes): void {
     this._graphic = new PopTipComponent(attribute);
     this.canvas.addGraphic(this._graphic);
   }
 
   protected _initRuntime(): void {
-    LabelItemCharacter.RunTime.forEach(R => {
-      this._runtime.push(new R(this));
-    });
+    super._initRuntime();
+    this._runtime.push(LabelItemRuntimeInstance);
   }
 
   protected getDefaultAttribute(): Partial<ILabelItemComponentAttributes> {

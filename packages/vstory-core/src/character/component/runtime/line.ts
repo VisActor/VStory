@@ -1,11 +1,12 @@
+import type { ICharacterComponent } from '../interface/character-component';
 import type { IComponentCharacterRuntime } from '../interface/runtime';
 import { BaseRuntime } from './base';
 
 export class LineRuntime extends BaseRuntime implements IComponentCharacterRuntime {
   type = 'Line';
-  applyConfigToAttribute(): void {
-    super.applyConfigToAttribute();
-    const rawAttribute = this._character.getAttribute();
+  applyConfigToAttribute(character: ICharacterComponent): void {
+    super.applyConfigToAttribute(character);
+    const rawAttribute = character.getAttribute();
     const { width = 1, height = 1 } = rawAttribute;
     rawAttribute.graphic.points = rawAttribute.graphic.points ?? [
       { x: 0, y: 0 },
@@ -13,3 +14,5 @@ export class LineRuntime extends BaseRuntime implements IComponentCharacterRunti
     ];
   }
 }
+
+export const LineRuntimeInstance = new LineRuntime();

@@ -5,3 +5,5 @@ import { POPTIP } from './constant';
 export class PopTipRuntime extends BaseRuntime implements IComponentCharacterRuntime {
   type = POPTIP;
 }
+
+export const PopTipRuntimeInstance = new PopTipRuntime();

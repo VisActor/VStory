@@ -8,13 +8,9 @@ import { getChartModelWithEvent } from './utils/vchart-pick';
 import type { ICharacterConfig, ICharacterInitOption } from '../../interface/dsl/dsl';
 import type { IChartCharacterConfig } from '../../interface/dsl/chart';
 import { getLayoutFromWidget } from '../../utils/layout';
-import type {
-  IChartCharacterRuntime,
-  IChartCharacterRuntimeConstructor,
-  IUpdateConfigParams
-} from './interface/runtime';
-import { CommonSpecRuntime } from './runtime/common-spec';
-import { CommonLayoutRuntime } from './runtime/common-layout';
+import type { IChartCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
+import { CommonSpecRuntimeInstance } from './runtime/common-spec';
+import { CommonLayoutRuntimeInstance } from './runtime/common-layout';
 import { ChartConfigProcess } from './chart-config-process';
 import type { ICharacterChart } from './interface/character-chart';
 import { mergeChartOption } from '../../utils/chart';
@@ -31,8 +27,6 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   protected _ticker: ITicker;
   protected _timeline: ITimeline;
   protected _runtime: IChartCharacterRuntime[] = [];
-
-  static RunTime: IChartCharacterRuntimeConstructor[] = [CommonSpecRuntime, CommonLayoutRuntime];
 
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     super(config, option);
@@ -152,9 +146,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   }
 
   protected _initRuntime(): void {
-    CharacterChart.RunTime.forEach(R => {
-      this._runtime.push(new R(this));
-    });
+    this._runtime.push(CommonSpecRuntimeInstance, CommonLayoutRuntimeInstance);
   }
   protected _clearRuntime(): void {
     this._runtime.length = 0;
@@ -173,7 +165,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
 
   protected applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void {
     this._attribute = this.getDefaultAttribute() as any;
-    this._runtime.forEach(r => r.applyConfigToAttribute?.());
+    this._runtime.forEach(r => r.applyConfigToAttribute?.(this));
   }
 
   getDefaultAttribute(): Partial<IChartGraphicAttribute> {
@@ -191,17 +183,17 @@ export class CharacterChart<T extends IChartGraphicAttribute>
       panel: {},
       ticker: this._ticker,
       zIndex: this._config.zIndex ?? 0,
-      vchartBoundsMode: this._config.options.initOption?.vchartBoundsMode ?? 'auto',
+      vchartBoundsMode: this._config.options.initOption?.vchartBoundsMode ?? 'clip',
       chartInitOptions: mergeChartOption(
         {
           performanceHook: {
             afterInitializeChart: (vchart: IVChart) => {
               // (<IChartTemp>this.configProcess.dataTempTransform?.specTemp)?.afterInitialize({ character: this });
-              this._runtime.forEach(r => r.afterInitialize?.(vchart));
+              this._runtime.forEach(r => r.afterInitialize?.(this, vchart));
             },
 
             afterVRenderDraw: () => {
-              this._runtime.forEach(r => r.afterVRenderDraw?.());
+              this._runtime.forEach(r => r.afterVRenderDraw?.(this));
             }
           }
         },

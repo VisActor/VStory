@@ -1,21 +1,13 @@
-import { merge, normalizePadding } from '@visactor/vutils';
+import { merge } from '@visactor/vutils';
 import type { IChartCharacterRuntime } from '../interface/runtime';
 import { getLayoutFromWidget } from '../../../utils/layout';
-import { parsePadding } from '@visactor/vrender-core';
 import type { ICharacterChart } from '../interface/character-chart';
-
 export class CommonLayoutRuntime implements IChartCharacterRuntime {
   type = 'CommonLayout';
 
-  protected declare _character: ICharacterChart;
-
-  constructor(character: ICharacterChart) {
-    this._character = character;
-  }
-
-  applyConfigToAttribute(): void {
-    const rawAttribute = this._character.getAttribute();
-    const config = this._character.config;
+  applyConfigToAttribute(character: ICharacterChart): void {
+    const rawAttribute = character.getAttribute();
+    const config = character.config;
     const layoutData = getLayoutFromWidget(config.position);
     const layout = getLayoutFromWidget(config.position);
     const viewBox = {
@@ -25,7 +17,7 @@ export class CommonLayoutRuntime implements IChartCharacterRuntime {
       y2: layout.height
     };
     rawAttribute.viewBox = viewBox;
-    rawAttribute.renderCanvas = this._character.canvas.getNativeCanvas();
+    rawAttribute.renderCanvas = character.canvas.getNativeCanvas();
 
     merge(rawAttribute, layoutData);
 
@@ -34,3 +26,5 @@ export class CommonLayoutRuntime implements IChartCharacterRuntime {
     merge(rawAttribute.panel, panel, layoutData);
   }
 }
+
+export const CommonLayoutRuntimeInstance = new CommonLayoutRuntime();
