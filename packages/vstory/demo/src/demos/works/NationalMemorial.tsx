@@ -5,6 +5,7 @@ import darkBg from '../../assets/nationalMemory/dark.jpeg';
 import candle from '../../assets/nationalMemory/candle.png';
 import monument from '../../assets/nationalMemory/monument.png';
 import { merge } from '@visactor/vutils';
+import { generatorPathEasingFunc, Easing } from '@visactor/vrender';
 
 registerAll();
 export const NationalMemorial = () => {
@@ -32,6 +33,9 @@ export const NationalMemorial = () => {
       }
     };
   };
+  const moveInEasing = generatorPathEasingFunc('M0,0,C0.46,0,0.496,0.014,0.616,0.088,0.734,0.161,0.884,0.4,1,1');
+  Easing['powerIn'] = moveInEasing;
+
   useEffect(() => {
     const container = document.getElementById(id);
     const canvas = document.createElement('canvas');
@@ -251,33 +255,6 @@ export const NationalMemorial = () => {
     const scene2Characters = [
       {
         character: {
-          id: 'scene1-bg',
-          type: 'Image',
-          position: {
-            x: 0,
-            y: 0,
-            width,
-            height
-          },
-          options: {
-            graphic: {
-              image: darkBg
-            }
-          }
-        },
-        appearAction: {
-          action: 'appear',
-          payload: {
-            animation: {
-              duration: 500,
-              easing: 'easeInOut'
-            }
-          }
-        },
-        disappearAction: false
-      },
-      {
-        character: {
           id: 'scene2-title',
           type: 'Text',
           position: {
@@ -310,14 +287,14 @@ export const NationalMemorial = () => {
         actions: [
           {
             action: 'moveTo',
-            startTime: 1800,
+            startTime: 2400,
             payload: {
               destination: {
                 x: 120,
                 y: 120
               },
               animation: {
-                duration: 800,
+                duration: 400,
                 easing: 'quadInOut'
               }
             }
@@ -330,7 +307,7 @@ export const NationalMemorial = () => {
           type: 'Text',
           position: {
             x: width / 2,
-            y: 260,
+            y: 280,
             width,
             height
           },
@@ -347,26 +324,27 @@ export const NationalMemorial = () => {
         },
         appearAction: {
           action: 'appear',
-          startTime: 800,
+          startTime: 700,
           payload: {
             animation: {
-              duration: 600,
+              duration: 1000,
               effect: 'move',
-              pos: 'top'
+              pos: 'top',
+              easing: 'powerIn'
             }
           }
         },
         actions: [
           {
             action: 'moveTo',
-            startTime: 1800,
+            startTime: 2400,
             payload: {
               destination: {
                 x: 400,
                 y: 120
               },
               animation: {
-                duration: 800,
+                duration: 400,
                 easing: 'quadInOut'
               }
             }
@@ -396,7 +374,7 @@ export const NationalMemorial = () => {
         },
         appearAction: {
           action: 'appear',
-          startTime: 2200,
+          startTime: 4500,
           payload: {
             animation: {
               duration: 200,
@@ -428,7 +406,7 @@ export const NationalMemorial = () => {
         },
         appearAction: {
           action: 'appear',
-          startTime: 2600,
+          startTime: 5000,
           payload: {
             animation: {
               duration: 1000,
@@ -443,14 +421,13 @@ export const NationalMemorial = () => {
           type: 'VChart',
           zIndex: 0,
           position: {
-            x: 100,
+            x: 72,
             y: 400,
             width: 500,
             height: 500
           },
           options: {
             initOption: { animation: true, interactive: true, disableTriggerEvent: true },
-
             spec: {
               type: 'pie',
               data: [
@@ -486,7 +463,7 @@ export const NationalMemorial = () => {
                         },
                         easing: 'elasticInOut'
                       },
-                      delay: 5500,
+                      delay: 8800,
                       duration: 500
                     }
                   ]
@@ -523,7 +500,7 @@ export const NationalMemorial = () => {
         },
         appearAction: {
           action: 'appear',
-          startTime: 2200,
+          startTime: 2800,
           payload: {
             animation: {
               duration: 600
@@ -544,7 +521,7 @@ export const NationalMemorial = () => {
           characterActions.push(...actions);
         }
         if (disappearAction !== false) {
-          characterActions.push(merge({}, defaultDisappearAction(6000), disappearAction));
+          characterActions.push(merge({}, defaultDisappearAction(9000), disappearAction));
         }
 
         return {
