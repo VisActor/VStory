@@ -37,7 +37,7 @@ export class CommonStyleActionProcessor extends ActionProcessorItem {
     super.preRun(character, actionSpec);
     const {
       animation = {},
-      graphic: graphicStyle,
+      graphic: graphicStyle = {},
       text: textStyle,
       panel: panelStyle
     } = getPayload(actionSpec) as IComponentStylePayLoad;

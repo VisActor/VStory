@@ -37,6 +37,7 @@ import { PopTipAnimate } from './demos/component/poptip';
 import { LabelItemAnimate } from './demos/component/label-item';
 import { BarHIV } from './demos/infographic/bar-hiv';
 import { LabelWorks } from './demos/works/label';
+import { NanJinWordCloud } from './demos/works/nanjin-wordcloud';
 import { NationalMemorial } from './demos/works/NationalMemorial';
 
 type MenusType = (
@@ -148,6 +149,10 @@ const App = () => {
         {
           name: 'SomeCharts',
           component: SomeCharts
+        },
+        {
+          name: 'NanJinWordCloud',
+          component: NanJinWordCloud
         },
         {
           name: 'NationalMemorial',
