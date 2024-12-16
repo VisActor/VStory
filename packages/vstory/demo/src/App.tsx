@@ -41,6 +41,7 @@ import { NanJinWordCloud } from './demos/works/nanjin-wordcloud';
 import { NationalMemorial } from './demos/works/NationalMemorial';
 import { BarWorkingInSameIndustry } from './demos/infographic/bar-work-in-same-industry';
 import { ProjectGoal } from './demos/infographic/project-goal';
+import { BigDataWordCloud } from './demos/infographic/big-data-wordcloud';
 
 type MenusType = (
   | {
