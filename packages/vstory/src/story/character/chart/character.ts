@@ -1,7 +1,7 @@
 import { CommonSpecRuntime } from './runtime/common-spec';
 import { ComponentSpecRuntime } from './runtime/component-spec';
 import type { IChartCharacterRuntimeConstructor } from './runtime/interface';
-import { cloneDeep, merge } from '@visactor/vutils';
+import { cloneDeep } from '@visactor/vutils';
 import { VChart } from '@visactor/vchart/esm/core';
 import type { IChartCharacterSpec } from '../dsl-interface';
 import { Chart } from './graphic/vchart-graphic';
