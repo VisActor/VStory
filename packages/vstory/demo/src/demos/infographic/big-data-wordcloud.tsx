@@ -1024,6 +1024,7 @@ export const BigDataWordCloud = () => {
                 backgroundColor: '#eee'
               },
               word: {
+                padding: 2,
                 style: {
                   fontWeight: (datum: any) => {
                     return datum.index < 2 ? 'bolder' : datum.index < 20 ? 'bold' : 'normal';
