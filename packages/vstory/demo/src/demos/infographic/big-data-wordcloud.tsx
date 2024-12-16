@@ -758,10 +758,13 @@ export const BigDataWordCloud = () => {
           position: {
             x: -300,
             y: -860,
-            width: 1280,
-            height: 720
+            width: 1280 + 300,
+            height: 720 + 860
           },
           options: {
+            panel: {
+              clip: true
+            },
             graphic: {
               size: 1200,
               symbolType:
@@ -777,10 +780,13 @@ export const BigDataWordCloud = () => {
           position: {
             x: -257,
             y: -810,
-            width: 1280,
-            height: 720
+            width: 1280 + 257,
+            height: 720 + 810
           },
           options: {
+            panel: {
+              clip: true
+            },
             graphic: {
               size: 1200,
               symbolType:
@@ -797,10 +803,13 @@ export const BigDataWordCloud = () => {
           position: {
             x: -220,
             y: -780,
-            width: 1280,
-            height: 720
+            width: 1280 + 220,
+            height: 720 + 780
           },
           options: {
+            panel: {
+              clip: true
+            },
             graphic: {
               size: 1200,
               symbolType:
