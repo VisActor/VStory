@@ -4,11 +4,6 @@ import { Story } from '../../../src/story/story';
 import '../../../src/story/index';
 import { cloneDeep } from '@visactor/vutils';
 import Scene3ChartImage2 from '../assets/scene3/chart-2.png';
-import { loadAllSelection } from '../../../src/edit/edit-component';
-import { Edit } from '../../../src/edit/edit';
-
-// Edit.registerEditComponent('common', CommonEditComponent);
-loadAllSelection();
 
 const chartSpec = {
   type: 'bar',
@@ -200,15 +195,6 @@ export const StoryEdit = () => {
     };
     const story = new Story(tempSpec, { dom: id });
     story.play(false);
-    const edit = new Edit(story);
-    edit.emitter.on('startEdit', msg => {
-      if (msg.type === 'commonEdit' && msg.actionInfo.character) {
-        console.log(cloneDeep(msg.actionInfo.character.spec));
-        msg.updateCharacter({ options: { graphic: { fill: 'green' } } });
-        console.log(cloneDeep(msg.actionInfo.character.spec));
-        story.play();
-      }
-    });
   }, []);
 
   return <div style={{ width: '100%', height: '100%' }} id={id}></div>;

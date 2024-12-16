@@ -2,16 +2,6 @@ import React, { useEffect } from 'react';
 import { IStorySpec } from '../../../src/story/interface';
 import { Story } from '../../../src/story/story';
 import '../../../src/story/index';
-import { Edit } from '../../../src/edit/edit';
-import { BoxSelection } from '../../../src/edit/edit-component/box-selection';
-import { TextSelection } from '../../../src/edit/edit-component/text-selection';
-import { RichTextSelection } from '../../../src/edit/edit-component/richtext-selection';
-import { loadAllSelection } from '../../../src/edit/edit-component';
-
-loadAllSelection();
-Edit.registerEditComponent('text', TextSelection);
-Edit.registerEditComponent('richtext', RichTextSelection);
-Edit.registerEditComponent('box-selection', BoxSelection);
 
 const spec = {
   direction: 'vertical',
@@ -726,8 +716,6 @@ export const VChartGraphic = () => {
     window.story = story;
     story.play(false);
     story.canvas.getCanvas().style.background = 'blue';
-    const edit = new Edit(story);
-    window.edit = edit;
 
     // const vchart = story.getCharactersById('vchart')?.graphic.vchart;
     // window.vchart = vchart;

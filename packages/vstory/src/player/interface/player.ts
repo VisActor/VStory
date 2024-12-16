@@ -1,5 +1,4 @@
 import type { EventEmitter } from '@visactor/vutils';
-import { ICharacter } from '../../story/character';
 import type { IActSpec } from '../../story/interface/dsl-interface';
 
 export interface IPlayer extends EventEmitter {

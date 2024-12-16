@@ -1,17 +1,8 @@
 import React, { useEffect } from 'react';
 import { IStorySpec } from '../../../../src/story/interface';
 import { Story } from '../../../../src/story/story';
-import { Edit } from '../../../../src/edit/edit';
 import '../../../../src/story/index';
 import { cloneDeep } from '@visactor/vutils';
-import { BoxSelection } from '../../../../src/edit/edit-component/box-selection';
-import { TextSelection } from '../../../../src/edit/edit-component/text-selection';
-import { RichTextSelection } from '../../../../src/edit/edit-component/richtext-selection';
-
-// Edit.registerEditComponent('common', CommonEditComponent);
-Edit.registerEditComponent('text', TextSelection);
-Edit.registerEditComponent('richtext', RichTextSelection);
-Edit.registerEditComponent('box-selection', BoxSelection);
 
 export const LV_BAR1 = () => {
   const id = 'storyBar';
@@ -90,15 +81,6 @@ export const LV_BAR1 = () => {
     };
     const story = new Story(tempSpec, { dom: id });
     story.play();
-    const edit = new Edit(story);
-    edit.emitter.on('startEdit', msg => {
-      if (msg.type === 'commonEdit' && msg.actionInfo.character) {
-        console.log(cloneDeep(msg.actionInfo.character.spec));
-        msg.updateCharacter({ options: { graphic: { fill: 'green' } } });
-        console.log(cloneDeep(msg.actionInfo.character.spec));
-        story.play();
-      }
-    });
   }, []);
 
   return <div style={{ width: '100%', height: '100%' }} id={id}></div>;

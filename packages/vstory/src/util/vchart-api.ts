@@ -1,4 +1,4 @@
-import { IVChart } from '@visactor/vchart';
+import type { IVChart } from '@visactor/vchart';
 
 export function getAllSeriesMarksWithoutRoot(vchart: IVChart) {
   if (!vchart) {

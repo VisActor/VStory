@@ -2,12 +2,8 @@ import React, { useEffect } from 'react';
 import { cloneDeep } from '@visactor/vutils';
 import { IStorySpec } from '../../../src/story/interface';
 import { Story } from '../../../src/story/story';
-import { Edit } from '../../../src/edit/edit';
 import '../../../src/story/index';
-import { loadAllSelection } from '../../../src/edit/edit-component';
 import img from '../assets/scene3/chart-3.png';
-
-loadAllSelection();
 
 export const GraphicEdit = () => {
   const id = 'storyBar';
@@ -146,16 +142,6 @@ export const GraphicEdit = () => {
     };
     const story = new Story(tempSpec, { dom: id });
     story.play();
-
-    const edit = new Edit(story);
-    edit.emitter.on('startEdit', msg => {
-      if (msg.type === 'commonEdit' && msg.actionInfo.character) {
-        console.log(cloneDeep(msg.actionInfo.character.spec));
-        // msg.updateCharacter({ options: { graphic: { fill: 'green' } } });
-        console.log(cloneDeep(msg.actionInfo.character.spec));
-        // story.play();
-      }
-    });
 
     // let i = 0;
     // story.getPlayer().setCurrentChapter(0);

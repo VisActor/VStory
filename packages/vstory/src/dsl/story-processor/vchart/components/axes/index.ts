@@ -1,1 +1,0 @@
-export { axesDisappearProcessor } from './disappear';
