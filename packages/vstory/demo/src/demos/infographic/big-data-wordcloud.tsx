@@ -512,32 +512,219 @@ export const BigDataWordCloud = () => {
                     'arc0',
                     'arc1',
                     'arc2',
-                    'leftTitle',
-                    'listIconLeft1',
-                    'listIconRight1',
-                    'listNo1',
-                    'listContent1',
+                    'leftTitle'
+                    // 'listIconLeft1',
+                    // 'listIconRight1',
+                    // 'listNo1',
+                    // 'listContent1',
 
-                    'listIconLeft2',
-                    'listIconRight2',
-                    'listNo2',
-                    'listContent2',
+                    // 'listIconLeft2',
+                    // 'listIconRight2',
+                    // 'listNo2',
+                    // 'listContent2',
 
-                    'listIconLeft3',
-                    'listIconRight3',
-                    'listNo3',
-                    'listContent3',
+                    // 'listIconLeft3',
+                    // 'listIconRight3',
+                    // 'listNo3',
+                    // 'listContent3',
 
-                    'listIconLeft4',
-                    'listIconRight4',
-                    'listNo4',
-                    'listContent4',
+                    // 'listIconLeft4',
+                    // 'listIconRight4',
+                    // 'listNo4',
+                    // 'listContent4',
 
-                    'wordCloud'
+                    // 'wordCloud'
                   ],
                   characterActions: [
                     {
                       action: 'appear'
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['leftTitle'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 0,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 400,
+                            easing: 'linear',
+                            effect: 'wipe'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['listIconLeft1', 'listIconRight1', 'listNo1'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 400,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 200,
+                            easing: 'linear',
+                            effect: 'fade'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  characterId: ['listContent1'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 600,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 600,
+                            easing: 'linear',
+                            effect: 'wipe'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['listIconLeft2', 'listIconRight2', 'listNo2'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 1200,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 200,
+                            easing: 'linear',
+                            effect: 'fade'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  characterId: ['listContent2'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 1400,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 600,
+                            easing: 'linear',
+                            effect: 'wipe'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['listIconLeft3', 'listIconRight3', 'listNo3'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 2000,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 200,
+                            easing: 'linear',
+                            effect: 'fade'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  characterId: ['listContent3'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 2200,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 600,
+                            easing: 'linear',
+                            effect: 'wipe'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['listIconLeft4', 'listIconRight4', 'listNo4'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 2800,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 200,
+                            easing: 'linear',
+                            effect: 'fade'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  characterId: ['listContent4'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 3000,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 600,
+                            easing: 'linear',
+                            effect: 'wipe'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  characterId: ['wordCloud'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 3600,
+                      payload: [
+                        {
+                          animation: {
+                            selector: '*',
+                            duration: 100,
+                            easing: 'linear',
+                            effect: 'scale',
+                            oneByOne: true
+                          }
+                        }
+                      ]
                     }
                   ]
                 }

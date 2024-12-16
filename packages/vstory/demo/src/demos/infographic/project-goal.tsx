@@ -17,23 +17,111 @@ export const ProjectGoal = () => {
           scenes: [
             {
               id: 'defaultScene',
+
+              // characterId: [
+              //   'background',
+              //   'leftRect',
+              //   'topArrow',
+              //   'topText',
+              //   'leftIcon',
+              //   'leftTitle',
+              //   'leftMiddleLine',
+              //   'leftContent',
+              //   'gaugeChart',
+              //   'targetText'
+              // ],
               actions: [
                 {
-                  characterId: [
-                    'background',
-                    'leftRect',
-                    'topArrow',
-                    'topText',
-                    'leftIcon',
-                    'leftTitle',
-                    'leftMiddleLine',
-                    'leftContent',
-                    'gaugeChart',
-                    'targetText'
-                  ],
+                  characterId: ['background', 'leftRect'],
                   characterActions: [
                     {
                       action: 'appear'
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['topArrow', 'topText'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 0,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 400,
+                            easing: 'linear',
+                            effect: 'wipe'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['leftIcon', 'leftTitle', 'leftMiddleLine'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 400,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 200,
+                            easing: 'linear',
+                            effect: 'fade'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['leftContent'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 600,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 400,
+                            easing: 'linear',
+                            effect: 'move'
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['gaugeChart'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 1000
+                    }
+                  ]
+                },
+
+                {
+                  characterId: ['targetText'],
+                  characterActions: [
+                    {
+                      action: 'appear',
+                      startTime: 1000,
+                      payload: [
+                        {
+                          animation: {
+                            duration: 400,
+                            easing: 'linear',
+                            effect: 'wipe'
+                          }
+                        }
+                      ]
                     }
                   ]
                 }

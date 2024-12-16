@@ -304,6 +304,20 @@
             "zh": "信息图模板-象形图: 新手撸猫指南",
             "en": "Pictogram Infographic: Cat Stroking Guide"
           }
+        },
+        {
+          "path": "project-goal",
+          "title": {
+            "zh": "信息图模板-仪表盘: 项目目标进度",
+            "en": "Gauge Infographic: Project Goal Progress"
+          }
+        },
+        {
+          "path": "big-data-wordcloud",
+          "title": {
+            "zh": "信息图模板-词云图: 大数据关键词",
+            "en": "Word Cloud Infographic: Big Data Keywords"
+          }
         }
       ]
     }
