@@ -1,6 +1,4 @@
 import { Timeline } from '@visactor/vrender-components';
-import { createText } from '@visactor/vrender';
-import type { IPointLike } from '@visactor/vutils';
 import { Graphic } from './graphic';
 import type { IWidgetData } from '../../dsl-interface';
 import { getLayoutFromWidget } from '../../../utils/layout';

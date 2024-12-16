@@ -1,5 +1,5 @@
-import type { IRichText, IRichTextGraphicAttribute, IText } from '@visactor/vrender';
-import { createRichText, createText } from '@visactor/vrender';
+import type { IRichText, IRichTextGraphicAttribute } from '@visactor/vrender';
+import { createRichText } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 import { Graphic } from './graphic';
 import type { IWidgetData } from '../../dsl-interface';

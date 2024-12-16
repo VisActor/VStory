@@ -1,15 +1,12 @@
-import type { ICharacterSpec } from './character/dsl-interface';
 import { isString } from '@visactor/vutils';
 import type { ICharacterTree, IStory, IStoryCanvas, IStoryInitOption } from './interface/runtime-interface';
 import type { ICharacter } from './character/runtime-interface';
 import { StoryCanvas } from './canvas/canvas';
-import type { IStorySpec, IActSpec } from './interface';
-import { StoryFactory } from './factory/factory';
+import type { IStorySpec } from './interface';
 import { defaultTicker, defaultTimeline } from '@visactor/vrender';
 import { CharacterTree } from './character-tree/character-tree';
 import type { IPlayer } from '../player/interface/player';
 import { Player } from '../player/player';
-import { logger } from '../util/output';
 
 defaultTicker.remTimeline(defaultTimeline);
 
@@ -46,7 +43,7 @@ export class Story implements IStory {
       width: option.width,
       height: option.height
     });
-    this._player = new Player(this, option.playerOption);
+    this._player = new Player(this, option.playerOption) as any;
 
     this._characterTree = new CharacterTree(this);
     spec && this.load(spec);

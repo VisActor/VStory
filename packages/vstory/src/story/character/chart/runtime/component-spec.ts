@@ -1,4 +1,4 @@
-import { merge, isValid } from '@visactor/vutils';
+import { merge } from '@visactor/vutils';
 import type { IComponentSpec } from '../../dsl-interface';
 import type { CharacterChart } from '../character';
 import type { IChartCharacterRuntime } from './interface';

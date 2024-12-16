@@ -1,6 +1,6 @@
 import type { IVisactorGraphic } from '../../visactor/interface';
 import type { IBoundsLike } from '@visactor/vutils';
-import type { ISpec, IVChart } from '@visactor/vchart';
+import type { IVChart } from '@visactor/vchart';
 import type { GraphicType, IGroupGraphicAttribute, ITicker } from '@visactor/vrender';
 import { genNumberType, Group } from '@visactor/vrender';
 

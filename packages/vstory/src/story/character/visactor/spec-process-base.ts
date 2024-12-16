@@ -1,5 +1,5 @@
-import { IChartCharacterSpec } from '../dsl-interface';
-import { EventEmitter, cloneDeep } from '@visactor/vutils';
+import type { IChartCharacterSpec } from '../dsl-interface';
+import { EventEmitter } from '@visactor/vutils';
 import type {
   IDataTempTransform,
   IDataTempTransformConstructor,

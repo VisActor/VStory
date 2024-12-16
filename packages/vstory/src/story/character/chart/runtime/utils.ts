@@ -1,5 +1,5 @@
 import { isValid } from '@visactor/vutils';
-import { IComponentMatch } from '../../dsl-interface';
+import type { IComponentMatch } from '../../dsl-interface';
 export function ChartSpecMatch(rawSpec: any, index: number, matchInfo: IComponentMatch) {
   if (!matchInfo) {
     return false;

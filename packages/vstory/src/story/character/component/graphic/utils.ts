@@ -1,4 +1,4 @@
-import { IComponentCharacterSpec } from '../../dsl-interface';
+import type { IComponentCharacterSpec } from '../../dsl-interface';
 
 export const transformAttributesByType = (
   from: string,

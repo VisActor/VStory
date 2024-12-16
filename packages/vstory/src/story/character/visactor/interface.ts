@@ -1,5 +1,5 @@
 import type { IChartCharacterSpec } from '../dsl-interface';
-import type { EventEmitter, IBoundsLike } from '@visactor/vutils';
+import type { EventEmitter } from '@visactor/vutils';
 import type { ICharacter } from '../runtime-interface';
 import type { ISpec, IVChart } from '@visactor/vchart';
 import type { IGroup } from '@visactor/vrender';
