@@ -318,6 +318,20 @@
             "zh": "信息图模板-词云图: 大数据关键词",
             "en": "Word Cloud Infographic: Big Data Keywords"
           }
+        },
+        {
+          "path": "marking-wordcloud",
+          "title": {
+            "zh": "信息图模板-词云图: Marketing关键词",
+            "en": "Word Cloud Infographic: Marketing Keywords"
+          }
+        },
+        {
+          "path": "source-of-new-contacts-area-chart",
+          "title": {
+            "zh": "信息图模板-面积图: Source of New Contacts",
+            "en": "Area Chart Infographic: Source of New Contacts"
+          }
         }
       ]
     }
