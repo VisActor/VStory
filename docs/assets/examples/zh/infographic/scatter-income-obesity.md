@@ -14,7 +14,7 @@ cover: https://tosv.byted.org/obj/bit-cloud/vstory-infographic/preview/income_ob
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
-console.log('debug');
+
 const dsl = {
   acts: [
     {
@@ -412,7 +412,7 @@ const dsl = {
     }
   ]
 };
-console.log('debug');
+
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
   scaleX: 0.7,
