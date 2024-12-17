@@ -1,17 +1,14 @@
 import type { IGroup } from '@visactor/vrender-core';
 import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
-import type { IComponentCharacterRuntimeConstructor } from '../interface/runtime';
 import { ImageComponent } from '../graphic/ImageComponent';
 import type { IImageComponentAttributes } from '../interface/character-image';
-import { ImageRuntime } from '../runtime/image';
+import { ImageRuntimeInstance } from '../runtime/image';
 
 export class ImageCharacter extends CharacterComponent<ImageComponent, IImageComponentAttributes> {
   static type = CharacterType.IMAGE;
 
   protected _group: IGroup;
-
-  static RunTime: IComponentCharacterRuntimeConstructor[] = [ImageRuntime];
 
   protected createAndAddGraphic(attribute: IImageComponentAttributes): void {
     this._graphic = new ImageComponent(attribute);
@@ -19,9 +16,8 @@ export class ImageCharacter extends CharacterComponent<ImageComponent, IImageCom
   }
 
   protected _initRuntime(): void {
-    ImageCharacter.RunTime.forEach(R => {
-      this._runtime.push(new R(this));
-    });
+    super._initRuntime();
+    this._runtime.push(ImageRuntimeInstance);
   }
 
   protected getDefaultAttribute(): Partial<IImageComponentAttributes> {

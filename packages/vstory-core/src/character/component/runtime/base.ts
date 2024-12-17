@@ -6,15 +6,9 @@ import type { ICharacterComponent } from '../interface/character-component';
 export class BaseRuntime implements IComponentCharacterRuntime {
   type = 'Base';
 
-  protected declare _character: ICharacterComponent;
-
-  constructor(character: ICharacterComponent) {
-    this._character = character;
-  }
-
-  applyConfigToAttribute(): void {
-    const rawAttribute = this._character.getAttribute();
-    const { options, position } = this._character.config;
+  applyConfigToAttribute(character: ICharacterComponent): void {
+    const rawAttribute = character.getAttribute();
+    const { options, position } = character.config;
     const layout = getLayoutFromWidget(position);
 
     const { graphic = {}, text = {}, panel = {}, padding } = options;

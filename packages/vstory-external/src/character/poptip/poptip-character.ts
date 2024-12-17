@@ -1,9 +1,8 @@
 import type { IGroup } from '@visactor/vrender-core';
-import type { IComponentCharacterRuntimeConstructor } from '@visactor/vstory-core';
 import { CharacterComponent } from '@visactor/vstory-core';
 import { PopTipComponent } from './PopTipComponent';
 import type { IPopTipComponentAttributes } from './poptip-interface';
-import { PopTipRuntime } from './poptip-runtime';
+import { PopTipRuntimeInstance } from './poptip-runtime';
 import { POPTIP } from './constant';
 
 export class PopTipCharacter extends CharacterComponent<PopTipComponent, IPopTipComponentAttributes> {
@@ -11,17 +10,14 @@ export class PopTipCharacter extends CharacterComponent<PopTipComponent, IPopTip
 
   protected _group: IGroup;
 
-  static RunTime: IComponentCharacterRuntimeConstructor[] = [PopTipRuntime];
-
   protected createAndAddGraphic(attribute: IPopTipComponentAttributes): void {
     this._graphic = new PopTipComponent(attribute);
     this.canvas.addGraphic(this._graphic);
   }
 
   protected _initRuntime(): void {
-    PopTipCharacter.RunTime.forEach(R => {
-      this._runtime.push(new R(this));
-    });
+    super._initRuntime();
+    this._runtime.push(PopTipRuntimeInstance);
   }
 
   protected getDefaultAttribute(): Partial<IPopTipComponentAttributes> {

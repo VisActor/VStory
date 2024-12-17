@@ -31,3 +31,5 @@
 //     return;
 //   }
 // }
+
+// export const ScatterBarRuntimeInstance = new ScatterBarRuntime();

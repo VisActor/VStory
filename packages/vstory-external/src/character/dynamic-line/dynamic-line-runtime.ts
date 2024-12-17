@@ -45,3 +45,5 @@ export class DynamicLineRuntime implements IChartCharacterRuntime {
     bottomAxis.label.autoHide = false;
   }
 }
+
+export const DynamicLineRuntimeInstance = new DynamicLineRuntime(null);

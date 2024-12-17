@@ -332,6 +332,20 @@
             "zh": "信息图模板-面积图: Source of New Contacts",
             "en": "Area Chart Infographic: Source of New Contacts"
           }
+        },
+        {
+          "path": "scatter-income-obesity",
+          "title": {
+            "zh": "信息图模板-散点图: 收入与肥胖率",
+            "en": "Scatter Infographic: Income and Obesity Rate"
+          }
+        },
+        {
+          "path": "scatter-suicide-rate-age",
+          "title": {
+            "zh": "信息图模板-散点图: 年龄与轻生率",
+            "en": "Scatter Cloud Infographic: Age and Suicide Rate"
+          }
         }
       ]
     }
