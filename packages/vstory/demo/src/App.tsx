@@ -43,6 +43,7 @@ import { BarWorkingInSameIndustry } from './demos/infographic/bar-work-in-same-i
 import { ProjectGoal } from './demos/infographic/project-goal';
 import { BigDataWordCloud } from './demos/infographic/big-data-wordcloud';
 import { AreaChart } from './demos/infographic/source-of-new-contacts-area-chart';
+import { MarketingWordcloud } from './demos/infographic/marking-wordcloud';
 
 type MenusType = (
   | {
@@ -254,6 +255,10 @@ const App = () => {
         {
           name: 'Source of New Contacts Area Chart',
           component: AreaChart
+        },
+        {
+          name: 'Marketing WordCloud',
+          component: MarketingWordcloud
         }
       ]
     },

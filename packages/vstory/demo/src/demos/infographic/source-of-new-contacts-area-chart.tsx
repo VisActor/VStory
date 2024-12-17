@@ -217,7 +217,7 @@ export const AreaChart = () => {
           },
           options: {
             graphic: {
-              shape: 'circle',
+              symbolType: 'circle',
               fill: 'rgb(244,211,94)'
             }
           }
@@ -254,7 +254,7 @@ export const AreaChart = () => {
           },
           options: {
             graphic: {
-              shape: 'circle',
+              symbolType: 'circle',
               fill: 'rgb(249,87,56)'
             }
           }
@@ -291,7 +291,7 @@ export const AreaChart = () => {
           },
           options: {
             graphic: {
-              shape: 'circle',
+              symbolType: 'circle',
               fill: 'rgb(91,192,235)'
             }
           }
@@ -328,7 +328,7 @@ export const AreaChart = () => {
           },
           options: {
             graphic: {
-              shape: 'circle',
+              symbolType: 'circle',
               fill: 'rgb(155,197,61)'
             }
           }
