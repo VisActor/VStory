@@ -42,6 +42,7 @@ import { NationalMemorial } from './demos/works/NationalMemorial';
 import { BarWorkingInSameIndustry } from './demos/infographic/bar-work-in-same-industry';
 import { ProjectGoal } from './demos/infographic/project-goal';
 import { BigDataWordCloud } from './demos/infographic/big-data-wordcloud';
+import { AreaChart } from './demos/infographic/source-of-new-contacts-area-chart';
 
 type MenusType = (
   | {
@@ -249,6 +250,10 @@ const App = () => {
         {
           name: 'BigDataWordCloud',
           component: BigDataWordCloud
+        },
+        {
+          name: 'Source of New Contacts Area Chart',
+          component: AreaChart
         }
       ]
     },
