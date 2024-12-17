@@ -318,6 +318,20 @@
             "zh": "信息图模板-词云图: 大数据关键词",
             "en": "Word Cloud Infographic: Big Data Keywords"
           }
+        },
+        {
+          "path": "scatter-income-obesity",
+          "title": {
+            "zh": "信息图模板-散点图: 收入与肥胖率",
+            "en": "Scatter Infographic: Income and Obesity Rate"
+          }
+        },
+        {
+          "path": "scatter-suicide-rate-age",
+          "title": {
+            "zh": "信息图模板-散点图: 年龄与轻生率",
+            "en": "Scatter Cloud Infographic: Age and Suicide Rate"
+          }
         }
       ]
     }
