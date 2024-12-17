@@ -16,6 +16,7 @@ If you need to display a Lottie animation in your work, but the main VStory pack
 
 Since VStory is based on VRender, we need to implement the corresponding functionality with VRender first, and then integrate it into VStory as a `Character`. Fortunately, the `@visactor/vrender-kits` package already provides a Lottie element that we can directly use.
 We found the `Lottie` element in the `@visactor/vrender-kits` package, and to use it in VStory, we need to encapsulate it. The purpose of encapsulation is twofold:
+
 1. Provide some default attributes
 2. Provide parameter conversion, as the parameters in VStory are different from those in the VRender `Lottie` element. For example, layout parameters need to be converted to corresponding x, y, width, height, etc. parameters.
 3. Obtain some special abilities of VStory, such as all components in VStory carry a text configuration.
@@ -81,17 +82,14 @@ export class LottieCharacter extends CharacterComponent<LottieComponent, ILottie
 
   protected _group: IGroup;
 
-  static RunTime: IComponentCharacterRuntimeConstructor[] = [LottieRuntime];
-
   protected createAndAddGraphic(attribute: ILottieComponentAttributes): void {
     this._graphic = new LottieComponent(attribute);
     this.canvas.addGraphic(this._graphic);
   }
 
   protected _initRuntime(): void {
-    LottieCharacter.RunTime.forEach(R => {
-      this._runtime.push(new R(this));
-    });
+    super._initRuntime();
+    this._runtime.push(LottieRuntimeInstance);
   }
 
   protected getDefaultAttribute(): Partial<ILottieComponentAttributes> {
@@ -120,9 +118,9 @@ After encapsulation, we need to define a `Runtime` for `Lottie`. `Runtime` is th
 ```ts
 export class LottieRuntime extends BaseRuntime implements IComponentCharacterRuntime {
   type = 'Lottie';
-  applyConfigToAttribute(): void {
-    super.applyConfigToAttribute();
-    const rawAttribute = this._character.getAttribute();
+  applyConfigToAttribute(character: ICharacterComponent): void {
+    super.applyConfigToAttribute(character);
+    const rawAttribute = character.getAttribute();
 
     const { data } = rawAttribute.graphic;
     // Place a default Lottie
@@ -134,6 +132,8 @@ export class LottieRuntime extends BaseRuntime implements IComponentCharacterRun
     rawAttribute.graphic.fill = true;
   }
 }
+
+export const LottieRuntimeInstance = new LottieRuntime();
 ```
 
 ## Defining Processor

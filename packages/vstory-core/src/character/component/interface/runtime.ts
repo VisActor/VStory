@@ -3,11 +3,11 @@ import type { ICharacterConfig } from '../../../interface/dsl/dsl';
 export interface IComponentCharacterRuntime {
   readonly type: string;
   // 应用config到attribute
-  applyConfigToAttribute?: () => void;
+  applyConfigToAttribute?: (character: ICharacter) => void;
 }
 
 export interface IComponentCharacterRuntimeConstructor {
-  new (character: ICharacter): IComponentCharacterRuntime;
+  new (): IComponentCharacterRuntime;
 }
 
 export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;

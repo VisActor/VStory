@@ -1,17 +1,14 @@
 import type { IGroup } from '@visactor/vrender-core';
-import type { IComponentCharacterRuntimeConstructor } from '@visactor/vstory-core';
 import { CharacterComponent } from '@visactor/vstory-core';
 import { LOTTIE } from './constant';
 import { LottieComponent } from './LottieComponent';
 import type { ILottieComponentAttributes } from './lottie-interface';
-import { LottieRuntime } from './lottie-runtime';
+import { LottieRuntimeInstance } from './lottie-runtime';
 
 export class LottieCharacter extends CharacterComponent<LottieComponent, ILottieComponentAttributes> {
   static type = LOTTIE;
 
   protected _group: IGroup;
-
-  static RunTime: IComponentCharacterRuntimeConstructor[] = [LottieRuntime];
 
   protected createAndAddGraphic(attribute: ILottieComponentAttributes): void {
     this._graphic = new LottieComponent(attribute);
@@ -19,9 +16,8 @@ export class LottieCharacter extends CharacterComponent<LottieComponent, ILottie
   }
 
   protected _initRuntime(): void {
-    LottieCharacter.RunTime.forEach(R => {
-      this._runtime.push(new R(this));
-    });
+    super._initRuntime();
+    this._runtime.push(LottieRuntimeInstance);
   }
 
   protected getDefaultAttribute(): Partial<ILottieComponentAttributes> {

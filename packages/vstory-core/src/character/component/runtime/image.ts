@@ -4,3 +4,5 @@ import { BaseRuntime } from './base';
 export class ImageRuntime extends BaseRuntime implements IComponentCharacterRuntime {
   type = 'Image';
 }
+
+export const ImageRuntimeInstance = new ImageRuntime();

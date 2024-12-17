@@ -4,3 +4,5 @@ import { BaseRuntime } from './base';
 export class RectRuntime extends BaseRuntime implements IComponentCharacterRuntime {
   type = 'Rect';
 }
+
+export const RectRuntimeInstance = new RectRuntime();
