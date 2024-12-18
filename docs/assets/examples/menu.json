@@ -158,6 +158,13 @@
             "zh": "图元",
             "en": "graphics"
           }
+        },
+        {
+          "path": "clipped-image",
+          "title": {
+            "zh": "图片裁剪",
+            "en": "clipped image"
+          }
         }
       ]
     },
