@@ -1,6 +1,6 @@
 ---
 category: examples
-group: animate
+group: character
 title: clipped-image
 keywords: image, shape, clip, vgraphic
 order: 1-0
