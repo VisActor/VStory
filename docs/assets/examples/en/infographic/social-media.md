@@ -220,8 +220,10 @@ const dsl = {
 
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
-  scaleX: 0.7,
-  scaleY: 0.7
+  scaleX: 'auto',
+  scaleY: 'auto',
+  width: 800,
+  height: 750
 });
 const player = new VStory.Player(story);
 story.init(player);

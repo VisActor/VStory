@@ -1,20 +1,14 @@
 import { merge } from '@visactor/vutils';
 import type { IComponentCharacterRuntime } from '../interface/runtime';
 import { getLayoutFromWidget } from '../../../utils/layout';
-import type { ICharacterText } from '../interface/character-text';
+import type { ICharacterComponent } from '../interface/character-component';
 
 export class TextRuntime implements IComponentCharacterRuntime {
   type = 'Text';
 
-  protected declare _character: ICharacterText;
-
-  constructor(character: ICharacterText) {
-    this._character = character;
-  }
-
-  applyConfigToAttribute(): void {
-    const rawAttribute = this._character.getAttribute();
-    const { options, position } = this._character.config;
+  applyConfigToAttribute(character: ICharacterComponent): void {
+    const rawAttribute = character.getAttribute();
+    const { options, position } = character.config;
     const layout = getLayoutFromWidget(position);
 
     const { graphic = {}, panel = {}, padding } = options;
@@ -28,3 +22,5 @@ export class TextRuntime implements IComponentCharacterRuntime {
     merge(rawAttribute.textStyle, graphic);
   }
 }
+
+export const TextRuntimeInstance = new TextRuntime();

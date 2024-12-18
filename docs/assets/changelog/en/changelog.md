@@ -1,9 +1,88 @@
+# v0.0.20
+
+2024-12-13
+
+
+**What's Changed**
+
+* feat: add single bar and pie templates by @skie1997 in https://github.com/VisActor/VStory/pull/152
+* [Auto Sync] Sync the code from branch main to branch develop after release 0.0.19 by @github-actions in https://github.com/VisActor/VStory/pull/157
+* Docs/update infographic demo size by @xiaoluoHe in https://github.com/VisActor/VStory/pull/158
+* docs: rename title of code demo by @xiaoluoHe in https://github.com/VisActor/VStory/pull/159
+* Feat/national memorial by @neuqzxy in https://github.com/VisActor/VStory/pull/160
+* [Auto release] release 0.0.20 by @github-actions in https://github.com/VisActor/VStory/pull/164
+
+
+
+[more detail about v0.0.20](https://github.com/VisActor/VStory/releases/tag/v0.0.20)
+
+
+# v0.0.19
+
+2024-12-13
+
+
+**What's Changed**
+
+
+# v0.0.18
+
+# v0.0.17
+
+2024-12-13
+
+
+**What's Changed**
+
+
+* [Auto Sync] Sync the code from branch main to branch develop after release 0.0.16 by @github-actions in https://github.com/VisActor/VStory/pull/139
+* docs: fix document errors by @neuqzxy in https://github.com/VisActor/VStory/pull/140
+* fix: issue with unit-template animate caused by time by @neuqzxy in https://github.com/VisActor/VStory/pull/141
+* [Auto changelog] changlog of v0.0.16 by @github-actions in https://github.com/VisActor/VStory/pull/142
+* [Auto release] release 0.0.17 by @github-actions in https://github.com/VisActor/VStory/pull/143
+* [Auto Sync] Sync the code from branch main to branch develop after release 0.0.17 by @github-actions in https://github.com/VisActor/VStory/pull/144
+* feat: support poptip and label-item by @neuqzxy in https://github.com/VisActor/VStory/pull/145
+* Add Demo of bar chart and pie chart by @666haiwen in https://github.com/VisActor/VStory/pull/146
+* Docs/poptip label item by @neuqzxy in https://github.com/VisActor/VStory/pull/148
+* Docs/infographic bar hiv by @xuefei1313 in https://github.com/VisActor/VStory/pull/147
+* [Auto release] release 0.0.18 by @github-actions in https://github.com/VisActor/VStory/pull/149
+* [Auto Sync] Sync the code from branch main to branch develop after release 0.0.18 by @github-actions in https://github.com/VisActor/VStory/pull/150
+* docs: add infographic demo: bar industry stability by @xuefei1313 in https://github.com/VisActor/VStory/pull/151
+* docs: add Sprint Burndown and Client Breakdown template by @fangsmile in https://github.com/VisActor/VStory/pull/153
+* docs: add animation to infographic demo by @xiaoluoHe in https://github.com/VisActor/VStory/pull/155
+* [Auto release] release 0.0.19 by @github-actions in https://github.com/VisActor/VStory/pull/156
+
+
+
+
+[more detail about v0.0.19](https://github.com/VisActor/VStory/releases/tag/v0.0.19)
+
 # v0.0.16
 
 2024-12-10
 
 
 **🆕 New feature**
+
+
+
+[more detail about v0.0.18](https://github.com/VisActor/VStory/releases/tag/v0.0.18)
+
+**🐛 Bug fix**
+
+- **@visactor/vstory**: issue with unit-template animate caused by time
+- **@visactor/vstory-templates**: issue with unit-template animate caused by time
+
+[more detail about v0.0.17](https://github.com/VisActor/VStory/releases/tag/v0.0.17)
+
+
+# v0.0.16
+
+2024-12-10
+
+
+**🆕 New feature**
+
 
 - **@visactor/vstory-external**: support dynamic line chart and single pie
 

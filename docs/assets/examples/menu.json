@@ -304,6 +304,48 @@
             "zh": "信息图模板-象形图: 新手撸猫指南",
             "en": "Pictogram Infographic: Cat Stroking Guide"
           }
+        },
+        {
+          "path": "project-goal",
+          "title": {
+            "zh": "信息图模板-仪表盘: 项目目标进度",
+            "en": "Gauge Infographic: Project Goal Progress"
+          }
+        },
+        {
+          "path": "big-data-wordcloud",
+          "title": {
+            "zh": "信息图模板-词云图: 大数据关键词",
+            "en": "Word Cloud Infographic: Big Data Keywords"
+          }
+        },
+        {
+          "path": "marking-wordcloud",
+          "title": {
+            "zh": "信息图模板-词云图: Marketing关键词",
+            "en": "Word Cloud Infographic: Marketing Keywords"
+          }
+        },
+        {
+          "path": "source-of-new-contacts-area-chart",
+          "title": {
+            "zh": "信息图模板-面积图: Source of New Contacts",
+            "en": "Area Chart Infographic: Source of New Contacts"
+          }
+        },
+        {
+          "path": "scatter-income-obesity",
+          "title": {
+            "zh": "信息图模板-散点图: 收入与肥胖率",
+            "en": "Scatter Infographic: Income and Obesity Rate"
+          }
+        },
+        {
+          "path": "scatter-suicide-rate-age",
+          "title": {
+            "zh": "信息图模板-散点图: 年龄与轻生率",
+            "en": "Scatter Cloud Infographic: Age and Suicide Rate"
+          }
         }
       ]
     }

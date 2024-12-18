@@ -5,16 +5,10 @@ import type { ICharacterChart } from '../interface/character-chart';
 export class CommonSpecRuntime implements IChartCharacterRuntime {
   type = 'CommonSpec';
 
-  protected declare _character: ICharacterChart;
-
-  constructor(character: ICharacterChart) {
-    this._character = character;
-  }
-
-  applyConfigToAttribute(): void {
-    const rawAttribute = this._character.getAttribute();
+  applyConfigToAttribute(character: ICharacterChart): void {
+    const rawAttribute = character.getAttribute();
     const { spec } = rawAttribute;
-    const options = this._character.config.options;
+    const options = character.config.options;
     const { title, legends, data, color, axes, rootConfig = {}, padding } = options;
 
     if (title) {
@@ -45,3 +39,5 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
     merge(spec, { ...rootConfig });
   }
 }
+
+export const CommonSpecRuntimeInstance = new CommonSpecRuntime();

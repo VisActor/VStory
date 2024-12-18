@@ -4,6 +4,7 @@ import type { IStoryCanvas } from '../interface/canvas';
 import type { IStory } from '../interface/story';
 import type { IStoryEvent } from '../interface/event';
 import type { ICharacter } from '../interface/character';
+import { isValidNumber } from '@visactor/vutils';
 
 export class StoryCanvas implements IStoryCanvas {
   protected _story: IStory;
@@ -33,8 +34,8 @@ export class StoryCanvas implements IStoryCanvas {
       dpr?: number;
       background: string;
       layerBackground: string;
-      scaleX?: number;
-      scaleY?: number;
+      scaleX?: number | 'auto';
+      scaleY?: number | 'auto';
     }
   ) {
     this._story = story;
@@ -55,8 +56,7 @@ export class StoryCanvas implements IStoryCanvas {
 
     this._stage.background = background;
     this._stage.defaultLayer.setAttributes({ background: layerBackground });
-
-    this._stage.defaultLayer.scale(scaleX, scaleY);
+    this.initScale(width, height, scaleX, scaleY);
   }
 
   protected _initCanvasByContainer(width: number, height: number, dpr: number) {
@@ -100,6 +100,29 @@ export class StoryCanvas implements IStoryCanvas {
     });
     stage.id = `vstory_${this._story.id}`;
     return stage;
+  }
+
+  protected initScale(width: number, height: number, scaleX: number | 'auto', scaleY: number | 'auto') {
+    if (scaleX === 'auto' || scaleY === 'auto') {
+      const clipWidth = this._container ? this._container.clientWidth : this._canvas.width / this.getDpr();
+      const clipHeight = this._container ? this._container.clientHeight : this._canvas.height / this.getDpr();
+
+      const clipAspectRatio = clipWidth / clipHeight;
+      const contentAspectRatio = width / height;
+      const scale = clipAspectRatio > contentAspectRatio ? clipHeight / height : clipWidth / width;
+      if (!isValidNumber(scale)) {
+        scaleX = scaleY = 1;
+      } else {
+        if (scaleX === 'auto') {
+          scaleX = scale;
+        }
+
+        if (scaleY === 'auto') {
+          scaleY = scale;
+        }
+      }
+    }
+    this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 
   resize(w: number, h: number) {

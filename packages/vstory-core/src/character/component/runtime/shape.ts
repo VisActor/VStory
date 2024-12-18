@@ -4,3 +4,5 @@ import { BaseRuntime } from './base';
 export class ShapeRuntime extends BaseRuntime implements IComponentCharacterRuntime {
   type = 'Shape';
 }
+
+export const ShapeRuntimeInstance = new ShapeRuntime();

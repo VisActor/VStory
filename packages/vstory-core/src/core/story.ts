@@ -20,8 +20,8 @@ export interface IStoryInitOption {
   layerBackground?: string;
   dpr?: number;
   // 对画面的缩放
-  scaleX?: number;
-  scaleY?: number;
+  scaleX?: number | 'auto';
+  scaleY?: number | 'auto';
 }
 
 export class Story implements IStory {

@@ -1,7 +1,7 @@
 import { CharacterType } from '../../../constants/character';
 import { CharacterChart } from '../character-chart';
 import type { IChartGraphicAttribute } from '../graphic/vchart-graphic';
-import { WaveScatterRuntime } from '../runtime/wave-scatter';
+import { WaveScatterRuntimeInstance } from '../runtime/wave-scatter';
 
 function waterDrop(ctx: any, size: number, topX: number, topY: number) {
   ctx.beginPath();
@@ -28,7 +28,7 @@ export class WaveScatterCharacter extends CharacterChart<IWaveScatterChartGraphi
 
   protected _initRuntime(): void {
     super._initRuntime();
-    this._runtime.push(new WaveScatterRuntime(this));
+    this._runtime.push(WaveScatterRuntimeInstance);
   }
 
   getDefaultAttribute(): Partial<IWaveScatterChartGraphicAttribute> {

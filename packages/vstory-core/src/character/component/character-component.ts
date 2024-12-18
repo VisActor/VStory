@@ -90,6 +90,6 @@ export abstract class CharacterComponent<T extends IGraphic, T1>
 
   protected applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void {
     this._attribute = this.getDefaultAttribute() as any;
-    this._runtime.forEach(r => r.applyConfigToAttribute?.());
+    this._runtime.forEach(r => r.applyConfigToAttribute?.(this));
   }
 }
