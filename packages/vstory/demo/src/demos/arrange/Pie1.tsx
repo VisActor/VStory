@@ -98,6 +98,21 @@ export const Pie1 = () => {
                       }
                     },
                     {
+                      action: 'highlight',
+                      startTime: 4000,
+                      payload: {
+                        animation: {
+                          duration: 200,
+                          easing: 'bounceOut'
+                        },
+                        value: { type: 'shebao', value: '4.6' },
+                        style: {
+                          fill: 'red',
+                          outerRadius: 260
+                        }
+                      }
+                    },
+                    {
                       action: 'update',
                       startTime: 5500,
                       payload: {
@@ -141,7 +156,6 @@ export const Pie1 = () => {
     story.init(player);
     console.log(story);
     player.play(0);
-
     exportVideo(story);
 
     return () => {

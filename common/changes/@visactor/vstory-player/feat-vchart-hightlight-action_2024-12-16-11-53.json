@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-player",
+      "comment": "feat: support highlight action for vchart",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-player"
+}

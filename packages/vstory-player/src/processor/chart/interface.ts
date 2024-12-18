@@ -50,3 +50,16 @@ export interface IChartUpdatePayload extends IActionPayload {
 export interface IChartUpdateAction extends IAction<IChartUpdatePayload> {
   action: 'update';
 }
+
+/************ Highlight **************/
+export interface IChartHighlightPayload extends IActionPayload {
+  value: Datum;
+  id: string | number;
+  style: {
+    [key: string]: number | string;
+  };
+}
+
+export interface IChartHighlightAction extends IAction<IChartHighlightPayload> {
+  action: 'highlight';
+}
