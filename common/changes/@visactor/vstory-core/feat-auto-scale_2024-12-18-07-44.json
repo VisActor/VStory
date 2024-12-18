@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-core",
+      "comment": "feat: support `auto` for scaleX/scaleY in initParams",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-core"
+}
