@@ -2,6 +2,12 @@
   "name": "@visactor/vstory-external",
   "entries": [
     {
+      "version": "0.0.21",
+      "tag": "@visactor/vstory-external_v0.0.21",
+      "date": "Wed, 18 Dec 2024 08:25:28 GMT",
+      "comments": {}
+    },
+    {
       "version": "0.0.20",
       "tag": "@visactor/vstory-external_v0.0.20",
       "date": "Fri, 13 Dec 2024 11:12:52 GMT",
