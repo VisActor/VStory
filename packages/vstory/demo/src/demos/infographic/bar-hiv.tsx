@@ -418,7 +418,7 @@ export const BarHIV = () => {
 
     console.log(dsl);
 
-    const story = new Story(dsl, { canvas, width: 1056, height: 814, background: 'pink' });
+    const story = new Story(dsl, { canvas, scaleX: 'auto', scaleY: 'auto', width: 1056, height: 814 });
     const player = new Player(story);
     story.init(player);
     player.play(-1);

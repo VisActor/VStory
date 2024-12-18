@@ -20,8 +20,8 @@ export interface IStoryInitOption {
   layerBackground?: string;
   dpr?: number;
   // 对画面的缩放
-  scaleX?: number;
-  scaleY?: number;
+  scaleX?: number | 'auto';
+  scaleY?: number | 'auto';
 }
 
 export class Story implements IStory {
@@ -50,7 +50,8 @@ export class Story implements IStory {
       layerBackground = 'transparent',
       dpr = vglobal.devicePixelRatio,
       scaleX = 1,
-      scaleY = 1
+      scaleY = 1,
+      aspectRatio
     } = option;
     if (!(dom || canvas)) {
       throw new Error('dom or canvas is required');
@@ -64,7 +65,8 @@ export class Story implements IStory {
       dpr,
       layerBackground,
       scaleX,
-      scaleY
+      scaleY,
+      aspectRatio
     });
     this._characterTree = new CharacterTree(this);
     this._dsl = dsl;
