@@ -4,7 +4,7 @@ group: infographic
 title: Scatter Chart Infographic - Income and Obesity
 keywords: templates, visualization, scatter
 order: 1-0
-cover: https://tosv.byted.org/obj/bit-cloud/vstory-infographic/preview/income_obesity.png
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/income_obesity.png
 ---
 
 # 信息图模板-散点图：收入与肥胖率
@@ -84,7 +84,7 @@ const dsl = {
           shadowBlur: 10,
           fill: 'rgba(28, 42, 69)',
           fillOpacity: 0.5,
-          background: 'https://tosv.byted.org/obj/bit-cloud/vstory-infographic/resource/scatter-food.jpg'
+          background: 'https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/resource/scatter-food.jpg'
         }
       }
     },

@@ -4,7 +4,7 @@ group: infographic
 title: Scatter Chart Infographic - Suicide Rate by Age
 keywords: templates, visualization, scatter
 order: 1-0
-cover: https://tosv.byted.org/obj/bit-cloud/vstory-infographic/preview/suicide_rate.png
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/suicide_rate.png
 ---
 
 # Scatter Chart Infographic: Suiicide Rate by Age
@@ -81,7 +81,7 @@ const dsl = {
       },
       options: {
         graphic: {
-          background: 'https://tosv.byted.org/obj/bit-cloud/vstory-infographic/resource/scatter-life.jpg'
+          background: 'https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/resource/scatter-life.jpg'
         }
       }
     },
