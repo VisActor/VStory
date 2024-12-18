@@ -17,6 +17,7 @@ export * from './character/chart';
 export * from './interface/dsl/component';
 export * from './character/component/runtime/base';
 export * from './character/component/interface/runtime';
+export * from './character/component/interface/character-component';
 export * from './utils/factory';
 
 export { VChart } from '@visactor/vchart';

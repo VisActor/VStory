@@ -50,8 +50,7 @@ export class Story implements IStory {
       layerBackground = 'transparent',
       dpr = vglobal.devicePixelRatio,
       scaleX = 1,
-      scaleY = 1,
-      aspectRatio
+      scaleY = 1
     } = option;
     if (!(dom || canvas)) {
       throw new Error('dom or canvas is required');
@@ -65,8 +64,7 @@ export class Story implements IStory {
       dpr,
       layerBackground,
       scaleX,
-      scaleY,
-      aspectRatio
+      scaleY
     });
     this._characterTree = new CharacterTree(this);
     this._dsl = dsl;
