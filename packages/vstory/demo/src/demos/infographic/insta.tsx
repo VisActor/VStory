@@ -204,7 +204,13 @@ export const Insta = () => {
       ]
     };
 
-    const story = new Story(dsl, { canvas, width: 750, height: 800, background: 'white' });
+    const story = new Story(dsl, {
+      canvas,
+      width: 750,
+      height: 800,
+      scaleX: 'auto',
+      scaleY: 'auto'
+    });
     const player = new Player(story);
     story.init(player);
 

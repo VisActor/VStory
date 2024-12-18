@@ -450,7 +450,13 @@ export const ProjectGoal = () => {
       ]
     };
 
-    const story = new Story(dsl, { canvas, width: 1280, height: 720, background: 'pink' });
+    const story = new Story(dsl, {
+      canvas,
+      width: 1280,
+      height: 720,
+      scaleX: 'auto',
+      scaleY: 'auto'
+    });
     const player = new Player(story);
     story.init(player);
     player.play(-1);

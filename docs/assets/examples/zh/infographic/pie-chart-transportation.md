@@ -239,7 +239,7 @@ async function loadDSL() {
   };
 }
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 1280, height: 720, scaleX: 0.7, scaleY: 0.7 });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, scaleX: 'auto', scaleY: 'auto', width: 1280, height: 720 });
 const player = new VStory.Player(story);
 story.init(player);
 

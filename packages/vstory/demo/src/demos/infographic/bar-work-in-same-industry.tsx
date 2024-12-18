@@ -403,7 +403,13 @@ export const BarWorkingInSameIndustry = () => {
 
     console.log(dsl);
 
-    const story = new Story(dsl, { canvas, width: 816, height: 816, background: 'white' });
+    const story = new Story(dsl, {
+      canvas,
+      width: 816,
+      height: 816,
+      scaleX: 'auto',
+      scaleY: 'auto'
+    });
     const player = new Player(story);
     story.init(player);
     player.play(-1);

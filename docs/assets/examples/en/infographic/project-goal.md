@@ -443,9 +443,10 @@ const dsl = {
 
 const story = new VStory.Story(dsl, {
   dom: CONTAINER_ID,
-  background: '#ebecf0',
-  scaleX: 0.5,
-  scaleY: 0.5
+  scaleX: 'auto',
+  scaleY: 'auto',
+  width: 1280,
+  height: 720
 });
 const player = new VStory.Player(story);
 story.init(player);
