@@ -10,7 +10,7 @@ export interface IChartCharacterRuntime {
   afterInitialize?: (character: ICharacter, vchart: IVChart) => void;
 
   // 图表绘制完成
-  afterVRenderDraw?: (character: ICharacter) => void;
+  afterVRenderDraw?: (character: ICharacter, vchart: IVChart) => void;
 }
 
 export interface IChartCharacterRuntimeConstructor {

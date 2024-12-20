@@ -45,6 +45,9 @@ import { BigDataWordCloud } from './demos/infographic/big-data-wordcloud';
 import { AreaChart } from './demos/infographic/source-of-new-contacts-area-chart';
 import { MarketingWordcloud } from './demos/infographic/marking-wordcloud';
 
+// VchartEditor Runtime
+import { RuntimeSeriesMark } from './demos/runtime/series-mark';
+
 type MenusType = (
   | {
       name: string;
@@ -268,6 +271,15 @@ const App = () => {
         {
           name: 'Base Chart',
           component: BaseChart
+        }
+      ]
+    },
+    {
+      name: 'Runtime',
+      subMenus: [
+        {
+          name: 'Series Mark',
+          component: RuntimeSeriesMark
         }
       ]
     }
