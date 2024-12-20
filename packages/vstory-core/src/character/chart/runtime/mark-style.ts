@@ -39,7 +39,42 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     return value;
   }
 
-  onConfigReady() {
+  applyConfigToAttribute(character: ICharacterChart) {
+    // visible
+    // 如果 dataGroupStyle 中有 visible 配置，在这里添加上 visible = true
+    // 具体 visible 的逻辑在下方 afterInitialize 中设置到 mark 上
+    const config = character.config;
+    const dataGroupStyle = config.options?.dataGroupStyle;
+    // 没有的话，忽略
+    if (!dataGroupStyle) {
+      return;
+    }
+    const rawAttribute = character.getAttribute();
+    const { spec } = rawAttribute;
+    const visibleMarkNames: string[] = [];
+    // 得到全部被设置过 visible 的 markName
+    Object.values(dataGroupStyle).forEach(groupConfig => {
+      Object.keys(groupConfig).forEach(markName => {
+        if (isValid(groupConfig[markName]?.visible)) {
+          visibleMarkNames.push(markName);
+        }
+      });
+    });
+    // 设置到 spec 上
+    if (spec.series) {
+      spec.series.forEach(s => {
+        visibleMarkNames.forEach(name => {
+          s[name] = s[name] || { visible: true };
+          s[name].visible = true;
+        });
+      });
+    } else {
+      visibleMarkNames.forEach(name => {
+        spec[name] = spec[name] || { visible: true };
+        spec[name].visible = true;
+      });
+    }
+
     return;
   }
 
@@ -77,12 +112,15 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
         // 系列分组key
         if (groupValueList && groupValueList.length === 1) {
           // 一个 series 对应一组数据 简化处理，优化性能
-          if (!dataGroupStyle[groupValue] && !dataGroupStyle[StroyAllDataGroup]) {
+          if (!dataGroupStyle[groupValue]?.[m.name]?.style && !dataGroupStyle[StroyAllDataGroup]?.[m.name]?.style) {
             return;
           }
-          const seriesStyle = merge({}, dataGroupStyle[StroyAllDataGroup] ?? {}, dataGroupStyle[groupValue] ?? {});
-          const markStyle = seriesStyle[m.name]?.style;
-          if (!markStyle) {
+          const markStyle = merge(
+            {},
+            dataGroupStyle[StroyAllDataGroup][m.name].style ?? {},
+            dataGroupStyle[groupValue][m.name].style ?? {}
+          );
+          if (Object.keys(markStyle).length === 0) {
             return;
           }
           m.setStyle(

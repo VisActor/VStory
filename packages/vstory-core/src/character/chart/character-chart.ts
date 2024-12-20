@@ -155,8 +155,8 @@ export class CharacterChart<T extends IChartGraphicAttribute>
     this._runtime.push(
       CommonSpecRuntimeInstance,
       CommonLayoutRuntimeInstance,
-      MarkStyleRuntimeInstance
-      // LabelStyleRuntimeInstance
+      MarkStyleRuntimeInstance,
+      LabelStyleRuntimeInstance
     );
   }
   protected _clearRuntime(): void {
@@ -211,5 +211,10 @@ export class CharacterChart<T extends IChartGraphicAttribute>
         this._config.options.initOption ?? {}
       )
     };
+  }
+
+  protected _clearGraphic(): void {
+    super._clearGraphic();
+    this._vchart = null;
   }
 }

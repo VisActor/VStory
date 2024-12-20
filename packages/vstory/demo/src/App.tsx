@@ -47,6 +47,7 @@ import { MarketingWordcloud } from './demos/infographic/marking-wordcloud';
 
 // VchartEditor Runtime
 import { RuntimeSeriesMark } from './demos/runtime/series-mark';
+import { RuntimeLabelStyle } from './demos/runtime/label-style';
 
 type MenusType = (
   | {
@@ -280,6 +281,10 @@ const App = () => {
         {
           name: 'Series Mark',
           component: RuntimeSeriesMark
+        },
+        {
+          name: 'Label Style',
+          component: RuntimeLabelStyle
         }
       ]
     }
