@@ -7,7 +7,7 @@ import { CommonScaleToActionProcessor } from '../common/scale';
 import { CommonBounceActionProcessor } from '../common/bounce';
 import { clipRangeInstance } from '../../common/clipRange-processor';
 export class LineVisibilityActionProcessor extends CommonVisibilityActionProcessor {
-  name: 'appearOrDisAppear';
+  name: 'appearOrDisAppear' = 'appearOrDisAppear';
 
   getEffectInstance(effect: string, appear: boolean) {
     switch (effect) {

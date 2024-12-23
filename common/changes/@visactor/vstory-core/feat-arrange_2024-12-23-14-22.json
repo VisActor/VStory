@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-core",
+      "comment": "feat: enhance vchart animate arrange",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-core"
+}

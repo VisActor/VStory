@@ -16,7 +16,7 @@ import { UnitInfographic } from './demos/works/unit-infographic';
 import { VChartSiteDemo } from './demos/works/website/VChartSite';
 import { TimelineAnimate } from './demos/component/timeline';
 import { BasicUnit } from './demos/component/basic-unit';
-import { BarChart2 } from './demos/BarChart2';
+import { BarChart2 } from './demos/arrange/BarChart2';
 import { UnitTemplate1 } from './demos/templates/unit-template1';
 import { VScreen } from './demos/works/vscreen';
 import { Lottie } from './demos/component/lottie';

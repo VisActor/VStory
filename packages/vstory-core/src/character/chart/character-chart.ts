@@ -95,16 +95,21 @@ export class CharacterChart<T extends IChartGraphicAttribute>
     match: boolean = true
   ) {
     if (select[0] === '#') {
-      return this.selectByName(seriesList, componentsList, select, match);
+      return this.selectByNameOrUserId(seriesList, componentsList, select, match);
     }
     return this.selectByType(seriesList, componentsList, select, match);
   }
 
-  protected selectByName(seriesList: ISeries[], componentsList: IComponent[], select: string, match: boolean = true) {
+  protected selectByNameOrUserId(
+    seriesList: ISeries[],
+    componentsList: IComponent[],
+    select: string,
+    match: boolean = true
+  ) {
     const name = select.substring(1);
     return {
-      seriesList: seriesList.filter(item => (item.name === name) === match),
-      componentsList: componentsList.filter(item => (item.name === name) === match)
+      seriesList: seriesList.filter(item => (item.name === name || item.userId === name) === match),
+      componentsList: componentsList.filter(item => (item.name === name || item.userId === name) === match)
     };
   }
 
