@@ -1,5 +1,5 @@
 import type { IChartCharacterRuntime } from '../interface/runtime';
-import type { ICharacterChart } from '../interface/character-chart';
+import type { ICharacterChartRuntimeConfig } from '../interface/character-chart';
 import type { ISeries, IVChart } from '@visactor/vchart';
 import { getSeriesKeyScalesMap, GetVChartSeriesWithMatch, matchDatumWithScaleMap } from './utils';
 import type { IChartCharacterConfig } from '../../../interface/dsl/chart';
@@ -39,7 +39,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     return value;
   }
 
-  applyConfigToAttribute(character: ICharacterChart) {
+  applyConfigToAttribute(character: ICharacterChartRuntimeConfig) {
     // visible
     // 如果 dataGroupStyle 中有 visible 配置，在这里添加上 visible = true
     // 具体 visible 的逻辑在下方 afterInitialize 中设置到 mark 上
@@ -62,7 +62,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     });
     // 设置到 spec 上
     if (spec.series) {
-      spec.series.forEach(s => {
+      spec.series.forEach((s: any) => {
         visibleMarkNames.forEach(name => {
           s[name] = s[name] || { visible: true };
           s[name].visible = true;
@@ -78,13 +78,13 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     return;
   }
 
-  afterInitialize(character: ICharacterChart, vchart: IVChart) {
+  afterInitialize(character: ICharacterChartRuntimeConfig, vchart: IVChart) {
     this._setDataGroupStyle(character, vchart);
     this._setMarkStyle(character, vchart);
     return;
   }
 
-  private _setDataGroupStyle(character: ICharacterChart, vchart: IVChart) {
+  private _setDataGroupStyle(character: ICharacterChartRuntimeConfig, vchart: IVChart) {
     const config = character.config;
     const dataGroupStyle = config.options?.dataGroupStyle;
     if (!dataGroupStyle) {
@@ -158,7 +158,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     });
   }
 
-  private _setMarkStyle(character: ICharacterChart, vchart: IVChart) {
+  private _setMarkStyle(character: ICharacterChartRuntimeConfig, vchart: IVChart) {
     const config = character.config;
     const markStyle = config.options?.markStyle;
     if (!markStyle) {

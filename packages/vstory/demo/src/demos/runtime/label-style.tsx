@@ -412,6 +412,7 @@ function loadDSL() {
           dataGroupStyle: {
             [StroyAllDataGroup]: {
               label: {
+                // visible: true,
                 style: {
                   fill: 'green',
                   stroke: 'yellow',
@@ -421,6 +422,7 @@ function loadDSL() {
             },
             a: {
               label: {
+                // visible: true,
                 style: {
                   fill: 'red'
                 }
@@ -428,6 +430,7 @@ function loadDSL() {
             },
             b: {
               label: {
+                // visible: true,
                 style: {
                   stroke: 'blue',
                   lineWidth: 5

@@ -1,10 +1,10 @@
 import type { IChartCharacterRuntime } from '../interface/runtime';
-import type { ICharacterChart } from '../interface/character-chart';
+import type { ICharacterChartRuntimeConfig } from '../interface/character-chart';
 
 export class RankingBarRuntime implements IChartCharacterRuntime {
   type = 'RankingBar';
 
-  applyConfigToAttribute(character: ICharacterChart): void {
+  applyConfigToAttribute(character: ICharacterChartRuntimeConfig): void {
     const rawAttribute = character.getAttribute();
     const { spec } = rawAttribute;
     // 关掉player显示

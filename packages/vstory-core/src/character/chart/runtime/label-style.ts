@@ -1,6 +1,6 @@
 import { array, isValid, merge } from '@visactor/vutils';
 import type { IChartCharacterRuntime } from '../interface/runtime';
-import type { ICharacterChart } from '../interface/character-chart';
+import type { ICharacterChartRuntimeConfig } from '../interface/character-chart';
 import type { ISeries, IVChart } from '@visactor/vchart';
 import type { ILabelInfo, Label as VChartLabelComponent } from '@visactor/vchart/esm/component/label/label';
 import { MarkStyleRuntime } from './mark-style';
@@ -13,7 +13,7 @@ import { CommonMarkAttributeMap, fillMarkAttribute, SeriesMarkStyleMap } from '.
 export class LabelStyleRuntime implements IChartCharacterRuntime {
   type = 'LabelStyle';
 
-  applyConfigToAttribute(character: ICharacterChart) {
+  applyConfigToAttribute(character: ICharacterChartRuntimeConfig) {
     // 设置 visible 为 true 关闭标签能力放到分组上
     // 当前 dataGroupStyle 中有 label.visible 配置，在这里添加上 visible = true
     const dataGroupStyle = character.config.options?.dataGroupStyle;
@@ -57,7 +57,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
    * @param vchart
    * @returns
    */
-  afterInitialize(character: ICharacterChart, vchart: IVChart) {
+  afterInitialize(character: ICharacterChartRuntimeConfig, vchart: IVChart) {
     const labelComponent = vchart.getChart().getComponentsByKey('label')[0] as VChartLabelComponent;
     if (!labelComponent) {
       return;
@@ -65,7 +65,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
     this._setDataGroupStyle(character, labelComponent);
   }
 
-  private _setDataGroupStyle(character: ICharacterChart, labelComponent: VChartLabelComponent) {
+  private _setDataGroupStyle(character: ICharacterChartRuntimeConfig, labelComponent: VChartLabelComponent) {
     const config = character.config;
     const dataGroupStyle = config.options?.dataGroupStyle;
     if (!dataGroupStyle) {
@@ -143,10 +143,13 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
           // 默认值 还必须这样写
           labelMark.setAttribute('visible', (): any => undefined);
         }
+        const spec = config.options.spec;
         labelMark.setPostProcess('visible', (result, datum) => {
           return (
-            dataGroupStyle[datum[seriesField]]?.label?.visible ??
-            dataGroupStyle[StroyAllDataGroup]?.label?.visible ??
+            dataGroupStyle[datum[seriesField]]?.label?.visible ?? // 单组 visible
+            dataGroupStyle[StroyAllDataGroup]?.label?.visible ?? // 全部组visible
+            spec?.series?.[series.getSpecIndex()]?.label?.visible ?? // 单系列 visible
+            spec?.label?.visible ?? // 全局 visible
             result
           );
         });
@@ -161,7 +164,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
    * @param vchart
    * @returns
    */
-  afterVRenderDraw(character: ICharacterChart, vchart: IVChart) {
+  afterVRenderDraw(character: ICharacterChartRuntimeConfig, vchart: IVChart) {
     const dataGroupStyle = character.config.options?.dataGroupStyle;
     const labelStyle = character.config.options?.labelStyle;
     if (!labelStyle && !dataGroupStyle) {

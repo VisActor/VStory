@@ -38,4 +38,12 @@ export interface ICharacter extends IReleaseable {
   setConfig: (config: ICharacterConfig) => void;
 
   getAttribute: () => any;
+
+  getRuntimeConfig: () => ICharacterRuntimeConfig;
+}
+
+export interface ICharacterRuntimeConfig {
+  config: ICharacterConfig;
+  canvas: IStoryCanvas;
+  getAttribute: () => any;
 }
