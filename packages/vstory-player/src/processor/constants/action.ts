@@ -8,5 +8,6 @@ export const ACTION_TYPE = {
   BOUNCE: 'bounce',
   PLAY: 'play',
   UPDATE: 'update',
-  ADD: 'add'
+  ADD: 'add',
+  HIGHLIGHT: 'highlight'
 };
