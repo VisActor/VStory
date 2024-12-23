@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "comment": "feat: change runtime logic about get the character config\n\n",
+      "type": "none",
+      "packageName": "@visactor/vstory"
+    }
+  ],
+  "packageName": "@visactor/vstory",
+  "email": "lixuef1313@163.com"
+}

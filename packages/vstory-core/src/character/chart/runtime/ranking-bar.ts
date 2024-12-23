@@ -5,7 +5,7 @@ export class RankingBarRuntime implements IChartCharacterRuntime {
   type = 'RankingBar';
 
   applyConfigToAttribute(character: ICharacterChart): void {
-    const rawAttribute = character.getAttribute();
+    const rawAttribute = character.getRuntimeConfig().getAttribute();
     const { spec } = rawAttribute;
     // 关掉player显示
     spec.player = {
