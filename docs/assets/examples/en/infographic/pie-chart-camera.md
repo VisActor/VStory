@@ -2,7 +2,7 @@
 category: examples
 group: infographic
 title: Pie Chart Camera
-keywords: templates, visualization, bar, left-right, comparison, horizontal
+keywords: templates, visualization, bar, percentage, horizontal
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/pie-chart-camera.png
 ---
@@ -19,14 +19,34 @@ const dsl = {
       id: 'defaultAct',
       scenes: [
         {
-import { CustomInfographic } from './demos/infographic/bar';
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['bgImage', 'cameraIcon', 'bg0', 'bg1', 'title', 'chart', 'displayImage'],
+              characterId: ['bgImage', 'cameraIcon', 'bg0', 'bg1', 'title', 'displayImage'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 500,
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['chart'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: [
+                    {
+                      animation: {
+                        startTime: 300,
+                        duration: 1000,
+                      }
+                    }
+                  ]
                 }
               ]
             }

@@ -22,10 +22,32 @@ const dsl = {
           id: 'defaultScene',
           actions: [
             {
-              characterId: ['bgImage', 'bg0', 'bg1', 'title', 'chart', 'displayImage'],
+              characterId: ['bgImage', 'bg0', 'bg1'],
               characterActions: [
                 {
-                  action: 'appear'
+                  action: 'appear',
+                  payload: {
+                    animation: {
+                      duration: 500
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              characterId: ['title', 'chart', 'displayImage'],
+              characterActions: [
+                {
+                  action: 'appear',
+                  payload: [
+                    {
+                      animation: {
+                        duration: 500,
+                        easing: 'linear',
+                        effect: 'wipe'
+                      }
+                    }
+                  ]
                 }
               ]
             }
