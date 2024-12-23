@@ -1,6 +1,6 @@
 import { array, isValid, merge } from '@visactor/vutils';
 import type { IChartCharacterRuntime } from '../interface/runtime';
-import type { ICharacterChartRuntimeConfig } from '../interface/character-chart';
+import type { ICharacterChart } from '../interface/character-chart';
 import type { ISeries, IVChart } from '@visactor/vchart';
 import type { ILabelInfo, Label as VChartLabelComponent } from '@visactor/vchart/esm/component/label/label';
 import { MarkStyleRuntime } from './mark-style';
@@ -13,10 +13,11 @@ import { CommonMarkAttributeMap, fillMarkAttribute, SeriesMarkStyleMap } from '.
 export class LabelStyleRuntime implements IChartCharacterRuntime {
   type = 'LabelStyle';
 
-  applyConfigToAttribute(character: ICharacterChartRuntimeConfig) {
+  applyConfigToAttribute(character: ICharacterChart) {
     // 设置 visible 为 true 关闭标签能力放到分组上
     // 当前 dataGroupStyle 中有 label.visible 配置，在这里添加上 visible = true
-    const dataGroupStyle = character.config.options?.dataGroupStyle;
+    const config = character.getRuntimeConfig().config;
+    const dataGroupStyle = config.options?.dataGroupStyle;
     if (!dataGroupStyle) {
       return;
     }
@@ -34,7 +35,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       return;
     }
     // 否则全部设置为 true
-    const rawAttribute = character.getAttribute();
+    const rawAttribute = character.getRuntimeConfig().getAttribute();
     const { spec } = rawAttribute;
     if (!spec.label) {
       spec.label = { visible: true };
@@ -57,7 +58,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
    * @param vchart
    * @returns
    */
-  afterInitialize(character: ICharacterChartRuntimeConfig, vchart: IVChart) {
+  afterInitialize(character: ICharacterChart, vchart: IVChart) {
     const labelComponent = vchart.getChart().getComponentsByKey('label')[0] as VChartLabelComponent;
     if (!labelComponent) {
       return;
@@ -65,8 +66,8 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
     this._setDataGroupStyle(character, labelComponent);
   }
 
-  private _setDataGroupStyle(character: ICharacterChartRuntimeConfig, labelComponent: VChartLabelComponent) {
-    const config = character.config;
+  private _setDataGroupStyle(character: ICharacterChart, labelComponent: VChartLabelComponent) {
+    const config = character.getRuntimeConfig().config;
     const dataGroupStyle = config.options?.dataGroupStyle;
     if (!dataGroupStyle) {
       return;
@@ -164,9 +165,10 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
    * @param vchart
    * @returns
    */
-  afterVRenderDraw(character: ICharacterChartRuntimeConfig, vchart: IVChart) {
-    const dataGroupStyle = character.config.options?.dataGroupStyle;
-    const labelStyle = character.config.options?.labelStyle;
+  afterVRenderDraw(character: ICharacterChart, vchart: IVChart) {
+    const config = character.getRuntimeConfig().config;
+    const dataGroupStyle = config.options?.dataGroupStyle;
+    const labelStyle = config.options?.labelStyle;
     if (!labelStyle && !dataGroupStyle) {
       return;
     }

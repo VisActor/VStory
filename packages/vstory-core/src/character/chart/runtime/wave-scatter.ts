@@ -1,7 +1,7 @@
 import { merge } from '@visactor/vutils';
 import { ACustomAnimate } from '@visactor/vrender-core';
 import type { IChartCharacterRuntime } from '../interface/runtime';
-import type { ICharacterChartRuntimeConfig } from '../interface/character-chart';
+import type { ICharacterChart } from '../interface/character-chart';
 
 export class WaveAnimate extends ACustomAnimate<any> {
   static label: string = 'wave-animate';
@@ -28,10 +28,10 @@ export class WaveAnimate extends ACustomAnimate<any> {
 export class WaveScatterRuntime implements IChartCharacterRuntime {
   type = 'WaveScatter';
 
-  applyConfigToAttribute(character: ICharacterChartRuntimeConfig): void {
-    const rawAttribute = character.getAttribute();
+  applyConfigToAttribute(character: ICharacterChart): void {
+    const rawAttribute = character.getRuntimeConfig().getAttribute();
     const { spec } = rawAttribute;
-    const config = character.config as any;
+    const config = character.getRuntimeConfig().config as any;
     const {
       waveDuration = 1000,
       categoryField,

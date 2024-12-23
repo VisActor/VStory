@@ -1,14 +1,14 @@
 // import { merge } from '@visactor/vutils';
 // import type { IVChart } from '@visactor/vchart';
 // import type { IChartCharacterRuntime } from '../interface/runtime';
-// import type { ICharacterChartRuntimeConfig } from '../interface/character-chart';
+// import type { ICharacterChart } from '../interface/character-chart';
 
 // export class ScatterBarRuntime implements IChartCharacterRuntime {
 //   type = 'ScatterBar';
 
 //   protected declare _character: ICharacterChart;
 
-//   constructor(character: ICharacterChartRuntimeConfig) {
+//   constructor(character: ICharacterChart) {
 //     this._character = character;
 //   }
 

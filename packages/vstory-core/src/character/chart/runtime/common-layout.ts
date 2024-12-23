@@ -1,13 +1,13 @@
 import { merge } from '@visactor/vutils';
 import type { IChartCharacterRuntime } from '../interface/runtime';
 import { getLayoutFromWidget } from '../../../utils/layout';
-import type { ICharacterChartRuntimeConfig } from '../interface/character-chart';
+import type { ICharacterChart } from '../interface/character-chart';
 export class CommonLayoutRuntime implements IChartCharacterRuntime {
   type = 'CommonLayout';
 
-  applyConfigToAttribute(character: ICharacterChartRuntimeConfig): void {
-    const rawAttribute = character.getAttribute();
-    const config = character.config;
+  applyConfigToAttribute(character: ICharacterChart): void {
+    const rawAttribute = character.getRuntimeConfig().getAttribute();
+    const config = character.getRuntimeConfig().config;
     const layoutData = getLayoutFromWidget(config.position);
     const layout = getLayoutFromWidget(config.position);
     const viewBox = {

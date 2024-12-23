@@ -217,4 +217,8 @@ export class CharacterChart<T extends IChartGraphicAttribute>
     super._clearGraphic();
     this._vchart = null;
   }
+
+  getRuntimeConfig() {
+    return this;
+  }
 }

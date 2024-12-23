@@ -1,14 +1,15 @@
 import { merge } from '@visactor/vutils';
 import type { IChartCharacterRuntime } from '../interface/runtime';
-import type { ICharacterChartRuntimeConfig } from '../interface/character-chart';
+import type { ICharacterChart } from '../interface/character-chart';
 
 export class CommonSpecRuntime implements IChartCharacterRuntime {
   type = 'CommonSpec';
 
-  applyConfigToAttribute(character: ICharacterChartRuntimeConfig): void {
-    const rawAttribute = character.getAttribute();
+  applyConfigToAttribute(character: ICharacterChart): void {
+    const rawAttribute = character.getRuntimeConfig().getAttribute();
+    const config = character.getRuntimeConfig().config;
     const { spec } = rawAttribute;
-    const options = character.config.options;
+    const options = config.options;
     const { title, legends, data, color, axes, rootConfig = {}, padding } = options;
 
     if (title) {
