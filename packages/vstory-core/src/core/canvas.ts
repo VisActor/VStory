@@ -43,20 +43,22 @@ export class StoryCanvas implements IStoryCanvas {
 
     const {
       canvas,
-      width,
-      height,
+      width: _w,
+      height: _h,
       background = 'transparent',
       layerBackground = 'transparent',
       dpr = vglobal.devicePixelRatio,
-      scaleX = 1,
-      scaleY = 1
+      scaleX: _sx = 1,
+      scaleY: _sy = 1
     } = params;
+    const { scaleX, scaleY, width, height } = this.getScale(_w, _h, _sx, _sy);
+
     this._container && this._initCanvasByContainer(width, height, dpr, background);
     params.canvas && this._initCanvasByCanvas(canvas, width ?? 500, height ?? 500, dpr, background);
 
     // this._stage.background = background;
     this._stage.defaultLayer.setAttributes({ background: layerBackground });
-    this.initScale(width, height, scaleX, scaleY);
+    this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 
   protected _initCanvasByContainer(width: number, height: number, dpr: number, background: string) {
@@ -114,27 +116,40 @@ export class StoryCanvas implements IStoryCanvas {
     return stage;
   }
 
-  protected initScale(width: number, height: number, scaleX: number | 'auto', scaleY: number | 'auto') {
+  protected getScale(
+    width: number,
+    height: number,
+    scaleX: number | 'auto',
+    scaleY: number | 'auto'
+  ): { scaleX: number; scaleY: number; width: number; height: number } {
+    // 仅在传入width和height时有效
     if (scaleX === 'auto' || scaleY === 'auto') {
-      const clipWidth = this._container ? this._container.clientWidth : this._canvas.width / this.getDpr();
-      const clipHeight = this._container ? this._container.clientHeight : this._canvas.height / this.getDpr();
-
-      const clipAspectRatio = clipWidth / clipHeight;
-      const contentAspectRatio = width / height;
-      const scale = clipAspectRatio > contentAspectRatio ? clipHeight / height : clipWidth / width;
-      if (!isValidNumber(scale)) {
+      if (!Number.isFinite(width) || !Number.isFinite(height)) {
         scaleX = scaleY = 1;
       } else {
-        if (scaleX === 'auto') {
-          scaleX = scale;
-        }
+        const clipWidth = this._container ? this._container.clientWidth : this._canvas.width / this.getDpr();
+        const clipHeight = this._container ? this._container.clientHeight : this._canvas.height / this.getDpr();
 
-        if (scaleY === 'auto') {
-          scaleY = scale;
+        const clipAspectRatio = clipWidth / clipHeight;
+        const contentAspectRatio = width / height;
+        const scale = clipAspectRatio > contentAspectRatio ? clipHeight / height : clipWidth / width;
+        if (!isValidNumber(scale)) {
+          scaleX = scaleY = 1;
+        } else {
+          if (scaleX === 'auto') {
+            scaleX = scale;
+          }
+
+          if (scaleY === 'auto') {
+            scaleY = scale;
+          }
         }
+        width *= scaleX;
+        height *= scaleY;
       }
     }
-    this._stage.defaultLayer.scale(scaleX, scaleY);
+    return { scaleX, scaleY, width, height };
+    // this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 
   resize(w: number, h: number) {

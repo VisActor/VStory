@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-core",
+      "comment": "feat: enhance scaleXY auto to support resize canvas wh",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-core"
+}
