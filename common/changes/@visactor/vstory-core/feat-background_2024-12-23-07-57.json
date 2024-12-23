@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-core",
+      "comment": "fix: fix issue with image background",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-core"
+}

@@ -51,15 +51,15 @@ export class StoryCanvas implements IStoryCanvas {
       scaleX = 1,
       scaleY = 1
     } = params;
-    this._container && this._initCanvasByContainer(width, height, dpr);
-    params.canvas && this._initCanvasByCanvas(canvas, width ?? 500, height ?? 500, dpr);
+    this._container && this._initCanvasByContainer(width, height, dpr, background);
+    params.canvas && this._initCanvasByCanvas(canvas, width ?? 500, height ?? 500, dpr, background);
 
-    this._stage.background = background;
+    // this._stage.background = background;
     this._stage.defaultLayer.setAttributes({ background: layerBackground });
     this.initScale(width, height, scaleX, scaleY);
   }
 
-  protected _initCanvasByContainer(width: number, height: number, dpr: number) {
+  protected _initCanvasByContainer(width: number, height: number, dpr: number, background: string) {
     const container = this._container;
     if (!container) {
       return;
@@ -69,26 +69,38 @@ export class StoryCanvas implements IStoryCanvas {
     canvas.id = `_visactor_story_canvas_${this._story.id}`;
     this._canvas = canvas as any;
     container.appendChild(canvas);
-    const stage = this._initCanvas(canvas, width ?? container.clientWidth, height ?? container.clientHeight, dpr);
+    const stage = this._initCanvas(
+      canvas,
+      width ?? container.clientWidth,
+      height ?? container.clientHeight,
+      dpr,
+      background
+    );
     // @ts-ignore
     this._stage = stage;
   }
 
-  protected _initCanvasByCanvas(canvas: HTMLCanvasElement, width: number, height: number, dpr: number) {
-    const stage = this._initCanvas(canvas, width, height, dpr);
+  protected _initCanvasByCanvas(
+    canvas: HTMLCanvasElement,
+    width: number,
+    height: number,
+    dpr: number,
+    background: string
+  ) {
+    const stage = this._initCanvas(canvas, width, height, dpr, background);
     this._canvas = canvas as any;
     // @ts-ignore
     this._stage = stage;
   }
 
-  protected _initCanvas(canvas: HTMLCanvasElement, width: number, height: number, dpr: number) {
+  protected _initCanvas(canvas: HTMLCanvasElement, width: number, height: number, dpr: number, background: string) {
     const stage = createStage({
       canvas: canvas,
       width,
       height,
       dpr,
       canvasControled: true,
-
+      background,
       // 得开启自动渲染，否则编辑场景中无法触发视图更新
       autoRender: false,
       disableDirtyBounds: true,
