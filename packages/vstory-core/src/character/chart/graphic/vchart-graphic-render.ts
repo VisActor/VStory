@@ -44,6 +44,11 @@ export class VChartRender extends DefaultCanvasRectRender implements IGraphicRen
     }
     context.baseGlobalAlpha *= baseOpacity;
     super.drawShape(chart, context, x, y, drawContext, params, fillCb, strokeCb);
+    // TODO 考虑一个通用的ctx清理逻辑
+    if (context._clearFilterStyle && context.nativeContext) {
+      context.nativeContext.filter = 'blur(0px)';
+      context._clearFilterStyle = false;
+    }
     context.baseGlobalAlpha /= baseOpacity;
     const vChart = (chart as VChartGraphic).vchart;
     const vchartStage = vChart.getStage();
