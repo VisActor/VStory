@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-animate",
+      "comment": "feat: add arrange demo, support line growPoint animate",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-animate"
+}

@@ -141,7 +141,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     payload: IChartVisibilityPayload,
     isRun: boolean
   ) {
-    const vrenderComponents = component.getVRenderComponents();
+    const vrenderComponents = component.getVRenderComponents().filter((item: any) => !!item);
     const appearTransformFunc = transformMap.appear.legends;
     const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     vrenderComponents.forEach(group => {

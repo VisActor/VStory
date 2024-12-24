@@ -140,26 +140,26 @@ export const BarChart2 = () => {
                       ]
                     },
                     {
-                      startTime: 2000,
+                      startTime: 3000,
                       action: 'appear',
                       payload: [
                         {
                           selector: 'bar',
                           animation: {
-                            duration: 2000,
+                            duration: 800,
                             easing: 'linear'
                           }
                         }
                       ]
                     },
                     {
-                      startTime: 2000,
+                      startTime: 3000,
                       action: 'appear',
                       payload: [
                         {
                           selector: '#axes-right',
                           animation: {
-                            duration: 2000,
+                            duration: 800,
                             easing: 'linear'
                           }
                         }

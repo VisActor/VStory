@@ -48,6 +48,8 @@ import { MarketingWordcloud } from './demos/infographic/marking-wordcloud';
 // VchartEditor Runtime
 import { RuntimeSeriesMark } from './demos/runtime/series-mark';
 import { RuntimeLabelStyle } from './demos/runtime/label-style';
+import { LineChartArrange } from './demos/arrange/LineChart';
+import { PieChart } from './demos/arrange/PieChart';
 
 type MenusType = (
   | {
@@ -98,6 +100,14 @@ const App = () => {
         {
           name: 'BarChart1',
           component: BarChart1
+        },
+        {
+          name: 'LineChartArrange',
+          component: LineChartArrange
+        },
+        {
+          name: 'PieChart',
+          component: PieChart
         },
         {
           name: 'BarChart2',
