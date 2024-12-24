@@ -1,7 +1,7 @@
 import * as VStory from '@visactor/vstory';
 
 // @ts-ignore
-window.VTable = VStory;
+window.VStory = VStory;
 
 export default {
   VStory
