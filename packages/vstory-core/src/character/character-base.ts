@@ -1,3 +1,4 @@
+import type { ICharacterRuntimeConfig } from './../interface/character';
 import type { IGraphic } from '@visactor/vrender-core';
 import { Generator, IGroup } from '@visactor/vrender-core';
 import type { ICharacter } from '../interface/character';
@@ -103,6 +104,9 @@ export abstract class CharacterBase<T> implements ICharacter {
   protected abstract getDefaultAttribute(): Partial<T>;
   getAttribute() {
     return this._attribute;
+  }
+  getRuntimeConfig() {
+    return this as ICharacterRuntimeConfig;
   }
 
   protected abstract applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void;
