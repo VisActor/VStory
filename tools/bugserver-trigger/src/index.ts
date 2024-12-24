@@ -1,5 +1,8 @@
-// export const a = 'a';
-// export const b = 'b';
+import * as VStory from '@visactor/vstory';
 
-// global.a = a;
-// global.b = b;
+// @ts-ignore
+window.VStory = VStory;
+
+export default {
+  VStory
+};
