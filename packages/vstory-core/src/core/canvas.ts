@@ -40,6 +40,7 @@ export class StoryCanvas implements IStoryCanvas {
   ) {
     this._story = story;
     this._container = params.container;
+    this._canvas = params.canvas as any;
 
     const {
       canvas,
@@ -127,8 +128,16 @@ export class StoryCanvas implements IStoryCanvas {
       if (!Number.isFinite(width) || !Number.isFinite(height)) {
         scaleX = scaleY = 1;
       } else {
-        const clipWidth = this._container ? this._container.clientWidth : this._canvas.width / this.getDpr();
-        const clipHeight = this._container ? this._container.clientHeight : this._canvas.height / this.getDpr();
+        const clipWidth = this._container
+          ? this._container.clientWidth
+          : this._canvas?.width / vglobal.devicePixelRatio;
+        const clipHeight = this._container
+          ? this._container.clientHeight
+          : this._canvas?.height / vglobal.devicePixelRatio;
+        if (!isValidNumber(clipWidth) || !isValidNumber(clipHeight)) {
+          scaleX = scaleY = 1;
+          return { scaleX, scaleY, width, height };
+        }
 
         const clipAspectRatio = clipWidth / clipHeight;
         const contentAspectRatio = width / height;

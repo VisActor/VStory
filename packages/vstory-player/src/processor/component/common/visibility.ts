@@ -44,7 +44,7 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
     });
   }
 
-  applyAttrs(character: ICharacter, actionSpec: IActionSpec): void {
+  applyAttrsForVisibility(character: ICharacter, actionSpec: IActionSpec): void {
     const { animation = {}, selector } = getPayload(actionSpec);
     const { effect = 'default' } = animation as any;
     array(effect).forEach(_effect => {

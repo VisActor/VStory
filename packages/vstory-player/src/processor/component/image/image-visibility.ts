@@ -7,7 +7,7 @@ import { CommonScaleToActionProcessor } from '../common/scale';
 import { CommonBounceActionProcessor } from '../common/bounce';
 
 export class ImageVisibilityActionProcessor extends CommonVisibilityActionProcessor {
-  name: 'appearOrDisAppear';
+  name: 'appearOrDisAppear' = 'appearOrDisAppear';
 }
 
 export function registerImageVisibilityAction() {

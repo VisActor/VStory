@@ -1,6 +1,6 @@
 import React, { createRef, useEffect } from 'react';
-import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction } from '../../../../vstory-player/src';
+import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
+import { registerVComponentAction, registerVChartAction } from '../../../../../vstory-player/src';
 
 registerGraphics();
 registerCharacters();
@@ -58,7 +58,7 @@ export const BarChart2 = () => {
           type: 'bar',
           id: 'bar',
           dataIndex: 0,
-          label: { visible: true },
+          label: { visible: false },
           seriesField: 'type',
           dataIndex: 0,
           xField: ['x', 'type'],
@@ -68,7 +68,7 @@ export const BarChart2 = () => {
           type: 'line',
           id: 'line',
           dataIndex: 1,
-          label: { visible: true },
+          label: { visible: false },
           seriesField: 'type',
           xField: 'x',
           yField: 'y',
@@ -76,8 +76,14 @@ export const BarChart2 = () => {
         }
       ],
       axes: [
-        { orient: 'left', seriesIndex: [0] },
-        { orient: 'right', seriesId: ['line'], grid: { visible: false } },
+        {
+          orient: 'left',
+          id: 'axes-left',
+          domainLine: { visible: true },
+          seriesId: ['line'],
+          grid: { visible: false }
+        },
+        { orient: 'right', id: 'axes-right', domainLine: { visible: true }, seriesId: ['bar'], seriesIndex: [0] },
         { orient: 'bottom', label: { visible: true }, type: 'band' }
       ],
       legends: {
@@ -94,7 +100,7 @@ export const BarChart2 = () => {
           position: {
             top: 50,
             left: 50,
-            width: 300,
+            width: 500,
             height: 300
           },
           options: {
@@ -125,7 +131,7 @@ export const BarChart2 = () => {
                       action: 'appear',
                       payload: [
                         {
-                          selector: ':not(bar)',
+                          selector: ':not(bar) :not(#axes-right)',
                           animation: {
                             duration: 2000,
                             easing: 'linear'
@@ -134,13 +140,26 @@ export const BarChart2 = () => {
                       ]
                     },
                     {
-                      startTime: 2000,
+                      startTime: 3000,
                       action: 'appear',
                       payload: [
                         {
                           selector: 'bar',
                           animation: {
-                            duration: 2000,
+                            duration: 800,
+                            easing: 'linear'
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      startTime: 3000,
+                      action: 'appear',
+                      payload: [
+                        {
+                          selector: '#axes-right',
+                          animation: {
+                            duration: 800,
                             easing: 'linear'
                           }
                         }

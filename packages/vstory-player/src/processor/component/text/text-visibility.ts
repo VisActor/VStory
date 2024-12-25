@@ -47,7 +47,7 @@ export class TypeWriterVisibility extends BaseVisibility {
 const typewriterIn = new TypeWriterVisibility();
 
 export class TextVisibilityActionProcessor extends CommonVisibilityActionProcessor {
-  name: 'appearOrDisAppear';
+  name: 'appearOrDisAppear' = 'appearOrDisAppear';
   constructor() {
     super();
   }
