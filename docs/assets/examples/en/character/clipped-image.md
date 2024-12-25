@@ -16,7 +16,7 @@ You can achieve image clipping effects under various shapes through the backgrou
 ```javascript livedemo template=vstory
 VStory.registerAll();
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#18253A' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 700, height: 500, scaleX: 'auto', scaleY: 'auto', background: '#18253A' });
 const player = new VStory.Player(story);
 story.init(player);
 const clipPath = [

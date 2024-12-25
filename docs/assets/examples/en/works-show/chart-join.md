@@ -77,7 +77,7 @@ const getChartSpec = (i, showLeftAxis) => {
   };
 }
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 2000 / 2, height: 800 / 2, background: '#ebecf0', scaleX: 0.5, scaleY: 0.5 });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 2000, height: 800, scaleX: 'auto', scaleY: 'auto', background: '#ebecf0' });
 const player = new VStory.Player(story);
 story.init(player);
 

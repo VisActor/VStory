@@ -1589,7 +1589,7 @@ const dsl = {
   ]
 };
 
-const story = new VStory.Story(dsl, { dom: CONTAINER_ID, width: width / 2, height: height / 2, background: '#ebecf0', scaleX: 0.5, scaleY: 0.5 });
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, width, height, scaleX: 'auto', scaleY: 'auto', background: '#ebecf0' });
 const player = new VStory.Player(story);
 story.init(player);
 

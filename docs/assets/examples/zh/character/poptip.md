@@ -22,7 +22,7 @@ VStory.registerAll();
 VStory.registerPopTip();
 VStory.registerPopTipAction();
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#18253A' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 400, height: 300, scaleX: 'auto', scaleY: 'auto', background: '#18253A' });
 const player = new VStory.Player(story);
 story.init(player);
 
