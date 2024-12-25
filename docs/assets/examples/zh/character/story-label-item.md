@@ -24,7 +24,7 @@ VStory.registerAll();
 VStory.registerLabelItem();
 VStory.registerLabelItemAction();
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#18253A' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 750, height: 450, scaleX: 'auto', scaleY: 'auto', background: '#18253A' });
 const player = new VStory.Player(story);
 story.init(player);
 

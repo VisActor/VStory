@@ -19,7 +19,7 @@ VStory.registerAll();
 VStory.registerSinglePie();
 VStory.registerSinglePieAction();
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 500, height: 350, scaleX: 'auto', scaleY: 'auto', background: '#ebecf0' });
 const player = new VStory.Player(story);
 story.init(player);
 

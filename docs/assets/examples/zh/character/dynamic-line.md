@@ -43,7 +43,7 @@ const data = [
   { year: '2022年9月13日', name: 'iPhone 16', price: 5999, bg: 'iphone16.png' }
 ].map(item => ({ ...item, bg: `https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/demo/${item.bg}` }));
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 600, height: 400, scaleX: 'auto', scaleY: 'auto', background: '#ebecf0' });
 const player = new VStory.Player(story);
 story.init(player);
 
@@ -54,7 +54,7 @@ story.addCharacter(
     zIndex: 1,
     position: {
       top: 50,
-      left: 100,
+      left: 50,
       width: 500,
       height: 300
     },
