@@ -19,10 +19,10 @@ export class CommonSpecRuntime implements ITableCharacterRuntime {
     // spec.hover = spec.hover ?? {};
     // // spec.select.disableSelect = true;
     // // spec.hover.disableHover = true;
-    spec.columnResizeMode = 'none';
-    spec.rowResizeMode = 'none';
+    // spec.columnResizeMode = 'none';
+    // spec.rowResizeMode = 'none';
     /** 控制拖拽表头移动位置顺序开关 */
-    spec.dragHeaderMode = 'none';
+    // spec.dragHeaderMode = 'none';
 
     spec.chartOption = {
       // disableInteraction: true,

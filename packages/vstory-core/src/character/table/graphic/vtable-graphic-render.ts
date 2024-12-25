@@ -61,7 +61,8 @@ export class VTableRender extends DefaultCanvasRectRender implements IGraphicRen
     matrix.translate(table.vTableAutoTranslate.x, table.vTableAutoTranslate.y);
     const stageMatrix = table.stage.window.getViewBoxTransform().clone();
     stageMatrix.multiply(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
-    vTableStage.window.setViewBoxTransform(
+    // vTableStage.setViewBox();
+    vTable.setViewBoxTransform(
       stageMatrix.a,
       stageMatrix.b,
       stageMatrix.c,

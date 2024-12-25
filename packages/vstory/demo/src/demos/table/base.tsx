@@ -64,7 +64,7 @@ function loadDSL() {
         zIndex: 10,
         position: {
           top: 20,
-          left: 560,
+          left: 540,
           width: 600,
           height: 630
         },
