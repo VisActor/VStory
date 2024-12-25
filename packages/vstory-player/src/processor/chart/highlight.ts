@@ -19,7 +19,7 @@ export class VChartHighlightActionProcessor extends VChartBaseActionProcessor {
     }
 
     const { payload } = actionSpec as IChartHighlightAction;
-    const { value, animation, style = {} } = payload as IChartHighlightPayload;
+    const { value, inverse, animation, style = {} } = payload as IChartHighlightPayload;
     const isDatumEqual = (inputValue: any, elementDatum: any) =>
       Object.keys(inputValue).every(key => inputValue[key] === elementDatum[key]);
     const channel = {};
@@ -42,7 +42,7 @@ export class VChartHighlightActionProcessor extends VChartBaseActionProcessor {
               },
               duration: animation?.duration ?? 0
             },
-            partitioner: datum => isDatumEqual(value, datum)
+            partitioner: datum => (inverse ? !isDatumEqual(value, datum) : isDatumEqual(value, datum))
           });
         }
       });
