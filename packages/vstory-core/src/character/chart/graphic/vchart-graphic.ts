@@ -119,7 +119,7 @@ export class VChartGraphic extends Rect {
           // 只有vstory触发的render才会真的render
           beforeRender: stage => {
             const chartStage = this._vchart.getStage();
-            if (!(chartStage as any)._editor_needRender) {
+            if (!(chartStage as any)._story_needRender) {
               chartStage.pauseRender();
               stage.dirtyBounds?.union(this.globalAABBBounds);
               stage.renderNextFrame();
@@ -127,7 +127,7 @@ export class VChartGraphic extends Rect {
           },
           afterRender: stage => {
             // @ts-ignore
-            stage._editor_needRender = false;
+            stage._story_needRender = false;
             stage.resumeRender();
           }
         },

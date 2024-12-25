@@ -1,6 +1,8 @@
 import type { ICharacterConfigBase } from './dsl';
 
 interface ITableCharacterConfigOptionsType {
+  // 表格spec
+  spec?: any;
   records: any;
   columns: any;
   widthMode?: 'standard' | 'adaptive' | 'autoWidth';

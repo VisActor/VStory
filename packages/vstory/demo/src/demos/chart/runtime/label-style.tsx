@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react';
-import { Player, Story, initVR, registerGraphics, registerCharacters, IStoryDSL } from '../../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction } from '../../../../../vstory-player/src';
-import { StroyAllDataGroup } from '../../../../../vstory-core/src/interface/dsl/chart';
+import {
+  Player,
+  Story,
+  initVR,
+  registerGraphics,
+  registerCharacters,
+  IStoryDSL
+} from '../../../../../../vstory-core/src';
+import { registerVComponentAction, registerVChartAction } from '../../../../../../vstory-player/src';
+import { StroyAllDataGroup } from '../../../../../../vstory-core/src/interface/dsl/chart';
 
 registerGraphics();
 registerCharacters();
@@ -38,6 +45,7 @@ function loadDSL() {
           }
         },
         label: {
+          visible: true,
           position: 'inside',
           style: {
             lineHeight: '100%',
@@ -114,6 +122,7 @@ function loadDSL() {
           }
         },
         label: {
+          visible: false,
           position: 'inside',
           style: {
             lineHeight: '100%',
@@ -409,7 +418,8 @@ function loadDSL() {
           },
           dataGroupStyle: {
             [StroyAllDataGroup]: {
-              bar: {
+              label: {
+                // visible: true,
                 style: {
                   fill: 'green',
                   stroke: 'yellow',
@@ -418,60 +428,16 @@ function loadDSL() {
               }
             },
             a: {
-              bar: {
+              label: {
+                // visible: true,
                 style: {
                   fill: 'red'
                 }
               }
             },
             b: {
-              bar: {
-                style: {
-                  stroke: 'blue',
-                  lineWidth: 5
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        type: 'VChart',
-        id: 'chart1',
-        zIndex: 10,
-        position: {
-          top: 380,
-          left: 50,
-          width: 500,
-          height: 300
-        },
-        options: {
-          spec: barSpec1,
-          initOption: {
-            interactive: true,
-            animation: false,
-            disableTriggerEvent: true,
-            disableDirtyBounds: true
-          },
-          dataGroupStyle: {
-            [StroyAllDataGroup]: {
-              bar: {
-                style: {
-                  fill: 'green',
-                  stroke: 'yellow',
-                  lineWidth: 2
-                }
-              }
-            },
-            A_p: {
-              bar: {
-                style: {
-                  fill: 'red'
-                }
-              }
-            },
-            B_k: {
-              bar: {
+              label: {
+                // visible: true,
                 style: {
                   stroke: 'blue',
                   lineWidth: 5
@@ -481,6 +447,52 @@ function loadDSL() {
           }
         }
       }
+      // {
+      //   type: 'VChart',
+      //   id: 'chart1',
+      //   zIndex: 10,
+      //   position: {
+      //     top: 380,
+      //     left: 50,
+      //     width: 500,
+      //     height: 300
+      //   },
+      //   options: {
+      //     spec: barSpec1,
+      //     initOption: {
+      //       interactive: true,
+      //       animation: false,
+      //       disableTriggerEvent: true,
+      //       disableDirtyBounds: true
+      //     },
+      //     dataGroupStyle: {
+      //       [StroyAllDataGroup]: {
+      //         bar: {
+      //           style: {
+      //             fill: 'green',
+      //             stroke: 'yellow',
+      //             lineWidth: 2
+      //           }
+      //         }
+      //       },
+      //       A_p: {
+      //         bar: {
+      //           style: {
+      //             fill: 'red'
+      //           }
+      //         }
+      //       },
+      //       B_k: {
+      //         bar: {
+      //           style: {
+      //             stroke: 'blue',
+      //             lineWidth: 5
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
     ],
     acts: []
   };
@@ -507,8 +519,8 @@ function loadDSL() {
   return dsl;
 }
 
-export const RuntimeSeriesMark = () => {
-  const id = 'RuntimeSeriesMark';
+export const RuntimeLabelStyle = () => {
+  const id = 'RuntimeLabelStyle';
 
   useEffect(() => {
     const container = document.getElementById(id);

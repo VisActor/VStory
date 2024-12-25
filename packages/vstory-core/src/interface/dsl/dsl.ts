@@ -5,6 +5,7 @@ import type { IComponentCharacterConfig } from './component';
 import type { ICharacter } from '../character';
 import type { IStory } from '../story';
 import type { IStoryCanvas } from '../canvas';
+import type { ITableCharacterConfig } from './table';
 
 export interface IAction<T extends IActionPayload> {
   action: string;
@@ -78,7 +79,7 @@ export type IEditorTextGraphicAttribute = {
   graphicBaseline?: 'top' | 'middle' | 'bottom';
 } & Partial<ITextGraphicAttribute & IRichTextGraphicAttribute>;
 
-export type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig;
+export type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig | ITableCharacterConfig;
 
 export interface ICharacterInitOption {
   story: IStory;

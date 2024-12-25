@@ -48,10 +48,11 @@ import { NoStackArea } from './demos/infographic/market-share';
 import { Top10Podcast } from './demos/infographic/top10_podcast';
 
 // VchartEditor Runtime
-import { RuntimeSeriesMark } from './demos/runtime/series-mark';
-import { RuntimeLabelStyle } from './demos/runtime/label-style';
 import { LineChartArrange } from './demos/arrange/LineChart';
 import { PieChart } from './demos/arrange/PieChart';
+import { RuntimeSeriesMark } from './demos/chart/runtime/series-mark';
+import { RuntimeLabelStyle } from './demos/chart/runtime/label-style';
+import { TableBase } from './demos/table/base';
 
 type MenusType = (
   | {
@@ -296,7 +297,7 @@ const App = () => {
       ]
     },
     {
-      name: 'Runtime',
+      name: 'ChartRuntime',
       subMenus: [
         {
           name: 'Series Mark',
@@ -305,6 +306,15 @@ const App = () => {
         {
           name: 'Label Style',
           component: RuntimeLabelStyle
+        }
+      ]
+    },
+    {
+      name: 'TableRuntime',
+      subMenus: [
+        {
+          name: 'Base Table',
+          component: TableBase
         }
       ]
     }
