@@ -16,197 +16,37 @@ export const LineChartArrange = () => {
     const canvas = document.createElement('canvas');
     container?.appendChild(canvas);
 
-    const USA = [
-      {
-        type: 'Nail polish',
-        country: 'USA',
-        value: 12814
-      },
-      {
-        type: 'Eyebrow pencil',
-        country: 'USA',
-        value: 13012
-      },
-      {
-        type: 'Rouge',
-        country: 'USA',
-        value: 11624
-      },
-      {
-        type: 'Lipstick',
-        country: 'USA',
-        value: 8814
-      },
-      {
-        type: 'Eyeshadows',
-        country: 'USA',
-        value: 12998
-      },
-      {
-        type: 'Eyeliner',
-        country: 'USA',
-        value: 12321
-      },
-      {
-        type: 'Foundation',
-        country: 'USA',
-        value: 10342
-      },
-      {
-        type: 'Lip gloss',
-        country: 'USA',
-        value: 22998
-      },
-      {
-        type: 'Mascara',
-        country: 'USA',
-        value: 11261
-      }
-    ].map(item => ({ ...item, value: 1000 + Math.random() * 1000 }));
-
-    const EU = [
-      {
-        type: 'Nail polish',
-        country: 'EU',
-        value: 4376
-      },
-      {
-        type: 'Eyebrow pencil',
-        country: 'EU',
-        value: 3987
-      },
-      {
-        type: 'Rouge',
-        country: 'EU',
-        value: 3574
-      },
-      {
-        type: 'Lipstick',
-        country: 'EU',
-        value: 4376
-      },
-      {
-        type: 'Eyeshadows',
-        country: 'EU',
-        value: 4572
-      },
-      {
-        type: 'Eyeliner',
-        country: 'EU',
-        value: 3417
-      },
-      {
-        type: 'Foundation',
-        country: 'EU',
-        value: 5231
-      },
-      {
-        type: 'Lip gloss',
-        country: 'EU',
-        value: 4572
-      },
-      {
-        type: 'Mascara',
-        country: 'EU',
-        value: 6134
-      }
-    ].map(item => ({ ...item, value: 2000 + Math.random() * 1000 }));
-
-    const China = [
-      {
-        type: 'Nail polish',
-        country: 'China',
-        value: 3054
-      },
-      {
-        type: 'Eyebrow pencil',
-        country: 'China',
-        value: 5067
-      },
-      {
-        type: 'Rouge',
-        country: 'China',
-        value: 7004
-      },
-      {
-        type: 'Lipstick',
-        country: 'China',
-        value: 9054
-      },
-      {
-        type: 'Eyeshadows',
-        country: 'China',
-        value: 12043
-      },
-      {
-        type: 'Eyeliner',
-        country: 'China',
-        value: 15067
-      },
-      {
-        type: 'Foundation',
-        country: 'China',
-        value: 10119
-      },
-      {
-        type: 'Lip gloss',
-        country: 'China',
-        value: 12043
-      },
-      {
-        type: 'Mascara',
-        country: 'China',
-        value: 10419
-      }
-    ].map(item => ({ ...item, value: 3000 + Math.random() * 1000 }));
-
-    const Africa = [
-      {
-        type: 'Nail polish',
-        country: 'Africa',
-        value: 4229
-      },
-      {
-        type: 'Eyebrow pencil',
-        country: 'Africa',
-        value: 3932
-      },
-      {
-        type: 'Rouge',
-        country: 'Africa',
-        value: 5221
-      },
-      {
-        type: 'Lipstick',
-        country: 'Africa',
-        value: 9256
-      },
-      {
-        type: 'Eyeshadows',
-        country: 'Africa',
-        value: 3308
-      },
-      {
-        type: 'Eyeliner',
-        country: 'Africa',
-        value: 5432
-      },
-      {
-        type: 'Foundation',
-        country: 'Africa',
-        value: 13701
-      },
-      {
-        type: 'Lip gloss',
-        country: 'Africa',
-        value: 4008
-      },
-      {
-        type: 'Mascara',
-        country: 'Africa',
-        value: 18712
-      }
-    ].map(item => ({ ...item, value: 4000 + Math.random() * 1000 }));
+    const typeList = [
+      'Nail polish',
+      'Eyebrow pencil',
+      'Rouge',
+      'Lipstick',
+      'Eyeshadows',
+      'Eyeliner',
+      'Foundation',
+      'Lip gloss',
+      'Mascara'
+    ];
+    const USA = typeList.map((item, i) => ({
+      type: item,
+      country: 'USA',
+      value: 1000 + Math.random() * 1000
+    }));
+    const EU = typeList.map((item, i) => ({
+      type: item,
+      country: 'EU',
+      value: 2000 + Math.random() * 1000
+    }));
+    const China = typeList.map((item, i) => ({
+      type: item,
+      country: 'China',
+      value: 2000 + Math.random() * 1000
+    }));
+    const Africa = typeList.map((item, i) => ({
+      type: item,
+      country: 'Africa',
+      value: 3000 + Math.random() * 1000
+    }));
 
     const spec = {
       type: 'common',
