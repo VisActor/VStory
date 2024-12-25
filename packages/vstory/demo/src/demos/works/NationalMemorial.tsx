@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { Player, Story } from '../../../../../vstory-core/src';
-import { Easing, registerAll } from '../../../../../vstory/src';
+import { Easing, generatorPathEasingFunc, registerAll } from '../../../../../vstory/src';
 import darkBg from '../../assets/nationalMemory/dark.jpeg';
 import candle from '../../assets/nationalMemory/candle.png';
 import monument from '../../assets/nationalMemory/monument.png';
 import { merge } from '@visactor/vutils';
 import { exportVideo } from '../utils';
-import { generatorPathEasingFunc } from '../../../../../vstory-animate/cjs';
 
 registerAll();
 

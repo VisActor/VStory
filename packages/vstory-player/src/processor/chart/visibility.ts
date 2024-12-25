@@ -126,10 +126,10 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
     vrenderComponents.forEach(group => {
       if (isRun) {
-        // group.setAttribute('visibleAll', true);
+        (group.attribute as any).visibleAll = true;
         this.runTransformFunc(group as any, appearTransformFunc, action, payload, defaultPayload);
       } else {
-        group.setAttribute('visibleAll', false);
+        (group.attribute as any).visibleAll = false;
       }
     });
   }
@@ -146,10 +146,10 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     vrenderComponents.forEach(group => {
       if (isRun) {
-        group.setAttribute('visibleAll', true);
+        (group.attribute as any).visibleAll = true;
         this.runTransformFunc(group as any, appearTransformFunc, action, payload, defaultPayload);
       } else {
-        group.setAttribute('visibleAll', false);
+        (group.attribute as any).visibleAll = false;
       }
     });
   }
@@ -169,9 +169,9 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     // debugger;
     vrenderComponents.forEach(c => {
       if (isRun) {
-        c.setAttribute('visibleAll', true);
+        (c.attribute as any).visibleAll = false;
       } else {
-        c.setAttribute('visibleAll', false);
+        (c.attribute as any).visibleAll = false;
       }
     });
     if (!isRun) {
