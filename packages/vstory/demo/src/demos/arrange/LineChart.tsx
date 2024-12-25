@@ -30,12 +30,12 @@ export const LineChartArrange = () => {
     const USA = typeList.map((item, i) => ({
       type: item,
       country: 'USA',
-      value: 1000 + Math.random() * 1000
+      value: Math.random() * 1000
     }));
     const EU = typeList.map((item, i) => ({
       type: item,
       country: 'EU',
-      value: 2000 + Math.random() * 1000
+      value: 1000 + Math.random() * 1000
     }));
     const China = typeList.map((item, i) => ({
       type: item,

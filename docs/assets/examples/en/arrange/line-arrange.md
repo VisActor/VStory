@@ -7,13 +7,13 @@ order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vchart-arrange.gif
 ---
 
-# 折线图动画编排
+# Line Chart Animation Arrangement
 
-`VChart`图表组件可以参考[VChart图表元素](/vstory/demo/character/vchart)是一种通用的Character元素，可以配置任意的VChart spec。那么当配置好了一个VChart的spec之后，我们就基于VStory的动画编排能力，去控制该图表不同组件、系列、坐标轴、图例等组件的动画效果。
+The `VChart` chart component can refer to [VChart Chart Elements](/vstory/demo/character/vchart) for a generic Character element that can be configured with any VChart spec. Once a VChart spec is configured, we can use VStory's animation arrangement capabilities to control the animation effects of different components, series, axes, legends, and other components of the chart.
 
-这个demo，我们将演示对多系列折线图里线段动画的编排。
+In this demo, we will demonstrate the animation arrangement of line segments in a multi-series line chart.
 
-## 代码演示
+## Code Demo
 
 ```javascript livedemo template=vstory
 // 注册所有需要的内容

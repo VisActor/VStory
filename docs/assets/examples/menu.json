@@ -181,6 +181,20 @@
             "zh": "VChart动画编排",
             "en": "VChart Animation arrangement"
           }
+        },
+        {
+          "path": "bar-line-arrange",
+          "title": {
+            "zh": "VChart组合图动画编排",
+            "en": "VChart combination chart Animation arrangement"
+          }
+        },
+        {
+          "path": "line-arrange",
+          "title": {
+            "zh": "VChart多系列动画编排",
+            "en": "VChart multiple series Animation arrangement"
+          }
         }
       ]
     },
