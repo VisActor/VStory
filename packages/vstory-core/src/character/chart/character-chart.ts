@@ -10,7 +10,7 @@ import type { IChartCharacterConfig } from '../../interface/dsl/chart';
 import { getLayoutFromWidget } from '../../utils/layout';
 import type { IChartCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
 import { CommonSpecRuntimeInstance } from './runtime/common-spec';
-import { CommonLayoutRuntimeInstance } from './runtime/common-layout';
+import { CommonLayoutRuntimeInstance } from '../common/runtime/common-layout';
 import { ChartConfigProcess } from './chart-config-process';
 import type { ICharacterChart } from './interface/character-chart';
 import { mergeChartOption } from '../../utils/chart';

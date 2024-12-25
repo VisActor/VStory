@@ -4,7 +4,9 @@ import type { IAABBBounds, IBoundsLike, Bounds } from '@visactor/vutils';
 import { pointInAABB, transformBoundsWithMatrix } from '@visactor/vutils';
 import { isBoundsLikeEqual } from '../../../utils/equal';
 import * as VTable from '@visactor/vtable';
-import type { IInitOption } from '@visactor/vchart';
+import { VChart, type IInitOption } from '@visactor/vchart';
+
+VTable.register.chartModule('vchart', VChart);
 
 export const TableClass: { [key: string]: any } = {
   table: VTable.ListTable,
@@ -18,7 +20,8 @@ export const TableClass: { [key: string]: any } = {
   // 其他都是 PivotChart
 
   ListTable: VTable.ListTable,
-  PivotTable: VTable.PivotTable
+  PivotTable: VTable.PivotTable,
+  PivotChart: VTable.PivotChart
 };
 
 export type IVTable = VTable.ListTable | VTable.PivotTable | VTable.PivotChart;
@@ -30,7 +33,8 @@ export interface ITableConstructor {
 export interface ITableGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
   spec: any;
-  chartType: string;
+  // 表格类型
+  tableType: string;
   // ClassType: any;
   TableConstructor?: ITableConstructor;
   dpr: number;
@@ -105,7 +109,7 @@ export class VTableGraphic extends Rect {
     // 创建table
     this.attribute.viewBox = params.viewBox;
     const filledOption = this._createOption(params);
-    this._vTable = new (TableConstructor ?? TableClass[params.chartType] ?? VTable.PivotChart)(filledOption);
+    this._vTable = new (TableConstructor ?? TableClass[params.tableType] ?? VTable.PivotChart)(filledOption);
 
     // 背景设置为false后，不会擦除画布内容，可以实现元素正常堆叠绘制
     const stage = this._vTable.scenegraph.stage;

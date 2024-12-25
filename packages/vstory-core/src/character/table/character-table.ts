@@ -12,7 +12,8 @@ import type { ITableCharacterRuntime, IUpdateConfigParams } from './interface/ru
 import { TableConfigProcess } from './table-config-process';
 import type { ICharacterTable } from './interface/character-table';
 import { CommonSpecRuntimeInstance } from './runtime/common-spec';
-import { CommonLayoutRuntimeInstance } from '../chart/runtime/common-layout';
+import { CommonLayoutRuntimeInstance } from '../common/runtime/common-layout';
+import { TableTypeRuntimeInstance } from './runtime/table-type';
 
 export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>
@@ -93,7 +94,7 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   }
 
   protected _initRuntime(): void {
-    this._runtime.push(CommonLayoutRuntimeInstance as any, CommonSpecRuntimeInstance);
+    this._runtime.push(CommonLayoutRuntimeInstance as any, TableTypeRuntimeInstance, CommonSpecRuntimeInstance);
   }
   protected _clearRuntime(): void {
     this._runtime.length = 0;

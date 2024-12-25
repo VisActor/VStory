@@ -8,7 +8,6 @@ export class CommonSpecRuntime implements ITableCharacterRuntime {
   applyConfigToAttribute(character: ICharacterTable): void {
     const rawAttribute = character.getRuntimeConfig().getAttribute();
     const { spec } = rawAttribute;
-    rawAttribute.chartType = 'table';
     spec.canvas = character.canvas.getNativeCanvas();
     spec.animation = false;
     // 编辑模式关闭
@@ -17,17 +16,17 @@ export class CommonSpecRuntime implements ITableCharacterRuntime {
     spec.select = Object.assign({}, spec.select ?? {}, {
       makeSelectCellVisible: false
     });
-    spec.hover = spec.hover ?? {};
-    spec.select.disableSelect = true;
-    spec.hover.disableHover = true;
+    // spec.hover = spec.hover ?? {};
+    // // spec.select.disableSelect = true;
+    // // spec.hover.disableHover = true;
     spec.columnResizeMode = 'none';
     spec.rowResizeMode = 'none';
     /** 控制拖拽表头移动位置顺序开关 */
     spec.dragHeaderMode = 'none';
 
     spec.chartOption = {
-      disableInteraction: true,
-      disableTriggerEvent: true
+      // disableInteraction: true,
+      // disableTriggerEvent: true
     };
 
     if (spec.legends) {

@@ -1,7 +1,7 @@
 import { merge } from '@visactor/vutils';
-import type { IChartCharacterRuntime } from '../interface/runtime';
+import type { IChartCharacterRuntime } from '../../chart/interface/runtime';
 import { getLayoutFromWidget } from '../../../utils/layout';
-import type { ICharacterChart } from '../interface/character-chart';
+import type { ICharacterChart } from '../../chart/interface/character-chart';
 export class CommonLayoutRuntime implements IChartCharacterRuntime {
   type = 'CommonLayout';
 
