@@ -22,6 +22,9 @@
 
 
 [更多详情请查看 v0.0.22](https://github.com/VisActor/VStory/releases/tag/v0.0.22)
+- **@visactor/vstory-core**: support `auto` for scaleX/scaleY in initParams
+
+[更多详情请查看 v0.0.21](https://github.com/VisActor/VStory/releases/tag/v0.0.21)
 
 # v0.0.20
 
