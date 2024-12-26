@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-core",
+      "comment": "feat: support highlight inverse select",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-core"
+}

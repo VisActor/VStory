@@ -54,6 +54,7 @@ export interface IChartUpdateAction extends IAction<IChartUpdatePayload> {
 /************ Highlight **************/
 export interface IChartHighlightPayload extends IActionPayload {
   value: Datum;
+  inverse?: boolean;
   id: string | number;
   style: {
     [key: string]: number | string;
