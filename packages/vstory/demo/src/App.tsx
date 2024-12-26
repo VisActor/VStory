@@ -44,6 +44,8 @@ import { ProjectGoal } from './demos/infographic/project-goal';
 import { BigDataWordCloud } from './demos/infographic/big-data-wordcloud';
 import { AreaChart } from './demos/infographic/source-of-new-contacts-area-chart';
 import { MarketingWordcloud } from './demos/infographic/marking-wordcloud';
+import { NoStackArea } from './demos/infographic/market-share';
+import { Top10Podcast } from './demos/infographic/top10_podcast';
 
 // VchartEditor Runtime
 import { RuntimeSeriesMark } from './demos/runtime/series-mark';
@@ -273,6 +275,14 @@ const App = () => {
         {
           name: 'Marketing WordCloud',
           component: MarketingWordcloud
+        },
+        {
+          name: 'Market Share',
+          component: NoStackArea
+        },
+        {
+          name: 'Top 10 Podcast Publishers in US',
+          component: Top10Podcast
         }
       ]
     },

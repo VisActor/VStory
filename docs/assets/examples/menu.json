@@ -381,6 +381,20 @@
             "zh": "信息图模板-散点图: 年龄与轻生率",
             "en": "Scatter Cloud Infographic: Age and Suicide Rate"
           }
+        },
+        {
+          "path": "market-share-area-chart",
+          "title": {
+            "zh": "信息图模板-面积图: Market share",
+            "en": "Area chart Infographic: Market share"
+          }
+        },
+        {
+          "path": "top10-podcasts-bar-chart",
+          "title": {
+            "zh": "信息图模板-面积图: Top 10 Podcasts",
+            "en": "Bar chart Infographic: Top 10 Podcasts"
+          }
         }
       ]
     }
