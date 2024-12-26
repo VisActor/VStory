@@ -10,7 +10,7 @@ export class VChartBaseActionProcessor extends ActionProcessorItem {
    * @param vchart
    */
   selectBySelector(
-    selector: string,
+    selector: string | string[],
     character: ICharacter
   ): {
     chart: boolean;

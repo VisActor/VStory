@@ -9,7 +9,7 @@ export class VTableBaseActionProcessor extends ActionProcessorItem {
    * @param vtable
    */
   selectBySelector(
-    selector: string,
+    selector: string | string[],
     character: ICharacter
   ): {
     table: boolean;

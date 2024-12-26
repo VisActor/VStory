@@ -17,6 +17,7 @@ import { mergeChartOption } from '../../utils/chart';
 import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
 import { MarkStyleRuntimeInstance } from './runtime/mark-style';
 import { LabelStyleRuntimeInstance } from './runtime/label-style';
+import { isArray } from '@visactor/vutils';
 
 export class CharacterChart<T extends IChartGraphicAttribute>
   extends CharacterBase<IChartGraphicAttribute>
@@ -49,7 +50,30 @@ export class CharacterChart<T extends IChartGraphicAttribute>
     this._graphic.vchart.getStage().ticker.tickAt && this._graphic.vchart.getStage().ticker.tickAt(t);
   }
 
-  getGraphicBySelector(selector: string) {
+  getGraphicBySelector(selector: string | string[]) {
+    let chart = false;
+    let panel = false;
+    const seriesList: Set<ISeries> = new Set();
+    const componentsList: Set<IComponent> = new Set();
+    if (isArray(selector)) {
+      selector.forEach(s => {
+        const data = this._getGraphicBySelector(s);
+        chart = chart || data.chart;
+        panel = panel || data.panel;
+        data.seriesList.forEach(s => seriesList.add(s));
+        data.componentsList.forEach(c => componentsList.add(c));
+      });
+      return {
+        chart,
+        panel,
+        seriesList: Array.from(seriesList.values()),
+        componentsList: Array.from(componentsList.values())
+      };
+    }
+    return this._getGraphicBySelector(selector);
+  }
+
+  _getGraphicBySelector(selector: string) {
     const vchart = this._graphic.vchart;
     let chart = false;
     let seriesList = vchart.getChart().getAllSeries();

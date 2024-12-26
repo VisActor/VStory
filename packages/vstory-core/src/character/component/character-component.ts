@@ -6,6 +6,7 @@ import type { ICharacterInitOption } from '../../interface/dsl/dsl';
 import { ComponentConfigProcess } from './component-config-process';
 import type { ICharacterComponent } from './interface/character-component';
 import type { IStoryEvent, ICharacterPickInfo } from '../../interface/event';
+import { isArray } from '@visactor/vutils';
 
 export abstract class CharacterComponent<T extends IGraphic, T1>
   extends CharacterBase<T1>
@@ -30,7 +31,20 @@ export abstract class CharacterComponent<T extends IGraphic, T1>
     return;
   }
 
-  getGraphicBySelector(selector: string) {
+  getGraphicBySelector(selector: string | string[]) {
+    if (isArray(selector)) {
+      const graphics: Set<IGraphic> = new Set();
+      selector.forEach(s => {
+        this._getGraphicBySelector(s).forEach(g => {
+          graphics.add(g);
+        });
+      });
+      return Array.from(graphics.values());
+    }
+    return this._getGraphicBySelector(selector);
+  }
+
+  _getGraphicBySelector(selector: string) {
     const g = this._graphic;
     if (!selector) {
       return [g];
