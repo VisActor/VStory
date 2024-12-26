@@ -27,7 +27,7 @@ export class DynamicLinePlayActionProcessor extends VChartBaseActionProcessor {
       const { duration, easing } = animation;
 
       const delta = end - start;
-      (instance.getStage().children[0] as any)
+      (instance.getStage().getChildren()[0] as any)
         .animate()
         .to({}, duration, easing)
         .onFrame((step: any, t: number) => {

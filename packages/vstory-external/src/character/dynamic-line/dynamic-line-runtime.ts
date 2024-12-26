@@ -6,15 +6,10 @@ import type { ICharacterChart } from '@visactor/vstory-core/es/character/chart/i
 export class DynamicLineRuntime implements IChartCharacterRuntime {
   type = DYNAMIC_LINE;
 
-  protected declare _character: ICharacterChart;
-
-  constructor(character: ICharacterChart) {
-    this._character = character;
-  }
-
-  applyConfigToAttribute(): void {
-    const { bottomRange } = this._character.config.options as any;
-    const rawAttribute = this._character.getAttribute() as IDynamicLineChartGraphicAttribute;
+  applyConfigToAttribute(character: ICharacterChart): void {
+    const rawAttribute = character.getRuntimeConfig().getAttribute() as IDynamicLineChartGraphicAttribute;
+    const config = character.getRuntimeConfig().config;
+    const { bottomRange } = config.options as any;
     const { spec } = rawAttribute;
 
     const bottom = spec.scrollBar.find((item: any) => item.orient === 'bottom');
@@ -46,4 +41,4 @@ export class DynamicLineRuntime implements IChartCharacterRuntime {
   }
 }
 
-export const DynamicLineRuntimeInstance = new DynamicLineRuntime(null);
+export const DynamicLineRuntimeInstance = new DynamicLineRuntime();
