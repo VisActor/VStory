@@ -4,7 +4,7 @@ group: infographic
 title: Market Share
 keywords: templates, visualization, area, left-right
 order: 1-0
-cover: https://tosv.byted.org/obj/bit-cloud/vstory-infographic/preview/1.png
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/1.png
 ---
 
 # Venn Chart Infographic
