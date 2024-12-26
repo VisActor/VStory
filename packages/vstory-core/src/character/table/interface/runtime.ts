@@ -1,6 +1,5 @@
-import type { IVTable } from '@visactor/vtable';
 import type { ICharacterConfig } from '../../../interface/dsl/dsl';
-import type { ICharacterTableRuntimeConfig } from './character-table';
+import type { ICharacterTableRuntimeConfig, IVTable } from './character-table';
 export interface ITableCharacterRuntime {
   readonly type: string;
   // 应用config到attribute
@@ -10,7 +9,7 @@ export interface ITableCharacterRuntime {
   afterInitialize?: (character: ICharacterTableRuntimeConfig, vtable: IVTable) => void;
 
   // 图表绘制完成
-  afterVRenderDraw?: (character: ICharacterTableRuntimeConfig, vtable: IVTable) => void;
+  beforeVRenderDraw?: (character: ICharacterTableRuntimeConfig, vtable: IVTable) => void;
 }
 
 export interface ITableCharacterRuntimeConstructor {

@@ -1,9 +1,18 @@
 import React, { useEffect } from 'react';
-import { Player, Story, initVR, registerGraphics, registerCharacters, IStoryDSL } from '../../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction, registerVTableAction } from '../../../../../vstory-player/src';
-import { pivotTableOption } from './option-pivot-table';
-import { listTableOption } from './option-list-table';
-import { pivotChartOption } from './option-pivot-chart';
+import {
+  Player,
+  Story,
+  initVR,
+  registerGraphics,
+  registerCharacters,
+  IStoryDSL
+} from '../../../../../../vstory-core/src';
+import {
+  registerVComponentAction,
+  registerVChartAction,
+  registerVTableAction
+} from '../../../../../../vstory-player/src';
+import { listTableOption } from '../option-list-table';
 import { cloneDeep } from '@visactor/vutils';
 
 registerGraphics();
@@ -14,9 +23,6 @@ registerVTableAction();
 initVR();
 
 function loadDSL() {
-  const tableSpec0 = cloneDeep(listTableOption);
-  const tableSpec1 = cloneDeep(pivotTableOption);
-  const tableSpec2 = cloneDeep(pivotChartOption);
   const dsl: IStoryDSL = {
     characters: [
       {
@@ -26,56 +32,23 @@ function loadDSL() {
         position: {
           top: 20,
           left: 20,
-          width: 500,
-          height: 300
+          width: 1100,
+          height: 750
         },
         options: {
-          spec: tableSpec0,
+          spec: cloneDeep(listTableOption),
           initOption: {
             interactive: true,
             animation: false,
             disableTriggerEvent: true,
             disableDirtyBounds: true
-          }
-        }
-      },
-      {
-        type: 'VTable',
-        id: 'table1',
-        zIndex: 10,
-        position: {
-          top: 350,
-          left: 20,
-          width: 500,
-          height: 300
-        },
-        options: {
-          spec: tableSpec1,
-          initOption: {
-            interactive: true,
-            animation: false,
-            disableTriggerEvent: true,
-            disableDirtyBounds: true
-          }
-        }
-      },
-      {
-        type: 'VTable',
-        id: 'table2',
-        zIndex: 10,
-        position: {
-          top: 20,
-          left: 540,
-          width: 600,
-          height: 630
-        },
-        options: {
-          spec: tableSpec2,
-          initOption: {
-            interactive: true,
-            animation: false,
-            disableTriggerEvent: true,
-            disableDirtyBounds: true
+          },
+          colWidth: {
+            0: 150,
+            1: 50,
+            2: 30,
+            3: 20,
+            4: 100
           }
         }
       }
@@ -114,8 +87,8 @@ function loadDSL() {
   return dsl;
 }
 
-export const TableBase = () => {
-  const id = 'table-base';
+export const ColWidth = () => {
+  const id = 'col-width';
 
   useEffect(() => {
     const container = document.getElementById(id);

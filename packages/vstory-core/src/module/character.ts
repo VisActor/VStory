@@ -11,6 +11,7 @@ import { TimelineCharacter } from '../character/component/character/timeline';
 import { UnitCharacter } from '../character/component/character/unit';
 import { StoryFactory } from '../utils/factory';
 import { VTableCharacter } from '../character/table/character/vtable';
+import { PivotChartCharacter } from '../character/table/character/pivot-chart';
 
 let _register = false;
 export function registerCharacters() {
@@ -35,4 +36,6 @@ export function registerCharacters() {
   StoryFactory.registerCharacter(UnitCharacter.type, UnitCharacter);
   // table
   StoryFactory.registerCharacter(VTableCharacter.type, VTableCharacter);
+  // table
+  StoryFactory.registerCharacter(PivotChartCharacter.type, PivotChartCharacter);
 }

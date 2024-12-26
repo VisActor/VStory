@@ -1,9 +1,18 @@
 import React, { useEffect } from 'react';
-import { Player, Story, initVR, registerGraphics, registerCharacters, IStoryDSL } from '../../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction, registerVTableAction } from '../../../../../vstory-player/src';
-import { pivotTableOption } from './option-pivot-table';
-import { listTableOption } from './option-list-table';
-import { pivotChartOption } from './option-pivot-chart';
+import {
+  Player,
+  Story,
+  initVR,
+  registerGraphics,
+  registerCharacters,
+  IStoryDSL
+} from '../../../../../../vstory-core/src';
+import {
+  registerVComponentAction,
+  registerVChartAction,
+  registerVTableAction
+} from '../../../../../../vstory-player/src';
+import { listTableOption } from '../option-list-table';
 import { cloneDeep } from '@visactor/vutils';
 
 registerGraphics();
@@ -14,9 +23,6 @@ registerVTableAction();
 initVR();
 
 function loadDSL() {
-  const tableSpec0 = cloneDeep(listTableOption);
-  const tableSpec1 = cloneDeep(pivotTableOption);
-  const tableSpec2 = cloneDeep(pivotChartOption);
   const dsl: IStoryDSL = {
     characters: [
       {
@@ -30,52 +36,21 @@ function loadDSL() {
           height: 300
         },
         options: {
-          spec: tableSpec0,
+          spec: cloneDeep(listTableOption),
           initOption: {
             interactive: true,
             animation: false,
             disableTriggerEvent: true,
             disableDirtyBounds: true
-          }
-        }
-      },
-      {
-        type: 'VTable',
-        id: 'table1',
-        zIndex: 10,
-        position: {
-          top: 350,
-          left: 20,
-          width: 500,
-          height: 300
-        },
-        options: {
-          spec: tableSpec1,
-          initOption: {
-            interactive: true,
-            animation: false,
-            disableTriggerEvent: true,
-            disableDirtyBounds: true
-          }
-        }
-      },
-      {
-        type: 'VTable',
-        id: 'table2',
-        zIndex: 10,
-        position: {
-          top: 20,
-          left: 540,
-          width: 600,
-          height: 630
-        },
-        options: {
-          spec: tableSpec2,
-          initOption: {
-            interactive: true,
-            animation: false,
-            disableTriggerEvent: true,
-            disableDirtyBounds: true
+          },
+          cellStyle: {
+            '2_2': {
+              col: 2,
+              row: 2,
+              style: {
+                color: 'red'
+              }
+            }
           }
         }
       }
@@ -114,15 +89,15 @@ function loadDSL() {
   return dsl;
 }
 
-export const TableBase = () => {
-  const id = 'table-base';
+export const CellStyle = () => {
+  const id = 'cell-style';
 
   useEffect(() => {
     const container = document.getElementById(id);
     const canvas = document.createElement('canvas');
     container?.appendChild(canvas);
 
-    const story = new Story(null, { canvas, width: 1200, height: 800, background: 'gray' });
+    const story = new Story(null, { canvas, width: 700, height: 500, background: 'gray' });
     const player = new Player(story);
     story.init(player);
     // @ts-ignore

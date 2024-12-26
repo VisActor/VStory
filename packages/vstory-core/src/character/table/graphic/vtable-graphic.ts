@@ -1,10 +1,11 @@
-import type { GraphicType, IRectGraphicAttribute, ITicker } from '@visactor/vrender-core';
+import type { GraphicType, IRectGraphicAttribute, ITicker, IStage } from '@visactor/vrender-core';
 import { genNumberType, parsePadding, Rect } from '@visactor/vrender-core';
 import type { IAABBBounds, IBoundsLike, Bounds } from '@visactor/vutils';
 import { pointInAABB, transformBoundsWithMatrix } from '@visactor/vutils';
 import { isBoundsLikeEqual } from '../../../utils/equal';
 import * as VTable from '@visactor/vtable';
 import { VChart, type IInitOption } from '@visactor/vchart';
+import type { IVTable } from '../interface/character-table';
 
 VTable.register.chartModule('vchart', VChart);
 
@@ -23,8 +24,6 @@ export const TableClass: { [key: string]: any } = {
   PivotTable: VTable.PivotTable,
   PivotChart: VTable.PivotChart
 };
-
-export type IVTable = VTable.ListTable | VTable.PivotTable | VTable.PivotChart;
 
 export interface ITableConstructor {
   new (option: any): IVTable;
@@ -66,8 +65,8 @@ export class VTableGraphic extends Rect {
   get vTable() {
     return this._vTable;
   }
-  get vTableStage() {
-    return this._vTable.scenegraph.stage;
+  get vTableStage(): IStage {
+    return this._vTable.scenegraph.stage as IStage;
   }
   // vtable 的实际绘图绘制位置
   // 首先 vtable.stage 会根据 stage.window.viewBoxTransform 变换第一次，这一次变化包括了
@@ -219,6 +218,7 @@ export class VTableGraphic extends Rect {
     // 先更新 viewBox
     this.attribute.viewBox = bounds;
     // 直接更新viewBox
+    // @ts-ignore
     this._vTable.updateViewBox(this._transformViewBoxToZero(bounds));
   }
 }

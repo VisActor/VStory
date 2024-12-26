@@ -1,4 +1,3 @@
-import type { IRect } from '@visactor/vrender-core';
 import { ActionProcessorItem } from '../processor-item';
 import type { IActionSpec, ICharacter } from '@visactor/vstory-core';
 import { array } from '@visactor/vutils';

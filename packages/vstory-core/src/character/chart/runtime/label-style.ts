@@ -166,7 +166,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
    * @param vchart
    * @returns
    */
-  afterVRenderDraw(character: ICharacterChart, vchart: IVChart) {
+  beforeVRenderDraw(character: ICharacterChart, vchart: IVChart) {
     const config = character.getRuntimeConfig().config;
     const dataGroupStyle = config.options?.dataGroupStyle;
     const labelStyle = config.options?.labelStyle;

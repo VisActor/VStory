@@ -62,6 +62,7 @@ export class VTableRender extends DefaultCanvasRectRender implements IGraphicRen
     const stageMatrix = table.stage.window.getViewBoxTransform().clone();
     stageMatrix.multiply(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
     // vTableStage.setViewBox();
+    // @ts-ignore
     vTable.setViewBoxTransform(
       stageMatrix.a,
       stageMatrix.b,

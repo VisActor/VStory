@@ -2,18 +2,20 @@ import type { ITicker, ITimeline } from '@visactor/vrender-core';
 import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
-import type { ITableGraphicAttribute, IVTable } from './graphic/vtable-graphic';
+import type { ITableGraphicAttribute } from './graphic/vtable-graphic';
 import { VTableGraphic } from './graphic/vtable-graphic';
-import { getTableModelWithEvent } from './utils/vtable-pick';
 import type { ICharacterConfig, ICharacterInitOption } from '../../interface/dsl/dsl';
 import type { ITableCharacterConfig } from '../../interface/dsl/table';
 import { getLayoutFromWidget } from '../../utils/layout';
 import type { ITableCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
 import { TableConfigProcess } from './table-config-process';
-import type { ICharacterTable } from './interface/character-table';
+import type { ICharacterTable, IVTable } from './interface/character-table';
 import { CommonSpecRuntimeInstance } from './runtime/common-spec';
 import { CommonLayoutRuntimeInstance } from '../common/runtime/common-layout';
 import { TableTypeRuntimeInstance } from './runtime/table-type';
+import { CellStyleRuntimeInstance } from './runtime/cell-style';
+import { ColWidthRuntimeInstance } from './runtime/col-width';
+import { RowHeightRuntimeInstance } from './runtime/row-height';
 
 export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>
@@ -23,8 +25,8 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   protected declare _graphic: VTableGraphic;
   protected declare _config: ITableCharacterConfig;
 
-  // 临时记录 vtable 对象。在第一次执行 afterInitializeTable 后赋值， 在 afterVRenderDraw 中使用
-  // 不临时记录的话，第一次 afterVRenderDraw 时，graphic 对象还未执行完初始化，当前对象的 _graphic 为 null
+  // 临时记录 vtable 对象。在第一次执行 afterInitializeTable 后赋值， 在 beforeVRenderDraw 中使用
+  // 不临时记录的话，第一次 beforeVRenderDraw 时，graphic 对象还未执行完初始化，当前对象的 _graphic 为 null
   protected _vtable: IVTable;
 
   protected _ticker: ITicker;
@@ -61,27 +63,16 @@ export class CharacterTable<T extends ITableGraphicAttribute>
     if (!(event.detailPath ?? event.path).some(g => g === this._graphic)) {
       return false;
     }
-    const tablePath = event.detailPath[event.detailPath.length - 1];
-    const result = getTableModelWithEvent(this._graphic.vTable, event);
-    if (!result) {
-      // 点击到图表的空白区域
-      if (this._graphic.pointInViewBox((event as any).canvasX, (event as any).canvasY)) {
-        return {
-          part: 'null',
-          graphic: null,
-          modelInfo: null,
-          graphicType: 'null'
-        };
-      }
-      return false;
+    // 点击到图表的空白区域
+    if (this._graphic.pointInViewBox((event as any).canvasX, (event as any).canvasY)) {
+      return {
+        part: 'null',
+        graphic: null,
+        modelInfo: null,
+        graphicType: 'null'
+      };
     }
-    const graphic = tablePath?.[tablePath.length - 1];
-    return {
-      part: result.type,
-      modelInfo: result,
-      graphic,
-      graphicType: graphic.type
-    };
+    return false;
   }
 
   _initGraphic() {
@@ -91,10 +82,25 @@ export class CharacterTable<T extends ITableGraphicAttribute>
     this._graphic = new VTableGraphic(attribute);
 
     this.canvas.addGraphic(this._graphic);
+    // 完成spec设置
+    this._runtime.forEach(r => r.afterInitialize?.(this, this._graphic.vTable));
+  }
+
+  protected _setAttributes(attr: T): void {
+    super._setAttributes(attr);
+    // 完成spec更新也需要调用 afterInitialize
+    this._runtime.forEach(r => r.afterInitialize?.(this, this._graphic.vTable));
   }
 
   protected _initRuntime(): void {
-    this._runtime.push(CommonLayoutRuntimeInstance as any, TableTypeRuntimeInstance, CommonSpecRuntimeInstance);
+    this._runtime.push(
+      CommonLayoutRuntimeInstance as any,
+      TableTypeRuntimeInstance,
+      CommonSpecRuntimeInstance,
+      CellStyleRuntimeInstance,
+      ColWidthRuntimeInstance,
+      RowHeightRuntimeInstance
+    );
   }
   protected _clearRuntime(): void {
     this._runtime.length = 0;

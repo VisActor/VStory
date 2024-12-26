@@ -1,4 +1,4 @@
-import type { IGraphic, ITicker, ITimeline } from '@visactor/vrender-core';
+import type { ITicker, ITimeline } from '@visactor/vrender-core';
 import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
@@ -26,8 +26,8 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   protected declare _graphic: VChartGraphic;
   protected declare _config: IChartCharacterConfig;
 
-  // 临时记录 vchart 对象。在第一次执行 afterInitializeChart 后赋值， 在 afterVRenderDraw 中使用
-  // 不临时记录的话，第一次 afterVRenderDraw 时，graphic 对象还未执行完初始化，当前对象的 _graphic 为 null
+  // 临时记录 vchart 对象。在第一次执行 afterInitializeChart 后赋值， 在 beforeVRenderDraw 中使用
+  // 不临时记录的话，第一次 beforeVRenderDraw 时，graphic 对象还未执行完初始化，当前对象的 _graphic 为 null
   protected _vchart: IVChart;
 
   protected _ticker: ITicker;
@@ -207,9 +207,9 @@ export class CharacterChart<T extends IChartGraphicAttribute>
               this._vchart = vchart;
               this._runtime.forEach(r => r.afterInitialize?.(this, vchart));
             },
-
-            afterVRenderDraw: () => {
-              this._runtime.forEach(r => r.afterVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
+            // @ts-ignore
+            beforeDoRender: () => {
+              this._runtime.forEach(r => r.beforeVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
             }
           }
         },
