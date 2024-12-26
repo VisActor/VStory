@@ -1,6 +1,20 @@
 # Change Log - @visactor/vstory-core
 
-This log was last generated on Wed, 18 Dec 2024 08:25:28 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Dec 2024 03:40:33 GMT and should not be manually modified.
+
+## 0.0.22
+Thu, 26 Dec 2024 03:40:33 GMT
+
+### Updates
+
+- feat: enhance vchart animate arrange
+- feat: add arrange demo, support line growPoint animate
+- fix: fix issue with image background
+- feat: change runtime logic about get the character config
+
+
+- feat: enhance scaleXY auto to support resize canvas wh
+- fix: fix issue with chart blur not clear
 
 ## 0.0.21
 Wed, 18 Dec 2024 08:25:28 GMT
