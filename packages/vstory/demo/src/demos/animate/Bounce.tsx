@@ -17,9 +17,9 @@ export const Bounce = () => {
   const id = 'Bounce';
 
   useEffect(() => {
-    const container = document.getElementById(id);
-    const canvas = document.createElement('canvas');
-    container?.appendChild(canvas);
+    // const container = document.getElementById(id);
+    // const canvas = document.createElement('canvas');
+    // container?.appendChild(canvas);
 
     const chartSpec = {
       type: 'bar',
@@ -43,7 +43,14 @@ export const Bounce = () => {
       yField: 'sales'
     };
 
-    const story = new Story(null, { canvas, width: 800, height: 500, background: 'pink' });
+    const story = new Story(null, {
+      dom: id,
+      width: 900,
+      height: 500,
+      scaleX: 'auto',
+      scaleY: 'auto',
+      background: 'pink'
+    });
     const player = new Player(story);
     story.init(player);
 
@@ -188,5 +195,5 @@ export const Bounce = () => {
     };
   }, []);
 
-  return <div style={{ width: '100%', height: '100%' }} id={id}></div>;
+  return <div style={{ width: '500px', height: '300px' }} id={id}></div>;
 };

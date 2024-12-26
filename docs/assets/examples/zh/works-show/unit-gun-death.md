@@ -356,7 +356,7 @@ const dsl = VStory.createUnitTemplate(spec);
 console.log(dsl);
 
 
-const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0', scaleX: 0.5, scaleY: 0.5 });
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0', width: 1550, height: 800, scaleX: 'auto', scaleY: 'auto' });
 const player = new VStory.Player(story);
 story.init(player);
 

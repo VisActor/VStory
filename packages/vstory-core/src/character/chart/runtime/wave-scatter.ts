@@ -29,9 +29,9 @@ export class WaveScatterRuntime implements IChartCharacterRuntime {
   type = 'WaveScatter';
 
   applyConfigToAttribute(character: ICharacterChart): void {
-    const rawAttribute = character.getAttribute();
+    const rawAttribute = character.getRuntimeConfig().getAttribute();
     const { spec } = rawAttribute;
-    const config = character.config as any;
+    const config = character.getRuntimeConfig().config as any;
     const {
       waveDuration = 1000,
       categoryField,

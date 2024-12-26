@@ -16,7 +16,7 @@ import { UnitInfographic } from './demos/works/unit-infographic';
 import { VChartSiteDemo } from './demos/works/website/VChartSite';
 import { TimelineAnimate } from './demos/component/timeline';
 import { BasicUnit } from './demos/component/basic-unit';
-import { BarChart2 } from './demos/BarChart2';
+import { BarChart2 } from './demos/arrange/BarChart2';
 import { UnitTemplate1 } from './demos/templates/unit-template1';
 import { VScreen } from './demos/works/vscreen';
 import { Lottie } from './demos/component/lottie';
@@ -44,6 +44,12 @@ import { ProjectGoal } from './demos/infographic/project-goal';
 import { BigDataWordCloud } from './demos/infographic/big-data-wordcloud';
 import { AreaChart } from './demos/infographic/source-of-new-contacts-area-chart';
 import { MarketingWordcloud } from './demos/infographic/marking-wordcloud';
+
+// VchartEditor Runtime
+import { RuntimeSeriesMark } from './demos/runtime/series-mark';
+import { RuntimeLabelStyle } from './demos/runtime/label-style';
+import { LineChartArrange } from './demos/arrange/LineChart';
+import { PieChart } from './demos/arrange/PieChart';
 
 type MenusType = (
   | {
@@ -94,6 +100,14 @@ const App = () => {
         {
           name: 'BarChart1',
           component: BarChart1
+        },
+        {
+          name: 'LineChartArrange',
+          component: LineChartArrange
+        },
+        {
+          name: 'PieChart',
+          component: PieChart
         },
         {
           name: 'BarChart2',
@@ -268,6 +282,19 @@ const App = () => {
         {
           name: 'Base Chart',
           component: BaseChart
+        }
+      ]
+    },
+    {
+      name: 'Runtime',
+      subMenus: [
+        {
+          name: 'Series Mark',
+          component: RuntimeSeriesMark
+        },
+        {
+          name: 'Label Style',
+          component: RuntimeLabelStyle
         }
       ]
     }

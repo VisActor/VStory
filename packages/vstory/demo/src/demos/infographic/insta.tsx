@@ -8,6 +8,8 @@ export const Insta = () => {
   useEffect(() => {
     const container = document.getElementById(id);
     const canvas = document.createElement('canvas');
+    canvas.width = 2000;
+    canvas.height = 1000;
     container?.appendChild(canvas);
 
     const colors = ['#5C95FF', '#B9E6FF', '#FFA9A3', '#F87575', '#7E6C6C'];

@@ -14,6 +14,7 @@ export const API = () => {
   useEffect(() => {
     const container = document.getElementById(id);
     const canvas = document.createElement('canvas');
+
     container?.appendChild(canvas);
 
     const story = new Story(null, { canvas, width: 800, height: 500, background: 'pink' });

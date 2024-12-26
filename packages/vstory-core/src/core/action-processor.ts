@@ -83,8 +83,8 @@ export class ActionProcessor implements IActionProcessor {
 
   applyAppearAttrs(name: string, actionName: string, character: ICharacter, actionSpec: IActionSpec) {
     const processor = this.getProcessor(name, actionName);
-    if (processor && processor.applyAttrs) {
-      return processor.applyAttrs(character, actionSpec);
+    if (processor && processor.applyAttrsForVisibility) {
+      return processor.applyAttrsForVisibility(character, actionSpec);
     }
     return undefined;
   }

@@ -158,6 +158,13 @@
             "zh": "图元",
             "en": "graphics"
           }
+        },
+        {
+          "path": "clipped-image",
+          "title": {
+            "zh": "图片裁剪",
+            "en": "clipped image"
+          }
         }
       ]
     },
@@ -173,6 +180,20 @@
           "title": {
             "zh": "VChart动画编排",
             "en": "VChart Animation arrangement"
+          }
+        },
+        {
+          "path": "bar-line-arrange",
+          "title": {
+            "zh": "VChart组合图动画编排",
+            "en": "VChart combination chart Animation arrangement"
+          }
+        },
+        {
+          "path": "line-arrange",
+          "title": {
+            "zh": "VChart多系列动画编排",
+            "en": "VChart multiple series Animation arrangement"
           }
         }
       ]
@@ -278,6 +299,13 @@
           }
         },
         {
+          "path": "pie-chart-camera",
+          "title": {
+            "zh": "相机占比统计-饼图",
+            "en": "Camera Statistic - Pie Chart"
+          }
+        },
+        {
           "path": "bar-work-in-same-industry",
           "title": {
             "zh": "信息图模版-柱图: Industry Stability",
@@ -296,6 +324,13 @@
           "title": {
             "zh": "信息图模板-饼图: Client Breakdown",
             "en": "Pie Chart Infographic: Client Breakdown"
+          }
+        },
+        {
+          "path": "bar-chart-horizontal",
+          "title": {
+            "zh": "信息图模板-条形图",
+            "en": "Horizontal Bar Chart Infographic"
           }
         },
         {

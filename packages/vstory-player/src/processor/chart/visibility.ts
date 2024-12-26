@@ -15,7 +15,7 @@ import { VChartAddActionProcessor } from './add';
 import { CommonStyleActionProcessor } from '../component/common/style';
 
 export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
-  name: 'appearOrDisAppear';
+  name: 'appearOrDisAppear' = 'appearOrDisAppear';
   protected character: ICharacter | null;
 
   constructor() {
@@ -24,6 +24,15 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
 
   run(character: ICharacter, actionSpec: IChartVisibilityAction): void {
     super.preRun(character, actionSpec);
+    this.runOrApplyAttrs(character, actionSpec, { isRun: true });
+  }
+
+  applyAttrsForVisibility(character: ICharacter, actionSpec: IChartVisibilityAction): void {
+    this.runOrApplyAttrs(character, actionSpec, { isRun: false });
+  }
+
+  protected runOrApplyAttrs(character: ICharacter, actionSpec: IChartVisibilityAction, params: { isRun?: boolean }) {
+    const { isRun = true } = params;
     this.character = character;
     const vchart = character.graphic._vchart as IVChart;
     // 基于选择器做筛选
@@ -37,20 +46,20 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
         const { chart, seriesList, componentsList, panel } = this.selectBySelector(payload.selector ?? '*', character);
         if (!runnedChart && chart) {
           // chart & panel
-          this.chartVisibility(character.graphic as any, actionSpec.action, payload);
+          this.chartVisibility(character.graphic as any, actionSpec.action, payload, isRun);
         } else if (!runnedChart && panel) {
           // panel
-          this.panelVisibility(character.graphic as any, actionSpec.action, payload);
+          this.panelVisibility(character.graphic as any, actionSpec.action, payload, isRun);
         }
         // 过滤seriesList
         const shouldRunSeriesList = seriesList.filter(item => !runnedSeriesSet.has(item));
         shouldRunSeriesList.forEach(series => {
-          this.commonSeriesAppear(vchart, series, actionSpec.action, payload);
+          this.commonSeriesAppear(vchart, series, actionSpec.action, payload, isRun);
         });
         // 过滤componentsList
         const shouldRunComponentsList = componentsList.filter(item => !runnedComponentsSet.has(item));
         shouldRunComponentsList.forEach(component => {
-          this.componentAppear(vchart, component, actionSpec.action, payload);
+          this.componentAppear(vchart, component, actionSpec.action, payload, isRun);
         });
         runnedChart = runnedChart || chart;
         seriesList.forEach(item => runnedSeriesSet.add(item));
@@ -59,13 +68,29 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     this.character = null;
   }
 
-  protected chartVisibility(chartGraphic: any, action: 'appear' | 'disappear', payload: IChartVisibilityPayload) {
+  protected chartVisibility(
+    chartGraphic: any,
+    action: 'appear' | 'disappear',
+    payload: IChartVisibilityPayload,
+    isRun: boolean
+  ) {
+    if (!isRun) {
+      return;
+    }
     const appearTransformFunc = transformMap.appear.chart;
     const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     this.runTransformFunc(chartGraphic as any, appearTransformFunc, action, payload, defaultPayload);
   }
 
-  protected panelVisibility(chartGraphic: any, action: 'appear' | 'disappear', payload: IChartVisibilityPayload) {
+  protected panelVisibility(
+    chartGraphic: any,
+    action: 'appear' | 'disappear',
+    payload: IChartVisibilityPayload,
+    isRun: boolean
+  ) {
+    if (!isRun) {
+      return;
+    }
     const appearTransformFunc = transformMap.appear.panel;
     const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     this.runTransformFunc(chartGraphic as any, appearTransformFunc, action, payload, defaultPayload);
@@ -75,16 +100,17 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     vchart: IVChart,
     component: IComponent,
     action: 'appear' | 'disappear',
-    payload: IChartVisibilityPayload
+    payload: IChartVisibilityPayload,
+    isRun: boolean
   ) {
     if (component.specKey === 'label') {
-      this.labelComponentAppear(vchart, component, action, payload);
+      this.labelComponentAppear(vchart, component, action, payload, isRun);
     } else if (component.specKey === 'legends') {
-      this.legendsComponentAppear(vchart, component, action, payload);
+      this.legendsComponentAppear(vchart, component, action, payload, isRun);
     } else if (component.specKey === 'axes') {
-      this.axisComponentAppear(vchart, component, action, payload);
+      this.axisComponentAppear(vchart, component, action, payload, isRun);
     } else if (component.specKey === 'title') {
-      this.titleComponentAppear(vchart, component, action, payload);
+      this.titleComponentAppear(vchart, component, action, payload, isRun);
     }
   }
 
@@ -92,13 +118,19 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     vchart: IVChart,
     component: IComponent,
     action: 'appear' | 'disappear',
-    payload: IChartVisibilityPayload
+    payload: IChartVisibilityPayload,
+    isRun: boolean
   ) {
     const vrenderComponents = component.getVRenderComponents();
     const appearTransformFunc = transformMap.appear.label;
     const defaultPayload = VChartVisibilityActionProcessor.defaultPayload;
     vrenderComponents.forEach(group => {
-      this.runTransformFunc(group as any, appearTransformFunc, action, payload, defaultPayload);
+      if (isRun) {
+        (group.attribute as any).visibleAll = true;
+        this.runTransformFunc(group as any, appearTransformFunc, action, payload, defaultPayload);
+      } else {
+        (group.attribute as any).visibleAll = false;
+      }
     });
   }
 
@@ -106,13 +138,19 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     vchart: IVChart,
     component: IComponent,
     action: 'appear' | 'disappear',
-    payload: IChartVisibilityPayload
+    payload: IChartVisibilityPayload,
+    isRun: boolean
   ) {
-    const vrenderComponents = component.getVRenderComponents();
+    const vrenderComponents = component.getVRenderComponents().filter((item: any) => !!item);
     const appearTransformFunc = transformMap.appear.legends;
     const defaultPayload = VChartVisibilityActionProcessor.fadePayload;
     vrenderComponents.forEach(group => {
-      this.runTransformFunc(group as any, appearTransformFunc, action, payload, defaultPayload);
+      if (isRun) {
+        (group.attribute as any).visibleAll = true;
+        this.runTransformFunc(group as any, appearTransformFunc, action, payload, defaultPayload);
+      } else {
+        (group.attribute as any).visibleAll = false;
+      }
     });
   }
 
@@ -120,19 +158,31 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     vchart: IVChart,
     component: IComponent,
     action: 'appear' | 'disappear',
-    payload: IChartVisibilityPayload
+    payload: IChartVisibilityPayload,
+    isRun: boolean
   ) {
     const vrenderComponents = component.getVRenderComponents();
     const axis = vrenderComponents[0];
     if (!axis) {
       return;
     }
+    // debugger;
+    vrenderComponents.forEach(c => {
+      if (isRun) {
+        (c.attribute as any).visibleAll = true;
+      } else {
+        (c.attribute as any).visibleAll = false;
+      }
+    });
+    if (!isRun) {
+      return;
+    }
     const axisGrid = vrenderComponents[1];
     const axisOrient = (axis.attribute as AxisBaseAttributes)?.orient;
     if (axisOrient === 'angle' || axisOrient === 'radius') {
-      this.polarAxisAppear(axis, axisGrid, action, payload);
+      this.polarAxisAppear(axis, axisGrid, action, payload, isRun);
     } else {
-      this.cartesianAxisAppear(axis, axisGrid, action, payload);
+      this.cartesianAxisAppear(axis, axisGrid, action, payload, isRun);
     }
   }
 
@@ -140,7 +190,8 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     axis: any,
     axisGrid: any,
     action: 'appear' | 'disappear',
-    payload: IChartVisibilityPayload
+    payload: IChartVisibilityPayload,
+    isRun: boolean
   ) {
     const axisOrient = (axis.attribute as AxisBaseAttributes)?.orient;
     const axisItems = (axis.attribute as AxisBaseAttributes)?.items ?? [[]];
@@ -165,7 +216,8 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     axis: any,
     axisGrid: any,
     action: 'appear' | 'disappear',
-    payload: IChartVisibilityPayload
+    payload: IChartVisibilityPayload,
+    isRun: boolean
   ) {
     const axisItems = (axis.attribute as AxisBaseAttributes)?.items ?? [[]];
     const appearTransformFunc = transformMap.appear.axis;
@@ -182,7 +234,8 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     vchart: IVChart,
     component: IComponent,
     action: 'appear' | 'disappear',
-    payload: IChartVisibilityPayload
+    payload: IChartVisibilityPayload,
+    isRun: boolean
   ) {
     const vrenderComponents = component.getVRenderComponents();
     const appearTransformFunc = transformMap.appear.title;
@@ -214,7 +267,8 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     vchart: IVChart,
     series: ISeries,
     action: 'appear' | 'disappear',
-    payload: IChartVisibilityPayload
+    payload: IChartVisibilityPayload,
+    isRun: boolean
   ) {
     const marks = series.getMarksWithoutRoot();
     if (!marks.length) {
@@ -223,8 +277,13 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     marks.forEach((mark, markIndex) => {
       const config = this.getMarkAnimateConfig(vchart, mark, markIndex, action, series, payload);
       const product = mark.getProduct();
-      // @ts-ignore
-      product && product.animate && product.animate.run(config || {});
+      if (isRun) {
+        // @ts-ignore
+        product?.graphicItem?.setAttribute('visibleAll', true);
+        product?.animate?.run(config || {});
+      } else {
+        product?.graphicItem?.setAttribute('visibleAll', false);
+      }
     });
   }
 

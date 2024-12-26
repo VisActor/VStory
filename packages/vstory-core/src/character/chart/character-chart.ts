@@ -15,6 +15,8 @@ import { ChartConfigProcess } from './chart-config-process';
 import type { ICharacterChart } from './interface/character-chart';
 import { mergeChartOption } from '../../utils/chart';
 import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
+import { MarkStyleRuntimeInstance } from './runtime/mark-style';
+import { LabelStyleRuntimeInstance } from './runtime/label-style';
 
 export class CharacterChart<T extends IChartGraphicAttribute>
   extends CharacterBase<IChartGraphicAttribute>
@@ -23,6 +25,10 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   visActorType: 'chart' | 'component' | 'table' | 'common' = 'chart';
   protected declare _graphic: VChartGraphic;
   protected declare _config: IChartCharacterConfig;
+
+  // 临时记录 vchart 对象。在第一次执行 afterInitializeChart 后赋值， 在 afterVRenderDraw 中使用
+  // 不临时记录的话，第一次 afterVRenderDraw 时，graphic 对象还未执行完初始化，当前对象的 _graphic 为 null
+  protected _vchart: IVChart;
 
   protected _ticker: ITicker;
   protected _timeline: ITimeline;
@@ -89,16 +95,21 @@ export class CharacterChart<T extends IChartGraphicAttribute>
     match: boolean = true
   ) {
     if (select[0] === '#') {
-      return this.selectByName(seriesList, componentsList, select, match);
+      return this.selectByNameOrUserId(seriesList, componentsList, select, match);
     }
     return this.selectByType(seriesList, componentsList, select, match);
   }
 
-  protected selectByName(seriesList: ISeries[], componentsList: IComponent[], select: string, match: boolean = true) {
+  protected selectByNameOrUserId(
+    seriesList: ISeries[],
+    componentsList: IComponent[],
+    select: string,
+    match: boolean = true
+  ) {
     const name = select.substring(1);
     return {
-      seriesList: seriesList.filter(item => (item.name === name) === match),
-      componentsList: componentsList.filter(item => (item.name === name) === match)
+      seriesList: seriesList.filter(item => (item.name === name || item.userId === name) === match),
+      componentsList: componentsList.filter(item => (item.name === name || item.userId === name) === match)
     };
   }
 
@@ -146,7 +157,12 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   }
 
   protected _initRuntime(): void {
-    this._runtime.push(CommonSpecRuntimeInstance, CommonLayoutRuntimeInstance);
+    this._runtime.push(
+      CommonSpecRuntimeInstance,
+      CommonLayoutRuntimeInstance,
+      MarkStyleRuntimeInstance,
+      LabelStyleRuntimeInstance
+    );
   }
   protected _clearRuntime(): void {
     this._runtime.length = 0;
@@ -188,17 +204,26 @@ export class CharacterChart<T extends IChartGraphicAttribute>
         {
           performanceHook: {
             afterInitializeChart: (vchart: IVChart) => {
-              // (<IChartTemp>this.configProcess.dataTempTransform?.specTemp)?.afterInitialize({ character: this });
+              this._vchart = vchart;
               this._runtime.forEach(r => r.afterInitialize?.(this, vchart));
             },
 
             afterVRenderDraw: () => {
-              this._runtime.forEach(r => r.afterVRenderDraw?.(this));
+              this._runtime.forEach(r => r.afterVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
             }
           }
         },
         this._config.options.initOption ?? {}
       )
     };
+  }
+
+  protected _clearGraphic(): void {
+    super._clearGraphic();
+    this._vchart = null;
+  }
+
+  getRuntimeConfig() {
+    return this;
   }
 }

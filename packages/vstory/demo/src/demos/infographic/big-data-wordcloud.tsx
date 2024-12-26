@@ -496,6 +496,8 @@ export const BigDataWordCloud = () => {
   useEffect(() => {
     const container = document.getElementById(id);
     const canvas = document.createElement('canvas');
+    canvas.width = 2000;
+    canvas.height = 1000;
     container?.appendChild(canvas);
 
     const dsl = {

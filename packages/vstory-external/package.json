@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory-external",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -24,19 +24,19 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vchart": "1.13.1-vstory.3",
+    "@visactor/vchart": "1.13.2-vstory.2",
     "@visactor/vtable": "1.10.1",
-    "@visactor/vrender": "0.21.2-vstory.3",
-    "@visactor/vrender-core": "0.21.2-vstory.3",
-    "@visactor/vrender-kits": "0.21.2-vstory.3",
-    "@visactor/vrender-components": "0.21.2-vstory.3",
+    "@visactor/vrender": "0.21.5-vstory.2",
+    "@visactor/vrender-core": "0.21.5-vstory.2",
+    "@visactor/vrender-kits": "0.21.5-vstory.2",
+    "@visactor/vrender-components": "0.21.5-vstory.2",
     "@visactor/vutils": "~0.18.17",
     "@visactor/vchart-extension": "0.0.3-vstory.2",
     "@visactor/vdataset": "~0.18.17",
     "@visactor/vscale": "~0.18.17",
-    "@visactor/vstory-core": "workspace:0.0.21",
-    "@visactor/vstory-animate": "workspace:0.0.21",
-    "@visactor/vstory-player": "workspace:0.0.21"
+    "@visactor/vstory-core": "workspace:0.0.22",
+    "@visactor/vstory-animate": "workspace:0.0.22",
+    "@visactor/vstory-player": "workspace:0.0.22"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",
