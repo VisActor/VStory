@@ -6,6 +6,7 @@ export const enum CharacterType {
   WAVE_SCATTER = 'WaveScatter',
   SCATTER_BAR = 'ScatterBar',
   PROGRESS_PIE = 'ProgressPie',
+  PIVOT_CHART = 'PivotChart',
 
   // component
   TEXT = 'Text',

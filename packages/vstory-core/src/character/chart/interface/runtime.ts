@@ -1,16 +1,16 @@
 import type { IVChart } from '@visactor/vchart';
 import type { ICharacterConfig } from '../../../interface/dsl/dsl';
-import type { ICharacterChartRuntimeConfig } from './character-chart';
+import type { ICharacterChart } from './character-chart';
 export interface IChartCharacterRuntime {
   readonly type: string;
   // 应用config到attribute
-  applyConfigToAttribute?: (character: ICharacterChartRuntimeConfig) => void;
+  applyConfigToAttribute?: (character: ICharacterChart) => void;
 
   // 图表初始化完成
-  afterInitialize?: (character: ICharacterChartRuntimeConfig, vchart: IVChart) => void;
+  afterInitialize?: (character: ICharacterChart, vchart: IVChart) => void;
 
   // 图表绘制完成
-  afterVRenderDraw?: (character: ICharacterChartRuntimeConfig, vchart: IVChart) => void;
+  beforeVRenderDraw?: (character: ICharacterChart, vchart: IVChart) => void;
 }
 
 export interface IChartCharacterRuntimeConstructor {

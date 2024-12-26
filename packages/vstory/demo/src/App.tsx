@@ -48,10 +48,15 @@ import { NoStackArea } from './demos/infographic/market-share';
 import { Top10Podcast } from './demos/infographic/top10_podcast';
 
 // VchartEditor Runtime
-import { RuntimeSeriesMark } from './demos/runtime/series-mark';
-import { RuntimeLabelStyle } from './demos/runtime/label-style';
 import { LineChartArrange } from './demos/arrange/LineChart';
 import { PieChart } from './demos/arrange/PieChart';
+import { RuntimeSeriesMark } from './demos/chart/runtime/series-mark';
+import { RuntimeLabelStyle } from './demos/chart/runtime/label-style';
+import { TableBase } from './demos/table/base';
+import { CellStyle } from './demos/table/runtime/cell-style';
+import { ColWidth } from './demos/table/runtime/col-width';
+import { RowHeight } from './demos/table/runtime/row-height';
+import { PivotChartBase } from './demos/table/runtime/pivot-chart-base';
 
 type MenusType = (
   | {
@@ -296,7 +301,7 @@ const App = () => {
       ]
     },
     {
-      name: 'Runtime',
+      name: 'ChartRuntime',
       subMenus: [
         {
           name: 'Series Mark',
@@ -305,6 +310,31 @@ const App = () => {
         {
           name: 'Label Style',
           component: RuntimeLabelStyle
+        }
+      ]
+    },
+    {
+      name: 'TableRuntime',
+      subMenus: [
+        {
+          name: 'Base Table',
+          component: TableBase
+        },
+        {
+          name: 'Cell Style',
+          component: CellStyle
+        },
+        {
+          name: 'Col Width',
+          component: ColWidth
+        },
+        {
+          name: 'Row Height',
+          component: RowHeight
+        },
+        {
+          name: 'Pivot Chart Base',
+          component: PivotChartBase
         }
       ]
     }

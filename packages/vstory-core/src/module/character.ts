@@ -10,6 +10,8 @@ import { TextCharacter } from '../character/component/character/text';
 import { TimelineCharacter } from '../character/component/character/timeline';
 import { UnitCharacter } from '../character/component/character/unit';
 import { StoryFactory } from '../utils/factory';
+import { VTableCharacter } from '../character/table/character/vtable';
+import { PivotChartCharacter } from '../character/table/character/pivot-chart';
 
 let _register = false;
 export function registerCharacters() {
@@ -17,12 +19,14 @@ export function registerCharacters() {
     return;
   }
   _register = true;
+  // chart
   StoryFactory.registerCharacter(VChartCharacter.type, VChartCharacter);
   registerRankingBarTemp();
   registerAllVChart();
   StoryFactory.registerCharacter(RankingBarCharacter.type, RankingBarCharacter);
   StoryFactory.registerCharacter(WaveScatterCharacter.type, WaveScatterCharacter);
   StoryFactory.registerCharacter(ScatterBarCharacter.type, ScatterBarCharacter);
+  // component
   StoryFactory.registerCharacter(TextCharacter.type, TextCharacter);
   StoryFactory.registerCharacter(RectCharacter.type, RectCharacter);
   StoryFactory.registerCharacter(ImageCharacter.type, ImageCharacter);
@@ -30,4 +34,8 @@ export function registerCharacters() {
   StoryFactory.registerCharacter(ShapeCharacter.type, ShapeCharacter);
   StoryFactory.registerCharacter(TimelineCharacter.type, TimelineCharacter);
   StoryFactory.registerCharacter(UnitCharacter.type, UnitCharacter);
+  // table
+  StoryFactory.registerCharacter(VTableCharacter.type, VTableCharacter);
+  // table
+  StoryFactory.registerCharacter(PivotChartCharacter.type, PivotChartCharacter);
 }
