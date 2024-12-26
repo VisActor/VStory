@@ -1,3 +1,14 @@
+# v0.0.21
+
+2024-12-26
+
+
+**🆕 New feature**
+
+- **@visactor/vstory-core**: support `auto` for scaleX/scaleY in initParams
+
+[more detail about v0.0.21](https://github.com/VisActor/VStory/releases/tag/v0.0.21)
+
 # v0.0.20
 
 2024-12-13
