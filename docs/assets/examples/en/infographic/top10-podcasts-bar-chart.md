@@ -4,7 +4,7 @@ group: infographic
 title: Top 10 Podcasts
 keywords: templates, visualization, bar, left-right
 order: 1-0
-cover: https://tosv.byted.org/obj/bit-cloud/vstory-infographic/preview/chart.png
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory-infographic/preview/chart.png
 ---
 
 # Venn Chart Infographic
