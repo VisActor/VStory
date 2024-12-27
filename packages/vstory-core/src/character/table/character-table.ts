@@ -48,7 +48,7 @@ export class CharacterTable<T extends ITableGraphicAttribute>
     this._graphic.vTableStage.ticker.tickAt && this._graphic.vTableStage.ticker.tickAt(t);
   }
 
-  getGraphicBySelector(selector: string) {
+  getGraphicBySelector(selector: string | string[]) {
     const table = true;
     // 是否包含panel, >0为包含
     const includePanel = 1;
