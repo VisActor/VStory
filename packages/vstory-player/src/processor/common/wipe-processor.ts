@@ -24,10 +24,11 @@ export class WipeVisibility {
       wipeRatio: fromRatio
     } as any);
   }
-  run(graphic: IGraphic, params: IWipeInParams, appear: boolean) {
+  run(graphic: IGraphic, params: IWipeInParams, appear: boolean, setInitAttributes: boolean = false) {
     if (!canDoGraphicAnimation(graphic, params)) {
       return false;
     }
+    setInitAttributes && this.setInitAttributes(graphic, params, appear);
 
     const duration = params.duration;
     const easing = params.easing;

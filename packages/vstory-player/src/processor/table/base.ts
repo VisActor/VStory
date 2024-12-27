@@ -1,3 +1,4 @@
+import type { IGroup } from '@visactor/vrender-core';
 import { ActionProcessorItem } from '../processor-item';
 import type { IActionSpec, ICharacter } from '@visactor/vstory-core';
 import { array } from '@visactor/vutils';
@@ -14,6 +15,9 @@ export class VTableBaseActionProcessor extends ActionProcessorItem {
   ): {
     table: boolean;
     panel: boolean;
+    rowHeader: IGroup;
+    colHeader: IGroup;
+    bodyGroup: IGroup;
   } {
     return character.getGraphicBySelector(selector);
   }
