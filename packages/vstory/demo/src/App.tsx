@@ -57,6 +57,7 @@ import { CellStyle } from './demos/table/runtime/cell-style';
 import { ColWidth } from './demos/table/runtime/col-width';
 import { RowHeight } from './demos/table/runtime/row-height';
 import { PivotChartBase } from './demos/table/runtime/pivot-chart-base';
+import { TextComponent } from './demos/component/text';
 
 type MenusType = (
   | {
@@ -227,6 +228,10 @@ const App = () => {
         {
           name: 'LabelItemAnimate',
           component: LabelItemAnimate
+        },
+        {
+          name: 'TextComponent',
+          component: TextComponent
         }
       ]
     },
