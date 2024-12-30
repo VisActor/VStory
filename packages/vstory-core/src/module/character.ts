@@ -2,8 +2,10 @@ import { RankingBarCharacter, registerRankingBarTemp } from '../character/chart/
 import { ScatterBarCharacter } from '../character/chart/character/scatter-bar';
 import { VChartCharacter, registerAllVChart } from '../character/chart/character/vchart';
 import { WaveScatterCharacter } from '../character/chart/character/wave-scatter';
+import { ArcCharacter } from '../character/component/character/arc';
 import { ImageCharacter } from '../character/component/character/image';
 import { LineCharacter } from '../character/component/character/line';
+import { PolygonCharacter } from '../character/component/character/polygon';
 import { RectCharacter } from '../character/component/character/rect';
 import { ShapeCharacter } from '../character/component/character/shape';
 import { TextCharacter } from '../character/component/character/text';
@@ -32,6 +34,9 @@ export function registerCharacters() {
   StoryFactory.registerCharacter(ImageCharacter.type, ImageCharacter);
   StoryFactory.registerCharacter(LineCharacter.type, LineCharacter);
   StoryFactory.registerCharacter(ShapeCharacter.type, ShapeCharacter);
+  StoryFactory.registerCharacter(PolygonCharacter.type, PolygonCharacter);
+  StoryFactory.registerCharacter(ArcCharacter.type, ArcCharacter);
+
   StoryFactory.registerCharacter(TimelineCharacter.type, TimelineCharacter);
   StoryFactory.registerCharacter(UnitCharacter.type, UnitCharacter);
   // table

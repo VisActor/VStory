@@ -6,8 +6,15 @@
     "outDir": "./es",
     "typeRoots": ["./node_modules/@types", "./src/types"],
     "composite": true,
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
   "include": ["src", "src/**/*", "src/**/*.json"],
-  "references": []
+  "references": [
+    {
+      "path": "../vstory-core"
+    },
+    {
+      "path": "../vstory-player"
+    }
+  ]
 }
