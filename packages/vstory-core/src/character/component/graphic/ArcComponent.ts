@@ -1,6 +1,6 @@
 import type { ComponentOptions } from '@visactor/vrender-components';
 import { merge } from '@visactor/vutils';
-import type { IArc, IPolygon } from '@visactor/vrender-core';
+import type { IArc, IArcGraphicAttribute } from '@visactor/vrender-core';
 import { BaseComponentWithText } from './BaseComponentWithText';
 import type { IArcComponentAttributes } from '../interface/character-arc';
 
@@ -27,13 +27,18 @@ export class ArcComponent extends BaseComponentWithText {
     this.renderPolygon();
   }
   protected renderPolygon() {
-    const { graphic, padding } = this.attribute as IArcComponentAttributes;
+    const { graphic, padding, width, height } = this.attribute as IArcComponentAttributes;
     const attrs = { ...graphic };
+
     if (!attrs.x) {
-      attrs.x = padding.left;
+      attrs.x = width / 2;
     }
     if (!attrs.y) {
-      attrs.y = padding.top;
+      attrs.y = height / 2;
+    }
+
+    if (!(attrs as IArcGraphicAttribute).outerRadius) {
+      attrs.outerRadius = Math.min(width - padding.left - padding.right, height - padding.top - padding.bottom) / 2;
     }
 
     this.createOrUpdateChild(
