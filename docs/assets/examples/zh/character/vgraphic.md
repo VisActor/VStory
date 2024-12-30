@@ -114,7 +114,14 @@ const characterList = [
   { type: 'Arc', options: arc, effect: 'growAngle' }
 ];
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 400, height: 400, scaleX: 'auto', scaleY: 'auto', background: '#ebecf0' });
+const story = new VStory.Story(null, {
+  dom: CONTAINER_ID,
+  width: 400,
+  height: 400,
+  scaleX: 'auto',
+  scaleY: 'auto',
+  background: '#ebecf0'
+});
 const player = new VStory.Player(story);
 story.init(player);
 
@@ -137,7 +144,7 @@ characterList.forEach((item, index) => {
       actions: [
         {
           action: 'appear',
-          // startTime: 1000 * index,
+          startTime: 1000 * index,
           payload: [
             {
               animation: {
