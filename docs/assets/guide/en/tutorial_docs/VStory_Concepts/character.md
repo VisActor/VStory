@@ -226,15 +226,17 @@ window['story'] = story;
 window['vstory'] = story;
 ```
 
-### Basic Components (Image, Line, Rect, Shape, Text)
+### Basic Components (Image, Line, Rect, Shape, Text, Arc, Polygon)
 
-The interface definition of component types is as follows, where basic components (Image, Line, Rect, Shape, Text) are configured directly based on the corresponding elements of VRender, configured in the graphic property:
+The interface definition of component types is as follows, where basic components (Image, Line, Rect, Shape, Text, Arc, Polygon) are configured directly based on the corresponding elements of VRender, configured in the graphic property:
 
 - Image is based on VRender's [Image element](/vrender/option/Image)
 - Line is based on VRender's [Line element](/vrender/option/Line)
 - Rect is based on VRender's [Rect element](/vrender/option/Rect)
 - Shape is based on VRender's [Symbol element](/vrender/option/Symbol)
-- Text is based on VRender's [Text element](/vrender/option/Text)
+- Text is based on VRender's [RichText element](/vrender/option/RichText)
+- Arc is based on VRender's [Arc element](/vrender/option/Arc)
+- Polygon is based on VRender's [Polygon element](/vrender/option/Polygon)
 
 The panel is an additional panel of the component, actually a [Rect element of VRender](/vrender/option/Rect), you can refer to the configuration of [Rect element of VRender](/vrender/option/Rect).
 The text configuration is an additional configuration that each component has, it is a [Text element of VRender](/vrender/option/Text), you can refer to the configuration of [Text element of VRender](/vrender/option/Text).
