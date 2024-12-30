@@ -253,8 +253,104 @@ export const API = () => {
         ]
       }
     );
-    player.play();
 
+    story.addCharacter(
+      {
+        type: 'Polygon',
+        id: 'polygon',
+        zIndex: 1,
+        position: {
+          top: 300,
+          left: 100,
+          width: 100,
+          height: 100
+        },
+        options: {
+          graphic: {
+            points: [
+              { x: 0, y: 0 * Math.cos(Math.PI / 6) },
+              { x: 50, y: 0 * Math.cos(Math.PI / 6) },
+              { x: 50 + 50 * Math.sin(Math.PI / 6), y: 0 },
+              { x: 50, y: 50 * Math.cos(Math.PI / 6) },
+              { x: 25, y: 50 * Math.cos(Math.PI / 6) },
+              { x: 25 - 50 * Math.sin(Math.PI / 6), y: 0 }
+            ],
+            fill: {
+              gradient: 'linear',
+              x0: 0,
+              y0: 0,
+              x1: 1,
+              y1: 0,
+              stops: [
+                { offset: 0, color: 'green' },
+                { offset: 0.5, color: 'orange' },
+                { offset: 1, color: 'red' }
+              ]
+            }
+          }
+        }
+      },
+      {
+        sceneId: 'defaultScene',
+        actions: [
+          {
+            action: 'appear',
+            payload: [
+              {
+                animation: {
+                  duration: 2000,
+                  easing: 'linear'
+                } as any
+              }
+            ]
+          }
+        ]
+      }
+    );
+
+    story.addCharacter(
+      {
+        type: 'Arc',
+        id: 'arc',
+        zIndex: 1,
+        position: {
+          top: 320,
+          left: 250,
+          width: 100,
+          height: 100
+        },
+        options: {
+          graphic: {
+            innerRadius: 20,
+            outerRadius: 40,
+            startAngle: 0,
+            endAngle: Math.PI * 2,
+            fill: 'orange'
+          }
+        }
+      },
+      {
+        sceneId: 'defaultScene',
+        actions: [
+          {
+            action: 'appear',
+            payload: [
+              {
+                animation: {
+                  duration: 1000,
+                  easing: 'linear',
+                  // effect: 'growRadius'
+                  effect: 'growAngle'
+                }
+              }
+            ]
+          }
+        ]
+      }
+    );
+
+    player.play();
+    window.story = story;
     return () => {
       story.release();
     };

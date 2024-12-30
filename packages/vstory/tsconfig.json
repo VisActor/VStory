@@ -8,5 +8,12 @@
     "composite": true
   },
   "include": ["src"],
-  "references": []
+  "references": [
+    { "path": "../vstory-core" },
+    { "path": "../vstory-animate" },
+    { "path": "../vstory-editor" },
+    { "path": "../vstory-player" },
+    { "path": "../vstory-templates" },
+    { "path": "../vstory-external" }
+  ]
 }
