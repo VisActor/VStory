@@ -11,6 +11,9 @@
   "references": [
     {
       "path": "../vstory-core"
+    },
+    {
+      "path": "../vstory-animate"
     }
   ]
 }
