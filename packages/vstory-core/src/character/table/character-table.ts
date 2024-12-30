@@ -1,4 +1,4 @@
-import type { ITicker, ITimeline } from '@visactor/vrender-core';
+import type { IGroup, ITicker, ITimeline } from '@visactor/vrender-core';
 import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
@@ -16,6 +16,7 @@ import { TableTypeRuntimeInstance } from './runtime/table-type';
 import { CellStyleRuntimeInstance } from './runtime/cell-style';
 import { ColWidthRuntimeInstance } from './runtime/col-width';
 import { RowHeightRuntimeInstance } from './runtime/row-height';
+import { isArray } from '@visactor/vutils';
 
 export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>
@@ -49,13 +50,73 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   }
 
   getGraphicBySelector(selector: string | string[]) {
-    const table = true;
+    let table = false;
+    let panel = false;
+    if (isArray(selector)) {
+      selector.forEach(s => {
+        const data = this._getGraphicBySelector(s);
+        table = table || data.table;
+        panel = panel || data.panel;
+      });
+      return {
+        table,
+        panel
+      };
+    }
+    return this._getGraphicBySelector(selector);
+  }
+
+  _getGraphicBySelector(selector: string) {
+    const vtable = this._graphic.vTable;
+    let table = false;
     // 是否包含panel, >0为包含
-    const includePanel = 1;
+    let includePanel = 1;
+    const rowHeader = vtable.scenegraph.rowHeaderGroup;
+    const colHeader = vtable.scenegraph.colHeaderGroup;
+    const bodyGroup = vtable.scenegraph.bodyGroup;
+
+    let out: any = {
+      rowHeader,
+      colHeader,
+      bodyGroup
+    };
+
+    const selectorList = selector.split(' ');
+    selectorList.forEach(subSelector => {
+      if (subSelector === '*') {
+        table = true;
+      } else if (/:not\(([^)]+)\)/.test(subSelector)) {
+        const match = /:not\(([^)]+)\)/.exec(subSelector)[1];
+        out = this.selectByType(out, match, false);
+        if (match === 'panel') {
+          includePanel = -Infinity; // 如果被排除，那么一定不包含了
+        }
+      } else {
+        out = this.selectByType(out, subSelector);
+        if (subSelector === 'panel') {
+          includePanel = Infinity; // 如果有正选，那么选中才算
+        } else {
+          includePanel--;
+        }
+      }
+    });
 
     return {
       table,
-      panel: includePanel > 0
+      panel: includePanel > 0,
+      ...out
+    };
+  }
+
+  protected selectByType(
+    data: { rowHeader: IGroup; colHeader: IGroup; bodyGroup: IGroup },
+    name: string,
+    match: boolean = true
+  ) {
+    return {
+      rowHeader: (name === 'rowHeader') === match ? data.rowHeader : null,
+      colHeader: (name === 'colHeader') === match ? data.colHeader : null,
+      bodyGroup: (name === 'body') === match ? data.bodyGroup : null
     };
   }
 

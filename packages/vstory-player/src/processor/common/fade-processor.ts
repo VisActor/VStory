@@ -23,10 +23,11 @@ export class FadeVisibility {
       } as any);
     }
   }
-  run(graphic: IGraphic, params: IFadeInParams, appear: boolean) {
+  run(graphic: IGraphic, params: IFadeInParams, appear: boolean, setInitAttributes: boolean = false) {
     if (!canDoGraphicAnimation(graphic, params)) {
       return false;
     }
+    setInitAttributes && this.setInitAttributes(graphic, params, appear);
     const duration = params.duration;
     const easing = params.easing;
 

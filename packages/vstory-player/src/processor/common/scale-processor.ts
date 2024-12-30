@@ -13,13 +13,11 @@ export class ScaleVisibility {
 
     graphic.setAttributes({ scaleX: ratio, scaleY: ratio });
   }
-  run(graphic: IGraphic, animation: IScaleInParams, appear: boolean) {
+  run(graphic: IGraphic, animation: IScaleInParams, appear: boolean, setInitAttributes: boolean = false) {
     if (!canDoGraphicAnimation(graphic, animation)) {
       return false;
     }
-    if (!canDoGraphicAnimation(graphic, animation)) {
-      return false;
-    }
+    setInitAttributes && this.setInitAttributes(graphic, animation, appear);
 
     const duration = animation.duration;
     const easing = animation.easing;

@@ -18,7 +18,11 @@ export class MoveVisibility {
       y: fromY
     });
   }
-  run(graphic: IGraphic, params: IMoveParams, appear: boolean) {
+  run(graphic: IGraphic, params: IMoveParams, appear: boolean, setInitAttributes: boolean = false) {
+    if (!canDoGraphicAnimation(graphic, params)) {
+      return false;
+    }
+    setInitAttributes && this.setInitAttributes(graphic, params, appear);
     return appear ? this._moveIn(graphic, params) : this._moveOut(graphic, params);
   }
 
@@ -119,9 +123,6 @@ export class MoveVisibility {
   }
 
   _moveIn(graphic: IGraphic, params: IMoveParams) {
-    if (!canDoGraphicAnimation(graphic, params)) {
-      return false;
-    }
     const duration = params.duration;
     const easing = params.easing;
 
@@ -133,9 +134,6 @@ export class MoveVisibility {
   }
 
   _moveOut(graphic: IGraphic, params: IMoveParams) {
-    if (!canDoGraphicAnimation(graphic, params)) {
-      return false;
-    }
     const { move = {} } = params;
     const to = move.pos ?? params.pos;
     const duration = move.duration ?? params.duration;

@@ -103,6 +103,39 @@ function loadDSL() {
                     flipY: true
                     // dy: 30,
                   }
+                },
+                {
+                  action: 'appear',
+                  payload: {
+                    selector: 'colHeader',
+                    animation: {
+                      duration: 2000,
+                      easing: 'quadOut',
+                      effect: 'scale'
+                    }
+                  }
+                },
+                {
+                  action: 'appear',
+                  payload: {
+                    selector: 'rowHeader',
+                    animation: {
+                      duration: 2000,
+                      easing: 'quadOut',
+                      effect: 'scale'
+                    }
+                  }
+                },
+                {
+                  action: 'appear',
+                  payload: {
+                    selector: 'body',
+                    animation: {
+                      duration: 2000,
+                      easing: 'quadOut',
+                      effect: 'scale'
+                    }
+                  }
                 }
               ]
             }

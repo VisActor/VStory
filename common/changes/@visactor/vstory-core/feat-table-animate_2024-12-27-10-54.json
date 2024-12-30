@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-core",
+      "comment": "feat: support table animate",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-core"
+}
