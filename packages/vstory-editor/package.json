@@ -24,8 +24,8 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vchart": "1.13.2-vstory.2",
-    "@visactor/vtable": "1.14.1",
+    "@visactor/vchart": "1.13.3-vstory.3",
+    "@visactor/vtable": "1.14.4-alpha.0",
     "@visactor/vrender": "0.21.5-vstory.2",
     "@visactor/vrender-core": "0.21.5-vstory.2",
     "@visactor/vrender-kits": "0.21.5-vstory.2",

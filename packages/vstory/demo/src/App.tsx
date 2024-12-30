@@ -58,6 +58,7 @@ import { ColWidth } from './demos/table/runtime/col-width';
 import { RowHeight } from './demos/table/runtime/row-height';
 import { PivotChartBase } from './demos/table/runtime/pivot-chart-base';
 import { TextComponent } from './demos/component/text';
+import { SpecAxes } from './demos/chart/runtime/spec-axes';
 
 type MenusType = (
   | {
@@ -315,6 +316,10 @@ const App = () => {
         {
           name: 'Label Style',
           component: RuntimeLabelStyle
+        },
+        {
+          name: 'Common Spec Axes',
+          component: SpecAxes
         }
       ]
     },

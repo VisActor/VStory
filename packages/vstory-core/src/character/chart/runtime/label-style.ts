@@ -199,8 +199,8 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             }
             const style = merge(
               {},
-              dataGroupStyle[StroyAllDataGroup].label.style ?? {},
-              dataGroupStyle[groupValue].label.style ?? {}
+              dataGroupStyle[StroyAllDataGroup]?.label?.style ?? {},
+              dataGroupStyle[groupValue]?.label?.style ?? {}
             );
             // 只设置 fill 和 stroke 颜色
             if (!isValid(style.fill) && !isValid(style.stroke)) {

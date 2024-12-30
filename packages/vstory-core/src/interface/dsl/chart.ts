@@ -43,6 +43,15 @@ export interface IChartCharacterInitOption {
   vchartBoundsMode?: 'clip' | 'auto';
 }
 
+// 模块选择器
+// number => model.getSpecIndex(); 模块的 specIndex
+// * => chart.getAllModelInType(); 所有模块
+// #id => model.userId; 模块的 userId
+export type ModelSelector = number | `${number}` | '*' | `#${string}`;
+
+// 定义一个类型辅助工具来提取非数组类型
+type ElementType<T> = T extends (infer U)[] ? U : T;
+
 export interface IChartCharacterConfig extends ICharacterConfigBase {
   options: {
     // 图表spec
@@ -57,15 +66,19 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     data?: any;
     // 标题
     title?: {
-      [key: string]: IComponentConfig<ISpec['title']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['title']>>;
     };
     // 图例
     legends?: {
-      [key: string]: IComponentConfig<ISpec['legends']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['legends']>>;
     };
     // axes
     axes?: {
-      [key: string]: IComponentConfig<ISpec['axes']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['axes']>>;
+    };
+    // series
+    series?: {
+      [key in ModelSelector]: Partial<ElementType<ISpec['series']>>;
     };
     // 色板
     color?: any;
