@@ -47,7 +47,10 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   }
 
   tickTo(t: number): void {
-    this._graphic.vchart.getStage().ticker.tickAt && this._graphic.vchart.getStage().ticker.tickAt(t);
+    const stage = this._graphic.vchart.getStage();
+    stage.ticker.start();
+    stage.getTimeline().resume();
+    stage.ticker.tickAt && stage.ticker.tickAt(t);
   }
 
   getGraphicBySelector(selector: string | string[]) {
