@@ -211,4 +211,11 @@ export function registerVTableVisibilityAction() {
     [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor(),
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor()
   });
+
+  globalProcessorRegistry.registerProcessor(CharacterType.PIVOT_CHART, {
+    [ACTION_TYPE.APPEAR]: new VTableVisibilityActionProcessor(),
+    [ACTION_TYPE.DISAPPEAR]: new VTableVisibilityActionProcessor(),
+    [ACTION_TYPE.BOUNCE]: new CommonBounceActionProcessor(),
+    [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor()
+  });
 }

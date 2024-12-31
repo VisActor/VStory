@@ -50,15 +50,12 @@ export interface IWeatherTableCharacterConfig extends ITableCharacterConfig {
  * pivot chart 配置
  */
 interface IPivotChartCharacterConfigOptionsType extends ITableCharacterConfigOptionsType {
-  // 单个单元格样式，框选也会应用到这里
-  // 使用 map 不用数组的原因。减少写入是的反复遍历
-  cellStyle?: {
+  chartOptions?: {
     // col_row
     [key: string]: {
       col: number;
       row: number;
-      style?: any;
-      chartOptions?: IChartCharacterConfig['options'];
+      options?: Partial<IChartCharacterConfig['options']>;
     };
   };
 }

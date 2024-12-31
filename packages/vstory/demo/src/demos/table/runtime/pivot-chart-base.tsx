@@ -14,6 +14,7 @@ import {
 } from '../../../../../../vstory-player/src';
 import { pivotChartOption } from '../option-pivot-chart';
 import { cloneDeep } from '@visactor/vutils';
+import { StroyAllDataGroup } from '../../../../../../vstory-core/src/interface/dsl/chart';
 
 registerGraphics();
 registerCharacters();
@@ -42,6 +43,76 @@ function loadDSL() {
             animation: false,
             disableTriggerEvent: true,
             disableDirtyBounds: true
+          },
+          chartOptions: {
+            '4_2': {
+              col: 4,
+              row: 2,
+              options: {
+                series: {
+                  a: {
+                    specIndex: 0,
+                    spec: {
+                      // @ts-ignore
+                      bar: {
+                        style: {
+                          cornerRadius: 20
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            '5_2': {
+              col: 5,
+              row: 2,
+              options: {
+                dataGroupStyle: {
+                  [StroyAllDataGroup]: {
+                    label: {
+                      visible: true,
+                      style: {
+                        fill: 'green',
+                        stroke: 'yellow',
+                        lineWidth: 2
+                      }
+                    },
+                    bar: {
+                      style: {
+                        cornerRadius: 20
+                      }
+                    }
+                  },
+                  'Home Office-Quantity': {
+                    bar: {
+                      style: {
+                        fill: 'red'
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            '6_2': {
+              col: 6,
+              row: 2,
+              options: {
+                series: {
+                  a: {
+                    specIndex: 0,
+                    spec: {
+                      // @ts-ignore
+                      bar: {
+                        style: {
+                          cornerRadius: 20
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -59,16 +130,7 @@ function loadDSL() {
               characterId: dsl.characters.map(i => i.id),
               characterActions: [
                 {
-                  action: 'bounce',
-                  payload: {
-                    animation: {
-                      duration: 2000,
-                      easing: 'quadOut'
-                    },
-                    type: 'bounce4',
-                    flipY: true
-                    // dy: 30,
-                  }
+                  action: 'appear'
                 }
               ]
             }
@@ -97,7 +159,7 @@ export const PivotChartBase = () => {
     window.player = player;
     const dsl = loadDSL();
     story.load(dsl);
-    player.play(-1);
+    player.play(0);
 
     return () => {
       story.release();

@@ -3,23 +3,11 @@ import type { ICharacterConfigBase } from './dsl';
 
 export const StroyAllDataGroup = '_STORY_ALL_DATA_GROUP';
 
-export type IChartModelMatch =
-  | {
-      usrId: string;
-    }
-  | {
-      specIndex: number | 'all'; // all 表示所有
-    };
-
 export interface IComponentMatch {
   usrId?: string;
   specIndex?: number | 'all'; // all 表示所有
   [key: string]: any;
 }
-
-export type IComponentConfig<T = any> = IChartModelMatch & {
-  spec: T;
-};
 
 export interface IMarkStyle {
   seriesMatch: { type: string } & IComponentMatch;
@@ -43,6 +31,15 @@ export interface IChartCharacterInitOption {
   vchartBoundsMode?: 'clip' | 'auto';
 }
 
+// 模块选择器
+// number => model.getSpecIndex(); 模块的 specIndex
+// * => chart.getAllModelInType(); 所有模块
+// #id => model.userId; 模块的 userId
+export type ModelSelector = number | `${number}` | '*' | `#${string}`;
+
+// 定义一个类型辅助工具来提取非数组类型
+type ElementType<T> = T extends (infer U)[] ? U : T;
+
 export interface IChartCharacterConfig extends ICharacterConfigBase {
   options: {
     // 图表spec
@@ -57,15 +54,19 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     data?: any;
     // 标题
     title?: {
-      [key: string]: IComponentConfig<ISpec['title']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['title']>>;
     };
     // 图例
     legends?: {
-      [key: string]: IComponentConfig<ISpec['legends']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['legends']>>;
     };
     // axes
     axes?: {
-      [key: string]: IComponentConfig<ISpec['axes']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['axes']>>;
+    };
+    // series
+    series?: {
+      [key in ModelSelector]: Partial<ElementType<ISpec['series']>>;
     };
     // 色板
     color?: any;

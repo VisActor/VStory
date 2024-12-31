@@ -1,17 +1,18 @@
 # character
 
-请先阅读[dsl的定义](./DSL)，然后再阅读本节内容。
-Character（角色） 是 VStory 中最基础的元素，它可以是图表、组件、表格等，它可以只是一个简单的文字，也可以是一个非常复杂的图表。Character 可以通过 DSL 配置，也可以通过 API 动态添加。Character是需要预定义的，如果你的作品中需要使用某个Character，你需要在DSL的`characters`数组中定义好这个Character。
+请先阅读[dsl 的定义](./DSL)，然后再阅读本节内容。
+Character（角色） 是 VStory 中最基础的元素，它可以是图表、组件、表格等，它可以只是一个简单的文字，也可以是一个非常复杂的图表。Character 可以通过 DSL 配置，也可以通过 API 动态添加。Character 是需要预定义的，如果你的作品中需要使用某个 Character，你需要在 DSL 的`characters`数组中定义好这个 Character。
 
-## Character的定义
+## Character 的定义
 
 所有的`character`都可以由一些通用的配置和一些特殊的配置定义。通用配置包括：
-- id：`character`的id，用于唯一标识这个`character`，后续在定义具体的行为（action）时会用到
-- type：`character`的类型，目前VStory支持的`character`类型包括但不限于：`VChart`、`Text`、`Image`等
-- position：`character`的位置和大小，以及旋转锚点等信息
-- zIndex：`character`的层级，默认为0，层级高的`character`会覆盖层级低的`character`
 
-所有的特殊配置都在options里，举例：
+- id：`character`的 id，用于唯一标识这个`character`，后续在定义具体的行为（action）时会用到
+- type：`character`的类型，目前 VStory 支持的`character`类型包括但不限于：`VChart`、`Text`、`Image`等
+- position：`character`的位置和大小，以及旋转锚点等信息
+- zIndex：`character`的层级，默认为 0，层级高的`character`会覆盖层级低的`character`
+
+所有的特殊配置都在 options 里，举例：
 
 ```ts
 const textConfig = {
@@ -20,7 +21,7 @@ const textConfig = {
   zIndex: 1,
   position: {
     top: 100,
-    left: 200,
+    left: 200
   },
   // 这里定义文字的配置
   options: {
@@ -28,9 +29,9 @@ const textConfig = {
       text: 'A BRIEF HISTORY',
       fontSize: 12,
       fill: 'red'
-    },
+    }
   }
-}
+};
 
 const imageConfig = {
   type: 'Image', // 标记是图片类型
@@ -38,18 +39,19 @@ const imageConfig = {
   zIndex: 1,
   position: {
     top: 100,
-    left: 200,
+    left: 200
   },
   // 这里定义图片的配置
   options: {
     graphic: {
-      image: 'url',
+      image: 'url'
     }
   }
-}
+};
 ```
 
 关于准确的接口定义，如下所示：
+
 ```ts
 type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig;
 
@@ -82,12 +84,11 @@ interface ICharacterConfigBase {
 }
 ```
 
-
-## 内置的Character类型
+## 内置的 Character 类型
 
 ### VChart
 
-VChart是VStory中最常用的Character类型，它可以是各种类型的图表，比如折线图、柱状图、饼图等。VChart可以通过直接传入VChart的Spec来定义，具体的spec如何定义，请参考[vchart站点](/vchart)。VChart的接口定义如下：
+VChart 是 VStory 中最常用的 Character 类型，它可以是各种类型的图表，比如折线图、柱状图、饼图等。VChart 可以通过直接传入 VChart 的 Spec 来定义，具体的 spec 如何定义，请参考[vchart 站点](/vchart)。VChart 的接口定义如下：
 
 ```ts
 interface IChartCharacterConfig extends ICharacterConfigBase {
@@ -104,15 +105,15 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
     data?: any;
     // 标题
     title?: {
-      [key: string]: IComponentConfig<ISpec['title']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['title']>>;
     };
     // 图例
     legends?: {
-      [key: string]: IComponentConfig<ISpec['legends']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['legends']>>;
     };
     // axes
     axes?: {
-      [key: string]: IComponentConfig<ISpec['axes']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['axes']>>;
     };
     // 色板
     color?: any;
@@ -134,7 +135,8 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
   };
 }
 ```
-我们看一个VChart的例子：
+
+我们看一个 VChart 的例子：
 
 ```javascript livedemo template=vchart
 // 注册所有需要的内容
@@ -204,7 +206,7 @@ const dsl = {
                       animation: { duration: 3000, effect: 'barLeap', oneByOne: true, dimensionCount: 5 }
                     }
                   ]
-                },
+                }
               ]
             }
           ]
@@ -212,7 +214,7 @@ const dsl = {
       ]
     }
   ]
-}
+};
 
 const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
 const player = new VStory.Player(story);
@@ -225,16 +227,17 @@ window['vstory'] = story;
 
 ### 基本组件（Image、Line、Rect、Shape、Text）
 
-组件类型的接口定义如下，其中基本组件（Image、Line、Rect、Shape、Text）的配置都直接基于VRender的对应图元，配置在graphic属性上：
-- Image 是基于VRender的[Image图元](/vrender/option/Image)
-- Line 是基于VRender的[Line图元](/vrender/option/Line)
-- Rect 是基于VRender的[Rect图元](/vrender/option/Rect)
-- Shape 是基于VRender的[Symbol图元](/vrender/option/Symbol)
-- Text 是基于VRender的[Text图元](/vrender/option/Text)
+组件类型的接口定义如下，其中基本组件（Image、Line、Rect、Shape、Text）的配置都直接基于 VRender 的对应图元，配置在 graphic 属性上：
 
-其中panel是组件的额外面板，其实是一个[VRender的rect](/vrender/option/Rect)图元，可以参考[VRender的rect](/vrender/option/Rect)图元配置。
-text配置是每个组件都带有的一个额外的配置，是一个[VRender的text](/vrender/option/Text)图元，可以参考[VRender的text](/vrender/option/Text)图元配置。
-padding表示面板和内容的边距，分别表示上、右、下、左的边距。
+- Image 是基于 VRender 的[Image 图元](/vrender/option/Image)
+- Line 是基于 VRender 的[Line 图元](/vrender/option/Line)
+- Rect 是基于 VRender 的[Rect 图元](/vrender/option/Rect)
+- Shape 是基于 VRender 的[Symbol 图元](/vrender/option/Symbol)
+- Text 是基于 VRender 的[Text 图元](/vrender/option/Text)
+
+其中 panel 是组件的额外面板，其实是一个[VRender 的 rect](/vrender/option/Rect)图元，可以参考[VRender 的 rect](/vrender/option/Rect)图元配置。
+text 配置是每个组件都带有的一个额外的配置，是一个[VRender 的 text](/vrender/option/Text)图元，可以参考[VRender 的 text](/vrender/option/Text)图元配置。
+padding 表示面板和内容的边距，分别表示上、右、下、左的边距。
 
 ```ts
 interface IComponentCharacterConfig extends ICharacterConfigBase {
@@ -265,7 +268,7 @@ const rect = {
     text: '这是一个矩形',
     textBaseline: 'middle',
     textAlign: 'center',
-    fill: 'white',
+    fill: 'white'
   }
 };
 const text = {
@@ -276,7 +279,7 @@ const text = {
     fill: 'red',
     textAlign: 'left',
     textBaseline: 'top'
-  },
+  }
 };
 const image = {
   graphic: {
@@ -290,56 +293,59 @@ const shape = {
     stroke: 'red',
     symbolType: 'star'
   }
-}
+};
 const line = {
   graphic: {
-    stroke: 'red',
+    stroke: 'red'
   }
-}
+};
 
 const characterList = [
   { type: 'Rect', options: rect, effect: 'scale' },
-  { type:'Text', options: text, effect: 'typewriter' },
-  { type:'Image', options: image, effect: 'wipe' },
-  { type:'Shape', options: shape, effect: 'clipRange' },
-  { type:'Line', options: line, effect: 'clipRange' },
-]
+  { type: 'Text', options: text, effect: 'typewriter' },
+  { type: 'Image', options: image, effect: 'wipe' },
+  { type: 'Shape', options: shape, effect: 'clipRange' },
+  { type: 'Line', options: line, effect: 'clipRange' }
+];
 
 const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
 const player = new VStory.Player(story);
 story.init(player);
 
 characterList.forEach((item, index) => {
-  story.addCharacter({
-    type: item.type,
-    id: item.type,
-    zIndex: 1,
-    position: {
-      top: 50 + Math.floor(index / 2) * 150,
-      left: 50 + Math.floor(index % 2) * 150,
-      width: 100,
-      height: 100
+  story.addCharacter(
+    {
+      type: item.type,
+      id: item.type,
+      zIndex: 1,
+      position: {
+        top: 50 + Math.floor(index / 2) * 150,
+        left: 50 + Math.floor(index % 2) * 150,
+        width: 100,
+        height: 100
+      },
+      options: item.options
     },
-    options: item.options
-  }, {
-    sceneId: 'defaultScene',
-    actions: [
-      {
-        action: 'appear',
-        startTime: 1000 * index,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000 * index,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
             }
-          }
-        ]
-      }
-    ]
-  });
-})
+          ]
+        }
+      ]
+    }
+  );
+});
 
 player.play(1);
 window.vstory = story;
@@ -347,11 +353,11 @@ window['story'] = story;
 window['vstory'] = story;
 ```
 
-### Timeline组件
+### Timeline 组件
 
 `Timeline`组件是一个时间轴组件，可以展示一整个时间序列，以及时间的流向，它的接口定义如下：
-```ts
 
+```ts
 interface TimelineAttrs extends IGroupGraphicAttribute {
   width: number; // 宽度
   // height?: number;
@@ -386,6 +392,7 @@ interface ITimelineComponentAttributes extends IGroupGraphicAttribute {
 ```
 
 使用案例如下：
+
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
@@ -400,7 +407,7 @@ const dsl = {
         top: 100,
         left: 0,
         width: 500,
-        height: 100,
+        height: 100
       },
       options: {
         graphic: {
@@ -408,7 +415,7 @@ const dsl = {
             { label: '1486', desc: '' },
             { label: '1644', desc: '' },
             { label: '1765', desc: '' },
-            { label: '1786', desc: '' },
+            { label: '1786', desc: '' }
           ],
           labelStyle: {
             fontSize: 16,
@@ -421,7 +428,7 @@ const dsl = {
             fontSize: 22,
             fontWeight: 'bold'
           }
-        },
+        }
       }
     }
   ],
@@ -445,7 +452,7 @@ const dsl = {
                     }
                   }
                 },
-                ...(new Array(5).fill(0).map((item, index) => {
+                ...new Array(5).fill(0).map((item, index) => {
                   return {
                     startTime: 3000 + index * 3100,
                     action: 'state',
@@ -455,15 +462,15 @@ const dsl = {
                         effect: 'forward'
                       }
                     }
-                  }
-                }))
+                  };
+                })
               ]
             }
           ]
         }
       ]
     }
-  ],
+  ]
 };
 
 const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
@@ -475,11 +482,12 @@ window['story'] = story;
 window['vstory'] = story;
 ```
 
-### Unit组件
+### Unit 组件
 
 单元可视化组件，单元可视化是一种将数据转化为视觉元素的叙事方式，能够直观地展示复杂信息。通过将每个数据点个体化，观众能更深入地理解每一个数据背后所代表的真实故事。这种方式利用动画和时间推移，生动地描绘数据变化的过程，同时通过颜色和形状等视觉元素传达多维度的信息，增强了情感共鸣。它不仅提升了数据的可读性，还易于在社交媒体上分享，有助于提高公众对重要社会问题的关注。
 
 `Unit`组件的接口定义如下
+
 ```ts
 interface IUnitGraphicAttributes extends IGroupAttribute {
   /**
@@ -545,7 +553,9 @@ interface IUnitGraphicAttributes extends IGroupAttribute {
   duration?: number;
 }
 ```
+
 使用案例如下：
+
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
@@ -647,7 +657,7 @@ const dsl = {
                             symbolType: 'circle',
                             fill: '#6638f0'
                           }
-                        },
+                        }
                       ]
                     }
                   }

@@ -24,11 +24,6 @@ export class CommonSpecRuntime implements ITableCharacterRuntime {
     /** 控制拖拽表头移动位置顺序开关 */
     // spec.dragHeaderMode = 'none';
 
-    spec.chartOption = {
-      // disableInteraction: true,
-      // disableTriggerEvent: true
-    };
-
     if (spec.legends) {
       array(spec.legends).forEach(l => {
         l.interactive = false;
