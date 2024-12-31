@@ -169,11 +169,11 @@ export class StoryCanvas implements IStoryCanvas {
     // 得到交互元素的详细信息
     let characterInfo;
     let character: ICharacter;
-    this._story.getCharacterList().forEach(character => {
-      const info = character.checkEvent(event);
+    this._story.getCharacterList().forEach(c => {
+      const info = c.checkEvent(event);
       if (info) {
         characterInfo = info;
-        character = character;
+        character = c;
         return true;
       }
       return false;

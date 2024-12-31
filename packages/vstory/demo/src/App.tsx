@@ -60,6 +60,7 @@ import { PivotChartBase } from './demos/table/runtime/pivot-chart-base';
 import { TextComponent } from './demos/component/text';
 import { SpecAxes } from './demos/chart/runtime/spec-axes';
 import { RuntimeTotalLabel } from './demos/chart/runtime/total-label';
+import { RectComponent } from './demos/component/rect';
 
 type MenusType = (
   | {
@@ -234,6 +235,10 @@ const App = () => {
         {
           name: 'TextComponent',
           component: TextComponent
+        },
+        {
+          name: 'RectComponent',
+          component: RectComponent
         }
       ]
     },
