@@ -74,7 +74,7 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
           merge(s, options[key][selector]);
         } else {
           const s = options[key][selector];
-          s.id = userId;
+          (s as any).id = userId;
           rawSpec[key].push(s);
         }
       }
@@ -100,7 +100,7 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
       return;
     }
     if (isArray(spec.data)) {
-      spec.data.forEach(d => {
+      spec.data.forEach((d: any) => {
         if (!d.values) {
           d.values = [];
         }
@@ -115,7 +115,7 @@ export class CommonSpecRuntime implements IChartCharacterRuntime {
   protected _fillDataValues(spec: any) {
     this._fillSpecData(spec);
     if (spec.series) {
-      spec.series.forEach(s => this._fillSpecData(s));
+      spec.series.forEach((s: any) => this._fillSpecData(s));
     }
   }
 }

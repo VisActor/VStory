@@ -36,7 +36,7 @@ export class TypeWriterVisibility extends BaseVisibility {
         }
         const a = graphic
           .animate()
-          .play(new TypeWriter({ text: from }, { text: to }, duration, easing as EasingType, typewriterParams));
+          .play(new TypeWriter({ text: from }, { text: to }, duration, easing as EasingType, typewriterParams as any));
         if (!appear) {
           a.reversed(true);
         }
