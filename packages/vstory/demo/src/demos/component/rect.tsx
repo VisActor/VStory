@@ -19,6 +19,40 @@ export const RectComponent = () => {
 
     story.addCharacterWithAppear({
       type: 'Rect',
+      id: 'bleed',
+      zIndex: 1,
+      position: {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+      },
+      locked: true,
+      options: {
+        graphic: {
+          stroke: 'red',
+          lineWidth: 4
+        }
+      }
+    });
+    // story.addCharacterWithAppear({
+    //   type: 'Rect',
+    //   id: 'title',
+    //   zIndex: 1,
+    //   position: {
+    //     top: 100,
+    //     left: 100,
+    //     width: 200,
+    //     height: 200
+    //   },
+    //   options: {
+    //     graphic: {
+    //       fill: 'red'
+    //     }
+    //   }
+    // });
+    story.addCharacterWithAppear({
+      type: 'Rect',
       id: 'title',
       zIndex: 1,
       position: {

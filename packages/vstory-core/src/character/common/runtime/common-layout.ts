@@ -8,13 +8,12 @@ export class CommonLayoutRuntime implements IChartCharacterRuntime {
   applyConfigToAttribute(character: ICharacterChart): void {
     const rawAttribute = character.getRuntimeConfig().getAttribute();
     const config = character.getRuntimeConfig().config;
-    const layoutData = getLayoutFromWidget(config.position);
-    const layout = getLayoutFromWidget(config.position);
+    const layoutData = getLayoutFromWidget(config.position, character);
     const viewBox = {
       x1: 0,
-      x2: layout.width,
+      x2: layoutData.width,
       y1: 0,
-      y2: layout.height
+      y2: layoutData.height
     };
     rawAttribute.viewBox = viewBox;
     rawAttribute.renderCanvas = character.canvas.getNativeCanvas();
