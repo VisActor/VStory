@@ -25,7 +25,7 @@ export class TypeWriter extends ACustomAnimate<{ text: string }> {
     easing: EasingType,
     params: ITypeWriterParams
   ) {
-    super(from, to, duration, easing, params);
+    super(from, to, duration, easing, params || {});
   }
 
   getEndProps(): Record<string, any> {

@@ -35,7 +35,7 @@ export interface ICharacter extends IReleaseable {
   checkEvent: (event: IStoryEvent) => false | (ICharacterPickInfo & any);
 
   toDSL: () => ICharacterConfig;
-  setConfig: (config: ICharacterConfig) => void;
+  setConfig: (config: Partial<ICharacterConfig>) => void;
 
   getAttribute: () => any;
 

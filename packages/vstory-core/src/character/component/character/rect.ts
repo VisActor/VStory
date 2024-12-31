@@ -4,6 +4,7 @@ import { CharacterComponent } from '../character-component';
 import { RectComponent } from '../graphic/RectComponent';
 import { RectRuntimeInstance } from '../runtime/rect';
 import type { IRectComponentAttributes } from '../interface/character-rect';
+import type { ICharacterPickInfo, IStoryEvent } from '../../../interface/event';
 
 export class RectCharacter extends CharacterComponent<RectComponent, IRectComponentAttributes> {
   static type = CharacterType.RECT;
@@ -37,5 +38,13 @@ export class RectCharacter extends CharacterComponent<RectComponent, IRectCompon
   }
   hide() {
     this._graphic.setAttribute('visibleAll', false);
+  }
+
+  checkEvent(event: IStoryEvent): false | ICharacterPickInfo {
+    const info = super.checkEvent(event);
+    if (info && event.path[event.path.length - 1] === this._group) {
+      return false;
+    }
+    return info;
   }
 }
