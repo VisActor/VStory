@@ -1,21 +1,8 @@
-import { isValid, merge, array, isArray, isValidNumber, isNumber } from '@visactor/vutils';
+import { merge, array, isArray } from '@visactor/vutils';
 import type { IChartCharacterRuntime } from '../interface/runtime';
 import type { ICharacterChart } from '../interface/character-chart';
-import type { IChartCharacterConfig, IChartModelMatch, ModelSelector } from '../../../interface/dsl/chart';
+import type { IChartCharacterConfig, ModelSelector } from '../../../interface/dsl/chart';
 import { isIDSelector, isSpecIndexSelector } from '../../../utils/type';
-
-export function ChartSpecMatch(rawSpec: any, index: number, matchInfo: IChartModelMatch) {
-  if (!matchInfo) {
-    return false;
-  }
-  if ('usrId' in matchInfo && isValid(matchInfo)) {
-    return rawSpec.id === matchInfo.usrId;
-  } else if (isValid(matchInfo.specIndex)) {
-    return matchInfo.specIndex === 'all' || index === matchInfo.specIndex;
-  }
-
-  return false;
-}
 
 export class CommonSpecRuntime implements IChartCharacterRuntime {
   type = 'CommonSpec';

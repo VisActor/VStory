@@ -3,23 +3,11 @@ import type { ICharacterConfigBase } from './dsl';
 
 export const StroyAllDataGroup = '_STORY_ALL_DATA_GROUP';
 
-export type IChartModelMatch =
-  | {
-      usrId: string;
-    }
-  | {
-      specIndex: number | 'all'; // all 表示所有
-    };
-
 export interface IComponentMatch {
   usrId?: string;
   specIndex?: number | 'all'; // all 表示所有
   [key: string]: any;
 }
-
-export type IComponentConfig<T = any> = IChartModelMatch & {
-  spec: T;
-};
 
 export interface IMarkStyle {
   seriesMatch: { type: string } & IComponentMatch;

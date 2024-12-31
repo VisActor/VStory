@@ -7,6 +7,7 @@ Character is the most basic element in VStory, it can be a chart, component, tab
 ## Definition of Character
 
 All `characters` can be defined by some common configurations and some special configurations. Common configurations include:
+
 - id: The id of the `character`, used to uniquely identify this `character`, which will be used in defining specific behaviors (actions) later
 - type: The type of the `character`, the types of `characters` supported by VStory include but are not limited to: `VChart`, `Text`, `Image`, etc.
 - position: The position and size of the `character`, as well as rotation anchor information
@@ -21,7 +22,7 @@ const textConfig = {
   zIndex: 1,
   position: {
     top: 100,
-    left: 200,
+    left: 200
   },
   // Define the text configuration here
   options: {
@@ -29,9 +30,9 @@ const textConfig = {
       text: 'A BRIEF HISTORY',
       fontSize: 12,
       fill: 'red'
-    },
+    }
   }
-}
+};
 
 const imageConfig = {
   type: 'Image', // Indicates it is an image type
@@ -39,18 +40,19 @@ const imageConfig = {
   zIndex: 1,
   position: {
     top: 100,
-    left: 200,
+    left: 200
   },
   // Define the image configuration here
   options: {
     graphic: {
-      image: 'url',
+      image: 'url'
     }
   }
-}
+};
 ```
 
 Regarding the accurate interface definition, it is as follows:
+
 ```ts
 type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig;
 
@@ -104,15 +106,15 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
     data?: any;
     // Title
     title?: {
-      [key: string]: IComponentConfig<ISpec['title']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['title']>>;
     };
     // Legends
     legends?: {
-      [key: string]: IComponentConfig<ISpec['legends']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['legends']>>;
     };
     // Axes
     axes?: {
-      [key: string]: IComponentConfig<ISpec['axes']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['axes']>>;
     };
     // Color palette
     color?: any;
@@ -134,6 +136,7 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
   };
 }
 ```
+
 Let's look at an example of VChart:
 
 ```javascript livedemo template=vchart
@@ -204,7 +207,7 @@ const dsl = {
                       animation: { duration: 3000, effect: 'barLeap', oneByOne: true, dimensionCount: 5 }
                     }
                   ]
-                },
+                }
               ]
             }
           ]
@@ -212,7 +215,7 @@ const dsl = {
       ]
     }
   ]
-}
+};
 
 const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
 const player = new VStory.Player(story);
@@ -226,6 +229,7 @@ window['vstory'] = story;
 ### Basic Components (Image, Line, Rect, Shape, Text)
 
 The interface definition of component types is as follows, where basic components (Image, Line, Rect, Shape, Text) are configured directly based on the corresponding elements of VRender, configured in the graphic property:
+
 - Image is based on VRender's [Image element](/vrender/option/Image)
 - Line is based on VRender's [Line element](/vrender/option/Line)
 - Rect is based on VRender's [Rect element](/vrender/option/Rect)
@@ -265,7 +269,7 @@ const rect = {
     text: '这是一个矩形',
     textBaseline: 'middle',
     textAlign: 'center',
-    fill: 'white',
+    fill: 'white'
   }
 };
 const text = {
@@ -276,7 +280,7 @@ const text = {
     fill: 'red',
     textAlign: 'left',
     textBaseline: 'top'
-  },
+  }
 };
 const image = {
   graphic: {
@@ -290,56 +294,59 @@ const shape = {
     stroke: 'red',
     symbolType: 'star'
   }
-}
+};
 const line = {
   graphic: {
-    stroke: 'red',
+    stroke: 'red'
   }
-}
+};
 
 const characterList = [
   { type: 'Rect', options: rect, effect: 'scale' },
-  { type:'Text', options: text, effect: 'typewriter' },
-  { type:'Image', options: image, effect: 'wipe' },
-  { type:'Shape', options: shape, effect: 'clipRange' },
-  { type:'Line', options: line, effect: 'clipRange' },
-]
+  { type: 'Text', options: text, effect: 'typewriter' },
+  { type: 'Image', options: image, effect: 'wipe' },
+  { type: 'Shape', options: shape, effect: 'clipRange' },
+  { type: 'Line', options: line, effect: 'clipRange' }
+];
 
 const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
 const player = new VStory.Player(story);
 story.init(player);
 
 characterList.forEach((item, index) => {
-  story.addCharacter({
-    type: item.type,
-    id: item.type,
-    zIndex: 1,
-    position: {
-      top: 50 + Math.floor(index / 2) * 150,
-      left: 50 + Math.floor(index % 2) * 150,
-      width: 100,
-      height: 100
+  story.addCharacter(
+    {
+      type: item.type,
+      id: item.type,
+      zIndex: 1,
+      position: {
+        top: 50 + Math.floor(index / 2) * 150,
+        left: 50 + Math.floor(index % 2) * 150,
+        width: 100,
+        height: 100
+      },
+      options: item.options
     },
-    options: item.options
-  }, {
-    sceneId: 'defaultScene',
-    actions: [
-      {
-        action: 'appear',
-        startTime: 1000 * index,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000 * index,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
             }
-          }
-        ]
-      }
-    ]
-  });
-})
+          ]
+        }
+      ]
+    }
+  );
+});
 
 player.play(1);
 window.vstory = story;
@@ -350,8 +357,8 @@ window['vstory'] = story;
 ### Timeline Component
 
 The `Timeline` component is a timeline component that displays a complete sequence of time, as well as the flow of time. Its interface definition is as follows:
-```ts
 
+```ts
 interface TimelineAttrs extends IGroupGraphicAttribute {
   width: number; // Width
   // height?: number;
@@ -386,6 +393,7 @@ interface ITimelineComponentAttributes extends IGroupGraphicAttribute {
 ```
 
 Usage example:
+
 ```javascript livedemo template=vstory
 // Register all required content
 VStory.registerAll();
@@ -400,7 +408,7 @@ const dsl = {
         top: 100,
         left: 0,
         width: 500,
-        height: 100,
+        height: 100
       },
       options: {
         graphic: {
@@ -408,7 +416,7 @@ const dsl = {
             { label: '1486', desc: '' },
             { label: '1644', desc: '' },
             { label: '1765', desc: '' },
-            { label: '1786', desc: '' },
+            { label: '1786', desc: '' }
           ],
           labelStyle: {
             fontSize: 16,
@@ -421,7 +429,7 @@ const dsl = {
             fontSize: 22,
             fontWeight: 'bold'
           }
-        },
+        }
       }
     }
   ],
@@ -445,7 +453,7 @@ const dsl = {
                     }
                   }
                 },
-                ...(new Array(5).fill(0).map((item, index) => {
+                ...new Array(5).fill(0).map((item, index) => {
                   return {
                     startTime: 3000 + index * 3100,
                     action: 'state',
@@ -455,15 +463,15 @@ const dsl = {
                         effect: 'forward'
                       }
                     }
-                  }
-                }))
+                  };
+                })
               ]
             }
           ]
         }
       ]
     }
-  ],
+  ]
 };
 
 const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
@@ -480,6 +488,7 @@ window['vstory'] = story;
 The unit visualization component is a narrative way of transforming data into visual elements, allowing complex information to be intuitively displayed. By individualizing each data point, the audience can gain a deeper understanding of the real stories behind each data point. This method vividly depicts the process of data change through animation and time progression, while conveying multidimensional information through visual elements such as color and shape, enhancing emotional resonance. It not only enhances the readability of data but also makes it easy to share on social media, helping to increase public awareness of important social issues.
 
 The interface definition of the `Unit` component is as follows:
+
 ```ts
 interface IUnitGraphicAttributes extends IGroupAttribute {
   /**
@@ -547,6 +556,7 @@ interface IUnitGraphicAttributes extends IGroupAttribute {
 ```
 
 Usage example:
+
 ```javascript livedemo template=vstory
 // Register all required content
 VStory.registerAll();
@@ -648,7 +658,7 @@ const dsl = {
                             symbolType: 'circle',
                             fill: '#6638f0'
                           }
-                        },
+                        }
                       ]
                     }
                   }

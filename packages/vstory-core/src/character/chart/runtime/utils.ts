@@ -5,19 +5,6 @@ import { isContinuous } from '@visactor/vscale';
 import { VCHART_DATA_INDEX, ValueLink, FieldLink } from './const';
 import type { IComponentMatch } from '../../../interface/dsl/chart';
 
-export function ChartSpecMatch(rawSpec: any, index: number, matchInfo: IComponentMatch) {
-  if (!matchInfo) {
-    return false;
-  }
-  if (isValid(matchInfo.usrId)) {
-    return rawSpec.id === matchInfo.usrId;
-  } else if (isValid(matchInfo.specIndex)) {
-    return matchInfo.specIndex === 'all' || index === matchInfo.specIndex;
-  }
-
-  return false;
-}
-
 export function GetVChartSeriesWithMatch(vchart: IChart, seriesMatch: IComponentMatch & { type: string }) {
   if (!isValid(seriesMatch.specIndex) && seriesMatch.type) {
     return vchart.getAllSeries().filter(s => s.type === seriesMatch.type);
