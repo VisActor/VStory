@@ -4,6 +4,7 @@ import type { IStoryCanvas } from '../interface/canvas';
 import type { IStory } from '../interface/story';
 import type { IStoryEvent } from '../interface/event';
 import type { ICharacter } from '../interface/character';
+import type { IAABBBoundsLike } from '@visactor/vutils';
 import { isValidNumber } from '@visactor/vutils';
 
 export class StoryCanvas implements IStoryCanvas {
@@ -34,6 +35,7 @@ export class StoryCanvas implements IStoryCanvas {
       dpr?: number;
       background: string;
       layerBackground: string;
+      layerViewBox?: IAABBBoundsLike;
       scaleX?: number | 'auto';
       scaleY?: number | 'auto';
     }
@@ -49,6 +51,7 @@ export class StoryCanvas implements IStoryCanvas {
       background = 'transparent',
       layerBackground = 'transparent',
       dpr = vglobal.devicePixelRatio,
+      layerViewBox,
       scaleX: _sx = 1,
       scaleY: _sy = 1
     } = params;
@@ -59,6 +62,15 @@ export class StoryCanvas implements IStoryCanvas {
 
     // this._stage.background = background;
     this._stage.defaultLayer.setAttributes({ background: layerBackground });
+    if (layerViewBox) {
+      this._stage.defaultLayer.setAttributes({
+        x: layerViewBox.x1,
+        y: layerViewBox.y1,
+        width: layerViewBox.x2 - layerViewBox.x1,
+        height: layerViewBox.y2 - layerViewBox.y1,
+        clip: true
+      });
+    }
     this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 

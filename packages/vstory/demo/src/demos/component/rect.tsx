@@ -13,7 +13,16 @@ export const RectComponent = () => {
     const canvas = document.createElement('canvas');
     container?.appendChild(canvas);
 
-    const story = new Story(null, { canvas, width: 800, height: 500, background: 'pink' });
+    const story = new Story(null, {
+      canvas,
+      width: 1000,
+      height: 600,
+      layerBackground: 'white',
+      background: 'pink',
+      scaleX: 0.5,
+      scaleY: 0.5,
+      layerViewBox: { x1: 100, y1: 100, x2: 900, y2: 500 }
+    });
     const player = new Player(story);
     story.init(player);
 
@@ -24,8 +33,8 @@ export const RectComponent = () => {
       position: {
         top: 0,
         left: 0,
-        right: 0,
-        bottom: 0
+        width: 800,
+        height: 400
       },
       locked: true,
       options: {
@@ -35,22 +44,6 @@ export const RectComponent = () => {
         }
       }
     });
-    // story.addCharacterWithAppear({
-    //   type: 'Rect',
-    //   id: 'title',
-    //   zIndex: 1,
-    //   position: {
-    //     top: 100,
-    //     left: 100,
-    //     width: 200,
-    //     height: 200
-    //   },
-    //   options: {
-    //     graphic: {
-    //       fill: 'red'
-    //     }
-    //   }
-    // });
     story.addCharacterWithAppear({
       type: 'Rect',
       id: 'title',

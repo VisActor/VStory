@@ -3,6 +3,7 @@ import type { IActionParams, IStory } from '../interface/story';
 import type { ICharacterConfig, IStoryDSL } from '../interface/dsl/dsl';
 import { StoryCanvas } from './canvas';
 import type { IStoryCanvas } from '../interface/canvas';
+import type { IAABBBoundsLike } from '@visactor/vutils';
 import { isString } from '@visactor/vutils';
 import type { ICharacter } from '../interface/character';
 import type { IPlayer } from '../interface/player';
@@ -18,6 +19,7 @@ export interface IStoryInitOption {
   height?: number;
   background?: string;
   layerBackground?: string;
+  layerViewBox?: IAABBBoundsLike;
   dpr?: number;
   // 对画面的缩放
   scaleX?: number | 'auto';
@@ -48,6 +50,7 @@ export class Story implements IStory {
       height,
       background = 'transparent',
       layerBackground = 'transparent',
+      layerViewBox,
       dpr = vglobal.devicePixelRatio,
       scaleX = 1,
       scaleY = 1
@@ -63,6 +66,7 @@ export class Story implements IStory {
       background,
       dpr,
       layerBackground,
+      layerViewBox,
       scaleX,
       scaleY
     });
