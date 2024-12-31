@@ -196,7 +196,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   }
 
   protected getViewBoxFromSpec() {
-    const layout = getLayoutFromWidget(this._config.position);
+    const layout = getLayoutFromWidget(this._config.position, this);
     const viewBox = {
       x1: layout.x,
       x2: layout.x + layout.width,
@@ -209,6 +209,8 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   protected applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void {
     this._attribute = this.getDefaultAttribute() as any;
     this._runtime.forEach(r => r.applyConfigToAttribute?.(this));
+    // 设置locked
+    this.locked = !!config.locked;
   }
 
   getDefaultAttribute(): Partial<IChartGraphicAttribute> {

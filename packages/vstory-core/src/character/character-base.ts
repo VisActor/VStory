@@ -21,6 +21,8 @@ export abstract class CharacterBase<T> implements ICharacter {
   protected _canvas: IStoryCanvas;
   declare configProcess: IConfigProcess;
   declare _attribute: T;
+  // 是否锁定，不可被编辑
+  declare locked?: boolean;
   // declare attributeProcess: IAttributeProcess;
 
   get config() {
