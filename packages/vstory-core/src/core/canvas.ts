@@ -185,6 +185,9 @@ export class StoryCanvas implements IStoryCanvas {
   }
 
   tickTo(t: number, render: boolean = true) {
+    // 开启ticker，否则ticker那里不会执行，第一帧就掉了
+    this._stage.ticker.start();
+    this._stage.getTimeline().resume();
     this._stage.ticker.tickAt(t);
     render && this._stage.render();
   }
