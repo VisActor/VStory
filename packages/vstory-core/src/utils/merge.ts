@@ -1,4 +1,4 @@
-import { isObject } from '@visactor/vutils';
+import { isArray, isObject } from '@visactor/vutils';
 import { DeletedAttr } from '../constants/config';
 
 /**
@@ -18,9 +18,11 @@ export function deepMergeWithDeletedAttr<T>(target: T, source: Partial<T>): T {
         delete target[key];
         continue;
       }
-
-      // 如果 sourceValue 是对象且 targetValue 也是对象，进行递归合并
-      if (isObject(targetValue) && isObject(sourceValue)) {
+      if (isArray(targetValue) && isArray(sourceValue)) {
+        // 如果都是数组，也直接赋值
+        target[key] = sourceValue;
+      } else if (isObject(targetValue) && isObject(sourceValue)) {
+        // 如果 sourceValue 是对象且 targetValue 也是对象，进行递归合并
         target[key] = deepMergeWithDeletedAttr(targetValue, sourceValue);
       } else {
         // 否则直接赋值

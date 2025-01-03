@@ -5,6 +5,8 @@ import type { IRect } from '@visactor/vrender-core';
 import { BaseComponentWithText } from './BaseComponentWithText';
 
 export class RectComponent extends BaseComponentWithText {
+  type: string = 'RectComponent';
+  mainGraphic: IRect;
   static defaultAttributes: Partial<IRectComponentAttributes> = {
     visible: true,
     textStyle: {},
@@ -42,6 +44,10 @@ export class RectComponent extends BaseComponentWithText {
     if (!attrs.height) {
       attrs.height = height - padding.top - padding.bottom;
     }
-    this.createOrUpdateChild('rect', { ...attrs, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null }, 'rect') as IRect;
+    this.mainGraphic = this.createOrUpdateChild(
+      'rect',
+      { ...attrs, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null },
+      'rect'
+    ) as IRect;
   }
 }

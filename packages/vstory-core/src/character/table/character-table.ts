@@ -168,7 +168,7 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   }
 
   protected getViewBoxFromSpec() {
-    const layout = getLayoutFromWidget(this._config.position);
+    const layout = getLayoutFromWidget(this._config.position, this);
     const viewBox = {
       x1: layout.x,
       x2: layout.x + layout.width,

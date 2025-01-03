@@ -9,6 +9,7 @@ export * from './interface/action-processor';
 export * from './interface/dsl/dsl';
 export * from './interface/character';
 export * from './interface/story';
+export * from './interface/event';
 export * from './core/processorRegistry';
 export * from './tools/global-ticker';
 export * from './character/component/character-component';

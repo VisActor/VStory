@@ -3,7 +3,6 @@ import type { IGraphic } from '@visactor/vrender-core';
 import { Generator, IGroup } from '@visactor/vrender-core';
 import type { ICharacter } from '../interface/character';
 import type { ICharacterConfig, ICharacterInitOption } from '../interface/dsl/dsl';
-import { deepMergeWithDeletedAttr } from '../utils/merge';
 import { cloneDeep, isValid } from '@visactor/vutils';
 import type { ICharacterPickInfo, IStoryEvent } from '../interface/event';
 import type { IStory } from '../interface/story';
@@ -21,6 +20,8 @@ export abstract class CharacterBase<T> implements ICharacter {
   protected _canvas: IStoryCanvas;
   declare configProcess: IConfigProcess;
   declare _attribute: T;
+  // 是否锁定，不可被编辑
+  declare locked?: boolean;
   // declare attributeProcess: IAttributeProcess;
 
   get config() {
@@ -46,7 +47,7 @@ export abstract class CharacterBase<T> implements ICharacter {
     this._canvas = option.canvas;
   }
 
-  setConfig(config: IUpdateConfigParams) {
+  setConfig(config: Partial<IUpdateConfigParams>) {
     const diffConfig = this.diffConfig(config);
     this.configProcess.updateConfig(diffConfig, config, this._config);
     this.applyConfigToAttribute(diffConfig, this._config);

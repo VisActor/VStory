@@ -8,8 +8,8 @@ export class BaseRuntime implements IComponentCharacterRuntime {
 
   applyConfigToAttribute(character: ICharacterComponent): void {
     const rawAttribute = character.getAttribute();
-    const { options, position } = character.config;
-    const layout = getLayoutFromWidget(position);
+    const { options, position, locked } = character.config;
+    const layout = getLayoutFromWidget(position, character);
 
     const { graphic = {}, text = {}, panel = {}, padding } = options;
 
@@ -22,6 +22,10 @@ export class BaseRuntime implements IComponentCharacterRuntime {
     merge(rawAttribute.textStyle, text);
     if (!rawAttribute.graphic) {
       rawAttribute.graphic = {};
+    }
+    if (locked) {
+      rawAttribute.pickable = false;
+      rawAttribute.childrenPickable = false;
     }
     merge(rawAttribute.graphic, graphic);
   }
