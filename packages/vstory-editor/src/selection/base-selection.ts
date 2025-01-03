@@ -18,6 +18,8 @@ export abstract class BaseSelection implements IEditSelection {
   protected _layoutController: ITransformController | null;
 
   isEditing: boolean = false;
+  declare clickCount: number;
+  protected readonly dblclickTime: number = 300;
 
   get activeCharacter() {
     return this._activeCharacter;
@@ -192,6 +194,7 @@ export abstract class BaseSelection implements IEditSelection {
       return false;
     }
     if (actionInfo.type === EditActionEnum.singleSelection) {
+      this.checkDblClickAction(actionInfo);
       // 使用到其他的Selection了，return false
       if (!this.isActionInfoSupported(actionInfo)) {
         this.endEdit();
@@ -207,6 +210,26 @@ export abstract class BaseSelection implements IEditSelection {
       // 还是是当前元素，return true
       return true;
     }
+    return false;
+  }
+
+  protected checkDblClickAction(actionInfo: IEditActionInfo) {
+    if (!this.clickCount) {
+      this.clickCount = 1;
+    } else {
+      this.clickCount++;
+    }
+    if (this.clickCount > 1) {
+      this._checkDblClickAction(actionInfo);
+      this.clickCount = 0;
+      // 暂时不用clearTimeout，猜测不会点的那么快
+    }
+    setTimeout(() => {
+      this.clickCount = 0;
+    }, this.dblclickTime);
+  }
+  protected _checkDblClickAction(actionInfo: IEditActionInfo) {
+    return;
   }
   // 非编辑状态下处理actionInfo
   protected checkActionWhileNoEditing(actionInfo: IEditActionInfo): boolean {

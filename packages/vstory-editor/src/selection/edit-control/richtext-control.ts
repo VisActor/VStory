@@ -30,7 +30,7 @@ export class RichTextControl {
     }
     if (msg.type === 'change' && this._character) {
       this._character.setConfig({
-        options: { graphic: { textConfig: this._richText.attribute.textConfig } }
+        options: { text: { text: '', textConfig: [...this._richText.attribute.textConfig] } }
       });
     }
     // do noting 富文本编辑消息的处理
