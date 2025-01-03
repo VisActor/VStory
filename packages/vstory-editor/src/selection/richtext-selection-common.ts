@@ -16,17 +16,23 @@ export class RichTextSelectionCommon extends BaseSelection implements IEditSelec
   protected _getRichText() {
     // @ts-ignore
     const character = this._actionInfo.character;
-    const text = character.graphic as IRichText;
+    const text = character.graphic.getElementsByName('text')[0] as IRichText;
     return { character, text };
   }
 
-  startEdit(actionInfo: IEditActionInfo) {
-    super.startEdit(actionInfo);
+  protected _checkDblClickAction(actionInfo: IEditActionInfo): void {
     const { character, text } = this._getRichText();
-    this._createRichControl(character, text);
+    // if (!text) {
+    //   return;
+    // }
+    this._createRichControl(character, text, actionInfo.event);
   }
+
   endEdit() {
     const { character, text } = this._getRichText();
+    // if (!text) {
+    //   return;
+    // }
     this._releaseRichControl(character, text);
     super.endEdit();
   }

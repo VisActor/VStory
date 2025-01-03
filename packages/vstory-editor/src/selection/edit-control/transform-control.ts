@@ -308,6 +308,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     this.addEventListener('pointerout', this.handleMouseOut);
 
     // drag
+    // TODO 这里不生效
     this.addEventListener('pointerdown', this.handleDragMouseDown);
     this.addDrag();
 
@@ -916,6 +917,20 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       return;
     }
     this._dragger.release();
+  }
+
+  pauseDragger() {
+    if (!this._dragger) {
+      return;
+    }
+    this._dragger.pauseDrag();
+  }
+
+  resumeDragger() {
+    if (!this._dragger) {
+      return;
+    }
+    this._dragger.resumeDrag();
   }
 
   private _isRelease = false;

@@ -1,8 +1,15 @@
 import { CharacterType } from '@visactor/vstory-core';
 import { Edit } from './edit';
 import { RectSelection } from './selection/rect-selection';
+import { AutoEnablePlugins, container, ContainerModule, RichTextEditPlugin } from '@visactor/vrender-core';
+
+const editPlugin = new ContainerModule(bind => {
+  bind(RichTextEditPlugin).toSelf();
+  bind(AutoEnablePlugins).toService(RichTextEditPlugin);
+});
 
 export function registerAllSelection() {
+  container.load(editPlugin);
   // Edit.registerEditSelection('common', CommonEditComponent);
   // Edit.registerEditSelection(CharacterType.TEXT, TextSelection);
   // Edit.registerEditSelection('richtext', RichTextSelection);

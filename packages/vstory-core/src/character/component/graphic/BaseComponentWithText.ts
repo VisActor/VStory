@@ -72,8 +72,8 @@ export class BaseComponentWithText extends AbstractComponent<ITextComponentAttri
     richtext.setAttributes({
       textConfig,
       verticalDirection: richtextBaseline,
-      // width: boxWidth,
-      // height: boxHeight,
+      width: boxWidth,
+      height: boxHeight,
       x: padding.left,
       y: padding.top
     });

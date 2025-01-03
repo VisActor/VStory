@@ -2,6 +2,7 @@ import type { IStage } from '@visactor/vrender';
 
 export class DragComponent {
   private _state: 'startDrag' | 'dragging' | 'stopDrag' | 'none' = 'none';
+  private _pausing = false;
   get state() {
     return this._state;
   }
@@ -25,6 +26,9 @@ export class DragComponent {
   protected _unDragEndHandler: () => void;
 
   pointerMove = (event: any) => {
+    if (this._pausing) {
+      return;
+    }
     if (!(this._state === 'startDrag' || this._state === 'dragging')) {
       return;
     }
@@ -44,6 +48,13 @@ export class DragComponent {
   }
   unDragEndHandler(handler: () => void) {
     this._unDragEndHandler = handler;
+  }
+
+  pauseDrag() {
+    this._pausing = true;
+  }
+  resumeDrag() {
+    this._pausing = false;
   }
 
   startDrag(event: any) {

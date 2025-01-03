@@ -57,6 +57,11 @@ export const RectComponent = () => {
       options: {
         graphic: {
           fill: 'red'
+        },
+        text: {
+          text: 'hello world',
+          fontSize: 30,
+          fill: 'blue'
         }
       }
     });

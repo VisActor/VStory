@@ -23,6 +23,6 @@ export class RectSelection extends RichTextSelectionCommon implements IEditSelec
 
   handlerContentClick = (e: any) => {
     this._layoutController.handleDragMouseDown(e);
-    this.endRichTextEdit();
+    // this.endRichTextEdit();
   };
 }
