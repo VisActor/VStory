@@ -28,18 +28,24 @@ export const RectComponent = () => {
 
     story.addCharacterWithAppear({
       type: 'Rect',
-      id: 'bleed',
-      zIndex: 1,
+      id: 'aaa',
+      zIndex: 10,
       position: {
         top: 100,
-        left: 60,
-        width: 60,
+        left: 100,
+        width: 80,
         height: 60
       },
       options: {
         graphic: {
-          stroke: 'green',
-          lineWidth: 4
+          stroke: false,
+          fill: 'pink'
+        },
+        text: {
+          text: '这是一个矩形',
+          textBaseline: 'middle',
+          textAlign: 'center',
+          fill: 'white'
         }
       }
     });

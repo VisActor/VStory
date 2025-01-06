@@ -128,8 +128,10 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
 
   private _snapLineX1: ILine;
   private _snapLineX2: ILine;
+  private _snapLineX3: ILine;
   private _snapLineY1: ILine;
   private _snapLineY2: ILine;
+  private _snapLineY3: ILine;
   protected _snapThreshold: number = 6;
 
   // snap的时候会修改rect，导致rect不跟手，所以需要一个最真实的bounds
@@ -273,6 +275,10 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       ...commonAttribute
     });
     this.add(this._snapLineX2);
+    this._snapLineX3 = createLine({
+      ...commonAttribute
+    });
+    this.add(this._snapLineX3);
 
     this._snapLineY1 = createLine({
       ...commonAttribute
@@ -282,6 +288,10 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       ...commonAttribute
     });
     this.add(this._snapLineY2);
+    this._snapLineY3 = createLine({
+      ...commonAttribute
+    });
+    this.add(this._snapLineY3);
   }
 
   addDrag() {
@@ -436,7 +446,14 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
   protected handleDragMouseUp = (e: any) => {
     this._actualSnapBounds = null;
     // 清理snapLine
-    [this._snapLineX1, this._snapLineX2, this._snapLineY1, this._snapLineY2].forEach(g => {
+    [
+      this._snapLineX1,
+      this._snapLineX2,
+      this._snapLineY1,
+      this._snapLineY2,
+      this._snapLineX3,
+      this._snapLineY3
+    ].forEach(g => {
       g.setAttributes({ visible: false });
     });
     if (!this.isDragging) {
@@ -951,13 +968,20 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     resize: boolean
   ): boolean {
     // 重置snapLine
-    (this as any)[`_snapLine${orient.toUpperCase()}1`].setAttributes({ visible: false });
-    (this as any)[`_snapLine${orient.toUpperCase()}2`].setAttributes({ visible: false });
+    [
+      `_snapLine${orient.toUpperCase()}1`,
+      `_snapLine${orient.toUpperCase()}2`,
+      `_snapLine${orient.toUpperCase()}3`
+    ].forEach(k => {
+      (this as any)[k].setAttributes({ visible: false });
+    });
 
     const snapLines = lines.filter(item => {
       const d1 = abs(item.value - bounds[`${orient}1`]);
       const d2 = abs(item.value - bounds[`${orient}2`]);
-      return d1 < this._snapThreshold || d2 < this._snapThreshold;
+      // 中间的线
+      const d3 = abs(item.value - (bounds[`${orient}1`] + bounds[`${orient}2`]) / 2);
+      return d1 < this._snapThreshold || d2 < this._snapThreshold || d3 < this._snapThreshold;
     });
     if (!snapLines.length) {
       return false;
@@ -967,37 +991,62 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     snapLines.forEach(line => {
       const d1 = line.value - bounds[`${orient}1`];
       const d2 = line.value - bounds[`${orient}2`];
+      // 中间的线
+      const d3 = line.value - (bounds[`${orient}1`] + bounds[`${orient}2`]) / 2;
       const otherOrientMin = Math.min(line.start, line.end, outBounds[`${otherOrient}1`], outBounds[`${otherOrient}2`]);
       const otherOrientMax = Math.max(line.start, line.end, outBounds[`${otherOrient}1`], outBounds[`${otherOrient}2`]);
-      if (abs(d1) < abs(d2)) {
-        outBounds[`${orient}1`] = line.value;
-        // 如果不是resize，就不改变宽度/高度
-        if (!resize) {
-          outBounds[`${orient}2`] = outBounds[`${orient}1`] + out[orient === 'x' ? 'width' : 'height'];
-        }
-        // 添加辅助线
-        (this as any)[`_snapLine${orient.toUpperCase()}1`].setAttributes({
-          visible: true,
-          points: [
-            { [orient]: line.value, [otherOrient]: otherOrientMin },
-            { [orient]: line.value, [otherOrient]: otherOrientMax }
-          ] as any
-        });
+      const d1Obj = { v: d1, absV: abs(d1), idx: '1', d: line.value - outBounds[`${orient}1`] };
+      const d2Obj = { v: d2, absV: abs(d2), idx: '2', d: line.value - outBounds[`${orient}2`] };
+      const d3Obj = {
+        v: d3,
+        absV: abs(d3),
+        idx: '3',
+        d: line.value - (outBounds[`${orient}1`] + outBounds[`${orient}2`]) / 2
+      };
+      const min = [d1Obj, d2Obj, d3Obj].sort((a, b) => a.absV - b.absV)[0];
+
+      if (!resize) {
+        outBounds.translate(orient === 'x' ? min.d : 0, orient === 'y' ? min.d : 0);
       } else {
-        outBounds[`${orient}2`] = line.value;
-        // 如果不是resize，就不改变宽度/高度
-        if (!resize) {
-          outBounds[`${orient}1`] = outBounds[`${orient}2`] - out[orient === 'x' ? 'width' : 'height'];
-        }
-        // 添加辅助线
-        (this as any)[`_snapLine${orient.toUpperCase()}2`].setAttributes({
-          visible: true,
-          points: [
-            { [orient]: line.value, [otherOrient]: otherOrientMin },
-            { [orient]: line.value, [otherOrient]: otherOrientMax }
-          ] as any
-        });
+        (outBounds as any)[`${orient}${min.idx}`] = line.value;
       }
+      (this as any)[`_snapLine${orient.toUpperCase()}${min.idx}`].setAttributes({
+        visible: true,
+        points: [
+          { [orient]: line.value, [otherOrient]: otherOrientMin },
+          { [orient]: line.value, [otherOrient]: otherOrientMax }
+        ] as any
+      });
+
+      // if (abs(d1) < abs(d2)) { // 要改x1/y1
+      //   outBounds[`${orient}1`] = line.value;
+      //   // 如果不是resize，就不改变宽度/高度
+      //   if (!resize) {
+      //     outBounds[`${orient}2`] = outBounds[`${orient}1`] + out[orient === 'x' ? 'width' : 'height'];
+      //   }
+      //   // 添加辅助线
+      //   (this as any)[`_snapLine${orient.toUpperCase()}1`].setAttributes({
+      //     visible: true,
+      //     points: [
+      //       { [orient]: line.value, [otherOrient]: otherOrientMin },
+      //       { [orient]: line.value, [otherOrient]: otherOrientMax }
+      //     ] as any
+      //   });
+      // } else { // 要改x2/y2
+      //   outBounds[`${orient}2`] = line.value;
+      //   // 如果不是resize，就不改变宽度/高度
+      //   if (!resize) {
+      //     outBounds[`${orient}1`] = outBounds[`${orient}2`] - out[orient === 'x' ? 'width' : 'height'];
+      //   }
+      //   // 添加辅助线
+      //   (this as any)[`_snapLine${orient.toUpperCase()}2`].setAttributes({
+      //     visible: true,
+      //     points: [
+      //       { [orient]: line.value, [otherOrient]: otherOrientMin },
+      //       { [orient]: line.value, [otherOrient]: otherOrientMax }
+      //     ] as any
+      //   });
+      // }
     });
     out.x = outBounds.x1;
     out.y = outBounds.y1;
@@ -1109,6 +1158,8 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     this._dragger = null;
     this._snapLineX1 = null;
     this._snapLineY1 = null;
+    this._snapLineX2 = null;
+    this._snapLineY2 = null;
     this._snapLineX2 = null;
     this._snapLineY2 = null;
     this.editStartCbs = [];
