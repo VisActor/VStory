@@ -19,8 +19,8 @@ export const RectComponent = () => {
       height: 600,
       layerBackground: 'white',
       background: 'pink',
-      scaleX: 0.5,
-      scaleY: 0.5,
+      // scaleX: 0.5,
+      // scaleY: 0.5,
       layerViewBox: { x1: 100, y1: 100, x2: 900, y2: 500 }
     });
     const player = new Player(story);
@@ -31,15 +31,14 @@ export const RectComponent = () => {
       id: 'bleed',
       zIndex: 1,
       position: {
-        top: 0,
-        left: 0,
-        width: 800,
-        height: 400
+        top: 100,
+        left: 60,
+        width: 60,
+        height: 60
       },
-      locked: true,
       options: {
         graphic: {
-          stroke: 'red',
+          stroke: 'green',
           lineWidth: 4
         }
       }
@@ -81,7 +80,7 @@ export const RectComponent = () => {
       selectedCharacter = null;
     });
     edit.on('resize', msg => {
-      console.log('resize', msg);
+      // console.log('resize', msg);
     });
 
     return () => {

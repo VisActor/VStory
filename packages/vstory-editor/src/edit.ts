@@ -1,5 +1,6 @@
 import { EditAction } from './edit-action';
 import { EventEmitter } from '@visactor/vutils';
+import type { ILayoutLine } from './interface';
 import {
   type IEditActionInfo,
   type IEditSelection,
@@ -9,7 +10,7 @@ import {
 import type { IGroup, IGraphic } from '@visactor/vrender';
 import { createGroup } from '@visactor/vrender';
 import { EditActionEnum, SeriesMarkMode } from './const';
-import type { IStoryEvent, Story } from '@visactor/vstory-core';
+import type { ICharacter, IStoryEvent, Story } from '@visactor/vstory-core';
 
 export class Edit extends EventEmitter {
   readonly editAction: EditAction;
@@ -179,5 +180,17 @@ export class Edit extends EventEmitter {
 
   clearOverGraphic() {
     this._overGraphicGroup.removeAllChild();
+  }
+
+  getLayoutLineInLayer(ignoreIdList: string[]): ILayoutLine[] {
+    const result: ILayoutLine[] = [];
+    const characterList = this.story.getCharacterList();
+    characterList.forEach(c => {
+      if (ignoreIdList.includes(c.id)) {
+        return;
+      }
+      result.push(...c.getLayoutGuideLine());
+    });
+    return result;
   }
 }

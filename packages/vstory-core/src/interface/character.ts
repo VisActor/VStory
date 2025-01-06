@@ -6,6 +6,16 @@ import type { IReleaseable } from './releaseable';
 import type { IStory } from './story';
 import type { IConfigProcess } from '../character/config-transform/interface';
 import type { IStoryCanvas } from './canvas';
+import type { IAABBBounds } from '@visactor/vutils';
+
+export interface ILayoutLine {
+  orient: 'x' | 'y';
+  type: 'start' | 'middle' | 'end';
+  value: number;
+  start: number;
+  end: number;
+  bounds: IAABBBounds;
+}
 
 export interface ICharacter extends IReleaseable {
   id: string;
@@ -42,6 +52,9 @@ export interface ICharacter extends IReleaseable {
   getAttribute: () => any;
 
   getRuntimeConfig: () => ICharacterRuntimeConfig;
+
+  // 获取所有辅助线
+  getLayoutGuideLine: () => ILayoutLine[];
 }
 
 export interface ICharacterRuntimeConfig {

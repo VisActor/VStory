@@ -9,16 +9,20 @@ import type {
   IRect,
   IRectGraphicAttribute,
   ILineGraphicAttribute,
-  IGroup
+  IGroup,
+  ILine
 } from '@visactor/vrender';
-import { createRect } from '@visactor/vrender';
+import { createLine, createRect } from '@visactor/vrender';
 import type { IAABBBounds, IAABBBoundsLike, IPointLike } from '@visactor/vutils';
-import { AABBBounds, merge, normalizeAngle, normalizePadding, pi } from '@visactor/vutils';
+import { AABBBounds, abs, merge, normalizeAngle, normalizePadding, pi } from '@visactor/vutils';
 import { AbstractComponent } from '@visactor/vrender-components';
 import { DRAG_ANCHOR_COLOR, SHAPE_SELECT_COLOR, MinSize } from './constants';
 import { DragComponent } from './transform-drag';
 import { transformDeltaWithStage, transformPointWithStage } from '../../utils/transform';
-import type { IEditSelection, VRenderPointerEvent } from '../../interface';
+import type { IEditSelection, ILayoutLine, VRenderPointerEvent } from '../../interface';
+import { min } from '@visactor/vchart/esm/util';
+
+const tempRect = createRect({});
 
 type AnchorDirection = 'top' | 'bottom' | 'left-top' | 'left-bottom' | 'right' | 'left' | 'right-top' | 'right-bottom';
 
@@ -49,6 +53,13 @@ export type ControllerAttributes = {
   minHeight?: number;
   proportionalScaling?: boolean;
 } & IGroupGraphicAttribute;
+
+type IXYWH = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
 
 export type IUpdateParams = {
   x: number;
@@ -114,6 +125,16 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
   reshapeState: number;
   rect: IRect;
   editBorder: IRect;
+
+  private _snapLineX1: ILine;
+  private _snapLineX2: ILine;
+  private _snapLineY1: ILine;
+  private _snapLineY2: ILine;
+  protected _snapThreshold: number = 6;
+
+  // snap的时候会修改rect，导致rect不跟手，所以需要一个最真实的bounds
+  protected _actualSnapBounds: IAABBBounds | null = null;
+
   // state: {
   //   actionMode: EditorActionMode;
   // };
@@ -125,7 +146,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
   editStartCbs: Array<(event?: VRenderPointerEvent) => void>;
   unTransStartCbs: Array<(event: PointerEvent) => void>;
 
-  isEditor: boolean = false;
+  // isEditor: boolean = false;
 
   _editorConfig: {
     move: boolean;
@@ -229,10 +250,38 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     this.editBorder.attachShadow();
     this.add(this.rect);
     this.add(this.editBorder);
+    this._createSnapLine();
     this.editStartCbs = [];
     this.unTransStartCbs = [];
     this.updateCbs = [];
     this.endEditCbs = [];
+  }
+
+  protected _createSnapLine() {
+    const commonAttribute = {
+      stroke: SHAPE_SELECT_COLOR,
+      pickable: false,
+      lineWidth: 1,
+      strokeOpacity: 0.4,
+      visible: false
+    };
+    this._snapLineX1 = createLine({
+      ...commonAttribute
+    });
+    this.add(this._snapLineX1);
+    this._snapLineX2 = createLine({
+      ...commonAttribute
+    });
+    this.add(this._snapLineX2);
+
+    this._snapLineY1 = createLine({
+      ...commonAttribute
+    });
+    this.add(this._snapLineY1);
+    this._snapLineY2 = createLine({
+      ...commonAttribute
+    });
+    this.add(this._snapLineY2);
   }
 
   addDrag() {
@@ -330,7 +379,6 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
   };
 
   protected handleDragMouseDown = (e: any) => {
-    this.isEditor = true;
     this.editStartCbs.forEach(cb => cb(e));
     const layerPos = this.transformPoint(e.offset);
     if (!layerPos) {
@@ -386,6 +434,11 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
   };
 
   protected handleDragMouseUp = (e: any) => {
+    this._actualSnapBounds = null;
+    // 清理snapLine
+    [this._snapLineX1, this._snapLineX2, this._snapLineY1, this._snapLineY2].forEach(g => {
+      g.setAttributes({ visible: false });
+    });
     if (!this.isDragging) {
       return;
     }
@@ -394,7 +447,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     this.dragOffsetY = 0;
     this.setActiveGraphic(null);
     this.endEditCbs?.forEach(cb => cb(e));
-    this.isEditor = false;
+    // this.isEditor = false;
     this.isDragging = false;
   };
 
@@ -455,12 +508,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     if (height < this.minSize.height) {
       return;
     }
-    this.rect.setAttributes({
-      width,
-      height,
-      x,
-      y
-    });
+    this._doUpdateRectXYWH(x, y, width, height);
     this.setAttributes({
       anchor: anchor as [number | string, number | string]
     });
@@ -556,12 +604,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       x: (nextP1.x + nextP2.x) / 2,
       y: (nextP1.y + nextP2.y) / 2
     };
-    this.rect.setAttributes({
-      width: finalWidth,
-      height: finalHeight,
-      x: center.x - finalWidth / 2,
-      y: center.y - finalHeight / 2
-    });
+    this._doUpdateRectXYWH(center.x - finalWidth / 2, center.y - finalHeight / 2, finalWidth, finalHeight);
     this.setAttributes({
       anchor: [center.x, center.y]
     });
@@ -830,17 +873,137 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
 
   moveBy(dx: number, dy: number): this {
     const { x, y, width, height } = this.rect.attribute;
-    this.rect.setAttributes({
-      width: width,
-      height: height,
-      x: x + dx,
-      y: y + dy
-    });
+    this._doUpdateRectXYWH(x + dx, y + dy, width, height);
     this.setAttributes({
       anchor: [x + dx + width / 2, y + dy + height / 2]
     });
     this.dispatchUpdate();
     return this;
+  }
+
+  // moveBy或者scale，导致形状变化，走这里设置
+  protected _doUpdateRectXYWH(x: number, y: number, width: number, height: number) {
+    // console.log(x, y, width, height);
+    const snappedRect = this._checkSnap(x, y, width, height);
+    this.rect.setAttributes({
+      ...snappedRect
+    });
+  }
+
+  protected _checkSnap(x: number, y: number, width: number, height: number) {
+    const { x: _x, y: _y, width: _width, height: _height } = this.rect.attribute;
+    // 如果没变化，就不做处理
+    const diff = {
+      x: x - _x,
+      y: y - _y,
+      width: width - _width,
+      height: height - _height
+    };
+    const out = { x, y, width, height };
+    if (diff.x === 0 && diff.y === 0 && diff.width === 0 && diff.height === 0) {
+      return out;
+    }
+    // 计算出一个实际的bounds
+    if (!this._actualSnapBounds) {
+      this._actualSnapBounds = new AABBBounds().setValue(x, y, x + width, y + height);
+    } else {
+      this._actualSnapBounds.x1 += diff.x;
+      this._actualSnapBounds.y1 += diff.y;
+      this._actualSnapBounds.x2 += diff.x + diff.width;
+      this._actualSnapBounds.y2 += diff.y + diff.height;
+    }
+    // 否则，检测是否需要吸附
+    const { activeCharacter } = this.editSelection;
+    let _snappedX = false;
+    let _snappedY = false;
+    if (activeCharacter) {
+      const lines = this.editSelection.edit.getLayoutLineInLayer([activeCharacter.id]);
+      const lineX = lines.filter(item => item.orient === 'x');
+      const lineY = lines.filter(item => item.orient === 'y');
+      _snappedX = this._snapLine('x', lineX, this._actualSnapBounds, diff, out, diff.width !== 0);
+      _snappedY = this._snapLine('y', lineY, this._actualSnapBounds, diff, out, diff.height !== 0);
+    }
+
+    // 从吸附到未吸附，将实际的bounds重置回去
+    if (!_snappedX) {
+      out.x = this._actualSnapBounds.x1;
+      out.width = this._actualSnapBounds.width();
+    }
+    // 从吸附到未吸附，将实际的bounds重置回去
+    if (!_snappedY) {
+      out.y = this._actualSnapBounds.y1;
+      out.height = this._actualSnapBounds.height();
+    }
+    // 如果没有吸附，就重置回去
+    if (!(_snappedX || _snappedY)) {
+      this._actualSnapBounds = null;
+    }
+
+    return out;
+  }
+
+  _snapLine(
+    orient: 'x' | 'y',
+    lines: ILayoutLine[],
+    bounds: IAABBBounds,
+    diff: IXYWH,
+    out: IXYWH,
+    resize: boolean
+  ): boolean {
+    // 重置snapLine
+    (this as any)[`_snapLine${orient.toUpperCase()}1`].setAttributes({ visible: false });
+    (this as any)[`_snapLine${orient.toUpperCase()}2`].setAttributes({ visible: false });
+
+    const snapLines = lines.filter(item => {
+      const d1 = abs(item.value - bounds[`${orient}1`]);
+      const d2 = abs(item.value - bounds[`${orient}2`]);
+      return d1 < this._snapThreshold || d2 < this._snapThreshold;
+    });
+    if (!snapLines.length) {
+      return false;
+    }
+    const outBounds = new AABBBounds().setValue(out.x, out.y, out.x + out.width, out.y + out.height);
+    const otherOrient = orient === 'x' ? 'y' : 'x';
+    snapLines.forEach(line => {
+      const d1 = line.value - bounds[`${orient}1`];
+      const d2 = line.value - bounds[`${orient}2`];
+      const otherOrientMin = Math.min(line.start, line.end, outBounds[`${otherOrient}1`], outBounds[`${otherOrient}2`]);
+      const otherOrientMax = Math.max(line.start, line.end, outBounds[`${otherOrient}1`], outBounds[`${otherOrient}2`]);
+      if (abs(d1) < abs(d2)) {
+        outBounds[`${orient}1`] = line.value;
+        // 如果不是resize，就不改变宽度/高度
+        if (!resize) {
+          outBounds[`${orient}2`] = outBounds[`${orient}1`] + out[orient === 'x' ? 'width' : 'height'];
+        }
+        // 添加辅助线
+        (this as any)[`_snapLine${orient.toUpperCase()}1`].setAttributes({
+          visible: true,
+          points: [
+            { [orient]: line.value, [otherOrient]: otherOrientMin },
+            { [orient]: line.value, [otherOrient]: otherOrientMax }
+          ] as any
+        });
+      } else {
+        outBounds[`${orient}2`] = line.value;
+        // 如果不是resize，就不改变宽度/高度
+        if (!resize) {
+          outBounds[`${orient}1`] = outBounds[`${orient}2`] - out[orient === 'x' ? 'width' : 'height'];
+        }
+        // 添加辅助线
+        (this as any)[`_snapLine${orient.toUpperCase()}2`].setAttributes({
+          visible: true,
+          points: [
+            { [orient]: line.value, [otherOrient]: otherOrientMin },
+            { [orient]: line.value, [otherOrient]: otherOrientMax }
+          ] as any
+        });
+      }
+    });
+    out.x = outBounds.x1;
+    out.y = outBounds.y1;
+    out.width = outBounds.width();
+    out.height = outBounds.height();
+    return true;
   }
 
   dispatchUpdate(e?: any) {
@@ -933,14 +1096,22 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     this._dragger.resumeDrag();
   }
 
-  private _isRelease = false;
+  protected _isRelease = false;
   release(): void {
     this._isRelease = true;
     // event
     this.releaseEvent();
 
     this.parent.removeChild(this);
+    this.removeAllChild();
     this.editBorder = null;
+    this.rect = null;
+    this._dragger = null;
+    this._snapLineX1 = null;
+    this._snapLineY1 = null;
+    this._snapLineX2 = null;
+    this._snapLineY2 = null;
+    this.editStartCbs = [];
     this.updateCbs = [];
     this.endEditCbs = [];
     this.unTransStartCbs = [];

@@ -1,5 +1,5 @@
 import type { IGraphic } from '@visactor/vrender';
-import type { IPointLike } from '@visactor/vutils';
+import type { IAABBBounds, IPointLike } from '@visactor/vutils';
 import type { ICharacter, ICharacterPickInfo } from '@visactor/vstory-core';
 import type { EditActionEnum } from './const';
 import type { Edit } from './edit';
@@ -54,6 +54,7 @@ export interface IEditSelection {
   readonly level: number;
   isEditing: boolean;
   readonly activeCharacter: ICharacter | null;
+  readonly edit: Edit;
 
   // 是否 开始/继续 编辑 返回false的话，会导致当前编辑结束
   checkAction: (actionInfo: IEditActionInfo | IEditSelectionInfo) => boolean;
@@ -81,7 +82,7 @@ export interface ILayoutLine extends Partial<IModelInfo> {
   value: number;
   start: number;
   end: number;
-  rect: IRect;
+  bounds: IAABBBounds;
 }
 
 export interface IEditSelectionConstructor {

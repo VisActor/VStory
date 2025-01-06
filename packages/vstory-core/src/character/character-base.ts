@@ -1,8 +1,9 @@
-import type { ICharacterRuntimeConfig } from './../interface/character';
+import type { ICharacterRuntimeConfig, ILayoutLine } from './../interface/character';
 import type { IGraphic } from '@visactor/vrender-core';
 import { Generator, IGroup } from '@visactor/vrender-core';
 import type { ICharacter } from '../interface/character';
 import type { ICharacterConfig, ICharacterInitOption } from '../interface/dsl/dsl';
+import type { IAABBBounds } from '@visactor/vutils';
 import { cloneDeep, isValid } from '@visactor/vutils';
 import type { ICharacterPickInfo, IStoryEvent } from '../interface/event';
 import type { IStory } from '../interface/story';
@@ -114,6 +115,13 @@ export abstract class CharacterBase<T> implements ICharacter {
     return this as ICharacterRuntimeConfig;
   }
 
+  getLayoutGuideLine(): ILayoutLine[] {
+    const bounds = this._graphic.AABBBounds;
+    return CharacterBase.GetLayoutLine(bounds, {
+      id: this.id
+    });
+  }
+
   protected abstract applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void;
 
   protected abstract _initRuntime(): void;
@@ -122,5 +130,65 @@ export abstract class CharacterBase<T> implements ICharacter {
 
   protected _setAttributes(attr: T): void {
     this._graphic.setAttributes(attr);
+  }
+
+  static GetLayoutLine(b: IAABBBounds, opt: any, orient: 'x' | 'y' | 'xy' = 'xy') {
+    const result: ILayoutLine[] = [];
+    if (orient === 'y' || orient === 'xy') {
+      const commonInY: Omit<ILayoutLine, 'value' | 'type'> = {
+        orient: 'y',
+        start: b.x1,
+        end: b.x1 + b.width(),
+        bounds: b.clone(),
+        ...opt
+      };
+      // top
+      result.push({
+        value: b.y1,
+        type: 'start',
+        ...commonInY
+      });
+      // bottom
+      result.push({
+        value: b.y2,
+        type: 'end',
+        ...commonInY
+      });
+      // middle
+      result.push({
+        value: (b.y1 + b.y2) * 0.5,
+        type: 'middle',
+        ...commonInY
+      });
+    }
+
+    if (orient === 'x' || orient === 'xy') {
+      const commonInX: Omit<ILayoutLine, 'value' | 'type'> = {
+        orient: 'x',
+        start: b.y1,
+        end: b.y2,
+        bounds: b.clone(),
+        ...opt
+      };
+      // left
+      result.push({
+        value: b.x1,
+        type: 'start',
+        ...commonInX
+      });
+      // right
+      result.push({
+        value: b.x2,
+        type: 'end',
+        ...commonInX
+      });
+      // middle
+      result.push({
+        value: (b.x1 + b.x2) * 0.5,
+        type: 'middle',
+        ...commonInX
+      });
+    }
+    return result;
   }
 }
