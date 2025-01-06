@@ -420,6 +420,9 @@ function loadDSL() {
             [StroyAllDataGroup]: {
               label: {
                 // visible: true,
+                formatConfig: {
+                  prefix: 'asd'
+                },
                 style: {
                   fill: 'green',
                   stroke: 'yellow',
@@ -429,19 +432,40 @@ function loadDSL() {
             },
             a: {
               label: {
-                // visible: true,
+                visible: true,
+                formatConfig: {
+                  dataType: 'digit',
+                  content: ['value', 'dimension', 'abs', 'percentage'],
+                  fixed: 2,
+                  postfix: ['bb'],
+                  prefix: ['aa']
+                },
                 style: {
-                  fill: 'red'
+                  fill: 'yellow'
                 }
               }
             },
             b: {
               label: {
-                // visible: true,
+                visible: true,
                 style: {
                   stroke: 'blue',
                   lineWidth: 5
                 }
+              }
+            }
+          },
+          labelStyle: {
+            '_editor_dimension_field_1_&_editor_type_field_1': {
+              markName: 'label',
+              seriesMatch: { type: 'bar' },
+              itemKeys: ['_editor_dimension_field', '_editor_type_field'],
+              itemKeyMap: {
+                _editor_dimension_field: 1,
+                _editor_type_field: 2
+              },
+              style: {
+                fill: 'red'
               }
             }
           }

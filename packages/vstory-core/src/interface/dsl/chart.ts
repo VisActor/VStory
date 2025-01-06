@@ -1,5 +1,7 @@
+import type { ITextGraphicAttribute } from '@visactor/vrender-core';
 import type { IInitOption, ISpec } from '@visactor/vchart';
 import type { ICharacterConfigBase } from './dsl';
+import type { IFormatConfig } from './common';
 
 export const StroyAllDataGroup = '_STORY_ALL_DATA_GROUP';
 
@@ -9,19 +11,26 @@ export interface IComponentMatch {
   [key: string]: any;
 }
 
-export interface IMarkStyle {
+export type ITextAttribute = ITextGraphicAttribute;
+
+export interface IMarkStyle<T> {
   seriesMatch: { type: string } & IComponentMatch;
   markName: string;
-  id: string; // 唯一id，避免单个元素有多个匹配样式
   itemKeys: string[]; // 数据匹配维度
-  itemKeyMap: { [key: string]: any }; // 匹配维度值
-  style: any; // 样式
+  itemKeyMap: { [key: string]: number }; // 匹配维度值
+  style: T; // 样式
 }
 
 export interface IDataGroupStyle {
   // markName , label 也在这里，需要 label runtime 处理
+  label?: {
+    style?: IMarkStyle<ITextAttribute>['style'];
+    formatConfig?: IFormatConfig;
+    visible?: boolean; // 是否可见
+    [key: string]: any; // 其他可能存在的逻辑配置
+  };
   [key: string]: {
-    style?: IMarkStyle['style']; // markStyle
+    style?: IMarkStyle<any>['style']; // markStyle
     visible?: boolean; // 是否可见
     [key: string]: any; // 其他可能存在的逻辑配置
   };
@@ -66,17 +75,19 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     };
     // series
     series?: {
-      [key in ModelSelector]: Partial<ElementType<ISpec['series']>>;
+      [key in ModelSelector]?: Partial<ElementType<ISpec['series']>>;
     };
     // 色板
     color?: any;
     // mark 单元素样式
     markStyle?: {
-      [key: string]: IMarkStyle;
+      [key: string]: IMarkStyle<any>;
     };
     // label 单元素样式 与 mark 区分开，runtime逻辑完全不同
     labelStyle?: {
-      [key: string]: IMarkStyle;
+      [key: string]: IMarkStyle<ITextAttribute> & {
+        formatConfig?: IFormatConfig;
+      };
     };
     // 组样式配置
     dataGroupStyle?: {

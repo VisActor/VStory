@@ -166,7 +166,6 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     if (!axis) {
       return;
     }
-    // debugger;
     vrenderComponents.forEach(c => {
       if (isRun) {
         (c.attribute as any).visibleAll = true;

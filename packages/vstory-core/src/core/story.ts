@@ -22,6 +22,7 @@ export interface IStoryInitOption {
   // 对画面的缩放
   scaleX?: number | 'auto';
   scaleY?: number | 'auto';
+  theme?: string;
 }
 
 export class Story implements IStory {
@@ -30,6 +31,7 @@ export class Story implements IStory {
   protected _dsl: IStoryDSL | null;
   protected _player: IPlayer;
   protected _characterTree: ICharacterTree;
+  protected _theme: string;
 
   get canvas(): IStoryCanvas {
     return this._canvas;
@@ -39,6 +41,10 @@ export class Story implements IStory {
     return this._player;
   }
 
+  get theme(): string {
+    return this._theme;
+  }
+
   constructor(dsl: IStoryDSL | null, option: IStoryInitOption) {
     this.id = `test-mvp_${Generator.GenAutoIncrementId()}`;
     const {
@@ -46,6 +52,7 @@ export class Story implements IStory {
       canvas,
       width,
       height,
+      theme,
       background = 'transparent',
       layerBackground = 'transparent',
       dpr = vglobal.devicePixelRatio,
@@ -68,6 +75,7 @@ export class Story implements IStory {
     });
     this._characterTree = new CharacterTree(this);
     this._dsl = dsl;
+    this._theme = theme;
   }
 
   init(player: IPlayer) {

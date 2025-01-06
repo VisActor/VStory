@@ -3,11 +3,11 @@ import type { IChart } from '@visactor/vchart/esm/chart/interface';
 import type { ICartesianSeries, ISeries } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
 import { VCHART_DATA_INDEX, ValueLink, FieldLink } from './const';
-import type { IComponentMatch } from '../../../interface/dsl/chart';
+import type { IComponentMatch, IMarkStyle } from '../../../interface/dsl/chart';
 
 export function GetVChartSeriesWithMatch(vchart: IChart, seriesMatch: IComponentMatch & { type: string }) {
   if (!isValid(seriesMatch.specIndex) && seriesMatch.type) {
-    return vchart.getAllSeries().filter(s => s.type === seriesMatch.type);
+    return vchart.getAllSeries().filter(s => s.type === seriesMatch.type)[0];
   }
   if (!isValid(seriesMatch.specIndex)) {
     return null;
@@ -80,7 +80,33 @@ export function matchDatumWithScaleMap(
     if (isContinuous(scale.type)) {
       return keyValueMap[VCHART_DATA_INDEX] === datum[VCHART_DATA_INDEX];
     }
-    return keyValueMap[key] === scaleMap[key]._index.get(`${datum[key]}`);
+    return keyValueMap[key] === scale._index.get(`${datum[key]}`);
+  });
+}
+
+export function isSingleMarkMatch(
+  config: IMarkStyle<any>,
+  series: ISeries,
+  scaleMap: { [key: string]: any } = {},
+  datum: any
+) {
+  return (
+    isSeriesMatch(config.seriesMatch, series) &&
+    matchDatumWithScaleMap(config.itemKeys, config.itemKeyMap, scaleMap, datum)
+  );
+}
+
+export function findSingleConfig(
+  config: { [key: string]: IMarkStyle<any> },
+  series: ISeries,
+  scaleMap: { [key: string]: any } = {},
+  datum: any
+) {
+  if (!config) {
+    return null;
+  }
+  return Object.values(config).find(v => {
+    return isSingleMarkMatch(v, series, scaleMap, datum);
   });
 }
 

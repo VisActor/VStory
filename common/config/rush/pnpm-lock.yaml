@@ -224,6 +224,7 @@ importers:
       '@visactor/vtable': 1.14.4-alpha.0
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
+      bignumber.js: 9.0.1
       canvas: 2.11.2
       eslint: ~8.18.0
       jest: ^26.0.0
@@ -247,6 +248,7 @@ importers:
       '@visactor/vscale': 0.18.18
       '@visactor/vtable': 1.14.4-alpha.0
       '@visactor/vutils': 0.18.18
+      bignumber.js: 9.0.1
     devDependencies:
       '@douyinfe/semi-ui': 2.69.1_nnrd3gsncyragczmpvfhocinkq
       '@ffmpeg/core': 0.11.0
@@ -4761,6 +4763,10 @@ packages:
   /bezier-easing/2.1.0:
     resolution: {integrity: sha512-gbIqZ/eslnUFC1tjEvtz0sgx+xTK20wDnYMIA27VA04R7w6xxXQPZDbibjA9DTWZRA2CXtwHykkVzlCaAJAZig==}
     dev: true
+
+  /bignumber.js/9.0.1:
+    resolution: {integrity: sha512-IdZR9mh6ahOBv/hYGiXyVuyCetmGJhtYkqLBpTStdhEGjegpPlUawydyaF3pbIOFynJTpllEs+NP+CS9jKFLjA==}
+    dev: false
 
   /binary-extensions/1.13.1:
     resolution: {integrity: sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==}

@@ -165,20 +165,21 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
       return;
     }
     const chart = vchart.getChart();
-    Object.values(markStyle).forEach(i => {
-      const series = GetVChartSeriesWithMatch(chart, i.seriesMatch) as ISeries;
+    Object.keys(markStyle).forEach(key => {
+      const config = markStyle[key];
+      const series = GetVChartSeriesWithMatch(chart, config.seriesMatch) as ISeries;
       if (!series) {
         return;
       }
-      const mark = series.getMarkInName(i.markName);
+      const mark = series.getMarkInName(config.markName);
       if (!mark) {
         return;
       }
       const keyScaleMap = getSeriesKeyScalesMap(series);
-      const stateKey = i.id;
+      const stateKey = key;
       mark.setStyle(
         {
-          ...i.style
+          ...config.style
         },
         stateKey,
         EDITOR_SERIES_MARK_SINGLE_LEVEL
@@ -186,7 +187,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
       chart.updateState({
         [stateKey]: {
           filter: (datum: any) => {
-            return matchDatumWithScaleMap(i.itemKeys, i.itemKeyMap, keyScaleMap, datum);
+            return matchDatumWithScaleMap(config.itemKeys, config.itemKeyMap, keyScaleMap, datum);
           },
           level: 10
         }

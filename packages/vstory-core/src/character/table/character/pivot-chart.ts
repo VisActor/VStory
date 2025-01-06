@@ -86,6 +86,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       // 复用 chart 元素的 runtime 对 spec 进行处理
       this._chartRuntime.forEach(r => {
         r.applyConfigToAttribute?.({
+          story: this.story,
           getRuntimeConfig: () => {
             return runTimeConfig;
           }
@@ -106,6 +107,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       this._chartRuntime.forEach(r => {
         r.afterInitialize?.(
           {
+            story: this.story,
             getRuntimeConfig: () => {
               return {
                 config: {
@@ -128,6 +130,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       this._chartRuntime.forEach(r => {
         r.beforeVRenderDraw?.(
           {
+            story: this.story,
             getRuntimeConfig: () => {
               return {
                 config: {

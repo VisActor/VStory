@@ -485,6 +485,23 @@ function loadDSL() {
                 }
               }
             }
+          },
+          // 'type', 'range', 'type2'
+          markStyle: {
+            '_type_1_&_range_1_&_type2_1_&_color_1': {
+              markName: 'bar',
+              seriesMatch: { type: 'bar' },
+              itemKeys: ['type', 'range', 'type2', 'color'],
+              itemKeyMap: {
+                type: 1,
+                range: 1,
+                type2: 1,
+                color: 1
+              },
+              style: {
+                fill: 'black'
+              }
+            }
           }
         }
       }

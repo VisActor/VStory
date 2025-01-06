@@ -33,7 +33,8 @@
     "@visactor/vutils": "~0.18.17",
     "@visactor/vchart-extension": "0.0.3-vstory.2",
     "@visactor/vdataset": "~0.18.17",
-    "@visactor/vscale": "~0.18.17"
+    "@visactor/vscale": "~0.18.17",
+    "bignumber.js": "9.0.1"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",
