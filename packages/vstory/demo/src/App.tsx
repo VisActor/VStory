@@ -59,6 +59,7 @@ import { RowHeight } from './demos/table/runtime/row-height';
 import { PivotChartBase } from './demos/table/runtime/pivot-chart-base';
 import { TextComponent } from './demos/component/text';
 import { SpecAxes } from './demos/chart/runtime/spec-axes';
+import { RuntimeTotalLabel } from './demos/chart/runtime/total-label';
 
 type MenusType = (
   | {
@@ -310,6 +311,10 @@ const App = () => {
       name: 'ChartRuntime',
       subMenus: [
         {
+          name: 'Common Spec Axes',
+          component: SpecAxes
+        },
+        {
           name: 'Series Mark',
           component: RuntimeSeriesMark
         },
@@ -318,8 +323,8 @@ const App = () => {
           component: RuntimeLabelStyle
         },
         {
-          name: 'Common Spec Axes',
-          component: SpecAxes
+          name: 'Total Label',
+          component: RuntimeTotalLabel
         }
       ]
     },
