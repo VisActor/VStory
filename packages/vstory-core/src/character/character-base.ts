@@ -10,6 +10,7 @@ import type { IStory } from '../interface/story';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IConfigProcess } from './config-transform/interface';
 import type { IUpdateConfigParams } from './chart/interface/runtime';
+import { getLayoutLine } from '../utils/layout';
 
 export abstract class CharacterBase<T> implements ICharacter {
   readonly id: string;
@@ -117,7 +118,7 @@ export abstract class CharacterBase<T> implements ICharacter {
 
   getLayoutGuideLine(): ILayoutLine[] {
     const bounds = this._graphic.AABBBounds;
-    return CharacterBase.GetLayoutLine(bounds, {
+    return getLayoutLine(bounds, {
       id: this.id
     });
   }
@@ -130,65 +131,5 @@ export abstract class CharacterBase<T> implements ICharacter {
 
   protected _setAttributes(attr: T): void {
     this._graphic.setAttributes(attr);
-  }
-
-  static GetLayoutLine(b: IAABBBounds, opt: any, orient: 'x' | 'y' | 'xy' = 'xy') {
-    const result: ILayoutLine[] = [];
-    if (orient === 'y' || orient === 'xy') {
-      const commonInY: Omit<ILayoutLine, 'value' | 'type'> = {
-        orient: 'y',
-        start: b.x1,
-        end: b.x1 + b.width(),
-        bounds: b.clone(),
-        ...opt
-      };
-      // top
-      result.push({
-        value: b.y1,
-        type: 'start',
-        ...commonInY
-      });
-      // bottom
-      result.push({
-        value: b.y2,
-        type: 'end',
-        ...commonInY
-      });
-      // middle
-      result.push({
-        value: (b.y1 + b.y2) * 0.5,
-        type: 'middle',
-        ...commonInY
-      });
-    }
-
-    if (orient === 'x' || orient === 'xy') {
-      const commonInX: Omit<ILayoutLine, 'value' | 'type'> = {
-        orient: 'x',
-        start: b.y1,
-        end: b.y2,
-        bounds: b.clone(),
-        ...opt
-      };
-      // left
-      result.push({
-        value: b.x1,
-        type: 'start',
-        ...commonInX
-      });
-      // right
-      result.push({
-        value: b.x2,
-        type: 'end',
-        ...commonInX
-      });
-      // middle
-      result.push({
-        value: (b.x1 + b.x2) * 0.5,
-        type: 'middle',
-        ...commonInX
-      });
-    }
-    return result;
   }
 }

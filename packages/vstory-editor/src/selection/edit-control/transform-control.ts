@@ -19,8 +19,9 @@ import { AbstractComponent } from '@visactor/vrender-components';
 import { DRAG_ANCHOR_COLOR, SHAPE_SELECT_COLOR, MinSize } from './constants';
 import { DragComponent } from './transform-drag';
 import { transformDeltaWithStage, transformPointWithStage } from '../../utils/transform';
-import type { IEditSelection, ILayoutLine, VRenderPointerEvent } from '../../interface';
+import type { IEditSelection, VRenderPointerEvent } from '../../interface';
 import { min } from '@visactor/vchart/esm/util';
+import type { ILayoutLine } from '@visactor/vstory-core';
 
 const tempRect = createRect({});
 

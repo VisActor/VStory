@@ -3,9 +3,10 @@ import { createStage, ManualTicker, vglobal } from '@visactor/vrender-core';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IStory } from '../interface/story';
 import type { IStoryEvent } from '../interface/event';
-import type { ICharacter } from '../interface/character';
+import type { ICharacter, ILayoutLine } from '../interface/character';
 import type { IAABBBoundsLike } from '@visactor/vutils';
 import { isValidNumber } from '@visactor/vutils';
+import { getLayoutLine } from '../utils/layout';
 
 export class StoryCanvas implements IStoryCanvas {
   protected _story: IStory;
@@ -214,6 +215,16 @@ export class StoryCanvas implements IStoryCanvas {
 
   removeGraphic(g: IGraphic): void {
     this._stage.defaultLayer.removeChild(g);
+  }
+
+  getLayoutGuideLine(): ILayoutLine[] {
+    const layer = this._stage.defaultLayer;
+    const bounds = layer.AABBBounds.clone();
+    bounds.transformWithMatrix(layer.transMatrix.getInverse());
+
+    return getLayoutLine(bounds, {
+      id: this._stage.id
+    });
   }
 
   release() {

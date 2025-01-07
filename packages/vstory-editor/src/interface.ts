@@ -76,15 +76,6 @@ export type IModelInfo = IModelInfoSpecKey & {
   id?: string | number; // id in spec, model.userId
 };
 
-export interface ILayoutLine extends Partial<IModelInfo> {
-  orient: 'x' | 'y';
-  type: 'start' | 'middle' | 'end';
-  value: number;
-  start: number;
-  end: number;
-  bounds: IAABBBounds;
-}
-
 export interface IEditSelectionConstructor {
   new (edit: Edit): IEditSelection;
 }
