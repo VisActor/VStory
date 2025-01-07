@@ -798,6 +798,8 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
             { x: item[0] * width, y: item[1] * height },
             { x: item[2] * width, y: item[3] * height }
           ],
+          pickStrokeBuffer: 2,
+          boundsPadding: 1,
           cursor,
           ...resizeBorder
         },
@@ -942,6 +944,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     }
 
     // 从吸附到未吸附，将实际的bounds重置回去
+    // TODO x和y都分两边，如果有一边已经吸附，那就不生效
     if (!_snappedX) {
       out.x = this._actualSnapBounds.x1;
       out.width = this._actualSnapBounds.width();
