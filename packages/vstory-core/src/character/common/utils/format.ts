@@ -2,8 +2,7 @@ import type { FormatContentType, IFormatConfig } from '../../../interface/dsl/co
 import type { Unit } from '../../../constants/format';
 import { DataFormatUnit, unionContentTypeMap } from '../../../constants/format';
 import { isArray, isNil, isString } from '@visactor/vutils/es/common';
-import { couldBeValidNumber } from '@visactor/vchart/esm/util';
-import { getTimeFormatter } from '@visactor/vutils';
+import { getTimeFormatter, isValidNumber } from '@visactor/vutils';
 
 export type FormatValueFunction = (
   content: FormatContentType,
@@ -92,7 +91,7 @@ export function formatNumber(
   percentage?: boolean
 ): string | number {
   // 字符串类型的处理
-  if (value && isString(value) && !couldBeValidNumber(value)) {
+  if (value && isString(value) && !isValidNumber(+value)) {
     return value;
   }
 
