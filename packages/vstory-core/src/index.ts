@@ -22,5 +22,6 @@ export * from './character/component/interface/character-component';
 export * from './utils/factory';
 
 export { VChart } from '@visactor/vchart';
+export * as VTable from '@visactor/vtable';
 
 // export * from './demo';

@@ -229,6 +229,13 @@
           }
         },
         {
+          "path": "table/pricing-plans",
+          "title": {
+            "zh": "表格信息图：定价表",
+            "en": "Table Infographic: Pricing Plans"
+          }
+        },
+        {
           "path": "line-chart-leftRight",
           "title": {
             "zh": "信息图模板-折线图（左右布局）",
