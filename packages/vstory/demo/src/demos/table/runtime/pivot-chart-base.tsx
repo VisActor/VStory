@@ -50,14 +50,11 @@ function loadDSL() {
               row: 2,
               options: {
                 series: {
-                  a: {
-                    specIndex: 0,
-                    spec: {
-                      // @ts-ignore
-                      bar: {
-                        style: {
-                          cornerRadius: 20
-                        }
+                  0: {
+                    bar: {
+                      style: {
+                        stroke: 'black',
+                        lineWidth: 4
                       }
                     }
                   }
@@ -99,14 +96,10 @@ function loadDSL() {
               row: 2,
               options: {
                 series: {
-                  a: {
-                    specIndex: 0,
-                    spec: {
-                      // @ts-ignore
-                      bar: {
-                        style: {
-                          cornerRadius: 20
-                        }
+                  0: {
+                    bar: {
+                      style: {
+                        cornerRadius: 5
                       }
                     }
                   }

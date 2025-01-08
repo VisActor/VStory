@@ -1,4 +1,4 @@
-import { isString, isValidNumber } from '@visactor/vutils';
+import { isNumber, isString, isValidNumber } from '@visactor/vutils';
 import type { ModelSelector } from '../interface/dsl/chart';
 
 export function isIDSelector(value: ModelSelector): value is `#${string}` {
@@ -7,4 +7,8 @@ export function isIDSelector(value: ModelSelector): value is `#${string}` {
 
 export function isSpecIndexSelector(value: ModelSelector): value is number | `${number}` {
   return isValidNumber(+value);
+}
+
+export function validNumber(value: any) {
+  return isValidNumber(value) ? value : null;
 }

@@ -1,3 +1,5 @@
+import { VSTORY_PREFIX } from './config';
+
 export const enum CharacterType {
   VCHART = 'VChart',
   VTABLE = 'VTable',
@@ -20,3 +22,5 @@ export const enum CharacterType {
   // 通用的类型，一般在查找effect的时候所有类型都可以匹配
   COMMON = 'Common'
 }
+
+export const SeriesAxisOrientKey = `${VSTORY_PREFIX}_seriesAxisOrient`;

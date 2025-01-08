@@ -38,6 +38,10 @@ export abstract class CharacterBase<T> implements ICharacter {
     return this._canvas;
   }
 
+  get theme() {
+    return this._config.theme;
+  }
+
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     this.id = config.id ?? `c_${Generator.GenAutoIncrementId()}`;
     this.type = config.type;

@@ -13,6 +13,7 @@ export interface IStory extends IReleaseable {
   readonly id: string;
   readonly canvas: IStoryCanvas;
   readonly player: IPlayer;
+  readonly theme: string;
 
   load: (dsl: IStoryDSL) => void;
   reset: () => void;

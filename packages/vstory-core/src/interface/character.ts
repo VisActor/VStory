@@ -22,6 +22,8 @@ export interface ICharacter extends IReleaseable {
   configProcess: IConfigProcess;
   // attributeProcess: IAttributeProcess;
 
+  theme: string;
+
   init: () => void;
   reset: () => void;
   // 仅用于在action之前隐藏，在action之后显示

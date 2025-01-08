@@ -18,6 +18,7 @@ import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
 import { MarkStyleRuntimeInstance } from './runtime/mark-style';
 import { LabelStyleRuntimeInstance } from './runtime/label-style';
 import { isArray } from '@visactor/vutils';
+import { TotalLabelRuntimeInstance } from './runtime/total-label';
 
 export class CharacterChart<T extends IChartGraphicAttribute>
   extends CharacterBase<IChartGraphicAttribute>
@@ -188,7 +189,8 @@ export class CharacterChart<T extends IChartGraphicAttribute>
       CommonSpecRuntimeInstance,
       CommonLayoutRuntimeInstance,
       MarkStyleRuntimeInstance,
-      LabelStyleRuntimeInstance
+      LabelStyleRuntimeInstance,
+      TotalLabelRuntimeInstance
     );
   }
   protected _clearRuntime(): void {

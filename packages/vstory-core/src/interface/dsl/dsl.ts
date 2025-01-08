@@ -71,6 +71,7 @@ export interface ICharacterConfigBase {
   type: string; // 类型
   position: IWidgetData; // 定位描述
   zIndex: number;
+  theme?: string;
   extra?: any; // 带着的额外信息
 }
 

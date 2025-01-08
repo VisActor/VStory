@@ -44,53 +44,6 @@ function loadDSL() {
             lineWidth: 1
           }
         },
-        label: {
-          position: 'inside',
-          style: {
-            lineHeight: '100%',
-            fontSize: 16,
-            fontWeight: 'bold'
-          },
-          overlap: {
-            strategy: []
-          },
-          smartInvert: true,
-          formatConfig: {},
-          interactive: true
-        },
-        totalLabel: {
-          visible: true,
-          position: 'top',
-          overlap: false,
-          clampForce: false,
-          formatConfig: {
-            fixed: 0,
-            content: 'value'
-          },
-          style: {
-            lineHeight: '100%',
-            lineWidth: 1,
-            fill: '#1F2329',
-            stroke: '#ffffff',
-            fontSize: 16,
-            fontWeight: 'bold'
-          },
-          interactive: true
-        },
-        seriesLabel: {
-          visible: true,
-          position: 'end',
-          label: {
-            style: {
-              lineHeight: '100%',
-              lineWidth: 1,
-              stroke: '#ffffff',
-              fontSize: 16,
-              fontWeight: 'bold'
-            },
-            space: 10
-          }
-        },
         xField: '_editor_dimension_field',
         yField: '_editor_value_field',
         dataId: '0',
@@ -118,53 +71,6 @@ function loadDSL() {
           style: {
             stroke: '',
             lineWidth: 1
-          }
-        },
-        label: {
-          position: 'inside',
-          style: {
-            lineHeight: '100%',
-            fontSize: 16,
-            fontWeight: 'bold'
-          },
-          overlap: {
-            strategy: []
-          },
-          smartInvert: true,
-          formatConfig: {},
-          interactive: true
-        },
-        totalLabel: {
-          visible: true,
-          position: 'top',
-          overlap: false,
-          clampForce: false,
-          formatConfig: {
-            fixed: 0,
-            content: 'value'
-          },
-          style: {
-            lineHeight: '100%',
-            lineWidth: 1,
-            fill: '#1F2329',
-            stroke: '#ffffff',
-            fontSize: 16,
-            fontWeight: 'bold'
-          },
-          interactive: true
-        },
-        seriesLabel: {
-          visible: true,
-          position: 'end',
-          label: {
-            style: {
-              lineHeight: '100%',
-              lineWidth: 1,
-              stroke: '#ffffff',
-              fontSize: 16,
-              fontWeight: 'bold'
-            },
-            space: 10
           }
         },
         xField: '_editor_dimension_field',
@@ -355,45 +261,6 @@ function loadDSL() {
     ],
     labelLayout: 'region'
   };
-  const barSpec1 = {
-    type: 'bar',
-    data: [
-      {
-        values: [
-          { type: 'Category One', min: 76, max: 100, range: 'A', type2: 'p', color: 'A_p' },
-          { type: 'Category Two', min: 56, max: 108, range: 'A', type2: 'p', color: 'A_p' },
-          { type: 'Category One', min: 56, max: 100, range: 'B', type2: 'p', color: 'B_p' },
-          { type: 'Category Two', min: 36, max: 108, range: 'B', type2: 'p', color: 'B_p' },
-
-          { type: 'Category One', min: 76, max: 100, range: 'A', type2: 'k', color: 'A_k' },
-          { type: 'Category Two', min: 56, max: 108, range: 'A', type2: 'k', color: 'A_k' },
-          { type: 'Category One', min: 56, max: 100, range: 'B', type2: 'k', color: 'B_k' },
-          { type: 'Category Two', min: 36, max: 108, range: 'B', type2: 'k', color: 'B_k' }
-        ]
-      }
-    ],
-    xField: ['type', 'range', 'type2'],
-    yField: 'min',
-    seriesField: 'color',
-    paddingInner: [0.6, 0.6, 0.6],
-    bandPadding: [0.6, 0.6, 0.6],
-    label: {
-      position: 'bothEnd'
-    },
-    axes: [
-      {
-        orient: 'bottom',
-        showAllGroupLayers: true,
-        sampling: false,
-        tick: {
-          tickCount: 2
-        }
-      }
-    ],
-    legends: {
-      visible: true
-    }
-  };
   const dsl: IStoryDSL = {
     characters: [
       {
@@ -414,92 +281,36 @@ function loadDSL() {
             disableTriggerEvent: true,
             disableDirtyBounds: true
           },
-          dataGroupStyle: {
-            [StroyAllDataGroup]: {
-              bar: {
-                style: {
-                  fill: 'green',
-                  stroke: 'yellow',
-                  lineWidth: 2
-                }
-              }
-            },
-            a: {
-              bar: {
-                style: {
-                  fill: 'red'
-                }
-              }
-            },
-            b: {
-              bar: {
-                style: {
-                  stroke: 'blue',
-                  lineWidth: 5
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        type: 'VChart',
-        id: 'chart1',
-        zIndex: 10,
-        position: {
-          top: 380,
-          left: 50,
-          width: 500,
-          height: 300
-        },
-        options: {
-          spec: barSpec1,
-          initOption: {
-            interactive: true,
-            animation: false,
-            disableTriggerEvent: true,
-            disableDirtyBounds: true
-          },
-          dataGroupStyle: {
-            [StroyAllDataGroup]: {
-              bar: {
-                style: {
-                  fill: 'green',
-                  stroke: 'yellow',
-                  lineWidth: 2
-                }
-              }
-            },
-            A_p: {
-              bar: {
-                style: {
-                  fill: 'red'
-                }
-              }
-            },
-            B_k: {
-              bar: {
-                style: {
-                  stroke: 'blue',
-                  lineWidth: 5
-                }
-              }
-            }
-          },
-          // 'type', 'range', 'type2'
-          markStyle: {
-            '_type_1_&_range_1_&_type2_1_&_color_1': {
-              markName: 'bar',
-              seriesMatch: { type: 'bar' },
-              itemKeys: ['type', 'range', 'type2', 'color'],
-              itemKeyMap: {
-                type: 1,
-                range: 1,
-                type2: 1,
-                color: 1
-              },
+          totalLabel: {
+            __VCHART_series_bar_undefined: {
+              visible: true,
               style: {
-                fill: 'black'
+                fill: 'red',
+                stroke: 'black',
+                lineWidth: 2
+              },
+              formatConfig: {
+                content: ['dimension', 'value', 'percentage'],
+                prefix: 'a',
+                postfix: 'b',
+                fixed: 0
+              },
+              single: {
+                a: {
+                  itemKeys: ['_editor_dimension_field'],
+                  itemKeyMap: {
+                    _editor_dimension_field: 2
+                  },
+                  formatConfig: {
+                    content: ['dimension', 'value'],
+                    prefix: 's',
+                    postfix: 'l',
+                    fixed: 1
+                  },
+                  style: {
+                    fill: 'blue'
+                  }
+                }
               }
             }
           }
@@ -531,8 +342,8 @@ function loadDSL() {
   return dsl;
 }
 
-export const RuntimeSeriesMark = () => {
-  const id = 'RuntimeSeriesMark';
+export const RuntimeTotalLabel = () => {
+  const id = 'RuntimeTotalLabel';
 
   useEffect(() => {
     const container = document.getElementById(id);

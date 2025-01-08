@@ -1,15 +1,33 @@
-import { array, isValid, merge } from '@visactor/vutils';
+import { ThemeManager } from './../../../theme/theme-manager';
+import { array, isNil, isValid, merge } from '@visactor/vutils';
 import type { IChartCharacterRuntime } from '../interface/runtime';
 import type { ICharacterChart } from '../interface/character-chart';
-import type { ISeries, IVChart } from '@visactor/vchart';
+import {
+  STACK_FIELD_END,
+  STACK_FIELD_END_PERCENT,
+  STACK_FIELD_START,
+  STACK_FIELD_START_PERCENT,
+  STACK_FIELD_TOTAL,
+  type ISeries,
+  type IVChart,
+  type IRegion
+} from '@visactor/vchart';
 import type { Label as VChartLabelComponent } from '@visactor/vchart/esm/component/label/label';
 import type { ILabelInfo } from '@visactor/vchart/esm/component/label';
 import { MarkStyleRuntime } from './mark-style';
-import { getSeriesKeyScalesMap, isSeriesMatch, matchDatumWithScaleMap } from './utils';
+import { findSingleConfig, getSeriesKeyScalesMap, isSeriesMatch, matchDatumWithScaleMap } from './utils';
 import type { IGraphic } from '@visactor/vrender-core';
+import type { IChartCharacterConfig, ITextAttribute } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
 import type { IMark } from '@visactor/vchart/esm/mark/interface';
 import { CommonMarkAttributeMap, fillMarkAttribute, SeriesMarkStyleMap } from './const';
+import { formatConfigKey } from '../../../constants/format';
+import type { FormatContentType, IFormatConfig } from '../../../interface/dsl/common';
+import type { FormatValueFunction } from '../../common/utils/format';
+import { getTextWithFormat } from '../../common/utils/format';
+import { validNumber } from '../../../utils/type';
+import { getRegionStackGroup } from '@visactor/vchart/esm/util';
+import { stack } from '@visactor/vchart/esm/util';
 
 export class LabelStyleRuntime implements IChartCharacterRuntime {
   type = 'LabelStyle';
@@ -64,15 +82,20 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
     if (!labelComponent) {
       return;
     }
-    this._setDataGroupStyle(character, labelComponent);
+    this._setDataGroupStyle(character, vchart, labelComponent);
   }
 
-  private _setDataGroupStyle(character: ICharacterChart, labelComponent: VChartLabelComponent) {
+  private _setDataGroupStyle(character: ICharacterChart, vchart: IVChart, labelComponent: VChartLabelComponent) {
     const config = character.getRuntimeConfig().config;
     const dataGroupStyle = config.options?.dataGroupStyle;
     if (!dataGroupStyle) {
       return;
     }
+
+    const formatValue = ThemeManager.getAttribute(
+      [character.theme, character.story.theme],
+      'character.VChart.runtime.formatValue'
+    );
 
     const singleLabelStyleKeys: { [key: string]: boolean } = {};
     const hasLabelStyle = !!config.options?.labelStyle;
@@ -91,22 +114,22 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       array(infos).forEach(info => {
         const { series, labelMark } = info as { series: ISeries; labelMark: IMark };
         const keyScaleMap = getSeriesKeyScalesMap(series);
-        // 先看单标签样式
-        const findKey = hasLabelStyle
-          ? Object.keys(config.options.labelStyle).find(k =>
-              isSeriesMatch(config.options.labelStyle[k].seriesMatch, series)
+        // 先看当前系列是否存在单标签样式
+        const hasSingleStyle = hasLabelStyle
+          ? isValid(
+              Object.keys(config.options.labelStyle).find(k =>
+                isSeriesMatch(config.options.labelStyle[k].seriesMatch, series)
+              )
             )
-          : null;
-        const singleConfig = findKey ? config.options.labelStyle[findKey] : null;
+          : false;
         // 系列分组key
         const seriesField = series.getSeriesField();
         // style Map 是 能设置的样式
         const styleKeys =
-          SeriesMarkStyleMap[series.type]?.label?.style ?? CommonMarkAttributeMap.label ?? fillMarkAttribute;
+          SeriesMarkStyleMap[series.type]?.label?.style ?? CommonMarkAttributeMap.text ?? fillMarkAttribute;
 
-        // TODO: 在这里完成组样式下的标签 format
-        // 多组数据在同一个系列，使用vchart mark后处理
-        styleKeys.forEach((key: string) => {
+        // 多组数据在同一个系列，使用vchart mark后处理。这里只有常规属性，如果发现某些属性设置不上，考虑styleKeys缺少
+        styleKeys.forEach((key: keyof ITextAttribute) => {
           // fill 和 stroke 使用vrender后处理
           if (key === 'fill' || key === 'stroke') {
             return;
@@ -116,17 +139,15 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             // 默认值 还必须这样写
             labelMark.setAttribute(key, (): any => undefined);
           }
-          // 如果是有单标签样式的
-          if (singleLabelStyleKeys[key] && singleConfig && isValid(singleConfig.style[key])) {
+          // 如果当前系列是有单标签样式的
+          if (singleLabelStyleKeys[key] && hasSingleStyle) {
             labelMark.setPostProcess(key, (result, datum) => {
-              // 如果匹配到单标签样式
-              if (matchDatumWithScaleMap(singleConfig.itemKeys, singleConfig.itemKeyMap, keyScaleMap, datum)) {
-                // TODO: 单标签format处理
-                return singleConfig.style[key];
-              }
-              // 否则匹配组样式
               return (
-                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, 'label') ?? result
+                // 如果匹配到单标签样式
+                findSingleConfig(config.options.labelStyle, series, keyScaleMap, datum)?.style?.[key] ??
+                // 否则匹配组样式
+                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, 'label') ??
+                result
               );
             });
           } else {
@@ -139,6 +160,41 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             });
           }
         });
+
+        // format
+        // 如果是有单标签样式的
+        if (hasSingleStyle) {
+          labelMark.setPostProcess('text', (result, datum) => {
+            const formatConfig = (
+              findSingleConfig(config.options.labelStyle, series, keyScaleMap, datum) as unknown as {
+                [formatConfigKey]: IFormatConfig;
+              }
+            )?.[formatConfigKey];
+            if (isValid(formatConfig)) {
+              return (
+                getLabelTextWithFormat(datum, seriesField, series, vchart, character, formatConfig, formatValue) ??
+                result
+              );
+            }
+            // 否则匹配组样式
+            return (
+              getTextWithGroupFormat(datum, seriesField, series, vchart, character, dataGroupStyle, formatValue) ??
+              result
+            );
+          });
+        } else {
+          // 没有单标签样式的
+          // 直接匹配组样式
+          labelMark.setPostProcess('text', (result, datum) => {
+            return (
+              getTextWithGroupFormat(datum, seriesField, series, vchart, character, dataGroupStyle, formatValue) ??
+              result
+            );
+          });
+        }
+
+        // format结束
+
         // visible 单独设置
         if (!labelMark.stateStyle.normal?.visible) {
           // TODO VChart bug。如果直接设置属性为 undefined 会报错
@@ -148,6 +204,9 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         const spec = config.options.spec;
         labelMark.setPostProcess('visible', (result, datum) => {
           return (
+            // 如果匹配到单标签样式
+            findSingleConfig(config.options.labelStyle, series, keyScaleMap, datum)?.style?.visible ??
+            // 否则匹配组样式
             dataGroupStyle[datum[seriesField]]?.label?.visible ?? // 单组 visible
             dataGroupStyle[StroyAllDataGroup]?.label?.visible ?? // 全部组visible
             spec?.series?.[series.getSpecIndex()]?.label?.visible ?? // 单系列 visible
@@ -155,6 +214,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             result
           );
         });
+        // visible 结束
       });
     });
   }
@@ -242,6 +302,12 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
   }
 }
 
+/**
+ * 将标签graphic放入数组
+ * @param g graphic 父节点
+ * @param list 将graphic放入数组
+ * @returns
+ */
 function _collectAllLabelGraphic(g: IGraphic, list: IGraphic[]) {
   if (g.type === 'text' || g.type === 'richtext') {
     list.push(g);
@@ -252,6 +318,13 @@ function _collectAllLabelGraphic(g: IGraphic, list: IGraphic[]) {
   }
 }
 
+/**
+ * 找到对应的全部标签绘图节点
+ * @param g
+ * @param info
+ * @param list
+ * @returns
+ */
 function findLabelGraphicWithInfo(g: IGraphic, info: ILabelInfo, list: IGraphic[]) {
   const matchLabel = g.children[0].children.find(
     // @ts-ignore
@@ -261,6 +334,153 @@ function findLabelGraphicWithInfo(g: IGraphic, info: ILabelInfo, list: IGraphic[
     return;
   }
   _collectAllLabelGraphic(matchLabel, list);
+}
+
+// 得到标签经过分组配置中的 format 处理后的值
+function getTextWithGroupFormat(
+  datum: any,
+  seriesField: string,
+  series: ISeries,
+  vchart: IVChart,
+  character: ICharacterChart,
+  dataGroupStyle: IChartCharacterConfig['options']['dataGroupStyle'],
+  formatValue: FormatValueFunction
+) {
+  if (!dataGroupStyle) {
+    return null;
+  }
+  const formatConfig =
+    dataGroupStyle[datum[seriesField]]?.label?.formatConfig ?? dataGroupStyle[StroyAllDataGroup]?.label?.formatConfig;
+
+  if (!formatConfig) {
+    return null;
+  }
+
+  return getLabelTextWithFormat(datum, seriesField, series, vchart, character, formatConfig, formatValue);
+}
+
+// 得到标签经过 format 处理后的值
+function getLabelTextWithFormat(
+  datum: any,
+  seriesField: string,
+  series: ISeries,
+  vchart: IVChart,
+  character: ICharacterChart,
+  formatConfig: IFormatConfig,
+  formatValue: FormatValueFunction
+) {
+  // 去掉非百分百情况下的 percentdiff 内容
+  const formatContents = array(formatConfig.content).filter(content =>
+    series.getPercent() ? true : content !== 'percentdiff'
+  );
+  const opt = {
+    datum,
+    seriesField,
+    series,
+    vchart,
+    character
+  };
+  return getTextWithFormat(formatConfig, formatContents, getSeriesContentValue, formatValue, opt);
+}
+
+function getSeriesContentValue(
+  {
+    datum,
+    seriesField,
+    series,
+    vchart
+  }: {
+    datum: any;
+    seriesField: string;
+    series: ISeries;
+    vchart: IVChart;
+  },
+  content: FormatContentType
+) {
+  const dimensionField = series.getDimensionField()[0];
+  const measureField = series.getMeasureField()[0];
+  switch (content) {
+    case 'dimension':
+      return datum[dimensionField];
+    case 'abs':
+      return Math.abs(datum[measureField]);
+    case 'percentage':
+      // TODO: i18n
+      return validNumber(computeSeriesPercentage(vchart, datum, series)) ?? '百分比';
+    case 'series':
+      return datum[seriesField];
+    case 'value':
+    default:
+      return Number.parseFloat(datum[measureField]);
+  }
+}
+
+// 计算系列百分比
+function computeSeriesPercentage(vchart: IVChart, datum: any, series: ISeries) {
+  // TODO: calculate stack & percentage before format method
+  // calculate percentage for specified series
+  if (
+    series.type === 'pie' ||
+    series.type === 'rose' ||
+    series.type === 'scatter' ||
+    series.type === 'map' ||
+    series.type === 'funnel'
+  ) {
+    const data: any[] = series.getViewData().latestData;
+    const measureField = series.getMeasureField()[0];
+    const totalValue = data.reduce((sum: number, d: any) => {
+      return sum + Number.parseFloat(d[measureField]);
+    }, 0);
+    const percentage = Number.parseFloat(datum[measureField]) / totalValue;
+    return percentage * 100;
+  }
+  // TODO: unite the percentage calculation for different series
+  // for now, line & waterfall & group bar series cannot get correct stack data
+  if (
+    series.type === 'line' ||
+    series.type === 'waterfall' ||
+    // group bar chart
+    (series.type === 'bar' && series.getDimensionField().length > 1)
+  ) {
+    const seriesAxisOrient = series.getSpec()._editor_axis_orient;
+    const allSeries = vchart
+      .getChart()
+      .getAllSeries()
+      .filter((s: ISeries) => s.getSpec()._editor_axis_orient === seriesAxisOrient);
+    const data = allSeries.reduce((data, series) => {
+      return data.concat(series.getViewData().latestData);
+    }, []);
+    const dimensionField = series.getDimensionField()[0];
+    const measureField = series.getMeasureField()[0];
+    const totalValue = data.reduce((sum: number, d: any) => {
+      if (d[dimensionField] === datum[dimensionField]) {
+        const parsedValue = Number.parseFloat(d[measureField]);
+        return sum + (Number.isNaN(parsedValue) ? 0 : parsedValue);
+      }
+      return sum;
+    }, 0);
+    const currentValue = Number.parseFloat(datum[measureField]);
+    const percentage = Number.isNaN(currentValue) ? 0 : currentValue / totalValue;
+    return percentage * 100;
+  }
+  // calculate stack
+  const chart = vchart.getChart();
+  chart.getAllRegions().forEach((region: IRegion) => {
+    const stackValueGroup = getRegionStackGroup(region, true);
+    for (const stackValue in stackValueGroup) {
+      for (const key in stackValueGroup[stackValue].nodes) {
+        stack(stackValueGroup[stackValue].nodes[key], region.getStackInverse(), true);
+      }
+    }
+  });
+
+  if (!isNil(datum[STACK_FIELD_TOTAL])) {
+    return ((datum[STACK_FIELD_END] - datum[STACK_FIELD_START]) / datum[STACK_FIELD_TOTAL]) * 100;
+  }
+  if (!isNil(datum[STACK_FIELD_END_PERCENT]) && !isNil(datum[STACK_FIELD_START_PERCENT])) {
+    return (datum[STACK_FIELD_END_PERCENT] - datum[STACK_FIELD_START_PERCENT]) * 100;
+  }
+  return NaN;
 }
 
 export const LabelStyleRuntimeInstance = new LabelStyleRuntime();
