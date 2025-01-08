@@ -1,15 +1,13 @@
-import type { ICharacterRuntimeConfig } from './../interface/character';
+import type { ICharacterRuntimeConfig, IUpdateConfigParams } from './../interface/character';
 import type { IGraphic } from '@visactor/vrender-core';
-import { Generator, IGroup } from '@visactor/vrender-core';
+import { Generator } from '@visactor/vrender-core';
 import type { ICharacter } from '../interface/character';
 import type { ICharacterConfig, ICharacterInitOption } from '../interface/dsl/dsl';
-import { deepMergeWithDeletedAttr } from '../utils/merge';
-import { cloneDeep, isValid } from '@visactor/vutils';
+import { cloneDeep } from '@visactor/vutils';
 import type { ICharacterPickInfo, IStoryEvent } from '../interface/event';
 import type { IStory } from '../interface/story';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IConfigProcess } from './config-transform/interface';
-import type { IUpdateConfigParams } from './chart/interface/runtime';
 
 export abstract class CharacterBase<T> implements ICharacter {
   readonly id: string;

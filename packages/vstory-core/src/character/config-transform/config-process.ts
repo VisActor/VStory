@@ -1,8 +1,7 @@
 import { cloneDeep, isValid, merge } from '@visactor/vutils';
-import type { ICharacter } from '../../interface/character';
+import type { ICharacter, IUpdateConfigParams } from '../../interface/character';
 import { deepMergeWithDeletedAttr } from '../../utils/merge';
 import type { IConfigProcess } from './interface';
-import type { IUpdateConfigParams } from '../chart/interface/runtime';
 
 export class ConfigProcessBase implements IConfigProcess {
   protected _character: ICharacter;

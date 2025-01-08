@@ -1,4 +1,3 @@
-import type { ICharacterConfig } from '../../../interface/dsl/dsl';
 import type { ICharacterTableRuntimeConfig, IVTable } from './character-table';
 export interface ITableCharacterRuntime {
   readonly type: string;
@@ -15,5 +14,3 @@ export interface ITableCharacterRuntime {
 export interface ITableCharacterRuntimeConstructor {
   new (): ITableCharacterRuntime;
 }
-
-export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;

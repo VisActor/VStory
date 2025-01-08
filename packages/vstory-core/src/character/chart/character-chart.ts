@@ -8,7 +8,7 @@ import { getChartModelWithEvent } from './utils/vchart-pick';
 import type { ICharacterConfig, ICharacterInitOption } from '../../interface/dsl/dsl';
 import type { IChartCharacterConfig } from '../../interface/dsl/chart';
 import { getLayoutFromWidget } from '../../utils/layout';
-import type { IChartCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
+import type { IChartCharacterRuntime } from './interface/runtime';
 import { CommonSpecRuntimeInstance } from './runtime/common-spec';
 import { CommonLayoutRuntimeInstance } from '../common/runtime/common-layout';
 import { ChartConfigProcess } from './chart-config-process';
@@ -19,6 +19,7 @@ import { MarkStyleRuntimeInstance } from './runtime/mark-style';
 import { LabelStyleRuntimeInstance } from './runtime/label-style';
 import { isArray } from '@visactor/vutils';
 import { TotalLabelRuntimeInstance } from './runtime/total-label';
+import type { IUpdateConfigParams } from '../../interface/character';
 
 export class CharacterChart<T extends IChartGraphicAttribute>
   extends CharacterBase<IChartGraphicAttribute>

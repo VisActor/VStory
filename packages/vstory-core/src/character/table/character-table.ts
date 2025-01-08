@@ -7,7 +7,7 @@ import { VTableGraphic } from './graphic/vtable-graphic';
 import type { ICharacterConfig, ICharacterInitOption } from '../../interface/dsl/dsl';
 import type { ITableCharacterConfig } from '../../interface/dsl/table';
 import { getLayoutFromWidget } from '../../utils/layout';
-import type { ITableCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
+import type { ITableCharacterRuntime } from './interface/runtime';
 import { TableConfigProcess } from './table-config-process';
 import type { ICharacterTable, IVTable } from './interface/character-table';
 import { CommonSpecRuntimeInstance } from './runtime/common-spec';
@@ -17,6 +17,7 @@ import { CellStyleRuntimeInstance } from './runtime/cell-style';
 import { ColWidthRuntimeInstance } from './runtime/col-width';
 import { RowHeightRuntimeInstance } from './runtime/row-height';
 import { isArray } from '@visactor/vutils';
+import type { IUpdateConfigParams } from '../../interface/character';
 
 export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>

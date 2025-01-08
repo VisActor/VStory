@@ -1,5 +1,4 @@
 import type { IVChart } from '@visactor/vchart';
-import type { ICharacterConfig } from '../../../interface/dsl/dsl';
 import type { ICharacterChart } from './character-chart';
 export interface IChartCharacterRuntime {
   readonly type: string;
@@ -16,5 +15,3 @@ export interface IChartCharacterRuntime {
 export interface IChartCharacterRuntimeConstructor {
   new (): IChartCharacterRuntime;
 }
-
-export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;

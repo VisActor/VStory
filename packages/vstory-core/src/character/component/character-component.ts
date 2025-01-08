@@ -1,12 +1,13 @@
 import type { IGraphic } from '@visactor/vrender-core';
 import { CharacterBase } from '../character-base';
 import type { IComponentCharacterConfig } from '../../interface/dsl/component';
-import type { IComponentCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
+import type { IComponentCharacterRuntime } from './interface/runtime';
 import type { ICharacterInitOption } from '../../interface/dsl/dsl';
 import { ComponentConfigProcess } from './component-config-process';
 import type { ICharacterComponent } from './interface/character-component';
 import type { IStoryEvent, ICharacterPickInfo } from '../../interface/event';
 import { isArray } from '@visactor/vutils';
+import type { IUpdateConfigParams } from '../../interface/character';
 
 export abstract class CharacterComponent<T extends IGraphic, T1>
   extends CharacterBase<T1>

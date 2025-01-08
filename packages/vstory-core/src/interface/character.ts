@@ -49,3 +49,5 @@ export interface ICharacterRuntimeConfig {
   canvas: IStoryCanvas;
   getAttribute: () => any;
 }
+
+export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;
