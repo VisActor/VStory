@@ -16,6 +16,8 @@ export const enum CharacterType {
   SHAPE = 'Shape',
   IMAGE = 'Image',
   LINE = 'Line',
+  POLYGON = 'Polygon',
+  ARC = 'Arc',
   TIMELINE = 'Timeline',
   UNIT = 'Unit',
 

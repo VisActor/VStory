@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@visactor/vstory-core",
+      "comment": "feat: suppprt Arc/Polygon Component",
+      "type": "none"
+    }
+  ],
+  "packageName": "@visactor/vstory-core"
+}

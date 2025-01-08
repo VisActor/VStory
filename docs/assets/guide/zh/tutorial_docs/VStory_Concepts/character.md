@@ -225,15 +225,17 @@ window['story'] = story;
 window['vstory'] = story;
 ```
 
-### 基本组件（Image、Line、Rect、Shape、Text）
+### 基本组件（Image、Line、Rect、Shape、Text、Arc、Polygon）
 
-组件类型的接口定义如下，其中基本组件（Image、Line、Rect、Shape、Text）的配置都直接基于 VRender 的对应图元，配置在 graphic 属性上：
+组件类型的接口定义如下，其中基本组件（Image、Line、Rect、Shape、Text、Arc、Polygon）的配置都直接基于 VRender 的对应图元，配置在 graphic 属性上：
 
 - Image 是基于 VRender 的[Image 图元](/vrender/option/Image)
 - Line 是基于 VRender 的[Line 图元](/vrender/option/Line)
 - Rect 是基于 VRender 的[Rect 图元](/vrender/option/Rect)
 - Shape 是基于 VRender 的[Symbol 图元](/vrender/option/Symbol)
-- Text 是基于 VRender 的[Text 图元](/vrender/option/Text)
+- Text 是基于 VRender 的[RichText 图元](/vrender/option/RichText)
+- Arc 是基于 VRender 的[Arc 图元](/vrender/option/Arc)
+- Polygon 是基于 VRender 的[Polygon 图元](/vrender/option/Polygon)
 
 其中 panel 是组件的额外面板，其实是一个[VRender 的 rect](/vrender/option/Rect)图元，可以参考[VRender 的 rect](/vrender/option/Rect)图元配置。
 text 配置是每个组件都带有的一个额外的配置，是一个[VRender 的 text](/vrender/option/Text)图元，可以参考[VRender 的 text](/vrender/option/Text)图元配置。
