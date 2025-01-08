@@ -44,7 +44,10 @@ export class ConfigProcessBase implements IConfigProcess {
       targetConfig.zIndex = zIndex;
     }
     if (options) {
-      targetConfig.options = deepMergeWithDeletedAttr(targetConfig.options ?? {}, options);
+      targetConfig.options = deepMergeWithDeletedAttr(
+        targetConfig.options ?? ({} as typeof targetConfig.options),
+        options
+      );
     }
     return true;
   }
