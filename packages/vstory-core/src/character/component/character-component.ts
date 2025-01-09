@@ -72,7 +72,13 @@ export abstract class CharacterComponent<T extends IGraphic, T1>
   }
 
   checkEvent(event: IStoryEvent): false | ICharacterPickInfo {
-    return false;
+    if (!(event.detailPath ?? event.path).some(g => g === this._graphic)) {
+      return false;
+    }
+    return {
+      part: event.path[event.path.length - 1] === this._graphic.mainGraphic ? 'graphic' : 'text',
+      graphicType: this._graphic.type
+    };
   }
 
   protected _initGraphic(): void {
@@ -95,7 +101,7 @@ export abstract class CharacterComponent<T extends IGraphic, T1>
   protected getDefaultAttribute(): Partial<T1> {
     return {
       zIndex: this._config.zIndex ?? 0,
-      visibleAll: false,
+      visibleAll: true,
       x: 0,
       y: 0,
       textStyle: {}

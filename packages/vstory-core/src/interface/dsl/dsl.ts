@@ -73,6 +73,7 @@ export interface ICharacterConfigBase {
   zIndex: number;
   theme?: string;
   extra?: any; // 带着的额外信息
+  locked?: boolean; // 是否锁定
 }
 
 export type IEditorTextGraphicAttribute = {

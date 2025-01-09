@@ -12,6 +12,7 @@ export * from '@visactor/vstory-player';
 export * from '@visactor/vstory-templates';
 export * from '@visactor/vstory-external';
 export * from '@visactor/vstory-animate';
+export * from '@visactor/vstory-editor';
 
 export function registerAll() {
   registerGraphics();

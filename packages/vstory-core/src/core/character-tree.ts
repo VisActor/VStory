@@ -17,11 +17,11 @@ export class CharacterTree implements ICharacterTree {
   }
 
   getCharacterList(): ICharacter[] {
-    return Object.values(this._characters);
+    return Array.from(Object.values(this._characters));
   }
 
   getCharactersByType(type: string) {
-    return Object.values(this._characters).filter(c => c.type === type);
+    return this.getCharacterList().filter(c => c.type === type);
   }
 
   getCharacterById(key: string) {
@@ -43,10 +43,9 @@ export class CharacterTree implements ICharacterTree {
     };
     if ((<ICharacterConfig>config).id) {
       if (!this._characters[(<ICharacterConfig>config).id]) {
-        this._characters[(<ICharacterConfig>config).id] = StoryFactory.createCharacter(
-          <ICharacterConfig>config,
-          option
-        );
+        const c = StoryFactory.createCharacter(<ICharacterConfig>config, option);
+        c.hide();
+        this._characters[(<ICharacterConfig>config).id] = c;
       }
       return this._characters[(<ICharacterConfig>config).id];
     }
@@ -66,7 +65,9 @@ export class CharacterTree implements ICharacterTree {
     specs.forEach(spec => {
       if ((<ICharacterConfig>spec).id) {
         if (!this._characters[(<ICharacterConfig>spec).id]) {
-          this._characters[(<ICharacterConfig>spec).id] = StoryFactory.createCharacter(<ICharacterConfig>spec, option);
+          const c = StoryFactory.createCharacter(<ICharacterConfig>spec, option);
+          c.hide();
+          this._characters[(<ICharacterConfig>spec).id] = c;
         }
         // return this._characters[(<ICharacterConfig>spec).id];
       }
