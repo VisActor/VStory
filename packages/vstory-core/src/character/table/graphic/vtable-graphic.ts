@@ -121,10 +121,6 @@ export class VTableGraphic extends Rect {
       // stage.pauseTriggerEvent();
     }
     stage.resumeRender();
-    this.setAttributes({
-      // @ts-ignore
-      fill: 'rgba(255,0,0,0.2)'
-    });
   }
 
   private _createOption(params: ITableGraphicAttribute) {
