@@ -23,6 +23,8 @@ export class ImageComponent extends BaseComponentWithText {
     }
   };
 
+  mainGraphic: IImage;
+
   constructor(attributes: IImageComponentAttributes, options?: ComponentOptions) {
     super(options?.skipDefault ? attributes : merge({}, ImageComponent.defaultAttributes, attributes));
   }
@@ -47,7 +49,7 @@ export class ImageComponent extends BaseComponentWithText {
     if (!attrs.height) {
       attrs.height = height - padding.top - padding.bottom;
     }
-    this.createOrUpdateChild(
+    this.mainGraphic = this.createOrUpdateChild(
       'image',
       { ...attrs, scaleX: 1, scaleY: 1, angle: 0, postMatrix: null },
       'image'
