@@ -46,6 +46,24 @@ export const ComponentsEdit = () => {
       }
     });
     story.addCharacterWithAppear({
+      type: 'Image',
+      id: 'image',
+      zIndex: 10,
+      position: {
+        top: 100,
+        left: 300,
+        width: 80,
+        height: 60
+      },
+      options: {
+        graphic: {
+          stroke: false,
+          image: 'https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/screenshot-20240715-204217.png'
+          // size: 100
+        }
+      }
+    });
+    story.addCharacterWithAppear({
       type: 'Rect',
       id: 'title',
       zIndex: 1,
