@@ -1,5 +1,5 @@
 import type { IGroup } from '@visactor/vrender-core';
-import { createGroup } from '@visactor/vrender-core';
+import { createGroup, vglobal } from '@visactor/vrender-core';
 import type { IEditActionInfo, IEditSelection, IEditSelectionInfo } from '../interface';
 import type { ICharacter } from '@visactor/vstory-core';
 import { EditActionEnum, EditEditingState } from '../const';
@@ -74,6 +74,24 @@ export abstract class BaseSelection implements IEditSelection {
         selection: this
       });
   }
+  protected keyDown = (event: any) => {
+    if (!(this._layoutController && event)) {
+      return;
+    }
+    if (event.shiftKey || event.key === 'Shift') {
+      this._layoutController.defaultProportionalScaling = this._layoutController.proportionalScaling;
+      this._layoutController.proportionalScaling = true;
+    }
+  };
+  protected keyUp = (event: any) => {
+    if (!(this._layoutController && event)) {
+      return;
+    }
+    if (event.shiftKey || event.key === 'Shift') {
+      this._layoutController.proportionalScaling = this._layoutController.defaultProportionalScaling;
+    }
+  };
+
   protected activeLayoutController() {
     if (!this._layoutController) {
       this._layoutController = this.createLayoutController();
@@ -84,6 +102,8 @@ export abstract class BaseSelection implements IEditSelection {
     this.attachController(this._layoutController);
     this._layoutController.onActive();
     this.updateController();
+    vglobal.addEventListener('keydown', this.keyDown);
+    vglobal.addEventListener('keyup', this.keyUp);
   }
   protected inActiveLayoutController() {
     if (!this._layoutController) {
@@ -93,6 +113,8 @@ export abstract class BaseSelection implements IEditSelection {
     this.detachController();
 
     this.edit.setEditGlobalState(EditEditingState.continuingEditing, false);
+    vglobal.removeEventListener('keydown', this.keyDown);
+    vglobal.removeEventListener('keyup', this.keyUp);
   }
 
   protected attachController(layoutController: ITransformController) {
