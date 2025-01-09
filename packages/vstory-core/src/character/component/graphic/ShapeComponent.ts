@@ -9,6 +9,8 @@ const shapeMap: any = {
 };
 
 export class ShapeComponent extends BaseComponentWithText {
+  type: string = 'ShapeComponent';
+  mainGraphic: ISymbol;
   static defaultAttributes: Partial<IShapeComponentAttributes> = {
     visible: true,
     textStyle: {},
@@ -56,7 +58,7 @@ export class ShapeComponent extends BaseComponentWithText {
       dy = attrs.size / 2;
     }
 
-    this.createOrUpdateChild(
+    this.mainGraphic = this.createOrUpdateChild(
       'symbol',
       {
         ...attrs,

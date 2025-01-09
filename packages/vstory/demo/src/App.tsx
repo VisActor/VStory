@@ -62,6 +62,7 @@ import { SpecAxes } from './demos/chart/runtime/spec-axes';
 import { RuntimeTotalLabel } from './demos/chart/runtime/total-label';
 import { RectComponent } from './demos/component/rect';
 import { TableInfographic } from './demos/infographic/infographic-table';
+import { ComponentsEdit } from './demos/edit/components';
 
 type MenusType = (
   | {
@@ -309,8 +310,12 @@ const App = () => {
       ]
     },
     {
-      name: 'VChart Editor',
+      name: 'Editor',
       subMenus: [
+        {
+          name: 'Components',
+          component: ComponentsEdit
+        },
         {
           name: 'Base Chart',
           component: BaseChart
