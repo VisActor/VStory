@@ -53,10 +53,17 @@ export abstract class CharacterBase<T> implements ICharacter {
     this._canvas = option.canvas;
   }
 
-  setConfig(config: Partial<IUpdateConfigParams>) {
-    const diffConfig = this.diffConfig(config);
-    this.configProcess.updateConfig(diffConfig, config, this._config);
-    this.applyConfigToAttribute(diffConfig, this._config);
+  setConfig(config: Partial<IUpdateConfigParams>, forceMergeOption: boolean = true) {
+    if (forceMergeOption === false) {
+      const { options, ...rest } = config;
+      this.configProcess.updateConfig(rest, config, this._config);
+      this._config.options = options;
+      this.applyConfigToAttribute(config, this._config);
+    } else {
+      const diffConfig = this.diffConfig(config);
+      this.configProcess.updateConfig(diffConfig, config, this._config);
+      this.applyConfigToAttribute(diffConfig, this._config);
+    }
     this._setAttributes(this._attribute);
   }
 

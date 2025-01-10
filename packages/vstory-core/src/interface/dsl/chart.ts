@@ -131,7 +131,7 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     /**
      * 总计标签
      */
-    totalLabel: {
+    totalLabel?: {
       // 以 `组` 为单位配置。组的 key 对应 vchart.series.stackValue
       // 默认情况下 vchart 中 stackValue = `${PREFIX}_series_${series.type}`
       // 直角坐标系下的系列 stackValue = `${PREFIX}_series_${this.type}_${axisId}`
@@ -141,7 +141,7 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
      * 组样式配置
      */
     dataGroupStyle?: {
-      [StroyAllDataGroup]: IDataGroupStyle; // 全部分组的样式
+      [StroyAllDataGroup]?: IDataGroupStyle; // 全部分组的样式
       [key: string]: IDataGroupStyle; // 某一组
     };
     /**

@@ -559,7 +559,8 @@ export const RuntimeLabelStyle = () => {
     // @ts-ignore
     window.player = player;
     const dsl = loadDSL();
-    story.load(dsl);
+    // story.load(dsl);
+    story.addCharacter(dsl.characters[0]);
     player.play(-1);
 
     const chart0 = story.getCharacterById('chart0');
