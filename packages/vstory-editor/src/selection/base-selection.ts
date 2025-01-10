@@ -6,6 +6,8 @@ import { EditActionEnum, EditEditingState } from '../const';
 import type { Edit } from '../edit';
 import type { ITransformController, ControllerAttributes, IUpdateParams } from './edit-control/transform-control';
 import { TransformController } from './edit-control/transform-control';
+import type { IHoverController } from './edit-control/hover-control';
+import { HoverController } from './edit-control/hover-control';
 
 export abstract class BaseSelection implements IEditSelection {
   declare readonly level: number;
@@ -16,6 +18,7 @@ export abstract class BaseSelection implements IEditSelection {
   protected _actionInfo: IEditActionInfo | null;
   protected _activeCharacter: ICharacter | null;
   protected _layoutController: ITransformController | null;
+  protected _hoverController: IHoverController | null;
 
   isEditing: boolean = false;
   declare clickCount: number;
@@ -29,6 +32,7 @@ export abstract class BaseSelection implements IEditSelection {
     this._activeCharacter = null;
     this._actionInfo = null;
     this._layoutController = null;
+    this._hoverController = null;
     this._initOverGraphic();
   }
 
@@ -37,6 +41,16 @@ export abstract class BaseSelection implements IEditSelection {
       return this.checkActionWhileEditing(actionInfo);
     }
     return this.checkActionWhileNoEditing(actionInfo);
+  }
+  checkOver(actionInfo: IEditActionInfo | IEditSelectionInfo) {
+    if (!this.isActionInfoSupported(actionInfo)) {
+      return;
+    }
+    if (actionInfo.type === EditActionEnum.pointerOverCharacter) {
+      this.activeHoverController(actionInfo.character);
+    } else if (actionInfo.type === EditActionEnum.pointerOutCharacter) {
+      this.inActiveHoverController();
+    }
   }
   startEdit(actionInfo: IEditActionInfo, emitEvent: boolean = false) {
     if (this.isEditing) {
@@ -93,6 +107,9 @@ export abstract class BaseSelection implements IEditSelection {
   };
 
   protected activeLayoutController() {
+    // 关闭hover的控件
+    this.inActiveHoverController();
+
     if (!this._layoutController) {
       this._layoutController = this.createLayoutController();
     }
@@ -117,7 +134,25 @@ export abstract class BaseSelection implements IEditSelection {
     vglobal.removeEventListener('keyup', this.keyUp);
   }
 
-  protected attachController(layoutController: ITransformController) {
+  protected activeHoverController(character: ICharacter) {
+    if (this.isEditing) {
+      return;
+    }
+    if (!this._hoverController) {
+      this._hoverController = this.createHoverController(character);
+    }
+    this.attachController(this._hoverController);
+  }
+
+  protected inActiveHoverController() {
+    if (!this._hoverController) {
+      return;
+    }
+
+    this.detachController();
+  }
+
+  protected attachController(layoutController: IGroup) {
     const g = this.edit.getEditGroup();
     if (layoutController.parent === g) {
       throw new Error('【attachController】未知错误，不应该走到这里');
@@ -125,8 +160,14 @@ export abstract class BaseSelection implements IEditSelection {
     g.appendChild(layoutController);
   }
   protected detachController() {
-    this._layoutController.release();
-    this._layoutController = null;
+    if (this._layoutController) {
+      this._layoutController.release();
+      this._layoutController = null;
+    }
+    if (this._hoverController) {
+      this._hoverController.release();
+      this._hoverController = null;
+    }
   }
   protected updateController(): void {
     const actionInfo = this._actionInfo as IEditSelectionInfo;
@@ -169,6 +210,17 @@ export abstract class BaseSelection implements IEditSelection {
       this.edit.setEditGlobalState(EditEditingState.continuingEditing, false);
     });
     controller.onUpdate(this.handlerControlChange);
+    return controller;
+  }
+
+  protected createHoverController(character: ICharacter): IHoverController | undefined {
+    const bounds = character.graphic.AABBBounds;
+    const controller = new HoverController(this, {
+      x: bounds.x1,
+      y: bounds.y1,
+      width: bounds.width(),
+      height: bounds.height()
+    }) as any;
     return controller;
   }
 
@@ -259,7 +311,6 @@ export abstract class BaseSelection implements IEditSelection {
       this.startEdit(actionInfo);
       return true;
     }
-
     return false;
   }
 }
