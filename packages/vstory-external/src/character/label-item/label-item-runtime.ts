@@ -1,5 +1,5 @@
 import type { IComponentCharacterRuntime } from '@visactor/vstory-core';
-import { BaseRuntime } from '@visactor/vstory-core';
+import { BaseRuntime, RuntimeStore } from '@visactor/vstory-core';
 import { LABEL_ITEM } from './constant';
 
 export class LabelItemRuntime extends BaseRuntime implements IComponentCharacterRuntime {
@@ -7,3 +7,4 @@ export class LabelItemRuntime extends BaseRuntime implements IComponentCharacter
 }
 
 export const LabelItemRuntimeInstance = new LabelItemRuntime();
+RuntimeStore.register(LabelItemRuntimeInstance);

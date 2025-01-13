@@ -1,9 +1,9 @@
-import { array, merge } from '@visactor/vutils';
+import { array } from '@visactor/vutils';
 import type { ITableCharacterRuntime } from '../interface/runtime';
 import type { ICharacterTable } from '../interface/character-table';
 
 export class CommonSpecRuntime implements ITableCharacterRuntime {
-  type = 'CommonSpec';
+  type = 'TableCommonSpec';
 
   applyConfigToAttribute(character: ICharacterTable): void {
     const rawAttribute = character.getRuntimeConfig().getAttribute();

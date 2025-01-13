@@ -8,9 +8,77 @@ export const DefaultTheme: {
   name: 'default',
   theme: {
     character: {
+      VTable: {
+        runtime: {
+          list: ['CommonLayout', 'TableType', 'TableCommonSpec', 'CellStyle', 'ColWidth', 'RowHeight']
+        }
+      },
+      PivotChart: {
+        runtime: {
+          list: []
+        }
+      },
       VChart: {
         runtime: {
-          formatValue: formatValue
+          list: ['ChartCommonSpec', 'CommonLayout', 'MarkStyle', 'LabelStyle', 'TotalLabel'],
+          functions: {
+            formatValue: formatValue
+          }
+        }
+      },
+      RankingBar: {
+        runtime: {
+          list: ['RankingBar']
+        }
+      },
+      ScatterBar: {
+        runtime: {
+          list: []
+        }
+      },
+      WaveScatter: {
+        runtime: {
+          list: ['WaveScatter']
+        }
+      },
+      Text: {
+        runtime: {
+          list: ['Text']
+        }
+      },
+      Line: {
+        runtime: {
+          list: ['Line']
+        }
+      },
+      Arc: {
+        runtime: {
+          list: ['Arc']
+        }
+      },
+      Polygon: {
+        runtime: {
+          list: ['Polygon']
+        }
+      },
+      Timeline: {
+        runtime: {
+          list: ['Timeline']
+        }
+      },
+      Unit: {
+        runtime: {
+          list: ['Unit']
+        }
+      },
+      Rect: {
+        runtime: {
+          list: ['Rect']
+        }
+      },
+      Shape: {
+        runtime: {
+          list: ['Shape']
         }
       }
     }

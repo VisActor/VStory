@@ -15,10 +15,6 @@ export class PolygonCharacter extends CharacterComponent<PolygonComponent, IPoly
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(PolygonRuntimeInstance);
-  }
   show() {
     this._graphic.setAttribute('visibleAll', true);
   }

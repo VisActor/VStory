@@ -15,10 +15,6 @@ export class ArcCharacter extends CharacterComponent<ArcComponent, IArcComponent
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(ArcRuntimeInstance);
-  }
   show() {
     this._graphic.setAttribute('visibleAll', true);
   }

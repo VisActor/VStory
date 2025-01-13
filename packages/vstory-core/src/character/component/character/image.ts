@@ -15,11 +15,6 @@ export class ImageCharacter extends CharacterComponent<ImageComponent, IImageCom
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(ImageRuntimeInstance);
-  }
-
   protected getDefaultAttribute(): Partial<IImageComponentAttributes> {
     return {
       ...super.getDefaultAttribute(),

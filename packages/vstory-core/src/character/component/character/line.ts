@@ -15,11 +15,6 @@ export class LineCharacter extends CharacterComponent<LineComponent, ILineCompon
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(LineRuntimeInstance);
-  }
-
   protected getDefaultAttribute(): Partial<ILineComponentAttributes> {
     return {
       ...super.getDefaultAttribute(),

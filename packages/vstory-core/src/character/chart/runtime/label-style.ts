@@ -28,7 +28,6 @@ import { getTextWithFormat } from '../../common/utils/format';
 import { validNumber } from '../../../utils/type';
 import { getRegionStackGroup } from '@visactor/vchart/esm/util';
 import { stack } from '@visactor/vchart/esm/util';
-
 export class LabelStyleRuntime implements IChartCharacterRuntime {
   type = 'LabelStyle';
 
@@ -94,7 +93,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
 
     const formatValue = ThemeManager.getAttribute(
       [character.theme, character.story.theme],
-      'character.VChart.runtime.formatValue'
+      'character.VChart.runtime.functions.formatValue'
     );
 
     const singleLabelStyleKeys: { [key: string]: boolean } = {};

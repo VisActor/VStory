@@ -16,11 +16,6 @@ export class RectCharacter extends CharacterComponent<RectComponent, IRectCompon
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(RectRuntimeInstance);
-  }
-
   protected getDefaultAttribute(): Partial<IRectComponentAttributes> {
     return {
       ...super.getDefaultAttribute(),

@@ -15,11 +15,6 @@ export class TextCharacter extends CharacterComponent<TextComponent, ITextCompon
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(TextRuntimeInstance);
-  }
-
   protected getDefaultAttribute(): Partial<ITextComponentAttributes> {
     return {
       ...super.getDefaultAttribute(),

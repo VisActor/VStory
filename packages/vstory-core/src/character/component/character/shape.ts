@@ -15,11 +15,6 @@ export class ShapeCharacter extends CharacterComponent<ShapeComponent, IShapeCom
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(ShapeRuntimeInstance);
-  }
-
   protected _clearGraphic(): void {
     super._clearGraphic();
   }

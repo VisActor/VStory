@@ -15,11 +15,6 @@ export class TimelineCharacter extends CharacterComponent<TimelineComponent, ITi
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(TimelineRuntimeInstance);
-  }
-
   protected getDefaultAttribute(): Partial<ITimelineComponentAttributes> {
     return {
       ...super.getDefaultAttribute(),

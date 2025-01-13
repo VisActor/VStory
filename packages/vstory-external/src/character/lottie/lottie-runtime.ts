@@ -1,5 +1,5 @@
 import type { IComponentCharacterRuntime, ICharacterComponent } from '@visactor/vstory-core';
-import { BaseRuntime } from '@visactor/vstory-core';
+import { BaseRuntime, RuntimeStore } from '@visactor/vstory-core';
 // import loading1 from './lottie-files/loading1'
 import { loading1 } from './lottie-file/loading1';
 import { loading2 } from './lottie-file/loading2';
@@ -29,3 +29,4 @@ export class LottieRuntime extends BaseRuntime implements IComponentCharacterRun
 }
 
 export const LottieRuntimeInstance = new LottieRuntime();
+RuntimeStore.register(LottieRuntimeInstance);

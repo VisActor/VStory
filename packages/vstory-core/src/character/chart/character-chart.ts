@@ -9,16 +9,11 @@ import type { ICharacterConfig, ICharacterInitOption } from '../../interface/dsl
 import type { IChartCharacterConfig } from '../../interface/dsl/chart';
 import { getLayoutFromWidget } from '../../utils/layout';
 import type { IChartCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
-import { CommonSpecRuntimeInstance } from './runtime/common-spec';
-import { CommonLayoutRuntimeInstance } from '../common/runtime/common-layout';
 import { ChartConfigProcess } from './chart-config-process';
 import type { ICharacterChart } from './interface/character-chart';
 import { mergeChartOption } from '../../utils/chart';
 import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
-import { MarkStyleRuntimeInstance } from './runtime/mark-style';
-import { LabelStyleRuntimeInstance } from './runtime/label-style';
 import { isArray } from '@visactor/vutils';
-import { TotalLabelRuntimeInstance } from './runtime/total-label';
 
 export class CharacterChart<T extends IChartGraphicAttribute>
   extends CharacterBase<IChartGraphicAttribute>
@@ -36,6 +31,8 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   protected _timeline: ITimeline;
   protected _runtime: IChartCharacterRuntime[] = [];
 
+  static RuntimeMap: { [key: string]: boolean } = {};
+
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     super(config, option);
     this._timeline = new DefaultTimeline();
@@ -45,6 +42,10 @@ export class CharacterChart<T extends IChartGraphicAttribute>
 
   get config() {
     return this._config;
+  }
+
+  protected _initRuntime() {
+    super._initRuntime();
   }
 
   tickTo(t: number): void {
@@ -184,15 +185,6 @@ export class CharacterChart<T extends IChartGraphicAttribute>
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    this._runtime.push(
-      CommonSpecRuntimeInstance,
-      CommonLayoutRuntimeInstance,
-      MarkStyleRuntimeInstance,
-      LabelStyleRuntimeInstance,
-      TotalLabelRuntimeInstance
-    );
-  }
   protected _clearRuntime(): void {
     this._runtime.length = 0;
   }

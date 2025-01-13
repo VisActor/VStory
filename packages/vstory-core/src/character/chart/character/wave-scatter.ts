@@ -26,11 +26,6 @@ interface IWaveScatterChartGraphicAttribute extends IChartGraphicAttribute {
 export class WaveScatterCharacter extends CharacterChart<IWaveScatterChartGraphicAttribute> {
   static type = CharacterType.WAVE_SCATTER;
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(WaveScatterRuntimeInstance);
-  }
-
   getDefaultAttribute(): Partial<IWaveScatterChartGraphicAttribute> {
     return {
       ...super.getDefaultAttribute(),
