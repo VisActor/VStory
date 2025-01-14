@@ -8,7 +8,7 @@ export const DefaultTheme: {
   name: 'default',
   theme: {
     character: {
-      VTable: {
+      Table: {
         runtime: {
           list: ['CommonLayout', 'TableType', 'TableCommonSpec', 'CellStyle', 'ColWidth', 'RowHeight']
         }
@@ -18,9 +18,22 @@ export const DefaultTheme: {
           list: []
         }
       },
-      VChart: {
+      Chart: {
         runtime: {
           list: ['ChartCommonSpec', 'CommonLayout', 'MarkStyle', 'LabelStyle', 'TotalLabel'],
+          functions: {
+            formatValue: formatValue
+          }
+        }
+      },
+      VTable: {
+        runtime: {
+          list: []
+        }
+      },
+      VChart: {
+        runtime: {
+          list: [],
           functions: {
             formatValue: formatValue
           }
@@ -48,37 +61,42 @@ export const DefaultTheme: {
       },
       Line: {
         runtime: {
-          list: ['Line']
+          list: ['BaseGraphic', 'Line']
         }
       },
       Arc: {
         runtime: {
-          list: ['Arc']
+          list: ['BaseGraphic']
         }
       },
       Polygon: {
         runtime: {
-          list: ['Polygon']
+          list: ['BaseGraphic']
         }
       },
       Timeline: {
         runtime: {
-          list: ['Timeline']
+          list: ['BaseGraphic']
         }
       },
       Unit: {
         runtime: {
-          list: ['Unit']
+          list: ['BaseGraphic']
         }
       },
       Rect: {
         runtime: {
-          list: ['Rect']
+          list: ['BaseGraphic']
         }
       },
       Shape: {
         runtime: {
           list: ['Shape']
+        }
+      },
+      Image: {
+        runtime: {
+          list: ['BaseGraphic']
         }
       }
     }

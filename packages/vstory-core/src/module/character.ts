@@ -19,14 +19,8 @@ import { CommonSpecRuntimeInstance as ChartCommonSpecRuntimeInstance } from '../
 import { RankingBarRuntimeInstance } from '../character/chart/runtime/ranking-bar';
 import { WaveScatterRuntimeInstance } from '../character/chart/runtime/wave-scatter';
 import { TextRuntimeInstance } from '../character/component/runtime/text';
-import { RectRuntimeInstance } from '../character/component/runtime/rect';
-import { ImageRuntimeInstance } from '../character/component/runtime/image';
 import { LineRuntimeInstance } from '../character/component/runtime/line';
-import { ShapeRuntimeInstance } from '../character/component/runtime/shape';
-import { PolygonRuntimeInstance } from '../character/component/runtime/polygon';
-import { ArcRuntimeInstance } from '../character/component/runtime/arc';
-import { TimelineRuntimeInstance } from '../character/component/runtime/timeline';
-import { UnitRuntimeInstance } from '../character/component/runtime/unit';
+import { BaseGraphicRuntimeInstance } from '../character/component/runtime/base';
 import { SeriesSpecRuntimeInstance } from '../character/chart/runtime/series-spec';
 import { MarkStyleRuntimeInstance } from '../character/chart/runtime/mark-style';
 import { LabelStyleRuntimeInstance } from '../character/chart/runtime/label-style';
@@ -87,15 +81,9 @@ export function registerRuntime() {
   RuntimeStore.register(WaveScatterRuntimeInstance);
 
   // 组件相关运行时
+  RuntimeStore.register(BaseGraphicRuntimeInstance);
   RuntimeStore.register(TextRuntimeInstance);
-  RuntimeStore.register(RectRuntimeInstance);
-  RuntimeStore.register(ImageRuntimeInstance);
   RuntimeStore.register(LineRuntimeInstance);
-  RuntimeStore.register(ShapeRuntimeInstance);
-  RuntimeStore.register(PolygonRuntimeInstance);
-  RuntimeStore.register(ArcRuntimeInstance);
-  RuntimeStore.register(TimelineRuntimeInstance);
-  RuntimeStore.register(UnitRuntimeInstance);
 
   // 表格相关运行时
   RuntimeStore.register(TableCommonSpecRuntimeInstance);

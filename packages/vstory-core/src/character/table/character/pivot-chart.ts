@@ -7,9 +7,9 @@ import type { ITableGraphicAttribute } from '../graphic/vtable-graphic';
 import type { ICharacterChart } from '../../chart/interface/character-chart';
 import { ThemeManager } from '../../../theme/theme-manager';
 import { RuntimeStore } from '../../../store';
-import { VTableCharacter } from './vtable';
+import { CharacterTable } from '../character-table';
 
-export class PivotChartCharacter extends VTableCharacter {
+export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> {
   static type = CharacterType.PIVOT_CHART;
 
   static ChartRuntimeMap: Record<string, boolean> = {

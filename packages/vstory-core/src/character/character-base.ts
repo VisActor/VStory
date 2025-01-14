@@ -146,12 +146,14 @@ export abstract class CharacterBase<T> implements ICharacter {
         `character.${constructor.type}.runtime.list`
       );
       if (isArray(runtimeList)) {
+        const tempList: string[] = [];
         runtimeList.forEach(r => {
           if (!tempKeyMap[r]) {
             tempKeyMap[r] = true;
-            themeRuntimeKeyList.push(r);
+            tempList.push(r);
           }
         });
+        themeRuntimeKeyList.splice(0, 0, ...tempList);
       }
     });
 

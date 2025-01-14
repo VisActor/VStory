@@ -116,10 +116,9 @@ export class LottieCharacter extends CharacterComponent<LottieComponent, ILottie
 实例封装好了之后，我们需要定义一下`Lottie`的`Runtime`。`Runtime`是一个`Character`的运行时执行的内容，其有一些生命周期，比如当主动更新 Character 的 options 时，runtime 就会执行
 
 ```ts
-export class LottieRuntime extends BaseRuntime implements IComponentCharacterRuntime {
+export class LottieRuntime implements IComponentCharacterRuntime {
   type = 'Lottie';
   applyConfigToAttribute(character: ICharacterComponent): void {
-    super.applyConfigToAttribute(character);
     const rawAttribute = character.getAttribute();
 
     const { data } = rawAttribute.graphic;

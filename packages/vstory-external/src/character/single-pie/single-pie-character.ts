@@ -3,13 +3,12 @@ import { CharacterComponent } from '@visactor/vstory-core';
 import { SinglePieComponent } from './SinglePieComponent';
 import type { ISinglePieComponentAttributes } from './single-pie-interface';
 import { SINGLE_PIE } from './constant';
-import './single-pie-runtime';
 
 export class SinglePieCharacter extends CharacterComponent<SinglePieComponent, ISinglePieComponentAttributes> {
   static type = SINGLE_PIE;
 
   static RuntimeMap: { [key: string]: any } = {
-    SinglePie: true
+    BaseGraphic: true
   };
 
   protected _group: IGroup;

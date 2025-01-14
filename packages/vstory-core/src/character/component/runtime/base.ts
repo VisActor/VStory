@@ -3,8 +3,8 @@ import type { IComponentCharacterRuntime } from '../interface/runtime';
 import { getLayoutFromWidget } from '../../../utils/layout';
 import type { ICharacterComponent } from '../interface/character-component';
 
-export class BaseRuntime implements IComponentCharacterRuntime {
-  type = 'Base';
+export class BaseGraphicRuntime implements IComponentCharacterRuntime {
+  type = 'BaseGraphic';
 
   applyConfigToAttribute(character: ICharacterComponent): void {
     const rawAttribute = character.getAttribute();
@@ -30,3 +30,5 @@ export class BaseRuntime implements IComponentCharacterRuntime {
     merge(rawAttribute.graphic, graphic);
   }
 }
+
+export const BaseGraphicRuntimeInstance = new BaseGraphicRuntime();

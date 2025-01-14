@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { ImageComponent } from '../graphic/ImageComponent';
 import type { IImageComponentAttributes } from '../interface/character-image';
-import { ImageRuntimeInstance } from '../runtime/image';
 
 export class ImageCharacter extends CharacterComponent<ImageComponent, IImageComponentAttributes> {
   static type = CharacterType.IMAGE;

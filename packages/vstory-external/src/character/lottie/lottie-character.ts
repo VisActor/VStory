@@ -9,6 +9,7 @@ export class LottieCharacter extends CharacterComponent<LottieComponent, ILottie
   static type = LOTTIE;
 
   static RuntimeMap: { [key: string]: any } = {
+    BaseGraphic: true,
     Lottie: true
   };
 

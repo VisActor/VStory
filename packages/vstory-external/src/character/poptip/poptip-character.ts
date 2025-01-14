@@ -3,7 +3,6 @@ import { CharacterComponent } from '@visactor/vstory-core';
 import { PopTipComponent } from './PopTipComponent';
 import type { IPopTipComponentAttributes } from './poptip-interface';
 import { POPTIP } from './constant';
-import './poptip-runtime';
 
 export class PopTipCharacter extends CharacterComponent<PopTipComponent, IPopTipComponentAttributes> {
   static type = POPTIP;
@@ -11,7 +10,7 @@ export class PopTipCharacter extends CharacterComponent<PopTipComponent, IPopTip
   protected _group: IGroup;
 
   static RuntimeMap: { [key: string]: any } = {
-    [POPTIP]: true
+    BaseGraphic: true
   };
 
   protected createAndAddGraphic(attribute: IPopTipComponentAttributes): void {

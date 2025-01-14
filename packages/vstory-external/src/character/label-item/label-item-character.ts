@@ -3,13 +3,12 @@ import { CharacterComponent } from '@visactor/vstory-core';
 import { PopTipComponent } from './LabelItemComponent';
 import type { ILabelItemComponentAttributes } from './label-item-interface';
 import { LABEL_ITEM } from './constant';
-import './label-item-runtime';
 
 export class LabelItemCharacter extends CharacterComponent<PopTipComponent, ILabelItemComponentAttributes> {
   static type = LABEL_ITEM;
 
   static RuntimeMap: { [key: string]: any } = {
-    [LABEL_ITEM]: true
+    BaseGraphic: true
   };
 
   protected _group: IGroup;

@@ -19,6 +19,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   extends CharacterBase<IChartGraphicAttribute>
   implements ICharacterChart
 {
+  static type = 'Chart';
   visActorType: 'chart' | 'component' | 'table' | 'common' = 'chart';
   protected declare _graphic: VChartGraphic;
   protected declare _config: IChartCharacterConfig;

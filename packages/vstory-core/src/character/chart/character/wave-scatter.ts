@@ -1,7 +1,6 @@
 import { CharacterType } from '../../../constants/character';
 import { CharacterChart } from '../character-chart';
 import type { IChartGraphicAttribute } from '../graphic/vchart-graphic';
-import { WaveScatterRuntimeInstance } from '../runtime/wave-scatter';
 
 function waterDrop(ctx: any, size: number, topX: number, topY: number) {
   ctx.beginPath();

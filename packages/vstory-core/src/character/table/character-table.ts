@@ -16,6 +16,8 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>
   implements ICharacterTable
 {
+  static type = 'Table';
+
   visActorType: 'table' | 'component' | 'table' | 'common' = 'table';
   protected declare _graphic: VTableGraphic;
   protected declare _config: ITableCharacterConfig;
