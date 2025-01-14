@@ -14,6 +14,24 @@ import { UnitCharacter } from '../character/component/character/unit';
 import { StoryFactory } from '../utils/factory';
 import { VTableCharacter } from '../character/table/character/vtable';
 import { PivotChartCharacter } from '../character/table/character/pivot-chart';
+import { RuntimeStore } from '../store';
+import { CommonSpecRuntimeInstance as ChartCommonSpecRuntimeInstance } from '../character/chart/runtime/common-spec';
+import { RankingBarRuntimeInstance } from '../character/chart/runtime/ranking-bar';
+import { WaveScatterRuntimeInstance } from '../character/chart/runtime/wave-scatter';
+import { TextRuntimeInstance } from '../character/component/runtime/text';
+import { LineRuntimeInstance } from '../character/component/runtime/line';
+import { BaseGraphicRuntimeInstance } from '../character/component/runtime/base';
+import { SeriesSpecRuntimeInstance } from '../character/chart/runtime/series-spec';
+import { MarkStyleRuntimeInstance } from '../character/chart/runtime/mark-style';
+import { LabelStyleRuntimeInstance } from '../character/chart/runtime/label-style';
+import { TotalLabelRuntimeInstance } from '../character/chart/runtime/total-label';
+import { CommonLayoutRuntimeInstance } from '../character/common/runtime/common-layout';
+
+import { CommonSpecRuntimeInstance as TableCommonSpecRuntimeInstance } from '../character/table/runtime/common-spec';
+import { CellStyleRuntimeInstance } from '../character/table/runtime/cell-style';
+import { ColWidthRuntimeInstance } from '../character/table/runtime/col-width';
+import { RowHeightRuntimeInstance } from '../character/table/runtime/row-height';
+import { TableTypeRuntimeInstance } from '../character/table/runtime/table-type';
 
 let _register = false;
 export function registerCharacters() {
@@ -43,4 +61,34 @@ export function registerCharacters() {
   StoryFactory.registerCharacter(VTableCharacter.type, VTableCharacter);
   // table
   StoryFactory.registerCharacter(PivotChartCharacter.type, PivotChartCharacter);
+
+  registerRuntime();
+}
+
+export function registerRuntime() {
+  // 基础运行时
+  RuntimeStore.register(CommonLayoutRuntimeInstance);
+
+  // 基础图表运行时
+  RuntimeStore.register(ChartCommonSpecRuntimeInstance);
+  RuntimeStore.register(SeriesSpecRuntimeInstance);
+  RuntimeStore.register(MarkStyleRuntimeInstance);
+  RuntimeStore.register(LabelStyleRuntimeInstance);
+  RuntimeStore.register(TotalLabelRuntimeInstance);
+
+  // 图表相关运行时
+  RuntimeStore.register(RankingBarRuntimeInstance);
+  RuntimeStore.register(WaveScatterRuntimeInstance);
+
+  // 组件相关运行时
+  RuntimeStore.register(BaseGraphicRuntimeInstance);
+  RuntimeStore.register(TextRuntimeInstance);
+  RuntimeStore.register(LineRuntimeInstance);
+
+  // 表格相关运行时
+  RuntimeStore.register(TableCommonSpecRuntimeInstance);
+  RuntimeStore.register(CellStyleRuntimeInstance);
+  RuntimeStore.register(ColWidthRuntimeInstance);
+  RuntimeStore.register(RowHeightRuntimeInstance);
+  RuntimeStore.register(TableTypeRuntimeInstance);
 }

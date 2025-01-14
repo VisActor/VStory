@@ -1,16 +1,18 @@
 import type { ICharacterRuntimeConfig, ILayoutLine } from './../interface/character';
 import type { IGraphic } from '@visactor/vrender-core';
-import { Generator, IGroup } from '@visactor/vrender-core';
+import { Generator } from '@visactor/vrender-core';
 import type { ICharacter } from '../interface/character';
 import type { ICharacterConfig, ICharacterInitOption } from '../interface/dsl/dsl';
-import type { IAABBBounds } from '@visactor/vutils';
-import { cloneDeep, isValid } from '@visactor/vutils';
+import { cloneDeep, isArray } from '@visactor/vutils';
 import type { ICharacterPickInfo, IStoryEvent } from '../interface/event';
 import type { IStory } from '../interface/story';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IConfigProcess } from './config-transform/interface';
 import type { IUpdateConfigParams } from './chart/interface/runtime';
 import { getLayoutLine } from '../utils/layout';
+import { foreachAllConstructor } from '../utils/type';
+import { ThemeManager } from '../theme/theme-manager';
+import { RuntimeStore } from '../store';
 
 export abstract class CharacterBase<T> implements ICharacter {
   readonly id: string;
@@ -22,6 +24,7 @@ export abstract class CharacterBase<T> implements ICharacter {
   protected _canvas: IStoryCanvas;
   declare configProcess: IConfigProcess;
   declare _attribute: T;
+  protected declare _runtime: { type: string }[];
   // 是否锁定，不可被编辑
   declare locked?: boolean;
   // declare attributeProcess: IAttributeProcess;
@@ -53,10 +56,17 @@ export abstract class CharacterBase<T> implements ICharacter {
     this._canvas = option.canvas;
   }
 
-  setConfig(config: Partial<IUpdateConfigParams>) {
-    const diffConfig = this.diffConfig(config);
-    this.configProcess.updateConfig(diffConfig, config, this._config);
-    this.applyConfigToAttribute(diffConfig, this._config);
+  setConfig(config: Partial<IUpdateConfigParams>, forceMergeOption: boolean = true) {
+    if (forceMergeOption === false) {
+      const { options, ...rest } = config;
+      this.configProcess.updateConfig(rest, config, this._config);
+      this._config.options = options;
+      this.applyConfigToAttribute(config, this._config);
+    } else {
+      const diffConfig = this.diffConfig(config);
+      this.configProcess.updateConfig(diffConfig, config, this._config);
+      this.applyConfigToAttribute(diffConfig, this._config);
+    }
     this._setAttributes(this._attribute);
   }
 
@@ -123,9 +133,34 @@ export abstract class CharacterBase<T> implements ICharacter {
     });
   }
 
-  protected abstract applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void;
+  protected _initRuntime(): void {
+    const keyMap: Record<string, boolean> = {};
+    const themeRuntimeKeyList: string[] = [];
+    const tempKeyMap: Record<string, boolean> = {};
+    foreachAllConstructor(this, (constructor, _currentProto) => {
+      if (constructor && constructor.RuntimeMap) {
+        Object.assign(keyMap, constructor.RuntimeMap);
+      }
+      const runtimeList = ThemeManager.getAttribute(
+        [this.theme, this.story.theme],
+        `character.${constructor.type}.runtime.list`
+      );
+      if (isArray(runtimeList)) {
+        const tempList: string[] = [];
+        runtimeList.forEach(r => {
+          if (!tempKeyMap[r]) {
+            tempKeyMap[r] = true;
+            tempList.push(r);
+          }
+        });
+        themeRuntimeKeyList.splice(0, 0, ...tempList);
+      }
+    });
 
-  protected abstract _initRuntime(): void;
+    this._runtime = RuntimeStore.getList(keyMap, themeRuntimeKeyList);
+  }
+
+  protected abstract applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void;
   protected abstract _clearRuntime(): void;
   protected abstract _initGraphic(): void;
 

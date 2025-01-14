@@ -10,18 +10,14 @@ import { getLayoutFromWidget } from '../../utils/layout';
 import type { ITableCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
 import { TableConfigProcess } from './table-config-process';
 import type { ICharacterTable, IVTable } from './interface/character-table';
-import { CommonSpecRuntimeInstance } from './runtime/common-spec';
-import { CommonLayoutRuntimeInstance } from '../common/runtime/common-layout';
-import { TableTypeRuntimeInstance } from './runtime/table-type';
-import { CellStyleRuntimeInstance } from './runtime/cell-style';
-import { ColWidthRuntimeInstance } from './runtime/col-width';
-import { RowHeightRuntimeInstance } from './runtime/row-height';
 import { isArray } from '@visactor/vutils';
 
 export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>
   implements ICharacterTable
 {
+  static type = 'Table';
+
   visActorType: 'table' | 'component' | 'table' | 'common' = 'table';
   protected declare _graphic: VTableGraphic;
   protected declare _config: ITableCharacterConfig;
@@ -153,16 +149,6 @@ export class CharacterTable<T extends ITableGraphicAttribute>
     this._runtime.forEach(r => r.afterInitialize?.(this, this._graphic.vTable));
   }
 
-  protected _initRuntime(): void {
-    this._runtime.push(
-      CommonLayoutRuntimeInstance as any,
-      TableTypeRuntimeInstance,
-      CommonSpecRuntimeInstance,
-      CellStyleRuntimeInstance,
-      ColWidthRuntimeInstance,
-      RowHeightRuntimeInstance
-    );
-  }
   protected _clearRuntime(): void {
     this._runtime.length = 0;
   }

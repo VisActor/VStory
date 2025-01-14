@@ -5,7 +5,7 @@ import type { IChartCharacterConfig, ModelSelector } from '../../../interface/ds
 import { isIDSelector, isSpecIndexSelector } from '../../../utils/type';
 
 export class CommonSpecRuntime implements IChartCharacterRuntime {
-  type = 'CommonSpec';
+  type = 'ChartCommonSpec';
 
   applyConfigToAttribute(character: ICharacterChart): void {
     const rawAttribute = character.getRuntimeConfig().getAttribute();

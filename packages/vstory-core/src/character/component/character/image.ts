@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { ImageComponent } from '../graphic/ImageComponent';
 import type { IImageComponentAttributes } from '../interface/character-image';
-import { ImageRuntimeInstance } from '../runtime/image';
 
 export class ImageCharacter extends CharacterComponent<ImageComponent, IImageComponentAttributes> {
   static type = CharacterType.IMAGE;
@@ -13,11 +12,6 @@ export class ImageCharacter extends CharacterComponent<ImageComponent, IImageCom
   protected createAndAddGraphic(attribute: IImageComponentAttributes): void {
     this._graphic = new ImageComponent(attribute);
     this.canvas.addGraphic(this._graphic);
-  }
-
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(ImageRuntimeInstance);
   }
 
   protected getDefaultAttribute(): Partial<IImageComponentAttributes> {

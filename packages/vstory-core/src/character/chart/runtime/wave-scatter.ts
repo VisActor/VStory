@@ -4,7 +4,7 @@ import type { IChartCharacterRuntime } from '../interface/runtime';
 import type { ICharacterChart } from '../interface/character-chart';
 
 export class WaveAnimate extends ACustomAnimate<any> {
-  static label: string = 'wave-animate';
+  static label: string = 'WaveAnimate';
 
   declare valid: boolean;
 

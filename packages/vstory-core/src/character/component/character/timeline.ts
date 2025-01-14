@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { TimelineComponent } from '../graphic/TimelineComponent';
 import type { ITimelineComponentAttributes } from '../interface/character-timeline';
-import { TimelineRuntimeInstance } from '../runtime/timeline';
 
 export class TimelineCharacter extends CharacterComponent<TimelineComponent, ITimelineComponentAttributes> {
   static type = CharacterType.TIMELINE;
@@ -13,11 +12,6 @@ export class TimelineCharacter extends CharacterComponent<TimelineComponent, ITi
   protected createAndAddGraphic(attribute: ITimelineComponentAttributes): void {
     this._graphic = new TimelineComponent(attribute);
     this.canvas.addGraphic(this._graphic);
-  }
-
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(TimelineRuntimeInstance);
   }
 
   protected getDefaultAttribute(): Partial<ITimelineComponentAttributes> {

@@ -1,5 +1,5 @@
 import type { IComponentCharacterRuntime, ICharacterComponent } from '@visactor/vstory-core';
-import { BaseRuntime } from '@visactor/vstory-core';
+import { RuntimeStore } from '@visactor/vstory-core';
 // import loading1 from './lottie-files/loading1'
 import { loading1 } from './lottie-file/loading1';
 import { loading2 } from './lottie-file/loading2';
@@ -11,10 +11,9 @@ const builtinLottieMap: Record<string, any> = {
   loading3
 };
 
-export class LottieRuntime extends BaseRuntime implements IComponentCharacterRuntime {
+export class LottieRuntime implements IComponentCharacterRuntime {
   type = 'Lottie';
   applyConfigToAttribute(character: ICharacterComponent): void {
-    super.applyConfigToAttribute(character);
     const rawAttribute = character.getAttribute();
 
     const { data } = rawAttribute.graphic;
@@ -29,3 +28,4 @@ export class LottieRuntime extends BaseRuntime implements IComponentCharacterRun
 }
 
 export const LottieRuntimeInstance = new LottieRuntime();
+RuntimeStore.register(LottieRuntimeInstance);

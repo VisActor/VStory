@@ -42,7 +42,7 @@ export class TotalLabelRuntime implements IChartCharacterRuntime {
 
     const formatValue = ThemeManager.getAttribute(
       [character.theme, character.story.theme],
-      'character.VChart.runtime.formatValue'
+      'character.VChart.runtime.functions.formatValue'
     );
 
     if (spec.series) {

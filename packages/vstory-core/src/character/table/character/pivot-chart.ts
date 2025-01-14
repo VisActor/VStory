@@ -3,15 +3,18 @@ import type { IChartCharacterRuntime } from './../../chart/interface/runtime';
 import type { IVChart } from '@visactor/vchart';
 import { CharacterType } from '../../../constants/character';
 import type { IPivotChartCharacterConfig } from '../../../interface/dsl/table';
-import { CharacterTable } from '../character-table';
 import type { ITableGraphicAttribute } from '../graphic/vtable-graphic';
 import type { ICharacterChart } from '../../chart/interface/character-chart';
-import { CommonSpecRuntimeInstance } from '../../chart/runtime/common-spec';
-import { MarkStyleRuntimeInstance } from '../../chart/runtime/mark-style';
-import { LabelStyleRuntimeInstance } from '../../chart/runtime/label-style';
+import { ThemeManager } from '../../../theme/theme-manager';
+import { RuntimeStore } from '../../../store';
+import { CharacterTable } from '../character-table';
 
 export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> {
   static type = CharacterType.PIVOT_CHART;
+
+  static ChartRuntimeMap: Record<string, boolean> = {
+    CommonLayout: false
+  };
 
   protected declare _config: IPivotChartCharacterConfig;
 
@@ -152,6 +155,9 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
 
   protected _initRuntime(): void {
     super._initRuntime();
-    this._chartRuntime.push(CommonSpecRuntimeInstance, MarkStyleRuntimeInstance, LabelStyleRuntimeInstance);
+    const runtimeList = ThemeManager.getAttribute([this.theme, this.story.theme], `character.Chart.runtime.list`);
+    this._chartRuntime.push(
+      ...(RuntimeStore.getList(PivotChartCharacter.ChartRuntimeMap, runtimeList) as IChartCharacterRuntime[])
+    );
   }
 }

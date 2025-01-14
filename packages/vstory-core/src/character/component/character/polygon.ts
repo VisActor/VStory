@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { PolygonComponent } from '../graphic/PolygonComponent';
 import type { IPolygonComponentAttributes } from '../interface/character-polygon';
-import { PolygonRuntimeInstance } from '../runtime/polygon';
 
 export class PolygonCharacter extends CharacterComponent<PolygonComponent, IPolygonComponentAttributes> {
   static type = CharacterType.POLYGON;
@@ -15,10 +14,6 @@ export class PolygonCharacter extends CharacterComponent<PolygonComponent, IPoly
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(PolygonRuntimeInstance);
-  }
   show() {
     this._graphic.setAttribute('visibleAll', true);
   }

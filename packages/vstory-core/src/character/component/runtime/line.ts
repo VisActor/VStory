@@ -1,11 +1,9 @@
 import type { ICharacterComponent } from '../interface/character-component';
 import type { IComponentCharacterRuntime } from '../interface/runtime';
-import { BaseRuntime } from './base';
 
-export class LineRuntime extends BaseRuntime implements IComponentCharacterRuntime {
+export class LineRuntime implements IComponentCharacterRuntime {
   type = 'Line';
   applyConfigToAttribute(character: ICharacterComponent): void {
-    super.applyConfigToAttribute(character);
     const rawAttribute = character.getAttribute();
     const { width = 1, height = 1 } = rawAttribute;
     rawAttribute.graphic.points = rawAttribute.graphic.points ?? [

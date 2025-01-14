@@ -174,6 +174,9 @@ export class VChartGraphic extends Rect {
       super.setAttribute('x', value.x1);
       super.setAttribute('y', value.y1);
       this.updateVChartGraphicViewBox(value);
+    }
+    if (key === 'spec') {
+      this._vchart.updateSpecSync(value, false, {}, { reMake: true, change: true });
     } else {
       super.setAttribute(key, value);
     }
@@ -184,6 +187,9 @@ export class VChartGraphic extends Rect {
     if (attrs.viewBox) {
       this.attribute.viewBox = lastedViewBox;
       this.updateVChartGraphicViewBox(attrs.viewBox);
+    }
+    if (attrs.spec) {
+      this._vchart.updateSpecSync(attrs.spec, false, {}, { reMake: true, change: true });
     }
   }
 

@@ -117,8 +117,8 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
           }
           const markStyle = merge(
             {},
-            dataGroupStyle[StroyAllDataGroup][m.name].style ?? {},
-            dataGroupStyle[groupValue][m.name].style ?? {}
+            dataGroupStyle[StroyAllDataGroup]?.[m.name]?.style ?? {},
+            dataGroupStyle[groupValue]?.[m.name]?.style ?? {}
           );
           if (Object.keys(markStyle).length === 0) {
             return;

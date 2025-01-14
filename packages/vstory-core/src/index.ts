@@ -15,11 +15,19 @@ export * from './tools/global-ticker';
 export * from './character/component/character-component';
 export * from './character/component/graphic/BaseComponentWithText';
 export * from './character/chart';
+export * from './character/chart/utils/vchart-pick';
 export * from './interface/dsl/component';
+export * from './interface/dsl/chart';
+export * from './interface/dsl/common';
+export * from './interface/dsl/table';
 export * from './character/component/runtime/base';
 export * from './character/component/interface/runtime';
 export * from './character/component/interface/character-component';
 export * from './utils/factory';
+
+export * from './store';
+export * from './theme/theme-manager';
+export * from './theme/interface';
 
 export { VChart } from '@visactor/vchart';
 export * as VTable from '@visactor/vtable';

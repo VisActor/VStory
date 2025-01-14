@@ -2,7 +2,6 @@ import { registerRankingBarChart } from '@visactor/vchart-extension';
 import VChart from '@visactor/vchart';
 import { CharacterChart } from '../character-chart';
 import type { IChartGraphicAttribute } from '../graphic/vchart-graphic';
-import { RankingBarRuntimeInstance } from '../runtime/ranking-bar';
 
 export function registerRankingBarTemp() {
   registerRankingBarChart({ VChart });
@@ -10,11 +9,6 @@ export function registerRankingBarTemp() {
 
 export class RankingBarCharacter extends CharacterChart<IChartGraphicAttribute> {
   static type = 'RankingBar';
-
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(RankingBarRuntimeInstance);
-  }
 
   tickTo(t: number): void {
     // console.log(t);

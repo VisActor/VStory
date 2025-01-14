@@ -1,15 +1,13 @@
 import { CharacterChart } from '@visactor/vstory-core';
 import { DYNAMIC_LINE } from './constant';
 import type { IDynamicLineChartGraphicAttribute } from './dynamic-line-interface';
-import { DynamicLineRuntimeInstance } from './dynamic-line-runtime';
-
+import './dynamic-line-runtime';
 export class DynamicLineCharacter extends CharacterChart<IDynamicLineChartGraphicAttribute> {
   static type = DYNAMIC_LINE;
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(DynamicLineRuntimeInstance);
-  }
+  static RuntimeMap: { [key: string]: any } = {
+    [DYNAMIC_LINE]: true
+  };
 
   getDefaultAttribute(): Partial<IDynamicLineChartGraphicAttribute> {
     return {

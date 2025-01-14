@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { ArcComponent } from '../graphic/ArcComponent';
 import type { IArcComponentAttributes } from '../interface/character-arc';
-import { ArcRuntimeInstance } from '../runtime/arc';
 
 export class ArcCharacter extends CharacterComponent<ArcComponent, IArcComponentAttributes> {
   static type = CharacterType.ARC;
@@ -15,10 +14,6 @@ export class ArcCharacter extends CharacterComponent<ArcComponent, IArcComponent
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(ArcRuntimeInstance);
-  }
   show() {
     this._graphic.setAttribute('visibleAll', true);
   }

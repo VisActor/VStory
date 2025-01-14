@@ -90,10 +90,6 @@ export abstract class CharacterComponent<T extends IGraphic, T1>
 
   protected abstract createAndAddGraphic(attribute: T1): void;
 
-  protected _initRuntime(): void {
-    return;
-  }
-
   protected _clearRuntime(): void {
     this._runtime.length = 0;
   }
