@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { ShapeComponent } from '../graphic/ShapeComponent';
 import type { IShapeComponentAttributes } from '../interface/character-shape';
-import { ShapeRuntimeInstance } from '../runtime/shape';
 
 export class ShapeCharacter extends CharacterComponent<ShapeComponent, IShapeComponentAttributes> {
   static type = CharacterType.SHAPE;

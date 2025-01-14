@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { ArcComponent } from '../graphic/ArcComponent';
 import type { IArcComponentAttributes } from '../interface/character-arc';
-import { ArcRuntimeInstance } from '../runtime/arc';
 
 export class ArcCharacter extends CharacterComponent<ArcComponent, IArcComponentAttributes> {
   static type = CharacterType.ARC;

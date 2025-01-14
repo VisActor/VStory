@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { TimelineComponent } from '../graphic/TimelineComponent';
 import type { ITimelineComponentAttributes } from '../interface/character-timeline';
-import { TimelineRuntimeInstance } from '../runtime/timeline';
 
 export class TimelineCharacter extends CharacterComponent<TimelineComponent, ITimelineComponentAttributes> {
   static type = CharacterType.TIMELINE;

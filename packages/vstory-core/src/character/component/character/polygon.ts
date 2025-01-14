@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { PolygonComponent } from '../graphic/PolygonComponent';
 import type { IPolygonComponentAttributes } from '../interface/character-polygon';
-import { PolygonRuntimeInstance } from '../runtime/polygon';
 
 export class PolygonCharacter extends CharacterComponent<PolygonComponent, IPolygonComponentAttributes> {
   static type = CharacterType.POLYGON;
