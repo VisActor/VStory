@@ -8,6 +8,7 @@ interface ITableCharacterConfigOptionsType {
   columns: any;
   widthMode?: 'standard' | 'adaptive' | 'autoWidth';
   defaultRowHeight: number;
+  showHeader?: boolean;
   theme: any;
   // 数据源
   data?: any;
@@ -33,6 +34,46 @@ interface ITableCharacterConfigOptionsType {
   // 行高
   rowHeight?: {
     [key: number]: number;
+  };
+  // 列样式（包括列头）
+  colStyle?: {
+    [key: number]: {
+      col: number;
+      style: any;
+    };
+  };
+  // 行样式（包括行头）
+  rowStyle?: {
+    [key: number]: {
+      row: number;
+      style: any;
+    };
+  };
+  // 列隐藏
+  colVisible?: {
+    [key: number]: boolean;
+  };
+  // 行隐藏
+  rowVisible?: {
+    [key: number]: boolean;
+  };
+  // 内容列样式
+  contentColStyle?: {
+    [key: number]: {
+      col: number;
+      rowStart: number;
+      rowEnd: number;
+      style: any;
+    };
+  };
+  // 内容行样式
+  contentRowStyle?: {
+    [key: number]: {
+      row: number;
+      colStart: number;
+      colEnd: number;
+      style: any;
+    };
   };
 }
 

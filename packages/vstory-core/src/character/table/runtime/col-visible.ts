@@ -1,8 +1,8 @@
 import type { ITableCharacterRuntime } from '../interface/runtime';
 import type { ICharacterTable } from '../interface/character-table';
 
-export class RowHeightRuntime implements ITableCharacterRuntime {
-  type = 'RowHeight';
+export class ColVisibleRuntime implements ITableCharacterRuntime {
+  type = 'ColVisible';
 
   applyConfigToAttribute(character: ICharacterTable): void {
     // TODO: only handle list table for now
@@ -14,12 +14,14 @@ export class RowHeightRuntime implements ITableCharacterRuntime {
     const spec = character.getRuntimeConfig().getAttribute().spec;
     const options = character.getRuntimeConfig().config.options;
 
-    if (options.rowHeight && Object.keys(options.rowHeight).length > 0) {
-      spec.customComputeRowHeight = (args: { row: number }) => {
-        return options.rowHeight[args.row] ?? undefined;
-      };
+    if (options.colVisible && Object.keys(options.colVisible).length > 0) {
+      spec.columns = spec.columns.map((column: any, index: number) => {
+        const colVisible = options.colVisible[index];
+        const hide = colVisible === false;
+        return Object.assign({}, column, { hide });
+      });
     }
   }
 }
 
-export const RowHeightRuntimeInstance = new RowHeightRuntime();
+export const ColVisibleRuntimeInstance = new ColVisibleRuntime();

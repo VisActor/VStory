@@ -32,6 +32,14 @@ import { CellStyleRuntimeInstance } from '../character/table/runtime/cell-style'
 import { ColWidthRuntimeInstance } from '../character/table/runtime/col-width';
 import { RowHeightRuntimeInstance } from '../character/table/runtime/row-height';
 import { TableTypeRuntimeInstance } from '../character/table/runtime/table-type';
+import { TableThemeRuntimeInstance } from '../character/table/runtime/table-theme';
+import { ShowHeaderRuntimeInstance } from '../character/table/runtime/show-header';
+import { ColVisibleRuntimeInstance } from '../character/table/runtime/col-visible';
+import { RowVisibleRuntimeInstance } from '../character/table/runtime/row-visible';
+import { ColStyleRuntimeInstance } from '../character/table/runtime/col-style';
+import { RowStyleRuntimeInstance } from '../character/table/runtime/row-style';
+import { ContentColStyleRuntimeInstance } from '../character/table/runtime/content-col-style';
+import { ContentRowStyleRuntimeInstance } from '../character/table/runtime/content-row-style';
 
 let _register = false;
 export function registerCharacters() {
@@ -87,8 +95,16 @@ export function registerRuntime() {
 
   // 表格相关运行时
   RuntimeStore.register(TableCommonSpecRuntimeInstance);
-  RuntimeStore.register(CellStyleRuntimeInstance);
+  RuntimeStore.register(TableTypeRuntimeInstance);
+  RuntimeStore.register(TableThemeRuntimeInstance);
+  RuntimeStore.register(ShowHeaderRuntimeInstance);
   RuntimeStore.register(ColWidthRuntimeInstance);
   RuntimeStore.register(RowHeightRuntimeInstance);
-  RuntimeStore.register(TableTypeRuntimeInstance);
+  RuntimeStore.register(ColVisibleRuntimeInstance);
+  RuntimeStore.register(RowVisibleRuntimeInstance);
+  RuntimeStore.register(ColStyleRuntimeInstance);
+  RuntimeStore.register(RowStyleRuntimeInstance);
+  RuntimeStore.register(ContentColStyleRuntimeInstance);
+  RuntimeStore.register(ContentRowStyleRuntimeInstance);
+  RuntimeStore.register(CellStyleRuntimeInstance);
 }
