@@ -6,7 +6,7 @@ export class RowVisibleRuntime implements ITableCharacterRuntime {
 
   applyConfigToAttribute(character: ICharacterTable): void {
     // TODO: only handle list table for now
-    const tableType = character.getAttribute().tableType;
+    const tableType = character.getRuntimeConfig().getAttribute().tableType;
     if (tableType !== 'ListTable') {
       return;
     }

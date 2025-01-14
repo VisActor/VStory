@@ -8,7 +8,7 @@ export class TableThemeRuntime implements ITableCharacterRuntime {
   applyConfigToAttribute(character: ICharacterTable): void {
     const spec = character.getRuntimeConfig().getAttribute().spec;
     const options = character.getRuntimeConfig().config.options;
-    const tableType = character.getAttribute().tableType;
+    const tableType = character.getRuntimeConfig().getAttribute().tableType;
 
     if (!spec.theme) {
       spec.theme = {};
