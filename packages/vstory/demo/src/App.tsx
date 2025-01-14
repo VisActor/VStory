@@ -64,6 +64,7 @@ import { RectComponent } from './demos/component/rect';
 import { TableInfographic } from './demos/infographic/infographic-table';
 import { ComponentsEdit } from './demos/edit/components';
 import { ImageComponent } from './demos/component/image';
+import { ShapeComponent } from './demos/component/shape';
 
 type MenusType = (
   | {
@@ -246,6 +247,10 @@ const App = () => {
         {
           name: 'ImageComponent',
           component: ImageComponent
+        },
+        {
+          name: 'ShapeComponent',
+          component: ShapeComponent
         }
       ]
     },

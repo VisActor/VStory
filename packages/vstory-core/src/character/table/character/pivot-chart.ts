@@ -155,7 +155,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
 
   protected _initRuntime(): void {
     super._initRuntime();
-    const runtimeList = ThemeManager.getAttribute([this.theme, this.story.theme], `character.VChart.runtime.list`);
+    const runtimeList = ThemeManager.getAttribute([this.theme, this.story.theme], `character.Chart.runtime.list`);
     this._chartRuntime.push(
       ...(RuntimeStore.getList(PivotChartCharacter.ChartRuntimeMap, runtimeList) as IChartCharacterRuntime[])
     );

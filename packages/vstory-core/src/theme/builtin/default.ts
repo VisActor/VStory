@@ -91,7 +91,7 @@ export const DefaultTheme: {
       },
       Shape: {
         runtime: {
-          list: ['Shape']
+          list: ['BaseGraphic']
         }
       },
       Image: {
