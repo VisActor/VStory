@@ -37,17 +37,11 @@ interface ITableCharacterConfigOptionsType {
   };
   // 列样式（包括列头）
   colStyle?: {
-    [key: number]: {
-      col: number;
-      style: any;
-    };
+    [key: number]: any;
   };
   // 行样式（包括行头）
   rowStyle?: {
-    [key: number]: {
-      row: number;
-      style: any;
-    };
+    [key: number]: any;
   };
   // 列隐藏
   colVisible?: {
@@ -59,21 +53,11 @@ interface ITableCharacterConfigOptionsType {
   };
   // 内容列样式
   contentColStyle?: {
-    [key: number]: {
-      col: number;
-      rowStart: number;
-      rowEnd: number;
-      style: any;
-    };
+    [key: number]: any;
   };
   // 内容行样式
   contentRowStyle?: {
-    [key: number]: {
-      row: number;
-      colStart: number;
-      colEnd: number;
-      style: any;
-    };
+    [key: number]: any;
   };
 }
 

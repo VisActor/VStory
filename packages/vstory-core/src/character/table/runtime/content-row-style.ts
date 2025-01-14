@@ -12,27 +12,29 @@ export class ContentRowStyleRuntime implements ITableCharacterRuntime {
 
     if (options.contentRowStyle && Object.keys(options.contentRowStyle).length > 0) {
       Object.keys(options.contentRowStyle).forEach(key => {
-        const rowStyle = options.contentRowStyle[key as unknown as number];
+        const row = parseInt(key, 10);
+        const styleKey = `contentRowStyle-${row}`;
+        const rowStyle = options.contentRowStyle[row];
         if (!rowStyle) {
           return;
         }
         // 声明样式
-        vTable.registerCustomCellStyle(key, rowStyle.style);
+        vTable.registerCustomCellStyle(styleKey, rowStyle);
         // 匹配样式
         vTable.arrangeCustomCellStyle(
           {
             range: {
               start: {
-                row: rowStyle.row + colHeaderCount,
+                row: row + colHeaderCount,
                 col: rowHeaderCount
               },
               end: {
-                row: rowStyle.row + colHeaderCount,
+                row: row + colHeaderCount,
                 col: colCount - 1
               }
             }
           },
-          key
+          styleKey
         );
       });
     }
