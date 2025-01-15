@@ -84,10 +84,6 @@ export class ChartMarkerRuntime implements IChartCharacterRuntime {
       });
     }
   }
-
-  afterInitialize(character: ICharacterChart, vchart: IVChart) {
-    // 调整标注
-  }
 }
 
 export const ChartMarkerRuntimeInstance = new ChartMarkerRuntime();
