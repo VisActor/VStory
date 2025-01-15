@@ -69,6 +69,7 @@ import { ShowHeader } from './demos/table/runtime/show-header';
 import { TableTheme } from './demos/table/runtime/theme';
 import { TableStyle } from './demos/table/runtime/style';
 import { TableVisible } from './demos/table/runtime/visible';
+import { SpecMarker } from './demos/chart/runtime/spec-marker';
 
 type MenusType = (
   | {
@@ -354,6 +355,10 @@ const App = () => {
         {
           name: 'Total Label',
           component: RuntimeTotalLabel
+        },
+        {
+          name: 'Marker',
+          component: SpecMarker
         }
       ]
     },
