@@ -1,9 +1,9 @@
-import { isArray, isValid } from '@visactor/vutils';
+import { array, isArray, isString, isValid, merge } from '@visactor/vutils';
 import type { IChart } from '@visactor/vchart/esm/chart/interface';
 import type { ICartesianSeries, ISeries } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
-import { VCHART_DATA_INDEX, ValueLink, FieldLink } from './const';
-import type { IComponentMatch, IMarkStyle } from '../../../interface/dsl/chart';
+import { VCHART_DATA_INDEX, ValueLink, FieldLink, lineSymbolPathMap, LineSymbolType } from './const';
+import type { IChartCharacterConfig, IComponentMatch, IMarkStyle } from '../../../interface/dsl/chart';
 
 export function GetVChartSeriesWithMatch(vchart: IChart, seriesMatch: IComponentMatch & { type: string }) {
   if (!isValid(seriesMatch.specIndex) && seriesMatch.type) {
@@ -114,4 +114,64 @@ export function getMarkStyleId(markName: string, itemKeys: string[], itemKeyMap:
   return itemKeys.reduce((pre, cur) => {
     return pre + `${FieldLink}${cur}${ValueLink}${itemKeyMap[cur]}`;
   }, markName);
+}
+
+export function transformMarkerSymbolAttributeByKey(attr: any, key: string) {
+  if (attr[key]?.originSymbolType) {
+    attr[key].symbolType = lineSymbolPathMap[attr[key].originSymbolType as LineSymbolType];
+    attr[key].refX = 0;
+    const symbolStyle = attr[key].style ?? {};
+    const color =
+      symbolStyle.color ??
+      (isString(symbolStyle.fill) ? symbolStyle.fill : isString(symbolStyle.stroke) ? symbolStyle.stroke : '#000');
+    if (attr[key].originSymbolType === LineSymbolType.arrow) {
+      attr[key].style = merge({}, symbolStyle, {
+        fill: false,
+        stroke: color,
+        lineWidth: 1,
+        color
+      });
+      attr[key].symbolType = '<svg><path d="M -1 1 L 0 0 L 1 1"/></svg>';
+    } else if (
+      attr[key].originSymbolType === LineSymbolType.solidArrow ||
+      attr[key].originSymbolType === LineSymbolType.solidCircle
+    ) {
+      attr[key].style = merge({}, symbolStyle, {
+        fillOpacity: 1,
+        fill: color,
+        color,
+        lineWidth: 0
+      });
+    } else if (
+      attr[key].originSymbolType === LineSymbolType.hollowArrow ||
+      attr[key].originSymbolType === LineSymbolType.hollowCircle
+    ) {
+      attr[key].style = merge({}, symbolStyle, {
+        fillOpacity: 1,
+        fill: '#fff',
+        stroke: color,
+        color,
+        lineWidth: 1
+      });
+    }
+  }
+
+  return attr;
+}
+
+export function getChartType(options: IChartCharacterConfig['options']) {
+  const { chartType, spec = {} } = options;
+
+  if (chartType) {
+    return chartType;
+  }
+
+  if (spec.series && spec.series.length) {
+    // whether all series types are consistent.
+    const seriesTypes = spec.series.map((s: ISeries) => s.type);
+    if (seriesTypes.every((t: string) => t === seriesTypes[0])) {
+      return seriesTypes[0];
+    }
+  }
+  return spec.type ?? 'common';
 }

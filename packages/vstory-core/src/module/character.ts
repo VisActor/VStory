@@ -40,6 +40,7 @@ import { ColStyleRuntimeInstance } from '../character/table/runtime/col-style';
 import { RowStyleRuntimeInstance } from '../character/table/runtime/row-style';
 import { ContentColStyleRuntimeInstance } from '../character/table/runtime/content-col-style';
 import { ContentRowStyleRuntimeInstance } from '../character/table/runtime/content-row-style';
+import { ChartMarkerRuntimeInstance } from '../character/chart/runtime/marker';
 
 let _register = false;
 export function registerCharacters() {
@@ -83,6 +84,7 @@ export function registerRuntime() {
   RuntimeStore.register(MarkStyleRuntimeInstance);
   RuntimeStore.register(LabelStyleRuntimeInstance);
   RuntimeStore.register(TotalLabelRuntimeInstance);
+  RuntimeStore.register(ChartMarkerRuntimeInstance);
 
   // 图表相关运行时
   RuntimeStore.register(RankingBarRuntimeInstance);

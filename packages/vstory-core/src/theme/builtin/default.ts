@@ -35,7 +35,7 @@ export const DefaultTheme: {
       },
       Chart: {
         runtime: {
-          list: ['ChartCommonSpec', 'CommonLayout', 'MarkStyle', 'LabelStyle', 'TotalLabel'],
+          list: ['ChartCommonSpec', 'CommonLayout', 'MarkStyle', 'LabelStyle', 'TotalLabel', 'ChartMarker'],
           functions: {
             formatValue: formatValue
           }

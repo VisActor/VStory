@@ -90,3 +90,58 @@ export const SeriesMarkStyleMap: {
 
 export const FieldLink = '_filedLink_';
 export const ValueLink = '_valueLink_';
+
+export enum LineSymbolType {
+  none = 'none',
+  arrow = 'arrow',
+  solidArrow = 'solidArrow',
+  hollowArrow = 'hollowArrow',
+  solidCircle = 'solidCircle',
+  hollowCircle = 'hollowCircle'
+}
+
+export const lineSymbolPathMap = {
+  [LineSymbolType.none]: '',
+  [LineSymbolType.arrow]: 'M -1 1 L 0 0 L 1 1',
+  [LineSymbolType.solidArrow]: 'M -1 1.5 L 0 0 L 1 1.5 Z',
+  [LineSymbolType.hollowArrow]: 'M -1 1.5 L 0 0 L 1 1.5 Z',
+  [LineSymbolType.solidCircle]: 'M 1 0 A 1 1 0 1 1 -1 0 A 1 1 0 1 1 1 0',
+  [LineSymbolType.hollowCircle]: 'M 1 0 A 1 1 0 1 1 -1 0 A 1 1 0 1 1 1 0'
+};
+
+// 不支持标注的图表
+export const MARKER_NOT_SUPPORT_CHARTS = [
+  'pie',
+  'rose',
+  'radar',
+  'sequence',
+  'map',
+  'circularProgress',
+  'linearProgress',
+  'wordCloud',
+  'wordCloud3d',
+  'funnel',
+  'funnel3d',
+  'boxPlot',
+  'gauge',
+  'sankey',
+  'treemap',
+  'sunburst',
+  'circlePacking',
+  'heatmap',
+  'correlation'
+];
+
+export enum MarkerTypeEnum {
+  horizontalLine = 'h-line', // 水平值线
+  verticalLine = 'v-line', // 垂直值线
+  horizontalArea = 'h-area', // 水平区域标注
+  verticalArea = 'v-area', // 垂直区域标注
+  growthLine = 'growth-line', // 复合增长标注
+  totalDiffLine = 'total-diff-line', // 总计差异标注
+  hierarchyDiffLine = 'hierarchy-diff-line', // 层级差异标记
+  point = 'mark-point', // 点标注
+  trendLine = 'trend-line', // 趋势线
+  partitionLine = 'partition-line', // 分区标注线
+  partitionArea = 'partition-area' // 分区标注面
+}
