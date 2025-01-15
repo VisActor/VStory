@@ -1,5 +1,4 @@
 import type { ICharacter } from '../../../interface/character';
-import type { ICharacterConfig } from '../../../interface/dsl/dsl';
 export interface IComponentCharacterRuntime {
   readonly type: string;
   // 应用config到attribute
@@ -9,5 +8,3 @@ export interface IComponentCharacterRuntime {
 export interface IComponentCharacterRuntimeConstructor {
   new (): IComponentCharacterRuntime;
 }
-
-export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;

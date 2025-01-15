@@ -8,7 +8,7 @@ import type { ICharacterPickInfo, IStoryEvent } from '../interface/event';
 import type { IStory } from '../interface/story';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IConfigProcess } from './config-transform/interface';
-import type { IUpdateConfigParams } from './chart/interface/runtime';
+import type { IUpdateConfigParams } from './common/interface';
 import { getLayoutLine } from '../utils/layout';
 import { foreachAllConstructor } from '../utils/type';
 import { ThemeManager } from '../theme/theme-manager';

@@ -1,5 +1,4 @@
-import { ICharacter } from '../../interface/character';
-import type { IUpdateConfigParams } from '../chart/interface/runtime';
+import type { IUpdateConfigParams } from '../common/interface';
 
 export interface IConfigProcess {
   checkEnable: (diffConfig: IUpdateConfigParams, config: IUpdateConfigParams) => boolean;
