@@ -10,7 +10,22 @@ export const DefaultTheme: {
     character: {
       Table: {
         runtime: {
-          list: ['CommonLayout', 'TableType', 'TableCommonSpec', 'CellStyle', 'ColWidth', 'RowHeight']
+          list: [
+            'CommonLayout',
+            'TableType',
+            'TableCommonSpec',
+            'TableTheme',
+            'ShowHeader',
+            'ColWidth',
+            'RowHeight',
+            'ColVisible',
+            'RowVisible',
+            'ColStyle',
+            'RowStyle',
+            'ContentColStyle',
+            'ContentRowStyle',
+            'CellStyle'
+          ]
         }
       },
       PivotChart: {

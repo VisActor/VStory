@@ -65,6 +65,10 @@ import { TableInfographic } from './demos/infographic/infographic-table';
 import { ComponentsEdit } from './demos/edit/components';
 import { ImageComponent } from './demos/component/image';
 import { ShapeComponent } from './demos/component/shape';
+import { ShowHeader } from './demos/table/runtime/show-header';
+import { TableTheme } from './demos/table/runtime/theme';
+import { TableStyle } from './demos/table/runtime/style';
+import { TableVisible } from './demos/table/runtime/visible';
 
 type MenusType = (
   | {
@@ -375,6 +379,22 @@ const App = () => {
         {
           name: 'Pivot Chart Base',
           component: PivotChartBase
+        },
+        {
+          name: 'Show Header',
+          component: ShowHeader
+        },
+        {
+          name: 'Theme',
+          component: TableTheme
+        },
+        {
+          name: 'Style',
+          component: TableStyle
+        },
+        {
+          name: 'Visible',
+          component: TableVisible
         }
       ]
     }
