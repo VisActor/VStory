@@ -28,6 +28,7 @@ export * from './utils/factory';
 export * from './store';
 export * from './theme/theme-manager';
 export * from './theme/interface';
+export * from './theme/builtin/default';
 
 export { VChart } from '@visactor/vchart';
 export * as VTable from '@visactor/vtable';
