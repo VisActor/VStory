@@ -59,7 +59,7 @@ export interface IEditSelection {
   // 是否 开始/继续 编辑 返回false的话，会导致当前编辑结束
   checkAction: (actionInfo: IEditActionInfo | IEditSelectionInfo) => boolean;
 
-  checkOver?: (actionInfo: IEditActionInfo | IEditSelectionInfo) => void;
+  checkOver: (actionInfo: IEditActionInfo | IEditSelectionInfo) => void;
 
   // 编辑开始
   startEdit: (actionInfo: IEditActionInfo | IEditSelectionInfo, emitEvent?: boolean) => void;
