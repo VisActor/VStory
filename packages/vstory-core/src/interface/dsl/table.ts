@@ -1,20 +1,26 @@
+import type { IInitOption } from '@visactor/vchart';
 import type { IChartCharacterConfig } from './chart';
 import type { ICharacterConfigBase } from './dsl';
 
 interface ITableCharacterConfigOptionsType {
   // 表格spec
   spec?: any;
-  records: any;
-  columns: any;
+  records?: any;
+  columns?: any;
   widthMode?: 'standard' | 'adaptive' | 'autoWidth';
   defaultRowHeight: number;
   showHeader?: boolean;
-  theme: any;
+  theme?: any;
   // 数据源
   data?: any;
 
   panel?: any;
   padding?: number | [number, number] | [number, number, number, number];
+
+  /**
+   * 当表格内嵌图表时，可以传入图表的初始化参数
+   */
+  chartOption?: IInitOption;
 
   // 单个单元格样式，框选也会应用到这里
   // 使用 map 不用数组的原因。减少写入是的反复遍历

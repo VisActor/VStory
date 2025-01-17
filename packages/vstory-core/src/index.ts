@@ -40,6 +40,7 @@ export * from './theme/builtin/default';
 
 export * from './store';
 export * from './utils/factory';
+export * from './utils/index';
 export * from './core/processorRegistry';
 export * from './tools/global-ticker';
 

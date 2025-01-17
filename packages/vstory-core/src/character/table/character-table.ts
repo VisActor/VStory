@@ -12,6 +12,7 @@ import { TableConfigProcess } from './table-config-process';
 import type { ICharacterTable, IVTable } from './interface/character-table';
 import { isArray } from '@visactor/vutils';
 import type { IUpdateConfigParams } from '../common/interface';
+import { mergeChartOption } from '../../utils/chart';
 
 export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>
@@ -181,11 +182,14 @@ export class CharacterTable<T extends ITableGraphicAttribute>
       panel: {},
       ticker: this._ticker,
       zIndex: this._config.zIndex ?? 0,
-      chartOption: {
-        disableTriggerEvent: true,
-        disableDirtyBounds: true,
-        mode: 'desktop-browser'
-      }
+      chartOption: mergeChartOption(
+        {
+          disableTriggerEvent: true,
+          disableDirtyBounds: true,
+          mode: 'desktop-browser'
+        },
+        this._config.options.chartOption ?? {}
+      )
     };
   }
 
