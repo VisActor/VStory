@@ -16,17 +16,10 @@ export interface ILayoutAttribute {
 }
 
 export function getLayoutFromWidget(w: Partial<IWidgetData> | IRect, character: ICharacter): Partial<ILayoutAttribute> {
-  let x = 'x' in w ? w.x : w.left;
-  let y = 'y' in w ? w.y : w.top;
-  let width = (w as any).width;
-  let height = (w as any).height;
-
-  if ('x1' in w && 'x2' in w && 'y1' in w && 'y2' in w) {
-    x = w.x1;
-    y = w.y1;
-    width = w.x2 - w.x1;
-    height = w.y2 - w.y1;
-  }
+  const x = 'x' in w ? w.x : 'left' in w ? w.left : 'x1' in w ? w.x1 : 0;
+  const y = 'y' in w ? w.y : 'top' in w ? w.top : 'y1' in w ? w.y1 : 0;
+  let width = 'width' in w ? w.width : 'x2' in w ? w.x2 - w.x1 : 0;
+  let height = 'height' in w ? w.height : 'y2' in w ? w.y2 - w.y1 : 0;
 
   const stage = character.canvas.getStage();
   if (!Number.isFinite(width)) {
@@ -35,8 +28,6 @@ export function getLayoutFromWidget(w: Partial<IWidgetData> | IRect, character: 
   if (!Number.isFinite(height)) {
     height = stage.height - y - ((w as any).bottom ?? 0);
   }
-  // const width = 'width' in w ? w.width : <number>(w as any).right - <number>w.left;
-  // const height = 'height' in w ? w.height : <number>(w as any).bottom - <number>w.top;
 
   return {
     x,
