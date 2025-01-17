@@ -4,11 +4,13 @@ import type { ICharacterConfig, IStoryDSL } from '../interface/dsl/dsl';
 import { StoryCanvas } from './canvas';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IAABBBoundsLike } from '@visactor/vutils';
-import { isString } from '@visactor/vutils';
+import { EventEmitter, isString } from '@visactor/vutils';
 import type { ICharacter } from '../interface/character';
 import type { IPlayer } from '../interface/player';
 import type { ICharacterTree } from '../interface/character-tree';
 import { CharacterTree } from './character-tree';
+import type { IPluginService } from '../interface/plugin-service';
+import { DefaultPluginService } from './plugin-service';
 
 type NodeCanvas = any;
 
@@ -27,13 +29,14 @@ export interface IStoryInitOption {
   theme?: string;
 }
 
-export class Story implements IStory {
+export class Story extends EventEmitter implements IStory {
   readonly id: string;
   protected _canvas: IStoryCanvas;
   protected _dsl: IStoryDSL | null;
   protected _player: IPlayer;
   protected _characterTree: ICharacterTree;
   protected _theme: string;
+  pluginService: IPluginService;
 
   get canvas(): IStoryCanvas {
     return this._canvas;
@@ -48,6 +51,7 @@ export class Story implements IStory {
   }
 
   constructor(dsl: IStoryDSL | null, option: IStoryInitOption) {
+    super();
     this.id = `test-mvp_${Generator.GenAutoIncrementId()}`;
     const {
       dom,
@@ -80,6 +84,10 @@ export class Story implements IStory {
     this._characterTree = new CharacterTree(this);
     this._dsl = dsl;
     this._theme = theme;
+    this.pluginService = new DefaultPluginService();
+    this.pluginService.active(this, {
+      pluginList: []
+    });
   }
 
   init(player: IPlayer) {

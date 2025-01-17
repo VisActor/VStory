@@ -4,12 +4,15 @@ export * from './module/graphic';
 export * from './module/character';
 
 export * from './constants/character';
+export * from './constants/events';
 
 export * from './interface/action-processor';
 export * from './interface/dsl/dsl';
 export * from './interface/character';
 export * from './interface/story';
 export * from './interface/event';
+export * from './interface/plugin-service';
+export * from './interface/releaseable';
 export * from './core/processorRegistry';
 export * from './tools/global-ticker';
 export * from './character/component/character-component';

@@ -1,3 +1,4 @@
+import type { EventEmitter } from '@visactor/vutils';
 import type { IStoryCanvas } from './canvas';
 import type { ICharacter } from './character';
 import type { IActionSpec, ICharacterConfig, IStoryDSL } from './dsl/dsl';
@@ -9,7 +10,7 @@ export type IActionParams = {
   sceneId: string;
 };
 
-export interface IStory extends IReleaseable {
+export interface IStory extends IReleaseable, EventEmitter {
   readonly id: string;
   readonly canvas: IStoryCanvas;
   readonly player: IPlayer;

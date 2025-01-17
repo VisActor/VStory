@@ -1,6 +1,6 @@
 import type { IGraphic } from '@visactor/vrender-core';
 import { IGroup } from '@visactor/vrender-core';
-import type { ICharacterConfig } from './dsl/dsl';
+import type { ICharacterConfig, IUpdateConfigParams } from './dsl/dsl';
 import type { ICharacterPickInfo, IStoryEvent } from './event';
 import type { IReleaseable } from './releaseable';
 import type { IStory } from './story';
@@ -17,6 +17,10 @@ export interface ILayoutLine {
   bounds: IAABBBounds;
 }
 
+export enum SetConfigMode {
+  default = 0,
+  animate = 1
+}
 export interface ICharacter extends IReleaseable {
   id: string;
   type: string;
@@ -47,7 +51,8 @@ export interface ICharacter extends IReleaseable {
   checkEvent: (event: IStoryEvent) => false | (ICharacterPickInfo & any);
 
   toDSL: () => ICharacterConfig;
-  setConfig: (config: Partial<ICharacterConfig>) => void;
+  setConfig: (config: Partial<ICharacterConfig>, params?: { forceMergeOption?: boolean; mode?: SetConfigMode }) => void;
+  diffConfig: (config: IUpdateConfigParams) => IUpdateConfigParams;
 
   getAttribute: () => any;
 

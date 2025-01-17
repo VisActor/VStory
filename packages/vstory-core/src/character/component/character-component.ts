@@ -1,8 +1,8 @@
 import type { IGraphic } from '@visactor/vrender-core';
 import { CharacterBase } from '../character-base';
 import type { IComponentCharacterConfig } from '../../interface/dsl/component';
-import type { IComponentCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
-import type { ICharacterInitOption } from '../../interface/dsl/dsl';
+import type { IComponentCharacterRuntime } from './interface/runtime';
+import type { ICharacterInitOption, IUpdateConfigParams } from '../../interface/dsl/dsl';
 import { ComponentConfigProcess } from './component-config-process';
 import type { ICharacterComponent } from './interface/character-component';
 import type { IStoryEvent, ICharacterPickInfo } from '../../interface/event';

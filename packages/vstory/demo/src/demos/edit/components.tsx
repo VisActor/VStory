@@ -1,6 +1,6 @@
 import React, { createRef, useEffect } from 'react';
 import { Player, Story } from '../../../../../vstory-core/src';
-import { registerAllSelection } from '../../../../../vstory-editor/src';
+import { registerAllSelection, SnapshotPlugin } from '../../../../../vstory-editor/src';
 import { Edit, registerAll } from '../../../../src';
 
 registerAll();
@@ -102,6 +102,8 @@ export const ComponentsEdit = () => {
     edit.on('resize', msg => {
       // console.log('resize', msg);
     });
+
+    story.pluginService.register(new SnapshotPlugin());
 
     return () => {
       story.release();
