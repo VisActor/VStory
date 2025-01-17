@@ -26,32 +26,32 @@ export const ComponentsEdit = () => {
     const player = new Player(story);
     story.init(player);
 
-    story.addCharacterWithAppear({
-      type: 'Shape',
-      id: 'star',
-      zIndex: 10,
-      position: {
-        top: 100,
-        left: 100,
-        width: 80,
-        height: 60
-      },
-      options: {
-        graphic: {
-          stroke: false,
-          fill: 'pink',
-          symbolType: 'star'
-          // size: 100
-        }
-      }
-    });
+    // story.addCharacterWithAppear({
+    //   type: 'Shape',
+    //   id: 'star',
+    //   zIndex: 10,
+    //   position: {
+    //     top: 100,
+    //     left: 100,
+    //     width: 80,
+    //     height: 60
+    //   },
+    //   options: {
+    //     graphic: {
+    //       stroke: false,
+    //       fill: 'pink',
+    //       symbolType: 'star'
+    //       // size: 100
+    //     }
+    //   }
+    // });
     story.addCharacterWithAppear({
       type: 'Image',
       id: 'image',
       zIndex: 10,
       position: {
-        top: 100,
-        left: 300,
+        top: 300,
+        left: 200,
         width: 80,
         height: 60
       },
@@ -70,8 +70,8 @@ export const ComponentsEdit = () => {
       position: {
         top: 100,
         left: 100,
-        width: 200,
-        height: 200
+        width: 60,
+        height: 60
       },
       options: {
         graphic: {

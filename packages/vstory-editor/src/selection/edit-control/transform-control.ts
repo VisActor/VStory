@@ -14,7 +14,7 @@ import type {
 } from '@visactor/vrender';
 import { createLine, createRect } from '@visactor/vrender';
 import type { IAABBBounds, IAABBBoundsLike, IPointLike } from '@visactor/vutils';
-import { AABBBounds, abs, merge, normalizeAngle, normalizePadding, pi } from '@visactor/vutils';
+import { AABBBounds, abs, Matrix, merge, normalizeAngle, normalizePadding, pi } from '@visactor/vutils';
 import { AbstractComponent } from '@visactor/vrender-components';
 import { DRAG_ANCHOR_COLOR, SHAPE_SELECT_COLOR, MinSize } from './constants';
 import { DragComponent } from './transform-drag';
@@ -22,6 +22,8 @@ import { transformDeltaWithStage, transformPointWithStage } from '../../utils/tr
 import type { IEditSelection, VRenderPointerEvent } from '../../interface';
 import { min } from '@visactor/vchart/esm/util';
 import type { ILayoutLine } from '@visactor/vstory-core';
+
+const i = 0;
 
 const tempRect = createRect({});
 
@@ -744,7 +746,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     angle = normalizeAngle(angle);
     for (const fixedAngle of fixedAngles) {
       if (angle >= fixedAngle - maxAngleDifference && angle <= fixedAngle + maxAngleDifference) {
-        return fixedAngle;
+        return normalizeAngle(fixedAngle);
       }
     }
     return angle;
@@ -912,7 +914,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
 
   protected _checkSnap(x: number, y: number, width: number, height: number) {
     const { x: _x, y: _y, width: _width, height: _height } = this.rect.attribute;
-    // 如果没变化，就不做处理
+    // 计算出这次的diff
     const diff = {
       x: x - _x,
       y: y - _y,
@@ -923,7 +925,17 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     if (diff.x === 0 && diff.y === 0 && diff.width === 0 && diff.height === 0) {
       return out;
     }
-    // 计算出一个实际的bounds
+    const { activeCharacter } = this.editSelection;
+    if (!activeCharacter) {
+      return out;
+    }
+    // 如果有旋转的情况下resize宽高，那么不做处理直接返回
+    const { angle } = this.attribute;
+    if (angle && (diff.width || diff.height)) {
+      return out;
+    }
+    const lines = this.editSelection.edit.getLayoutLineInLayer([activeCharacter.id]);
+    // 计算出一个实际的bounds，_actualSnapBounds不受吸附影响，永远记录真实拖动的位置
     if (!this._actualSnapBounds) {
       this._actualSnapBounds = new AABBBounds().setValue(x, y, x + width, y + height);
     } else {
@@ -932,28 +944,64 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       this._actualSnapBounds.x2 += diff.x + diff.width;
       this._actualSnapBounds.y2 += diff.y + diff.height;
     }
-    // 否则，检测是否需要吸附
-    const { activeCharacter } = this.editSelection;
+
+    let actualSnapBounds = this._actualSnapBounds;
+    // 有旋转的话，需要计算出旋转后的bounds
+    if (angle) {
+      tempRect.setAttributes({
+        dx: actualSnapBounds.x1,
+        dy: actualSnapBounds.y1,
+        width,
+        height,
+        fill: 'transparent',
+        angle: angle,
+        anchor: [width / 2, height / 2]
+      });
+      actualSnapBounds = tempRect.AABBBounds.clone();
+      tempRect.setAttributes({
+        dx: out.x,
+        dy: out.y,
+        width: out.width,
+        height: out.height,
+        fill: 'transparent',
+        angle: angle,
+        anchor: [width / 2, height / 2]
+      });
+      out.x = tempRect.AABBBounds.x1;
+      out.y = tempRect.AABBBounds.y1;
+      out.width = tempRect.AABBBounds.width();
+      out.height = tempRect.AABBBounds.height();
+
+      const _out_backup = { ...out };
+      this._snapLineWithAngle(lines, actualSnapBounds, out);
+
+      const dx = _out_backup.x - out.x;
+      const dy = _out_backup.y - out.y;
+      // console.log(dy);
+      out.x = x - dx;
+      out.y = y - dy;
+      out.width = width;
+      out.height = height;
+      return out;
+    }
+
     let _snappedX = false;
     let _snappedY = false;
-    if (activeCharacter) {
-      const lines = this.editSelection.edit.getLayoutLineInLayer([activeCharacter.id]);
-      const lineX = lines.filter(item => item.orient === 'x');
-      const lineY = lines.filter(item => item.orient === 'y');
-      _snappedX = this._snapLine('x', lineX, this._actualSnapBounds, diff, out, diff.width !== 0);
-      _snappedY = this._snapLine('y', lineY, this._actualSnapBounds, diff, out, diff.height !== 0);
-    }
+    const lineX = lines.filter(item => item.orient === 'x');
+    const lineY = lines.filter(item => item.orient === 'y');
+    _snappedX = this._snapLine('x', lineX, actualSnapBounds, out, diff.width !== 0);
+    _snappedY = this._snapLine('y', lineY, actualSnapBounds, out, diff.height !== 0);
 
     // 从吸附到未吸附，将实际的bounds重置回去
     // TODO x和y都分两边，如果有一边已经吸附，那就不生效
     if (!_snappedX) {
-      out.x = this._actualSnapBounds.x1;
-      out.width = this._actualSnapBounds.width();
+      out.x = actualSnapBounds.x1;
+      out.width = actualSnapBounds.width();
     }
     // 从吸附到未吸附，将实际的bounds重置回去
     if (!_snappedY) {
-      out.y = this._actualSnapBounds.y1;
-      out.height = this._actualSnapBounds.height();
+      out.y = actualSnapBounds.y1;
+      out.height = actualSnapBounds.height();
     }
     // 如果没有吸附，就重置回去
     if (!(_snappedX || _snappedY)) {
@@ -963,14 +1011,15 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     return out;
   }
 
-  _snapLine(
-    orient: 'x' | 'y',
-    lines: ILayoutLine[],
-    bounds: IAABBBounds,
-    diff: IXYWH,
-    out: IXYWH,
-    resize: boolean
-  ): boolean {
+  _snapLineWithAngle(lines: ILayoutLine[], bounds: IAABBBounds, out: IXYWH) {
+    const lineX = lines.filter(item => item.orient === 'x');
+    const lineY = lines.filter(item => item.orient === 'y');
+    this._snapLine('x', lineX, bounds, out, false);
+    this._snapLine('y', lineY, bounds, out, false);
+    return out;
+  }
+
+  _snapLine(orient: 'x' | 'y', lines: ILayoutLine[], bounds: IAABBBounds, out: IXYWH, resize: boolean): boolean {
     // 重置snapLine
     [
       `_snapLine${orient.toUpperCase()}1`,
@@ -1016,41 +1065,13 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       }
       (this as any)[`_snapLine${orient.toUpperCase()}${min.idx}`].setAttributes({
         visible: true,
+        angle: -this.attribute.angle,
+        anchor: this.attribute.anchor,
         points: [
           { [orient]: line.value, [otherOrient]: otherOrientMin },
           { [orient]: line.value, [otherOrient]: otherOrientMax }
         ] as any
       });
-
-      // if (abs(d1) < abs(d2)) { // 要改x1/y1
-      //   outBounds[`${orient}1`] = line.value;
-      //   // 如果不是resize，就不改变宽度/高度
-      //   if (!resize) {
-      //     outBounds[`${orient}2`] = outBounds[`${orient}1`] + out[orient === 'x' ? 'width' : 'height'];
-      //   }
-      //   // 添加辅助线
-      //   (this as any)[`_snapLine${orient.toUpperCase()}1`].setAttributes({
-      //     visible: true,
-      //     points: [
-      //       { [orient]: line.value, [otherOrient]: otherOrientMin },
-      //       { [orient]: line.value, [otherOrient]: otherOrientMax }
-      //     ] as any
-      //   });
-      // } else { // 要改x2/y2
-      //   outBounds[`${orient}2`] = line.value;
-      //   // 如果不是resize，就不改变宽度/高度
-      //   if (!resize) {
-      //     outBounds[`${orient}1`] = outBounds[`${orient}2`] - out[orient === 'x' ? 'width' : 'height'];
-      //   }
-      //   // 添加辅助线
-      //   (this as any)[`_snapLine${orient.toUpperCase()}2`].setAttributes({
-      //     visible: true,
-      //     points: [
-      //       { [orient]: line.value, [otherOrient]: otherOrientMin },
-      //       { [orient]: line.value, [otherOrient]: otherOrientMax }
-      //     ] as any
-      //   });
-      // }
     });
     out.x = outBounds.x1;
     out.y = outBounds.y1;
