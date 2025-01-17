@@ -15,5 +15,3 @@ export interface ITableCharacterRuntime {
 export interface ITableCharacterRuntimeConstructor {
   new (): ITableCharacterRuntime;
 }
-
-export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;

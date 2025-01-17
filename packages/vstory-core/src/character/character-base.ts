@@ -2,17 +2,17 @@ import type { ICharacterRuntimeConfig, ILayoutLine } from './../interface/charac
 import type { IGraphic } from '@visactor/vrender-core';
 import { Generator } from '@visactor/vrender-core';
 import type { ICharacter } from '../interface/character';
-import type { ICharacterConfig, ICharacterInitOption } from '../interface/dsl/dsl';
+import type { ICharacterConfig, ICharacterInitOption, IUpdateConfigParams } from '../interface/dsl/dsl';
 import { cloneDeep, isArray } from '@visactor/vutils';
 import type { ICharacterPickInfo, IStoryEvent } from '../interface/event';
 import type { IStory } from '../interface/story';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IConfigProcess } from './config-transform/interface';
-import type { IUpdateConfigParams } from './chart/interface/runtime';
 import { getLayoutLine } from '../utils/layout';
 import { foreachAllConstructor } from '../utils/type';
 import { ThemeManager } from '../theme/theme-manager';
 import { RuntimeStore } from '../store';
+import { Events } from '../constants/events';
 
 export abstract class CharacterBase<T> implements ICharacter {
   readonly id: string;
@@ -56,8 +56,16 @@ export abstract class CharacterBase<T> implements ICharacter {
     this._canvas = option.canvas;
   }
 
-  setConfig(config: Partial<IUpdateConfigParams>, forceMergeOption: boolean = true) {
-    if (forceMergeOption === false) {
+  setConfig(
+    config: Partial<IUpdateConfigParams>,
+    params: {
+      forceMergeOption?: boolean;
+      mode?: number;
+    } = {}
+  ) {
+    const { forceMergeOption = true } = params;
+    this.story.emit(Events.BEFORE_SET_CONFIG, { config, character: this, params });
+    if (!forceMergeOption) {
       const { options, ...rest } = config;
       this.configProcess.updateConfig(rest, config, this._config);
       this._config.options = options;
@@ -68,6 +76,7 @@ export abstract class CharacterBase<T> implements ICharacter {
       this.applyConfigToAttribute(diffConfig, this._config);
     }
     this._setAttributes(this._attribute);
+    this.story.emit(Events.AFTER_SET_CONFIG, { config, character: this, params });
   }
 
   init(): void {
@@ -102,7 +111,7 @@ export abstract class CharacterBase<T> implements ICharacter {
     this.init();
   }
 
-  protected diffConfig(config: IUpdateConfigParams): IUpdateConfigParams {
+  diffConfig(config: IUpdateConfigParams): IUpdateConfigParams {
     return config;
   }
 

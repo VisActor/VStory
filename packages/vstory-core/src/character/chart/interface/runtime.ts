@@ -16,5 +16,3 @@ export interface IChartCharacterRuntime {
 export interface IChartCharacterRuntimeConstructor {
   new (): IChartCharacterRuntime;
 }
-
-export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;

@@ -87,6 +87,8 @@ export type ICharacterConfig =
   | ITableCharacterConfig
   | IPivotChartCharacterConfig;
 
+export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;
+
 export interface ICharacterInitOption {
   story: IStory;
   canvas: IStoryCanvas;
