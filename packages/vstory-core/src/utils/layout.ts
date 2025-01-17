@@ -21,11 +21,11 @@ export function getLayoutFromWidget(w: Partial<IWidgetData> | IRect, character: 
   let width = (w as any).width;
   let height = (w as any).height;
   const stage = character.canvas.getStage();
-  if (!Number.isFinite(width)) {
-    width = stage.width - x - ((w as any).right ?? 0);
+  if (!isFinite(width) && isFinite((w as any).right)) {
+    width = stage.width - x - (w as any).right;
   }
-  if (!Number.isFinite(height)) {
-    height = stage.height - y - ((w as any).bottom ?? 0);
+  if (!isFinite(height) && isFinite((w as any).bottom)) {
+    height = stage.height - y - (w as any).bottom;
   }
   // const width = 'width' in w ? w.width : <number>(w as any).right - <number>w.left;
   // const height = 'height' in w ? w.height : <number>(w as any).bottom - <number>w.top;

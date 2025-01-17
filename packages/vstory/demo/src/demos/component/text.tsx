@@ -15,8 +15,9 @@ export const TextComponent = () => {
     const player = new Player(story);
     story.init(player);
 
-    ['这是普通的一大段内容', '这是Blur的一大段内容', '这是缩放的一大段内容', '这是FadeUp的一大段内容'].forEach(
-      (text, index) => {
+    ['这是普通的一大段内容', '这是Blur的一大段内容', '这是缩放的一大段内容', '这是FadeUp的一大段内容']
+      .slice(0, 1)
+      .forEach((text, index) => {
         story.addCharacter(
           {
             type: 'Text',
@@ -33,6 +34,9 @@ export const TextComponent = () => {
                 fontSize: 36,
                 fontWeight: 'bold',
                 fill: 'red'
+              },
+              panel: {
+                fill: 'blue'
               }
             }
           },
@@ -74,8 +78,7 @@ export const TextComponent = () => {
             ]
           }
         );
-      }
-    );
+      });
 
     player.play(-1);
 
