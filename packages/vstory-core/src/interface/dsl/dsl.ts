@@ -1,3 +1,4 @@
+import type { IBoundsLike } from '@visactor/vutils';
 import type { IRichTextGraphicAttribute, ITextGraphicAttribute } from '@visactor/vrender-core';
 import type { EasingType } from '@visactor/vrender-core';
 import type { IChartCharacterConfig } from './chart';
@@ -33,21 +34,25 @@ export interface IActionPayload {
 export type IActionSpec = IAction<IActionPayload>;
 
 export type IWidgetData = {
-  left?: number;
-  top?: number;
-  x?: number;
-  y?: number;
   angle?: number;
   anchor?: [number, number];
 } & (
-  | {
-      bottom?: number;
-      right?: number;
-    }
-  | {
-      width?: number;
-      height?: number;
-    }
+  | ({
+      left?: number;
+      top?: number;
+      x?: number;
+      y?: number;
+    } & (
+      | {
+          bottom?: number;
+          right?: number;
+        }
+      | {
+          width?: number;
+          height?: number;
+        }
+    ))
+  | IBoundsLike
 );
 
 export interface IActSpec {
