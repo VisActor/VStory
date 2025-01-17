@@ -93,4 +93,10 @@ export class CharacterTree implements ICharacterTree {
       return this._characters[k].toDSL();
     });
   }
+
+  release() {
+    this.releaseCurrentCharacters();
+    this._characters = {};
+    this._story = null;
+  }
 }

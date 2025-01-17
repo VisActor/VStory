@@ -357,45 +357,6 @@ function loadDSL() {
     ],
     labelLayout: 'region'
   };
-  const barSpec1 = {
-    type: 'bar',
-    data: [
-      {
-        values: [
-          { type: 'Category One', min: 76, max: 100, range: 'A', type2: 'p', color: 'A_p' },
-          { type: 'Category Two', min: 56, max: 108, range: 'A', type2: 'p', color: 'A_p' },
-          { type: 'Category One', min: 56, max: 100, range: 'B', type2: 'p', color: 'B_p' },
-          { type: 'Category Two', min: 36, max: 108, range: 'B', type2: 'p', color: 'B_p' },
-
-          { type: 'Category One', min: 76, max: 100, range: 'A', type2: 'k', color: 'A_k' },
-          { type: 'Category Two', min: 56, max: 108, range: 'A', type2: 'k', color: 'A_k' },
-          { type: 'Category One', min: 56, max: 100, range: 'B', type2: 'k', color: 'B_k' },
-          { type: 'Category Two', min: 36, max: 108, range: 'B', type2: 'k', color: 'B_k' }
-        ]
-      }
-    ],
-    xField: ['type', 'range', 'type2'],
-    yField: 'min',
-    seriesField: 'color',
-    paddingInner: [0.6, 0.6, 0.6],
-    bandPadding: [0.6, 0.6, 0.6],
-    label: {
-      position: 'bothEnd'
-    },
-    axes: [
-      {
-        orient: 'bottom',
-        showAllGroupLayers: true,
-        sampling: false,
-        tick: {
-          tickCount: 2
-        }
-      }
-    ],
-    legends: {
-      visible: true
-    }
-  };
   const dsl: IStoryDSL = {
     characters: [
       {
@@ -419,7 +380,7 @@ function loadDSL() {
           dataGroupStyle: {
             [StroyAllDataGroup]: {
               label: {
-                // visible: true,
+                visible: true,
                 formatConfig: {
                   prefix: 'asd'
                 },
@@ -430,27 +391,36 @@ function loadDSL() {
                 }
               }
             },
-            a: {
+            c: {
+              seriesFieldMatch: {
+                value: 'a',
+                scaleIndex: 1
+              },
               label: {
                 visible: true,
                 formatConfig: {
                   dataType: 'digit',
                   content: ['value', 'dimension', 'abs', 'percentage'],
                   fixed: 2,
-                  postfix: ['bb'],
-                  prefix: ['aa']
+                  postfix: 'bb',
+                  prefix: 'aa'
                 },
                 style: {
-                  fill: 'yellow'
+                  fill: 'yellow',
+                  stroke: 'red'
                 }
               }
             },
-            b: {
+            s: {
+              seriesFieldMatch: {
+                value: 'b',
+                scaleIndex: 2
+              },
               label: {
                 visible: true,
                 style: {
                   stroke: 'blue',
-                  lineWidth: 5
+                  lineWidth: 15
                 }
               }
             }
@@ -461,8 +431,28 @@ function loadDSL() {
               seriesMatch: { type: 'bar' },
               itemKeys: ['_editor_dimension_field', '_editor_type_field'],
               itemKeyMap: {
-                _editor_dimension_field: 1,
-                _editor_type_field: 2
+                _editor_dimension_field: {
+                  scaleIndex: 1
+                },
+                _editor_type_field: {
+                  scaleIndex: 2
+                }
+              },
+              style: {
+                fill: 'red'
+              }
+            },
+            '_editor_dimension_field_1_&_editor_type_field_2': {
+              markName: 'label',
+              seriesMatch: { type: 'bar' },
+              itemKeys: ['_editor_dimension_field', '_editor_type_field'],
+              itemKeyMap: {
+                _editor_dimension_field: {
+                  value: 'x1'
+                },
+                _editor_type_field: {
+                  value: 'a'
+                }
               },
               style: {
                 fill: 'red'
@@ -471,52 +461,6 @@ function loadDSL() {
           }
         }
       }
-      // {
-      //   type: 'VChart',
-      //   id: 'chart1',
-      //   zIndex: 10,
-      //   position: {
-      //     top: 380,
-      //     left: 50,
-      //     width: 500,
-      //     height: 300
-      //   },
-      //   options: {
-      //     spec: barSpec1,
-      //     initOption: {
-      //       interactive: true,
-      //       animation: false,
-      //       disableTriggerEvent: true,
-      //       disableDirtyBounds: true
-      //     },
-      //     dataGroupStyle: {
-      //       [StroyAllDataGroup]: {
-      //         bar: {
-      //           style: {
-      //             fill: 'green',
-      //             stroke: 'yellow',
-      //             lineWidth: 2
-      //           }
-      //         }
-      //       },
-      //       A_p: {
-      //         bar: {
-      //           style: {
-      //             fill: 'red'
-      //           }
-      //         }
-      //       },
-      //       B_k: {
-      //         bar: {
-      //           style: {
-      //             stroke: 'blue',
-      //             lineWidth: 5
-      //           }
-      //         }
-      //       }
-      //     }
-      //   }
-      // }
     ],
     acts: []
   };
@@ -559,8 +503,7 @@ export const RuntimeLabelStyle = () => {
     // @ts-ignore
     window.player = player;
     const dsl = loadDSL();
-    // story.load(dsl);
-    story.addCharacter(dsl.characters[0]);
+    story.load(dsl);
     player.play(-1);
 
     const chart0 = story.getCharacterById('chart0');

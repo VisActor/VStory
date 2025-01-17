@@ -15,7 +15,13 @@ import {
 import type { Label as VChartLabelComponent } from '@visactor/vchart/esm/component/label/label';
 import type { ILabelInfo } from '@visactor/vchart/esm/component/label';
 import { MarkStyleRuntime } from './mark-style';
-import { findSingleConfig, getSeriesKeyScalesMap, isSeriesMatch, matchDatumWithScaleMap } from './utils';
+import {
+  findSingleConfig,
+  getGroupConfigWithDatum,
+  getSeriesKeyScalesMap,
+  isSeriesMatch,
+  matchDatumWithScaleMap
+} from './utils';
 import type { IGraphic } from '@visactor/vrender-core';
 import type { IChartCharacterConfig, ITextAttribute } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
@@ -52,6 +58,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
     if (!hasLabelVisible) {
       return;
     }
+
     // 否则全部设置为 true
     const rawAttribute = character.getRuntimeConfig().getAttribute();
     const { spec } = rawAttribute;
@@ -145,7 +152,15 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
                 // 如果匹配到单标签样式
                 findSingleConfig(config.options.labelStyle, series, keyScaleMap, datum)?.style?.[key] ??
                 // 否则匹配组样式
-                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, 'label') ??
+                MarkStyleRuntime.getMarkStyle(
+                  labelMark,
+                  dataGroupStyle,
+                  key,
+                  datum,
+                  seriesField,
+                  'label',
+                  keyScaleMap
+                ) ??
                 result
               );
             });
@@ -154,7 +169,15 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             // 直接匹配组样式
             labelMark.setPostProcess(key, (result, datum) => {
               return (
-                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, 'label') ?? result
+                MarkStyleRuntime.getMarkStyle(
+                  labelMark,
+                  dataGroupStyle,
+                  key,
+                  datum,
+                  seriesField,
+                  'label',
+                  keyScaleMap
+                ) ?? result
               );
             });
           }
@@ -177,8 +200,16 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             }
             // 否则匹配组样式
             return (
-              getTextWithGroupFormat(datum, seriesField, series, vchart, character, dataGroupStyle, formatValue) ??
-              result
+              getTextWithGroupFormat(
+                datum,
+                seriesField,
+                series,
+                vchart,
+                character,
+                dataGroupStyle,
+                keyScaleMap,
+                formatValue
+              ) ?? result
             );
           });
         } else {
@@ -186,8 +217,16 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
           // 直接匹配组样式
           labelMark.setPostProcess('text', (result, datum) => {
             return (
-              getTextWithGroupFormat(datum, seriesField, series, vchart, character, dataGroupStyle, formatValue) ??
-              result
+              getTextWithGroupFormat(
+                datum,
+                seriesField,
+                series,
+                vchart,
+                character,
+                dataGroupStyle,
+                keyScaleMap,
+                formatValue
+              ) ?? result
             );
           });
         }
@@ -202,12 +241,13 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         }
         const spec = config.options.spec;
         labelMark.setPostProcess('visible', (result, datum) => {
+          const groupConfig = getGroupConfigWithDatum(dataGroupStyle, datum, seriesField, keyScaleMap, 'label', false);
+
           return (
             // 如果匹配到单标签样式
             findSingleConfig(config.options.labelStyle, series, keyScaleMap, datum)?.style?.visible ??
             // 否则匹配组样式
-            dataGroupStyle[datum[seriesField]]?.label?.visible ?? // 单组 visible
-            dataGroupStyle[StroyAllDataGroup]?.label?.visible ?? // 全部组visible
+            groupConfig?.visible ?? // 单组 / 全组 visible
             spec?.series?.[series.getSpecIndex()]?.label?.visible ?? // 单系列 visible
             spec?.label?.visible ?? // 全局 visible
             result
@@ -217,6 +257,10 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       });
     });
   }
+
+  // user action 数据更新/图表类型/坐标系 => updateEditorSpec => 生成 VChartSpec(tag => firstSpec => new VChart draw => afterRender => updateEditorSpec => clearTag => finalSpec ) => vchart.updateSpec() => reRender
+  // 1. user action => updateEditorSpec (=> tag => draw => beforeVRenderDraw => updateEditorSpec ) => dls (vstory)
+  // editorSpec0 => dsl vstory => runtime => afterRender => vchart => editorSpec1
 
   /**
    * 只处理 fill stroke 值，
@@ -252,14 +296,28 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
           const seriesField = series.getSeriesField();
           const groupValueList = series.getRawDataStatisticsByField(seriesField)?.values as string[];
           groupValueList.forEach(groupValue => {
+            const groupConfig = getGroupConfigWithDatum(
+              dataGroupStyle,
+              { [seriesField]: groupValue },
+              seriesField,
+              keyScaleMap,
+              'label'
+            );
             // 是否存在分组样式
-            if (!dataGroupStyle[groupValue]?.label?.style && !dataGroupStyle[StroyAllDataGroup]?.label?.style) {
+            if (!groupConfig?.style) {
               return;
             }
             const style = merge(
               {},
               dataGroupStyle[StroyAllDataGroup]?.label?.style ?? {},
-              dataGroupStyle[groupValue]?.label?.style ?? {}
+              getGroupConfigWithDatum(
+                dataGroupStyle,
+                { [seriesField]: groupValue },
+                seriesField,
+                keyScaleMap,
+                'label',
+                false
+              )?.style ?? {}
             );
             // 只设置 fill 和 stroke 颜色
             if (!isValid(style.fill) && !isValid(style.stroke)) {
@@ -343,13 +401,20 @@ function getTextWithGroupFormat(
   vchart: IVChart,
   character: ICharacterChart,
   dataGroupStyle: IChartCharacterConfig['options']['dataGroupStyle'],
+  keyScaleMap: Record<string, any>,
   formatValue: FormatValueFunction
 ) {
   if (!dataGroupStyle) {
     return null;
   }
-  const formatConfig =
-    dataGroupStyle[datum[seriesField]]?.label?.formatConfig ?? dataGroupStyle[StroyAllDataGroup]?.label?.formatConfig;
+  const formatConfig = getGroupConfigWithDatum(
+    dataGroupStyle,
+    datum,
+    seriesField,
+    keyScaleMap,
+    'label',
+    false
+  )?.formatConfig;
 
   if (!formatConfig) {
     return null;

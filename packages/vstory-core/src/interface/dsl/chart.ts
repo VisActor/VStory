@@ -3,7 +3,7 @@ import type { IInitOption, ISpec } from '@visactor/vchart';
 import type { ICharacterConfigBase } from './dsl';
 import type { IFormatConfig } from './common';
 
-export const StroyAllDataGroup = '_STORY_ALL_DATA_GROUP';
+export const StroyAllDataGroup = '*';
 
 export interface IComponentMatch {
   usrId?: string;
@@ -13,11 +13,21 @@ export interface IComponentMatch {
 
 export type ITextAttribute = ITextGraphicAttribute;
 
-export interface IMarkStyle<T> {
+export interface IItemMatch {
+  itemKeys: string[]; // 数据匹配维度  x,type
+  itemKeyMap: {
+    [key: string]: {
+      // 1. 匹配维度值，优先
+      value?: any;
+      // 2. 匹配维度值的 scaleIndex
+      scaleIndex?: number;
+    };
+  };
+}
+
+export interface IMarkStyle<T> extends IItemMatch {
   seriesMatch: { type: string } & IComponentMatch;
   markName: string;
-  itemKeys: string[]; // 数据匹配维度
-  itemKeyMap: { [key: string]: number }; // 匹配维度值
   style: T; // 样式
 }
 
@@ -33,6 +43,10 @@ export interface IDataGroupStyle {
     style?: IMarkStyle<any>['style']; // markStyle
     visible?: boolean; // 是否可见
     [key: string]: any; // 其他可能存在的逻辑配置
+  };
+  seriesFieldMatch?: {
+    value?: any;
+    scaleIndex?: number;
   };
 }
 
@@ -56,11 +70,9 @@ export interface ITotalLabelConfig {
   single?: {
     // 使用 维度key_维度值_&_维度key_维度值 这样的格式构建key，保证唯一性
     [key: string]: {
-      itemKeys: string[]; // 数据匹配维度
-      itemKeyMap: { [key: string]: number }; // 匹配维度值
       formatConfig?: IFormatConfig;
       style?: ITextAttribute;
-    };
+    } & IItemMatch;
   };
 }
 
@@ -70,6 +82,10 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
      * 图表spec
      */
     spec?: any;
+    /**
+     * 图表类型
+     */
+    chartType?: string;
     /**
      * 初始化参数
      */

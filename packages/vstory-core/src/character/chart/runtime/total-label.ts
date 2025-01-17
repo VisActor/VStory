@@ -31,7 +31,6 @@ export class TotalLabelRuntime implements IChartCharacterRuntime {
   applyConfigToAttribute(character: ICharacterChart) {
     // 将总计标签的 visible 配置和组样式设置到 spec 上
     // 设置 visible 为 true 关闭标签能力放到分组上
-    // 当前 dataGroupStyle 中有 label.visible 配置，在这里添加上 visible = true
     const config = character.getRuntimeConfig().config;
     const totalLabel = config.options?.totalLabel;
     if (!totalLabel) {

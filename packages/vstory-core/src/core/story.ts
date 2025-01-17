@@ -140,6 +140,7 @@ export class Story implements IStory {
   }
 
   release(): void {
+    this._characterTree.release();
     this._player.release();
     this._canvas.release();
   }

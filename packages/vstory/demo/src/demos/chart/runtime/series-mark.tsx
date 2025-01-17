@@ -361,13 +361,13 @@ function loadDSL() {
       {
         values: [
           { type: 'Category One', min: 76, max: 100, range: 'A', type2: 'p', color: 'A_p' },
-          { type: 'Category Two', min: 56, max: 108, range: 'A', type2: 'p', color: 'A_p' },
-          { type: 'Category One', min: 56, max: 100, range: 'B', type2: 'p', color: 'B_p' },
-          { type: 'Category Two', min: 36, max: 108, range: 'B', type2: 'p', color: 'B_p' },
-
           { type: 'Category One', min: 76, max: 100, range: 'A', type2: 'k', color: 'A_k' },
-          { type: 'Category Two', min: 56, max: 108, range: 'A', type2: 'k', color: 'A_k' },
+          { type: 'Category One', min: 56, max: 100, range: 'B', type2: 'p', color: 'B_p' },
           { type: 'Category One', min: 56, max: 100, range: 'B', type2: 'k', color: 'B_k' },
+
+          { type: 'Category Two', min: 56, max: 108, range: 'A', type2: 'p', color: 'A_p' },
+          { type: 'Category Two', min: 56, max: 108, range: 'A', type2: 'k', color: 'A_k' },
+          { type: 'Category Two', min: 36, max: 108, range: 'B', type2: 'p', color: 'B_p' },
           { type: 'Category Two', min: 36, max: 108, range: 'B', type2: 'k', color: 'B_k' }
         ]
       }
@@ -424,14 +424,22 @@ function loadDSL() {
                 }
               }
             },
-            a: {
+            c: {
+              seriesFieldMatch: {
+                value: 'a',
+                scaleIndex: 1
+              },
               bar: {
                 style: {
                   fill: 'red'
                 }
               }
             },
-            b: {
+            d: {
+              seriesFieldMatch: {
+                value: 'b',
+                scaleIndex: 2
+              },
               bar: {
                 style: {
                   stroke: 'blue',
@@ -493,13 +501,62 @@ function loadDSL() {
               seriesMatch: { type: 'bar' },
               itemKeys: ['type', 'range', 'type2', 'color'],
               itemKeyMap: {
-                type: 1,
-                range: 1,
-                type2: 1,
-                color: 1
+                type: {
+                  scaleIndex: 1
+                },
+                range: {
+                  scaleIndex: 1
+                },
+                type2: {
+                  scaleIndex: 1
+                },
+                color: {
+                  scaleIndex: 1
+                }
               },
               style: {
                 fill: 'black'
+              }
+            },
+            '_type_1_&_range_1_&_type2_1_&_color_1_2': {
+              markName: 'bar',
+              seriesMatch: { type: 'bar' },
+              itemKeys: ['type', 'range', 'type2'],
+              itemKeyMap: {
+                type: {
+                  scaleIndex: 1
+                },
+                range: {
+                  scaleIndex: 2
+                },
+                type2: {
+                  value: 'k'
+                }
+              },
+              style: {
+                fill: 'yellow'
+              }
+            },
+            '_type_1_&_range_1_&_type2_1_&_color_1_3': {
+              markName: 'bar',
+              seriesMatch: { type: 'bar' },
+              itemKeys: ['type', 'range', 'type2', 'color'],
+              itemKeyMap: {
+                type: {
+                  value: 'Category Two'
+                },
+                range: {
+                  value: 'A'
+                },
+                type2: {
+                  value: 'p'
+                },
+                color: {
+                  value: 'A_p'
+                }
+              },
+              style: {
+                fill: 'red'
               }
             }
           }

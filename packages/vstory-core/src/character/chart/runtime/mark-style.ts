@@ -1,7 +1,14 @@
 import type { IChartCharacterRuntime } from '../interface/runtime';
 import type { ICharacterChart } from '../interface/character-chart';
 import type { ISeries, IVChart } from '@visactor/vchart';
-import { getSeriesKeyScalesMap, GetVChartSeriesWithMatch, matchDatumWithScaleMap } from './utils';
+import {
+  getGroupConfigWithDatum,
+  getGroupStyleWithDatum,
+  getGroupWithDatum,
+  getSeriesKeyScalesMap,
+  GetVChartSeriesWithMatch,
+  matchDatumWithScaleMap
+} from './utils';
 import type { IChartCharacterConfig } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
 import type { IMark } from '@visactor/vchart/esm/mark/interface';
@@ -24,14 +31,13 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     key: string,
     datum: any,
     seriesField: string,
-    markName?: string
+    markName: string,
+    keyScaleMap: Record<string, any>
   ) {
     if (!dataGroupStyle) {
       return null;
     }
-    const value =
-      dataGroupStyle[datum[seriesField]]?.[markName ?? mark.name]?.style?.[key] ??
-      dataGroupStyle[StroyAllDataGroup]?.[markName ?? mark.name]?.style?.[key];
+    const value = getGroupStyleWithDatum(dataGroupStyle, datum, seriesField, keyScaleMap, markName ?? mark.name, key);
 
     if (value === UseDefaultSeriesStyle) {
       return null;
@@ -102,23 +108,37 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
       const seriesField = s.getSeriesField();
       const groupValueList = s.getRawDataStatisticsByField(seriesField)?.values;
       const groupValue = groupValueList?.[0];
+      const keyScaleMap = getSeriesKeyScalesMap(s);
       s.getMarks().forEach(m => {
+        const groupConfig = getGroupConfigWithDatum(
+          dataGroupStyle,
+          { [seriesField]: groupValue },
+          seriesField,
+          keyScaleMap,
+          m.name
+        );
         // set visible first
-        const visible =
-          dataGroupStyle[groupValue]?.[m.name]?.visible ?? dataGroupStyle[StroyAllDataGroup]?.[m.name]?.visible;
+        const visible = groupConfig?.visible;
         if (isValid(visible)) {
           m.setVisible(visible);
         }
         // 系列分组key
         if (groupValueList && groupValueList.length === 1) {
           // 一个 series 对应一组数据 简化处理，优化性能
-          if (!dataGroupStyle[groupValue]?.[m.name]?.style && !dataGroupStyle[StroyAllDataGroup]?.[m.name]?.style) {
+          if (!groupConfig?.style) {
             return;
           }
           const markStyle = merge(
             {},
             dataGroupStyle[StroyAllDataGroup]?.[m.name]?.style ?? {},
-            dataGroupStyle[groupValue]?.[m.name]?.style ?? {}
+            getGroupConfigWithDatum(
+              dataGroupStyle,
+              { [seriesField]: groupValue },
+              seriesField,
+              keyScaleMap,
+              m.name,
+              false
+            )?.style ?? {}
           );
           if (Object.keys(markStyle).length === 0) {
             return;
@@ -144,7 +164,9 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
             }
 
             m.setPostProcess(key, (result, datum) => {
-              const temp = MarkStyleRuntime.getMarkStyle(m, dataGroupStyle, key, datum, seriesField) ?? result;
+              const temp =
+                MarkStyleRuntime.getMarkStyle(m, dataGroupStyle, key, datum, seriesField, m.name, keyScaleMap) ??
+                result;
               if (s.type === 'area' && key === 'stroke' && m.name === 'area') {
                 if (!isArray(temp)) {
                   return [temp, false, false, false];

@@ -11,4 +11,5 @@ export interface ICharacterTree {
   initCharacters: (spec: ICharacterConfig[]) => void;
   reset: () => void;
   toDSL: () => ICharacterConfig[];
+  release: () => void;
 }

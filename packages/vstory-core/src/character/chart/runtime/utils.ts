@@ -3,7 +3,12 @@ import type { IChart } from '@visactor/vchart/esm/chart/interface';
 import type { ICartesianSeries, ISeries } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
 import { VCHART_DATA_INDEX, ValueLink, FieldLink } from './const';
-import type { IComponentMatch, IMarkStyle } from '../../../interface/dsl/chart';
+import {
+  StroyAllDataGroup,
+  type IChartCharacterConfig,
+  type IComponentMatch,
+  type IMarkStyle
+} from '../../../interface/dsl/chart';
 
 export function GetVChartSeriesWithMatch(vchart: IChart, seriesMatch: IComponentMatch & { type: string }) {
   if (!isValid(seriesMatch.specIndex) && seriesMatch.type) {
@@ -65,7 +70,7 @@ export function getSeriesKeyScalesMap(series: ISeries) {
 
 export function matchDatumWithScaleMap(
   keys: string[],
-  keyValueMap: { [key: string]: number },
+  keyValueMap: { [key: string]: { value?: any; scaleIndex?: number } },
   scaleMap: { [key: string]: any } = {},
   datum: any
 ) {
@@ -73,14 +78,27 @@ export function matchDatumWithScaleMap(
     datum = datum[0];
   }
   return keys.every(key => {
+    if (!keyValueMap[key]) {
+      return true;
+    }
+
+    // 1. 直接匹配
+    const { value, scaleIndex } = keyValueMap[key];
+    if (isValid(value)) {
+      if (datum[key] === value) {
+        return true;
+      }
+    }
+
+    // 2. 通过 scale 匹配
     const scale = scaleMap[key];
-    if (!scale) {
-      return keyValueMap[key] === datum[key];
+    if (!scale || isContinuous(scale.type)) {
+      // 2.1 没有 scale 或者 scale 是连续的
+      return datum[key] === value;
     }
-    if (isContinuous(scale.type)) {
-      return keyValueMap[VCHART_DATA_INDEX] === datum[VCHART_DATA_INDEX];
-    }
-    return keyValueMap[key] === scale._index.get(`${datum[key]}`);
+
+    // 2.2 通过 scale._index 匹配
+    return scale._index.get(`${datum[key]}`) === scaleIndex;
   });
 }
 
@@ -114,4 +132,54 @@ export function getMarkStyleId(markName: string, itemKeys: string[], itemKeyMap:
   return itemKeys.reduce((pre, cur) => {
     return pre + `${FieldLink}${cur}${ValueLink}${itemKeyMap[cur]}`;
   }, markName);
+}
+
+export function getGroupWithDatum(
+  dataGroupStyle: IChartCharacterConfig['options']['dataGroupStyle'],
+  datum: any,
+  seriesField: string,
+  scaleMap: Record<string, any>,
+  includeAllDataGroup: boolean = true
+) {
+  const groupStyleKey = Object.keys(dataGroupStyle).find(key => {
+    const groupStyle = dataGroupStyle[key];
+    if (!groupStyle.seriesFieldMatch) {
+      return datum[seriesField] === key;
+    }
+    const { value, scaleIndex } = groupStyle.seriesFieldMatch;
+    if (isValid(value) && value === datum[seriesField]) {
+      return true;
+    }
+    const scale = scaleMap[seriesField];
+    if (scale && scale._index.get(`${datum[seriesField]}`) === scaleIndex) {
+      return true;
+    }
+    return false;
+  });
+  return groupStyleKey ? dataGroupStyle[groupStyleKey] : includeAllDataGroup ? dataGroupStyle[StroyAllDataGroup] : null;
+}
+
+export function getGroupStyleWithDatum(
+  dataGroupStyle: IChartCharacterConfig['options']['dataGroupStyle'],
+  datum: any,
+  seriesField: string,
+  scaleMap: Record<string, any>,
+  markName: string,
+  key: string,
+  includeAllDataGroup: boolean = true
+) {
+  return getGroupConfigWithDatum(dataGroupStyle, datum, seriesField, scaleMap, markName, includeAllDataGroup)?.style?.[
+    key
+  ];
+}
+
+export function getGroupConfigWithDatum(
+  dataGroupStyle: IChartCharacterConfig['options']['dataGroupStyle'],
+  datum: any,
+  seriesField: string,
+  scaleMap: Record<string, any>,
+  markName: string,
+  includeAllDataGroup: boolean = true
+) {
+  return getGroupWithDatum(dataGroupStyle, datum, seriesField, scaleMap, includeAllDataGroup)?.[markName];
 }
