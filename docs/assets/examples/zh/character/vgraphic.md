@@ -116,7 +116,7 @@ const characterList = [
 
 const story = new VStory.Story(null, {
   dom: CONTAINER_ID,
-  width: 400,
+  width: 500,
   height: 400,
   scaleX: 'auto',
   scaleY: 'auto',
