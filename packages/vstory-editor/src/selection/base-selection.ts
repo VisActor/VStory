@@ -52,7 +52,7 @@ export abstract class BaseSelection implements IEditSelection {
       this.inActiveHoverController();
     }
   }
-  startEdit(actionInfo: IEditActionInfo, emitEvent: boolean = false) {
+  startEdit(actionInfo: IEditActionInfo, emitEvent: boolean = true) {
     if (this.isEditing) {
       return;
     }
