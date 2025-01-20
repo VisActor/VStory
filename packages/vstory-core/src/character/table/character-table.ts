@@ -171,7 +171,9 @@ export class CharacterTable<T extends ITableGraphicAttribute>
 
   getDefaultAttribute(): Partial<ITableGraphicAttribute> {
     return {
-      spec: this._config.options.spec,
+      spec: Object.assign({}, this._config.options.spec, {
+        records: (this._config.options.spec?.records ?? []).slice()
+      }),
       dpr: this._canvas.getDpr(),
       autoRender: false,
       width: 500,

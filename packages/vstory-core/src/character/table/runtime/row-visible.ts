@@ -18,7 +18,7 @@ export class RowVisibleRuntime implements ITableCharacterRuntime {
       const records: any[] = [];
       const headerRowVisible = options.rowVisible[-1];
       spec.showHeader = headerRowVisible !== false && options.showHeader !== false;
-      spec.records.forEach((record: any, index: number) => {
+      options.spec.records.forEach((record, index) => {
         const rowVisible = options.rowVisible[index];
         if (rowVisible === false) {
           return;
