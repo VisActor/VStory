@@ -4,7 +4,7 @@ group: character
 title: vchart
 keywords: vchart
 order: 1-0
-cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vchart.gif
+cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vtable.gif
 ---
 
 # VTable Table Element
