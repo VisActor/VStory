@@ -2,6 +2,27 @@
   "name": "@visactor/vstory-core",
   "entries": [
     {
+      "version": "0.0.23",
+      "tag": "@visactor/vstory-core_v0.0.23",
+      "date": "Mon, 20 Jan 2025 13:55:43 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "feat: support highlight inverse select"
+          },
+          {
+            "comment": "feat: support selector array"
+          },
+          {
+            "comment": "feat: suppprt Arc/Polygon Component"
+          },
+          {
+            "comment": "feat: support table animate"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.0.22",
       "tag": "@visactor/vstory-core_v0.0.22",
       "date": "Thu, 26 Dec 2024 03:40:33 GMT",
