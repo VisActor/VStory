@@ -21,6 +21,7 @@ export class Player implements IPlayer {
   protected _currTime: number;
   protected _actionProcessor: IActionProcessor;
   protected _loop: number;
+  protected _lastFrameTime: number = -1;
 
   constructor(story: IStory, params: IPlayerParams = {}) {
     const { actionProcessor = new ActionProcessor(story) } = params;
@@ -100,7 +101,17 @@ export class Player implements IPlayer {
     }
   }
 
-  protected handlerTick = (delta: number) => {
+  protected handlerTick = (delta?: number) => {
+    const time = Date.now();
+    if (delta === void 0) {
+      if (this._lastFrameTime >= 0) {
+        delta = time - this._lastFrameTime;
+      } else {
+        delta = 0;
+      }
+    }
+    this._lastFrameTime = time;
+
     const totalTime = this._scheduler.getTotalTime();
     let currTime = this._currTime;
 
