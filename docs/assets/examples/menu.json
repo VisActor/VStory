@@ -146,6 +146,13 @@
           }
         },
         {
+          "path": "vtable",
+          "title": {
+            "zh": "vtable 表格",
+            "en": "vtable table"
+          }
+        },
+        {
           "path": "timeline",
           "title": {
             "zh": "时间轴组件",
