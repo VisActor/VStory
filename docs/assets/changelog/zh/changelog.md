@@ -1,3 +1,21 @@
+# v0.0.23
+
+2025-01-21
+
+
+**🆕 新增功能**
+
+- **@visactor/vstory**: support selector array
+- **@visactor/vstory-core**: support highlight inverse select
+- **@visactor/vstory-core**: support selector array
+- **@visactor/vstory-core**: suppprt Arc/Polygon Component
+- **@visactor/vstory-core**: support table animate
+- **@visactor/vstory-player**: support table animate
+
+
+
+[更多详情请查看 v0.0.23](https://github.com/VisActor/VStory/releases/tag/v0.0.23)
+
 # v0.0.22
 
 2024-12-26
