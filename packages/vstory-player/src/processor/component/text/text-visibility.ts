@@ -26,7 +26,7 @@ export class TypeWriterVisibility extends BaseVisibility {
   }
   protected _run(graphic: IGraphic, params: ITypeWriterParams, appear: boolean) {
     if (graphic && (graphic.type === 'text' || graphic.type === 'richtext')) {
-      const { duration, easing } = params;
+      const { duration, easing, params: typewriterParams } = params;
       const { text } = graphic.attribute as any;
       if (isString(text)) {
         let from = '';
@@ -34,7 +34,9 @@ export class TypeWriterVisibility extends BaseVisibility {
         if (!appear) {
           [from, to] = [to, from];
         }
-        const a = graphic.animate().play(new TypeWriter({ text: from }, { text: to }, duration, easing as EasingType));
+        const a = graphic
+          .animate()
+          .play(new TypeWriter({ text: from }, { text: to }, duration, easing as EasingType, typewriterParams as any));
         if (!appear) {
           a.reversed(true);
         }

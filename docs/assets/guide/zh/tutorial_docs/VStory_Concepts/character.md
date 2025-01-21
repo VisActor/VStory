@@ -1,17 +1,18 @@
 # character
 
-请先阅读[dsl的定义](./DSL)，然后再阅读本节内容。
-Character（角色） 是 VStory 中最基础的元素，它可以是图表、组件、表格等，它可以只是一个简单的文字，也可以是一个非常复杂的图表。Character 可以通过 DSL 配置，也可以通过 API 动态添加。Character是需要预定义的，如果你的作品中需要使用某个Character，你需要在DSL的`characters`数组中定义好这个Character。
+请先阅读[dsl 的定义](./DSL)，然后再阅读本节内容。
+Character（角色） 是 VStory 中最基础的元素，它可以是图表、组件、表格等，它可以只是一个简单的文字，也可以是一个非常复杂的图表。Character 可以通过 DSL 配置，也可以通过 API 动态添加。Character 是需要预定义的，如果你的作品中需要使用某个 Character，你需要在 DSL 的`characters`数组中定义好这个 Character。
 
-## Character的定义
+## Character 的定义
 
 所有的`character`都可以由一些通用的配置和一些特殊的配置定义。通用配置包括：
-- id：`character`的id，用于唯一标识这个`character`，后续在定义具体的行为（action）时会用到
-- type：`character`的类型，目前VStory支持的`character`类型包括但不限于：`VChart`、`Text`、`Image`等
-- position：`character`的位置和大小，以及旋转锚点等信息
-- zIndex：`character`的层级，默认为0，层级高的`character`会覆盖层级低的`character`
 
-所有的特殊配置都在options里，举例：
+- id：`character`的 id，用于唯一标识这个`character`，后续在定义具体的行为（action）时会用到
+- type：`character`的类型，目前 VStory 支持的`character`类型包括但不限于：`VChart`、`Text`、`Image`等
+- position：`character`的位置和大小，以及旋转锚点等信息
+- zIndex：`character`的层级，默认为 0，层级高的`character`会覆盖层级低的`character`
+
+所有的特殊配置都在 options 里，举例：
 
 ```ts
 const textConfig = {
@@ -20,7 +21,7 @@ const textConfig = {
   zIndex: 1,
   position: {
     top: 100,
-    left: 200,
+    left: 200
   },
   // 这里定义文字的配置
   options: {
@@ -28,9 +29,9 @@ const textConfig = {
       text: 'A BRIEF HISTORY',
       fontSize: 12,
       fill: 'red'
-    },
+    }
   }
-}
+};
 
 const imageConfig = {
   type: 'Image', // 标记是图片类型
@@ -38,18 +39,19 @@ const imageConfig = {
   zIndex: 1,
   position: {
     top: 100,
-    left: 200,
+    left: 200
   },
   // 这里定义图片的配置
   options: {
     graphic: {
-      image: 'url',
+      image: 'url'
     }
   }
-}
+};
 ```
 
 关于准确的接口定义，如下所示：
+
 ```ts
 type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig;
 
@@ -82,12 +84,11 @@ interface ICharacterConfigBase {
 }
 ```
 
-
-## 内置的Character类型
+## 内置的 Character 类型
 
 ### VChart
 
-VChart是VStory中最常用的Character类型，它可以是各种类型的图表，比如折线图、柱状图、饼图等。VChart可以通过直接传入VChart的Spec来定义，具体的spec如何定义，请参考[vchart站点](/vchart)。VChart的接口定义如下：
+VChart 是 VStory 中最常用的 Character 类型，它可以是各种类型的图表，比如折线图、柱状图、饼图等。VChart 可以通过直接传入 VChart 的 Spec 来定义，具体的 spec 如何定义，请参考[vchart 站点](/vchart)。VChart 的接口定义如下：
 
 ```ts
 interface IChartCharacterConfig extends ICharacterConfigBase {
@@ -104,15 +105,15 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
     data?: any;
     // 标题
     title?: {
-      [key: string]: IComponentConfig<ISpec['title']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['title']>>;
     };
     // 图例
     legends?: {
-      [key: string]: IComponentConfig<ISpec['legends']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['legends']>>;
     };
     // axes
     axes?: {
-      [key: string]: IComponentConfig<ISpec['axes']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['axes']>>;
     };
     // 色板
     color?: any;
@@ -134,7 +135,8 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
   };
 }
 ```
-我们看一个VChart的例子：
+
+我们看一个 VChart 的例子：
 
 ```javascript livedemo template=vchart
 // 注册所有需要的内容
@@ -204,7 +206,7 @@ const dsl = {
                       animation: { duration: 3000, effect: 'barLeap', oneByOne: true, dimensionCount: 5 }
                     }
                   ]
-                },
+                }
               ]
             }
           ]
@@ -212,7 +214,7 @@ const dsl = {
       ]
     }
   ]
-}
+};
 
 const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
 const player = new VStory.Player(story);
@@ -223,18 +225,637 @@ window['story'] = story;
 window['vstory'] = story;
 ```
 
-### 基本组件（Image、Line、Rect、Shape、Text）
+### VTable
 
-组件类型的接口定义如下，其中基本组件（Image、Line、Rect、Shape、Text）的配置都直接基于VRender的对应图元，配置在graphic属性上：
-- Image 是基于VRender的[Image图元](/vrender/option/Image)
-- Line 是基于VRender的[Line图元](/vrender/option/Line)
-- Rect 是基于VRender的[Rect图元](/vrender/option/Rect)
-- Shape 是基于VRender的[Symbol图元](/vrender/option/Symbol)
-- Text 是基于VRender的[Text图元](/vrender/option/Text)
+VTable 是 VStory 中表格的 Character 类型，它可以是各种类型的表格。VTable 可以通过直接传入 VTable 的 Spec 来定义，具体的 spec 如何定义，请参考[vtable 站点](/vtable) VTable 的接口定义如下：
 
-其中panel是组件的额外面板，其实是一个[VRender的rect](/vrender/option/Rect)图元，可以参考[VRender的rect](/vrender/option/Rect)图元配置。
-text配置是每个组件都带有的一个额外的配置，是一个[VRender的text](/vrender/option/Text)图元，可以参考[VRender的text](/vrender/option/Text)图元配置。
-padding表示面板和内容的边距，分别表示上、右、下、左的边距。
+```ts
+interface ITableCharacterConfigOptionsType {
+  // 表格spec
+  spec?: any;
+  records: any;
+  columns: any;
+  widthMode?: 'standard' | 'adaptive' | 'autoWidth';
+  defaultRowHeight: number;
+  showHeader?: boolean;
+  theme: any;
+  // 数据源
+  data?: any;
+
+  panel?: any;
+  padding?: number | [number, number] | [number, number, number, number];
+
+  // 单个单元格样式，框选也会应用到这里
+  // 使用 map 不用数组的原因。减少写入是的反复遍历
+  cellStyle?: {
+    // col_row
+    [key: string]: {
+      col: number;
+      row: number;
+      style?: any;
+    };
+  };
+
+  // 列宽
+  colWidth?: {
+    [key: number]: number;
+  };
+  // 行高
+  rowHeight?: {
+    [key: number]: number;
+  };
+  // 列样式（包括列头）
+  colStyle?: {
+    [key: number]: any;
+  };
+  // 行样式（包括行头）
+  rowStyle?: {
+    [key: number]: any;
+  };
+  // 列隐藏
+  colVisible?: {
+    [key: number]: boolean;
+  };
+  // 行隐藏
+  rowVisible?: {
+    [key: number]: boolean;
+  };
+  // 内容列样式
+  contentColStyle?: {
+    [key: number]: any;
+  };
+  // 内容行样式
+  contentRowStyle?: {
+    [key: number]: any;
+  };
+}
+
+export interface ITableCharacterConfig extends ICharacterConfigBase {
+  options: ITableCharacterConfigOptionsType;
+}
+```
+
+我们看一个 VTable 的例子：
+
+```javascript livedemo template=vtable
+// 注册所有需要的内容
+VStory.registerAll();
+// 需要用到的图表，一个普通柱状图就可以
+const columns = [
+  {
+    field: 'group',
+    title: 'department',
+    width: 'auto',
+    tree: true,
+    fieldFormat(rec) {
+      return rec['department'] ?? rec['group'] ?? rec['name'];
+    }
+  },
+  {
+    field: 'total_children',
+    title: 'memebers count',
+    width: 'auto',
+    fieldFormat(rec) {
+      if (rec?.['position']) {
+        return `position:  ${rec['position']}`;
+      } else return rec?.['total_children'];
+    }
+  },
+  {
+    field: 'monthly_expense',
+    title: 'monthly expense',
+    width: 'auto',
+    fieldFormat(rec) {
+      if (rec?.['salary']) {
+        return `salary:  ${rec['salary']}`;
+      } else return rec?.['monthly_expense'];
+    }
+  },
+  {
+    field: 'new_hires_this_month',
+    title: 'new hires this month',
+    width: 'auto'
+  },
+  {
+    field: 'resignations_this_month',
+    title: 'resignations this month',
+    width: 'auto'
+  },
+  {
+    field: 'complaints_and_suggestions',
+    title: 'recived complaints counts',
+    width: 'auto'
+  }
+];
+
+const listTableOption = {
+  records: [
+    {
+      department: 'Human Resources Department',
+      total_children: 30,
+      monthly_expense: '$45000',
+      new_hires_this_month: 6,
+      resignations_this_month: 3,
+      complaints_and_suggestions: 2,
+      children: [
+        {
+          group: 'Recruiting Group',
+          children: [
+            {
+              name: 'John Smith',
+              position: 'Recruiting Manager',
+              salary: '$8000'
+            },
+            {
+              name: 'Emily Johnson',
+              position: 'Recruiting Supervisor',
+              salary: '$6000'
+            },
+            {
+              name: 'Michael Davis',
+              position: 'Recruiting Specialist',
+              salary: '$4000'
+            }
+          ],
+          total_children: 15,
+          monthly_expense: '$25000',
+          new_hires_this_month: 4,
+          resignations_this_month: 2,
+          complaints_and_suggestions: 1
+        },
+        {
+          group: 'Training Group',
+          children: [
+            {
+              name: 'Jessica Brown',
+              position: 'Training Manager',
+              salary: '$8000'
+            },
+            {
+              name: 'Andrew Wilson',
+              position: 'Training Supervisor',
+              salary: '$6000'
+            }
+          ],
+          total_children: 15,
+          monthly_expense: '$20000',
+          new_hires_this_month: 2,
+          resignations_this_month: 1,
+          complaints_and_suggestions: 1
+        }
+      ],
+      hierarchyState: 'collapse'
+    },
+    {
+      department: 'Marketing Department',
+      total_children: 20,
+      monthly_expense: '$35000',
+      new_hires_this_month: 5,
+      resignations_this_month: 2,
+      complaints_and_suggestions: 1,
+      children: [
+        {
+          group: 'Advertising Group',
+          children: [
+            {
+              name: 'Alice Chen',
+              position: 'Advertising Manager',
+              salary: '$10000'
+            },
+            {
+              name: 'Bob Wang',
+              position: 'Advertising Supervisor',
+              salary: '$8000'
+            },
+            {
+              name: 'Cathy Liu',
+              position: 'Advertising Specialist',
+              salary: '$6000'
+            }
+          ],
+          total_children: 10,
+          monthly_expense: '$20000',
+          new_hires_this_month: 3,
+          resignations_this_month: 1,
+          complaints_and_suggestions: 0
+        },
+        {
+          group: 'Market Research Group',
+          children: [
+            {
+              name: 'David Zhang',
+              position: 'Market Research Manager',
+              salary: '$10000'
+            },
+            {
+              name: 'Emily Wang',
+              position: 'Market Research Supervisor',
+              salary: '$8000'
+            },
+            {
+              name: 'George Chen',
+              position: 'Market Research Analyst',
+              salary: '$5000'
+            }
+          ],
+          total_children: 10,
+          monthly_expense: '$15000',
+          new_hires_this_month: 2,
+          resignations_this_month: 1,
+          complaints_and_suggestions: 1
+        }
+      ],
+      hierarchyState: 'collapse'
+    },
+    {
+      department: 'Finance Department',
+      total_children: 25,
+      monthly_expense: '$40000',
+      new_hires_this_month: 4,
+      resignations_this_month: 1,
+      complaints_and_suggestions: 0,
+      children: [
+        {
+          group: 'Accounting Group',
+          children: [
+            {
+              name: 'John Chen',
+              position: 'Accounting Manager',
+              salary: '$10000'
+            },
+            {
+              name: 'Linda Wang',
+              position: 'Accounting Supervisor',
+              salary: '$8000'
+            },
+            {
+              name: 'Sam Li',
+              position: 'Accountant',
+              salary: '$6000'
+            }
+          ],
+          total_children: 10,
+          monthly_expense: '$20000',
+          new_hires_this_month: 2,
+          resignations_this_month: 0,
+          complaints_and_suggestions: 0
+        },
+        {
+          group: 'Financial Planning Group',
+          children: [
+            {
+              name: 'Kevin Zhang',
+              position: 'Financial Planning Manager',
+              salary: '$10000'
+            },
+            {
+              name: 'Grace Liu',
+              position: 'Financial Planning Supervisor',
+              salary: '$8000'
+            },
+            {
+              name: 'Tom Wang',
+              position: 'Financial Planner',
+              salary: '$6000'
+            }
+          ],
+          total_children: 15,
+          monthly_expense: '$20000',
+          new_hires_this_month: 2,
+          resignations_this_month: 1,
+          complaints_and_suggestions: 0
+        }
+      ],
+      hierarchyState: 'collapse'
+    },
+    {
+      department: 'Sales Department',
+      total_children: 35,
+      monthly_expense: '$50000',
+      new_hires_this_month: 7,
+      resignations_this_month: 4,
+      complaints_and_suggestions: 2,
+      children: [
+        {
+          group: 'Inside Sales Group',
+          children: [
+            {
+              name: 'Alex Brown',
+              position: 'Inside Sales Manager',
+              salary: '$10000'
+            },
+            {
+              name: 'Julia Lee',
+              position: 'Inside Sales Supervisor',
+              salary: '$8000'
+            },
+            {
+              name: 'Erica Chen',
+              position: 'Inside Sales Representative',
+              salary: '$5000'
+            }
+          ],
+          total_children: 15,
+          monthly_expense: '$25000',
+          new_hires_this_month: 4,
+          resignations_this_month: 2,
+          complaints_and_suggestions: 1
+        },
+        {
+          group: 'Outside Sales Group',
+          children: [
+            {
+              name: 'Daniel Zhang',
+              position: 'Outside Sales Manager',
+              salary: '$10000'
+            },
+            {
+              name: 'Karen Wang',
+              position: 'Outside Sales Supervisor',
+              salary: '$8000'
+            },
+            {
+              name: 'Jack Liu',
+              position: 'Outside Sales Representative',
+              salary: '$5000'
+            }
+          ],
+          total_children: 20,
+          monthly_expense: '$25000',
+          new_hires_this_month: 3,
+          resignations_this_month: 2,
+          complaints_and_suggestions: 1
+        }
+      ],
+      hierarchyState: 'collapse'
+    },
+    {
+      department: 'IT Department',
+      total_children: 40,
+      monthly_expense: '$60000',
+      new_hires_this_month: 8,
+      resignations_this_month: 3,
+      complaints_and_suggestions: 1,
+      children: [
+        {
+          group: 'Software Development Group',
+          children: [
+            {
+              name: 'Jason Wang',
+              position: 'Software Development Manager',
+              salary: '$12000'
+            },
+            {
+              name: 'Emily Chen',
+              position: 'Software Development Supervisor',
+              salary: '$10000'
+            },
+            {
+              name: 'David Li',
+              position: 'Software Developer',
+              salary: '$8000'
+            }
+          ],
+          total_children: 25,
+          monthly_expense: '$40000',
+          new_hires_this_month: 5,
+          resignations_this_month: 1,
+          complaints_and_suggestions: 1
+        },
+        {
+          group: 'IT Support Group',
+          children: [
+            {
+              name: 'Michael Zhang',
+              position: 'IT Support Manager',
+              salary: '$10000'
+            },
+            {
+              name: 'Lucy Wang',
+              position: 'IT Support Supervisor',
+              salary: '$8000'
+            },
+            {
+              name: 'Sam Li',
+              position: 'IT Support Specialist',
+              salary: '$6000'
+            }
+          ],
+          total_children: 15,
+          monthly_expense: '$20000',
+          new_hires_this_month: 3,
+          resignations_this_month: 2,
+          complaints_and_suggestions: 0
+        }
+      ],
+      hierarchyState: 'collapse'
+    },
+    {
+      department: 'Purchasing Department',
+      total_children: 25,
+      monthly_expense: '$35000',
+      new_hires_this_month: 4,
+      resignations_this_month: 1,
+      complaints_and_suggestions: 0,
+      children: [
+        {
+          group: 'Procurement Group',
+          children: [
+            {
+              name: 'David Chen',
+              position: 'Procurement Manager',
+              salary: '$8000'
+            },
+            {
+              name: 'Karen Zhang',
+              position: 'Procurement Supervisor',
+              salary: '$6000'
+            },
+            {
+              name: 'Tom Li',
+              position: 'Procurement Specialist',
+              salary: '$4000'
+            }
+          ],
+          total_children: 15,
+          monthly_expense: '$25000',
+          new_hires_this_month: 3,
+          resignations_this_month: 1,
+          complaints_and_suggestions: 0
+        },
+        {
+          group: 'Logistics Group',
+          children: [
+            {
+              name: 'Alice Wang',
+              position: 'Logistics Manager',
+              salary: '$8000'
+            },
+            {
+              name: 'Bob Chen',
+              position: 'Logistics Supervisor',
+              salary: '$6000'
+            },
+            {
+              name: 'Cathy Li',
+              position: 'Logistics Specialist',
+              salary: '$4000'
+            }
+          ],
+          total_children: 10,
+          monthly_expense: '$10000',
+          new_hires_this_month: 1,
+          resignations_this_month: 0,
+          complaints_and_suggestions: 0
+        }
+      ],
+      hierarchyState: 'collapse'
+    },
+    {
+      department: 'Customer Service Department',
+      total_children: 30,
+      monthly_expense: '$40000',
+      new_hires_this_month: 5,
+      resignations_this_month: 2,
+      complaints_and_suggestions: 2,
+      children: [
+        {
+          group: 'Customer Support Group',
+          children: [
+            {
+              name: 'Emma Zhang',
+              position: 'Customer Support Manager',
+              salary: '$8000'
+            },
+            {
+              name: 'Kevin Wang',
+              position: 'Customer Support Supervisor',
+              salary: '$6000'
+            },
+            {
+              name: 'Lucy Li',
+              position: 'Customer Support Representative',
+              salary: '$4000'
+            }
+          ],
+          total_children: 20,
+          monthly_expense: '$25000',
+          new_hires_this_month: 3,
+          resignations_this_month: 2,
+          complaints_and_suggestions: 2
+        },
+        {
+          group: 'Technical Support Group',
+          children: [
+            {
+              name: 'Frank Chen',
+              position: 'Technical Support Manager',
+              salary: '$8000'
+            },
+            {
+              name: 'Grace Zhang',
+              position: 'Technical Support Supervisor',
+              salary: '$6000'
+            },
+            {
+              name: 'Jack Wang',
+              position: 'Technical Support Specialist',
+              salary: '$4000'
+            }
+          ],
+          total_children: 10,
+          monthly_expense: '$15000',
+          new_hires_this_month: 2,
+          resignations_this_month: 0,
+          complaints_and_suggestions: 0
+        }
+      ],
+      hierarchyState: 'collapse'
+    }
+  ],
+  columns,
+  widthMode: 'standard'
+};
+
+// 定义故事的dsl
+const dsl = {
+  characters: [
+      {
+        type: 'VTable',
+        id: 'table0',
+        zIndex: 10,
+        position: {
+          top: 20,
+          left: 20,
+          width: 500,
+          height: 300
+        },
+        options: {
+          spec: listTableOption,
+          initOption: {
+            interactive: true,
+            animation: false,
+            disableTriggerEvent: true,
+            disableDirtyBounds: true
+          }
+        }
+      }
+  ],
+  acts: [
+    {
+      id: 'default-chapter',
+      scenes: [
+        {
+          id: 'scene0',
+          actions: [
+            {
+              characterId: 'table0',
+              characterActions: [
+                {
+                  action: 'bounce',
+                  payload: {
+                    animation: {
+                      duration: 2000,
+                      easing: 'quadOut'
+                    },
+                    type: 'bounce4',
+                    flipY: true
+                    // dy: 30,
+                  }
+                },
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
+const player = new VStory.Player(story);
+story.init(player);
+
+player.play(0);
+window['story'] = story;
+window['vstory'] = story;
+```
+
+### 基本组件（Image、Line、Rect、Shape、Text、Arc、Polygon）
+
+组件类型的接口定义如下，其中基本组件（Image、Line、Rect、Shape、Text、Arc、Polygon）的配置都直接基于 VRender 的对应图元，配置在 graphic 属性上：
+
+- Image 是基于 VRender 的[Image 图元](/vrender/option/Image)
+- Line 是基于 VRender 的[Line 图元](/vrender/option/Line)
+- Rect 是基于 VRender 的[Rect 图元](/vrender/option/Rect)
+- Shape 是基于 VRender 的[Symbol 图元](/vrender/option/Symbol)
+- Text 是基于 VRender 的[RichText 图元](/vrender/option/RichText)
+- Arc 是基于 VRender 的[Arc 图元](/vrender/option/Arc)
+- Polygon 是基于 VRender 的[Polygon 图元](/vrender/option/Polygon)
+
+其中 panel 是组件的额外面板，其实是一个[VRender 的 rect](/vrender/option/Rect)图元，可以参考[VRender 的 rect](/vrender/option/Rect)图元配置。
+text 配置是每个组件都带有的一个额外的配置，是一个[VRender 的 text](/vrender/option/Text)图元，可以参考[VRender 的 text](/vrender/option/Text)图元配置。
+padding 表示面板和内容的边距，分别表示上、右、下、左的边距。
 
 ```ts
 interface IComponentCharacterConfig extends ICharacterConfigBase {
@@ -265,7 +886,7 @@ const rect = {
     text: '这是一个矩形',
     textBaseline: 'middle',
     textAlign: 'center',
-    fill: 'white',
+    fill: 'white'
   }
 };
 const text = {
@@ -276,7 +897,7 @@ const text = {
     fill: 'red',
     textAlign: 'left',
     textBaseline: 'top'
-  },
+  }
 };
 const image = {
   graphic: {
@@ -290,56 +911,59 @@ const shape = {
     stroke: 'red',
     symbolType: 'star'
   }
-}
+};
 const line = {
   graphic: {
-    stroke: 'red',
+    stroke: 'red'
   }
-}
+};
 
 const characterList = [
   { type: 'Rect', options: rect, effect: 'scale' },
-  { type:'Text', options: text, effect: 'typewriter' },
-  { type:'Image', options: image, effect: 'wipe' },
-  { type:'Shape', options: shape, effect: 'clipRange' },
-  { type:'Line', options: line, effect: 'clipRange' },
-]
+  { type: 'Text', options: text, effect: 'typewriter' },
+  { type: 'Image', options: image, effect: 'wipe' },
+  { type: 'Shape', options: shape, effect: 'clipRange' },
+  { type: 'Line', options: line, effect: 'clipRange' }
+];
 
 const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
 const player = new VStory.Player(story);
 story.init(player);
 
 characterList.forEach((item, index) => {
-  story.addCharacter({
-    type: item.type,
-    id: item.type,
-    zIndex: 1,
-    position: {
-      top: 50 + Math.floor(index / 2) * 150,
-      left: 50 + Math.floor(index % 2) * 150,
-      width: 100,
-      height: 100
+  story.addCharacter(
+    {
+      type: item.type,
+      id: item.type,
+      zIndex: 1,
+      position: {
+        top: 50 + Math.floor(index / 2) * 150,
+        left: 50 + Math.floor(index % 2) * 150,
+        width: 100,
+        height: 100
+      },
+      options: item.options
     },
-    options: item.options
-  }, {
-    sceneId: 'defaultScene',
-    actions: [
-      {
-        action: 'appear',
-        startTime: 1000 * index,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000 * index,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
             }
-          }
-        ]
-      }
-    ]
-  });
-})
+          ]
+        }
+      ]
+    }
+  );
+});
 
 player.play(1);
 window.vstory = story;
@@ -347,11 +971,11 @@ window['story'] = story;
 window['vstory'] = story;
 ```
 
-### Timeline组件
+### Timeline 组件
 
 `Timeline`组件是一个时间轴组件，可以展示一整个时间序列，以及时间的流向，它的接口定义如下：
-```ts
 
+```ts
 interface TimelineAttrs extends IGroupGraphicAttribute {
   width: number; // 宽度
   // height?: number;
@@ -386,6 +1010,7 @@ interface ITimelineComponentAttributes extends IGroupGraphicAttribute {
 ```
 
 使用案例如下：
+
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
@@ -400,7 +1025,7 @@ const dsl = {
         top: 100,
         left: 0,
         width: 500,
-        height: 100,
+        height: 100
       },
       options: {
         graphic: {
@@ -408,7 +1033,7 @@ const dsl = {
             { label: '1486', desc: '' },
             { label: '1644', desc: '' },
             { label: '1765', desc: '' },
-            { label: '1786', desc: '' },
+            { label: '1786', desc: '' }
           ],
           labelStyle: {
             fontSize: 16,
@@ -421,7 +1046,7 @@ const dsl = {
             fontSize: 22,
             fontWeight: 'bold'
           }
-        },
+        }
       }
     }
   ],
@@ -445,7 +1070,7 @@ const dsl = {
                     }
                   }
                 },
-                ...(new Array(5).fill(0).map((item, index) => {
+                ...new Array(5).fill(0).map((item, index) => {
                   return {
                     startTime: 3000 + index * 3100,
                     action: 'state',
@@ -455,15 +1080,15 @@ const dsl = {
                         effect: 'forward'
                       }
                     }
-                  }
-                }))
+                  };
+                })
               ]
             }
           ]
         }
       ]
     }
-  ],
+  ]
 };
 
 const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
@@ -475,11 +1100,12 @@ window['story'] = story;
 window['vstory'] = story;
 ```
 
-### Unit组件
+### Unit 组件
 
 单元可视化组件，单元可视化是一种将数据转化为视觉元素的叙事方式，能够直观地展示复杂信息。通过将每个数据点个体化，观众能更深入地理解每一个数据背后所代表的真实故事。这种方式利用动画和时间推移，生动地描绘数据变化的过程，同时通过颜色和形状等视觉元素传达多维度的信息，增强了情感共鸣。它不仅提升了数据的可读性，还易于在社交媒体上分享，有助于提高公众对重要社会问题的关注。
 
 `Unit`组件的接口定义如下
+
 ```ts
 interface IUnitGraphicAttributes extends IGroupAttribute {
   /**
@@ -545,7 +1171,9 @@ interface IUnitGraphicAttributes extends IGroupAttribute {
   duration?: number;
 }
 ```
+
 使用案例如下：
+
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
@@ -647,7 +1275,7 @@ const dsl = {
                             symbolType: 'circle',
                             fill: '#6638f0'
                           }
-                        },
+                        }
                       ]
                     }
                   }

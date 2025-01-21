@@ -1,38 +1,38 @@
-import type { IGraphic, ITicker, ITimeline } from '@visactor/vrender-core';
+import type { ITicker, ITimeline } from '@visactor/vrender-core';
 import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
 import type { IChartGraphicAttribute } from './graphic/vchart-graphic';
 import { VChartGraphic } from './graphic/vchart-graphic';
 import { getChartModelWithEvent } from './utils/vchart-pick';
-import type { ICharacterConfig, ICharacterInitOption } from '../../interface/dsl/dsl';
+import type { ICharacterConfig, ICharacterInitOption, IUpdateConfigParams } from '../../interface/dsl/dsl';
 import type { IChartCharacterConfig } from '../../interface/dsl/chart';
 import { getLayoutFromWidget } from '../../utils/layout';
-import type { IChartCharacterRuntime, IUpdateConfigParams } from './interface/runtime';
-import { CommonSpecRuntimeInstance } from './runtime/common-spec';
-import { CommonLayoutRuntimeInstance } from './runtime/common-layout';
+import type { IChartCharacterRuntime } from './interface/runtime';
 import { ChartConfigProcess } from './chart-config-process';
 import type { ICharacterChart } from './interface/character-chart';
 import { mergeChartOption } from '../../utils/chart';
 import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
-import { MarkStyleRuntimeInstance } from './runtime/mark-style';
-import { LabelStyleRuntimeInstance } from './runtime/label-style';
+import { isArray } from '@visactor/vutils';
 
 export class CharacterChart<T extends IChartGraphicAttribute>
   extends CharacterBase<IChartGraphicAttribute>
   implements ICharacterChart
 {
+  static type = 'Chart';
   visActorType: 'chart' | 'component' | 'table' | 'common' = 'chart';
   protected declare _graphic: VChartGraphic;
   protected declare _config: IChartCharacterConfig;
 
-  // 临时记录 vchart 对象。在第一次执行 afterInitializeChart 后赋值， 在 afterVRenderDraw 中使用
-  // 不临时记录的话，第一次 afterVRenderDraw 时，graphic 对象还未执行完初始化，当前对象的 _graphic 为 null
+  // 临时记录 vchart 对象。在第一次执行 afterInitializeChart 后赋值， 在 beforeVRenderDraw 中使用
+  // 不临时记录的话，第一次 beforeVRenderDraw 时，graphic 对象还未执行完初始化，当前对象的 _graphic 为 null
   protected _vchart: IVChart;
 
   protected _ticker: ITicker;
   protected _timeline: ITimeline;
   protected _runtime: IChartCharacterRuntime[] = [];
+
+  static RuntimeMap: { [key: string]: boolean } = {};
 
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     super(config, option);
@@ -45,11 +45,41 @@ export class CharacterChart<T extends IChartGraphicAttribute>
     return this._config;
   }
 
-  tickTo(t: number): void {
-    this._graphic.vchart.getStage().ticker.tickAt && this._graphic.vchart.getStage().ticker.tickAt(t);
+  protected _initRuntime() {
+    super._initRuntime();
   }
 
-  getGraphicBySelector(selector: string) {
+  tickTo(t: number): void {
+    const stage = this._graphic.vchart.getStage();
+    stage.ticker.start();
+    stage.getTimeline().resume();
+    stage.ticker.tickAt && stage.ticker.tickAt(t);
+  }
+
+  getGraphicBySelector(selector: string | string[]) {
+    let chart = false;
+    let panel = false;
+    const seriesList: Set<ISeries> = new Set();
+    const componentsList: Set<IComponent> = new Set();
+    if (isArray(selector)) {
+      selector.forEach(s => {
+        const data = this._getGraphicBySelector(s);
+        chart = chart || data.chart;
+        panel = panel || data.panel;
+        data.seriesList.forEach(s => seriesList.add(s));
+        data.componentsList.forEach(c => componentsList.add(c));
+      });
+      return {
+        chart,
+        panel,
+        seriesList: Array.from(seriesList.values()),
+        componentsList: Array.from(componentsList.values())
+      };
+    }
+    return this._getGraphicBySelector(selector);
+  }
+
+  _getGraphicBySelector(selector: string) {
     const vchart = this._graphic.vchart;
     let chart = false;
     let seriesList = vchart.getChart().getAllSeries();
@@ -156,20 +186,12 @@ export class CharacterChart<T extends IChartGraphicAttribute>
     this.canvas.addGraphic(this._graphic);
   }
 
-  protected _initRuntime(): void {
-    this._runtime.push(
-      CommonSpecRuntimeInstance,
-      CommonLayoutRuntimeInstance,
-      MarkStyleRuntimeInstance,
-      LabelStyleRuntimeInstance
-    );
-  }
   protected _clearRuntime(): void {
     this._runtime.length = 0;
   }
 
   protected getViewBoxFromSpec() {
-    const layout = getLayoutFromWidget(this._config.position);
+    const layout = getLayoutFromWidget(this._config.position, this);
     const viewBox = {
       x1: layout.x,
       x2: layout.x + layout.width,
@@ -182,6 +204,8 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   protected applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void {
     this._attribute = this.getDefaultAttribute() as any;
     this._runtime.forEach(r => r.applyConfigToAttribute?.(this));
+    // 设置locked
+    this.locked = !!config.locked;
   }
 
   getDefaultAttribute(): Partial<IChartGraphicAttribute> {
@@ -207,9 +231,9 @@ export class CharacterChart<T extends IChartGraphicAttribute>
               this._vchart = vchart;
               this._runtime.forEach(r => r.afterInitialize?.(this, vchart));
             },
-
-            afterVRenderDraw: () => {
-              this._runtime.forEach(r => r.afterVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
+            // @ts-ignore
+            beforeDoRender: () => {
+              this._runtime.forEach(r => r.beforeVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
             }
           }
         },

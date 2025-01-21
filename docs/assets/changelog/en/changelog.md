@@ -1,3 +1,31 @@
+# v0.0.22
+
+2024-12-26
+
+
+**🆕 New feature**
+
+- **@visactor/vstory**: change runtime logic about get the character config
+- **@visactor/vstory-core**: enhance vchart animate arrange
+- **@visactor/vstory-core**: add arrange demo, support line growPoint animate
+- **@visactor/vstory-core**: change runtime logic about get the character config
+- **@visactor/vstory-core**: enhance scaleXY auto to support resize canvas wh
+- **@visactor/vstory-animate**: add arrange demo, support line growPoint animate
+- **@visactor/vstory-player**: support highlight action for vchart
+
+**🐛 Bug fix**
+
+- **@visactor/vstory**: fix issue with image background
+- **@visactor/vstory-core**: fix issue with image background
+- **@visactor/vstory-core**: fix issue with chart blur not clear
+
+
+
+[more detail about v0.0.22](https://github.com/VisActor/VStory/releases/tag/v0.0.22)
+- **@visactor/vstory-core**: support `auto` for scaleX/scaleY in initParams
+
+[more detail about v0.0.21](https://github.com/VisActor/VStory/releases/tag/v0.0.21)
+
 # v0.0.20
 
 2024-12-13

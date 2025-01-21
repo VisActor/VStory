@@ -5,6 +5,7 @@ import type { IComponentCharacterConfig } from './component';
 import type { ICharacter } from '../character';
 import type { IStory } from '../story';
 import type { IStoryCanvas } from '../canvas';
+import type { IPivotChartCharacterConfig, ITableCharacterConfig } from './table';
 
 export interface IAction<T extends IActionPayload> {
   action: string;
@@ -70,7 +71,9 @@ export interface ICharacterConfigBase {
   type: string; // 类型
   position: IWidgetData; // 定位描述
   zIndex: number;
+  theme?: string;
   extra?: any; // 带着的额外信息
+  locked?: boolean; // 是否锁定
 }
 
 export type IEditorTextGraphicAttribute = {
@@ -78,7 +81,13 @@ export type IEditorTextGraphicAttribute = {
   graphicBaseline?: 'top' | 'middle' | 'bottom';
 } & Partial<ITextGraphicAttribute & IRichTextGraphicAttribute>;
 
-export type ICharacterConfig = IChartCharacterConfig | IComponentCharacterConfig;
+export type ICharacterConfig =
+  | IChartCharacterConfig
+  | IComponentCharacterConfig
+  | ITableCharacterConfig
+  | IPivotChartCharacterConfig;
+
+export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;
 
 export interface ICharacterInitOption {
   story: IStory;

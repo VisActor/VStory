@@ -3,7 +3,6 @@ import { CharacterType } from '../../../constants/character';
 import { CharacterComponent } from '../character-component';
 import { ShapeComponent } from '../graphic/ShapeComponent';
 import type { IShapeComponentAttributes } from '../interface/character-shape';
-import { ShapeRuntimeInstance } from '../runtime/shape';
 
 export class ShapeCharacter extends CharacterComponent<ShapeComponent, IShapeComponentAttributes> {
   static type = CharacterType.SHAPE;
@@ -13,11 +12,6 @@ export class ShapeCharacter extends CharacterComponent<ShapeComponent, IShapeCom
   protected createAndAddGraphic(attribute: IShapeComponentAttributes): void {
     this._graphic = new ShapeComponent(attribute);
     this.canvas.addGraphic(this._graphic);
-  }
-
-  protected _initRuntime(): void {
-    super._initRuntime();
-    this._runtime.push(ShapeRuntimeInstance);
   }
 
   protected _clearGraphic(): void {

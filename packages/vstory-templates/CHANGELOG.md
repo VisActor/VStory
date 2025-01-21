@@ -1,6 +1,11 @@
 # Change Log - @visactor/vstory-templates
 
-This log was last generated on Thu, 26 Dec 2024 03:40:33 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Jan 2025 13:55:43 GMT and should not be manually modified.
+
+## 0.0.23
+Mon, 20 Jan 2025 13:55:43 GMT
+
+_Version update only_
 
 ## 0.0.22
 Thu, 26 Dec 2024 03:40:33 GMT

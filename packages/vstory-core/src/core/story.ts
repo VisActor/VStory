@@ -3,11 +3,14 @@ import type { IActionParams, IStory } from '../interface/story';
 import type { ICharacterConfig, IStoryDSL } from '../interface/dsl/dsl';
 import { StoryCanvas } from './canvas';
 import type { IStoryCanvas } from '../interface/canvas';
-import { isString } from '@visactor/vutils';
+import type { IAABBBoundsLike } from '@visactor/vutils';
+import { EventEmitter, isString } from '@visactor/vutils';
 import type { ICharacter } from '../interface/character';
 import type { IPlayer } from '../interface/player';
 import type { ICharacterTree } from '../interface/character-tree';
 import { CharacterTree } from './character-tree';
+import type { IPluginService } from '../interface/plugin-service';
+import { DefaultPluginService } from './plugin-service';
 
 type NodeCanvas = any;
 
@@ -18,18 +21,22 @@ export interface IStoryInitOption {
   height?: number;
   background?: string;
   layerBackground?: string;
+  layerViewBox?: IAABBBoundsLike;
   dpr?: number;
   // 对画面的缩放
   scaleX?: number | 'auto';
   scaleY?: number | 'auto';
+  theme?: string;
 }
 
-export class Story implements IStory {
+export class Story extends EventEmitter implements IStory {
   readonly id: string;
   protected _canvas: IStoryCanvas;
   protected _dsl: IStoryDSL | null;
   protected _player: IPlayer;
   protected _characterTree: ICharacterTree;
+  protected _theme: string;
+  pluginService: IPluginService;
 
   get canvas(): IStoryCanvas {
     return this._canvas;
@@ -39,15 +46,22 @@ export class Story implements IStory {
     return this._player;
   }
 
+  get theme(): string {
+    return this._theme;
+  }
+
   constructor(dsl: IStoryDSL | null, option: IStoryInitOption) {
+    super();
     this.id = `test-mvp_${Generator.GenAutoIncrementId()}`;
     const {
       dom,
       canvas,
       width,
       height,
+      theme,
       background = 'transparent',
       layerBackground = 'transparent',
+      layerViewBox,
       dpr = vglobal.devicePixelRatio,
       scaleX = 1,
       scaleY = 1
@@ -63,11 +77,17 @@ export class Story implements IStory {
       background,
       dpr,
       layerBackground,
+      layerViewBox,
       scaleX,
       scaleY
     });
     this._characterTree = new CharacterTree(this);
     this._dsl = dsl;
+    this._theme = theme;
+    this.pluginService = new DefaultPluginService();
+    this.pluginService.active(this, {
+      pluginList: []
+    });
   }
 
   init(player: IPlayer) {

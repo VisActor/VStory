@@ -44,12 +44,31 @@ import { ProjectGoal } from './demos/infographic/project-goal';
 import { BigDataWordCloud } from './demos/infographic/big-data-wordcloud';
 import { AreaChart } from './demos/infographic/source-of-new-contacts-area-chart';
 import { MarketingWordcloud } from './demos/infographic/marking-wordcloud';
+import { NoStackArea } from './demos/infographic/market-share';
+import { Top10Podcast } from './demos/infographic/top10_podcast';
 
 // VchartEditor Runtime
-import { RuntimeSeriesMark } from './demos/runtime/series-mark';
-import { RuntimeLabelStyle } from './demos/runtime/label-style';
 import { LineChartArrange } from './demos/arrange/LineChart';
 import { PieChart } from './demos/arrange/PieChart';
+import { RuntimeSeriesMark } from './demos/chart/runtime/series-mark';
+import { RuntimeLabelStyle } from './demos/chart/runtime/label-style';
+import { TableBase } from './demos/table/base';
+import { CellStyle } from './demos/table/runtime/cell-style';
+import { ColWidth } from './demos/table/runtime/col-width';
+import { RowHeight } from './demos/table/runtime/row-height';
+import { PivotChartBase } from './demos/table/runtime/pivot-chart-base';
+import { TextComponent } from './demos/component/text';
+import { SpecAxes } from './demos/chart/runtime/spec-axes';
+import { RuntimeTotalLabel } from './demos/chart/runtime/total-label';
+import { RectComponent } from './demos/component/rect';
+import { TableInfographic } from './demos/infographic/infographic-table';
+import { ComponentsEdit } from './demos/edit/components';
+import { ImageComponent } from './demos/component/image';
+import { ShapeComponent } from './demos/component/shape';
+import { ShowHeader } from './demos/table/runtime/show-header';
+import { TableTheme } from './demos/table/runtime/theme';
+import { TableStyle } from './demos/table/runtime/style';
+import { TableVisible } from './demos/table/runtime/visible';
 
 type MenusType = (
   | {
@@ -220,6 +239,22 @@ const App = () => {
         {
           name: 'LabelItemAnimate',
           component: LabelItemAnimate
+        },
+        {
+          name: 'TextComponent',
+          component: TextComponent
+        },
+        {
+          name: 'RectComponent',
+          component: RectComponent
+        },
+        {
+          name: 'ImageComponent',
+          component: ImageComponent
+        },
+        {
+          name: 'ShapeComponent',
+          component: ShapeComponent
         }
       ]
     },
@@ -229,6 +264,10 @@ const App = () => {
         {
           name: 'infographic',
           component: Infographic
+        },
+        {
+          name: 'table',
+          component: TableInfographic
         },
         {
           name: 'Dapanji',
@@ -273,12 +312,24 @@ const App = () => {
         {
           name: 'Marketing WordCloud',
           component: MarketingWordcloud
+        },
+        {
+          name: 'Market Share',
+          component: NoStackArea
+        },
+        {
+          name: 'Top 10 Podcast Publishers in US',
+          component: Top10Podcast
         }
       ]
     },
     {
-      name: 'VChart Editor',
+      name: 'Editor',
       subMenus: [
+        {
+          name: 'Components',
+          component: ComponentsEdit
+        },
         {
           name: 'Base Chart',
           component: BaseChart
@@ -286,8 +337,12 @@ const App = () => {
       ]
     },
     {
-      name: 'Runtime',
+      name: 'ChartRuntime',
       subMenus: [
+        {
+          name: 'Common Spec Axes',
+          component: SpecAxes
+        },
         {
           name: 'Series Mark',
           component: RuntimeSeriesMark
@@ -295,6 +350,51 @@ const App = () => {
         {
           name: 'Label Style',
           component: RuntimeLabelStyle
+        },
+        {
+          name: 'Total Label',
+          component: RuntimeTotalLabel
+        }
+      ]
+    },
+    {
+      name: 'TableRuntime',
+      subMenus: [
+        {
+          name: 'Base Table',
+          component: TableBase
+        },
+        {
+          name: 'Cell Style',
+          component: CellStyle
+        },
+        {
+          name: 'Col Width',
+          component: ColWidth
+        },
+        {
+          name: 'Row Height',
+          component: RowHeight
+        },
+        {
+          name: 'Pivot Chart Base',
+          component: PivotChartBase
+        },
+        {
+          name: 'Show Header',
+          component: ShowHeader
+        },
+        {
+          name: 'Theme',
+          component: TableTheme
+        },
+        {
+          name: 'Style',
+          component: TableStyle
+        },
+        {
+          name: 'Visible',
+          component: TableVisible
         }
       ]
     }

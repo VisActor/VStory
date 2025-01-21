@@ -2,7 +2,7 @@ import { cloneDeep, isValid, merge } from '@visactor/vutils';
 import type { ICharacter } from '../../interface/character';
 import { deepMergeWithDeletedAttr } from '../../utils/merge';
 import type { IConfigProcess } from './interface';
-import type { IUpdateConfigParams } from '../chart/interface/runtime';
+import type { IUpdateConfigParams } from '../../interface/dsl/dsl';
 
 export class ConfigProcessBase implements IConfigProcess {
   protected _character: ICharacter;
@@ -44,7 +44,10 @@ export class ConfigProcessBase implements IConfigProcess {
       targetConfig.zIndex = zIndex;
     }
     if (options) {
-      targetConfig.options = deepMergeWithDeletedAttr(targetConfig.options ?? {}, options);
+      targetConfig.options = deepMergeWithDeletedAttr(
+        targetConfig.options ?? ({} as typeof targetConfig.options),
+        options
+      );
     }
     return true;
   }

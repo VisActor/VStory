@@ -116,10 +116,9 @@ export class LottieCharacter extends CharacterComponent<LottieComponent, ILottie
 After encapsulation, we need to define a `Runtime` for `Lottie`. `Runtime` is the content that a Character executes at runtime, with some lifecycles, such as when options of the Character are updated, the runtime will execute.
 
 ```ts
-export class LottieRuntime extends BaseRuntime implements IComponentCharacterRuntime {
+export class LottieRuntime implements IComponentCharacterRuntime {
   type = 'Lottie';
   applyConfigToAttribute(character: ICharacterComponent): void {
-    super.applyConfigToAttribute(character);
     const rawAttribute = character.getAttribute();
 
     const { data } = rawAttribute.graphic;

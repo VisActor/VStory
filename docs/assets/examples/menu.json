@@ -146,6 +146,13 @@
           }
         },
         {
+          "path": "vtable",
+          "title": {
+            "zh": "vtable 表格",
+            "en": "vtable table"
+          }
+        },
+        {
           "path": "timeline",
           "title": {
             "zh": "时间轴组件",
@@ -226,6 +233,13 @@
           "title": {
             "zh": "单元可视化信息图示例",
             "en": "Unit Infographic Example"
+          }
+        },
+        {
+          "path": "table/pricing-plans",
+          "title": {
+            "zh": "表格信息图：定价表",
+            "en": "Table Infographic: Pricing Plans"
           }
         },
         {
@@ -380,6 +394,20 @@
           "title": {
             "zh": "信息图模板-散点图: 年龄与轻生率",
             "en": "Scatter Cloud Infographic: Age and Suicide Rate"
+          }
+        },
+        {
+          "path": "market-share-area-chart",
+          "title": {
+            "zh": "信息图模板-面积图: Market share",
+            "en": "Area chart Infographic: Market share"
+          }
+        },
+        {
+          "path": "top10-podcasts-bar-chart",
+          "title": {
+            "zh": "信息图模板-面积图: Top 10 Podcasts",
+            "en": "Bar chart Infographic: Top 10 Podcasts"
           }
         }
       ]

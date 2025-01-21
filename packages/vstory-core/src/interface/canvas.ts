@@ -1,5 +1,5 @@
 import type { ICanvasLike, IGraphic, IStage } from '@visactor/vrender-core';
-import type { ICharacter } from './character';
+import type { ICharacter, ILayoutLine } from './character';
 import type { IStoryEvent } from './event';
 import type { IReleaseable } from './releaseable';
 
@@ -18,4 +18,5 @@ export interface IStoryCanvas extends IReleaseable {
   // 添加graphic到canvas中
   addGraphic: (g: IGraphic) => void;
   removeGraphic: (g: IGraphic) => void;
+  getLayoutGuideLine: () => ILayoutLine[];
 }

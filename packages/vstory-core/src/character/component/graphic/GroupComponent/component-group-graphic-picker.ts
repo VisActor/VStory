@@ -21,7 +21,7 @@
 //     const vChart = (chart as Chart).vchart;
 //     const chartStage = vChart.getStage();
 //     // @ts-ignore
-//     chartStage._editor_needRender = true;
+//     chartStage._story_needRender = true;
 //     const matrix = chart.globalTransMatrix.clone();
 //     const stageMatrix = chart.stage.window.getViewBoxTransform();
 //     matrix.multiply(stageMatrix.a, stageMatrix.b, stageMatrix.c, stageMatrix.d, stageMatrix.e, stageMatrix.f);

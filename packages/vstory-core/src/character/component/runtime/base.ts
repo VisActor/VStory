@@ -3,13 +3,13 @@ import type { IComponentCharacterRuntime } from '../interface/runtime';
 import { getLayoutFromWidget } from '../../../utils/layout';
 import type { ICharacterComponent } from '../interface/character-component';
 
-export class BaseRuntime implements IComponentCharacterRuntime {
-  type = 'Base';
+export class BaseGraphicRuntime implements IComponentCharacterRuntime {
+  type = 'BaseGraphic';
 
   applyConfigToAttribute(character: ICharacterComponent): void {
     const rawAttribute = character.getAttribute();
-    const { options, position } = character.config;
-    const layout = getLayoutFromWidget(position);
+    const { options, position, locked } = character.config;
+    const layout = getLayoutFromWidget(position, character);
 
     const { graphic = {}, text = {}, panel = {}, padding } = options;
 
@@ -23,6 +23,12 @@ export class BaseRuntime implements IComponentCharacterRuntime {
     if (!rawAttribute.graphic) {
       rawAttribute.graphic = {};
     }
+    if (locked) {
+      rawAttribute.pickable = false;
+      rawAttribute.childrenPickable = false;
+    }
     merge(rawAttribute.graphic, graphic);
   }
 }
+
+export const BaseGraphicRuntimeInstance = new BaseGraphicRuntime();

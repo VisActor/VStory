@@ -9,5 +9,3 @@ export interface IComponentCharacterRuntime {
 export interface IComponentCharacterRuntimeConstructor {
   new (): IComponentCharacterRuntime;
 }
-
-export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;

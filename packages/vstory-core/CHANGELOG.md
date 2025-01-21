@@ -1,6 +1,16 @@
 # Change Log - @visactor/vstory-core
 
-This log was last generated on Thu, 26 Dec 2024 03:40:33 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Jan 2025 13:55:43 GMT and should not be manually modified.
+
+## 0.0.23
+Mon, 20 Jan 2025 13:55:43 GMT
+
+### Updates
+
+- feat: support highlight inverse select
+- feat: support selector array
+- feat: suppprt Arc/Polygon Component
+- feat: support table animate
 
 ## 0.0.22
 Thu, 26 Dec 2024 03:40:33 GMT

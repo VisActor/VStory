@@ -119,7 +119,7 @@ export class VChartGraphic extends Rect {
           // 只有vstory触发的render才会真的render
           beforeRender: stage => {
             const chartStage = this._vchart.getStage();
-            if (!(chartStage as any)._editor_needRender) {
+            if (!(chartStage as any)._story_needRender) {
               chartStage.pauseRender();
               stage.dirtyBounds?.union(this.globalAABBBounds);
               stage.renderNextFrame();
@@ -127,7 +127,7 @@ export class VChartGraphic extends Rect {
           },
           afterRender: stage => {
             // @ts-ignore
-            stage._editor_needRender = false;
+            stage._story_needRender = false;
             stage.resumeRender();
           }
         },
@@ -174,6 +174,9 @@ export class VChartGraphic extends Rect {
       super.setAttribute('x', value.x1);
       super.setAttribute('y', value.y1);
       this.updateVChartGraphicViewBox(value);
+    }
+    if (key === 'spec') {
+      this._vchart.updateSpecSync(value, false, {}, { reMake: true, change: true });
     } else {
       super.setAttribute(key, value);
     }
@@ -184,6 +187,9 @@ export class VChartGraphic extends Rect {
     if (attrs.viewBox) {
       this.attribute.viewBox = lastedViewBox;
       this.updateVChartGraphicViewBox(attrs.viewBox);
+    }
+    if (attrs.spec) {
+      this._vchart.updateSpecSync(attrs.spec, false, {}, { reMake: true, change: true });
     }
   }
 

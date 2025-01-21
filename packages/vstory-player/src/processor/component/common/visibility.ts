@@ -59,7 +59,7 @@ export class CommonVisibilityActionProcessor extends ActionProcessorItem {
     });
   }
 
-  selectBySelector(selector: string, character: ICharacter): IGraphic[] {
+  selectBySelector(selector: string | string[], character: ICharacter): IGraphic[] {
     if (character.getGraphicBySelector) {
       return character.getGraphicBySelector(selector);
     }

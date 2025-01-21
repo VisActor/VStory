@@ -55,7 +55,7 @@ export class VChartRender extends DefaultCanvasRectRender implements IGraphicRen
     const vchartCtx = vchartStage.window.getContext();
     vchartCtx.baseGlobalAlpha *= baseOpacity;
     // @ts-ignore
-    vchartStage._editor_needRender = true;
+    vchartStage._story_needRender = true;
     const matrix = chart.globalTransMatrix.clone();
     // auto 模式下，需要将vchart.stage的viewBoxTransform 设置到包含偏移量的位置
     matrix.translate(chart.vchartAutoTranslate.x, chart.vchartAutoTranslate.y);

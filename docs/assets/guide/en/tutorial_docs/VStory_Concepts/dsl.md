@@ -3,7 +3,9 @@
 DSL is a JSON format that describes a VStory work. It defines which elements are used in this work and their related configurations. It describes how the work is arranged, what elements are doing what actions at what moment. For a quick hands-on introduction to DSL, please refer to [A Basic DSL](../Basic/A_Basic_DSL). This tutorial will provide a detailed explanation of the specific definition of DSL.
 
 ## Structure
+
 `DSL` is a JSON format object that contains the following fields:
+
 1. `character` array
    The `character` array is used to describe which elements are used in this work and their related configurations.
 2. `acts` array
@@ -17,6 +19,7 @@ interface IStoryDSL {
 ```
 
 ### character Array
+
 The `character` array is used to describe which types of elements are used in this work and their related configurations. It includes position and size (`position`), and layer (`layout`) information.
 
 ```ts
@@ -55,6 +58,7 @@ Currently, there are three major types of `character`: chart, component, and tab
 #### Chart Type
 
 The chart type supports VChart charts, where you can directly configure the VChart spec and additional properties as listed below:
+
 ```ts
 interface IChartCharacterConfig extends ICharacterConfigBase {
   options: {
@@ -70,15 +74,15 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
     data?: any;
     // Title
     title?: {
-      [key: string]: IComponentConfig<ISpec['title']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['title']>>;
     };
     // Legends
     legends?: {
-      [key: string]: IComponentConfig<ISpec['legends']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['legends']>>;
     };
     // Axes
     axes?: {
-      [key: string]: IComponentConfig<ISpec['axes']>;
+      [key in ModelSelector]: Partial<ElementType<ISpec['axes']>>;
     };
     // Color palette
     color?: any;
@@ -100,10 +104,12 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
   };
 }
 ```
+
 #### Component Type
 
 Text, images, etc., belong to the component type. If you need to use custom components in VStory, you need to register them in VStory first and then use them in DSL. This will be detailed in [Custom Component](./Custom_Component).
 Note that a component can carry additional text, which is configured through the `text` property, while the `graphic` property is the configuration of the component itself.
+
 ```ts
 interface IComponentCharacterConfig extends ICharacterConfigBase {
   options: {
@@ -118,23 +124,31 @@ interface IComponentCharacterConfig extends ICharacterConfigBase {
   };
 }
 ```
+
 #### Table Type
+
 Under development
 
 ### Acts Array
+
 Through the `characters` array, we can place multiple elements on the canvas. Next, we need to use the `acts` array to describe how the work is arranged, what elements are doing what actions at what moment. `acts` consist of acts, scenes, and actions.
 The `acts` array can contain multiple acts, where acts are connected in a sequential structure. Each act can contain multiple scenes, where scenes are connected in a default sequential structure. However, scenes' timelines can overlap, and the `delay` field can be configured to control the offset of the timeline between this scene and the previous scene. Each scene can contain multiple actions, where actions describe specific behaviors of one or more `character`. Multiple characters and actions can be included in one scene, and actions are executed in parallel. The `startTime` is configured to control the start time of the action.
 
 #### Acts
+
 Acts are the largest chapters in the work, and a work can contain multiple acts, which are connected in a sequential structure.
+
 ```ts
 interface IActSpec {
   id: string; // Act ID
   scenes: ISceneSpec[]; // Array of scenes
 }
 ```
+
 #### Scenes
+
 A scene is a timeline that contains an array of actions. Scenes are connected in a default sequential structure, but the timeline of scenes can be offset from the previous scene by configuring the `delay` field.
+
 ```ts
 type ISceneSpec = {
   id: string;
@@ -142,8 +156,11 @@ type ISceneSpec = {
   actions: IActions[];
 };
 ```
+
 #### Actions
+
 An action contains the specific behavior of one or more `character`. Multiple actions can be included in one scene, and actions are executed in parallel. The `startTime` is configured to control the start time of the action.
+
 ```ts
 interface IActions {
   characterId: string | string[]; // ID or array of IDs of characters to perform the action

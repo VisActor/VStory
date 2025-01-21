@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vgraphic.gif
 
 # 图元元素
 
-我们提供了丰富的图元元素，包括文字，矩形，线段，shape等。在使用这些图元元素时，您可以通过配置属性来自定义图表的样式和行为，以满足您的需求。
+我们提供了丰富的图元元素，包括文字，矩形，线段，shape 等。在使用这些图元元素时，您可以通过配置属性来自定义图表的样式和行为，以满足您的需求。
 
 ## 代码演示
 
@@ -25,7 +25,7 @@ const rect = {
     text: '这是一个矩形',
     textBaseline: 'middle',
     textAlign: 'center',
-    fill: 'white',
+    fill: 'white'
   }
 };
 const text = {
@@ -54,50 +54,111 @@ const shape = {
     stroke: 'red',
     symbolType: 'star'
   }
-}
+};
+
+const arc = {
+  graphic: {
+    innerRadius: 20,
+    startAngle: 0,
+    endAngle: Math.PI * 2,
+    fill: 'orange'
+  }
+};
+
+const polygon = {
+  graphic: {
+    points: [
+      { x: 50 + (200 / (2 * Math.sqrt(3))) * Math.cos(0), y: 50 + (200 / (2 * Math.sqrt(3))) * Math.sin(0) },
+      {
+        x: 50 + (200 / (2 * Math.sqrt(3))) * Math.cos(Math.PI / 3),
+        y: 50 + (200 / (2 * Math.sqrt(3))) * Math.sin(Math.PI / 3)
+      },
+      {
+        x: 50 + (200 / (2 * Math.sqrt(3))) * Math.cos((2 * Math.PI) / 3),
+        y: 50 + (200 / (2 * Math.sqrt(3))) * Math.sin((2 * Math.PI) / 3)
+      },
+      {
+        x: 50 + (200 / (2 * Math.sqrt(3))) * Math.cos(Math.PI),
+        y: 50 + (200 / (2 * Math.sqrt(3))) * Math.sin(Math.PI)
+      },
+      {
+        x: 50 + (200 / (2 * Math.sqrt(3))) * Math.cos((4 * Math.PI) / 3),
+        y: 50 + (200 / (2 * Math.sqrt(3))) * Math.sin((4 * Math.PI) / 3)
+      },
+      {
+        x: 50 + (200 / (2 * Math.sqrt(3))) * Math.cos((5 * Math.PI) / 3),
+        y: 50 + (200 / (2 * Math.sqrt(3))) * Math.sin((5 * Math.PI) / 3)
+      }
+    ],
+    fill: {
+      gradient: 'linear',
+      x0: 0,
+      y0: 0,
+      x1: 1,
+      y1: 0,
+      stops: [
+        { offset: 0, color: 'green' },
+        { offset: 0.5, color: 'orange' },
+        { offset: 1, color: 'red' }
+      ]
+    }
+  }
+};
 
 const characterList = [
   { type: 'Rect', options: rect, effect: 'scale' },
-  { type:'Text', options: text, effect: 'typewriter' },
-  { type:'Image', options: image, effect: 'wipe' },
-  { type:'Shape', options: shape, effect: 'clipRange' }
-]
+  { type: 'Text', options: text, effect: 'typewriter' },
+  { type: 'Image', options: image, effect: 'wipe' },
+  { type: 'Shape', options: shape, effect: 'clipRange' },
+  { type: 'Polygon', options: polygon, effect: 'fade' },
+  { type: 'Arc', options: arc, effect: 'growAngle' }
+];
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, width: 400, height: 400, scaleX: 'auto', scaleY: 'auto', background: '#ebecf0' });
+const story = new VStory.Story(null, {
+  dom: CONTAINER_ID,
+  width: 500,
+  height: 400,
+  scaleX: 'auto',
+  scaleY: 'auto',
+  background: '#ebecf0'
+});
 const player = new VStory.Player(story);
 story.init(player);
 
 characterList.forEach((item, index) => {
-  story.addCharacter({
-    type: item.type,
-    id: item.type,
-    zIndex: 1,
-    position: {
-      top: 50 + Math.floor(index / 2) * 150,
-      left: 50 + Math.floor(index % 2) * 150,
-      width: 100,
-      height: 100
+  story.addCharacter(
+    {
+      type: item.type,
+      id: item.type,
+      zIndex: 1,
+      position: {
+        top: 50 + Math.floor(index / 3) * 150,
+        left: 50 + Math.floor(index % 3) * 150,
+        width: 100,
+        height: 100
+      },
+      options: item.options
     },
-    options: item.options
-  }, {
-    sceneId: 'defaultScene',
-    actions: [
-      {
-        action: 'appear',
-        startTime: 1000 * index,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000 * index,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
             }
-          }
-        ]
-      }
-    ]
-  });
-})
+          ]
+        }
+      ]
+    }
+  );
+});
 
 player.play(1);
 

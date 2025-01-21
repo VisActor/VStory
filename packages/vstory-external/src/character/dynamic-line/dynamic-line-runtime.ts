@@ -2,6 +2,7 @@ import { DYNAMIC_LINE } from './constant';
 import type { IDynamicLineChartGraphicAttribute } from './dynamic-line-interface';
 import type { IChartCharacterRuntime } from '@visactor/vstory-core/es/character/chart/interface/runtime';
 import type { ICharacterChart } from '@visactor/vstory-core/es/character/chart/interface/character-chart';
+import { RuntimeStore } from '@visactor/vstory-core';
 
 export class DynamicLineRuntime implements IChartCharacterRuntime {
   type = DYNAMIC_LINE;
@@ -42,3 +43,4 @@ export class DynamicLineRuntime implements IChartCharacterRuntime {
 }
 
 export const DynamicLineRuntimeInstance = new DynamicLineRuntime();
+RuntimeStore.register(DynamicLineRuntimeInstance);
