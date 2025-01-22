@@ -1,4 +1,4 @@
-import type { ICanvasLike, IGraphic, IStage } from '@visactor/vrender-core';
+import type { ICanvasLike, IGraphic, ILayer, IStage } from '@visactor/vrender-core';
 import { createStage, ManualTicker, vglobal } from '@visactor/vrender-core';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IStory } from '../interface/story';
@@ -63,15 +63,14 @@ export class StoryCanvas implements IStoryCanvas {
 
     // this._stage.background = background;
     this._stage.defaultLayer.setAttributes({ background: layerBackground });
-    if (layerViewBox) {
-      this._stage.defaultLayer.setAttributes({
-        x: layerViewBox.x1,
-        y: layerViewBox.y1,
-        width: layerViewBox.x2 - layerViewBox.x1,
-        height: layerViewBox.y2 - layerViewBox.y1,
-        clip: true
-      });
-    }
+    const viewBox = layerViewBox || { x1: 0, y1: 0, x2: width, y2: height };
+    this._stage.defaultLayer.setAttributes({
+      x: viewBox.x1,
+      y: viewBox.y1,
+      width: (viewBox.x2 - viewBox.x1) / scaleX,
+      height: (viewBox.y2 - viewBox.y1) / scaleY,
+      clip: true
+    });
     this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 
@@ -174,8 +173,34 @@ export class StoryCanvas implements IStoryCanvas {
     // this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 
-  resize(w: number, h: number) {
+  resize(w: number, h: number, scale?: { scaleX: number; scaleY: number }) {
     this._stage.resize(w, h, true);
+    let scaleX = 1;
+    let scaleY = 1;
+    if (scale) {
+      scaleX = scale.scaleX;
+      scaleY = scale.scaleY;
+    }
+    this._stage.forEachChildren((layer: ILayer) => {
+      layer.setAttributes({
+        x: 0,
+        y: 0,
+        width: w / scaleX,
+        height: h / scaleY,
+        scaleX,
+        scaleY
+      });
+    });
+  }
+
+  setLayerViewBox(viewBox: IAABBBoundsLike) {
+    this._stage.defaultLayer.setAttributes({
+      x: viewBox.x1,
+      y: viewBox.y1,
+      width: viewBox.x2 - viewBox.x1,
+      height: viewBox.y2 - viewBox.y1,
+      clip: true
+    });
   }
 
   getEventDetail(event: IStoryEvent) {

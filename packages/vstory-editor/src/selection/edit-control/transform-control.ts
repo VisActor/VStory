@@ -10,11 +10,12 @@ import type {
   IRectGraphicAttribute,
   ILineGraphicAttribute,
   IGroup,
-  ILine
+  ILine,
+  ISymbolGraphicAttribute
 } from '@visactor/vrender';
 import { createLine, createRect } from '@visactor/vrender';
 import type { IAABBBounds, IAABBBoundsLike, IPointLike } from '@visactor/vutils';
-import { AABBBounds, abs, Matrix, merge, normalizeAngle, normalizePadding, pi } from '@visactor/vutils';
+import { AABBBounds, abs, cloneDeep, Matrix, merge, normalizeAngle, normalizePadding, pi } from '@visactor/vutils';
 import { AbstractComponent } from '@visactor/vrender-components';
 import { DRAG_ANCHOR_COLOR, SHAPE_SELECT_COLOR, MinSize } from './constants';
 import { DragComponent } from './transform-drag';
@@ -37,7 +38,7 @@ export type ControllerAttributes = {
   resizeBorder?: Partial<ILineGraphicAttribute>;
   cornerRect?: Partial<IRectGraphicAttribute>;
   rotateCircle?: Partial<ICircleGraphicAttribute>;
-  rotatePath?: Partial<IPathGraphicAttribute> & { size: number };
+  rotatePath?: Partial<ISymbolGraphicAttribute> & { size: number };
   handlerLine?: Partial<ILineGraphicAttribute> & { size: number };
   shapeCircle?: Partial<ICircleGraphicAttribute>;
   move?: boolean;
@@ -201,7 +202,8 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       size: 12,
       angle: Math.PI,
       // eslint-disable-next-line
-      path: 'M202.403,95.22c0,46.312-33.237,85.002-77.109,93.484v25.663l-69.76-40l69.76-40v23.494 c27.176-7.87,47.109-32.964,47.109-62.642c0-35.962-29.258-65.22-65.22-65.22s-65.22,29.258-65.22,65.22 c0,9.686,2.068,19.001,6.148,27.688l-27.154,12.754c-5.968-12.707-8.994-26.313-8.994-40.441C11.964,42.716,54.68,0,107.184,0 S202.403,42.716,202.403,95.22z'
+      symbolType:
+        'M95.403.22c0 46.312-33.237 85.002-77.109 93.484v25.663l-69.76-40 69.76-40v23.494C45.47 54.991 65.403 29.897 65.403.219c0-35.962-29.258-65.22-65.22-65.22s-65.22 29.258-65.22 65.22c0 9.686 2.068 19.001 6.148 27.688l-27.154 12.754C-92.011 27.954-95.037 14.348-95.037.22-95.036-52.284-52.32-95 .184-95S95.403-52.284 95.403.22z'
     },
     handlerLine: {
       stroke: SHAPE_SELECT_COLOR,
@@ -219,7 +221,14 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
   };
 
   constructor(editSelection: IEditSelection, attributes: Partial<ControllerAttributes>) {
-    super(merge({ shadowRootIdx: 1 }, TransformController.defaultAttributes, attributes));
+    super(
+      merge(
+        { shadowRootIdx: 1 },
+        TransformController.defaultAttributes,
+        editSelection.edit.theme.layoutTransformerControl,
+        attributes
+      )
+    );
     this.editSelection = editSelection;
     this._editorConfig = {
       move: attributes.move !== false,
@@ -767,12 +776,23 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       cornerRect,
       rotateCircle,
       rotatePath,
-      handlerLine,
+      handlerLine: _handlerLine,
       shapeCircle,
       enabledAnchors = ['top', 'bottom', 'left-top', 'left-bottom', 'right', 'left', 'right-top', 'right-bottom'],
       shapePoints = [],
       isShapePointAbsolute
     } = this.attribute as ControllerAttributes;
+
+    let scaleX = 1;
+    let scaleY = 1;
+    // 如果editLayer有缩放的话，控件需要放大
+    if (this.layer) {
+      scaleX = this.layer.attribute.scaleX ? 1 / this.layer.attribute.scaleX : scaleX;
+      scaleY = this.layer.attribute.scaleY ? 1 / this.layer.attribute.scaleY : scaleY;
+    }
+
+    const handlerLine = cloneDeep(_handlerLine);
+    handlerLine.size *= (scaleX + scaleY) / 2;
 
     const root = this.editBorder.shadowRoot;
     if (!root || this.count === 1) {
@@ -831,7 +851,8 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
           x: minX + width / 2,
           y: minY - handlerLine.size - rotateCircle.radius,
           cursor: 'grab',
-          ...rotateCircle
+          ...rotateCircle,
+          radius: (rotateCircle.radius * (scaleX + scaleY)) / 2
         },
         'circle'
       );
@@ -839,16 +860,13 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
         `path-rotate`,
         {
           pickable: false,
-          x: minX + width / 2 + rotatePath.size / 2,
-          y: minY - handlerLine.size + rotatePath.size / 2 - rotateCircle.radius,
-          scaleX: rotatePath.size / 200,
-          scaleY: rotatePath.size / 200,
+          x: minX + width / 2,
+          y: minY - handlerLine.size - rotateCircle.radius,
           cursor: 'grab',
-          dx: 0.5,
-          dy: -0.5,
-          ...rotatePath
+          ...rotatePath,
+          size: (rotatePath.size * (scaleX + scaleY)) / 2
         },
-        'path'
+        'symbol'
       );
     }
 
@@ -866,6 +884,9 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
             x: minX + item[0] * width - cornerRect.width! / 2,
             y: minY + item[1] * height - cornerRect.height! / 2,
             cursor,
+            scaleX,
+            scaleY,
+            scaleCenter: ['50%', '50%'],
             ...cornerRect
           },
           'rect'

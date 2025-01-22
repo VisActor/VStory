@@ -10,9 +10,12 @@ import type { IGroup, IGraphic } from '@visactor/vrender';
 import { createGroup } from '@visactor/vrender';
 import { EditActionEnum, SeriesMarkMode } from './const';
 import type { ICharacter, ILayoutLine, IStoryEvent, Story } from '@visactor/vstory-core';
+import { Theme } from './theme';
 
 export class Edit extends EventEmitter {
   readonly editAction: EditAction;
+
+  readonly theme: Theme = new Theme();
 
   protected static selectionConstructorMap: { [key: string]: IEditSelectionConstructor } = {};
 
