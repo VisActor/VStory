@@ -2,6 +2,7 @@ import { registerCharacter } from './story';
 
 registerCharacter();
 
+export * from './story/canvas/canvas';
 export * from './story';
 export * from './story/utils/vchart-pick';
 export * from './story/utils/chart';

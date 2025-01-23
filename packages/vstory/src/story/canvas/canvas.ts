@@ -5,9 +5,11 @@ import { loadBrowserEnv } from '@visactor/vrender';
 import type { IStoryCanvas, StoryEvent } from '../interface/runtime-interface';
 import type { ICharacter } from '../character/runtime-interface';
 
-preLoadAllModule();
-loadBrowserEnv(container);
-vglobal.setEnv('browser');
+export function setBrowserEnv() {
+  preLoadAllModule();
+  loadBrowserEnv(container);
+  vglobal.setEnv('browser');
+}
 
 export class StoryCanvas implements IStoryCanvas {
   protected _story: Story;
@@ -26,6 +28,18 @@ export class StoryCanvas implements IStoryCanvas {
     return this._container;
   }
 
+  protected _params: {
+    container?: HTMLDivElement;
+    canvas?: HTMLCanvasElement;
+    width?: number;
+    height?: number;
+    dpr?: number;
+    pluginList?: string[];
+  };
+  get dpr() {
+    return this._params.dpr ?? vglobal.devicePixelRatio;
+  }
+
   constructor(
     story: Story,
     params: {
@@ -33,12 +47,15 @@ export class StoryCanvas implements IStoryCanvas {
       canvas?: HTMLCanvasElement;
       width?: number;
       height?: number;
+      dpr?: number;
+      pluginList?: string[];
     }
   ) {
     this._story = story;
+    this._params = params;
     this._container = params.container;
     this._container && this._initCanvasByContainer();
-    params.canvas && this._initCanvasByCanvas(params.canvas, params.width || 500, params.height || 500);
+    params.canvas && this._initCanvasByCanvas(params.canvas, params.width || 500, params.height || 500, params.dpr);
   }
 
   resize(w: number, h: number) {
@@ -61,13 +78,13 @@ export class StoryCanvas implements IStoryCanvas {
       canvas: this._canvas,
       width: this._container.clientWidth,
       height: this._container.clientHeight,
-      dpr: vglobal.devicePixelRatio,
+      dpr: this.dpr,
       canvasControled: true,
       // 得开启自动渲染，否则编辑场景中无法触发视图更新
       autoRender: true,
       disableDirtyBounds: true,
       ticker: new ManualTicker([]),
-      pluginList: ['RichTextEditPlugin'],
+      pluginList: this._params.pluginList ?? [],
       event: {
         clickInterval: 300
       }
@@ -76,7 +93,7 @@ export class StoryCanvas implements IStoryCanvas {
     this._stage = stage;
   }
 
-  protected _initCanvasByCanvas(canvas: HTMLCanvasElement, width: number, height: number) {
+  protected _initCanvasByCanvas(canvas: HTMLCanvasElement, width: number, height: number, dpr: number) {
     this._canvas = canvas;
     const stage = createStage({
       canvas: this._canvas,
@@ -87,8 +104,8 @@ export class StoryCanvas implements IStoryCanvas {
       autoRender: true,
       disableDirtyBounds: true,
       ticker: new ManualTicker([]),
-      pluginList: ['RichTextEditPlugin'],
-      dpr: vglobal.devicePixelRatio,
+      pluginList: this._params.pluginList ?? [],
+      dpr: this.dpr,
       event: {
         clickInterval: 300
       }

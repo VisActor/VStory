@@ -11,9 +11,11 @@ export interface IStoryInitOption {
     scaleX?: number;
     scaleY?: number;
   };
+  dpr?: number;
 }
 
 export interface IStoryCanvas {
+  readonly dpr: number;
   getStage: () => IStage;
   getCanvas: () => HTMLCanvasElement;
   resize: (w: number, height: number) => void;

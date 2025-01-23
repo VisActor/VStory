@@ -30,10 +30,13 @@ const splitModule = new ContainerModule(bind => {
   bind(GraphicRender).toService(ComponentGroupRender);
 });
 
-const editPlugin = new ContainerModule(bind => {
-  bind(RichTextEditPlugin).toSelf();
-  bind(AutoEnablePlugins).toService(RichTextEditPlugin);
-});
+export function registerEditPlugin() {
+  const editPlugin = new ContainerModule(bind => {
+    bind(RichTextEditPlugin).toSelf();
+    bind(AutoEnablePlugins).toService(RichTextEditPlugin);
+  });
+  container.load(editPlugin);
+}
 
 let _register = false;
 export function registerCharacter() {
@@ -58,7 +61,6 @@ export function registerCharacter() {
   StoryFactory.registerCharacter(StoryComponentType.UNIT, CharacterComponentUnit);
 
   container.load(splitModule);
-  container.load(editPlugin);
 }
 
 registerCharacter();

@@ -60,7 +60,7 @@ export class CharacterChart extends CharacterVisactor {
       vchart: null,
       zIndex: this._spec.zIndex,
       mode: 'desktop-browser',
-      dpr: window.devicePixelRatio,
+      dpr: this._option.canvas.dpr,
       interactive: false,
       autoRender: false,
       disableDirtyBounds: true,
