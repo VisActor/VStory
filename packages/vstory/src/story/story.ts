@@ -35,8 +35,14 @@ export class Story implements IStory {
     return this._characterTree;
   }
 
+  protected _option: IStoryInitOption;
+  get option() {
+    return this._option;
+  }
+
   constructor(spec: IStorySpec | null, option: IStoryInitOption) {
     this.id = 'test-mvp_' + Story._id_++;
+    this._option = option;
     this._canvas = new StoryCanvas(this, {
       container: isString(option.dom) ? (document.getElementById(option.dom) as HTMLDivElement) : option.dom,
       canvas: isString(option.canvas) ? (document.getElementById(option.canvas) as HTMLCanvasElement) : option.canvas,

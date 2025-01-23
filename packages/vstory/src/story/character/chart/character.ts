@@ -59,7 +59,7 @@ export class CharacterChart extends CharacterVisactor {
       ClassType: VChart,
       vchart: null,
       zIndex: this._spec.zIndex,
-      mode: 'desktop-browser',
+      mode: this._option.story.option.renderMode === 'node' ? 'desktop-browser' : 'node',
       dpr: this._option.canvas.dpr,
       interactive: false,
       autoRender: false,
