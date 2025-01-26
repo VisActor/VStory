@@ -183,6 +183,9 @@ export class VTableGraphic extends Rect {
       super.setAttribute('x', value.x1);
       super.setAttribute('y', value.y1);
       this.updateVTableGraphicViewBox(value);
+    }
+    if (key === 'spec') {
+      (this._vTable as any).updateOption(value);
     } else {
       super.setAttribute(key, value);
     }
@@ -193,6 +196,9 @@ export class VTableGraphic extends Rect {
     if (attrs.viewBox) {
       this.attribute.viewBox = lastedViewBox;
       this.updateVTableGraphicViewBox(attrs.viewBox);
+    }
+    if (attrs.spec) {
+      (this._vTable as any).updateOption(this._createOption(attrs));
     }
   }
 
