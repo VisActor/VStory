@@ -109,9 +109,9 @@ const dsl = {
           shadowOffsetX: 4,
           shadowOffsetY: 4,
           cornerRadius: 8
-        }
+        },
+        spec
       },
-      spec
     }
   ],
   // 图表的具体动画编排
