@@ -8,8 +8,8 @@ export class TextRuntime implements IComponentCharacterRuntime {
 
   applyConfigToAttribute(character: ICharacterComponent): void {
     const rawAttribute = character.getAttribute();
-    const { options, position } = character.config;
-    const layout = getLayoutFromWidget(position, character);
+    const { options } = character.config;
+    const layout = getLayoutFromWidget(character.config, character);
 
     const { graphic = {}, panel = {}, padding } = options;
 

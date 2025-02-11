@@ -8,8 +8,8 @@ export class BaseGraphicRuntime implements IComponentCharacterRuntime {
 
   applyConfigToAttribute(character: ICharacterComponent): void {
     const rawAttribute = character.getAttribute();
-    const { options, position, locked } = character.config;
-    const layout = getLayoutFromWidget(position, character);
+    const { options, locked } = character.config;
+    const layout = getLayoutFromWidget(character.config, character);
 
     const { graphic = {}, text = {}, panel = {}, padding } = options;
 

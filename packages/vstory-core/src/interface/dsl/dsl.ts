@@ -33,22 +33,20 @@ export interface IActionPayload {
 export type IActionSpec = IAction<IActionPayload>;
 
 export type IWidgetData = {
+  // 网格布局定位
+  columnSpan?: [number, number];
+  rowSpan?: [number, number];
+
   left?: number;
   top?: number;
-  x?: number;
-  y?: number;
+  bottom?: number;
+  right?: number;
+  width?: number;
+  height?: number;
+
   angle?: number;
   anchor?: [number, number];
-} & (
-  | {
-      bottom?: number;
-      right?: number;
-    }
-  | {
-      width?: number;
-      height?: number;
-    }
-);
+};
 
 export interface IActSpec {
   id: string;
@@ -69,11 +67,32 @@ export type ISceneSpec = {
 export interface ICharacterConfigBase {
   id: string;
   type: string; // 类型
+  layoutType?: 'absolute' | 'grid' | 'flex'; // 布局类型
+  // flex布局配置
+  flexConfig?: {
+    direction: 'row' | 'column';
+    wrap: 'wrap' | 'nowrap';
+    justifyContent: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
+    alignItems: 'flex-start' | 'flex-end' | 'center';
+  };
+  // 网格布局配置
+  gridConfig?: {
+    columns: number;
+    rows: number;
+    gutterColumn: number;
+    gutterRow: number;
+  };
   position: IWidgetData; // 定位描述
   zIndex: number;
   theme?: string;
   extra?: any; // 带着的额外信息
   locked?: boolean; // 是否锁定
+}
+
+// 新增 container 类型的配置接口
+export interface IContainerCharacterConfig extends ICharacterConfigBase {
+  type: 'container';
+  children: ICharacterConfig[]; // 子元素
 }
 
 export type IEditorTextGraphicAttribute = {
@@ -85,7 +104,8 @@ export type ICharacterConfig =
   | IChartCharacterConfig
   | IComponentCharacterConfig
   | ITableCharacterConfig
-  | IPivotChartCharacterConfig;
+  | IPivotChartCharacterConfig
+  | IContainerCharacterConfig; // 添加 container 类型
 
 export type IUpdateConfigParams = Omit<Partial<ICharacterConfig>, 'id' | 'type'>;
 
@@ -101,6 +121,17 @@ export interface ICharacterConstructor {
 }
 
 export interface IStoryDSL {
-  acts: IActSpec[]; // 作品的章节
+  version: string; // 版本号
+  width: number;
+  height: number;
+  theme?: string; // 主题
+  background?: string; // 背景色
+  gridConfig?: {
+    columns: number;
+    rows: number;
+    gutterColumn: number;
+    gutterRow: number;
+  };
   characters: ICharacterConfig[]; // 作品中的元素
+  acts: IActSpec[]; // 作品的章节
 }
