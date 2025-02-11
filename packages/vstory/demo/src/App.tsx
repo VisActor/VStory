@@ -70,6 +70,7 @@ import { TableTheme } from './demos/table/runtime/theme';
 import { TableStyle } from './demos/table/runtime/style';
 import { TableVisible } from './demos/table/runtime/visible';
 import { SpecMarker } from './demos/chart/runtime/spec-marker';
+import { LayoutGridComponent } from './demos/layout/grid';
 
 type MenusType = (
   | {
@@ -256,6 +257,15 @@ const App = () => {
         {
           name: 'ShapeComponent',
           component: ShapeComponent
+        }
+      ]
+    },
+    {
+      name: 'Layout',
+      subMenus: [
+        {
+          name: 'Grid',
+          component: LayoutGridComponent
         }
       ]
     },
