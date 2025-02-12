@@ -1,5 +1,5 @@
 import { registerRankingBarChart } from '@visactor/vchart-extension';
-import { VChart } from '@visactor/vchart/esm/core';
+import { VChart } from '@visactor/vchart';
 
 import { StoryFactory } from '../../../factory/factory';
 import { CharacterChart } from '../character';
