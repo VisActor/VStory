@@ -7,6 +7,7 @@ export interface IStoryInitOption {
   canvas?: string | HTMLCanvasElement; // canvas id
   width?: number;
   height?: number;
+  pluginList?: string[];
   playerOption?: {
     scaleX?: number;
     scaleY?: number;

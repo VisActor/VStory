@@ -48,7 +48,8 @@ export class Story implements IStory {
       canvas: isString(option.canvas) ? (document.getElementById(option.canvas) as HTMLCanvasElement) : option.canvas,
       width: option.width,
       height: option.height,
-      dpr: option.dpr
+      dpr: option.dpr,
+      pluginList: option.pluginList ?? []
     });
     this._player = new Player(this, option.playerOption) as any;
 
