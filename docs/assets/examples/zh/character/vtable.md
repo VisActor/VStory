@@ -1,8 +1,8 @@
 ---
 category: examples
 group: character
-title: vchart
-keywords: vchart
+title: VTable表格元素
+keywords: vtable
 order: 1-0
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vtable.png
 ---
