@@ -191,7 +191,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   }
 
   protected getViewBoxFromSpec() {
-    const layout = getLayoutFromWidget(this._config.position, this);
+    const layout = getLayoutFromWidget(this._config, this);
     const viewBox = {
       x1: layout.x,
       x2: layout.x + layout.width,
