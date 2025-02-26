@@ -18,6 +18,7 @@ export default {
     alias: {
       '@visactor/vstory': path.resolve(__dirname, '../packages/vstory/src/index.ts'),
       '@visactor/vstory-core': path.resolve(__dirname, '../packages/vstory-core/src/index.ts'),
+      '@visactor/vstory-editor': path.resolve(__dirname, '../packages/vstory-editor/src/index.ts'),
       '@visactor/vstory-render': path.resolve(__dirname, '../packages/vstory-render/src/index.ts'),
       '@visactor/vstory-animate': path.resolve(__dirname, '../packages/vstory-animate/src/index.ts'),
       '@visactor/vstory-player': path.resolve(__dirname, '../packages/vstory-player/src/index.ts'),
