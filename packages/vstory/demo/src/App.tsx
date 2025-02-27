@@ -70,6 +70,7 @@ import { TableTheme } from './demos/table/runtime/theme';
 import { TableStyle } from './demos/table/runtime/style';
 import { TableVisible } from './demos/table/runtime/visible';
 import { SpecMarker } from './demos/chart/runtime/spec-marker';
+import { DeepseekShockwave } from './demos/infographic/deepseek-shockwave';
 
 type MenusType = (
   | {
@@ -321,6 +322,10 @@ const App = () => {
         {
           name: 'Top 10 Podcast Publishers in US',
           component: Top10Podcast
+        },
+        {
+          name: 'Deepseek Shockwave',
+          component: DeepseekShockwave
         }
       ]
     },
