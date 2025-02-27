@@ -27,6 +27,7 @@ export interface IStoryInitOption {
   scaleX?: number | 'auto';
   scaleY?: number | 'auto';
   theme?: string;
+  dslOptions?: Omit<IStoryDSL, 'characters' | 'acts'>;
 }
 
 export class Story extends EventEmitter implements IStory {
@@ -36,6 +37,7 @@ export class Story extends EventEmitter implements IStory {
   protected _player: IPlayer;
   protected _characterTree: ICharacterTree;
   protected _theme: string;
+  protected _dslOptions: Omit<IStoryDSL, 'characters' | 'acts'>;
   pluginService: IPluginService;
 
   get canvas(): IStoryCanvas {
@@ -48,6 +50,10 @@ export class Story extends EventEmitter implements IStory {
 
   get theme(): string {
     return this._theme;
+  }
+
+  get dslOptions(): Omit<IStoryDSL, 'characters' | 'acts'> {
+    return this._dslOptions;
   }
 
   constructor(dsl: IStoryDSL | null, option: IStoryInitOption) {
@@ -64,7 +70,8 @@ export class Story extends EventEmitter implements IStory {
       layerViewBox,
       dpr = vglobal.devicePixelRatio,
       scaleX = 1,
-      scaleY = 1
+      scaleY = 1,
+      dslOptions = { version: '0.0.2', width: option.width, height: option.height }
     } = option;
     if (!(dom || canvas)) {
       throw new Error('dom or canvas is required');
@@ -83,11 +90,26 @@ export class Story extends EventEmitter implements IStory {
     });
     this._characterTree = new CharacterTree(this);
     this._dsl = dsl;
+    if (dsl) {
+      const options = { ...dsl };
+      delete options.characters;
+      delete options.acts;
+      this._dslOptions = options;
+    } else {
+      this._dslOptions = dslOptions;
+    }
     this._theme = theme;
     this.pluginService = new DefaultPluginService();
     this.pluginService.active(this, {
       pluginList: []
     });
+
+    // TODO 兼容历史版本，后续版本删除
+    if (!(this._dslOptions.width && this._dslOptions.height)) {
+      console.warn('width and height is required in dslOptions');
+    }
+    this._dslOptions.width = this._dslOptions.width ?? this._canvas.getStage().width;
+    this._dslOptions.height = this._dslOptions.height ?? this._canvas.getStage().height;
   }
 
   init(player: IPlayer) {
@@ -112,6 +134,7 @@ export class Story extends EventEmitter implements IStory {
   }
   toDSL(): IStoryDSL {
     return {
+      ...this._dslOptions,
       acts: this._player.toDSL(),
       characters: this._characterTree.toDSL()
     };

@@ -16,6 +16,9 @@ export interface IStory extends IReleaseable, EventEmitter {
   readonly player: IPlayer;
   readonly theme: string;
 
+  // 忽略IStoryDSL中的characters和actions
+  readonly dslOptions: Omit<IStoryDSL, 'characters' | 'acts'>;
+
   load: (dsl: IStoryDSL) => void;
   reset: () => void;
   toDSL: () => IStoryDSL;
