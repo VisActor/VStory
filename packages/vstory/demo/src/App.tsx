@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -8,7 +8,6 @@ import { TextAnimate } from './demos/Text';
 import { Bounce } from './demos/animate/Bounce';
 import { Leap } from './demos/animate/Leap';
 import { WaveScatter } from './demos/story-chart/wave-scatter';
-import { ScatterBar } from './demos/story-chart/scatter-bar';
 import { ScatterBarSwing } from './demos/story-chart/scatter-bar-swing';
 import { ScatterBarThrow } from './demos/story-chart/scatter-bar-throw';
 import { RankingBar } from './demos/story-chart/ranking-bar';
@@ -22,6 +21,15 @@ import { VScreen } from './demos/works/vscreen';
 import { Lottie } from './demos/component/lottie';
 import { Infographic } from './demos/infographic/infographic';
 import { SomeCharts } from './demos/works/some-charts';
+import {
+  QuickSort,
+  BubbleSort,
+  InsertSort,
+  SelectionSort,
+  MergeSort,
+  HeapSort,
+  ShellSort
+} from './demos/infographic/data-structure-algorithms';
 
 import { BaseChart } from './demos/vchart-editor/base-chart';
 import { Dapanji } from './demos/infographic/dapanji';
@@ -71,26 +79,15 @@ import { TableStyle } from './demos/table/runtime/style';
 import { TableVisible } from './demos/table/runtime/visible';
 import { SpecMarker } from './demos/chart/runtime/spec-marker';
 
-type MenusType = (
-  | {
-      name: string;
-      component: () => React.JSX.Element;
-      subMenus?: undefined;
-    }
-  | {
-      name: string;
-      subMenus: {
-        name: string;
-        component: () => React.JSX.Element;
-      }[];
-      component?: undefined;
-    }
-)[];
+type MenuItem = {
+  name: string;
+  component?: () => React.JSX.Element;
+  subMenus?: MenuItem[];
+};
 
 const App = () => {
   const [activeName, setActiveName] = useLocalStorage('menuName', '');
 
-  console.log(activeName);
   const menus = [
     {
       name: 'Base',
@@ -263,6 +260,18 @@ const App = () => {
       name: 'Infographic',
       subMenus: [
         {
+          name: 'Data Structure Algorithms',
+          subMenus: [
+            { name: 'Quick Sort', component: QuickSort },
+            { name: 'Bubble Sort', component: BubbleSort },
+            { name: 'Insertion Sort', component: InsertSort },
+            { name: 'Selection Sort', component: SelectionSort },
+            { name: 'Merge Sort', component: MergeSort },
+            { name: 'Heap Sort', component: HeapSort },
+            { name: 'Shell Sort', component: ShellSort }
+          ]
+        },
+        {
           name: 'infographic',
           component: Infographic
         },
@@ -404,8 +413,8 @@ const App = () => {
       ]
     }
   ];
-  const getSelectedMenu = useCallback<(menus: MenusType) => any>(
-    (menus: MenusType) => {
+  const getSelectedMenu = useCallback<(menus: MenuItem[]) => any>(
+    (menus: MenuItem[]) => {
       for (let i = 0; i < menus.length; i++) {
         const menu = menus[i];
         if (menu.name === activeName) {
@@ -423,31 +432,34 @@ const App = () => {
     [activeName]
   );
   const selectedMenu = getSelectedMenu(menus);
-  console.log('selectedMenu', selectedMenu);
+
+  // 修改渲染部分为递归函数
+  const renderMenu = (items: MenuItem[], level: number) =>
+    items.map(item => {
+      if (item.subMenus) {
+        return (
+          <Nav.Sub level={level} key={item.name} itemKey={item.name} text={item.name}>
+            {renderMenu(item.subMenus, level + 1)}
+          </Nav.Sub>
+        );
+      }
+      return <Nav.Item level={level} key={item.name} itemKey={item.name} text={item.name} />;
+    });
 
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      <div style={{ flex: '0 0 200px', height: '90vh', overflowY: 'auto', border: '1px solid #eee' }}>
+      <div style={{ flex: '0 0 300px', height: '90vh', overflowY: 'auto', border: '1px solid #eee' }}>
         <Nav
-          style={{ width: 200 }}
-          onSelect={data => setActiveName(data.itemKey)}
+          level={1}
+          limitIndent={false}
+          style={{ width: '100%' }}
+          onSelect={(data: any) => setActiveName(data.itemKey)}
           selectedKeys={[activeName]}
           footer={{
             collapseButton: false
           }}
         >
-          {menus.map(item => {
-            if (!item.subMenus) {
-              return <Nav.Item key={item.name} itemKey={item.name} text={item.name} />;
-            }
-            return (
-              <Nav.Sub key={item.name} itemKey={item.name} text={item.name}>
-                {item.subMenus.map(menu => (
-                  <Nav.Item key={menu.name} itemKey={menu.name} text={menu.name} />
-                ))}
-              </Nav.Sub>
-            );
-          })}
+          {renderMenu(menus, 0)}
         </Nav>
       </div>
 
