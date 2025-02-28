@@ -1,5 +1,5 @@
 import type { ICanvasLike, IGraphic, ILayer, IStage } from '@visactor/vrender-core';
-import { createStage, ManualTicker, vglobal } from '@visactor/vrender-core';
+import { createStage, vglobal, ManualTicker } from '@visactor/vrender';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IStory } from '../interface/story';
 import type { IStoryEvent } from '../interface/event';
