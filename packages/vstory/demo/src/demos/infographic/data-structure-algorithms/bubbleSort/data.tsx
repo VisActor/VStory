@@ -3,6 +3,7 @@ import { IStoryDSL, Player, Story } from '../../../../../../../vstory-core/src';
 import { registerAll } from '../../../../../../src';
 
 registerAll();
+// 排序算法
 export const Sort = () => {
   const id = 'Sort';
   const ref = useRef<Story>();
