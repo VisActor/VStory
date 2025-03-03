@@ -19,6 +19,17 @@ const result = child_process.spawnSync(
       ? `${commitlintBinPath} --config "${configPath}" --cwd "${path.dirname(gitPath)}" --edit`
       : `"${commitlintBinPath}" --config "${configPath}" --cwd "${path.dirname(gitPath)}" --edit`
   ],
+  {
+    stdio: 'inherit',
+    shell: true
+  }
+  process.platform === 'win32' ? 'cmd' : 'sh',
+  [
+    process.platform === 'win32' ? '/c' : '-c',
+    process.platform === 'win32'
+      ? `${commitlintBinPath} --config "${configPath}" --cwd "${path.dirname(gitPath)}" --edit`
+      : `"${commitlintBinPath}" --config "${configPath}" --cwd "${path.dirname(gitPath)}" --edit`
+  ],
   process.platform === 'win32'
     ? {
         stdio: 'inherit',
