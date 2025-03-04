@@ -17,12 +17,13 @@ export const ComponentsEdit = () => {
     const scaleY = 0.7;
     const story = new Story(null, {
       canvas,
-      width: 1000 * scaleX,
-      height: 600 * scaleY,
-      // layerBackground: 'white',
+      width: 1000,
+      height: 600,
+      layerBackground: 'white',
       background: 'pink',
       scaleX,
-      scaleY
+      scaleY,
+      layerViewBox: { x1: 100, y1: 100, x2: 900, y2: 500 }
     });
     const player = new Player(story);
     story.init(player);
@@ -97,9 +98,19 @@ export const ComponentsEdit = () => {
     let selectedCharacter: any = null;
     const edit = new Edit(story as any);
     edit.theme.setLayoutTransformerControlTheme({
-      handlerLine: { size: 13 },
-      rotateCircle: { radius: 8 },
-      rotatePath: { size: 8 }
+      handlerLine: { size: 8, stroke: false },
+      rotateCircle: { radius: 6, active: { fill: '#8c52ff', scaleX: 1.6, scaleY: 1.6 } },
+      rotatePath: { size: 6, active: { fill: 'white', stroke: 'white', scaleX: 1.6, scaleY: 1.6 } },
+      resizeBorder: { lineWidth: 2, stroke: '#8c52ff' },
+      cornerRect: {
+        fill: 'white',
+        stroke: 'grey',
+        lineWidth: 1,
+        cornerRadius: 100,
+        scaleX: 2,
+        scaleY: 2,
+        active: { fill: '#8c52ff' }
+      }
     });
     edit.on('startEdit', msg => {
       selectedCharacter = msg.actionInfo.character;

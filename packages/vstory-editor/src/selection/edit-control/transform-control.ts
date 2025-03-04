@@ -11,7 +11,9 @@ import type {
   ILineGraphicAttribute,
   IGroup,
   ILine,
-  ISymbolGraphicAttribute
+  ISymbolGraphicAttribute,
+  IFillStyle,
+  IStrokeStyle
 } from '@visactor/vrender';
 import { createLine, createRect } from '@visactor/vrender';
 import type { IAABBBounds, IAABBBoundsLike, IPointLike } from '@visactor/vutils';
@@ -33,14 +35,18 @@ type AnchorDirection = 'top' | 'bottom' | 'left-top' | 'left-bottom' | 'right' |
 const fixedAngles = [0, Math.PI / 2, Math.PI, (Math.PI * 3) / 2, Math.PI * 2];
 const maxAngleDifference = (3 / 180) * Math.PI; // 10 degrees
 
+type IActive = {
+  active: IFillStyle & IStrokeStyle;
+};
+
 export type ControllerAttributes = {
   padding?: number | [number, number, number, number];
-  resizeBorder?: Partial<ILineGraphicAttribute>;
-  cornerRect?: Partial<IRectGraphicAttribute>;
-  rotateCircle?: Partial<ICircleGraphicAttribute>;
-  rotatePath?: Partial<ISymbolGraphicAttribute> & { size: number };
-  handlerLine?: Partial<ILineGraphicAttribute> & { size: number };
-  shapeCircle?: Partial<ICircleGraphicAttribute>;
+  resizeBorder?: Partial<ILineGraphicAttribute> & Partial<IActive>;
+  cornerRect?: Partial<IRectGraphicAttribute> & Partial<IActive>;
+  rotateCircle?: Partial<ICircleGraphicAttribute> & Partial<IActive>;
+  rotatePath?: Partial<ISymbolGraphicAttribute> & { size: number } & Partial<IActive>;
+  handlerLine?: Partial<ILineGraphicAttribute> & { size: number } & Partial<IActive>;
+  shapeCircle?: Partial<ICircleGraphicAttribute> & Partial<IActive>;
   move?: boolean;
   rotate?: boolean;
   resize?: boolean;
@@ -377,6 +383,8 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     // cursor
     this.editBorder.addEventListener('mousemove', this.handleMouseMove);
     this.addEventListener('pointerout', this.handleMouseOut);
+    this.editBorder.addEventListener('pointerenter', this.handleMouseEnter);
+    this.editBorder.addEventListener('pointerleave', this.handleMouseLeave);
 
     // drag
     // TODO 这里不生效
@@ -421,6 +429,28 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     } else {
       this.unTransStartCbs.forEach(cb => cb(e));
       this._dragger.startDrag(e);
+    }
+  };
+
+  protected handleMouseEnter = (e: any) => {
+    const { shadowTarget } = e.pickParams || {};
+    if (shadowTarget) {
+      shadowTarget.addState('active', true, true);
+      if (shadowTarget.name === 'rotate-all' && shadowTarget.parent) {
+        shadowTarget.parent.getElementsByName('path-rotate').forEach((g: IGraphic) => {
+          g.addState('active', true, true);
+        });
+      }
+    }
+  };
+  protected handleMouseLeave = (e: any) => {
+    if (e.target === this.editBorder) {
+      const shadowRoot = this.editBorder.shadowRoot;
+      if (shadowRoot) {
+        shadowRoot.forEachChildren((child: IGraphic) => {
+          child.removeState('active', true);
+        });
+      }
     }
   };
 
@@ -812,7 +842,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       const enableResize = this._editorConfig.resize && enabledAnchors.includes(anchor as AnchorDirection);
       const item = anchorPositionMap[anchor];
       const cursor = enableResize ? anchorCursorMap[anchor] : 'default';
-      root.createOrUpdateChild(
+      const ag = root.createOrUpdateChild(
         enableResize ? `scale-${anchor}` : `stroke-line-${anchor}`,
         {
           x: minX,
@@ -827,12 +857,17 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
           ...resizeBorder
         },
         'line'
-      );
+      ) as IGraphic;
+      if (resizeBorder.active) {
+        (ag as any).states = {
+          active: resizeBorder.active
+        };
+      }
     });
 
     if (this._editorConfig.rotate) {
       // 添加顶部
-      root.createOrUpdateChild(
+      const l = root.createOrUpdateChild(
         'top-handler-line',
         {
           x: minX + width / 2,
@@ -845,7 +880,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
         },
         'line'
       );
-      root.createOrUpdateChild(
+      const c = root.createOrUpdateChild(
         `rotate-all`,
         {
           x: minX + width / 2,
@@ -856,7 +891,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
         },
         'circle'
       );
-      root.createOrUpdateChild(
+      const s = root.createOrUpdateChild(
         `path-rotate`,
         {
           pickable: false,
@@ -868,6 +903,22 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
         },
         'symbol'
       );
+
+      if (rotatePath.active) {
+        (s as any).states = {
+          active: rotatePath.active
+        };
+      }
+      if (rotateCircle.active) {
+        (c as any).states = {
+          active: rotateCircle.active
+        };
+      }
+      if (rotatePath.active) {
+        (l as any).states = {
+          active: rotatePath.active
+        };
+      }
     }
 
     // 添加锚点
@@ -878,7 +929,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
         }
         const item = anchorPositionMap[anchor];
         const cursor = anchorCursorMap[anchor];
-        root.createOrUpdateChild(
+        const a = root.createOrUpdateChild(
           `scale-${anchor}`,
           {
             x: minX + item[0] * width - cornerRect.width! / 2,
@@ -891,6 +942,11 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
           },
           'rect'
         );
+        if (cornerRect.active) {
+          (a as any).states = {
+            active: cornerRect.active
+          };
+        }
       });
     }
 
@@ -1162,6 +1218,8 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
 
   releaseEvent() {
     this.editBorder.removeEventListener('mousemove', this.handleMouseMove);
+    this.editBorder.removeEventListener('pointerenter', this.handleMouseEnter);
+    this.editBorder.removeEventListener('pointerleave', this.handleMouseLeave);
     if (this.stage) {
       this.stage.removeEventListener('pointermove', this.handleDragMouseMove);
       this.stage.removeEventListener('pointerup', this.handleDragMouseUp);
