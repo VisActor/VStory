@@ -1,6 +1,7 @@
-import { array, isArray, isString, isValid, merge } from '@visactor/vutils';
+import { isArray, isString, isValid, merge } from '@visactor/vutils';
 import type { IChart } from '@visactor/vchart-types/types/chart/interface';
-import type { ICartesianSeries, ISeries } from '@visactor/vchart-types/types/series';
+import type { ICartesianSeries } from '@visactor/vchart-types/types/series';
+import type { ISeries } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
 import { VCHART_DATA_INDEX, ValueLink, FieldLink, lineSymbolPathMap, LineSymbolType } from './const';
 import type { IChartCharacterConfig, IComponentMatch, IMarkStyle } from '../../../interface/dsl/chart';
@@ -36,13 +37,13 @@ export function getSeriesKeyScalesMap(series: ISeries) {
   let axisHelper: any;
   let fields: string[];
   const map: { [key: string]: any } = {};
-  if ((<ICartesianSeries>series).direction) {
-    if ((<ICartesianSeries>series).direction === 'vertical') {
-      axisHelper = (<ICartesianSeries>series).getXAxisHelper();
-      fields = (<ICartesianSeries>series).fieldX;
+  if ((<ICartesianSeries>(<unknown>series)).direction) {
+    if ((<ICartesianSeries>(<unknown>series)).direction === 'vertical') {
+      axisHelper = (<ICartesianSeries>(<unknown>series)).getXAxisHelper();
+      fields = (<ICartesianSeries>(<unknown>series)).fieldX;
     } else {
-      axisHelper = (<ICartesianSeries>series).getYAxisHelper();
-      fields = (<ICartesianSeries>series).fieldY;
+      axisHelper = (<ICartesianSeries>(<unknown>series)).getYAxisHelper();
+      fields = (<ICartesianSeries>(<unknown>series)).fieldY;
     }
     if (axisHelper?.getScale) {
       fields.forEach((f, i) => {
