@@ -4,17 +4,38 @@ import type { ICharacter } from './character';
 import type { IActionSpec, ICharacterConfig, IStoryDSL } from './dsl/dsl';
 import type { IPlayer } from './player';
 import type { IReleaseable } from './releaseable';
+import type { IAABBBoundsLike } from '@visactor/vutils';
 
 export type IActionParams = {
   actions: IActionSpec[];
   sceneId: string;
 };
 
+type NodeCanvas = any;
+export interface IStoryInitOption {
+  dom?: string | HTMLDivElement; // dom id
+  canvas?: string | HTMLCanvasElement | NodeCanvas; // canvas id
+  width?: number;
+  height?: number;
+  background?: string;
+  layerBackground?: string;
+  layerViewBox?: IAABBBoundsLike;
+  dpr?: number;
+  // 对画面的缩放
+  scaleX?: number | 'auto';
+  scaleY?: number | 'auto';
+  theme?: string;
+  pluginList?: string[];
+  mode?: 'desktop-browser' | 'node';
+  modeParams?: any;
+}
+
 export interface IStory extends IReleaseable, EventEmitter {
   readonly id: string;
   readonly canvas: IStoryCanvas;
   readonly player: IPlayer;
   readonly theme: string;
+  readonly option: IStoryInitOption;
 
   load: (dsl: IStoryDSL) => void;
   reset: () => void;

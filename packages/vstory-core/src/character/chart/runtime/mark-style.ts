@@ -4,7 +4,7 @@ import type { ISeries, IVChart } from '@visactor/vchart';
 import { getSeriesKeyScalesMap, GetVChartSeriesWithMatch, matchDatumWithScaleMap } from './utils';
 import type { IChartCharacterConfig } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
-import type { IMark } from '@visactor/vchart/esm/mark/interface';
+import type { IMark } from '@visactor/vchart-types/types/mark/interface';
 import {
   CommonMarkAttributeMap,
   EDITOR_SERIES_MARK_SINGLE_LEVEL,

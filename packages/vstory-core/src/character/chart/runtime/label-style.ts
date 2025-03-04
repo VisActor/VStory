@@ -12,22 +12,22 @@ import {
   type IVChart,
   type IRegion
 } from '@visactor/vchart';
-import type { Label as VChartLabelComponent } from '@visactor/vchart/esm/component/label/label';
-import type { ILabelInfo } from '@visactor/vchart/esm/component/label';
+import type { Label as VChartLabelComponent } from '@visactor/vchart-types/types/component/label/label';
+import type { ILabelInfo } from '@visactor/vchart-types/types/component/label';
 import { MarkStyleRuntime } from './mark-style';
 import { findSingleConfig, getSeriesKeyScalesMap, isSeriesMatch, matchDatumWithScaleMap } from './utils';
 import type { IGraphic } from '@visactor/vrender-core';
 import type { IChartCharacterConfig, ITextAttribute } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
-import type { IMark } from '@visactor/vchart/esm/mark/interface';
+import type { IMark } from '@visactor/vchart-types/types/mark/interface';
 import { CommonMarkAttributeMap, fillMarkAttribute, SeriesMarkStyleMap } from './const';
 import { formatConfigKey } from '../../../constants/format';
 import type { FormatContentType, IFormatConfig } from '../../../interface/dsl/common';
 import type { FormatValueFunction } from '../../common/utils/format';
 import { getTextWithFormat } from '../../common/utils/format';
 import { validNumber } from '../../../utils/type';
-import { getRegionStackGroup } from '@visactor/vchart/esm/util';
-import { stack } from '@visactor/vchart/esm/util';
+import { getRegionStackGroup } from '@visactor/vchart';
+import { stack } from '@visactor/vchart';
 export class LabelStyleRuntime implements IChartCharacterRuntime {
   type = 'LabelStyle';
 

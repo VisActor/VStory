@@ -1,5 +1,5 @@
 import { Encoder } from './encode';
-import type { IStory } from '@visactor/vstory-core/es/interface/story';
+import type { IStory } from '@visactor/vstory-core';
 
 export async function encodeToVideo(millsecond: number, fps: number, story: IStory): Promise<any> {
   const encode = new Encoder();

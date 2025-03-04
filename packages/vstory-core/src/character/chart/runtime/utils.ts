@@ -1,6 +1,6 @@
 import { array, isArray, isString, isValid, merge } from '@visactor/vutils';
-import type { IChart } from '@visactor/vchart/esm/chart/interface';
-import type { ICartesianSeries, ISeries } from '@visactor/vchart';
+import type { IChart } from '@visactor/vchart-types/types/chart/interface';
+import type { ICartesianSeries, ISeries } from '@visactor/vchart-types/types/series';
 import { isContinuous } from '@visactor/vscale';
 import { VCHART_DATA_INDEX, ValueLink, FieldLink, lineSymbolPathMap, LineSymbolType } from './const';
 import type { IChartCharacterConfig, IComponentMatch, IMarkStyle } from '../../../interface/dsl/chart';
