@@ -12,7 +12,7 @@ importers:
       '@types/markdown-it': ^13.0.0
       '@types/react': ^18.0.0
       '@types/react-dom': ^18.0.0
-      '@visactor/vstory': workspace:0.0.23
+      '@visactor/vstory': workspace:0.0.24-alpha.1
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
       axios: ^1.4.0
@@ -71,12 +71,12 @@ importers:
       '@types/jest': ^26.0.0
       '@types/react': ^18.0.0
       '@types/react-dom': ^18.0.0
-      '@visactor/vstory-animate': workspace:0.0.23
-      '@visactor/vstory-core': workspace:0.0.23
-      '@visactor/vstory-editor': workspace:0.0.23
-      '@visactor/vstory-external': workspace:0.0.23
-      '@visactor/vstory-player': workspace:0.0.23
-      '@visactor/vstory-templates': workspace:0.0.23
+      '@visactor/vstory-animate': workspace:0.0.24-alpha.1
+      '@visactor/vstory-core': workspace:0.0.24-alpha.1
+      '@visactor/vstory-editor': workspace:0.0.24-alpha.1
+      '@visactor/vstory-external': workspace:0.0.24-alpha.1
+      '@visactor/vstory-player': workspace:0.0.24-alpha.1
+      '@visactor/vstory-templates': workspace:0.0.24-alpha.1
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
       canvas: 2.11.2
@@ -146,7 +146,7 @@ importers:
       '@visactor/vrender-core': 0.22.5-vstory.1
       '@visactor/vrender-kits': 0.22.5-vstory.1
       '@visactor/vscale': ~0.18.17
-      '@visactor/vstory-core': workspace:0.0.23
+      '@visactor/vstory-core': workspace:0.0.24-alpha.1
       '@visactor/vtable': 1.14.4-alpha.0
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
@@ -298,7 +298,7 @@ importers:
       '@visactor/vrender-core': 0.22.5-vstory.1
       '@visactor/vrender-kits': 0.22.5-vstory.1
       '@visactor/vscale': ~0.18.17
-      '@visactor/vstory-core': workspace:0.0.23
+      '@visactor/vstory-core': workspace:0.0.24-alpha.1
       '@visactor/vtable': 1.14.4-alpha.0
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
@@ -373,9 +373,9 @@ importers:
       '@visactor/vrender-core': 0.22.5-vstory.1
       '@visactor/vrender-kits': 0.22.5-vstory.1
       '@visactor/vscale': ~0.18.17
-      '@visactor/vstory-animate': workspace:0.0.23
-      '@visactor/vstory-core': workspace:0.0.23
-      '@visactor/vstory-player': workspace:0.0.23
+      '@visactor/vstory-animate': workspace:0.0.24-alpha.1
+      '@visactor/vstory-core': workspace:0.0.24-alpha.1
+      '@visactor/vstory-player': workspace:0.0.24-alpha.1
       '@visactor/vtable': 1.14.4-alpha.0
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
@@ -452,8 +452,8 @@ importers:
       '@visactor/vrender-core': 0.22.5-vstory.1
       '@visactor/vrender-kits': 0.22.5-vstory.1
       '@visactor/vscale': ~0.18.17
-      '@visactor/vstory-animate': workspace:0.0.23
-      '@visactor/vstory-core': workspace:0.0.23
+      '@visactor/vstory-animate': workspace:0.0.24-alpha.1
+      '@visactor/vstory-core': workspace:0.0.24-alpha.1
       '@visactor/vtable': 1.14.4-alpha.0
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
@@ -529,7 +529,7 @@ importers:
       '@visactor/vrender-core': 0.22.5-vstory.1
       '@visactor/vrender-kits': 0.22.5-vstory.1
       '@visactor/vscale': ~0.18.17
-      '@visactor/vstory-core': workspace:0.0.23
+      '@visactor/vstory-core': workspace:0.0.24-alpha.1
       '@visactor/vtable': 1.14.4-alpha.0
       '@visactor/vutils': ~0.18.17
       '@vitejs/plugin-react': 3.1.0
@@ -630,7 +630,7 @@ importers:
       '@rushstack/eslint-patch': ~1.1.4
       '@types/node': '*'
       '@types/node-fetch': 2.6.4
-      '@visactor/vstory': workspace:0.0.23
+      '@visactor/vstory': workspace:0.0.24-alpha.1
       eslint: ~8.18.0
       form-data: ~4.0.0
       node-fetch: 2.6.6
