@@ -215,7 +215,7 @@ importers:
       '@types/react-dom': ^18.0.0
       '@visactor/vchart': 1.13.7-alpha.0
       '@visactor/vchart-extension': 0.0.3-vstory.2
-      '@visactor/vchart-types': 1.13.6
+      '@visactor/vchart-types': 1.13.7-alpha.0
       '@visactor/vdataset': ~0.18.17
       '@visactor/vrender': 0.22.5-vstory.1
       '@visactor/vrender-components': 0.22.5-vstory.1
@@ -241,7 +241,7 @@ importers:
     dependencies:
       '@visactor/vchart': 1.13.7-alpha.0
       '@visactor/vchart-extension': 0.0.3-vstory.2
-      '@visactor/vchart-types': 1.13.6
+      '@visactor/vchart-types': 1.13.7-alpha.0
       '@visactor/vdataset': 0.18.18
       '@visactor/vrender': 0.22.5-vstory.1
       '@visactor/vrender-components': 0.22.5-vstory.1
@@ -3724,8 +3724,8 @@ packages:
       '@visactor/vutils': 0.18.18
     dev: false
 
-  /@visactor/vchart-types/1.13.6:
-    resolution: {integrity: sha512-WMHHUs6yqeGTkO5B934PWVOh4fkUx7f9+TZm8oqsgOhF5bLotywoNi+nMWHGe2nq8Ogj7tEyecZsXsnNtpvGVw==}
+  /@visactor/vchart-types/1.13.7-alpha.0:
+    resolution: {integrity: sha512-41XcUVww7n1yPUjmU4cW96oztQy++DUTNmwGjBgaxQuTjpim4PwMahv6O5rLj44k0guqe0HTrpxCwWydx2XXnQ==}
     dev: false
 
   /@visactor/vchart/1.13.7-alpha.0:

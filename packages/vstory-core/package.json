@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@visactor/vchart": "1.13.7-alpha.0",
-    "@visactor/vchart-types": "1.13.6",
+    "@visactor/vchart-types": "1.13.7-alpha.0",
     "@visactor/vtable": "1.14.4-alpha.0",
     "@visactor/vrender": "0.22.5-vstory.1",
     "@visactor/vrender-core": "0.22.5-vstory.1",
