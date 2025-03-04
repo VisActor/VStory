@@ -1,7 +1,7 @@
 import { DYNAMIC_LINE } from './constant';
 import type { IDynamicLineChartGraphicAttribute } from './dynamic-line-interface';
-import type { IChartCharacterRuntime } from '@visactor/vstory-core/es/character/chart/interface/runtime';
-import type { ICharacterChart } from '@visactor/vstory-core/es/character/chart/interface/character-chart';
+import type { IChartCharacterRuntime } from '@visactor/vstory-core';
+import type { ICharacterChart } from '@visactor/vstory-core';
 import { RuntimeStore } from '@visactor/vstory-core';
 
 export class DynamicLineRuntime implements IChartCharacterRuntime {

@@ -12,22 +12,22 @@ import {
   type IVChart,
   type IRegion
 } from '@visactor/vchart';
-import type { Label as VChartLabelComponent } from '@visactor/vchart/esm/component/label/label';
-import type { ILabelInfo } from '@visactor/vchart/esm/component/label';
+import type { Label as VChartLabelComponent } from '@visactor/vchart-types/types/component/label/label';
+import type { ILabelInfo } from '@visactor/vchart-types/types/component/label';
 import { MarkStyleRuntime } from './mark-style';
 import { findSingleConfig, getSeriesKeyScalesMap, isSeriesMatch, matchDatumWithScaleMap } from './utils';
 import type { IGraphic } from '@visactor/vrender-core';
 import type { IChartCharacterConfig, ITextAttribute } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
-import type { IMark } from '@visactor/vchart/esm/mark/interface';
+import type { IMark } from '@visactor/vchart-types/types/mark/interface';
 import { CommonMarkAttributeMap, fillMarkAttribute, SeriesMarkStyleMap } from './const';
 import { formatConfigKey } from '../../../constants/format';
 import type { FormatContentType, IFormatConfig } from '../../../interface/dsl/common';
 import type { FormatValueFunction } from '../../common/utils/format';
 import { getTextWithFormat } from '../../common/utils/format';
 import { validNumber } from '../../../utils/type';
-import { getRegionStackGroup } from '@visactor/vchart/esm/util';
-import { stack } from '@visactor/vchart/esm/util';
+import { getRegionStackGroup } from '@visactor/vchart';
+import { stack } from '@visactor/vchart';
 export class LabelStyleRuntime implements IChartCharacterRuntime {
   type = 'LabelStyle';
 
@@ -77,7 +77,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
    * @returns
    */
   afterInitialize(character: ICharacterChart, vchart: IVChart) {
-    const labelComponent = vchart.getChart().getComponentsByKey('label')[0] as VChartLabelComponent;
+    const labelComponent = vchart.getChart().getComponentsByKey('label')[0] as unknown as VChartLabelComponent;
     if (!labelComponent) {
       return;
     }
@@ -111,7 +111,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         return;
       }
       array(infos).forEach(info => {
-        const { series, labelMark } = info as { series: ISeries; labelMark: IMark };
+        const { series, labelMark } = info as unknown as { series: ISeries; labelMark: IMark };
         const keyScaleMap = getSeriesKeyScalesMap(series);
         // 先看当前系列是否存在单标签样式
         const hasSingleStyle = hasLabelStyle
@@ -233,7 +233,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       return;
     }
 
-    const labelComponent = vchart.getChart().getComponentsByKey('label')[0] as VChartLabelComponent;
+    const labelComponent = vchart.getChart().getComponentsByKey('label')[0] as unknown as VChartLabelComponent;
     if (!labelComponent) {
       return;
     }
@@ -242,7 +242,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       // @ts-ignore
       const infos = labelComponent._labelComponentMap.get(componentMark)();
       array(infos).forEach(info => {
-        const { series: series } = info as { series: ISeries; labelMark: IMark };
+        const { series: series } = info as unknown as { series: ISeries; labelMark: IMark };
         const keyScaleMap = getSeriesKeyScalesMap(series);
         const labelGraphics: IGraphic[] = [];
         findLabelGraphicWithInfo(componentMark.getProduct().graphicItem, info, labelGraphics);
