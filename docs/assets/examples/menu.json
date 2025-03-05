@@ -409,6 +409,13 @@
             "zh": "信息图模板-面积图: Top 10 Podcasts",
             "en": "Bar chart Infographic: Top 10 Podcasts"
           }
+        },
+        {
+          "path": "pie-chart-banana",
+          "title": {
+            "zh": "信息图模板-饼图: Banana Composition by Percentage",
+            "en": "Pie Chart Infographic: Banana Composition by Percentage"
+          }
         }
       ]
     }
