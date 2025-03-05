@@ -26,6 +26,8 @@ export class StoryCanvas implements IStoryCanvas {
     return this._container;
   }
 
+  protected _layerClip: boolean = true;
+
   constructor(
     story: IStory,
     params: {
@@ -40,11 +42,13 @@ export class StoryCanvas implements IStoryCanvas {
       scaleX?: number | 'auto';
       scaleY?: number | 'auto';
       pluginList?: string[];
+      layerClip?: boolean;
     }
   ) {
     this._story = story;
     this._container = params.container;
     this._canvas = params.canvas as any;
+    this._layerClip = params.layerClip ?? true;
 
     const {
       canvas,
@@ -71,7 +75,7 @@ export class StoryCanvas implements IStoryCanvas {
       y: viewBox.y1,
       width: (viewBox.x2 - viewBox.x1) / scaleX,
       height: (viewBox.y2 - viewBox.y1) / scaleY,
-      clip: true
+      clip: this._layerClip
     });
     this._stage.defaultLayer.scale(scaleX, scaleY);
   }
@@ -216,7 +220,7 @@ export class StoryCanvas implements IStoryCanvas {
       y: viewBox.y1,
       width: viewBox.x2 - viewBox.x1,
       height: viewBox.y2 - viewBox.y1,
-      clip: true
+      clip: this._layerClip
     });
   }
 

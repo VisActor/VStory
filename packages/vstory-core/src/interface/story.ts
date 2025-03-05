@@ -28,6 +28,7 @@ export interface IStoryInitOption {
   pluginList?: string[];
   mode?: 'desktop-browser' | 'node';
   modeParams?: any;
+  layerClip?: boolean;
 }
 
 export interface IStory extends IReleaseable, EventEmitter {

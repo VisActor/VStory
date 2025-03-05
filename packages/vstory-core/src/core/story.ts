@@ -49,6 +49,7 @@ export class Story extends EventEmitter implements IStory {
       background = 'transparent',
       layerBackground = 'transparent',
       layerViewBox,
+      layerClip,
       dpr = option.dpr ?? vglobal.devicePixelRatio,
       scaleX = 1,
       scaleY = 1,
@@ -70,7 +71,8 @@ export class Story extends EventEmitter implements IStory {
       layerViewBox,
       scaleX,
       scaleY,
-      pluginList
+      pluginList,
+      layerClip
     });
     this._characterTree = new CharacterTree(this);
     this._dsl = dsl;
