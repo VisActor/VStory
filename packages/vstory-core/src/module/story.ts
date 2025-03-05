@@ -1,6 +1,6 @@
 import type { IStoryDSL } from '../interface/dsl/dsl';
-import type { IStoryInitOption } from '../core/story';
 import { Story } from '../core/story';
+import type { IStoryInitOption } from '../interface/story';
 
 export function createStory(dsl: IStoryDSL | null, option: IStoryInitOption) {
   const story = new Story(dsl, option);
