@@ -260,6 +260,11 @@ async function loadDSL() {
     timeField: 'Year',
     xField: 'Rank',
     yField: 'Language',
+    yAxis:{
+      label:{
+        fill:'black'
+      }
+    },
     //icon: Object.fromEntries(languageImage),
     interval: 2000,
     color: {
