@@ -260,7 +260,7 @@ async function loadDSL() {
     timeField: 'Year',
     xField: 'Rank',
     yField: 'Language',
-    icon: Object.fromEntries(languageImage),
+    //icon: Object.fromEntries(languageImage),
     interval: 2000,
     color: {
       Python: 'blue',
