@@ -383,7 +383,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     // cursor
     this.editBorder.addEventListener('mousemove', this.handleMouseMove);
     this.addEventListener('pointerout', this.handleMouseOut);
-    this.editBorder.addEventListener('pointerenter', this.handleMouseEnter);
+    this.editBorder.addEventListener('pointermove', this.handleShadowTargetMouseMove);
     this.editBorder.addEventListener('pointerleave', this.handleMouseLeave);
 
     // drag
@@ -432,14 +432,22 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     }
   };
 
-  protected handleMouseEnter = (e: any) => {
+  protected handleShadowTargetMouseMove = (e: any) => {
     const { shadowTarget } = e.pickParams || {};
     if (shadowTarget) {
-      shadowTarget.addState('active', true, true);
+      shadowTarget.addState('active', true, false);
       if (shadowTarget.name === 'rotate-all' && shadowTarget.parent) {
         shadowTarget.parent.getElementsByName('path-rotate').forEach((g: IGraphic) => {
           g.addState('active', true, true);
         });
+      } else if (shadowTarget.type === 'line') {
+        // hover到线上，就隐藏状态
+        const shadowRoot = this.editBorder.shadowRoot;
+        if (shadowRoot) {
+          shadowRoot.forEachChildren((child: IGraphic) => {
+            child.removeState('active', true);
+          });
+        }
       }
     }
   };
@@ -946,6 +954,11 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
           (a as any).states = {
             active: cornerRect.active
           };
+          if ((a as any).currentStates && (a as any).currentStates.length) {
+            const states = (a as any).currentStates.slice();
+            (a as any).clearStates(false);
+            (a as any).useStates(states, false);
+          }
         }
       });
     }
@@ -1218,7 +1231,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
 
   releaseEvent() {
     this.editBorder.removeEventListener('mousemove', this.handleMouseMove);
-    this.editBorder.removeEventListener('pointerenter', this.handleMouseEnter);
+    this.editBorder.removeEventListener('pointermove', this.handleShadowTargetMouseMove);
     this.editBorder.removeEventListener('pointerleave', this.handleMouseLeave);
     if (this.stage) {
       this.stage.removeEventListener('pointermove', this.handleDragMouseMove);

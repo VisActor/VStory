@@ -13,8 +13,8 @@ export const ComponentsEdit = () => {
     const canvas = document.createElement('canvas');
     container?.appendChild(canvas);
 
-    const scaleX = 0.7;
-    const scaleY = 0.7;
+    const scaleX = 1;
+    const scaleY = 1;
     const story = new Story(null, {
       canvas,
       width: 1000,
@@ -107,8 +107,8 @@ export const ComponentsEdit = () => {
         stroke: 'grey',
         lineWidth: 1,
         cornerRadius: 100,
-        scaleX: 2,
-        scaleY: 2,
+        width: 11,
+        height: 11,
         active: { fill: '#8c52ff' }
       }
     });
