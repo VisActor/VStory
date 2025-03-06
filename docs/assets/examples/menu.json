@@ -42,6 +42,13 @@
             "zh": "标注展示",
             "en": "annotation show"
           }
+        },
+        {
+          "path": "Programming-Language-Popularity",
+          "title": {
+            "zh": "Programming Language Popularity",
+            "en": "Programming Language Popularity"
+          }
         }
       ]
     },
