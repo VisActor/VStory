@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { Component, useCallback } from 'react';
 import { Nav } from '@douyinfe/semi-ui';
 import { createRoot } from 'react-dom/client';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -54,6 +54,7 @@ import { AreaChart } from './demos/infographic/source-of-new-contacts-area-chart
 import { MarketingWordcloud } from './demos/infographic/marking-wordcloud';
 import { NoStackArea } from './demos/infographic/market-share';
 import { Top10Podcast } from './demos/infographic/top10_podcast';
+import { FilmAnalysis } from './demos/infographic/film_analyze';
 
 // VchartEditor Runtime
 import { LineChartArrange } from './demos/arrange/LineChart';
@@ -330,6 +331,10 @@ const App = () => {
         {
           name: 'Top 10 Podcast Publishers in US',
           component: Top10Podcast
+        },
+        {
+          name: 'FilmAnalysis',
+          component: FilmAnalysis
         }
       ]
     },
