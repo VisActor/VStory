@@ -1,7 +1,7 @@
 import type { FormatContentType, IFormatConfig } from '../../../interface/dsl/common';
 import type { Unit } from '../../../constants/format';
 import { DataFormatUnit, unionContentTypeMap } from '../../../constants/format';
-import { isArray, isNil, isString } from '@visactor/vutils/es/common';
+import { isArray, isNil, isString } from '@visactor/vutils';
 import { getTimeFormatter, isValidNumber } from '@visactor/vutils';
 
 export type FormatValueFunction = (
