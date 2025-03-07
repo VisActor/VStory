@@ -7,16 +7,16 @@ order: 1-1
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/program-languages-order-compress2.gif
 ---
 
-# 编程语言流行度可视化故事
+# programming-language-popularity
 
-这个示例展示了如何使用 VStory 创建一个交互式的编程语言流行度可视化故事。它结合了时间轴、动态排名条形图和饼图等多种可视化方式，生动地展示了编程语言流行度的历史变化。
+This example demonstrates how to use VStory to create an interactive visualization story of programming language popularity. It combines a timeline, dynamic ranking bar charts, and pie charts to vividly showcase the historical trends in programming language popularity.
 
-## 代码演示
+## Code demonstration
 ```javascript livedemo template=vstory
 VStory.registerAll();
 
 async function loadDSL() {
-  // 时间轴数据
+  
   const timelineData = {
     times: [
       { label: ['Fortran', '1957'], desc: '1957' },
@@ -43,7 +43,7 @@ async function loadDSL() {
     }
   };
 
-  // 排名条形图数据
+  
   const dataJson = {
     data: [
       { "Year": 2008, "Language": "Java", "Rank": 1 },
@@ -253,7 +253,6 @@ async function loadDSL() {
     allData.push(...value);
   });
 
-  // 排名条形图规格
   const rankingBarSpec = {
     type: 'rankingBar',
     data: allData,
@@ -296,7 +295,7 @@ async function loadDSL() {
     }
   };
 
-  // 饼图配置
+  
   const chartSpec = {
     type: 'pie',
     
@@ -313,7 +312,7 @@ async function loadDSL() {
     categoryField: 'language',
     title: {
       visible: true,
-      text: 'C语言占比',
+      text: 'C Language Share',
       
     },
     legends: {
@@ -322,7 +321,7 @@ async function loadDSL() {
     },
     label: {
       visible: true,
-      formatMethod: (text, datum) => `${datum.percentage}%`, // 显示百分比
+      formatMethod: (text, datum) => `${datum.percentage}%`, 
       style: {
       fill: 'white', 
       fontSize: 14, 
@@ -334,7 +333,7 @@ async function loadDSL() {
   return {
     characters: [
 
-      // 添加时间轴
+      
       {
         type: 'Timeline',
         id: 'timeline',
@@ -349,7 +348,7 @@ async function loadDSL() {
           graphic: timelineData,
         }
       },
-      // 添加排名条形图
+      
       {
         type: 'RankingBar',
         id: 'bar',
@@ -372,7 +371,7 @@ async function loadDSL() {
           }
         },
       },
-      // 添加标题
+      
       {
         type: 'Text',
         id: 'title',
@@ -390,7 +389,7 @@ async function loadDSL() {
           }
         }
       },
-      //内容
+      
       {
         type: 'Text',
         id: 'wenben',
@@ -401,7 +400,7 @@ async function loadDSL() {
         },
         options: {
           graphic: {
-            text: 'C 语言经久不衰',
+            text: 'C language remains enduringly popular',
             fontSize: 20,
             fontWeight: 'bold',
             fill: 'linear-gradient(135deg,rgb(192, 169, 214) 50%,#667eea 0%)'
@@ -409,25 +408,24 @@ async function loadDSL() {
         }
       },
 
-      //副内容
       {
         type: 'Text',
         id: 'fuwenben',
         zIndex: 11,
         position: {
-          top: 190,
-          left: 850,
-          width:302,
+          top:200,
+          left: 835,
+          width:426,
           height:0,
         },
         options: {
           graphic: {
-            text: '自1972年诞生以来，C 语言一直是最流行的编程语言之一。它的语法简单、灵活，并且具有高效的运行速度。C 语言广泛应用于系统编程、嵌入式开发、游戏开发等领域。',
+            text: 'Since its inception in 1972, C has remained one of the most popular programming languages. It features a simple and flexible syntax along with high execution efficiency. C is widely used in system programming, embedded development, game development, and other fields.',
             fill: 'white'
           }
         }
       },
-      //副副内容
+      
       {
         type: 'Text',
         id: 'fufwenben',
@@ -447,13 +445,13 @@ async function loadDSL() {
           }
         }
       },
-      // 添加饼图
+      
       {
         type: 'VChart',
         id: 'cPieChart',
         zIndex: 10,
         position: {
-          top: 290,
+          top: 297,
           left: 700, 
           width: 300,
           height: 280
@@ -480,7 +478,7 @@ async function loadDSL() {
           {
             id: 'scene0',
             actions: [
-              // 时间轴动作
+              
               {
                 characterId: 'timeline',
                 characterActions: [
@@ -509,7 +507,6 @@ async function loadDSL() {
                 ]
               },
 
-              // 排名条形图动画
               {
                 characterId: 'bar',
                 characterActions: [
@@ -526,7 +523,7 @@ async function loadDSL() {
                   }
                 ]
               },
-              // 标题动画
+              
               {
                 characterId: 'title',
                 characterActions: [
@@ -536,7 +533,7 @@ async function loadDSL() {
                   }
                 ]
               },
-              //文本动画
+              
               {
                 characterId: 'wenben',
                 characterActions: [
@@ -546,7 +543,7 @@ async function loadDSL() {
                   }
                 ]
               },
-              //副文本动画
+              
               {
                 characterId: 'fuwenben',
                 characterActions: [
@@ -557,7 +554,7 @@ async function loadDSL() {
                 ]
               },
 
-              //副副文本动画
+
               {
                 characterId: 'fufwenben',
                 characterActions: [
@@ -567,7 +564,7 @@ async function loadDSL() {
                   }
                 ]
               },
-              // 饼图动画
+              
               {
                 characterId: 'cPieChart',
                 characterActions: [
@@ -587,7 +584,6 @@ async function loadDSL() {
   };
 }
 
-// 加载并初始化
 const dsl = await loadDSL();
 
 const story = new VStory.Story(dsl, {
