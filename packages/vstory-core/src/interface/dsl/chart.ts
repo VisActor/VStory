@@ -13,11 +13,14 @@ export interface IComponentMatch {
 
 export type ITextAttribute = ITextGraphicAttribute;
 
+// 数据匹配  至少存在 value 或者 scaleIndex 其中之一
+export type IDatumMatch = { value: any; scaleIndex?: number } | { value?: any; scaleIndex: number };
+
 export interface IMarkStyle<T> {
   seriesMatch: { type: string } & IComponentMatch;
   markName: string;
   itemKeys: string[]; // 数据匹配维度
-  itemKeyMap: { [key: string]: number }; // 匹配维度值
+  itemKeyMap: { [key: string]: IDatumMatch }; // 匹配维度值
   style: T; // 样式
 }
 
@@ -57,7 +60,7 @@ export interface ITotalLabelConfig {
     // 使用 维度key_维度值_&_维度key_维度值 这样的格式构建key，保证唯一性
     [key: string]: {
       itemKeys: string[]; // 数据匹配维度
-      itemKeyMap: { [key: string]: number }; // 匹配维度值
+      itemKeyMap: { [key: string]: IDatumMatch }; // 匹配维度值
       formatConfig?: IFormatConfig;
       style?: ITextAttribute;
     };
