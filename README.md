@@ -13,13 +13,13 @@
 
 <div align="center">
 
-VStory integrates the underlying capabilities of VisActor to provide an out-of-the-box data narrative solution.
+VStory, tell stories with data. An intelligent data narrative development framework.
 
 </div>
 
 <div align="center">
 
-[English](./README.md) | 简体中文 | [日本語](./README.ja-JP.md)
+English | [简体中文](./README.zh-CN.md) | [日本語](./README.ja-JP.md)
 
 </div>
 
@@ -29,24 +29,24 @@ VStory integrates the underlying capabilities of VisActor to provide an out-of-t
 
 </div>
 
-## 简介
+## Introduction
 
-VStory is a chart component library in the VisActor visualization system. It is based on the visualization chart library [VChart](https://github.com/VisActor/VChart), the visualization grammar library [VGrammar](https://github.com/VisActor/VGrammar), and the visualization rendering engine [VRender](https://github.com/VisActor/VRender) for component encapsulation. The core capabilities are as follows:
+VStory is a narrative visualization development framework in the VisActor visualization system. It encapsulates components based on the visualization chart library [VChart](https://github.com/VisActor/VChart), visualization grammar library [VGrammar](https://github.com/VisActor/VGrammar), and visualization rendering engine [VRender](https://github.com/VisActor/VRender). Core capabilities include:
 
-1. **One code for multiple platforms**: Automatically adapt to desktop, H5, and multiple small program environments
-2. **Narrative-oriented**: Comprehensive application of a series of enhanced functions such as annotation, animation, process control, narrative templates, etc. for narrative visualization creation.
-3. **Scene precipitation**: Facing the end users to precipitate visualization capabilities, liberating the productivity of developers
+1. **Cross-platform Compatibility**: Automatically adapts to desktop, H5, and multiple mini-program environments
+2. **Narrative-oriented**: Creates narrative visualizations by comprehensively applying enhanced features such as annotations, animations, process control, and narrative templates
+3. **Scene Accumulation**: Accumulates narrative visualization capabilities for data dashboards, infographics, data videos, data reports, and other scenarios, liberating developer productivity
 
 ## Repository Introduction
 
 This repository contains the following packages:
 
 1. [`vstory`](./packages/vstory/): Core package, VStory editor
-2. [`docs`](./docs/): VStory site source code, including all Chinese and English documents, sample code, etc. on the site.
+2. [`docs`](./docs/): VStory site source code, including all Chinese and English documentation, example code, and other content on the site.
 
-## 🔨 Usage
+## 🔨 Demo
 
-Under construction...
+[Demo](https://www.visactor.io/vstory/example)
 
 ## ⌨️ Development
 
@@ -56,23 +56,23 @@ First, install [@microsoft/rush](https://rushjs.io/pages/intro/get_started/) glo
 $ npm i --global @microsoft/rush
 ```
 
-Then clone the code to your local machine:
+Then clone the code locally:
 
 ```bash
 # clone
 $ git clone git@github.com:VisActor/VStory.git
 $ cd VStory
-# 安装依赖
+# install dependencies
 $ rush update
-# 开始 vstory 的本地开发
+# start local development of vstory
 $ rush start
-# 开始站点的本地开发
+# start local development of the site
 $ rush docs
 ```
 
 ## 📖 Documents
 
-After installing and updating dependencies, you can execute the docs command to start the local document preview of vstory:
+After installing and updating dependencies, you can execute the docs command to start local document preview for vstory:
 
 ```bash
 # start vstory document server
@@ -81,17 +81,17 @@ $ rush start
 
 ## 🔗 Related Links
 
-- [VCharts Chart Examples](https://www.visactor.io/vchart/example)
-- [VChart Chart Tutorial](https://www.visactor.io/vchart/guide/tutorial_docs/VChart_Website_Guide)
-- [VChart Chart Configuration Items](https://www.visactor.io/vchart/option/)
+- [VCharts Examples](https://www.visactor.io/vchart/example)
+- [VChart Tutorial](https://www.visactor.io/vchart/guide/tutorial_docs/VChart_Website_Guide)
+- [VChart Configuration](https://www.visactor.io/vchart/option/)
 - [VChart API](https://www.visactor.io/vchart/api/API/vchart)
 - [VGrammar](https://www.visactor.io/vgrammar)
 - [VRender](https://www.visactor.io/vrender)
 
-## 🤝 Contributing [](https://github.com/VisActor/VChart/blob/main/CONTRIBUTING.md#your-first-pull-request)
+## 🤝 Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/VisActor/VChart/blob/main/CONTRIBUTING.md#your-first-pull-request)
 
-If you would like to contribute, please read the [Code of Conduct](https://sophon-ai.bytedance.net/paas/CODE_OF_CONDUCT.md) and [Contributing Guidelines](https://sophon-ai.bytedance.net/paas/CONTRIBUTING.md).
+If you would like to contribute, please read our [Code of Conduct](./CODE_OF_CONDUCT.md) and [Contributing Guidelines](https://www.visactor.io/vstory/contributing/).
 
-Small streams make a river, and eventually become a sea!
+Small streams form rivers, eventually becoming the sea!
 
-<a href="https://github.com/visactor/vstory/graphs/contributors"></a>
+<a href="https://github.com/visactor/vstory/graphs/contributors"><img src="https://contrib.rocks/image?repo=visactor/vstory" /></a>
