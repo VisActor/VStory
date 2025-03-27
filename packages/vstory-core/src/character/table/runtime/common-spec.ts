@@ -34,7 +34,14 @@ export class CommonSpecRuntime implements ITableCharacterRuntime {
     delete spec.theme?.cellInnerBorder;
     delete spec.theme?.cellBorderClipDirection;
     delete spec.theme?._contentOffset;
+
+    // 自定义配置
+    const lastCustomConfig = { ...(spec.customConfig ?? {}) };
     delete spec.customConfig;
+    // 部分属性继续设置
+    spec.customConfig = {
+      disableBuildInChartActive: lastCustomConfig.disableBuildInChartActive
+    };
 
     spec.disableDirtyBounds = false;
     spec.mode = 'desktop-browser';
