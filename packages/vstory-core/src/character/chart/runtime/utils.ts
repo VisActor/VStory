@@ -3,7 +3,7 @@ import type { IChart } from '@visactor/vchart/esm/chart/interface';
 import type { ICartesianSeries, ISeries } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
 import { VCHART_DATA_INDEX, ValueLink, FieldLink, lineSymbolPathMap, LineSymbolType } from './const';
-import type { IChartCharacterConfig, IComponentMatch, IMarkStyle } from '../../../interface/dsl/chart';
+import type { IChartCharacterConfig, IComponentMatch, IDatumMatch, IMarkStyle } from '../../../interface/dsl/chart';
 
 export function GetVChartSeriesWithMatch(vchart: IChart, seriesMatch: IComponentMatch & { type: string }) {
   if (!isValid(seriesMatch.specIndex) && seriesMatch.type) {
@@ -65,7 +65,7 @@ export function getSeriesKeyScalesMap(series: ISeries) {
 
 export function matchDatumWithScaleMap(
   keys: string[],
-  keyValueMap: { [key: string]: number },
+  keyValueMap: { [key: string]: IDatumMatch },
   scaleMap: { [key: string]: any } = {},
   datum: any
 ) {
@@ -73,14 +73,26 @@ export function matchDatumWithScaleMap(
     datum = datum[0];
   }
   return keys.every(key => {
-    const scale = scaleMap[key];
-    if (!scale) {
-      return keyValueMap[key] === datum[key];
+    // 首先使用 value 匹配
+    if (isValid(keyValueMap[key].value)) {
+      if (keyValueMap[key].value === datum[key]) {
+        return true;
+      }
     }
+    const scale = scaleMap[key];
+    // 如果没有scale 直接使用 value 匹配一次
+    if (!scale) {
+      return keyValueMap[key].value === datum[key];
+    }
+    // 连续 scale 数据 index 匹配
     if (isContinuous(scale.type)) {
       return keyValueMap[VCHART_DATA_INDEX] === datum[VCHART_DATA_INDEX];
     }
-    return keyValueMap[key] === scale._index.get(`${datum[key]}`);
+    // 离散 scale 维度序号匹配
+    if (isValid(keyValueMap[key].scaleIndex)) {
+      return keyValueMap[key].scaleIndex === scale._index.get(`${datum[key]}`);
+    }
+    return false;
   });
 }
 
