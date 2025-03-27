@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@arco-design/web-react": "2.46.1",
-    "@visactor/vstory": "workspace:0.0.24-alpha.2",
+    "@visactor/vstory": "workspace:0.0.24-alpha.5",
     "@visactor/vutils": "~0.18.17",
     "markdown-it": "^13.0.0",
     "highlight.js": "^11.8.0",
