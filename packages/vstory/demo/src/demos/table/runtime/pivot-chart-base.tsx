@@ -45,16 +45,34 @@ function loadDSL() {
             disableDirtyBounds: true
           },
           chartOptions: {
+            '3_2': {
+              col: 3,
+              row: 2,
+              options: {
+                dataGroupStyle: {
+                  'Consumer-Quantity': {
+                    bar: {
+                      style: {
+                        fill: 'black',
+                        stroke: 'yellow',
+                        lineWidth: 10
+                      }
+                    }
+                  }
+                }
+              }
+            },
             '4_2': {
               col: 4,
               row: 2,
               options: {
-                series: {
-                  0: {
+                dataGroupStyle: {
+                  'Consumer-Quantity': {
                     bar: {
                       style: {
-                        stroke: 'black',
-                        lineWidth: 4
+                        fill: 'red',
+                        stroke: 'blue',
+                        lineWidth: 10
                       }
                     }
                   }
@@ -81,7 +99,7 @@ function loadDSL() {
                       }
                     }
                   },
-                  'Home Office-Quantity': {
+                  'Consumer-Quantity': {
                     bar: {
                       style: {
                         fill: 'red'
@@ -99,6 +117,7 @@ function loadDSL() {
                   0: {
                     bar: {
                       style: {
+                        fill: 'green',
                         cornerRadius: 5
                       }
                     }

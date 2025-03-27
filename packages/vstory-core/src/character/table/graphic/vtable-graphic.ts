@@ -1,7 +1,7 @@
 import type { GraphicType, IRectGraphicAttribute, ITicker, IStage } from '@visactor/vrender-core';
 import { genNumberType, parsePadding, Rect } from '@visactor/vrender-core';
 import type { IAABBBounds, IBoundsLike, Bounds } from '@visactor/vutils';
-import { pointInAABB, transformBoundsWithMatrix } from '@visactor/vutils';
+import { isValid, pointInAABB, transformBoundsWithMatrix } from '@visactor/vutils';
 import { isBoundsLikeEqual } from '../../../utils/equal';
 import * as VTable from '@visactor/vtable';
 import { VChart, type IInitOption } from '@visactor/vchart';
@@ -149,6 +149,19 @@ export class VTableGraphic extends Rect {
       // @ts-ignore
       this._vTable.scenegraph.stage.resumeRender();
     };
+
+    // @ts-ignore
+    filledOption.mode = params.mode;
+    filledOption.dpr = params.dpr;
+    // @ts-ignore
+    isValid(params.modeParams) && (filledOption.modeParams = params.modeParams);
+    isValid(params.interactive) && (filledOption.interactive = params.interactive);
+    isValid(params.animation) && (filledOption.animation = params.animation);
+    isValid(params.chartOption) &&
+      (filledOption.chartOption = Object.assign(filledOption.chartOption ?? {}, params.chartOption));
+    isValid(params.ticker) && (filledOption.ticker = params.ticker);
+    isValid(params.autoRender) && (filledOption.autoRender = params.autoRender);
+    isValid(params.enablePickBounds) && (filledOption.enablePickBounds = params.enablePickBounds);
 
     return filledOption;
   }

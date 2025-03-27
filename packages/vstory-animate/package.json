@@ -24,7 +24,11 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
+<<<<<<< Updated upstream
     "@visactor/vchart": "1.13.5-vstory.2",
+=======
+    "@visactor/vchart": "1.13.7",
+>>>>>>> Stashed changes
     "@visactor/vtable": "1.14.4-alpha.0",
     "@visactor/vrender": "0.22.0-vstory.6",
     "@visactor/vrender-core": "0.22.0-vstory.6",
