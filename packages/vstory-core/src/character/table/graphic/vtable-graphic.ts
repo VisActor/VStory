@@ -157,7 +157,8 @@ export class VTableGraphic extends Rect {
     isValid(params.modeParams) && (filledOption.modeParams = params.modeParams);
     isValid(params.interactive) && (filledOption.interactive = params.interactive);
     isValid(params.animation) && (filledOption.animation = params.animation);
-    isValid(params.chartOption) && (filledOption.chartOption = params.chartOption);
+    isValid(params.chartOption) &&
+      (filledOption.chartOption = Object.assign(filledOption.chartOption ?? {}, params.chartOption));
     isValid(params.ticker) && (filledOption.ticker = params.ticker);
     isValid(params.autoRender) && (filledOption.autoRender = params.autoRender);
     isValid(params.enablePickBounds) && (filledOption.enablePickBounds = params.enablePickBounds);

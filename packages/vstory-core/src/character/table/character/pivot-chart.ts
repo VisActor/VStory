@@ -59,7 +59,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       chartInstance._story_render_key = key;
       return {
         needFormatSpec,
-        spec: spec,
+        spec: { ...spec, [`__vstory_${key}`]: key },
         updateSpec: false
       };
     };
