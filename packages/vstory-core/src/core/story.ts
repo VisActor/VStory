@@ -1,9 +1,8 @@
 import { Generator, vglobal } from '@visactor/vrender-core';
-import type { IActionParams, IStory } from '../interface/story';
+import type { IActionParams, IStory, IStoryInitOption } from '../interface/story';
 import type { ICharacterConfig, IStoryDSL } from '../interface/dsl/dsl';
 import { StoryCanvas } from './canvas';
 import type { IStoryCanvas } from '../interface/canvas';
-import type { IAABBBoundsLike } from '@visactor/vutils';
 import { EventEmitter, isString } from '@visactor/vutils';
 import type { ICharacter } from '../interface/character';
 import type { IPlayer } from '../interface/player';
@@ -12,23 +11,6 @@ import { CharacterTree } from './character-tree';
 import type { IPluginService } from '../interface/plugin-service';
 import { DefaultPluginService } from './plugin-service';
 
-type NodeCanvas = any;
-
-export interface IStoryInitOption {
-  dom?: string | HTMLDivElement; // dom id
-  canvas?: string | HTMLCanvasElement | NodeCanvas; // canvas id
-  width?: number;
-  height?: number;
-  background?: string;
-  layerBackground?: string;
-  layerViewBox?: IAABBBoundsLike;
-  dpr?: number;
-  // 对画面的缩放
-  scaleX?: number | 'auto';
-  scaleY?: number | 'auto';
-  theme?: string;
-}
-
 export class Story extends EventEmitter implements IStory {
   readonly id: string;
   protected _canvas: IStoryCanvas;
@@ -36,6 +18,7 @@ export class Story extends EventEmitter implements IStory {
   protected _player: IPlayer;
   protected _characterTree: ICharacterTree;
   protected _theme: string;
+  protected _option: IStoryInitOption;
   pluginService: IPluginService;
 
   get canvas(): IStoryCanvas {
@@ -50,6 +33,10 @@ export class Story extends EventEmitter implements IStory {
     return this._theme;
   }
 
+  get option(): IStoryInitOption {
+    return this._option;
+  }
+
   constructor(dsl: IStoryDSL | null, option: IStoryInitOption) {
     super();
     this.id = `test-mvp_${Generator.GenAutoIncrementId()}`;
@@ -62,13 +49,17 @@ export class Story extends EventEmitter implements IStory {
       background = 'transparent',
       layerBackground = 'transparent',
       layerViewBox,
-      dpr = vglobal.devicePixelRatio,
+      layerClip,
+      dpr = option.dpr ?? vglobal.devicePixelRatio,
       scaleX = 1,
-      scaleY = 1
+      scaleY = 1,
+      pluginList = option.pluginList ?? []
     } = option;
     if (!(dom || canvas)) {
       throw new Error('dom or canvas is required');
     }
+    this._option = option;
+    this._option.mode = option.mode ?? 'desktop-browser';
     this._canvas = new StoryCanvas(this, {
       container: isString(dom) ? (vglobal.getElementById(dom) as HTMLDivElement) : dom,
       canvas: isString(canvas) ? (vglobal.getElementById(canvas) as any) : canvas,
@@ -79,7 +70,9 @@ export class Story extends EventEmitter implements IStory {
       layerBackground,
       layerViewBox,
       scaleX,
-      scaleY
+      scaleY,
+      pluginList,
+      layerClip
     });
     this._characterTree = new CharacterTree(this);
     this._dsl = dsl;

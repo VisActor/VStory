@@ -4,7 +4,7 @@ import type { ISeries, IVChart } from '@visactor/vchart';
 import { getSeriesKeyScalesMap, GetVChartSeriesWithMatch, matchDatumWithScaleMap } from './utils';
 import type { IChartCharacterConfig } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
-import type { IMark } from '@visactor/vchart/esm/mark/interface';
+import type { IMark } from '@visactor/vchart-types/types/mark/interface';
 import {
   CommonMarkAttributeMap,
   EDITOR_SERIES_MARK_SINGLE_LEVEL,
@@ -14,6 +14,7 @@ import {
   UseDefaultSeriesStyle
 } from './const';
 import { isArray, merge, isValid } from '@visactor/vutils';
+import type { IChart } from '@visactor/vchart-types/types/chart/interface';
 
 export class MarkStyleRuntime implements IChartCharacterRuntime {
   type = 'MarkStyle';
@@ -144,7 +145,8 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
             }
 
             m.setPostProcess(key, (result, datum) => {
-              const temp = MarkStyleRuntime.getMarkStyle(m, dataGroupStyle, key, datum, seriesField) ?? result;
+              const temp =
+                MarkStyleRuntime.getMarkStyle(m as unknown as IMark, dataGroupStyle, key, datum, seriesField) ?? result;
               if (s.type === 'area' && key === 'stroke' && m.name === 'area') {
                 if (!isArray(temp)) {
                   return [temp, false, false, false];
@@ -167,7 +169,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     const chart = vchart.getChart();
     Object.keys(markStyle).forEach(key => {
       const config = markStyle[key];
-      const series = GetVChartSeriesWithMatch(chart, config.seriesMatch) as ISeries;
+      const series = GetVChartSeriesWithMatch(chart as unknown as IChart, config.seriesMatch) as unknown as ISeries;
       if (!series) {
         return;
       }
@@ -175,7 +177,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
       if (!mark) {
         return;
       }
-      const keyScaleMap = getSeriesKeyScalesMap(series);
+      const keyScaleMap = getSeriesKeyScalesMap(series as ISeries);
       const stateKey = key;
       mark.setStyle(
         {

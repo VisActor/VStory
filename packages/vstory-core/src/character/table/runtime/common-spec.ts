@@ -1,4 +1,4 @@
-import { array } from '@visactor/vutils';
+import { array, isValid } from '@visactor/vutils';
 import type { ITableCharacterRuntime } from '../interface/runtime';
 import type { ICharacterTable } from '../interface/character-table';
 
@@ -7,9 +7,9 @@ export class CommonSpecRuntime implements ITableCharacterRuntime {
 
   applyConfigToAttribute(character: ICharacterTable): void {
     const rawAttribute = character.getRuntimeConfig().getAttribute();
+    const config = character.getRuntimeConfig().config;
     const { spec } = rawAttribute;
     spec.canvas = character.canvas.getNativeCanvas();
-    spec.animation = false;
     // 编辑模式关闭
     // if (isEditor) {
     // disable select cell visible for editor mode
@@ -43,10 +43,15 @@ export class CommonSpecRuntime implements ITableCharacterRuntime {
       disableBuildInChartActive: lastCustomConfig.disableBuildInChartActive
     };
 
-    spec.disableDirtyBounds = false;
-    spec.mode = 'desktop-browser';
-    spec.dpr = window.devicePixelRatio;
-    spec.interactive = true;
+    isValid(config.options.spec.animation)
+      ? (spec.animation = config.options.spec.animation)
+      : (spec.animation = false);
+    isValid(config.options.spec.disableDirtyBounds)
+      ? (spec.disableDirtyBounds = config.options.spec.disableDirtyBounds)
+      : (spec.disableDirtyBounds = false);
+    isValid(config.options.spec.interactive)
+      ? (spec.interactive = config.options.spec.interactive)
+      : (spec.interactive = true);
   }
 }
 
