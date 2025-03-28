@@ -70,12 +70,29 @@ export const ComponentsEdit = () => {
     //     }
     //   }
     // });
+    // story.addCharacterWithAppear({
+    //   type: 'Rect',
+    //   id: 'title',
+    //   zIndex: 1,
+    //   position: {
+    //     top: 100,
+    //     left: 100,
+    //     width: 60,
+    //     height: 60
+    //   },
+    //   options: {
+    //     graphic: {
+    //       fill: 'red'
+    //     }
+    //   }
+    // });
+
     story.addCharacterWithAppear({
       type: 'Rect',
-      id: 'title',
+      id: 'title2',
       zIndex: 1,
       position: {
-        top: 100,
+        top: 200,
         left: 100,
         width: 60,
         height: 60
@@ -83,11 +100,22 @@ export const ComponentsEdit = () => {
       options: {
         graphic: {
           fill: 'red'
-        },
-        text: {
-          text: 'hello world',
-          fontSize: 30,
-          fill: 'blue'
+        }
+      }
+    });
+    story.addCharacterWithAppear({
+      type: 'Rect',
+      id: 'title3',
+      zIndex: 1,
+      position: {
+        top: 300,
+        left: 100,
+        width: 60,
+        height: 60
+      },
+      options: {
+        graphic: {
+          fill: 'red'
         }
       }
     });
@@ -96,10 +124,24 @@ export const ComponentsEdit = () => {
 
     let selectedCharacter: any = null;
     const edit = new Edit(story as any);
+    setTimeout(() => {
+      edit.selectCharacter('title2');
+      edit.stopEdit();
+    }, 1000);
+    edit.on('startEdit', msg => {
+      console.log('startEdit', msg);
+    });
+    edit.on('endEdit', msg => {
+      console.log('endEdit', msg);
+    });
+    edit.on('resize', msg => {
+      console.log('resize', msg.position);
+    });
     edit.theme.setLayoutTransformerControlTheme({
       handlerLine: { size: 13 },
       rotateCircle: { radius: 8 },
-      rotatePath: { size: 8 }
+      rotatePath: { size: 8 },
+      snapLine: { lineWidth: 2 }
     });
     edit.on('startEdit', msg => {
       selectedCharacter = msg.actionInfo.character;
@@ -115,7 +157,7 @@ export const ComponentsEdit = () => {
       // console.log('resize', msg);
     });
 
-    story.pluginService.register(new SnapshotPlugin());
+    // story.pluginService.register(new SnapshotPlugin());
 
     return () => {
       story.release();

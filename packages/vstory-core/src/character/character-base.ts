@@ -137,9 +137,14 @@ export abstract class CharacterBase<T> implements ICharacter {
 
   getLayoutGuideLine(): ILayoutLine[] {
     const bounds = this._graphic.AABBBounds;
-    return getLayoutLine(bounds, {
-      id: this.id
-    });
+    return getLayoutLine(
+      bounds,
+      {
+        id: this.id
+      },
+      'xy',
+      false
+    );
   }
 
   protected _initRuntime(): void {

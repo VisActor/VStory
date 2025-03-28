@@ -71,7 +71,7 @@ export abstract class BaseSelection implements IEditSelection {
       });
   }
 
-  endEdit(emitEvent: boolean = false) {
+  endEdit(emitEvent: boolean = true) {
     if (!this.isEditing) {
       return;
     }
@@ -268,7 +268,7 @@ export abstract class BaseSelection implements IEditSelection {
       return false;
     }
     if (actionInfo.type === EditActionEnum.singleSelection) {
-      this.checkDblClickAction(actionInfo);
+      // this.checkDblClickAction(actionInfo);
       // 使用到其他的Selection了，return false
       if (!this.isActionInfoSupported(actionInfo)) {
         this.endEdit();
@@ -287,24 +287,24 @@ export abstract class BaseSelection implements IEditSelection {
     return false;
   }
 
-  protected checkDblClickAction(actionInfo: IEditActionInfo) {
-    if (!this.clickCount) {
-      this.clickCount = 1;
-    } else {
-      this.clickCount++;
-    }
-    if (this.clickCount > 1) {
-      this._checkDblClickAction(actionInfo);
-      this.clickCount = 0;
-      // 暂时不用clearTimeout，猜测不会点的那么快
-    }
-    setTimeout(() => {
-      this.clickCount = 0;
-    }, this.dblclickTime);
-  }
-  protected _checkDblClickAction(actionInfo: IEditActionInfo) {
-    return;
-  }
+  // protected checkDblClickAction(actionInfo: IEditActionInfo) {
+  //   if (!this.clickCount) {
+  //     this.clickCount = 1;
+  //   } else {
+  //     this.clickCount++;
+  //   }
+  //   if (this.clickCount > 1) {
+  //     this._checkDblClickAction(actionInfo);
+  //     this.clickCount = 0;
+  //     // 暂时不用clearTimeout，猜测不会点的那么快
+  //   }
+  //   setTimeout(() => {
+  //     this.clickCount = 0;
+  //   }, this.dblclickTime);
+  // }
+  // protected _checkDblClickAction(actionInfo: IEditActionInfo) {
+  //   return;
+  // }
   // 非编辑状态下处理actionInfo
   protected checkActionWhileNoEditing(actionInfo: IEditActionInfo): boolean {
     if (actionInfo.type === EditActionEnum.singleSelection && this.isActionInfoSupported(actionInfo)) {

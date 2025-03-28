@@ -40,7 +40,12 @@ export function getLayoutFromWidget(w: Partial<IWidgetData> | IRect, character: 
   };
 }
 
-export function getLayoutLine(b: IAABBBounds, opt: any, orient: 'x' | 'y' | 'xy' = 'xy') {
+export function getLayoutLine(
+  b: IAABBBounds,
+  opt: any,
+  orient: 'x' | 'y' | 'xy' = 'xy',
+  includeMiddle: boolean = true
+) {
   const result: ILayoutLine[] = [];
   if (orient === 'y' || orient === 'xy') {
     const commonInY: Omit<ILayoutLine, 'value' | 'type'> = {
@@ -63,11 +68,13 @@ export function getLayoutLine(b: IAABBBounds, opt: any, orient: 'x' | 'y' | 'xy'
       ...commonInY
     });
     // middle
-    result.push({
-      value: (b.y1 + b.y2) * 0.5,
-      type: 'middle',
-      ...commonInY
-    });
+    if (includeMiddle) {
+      result.push({
+        value: (b.y1 + b.y2) * 0.5,
+        type: 'middle',
+        ...commonInY
+      });
+    }
   }
 
   if (orient === 'x' || orient === 'xy') {
@@ -91,11 +98,13 @@ export function getLayoutLine(b: IAABBBounds, opt: any, orient: 'x' | 'y' | 'xy'
       ...commonInX
     });
     // middle
-    result.push({
-      value: (b.x1 + b.x2) * 0.5,
-      type: 'middle',
-      ...commonInX
-    });
+    if (includeMiddle) {
+      result.push({
+        value: (b.x1 + b.x2) * 0.5,
+        type: 'middle',
+        ...commonInX
+      });
+    }
   }
   return result;
 }
