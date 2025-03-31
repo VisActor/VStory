@@ -423,6 +423,13 @@
             "zh": "信息图模板-饼图: Banana Composition by Percentage",
             "en": "Pie Chart Infographic: Banana Composition by Percentage"
           }
+        },
+        {
+          "path": "line-chart-temperatureChanges",
+          "title": {
+            "zh": "信息图模板-折线图: Spring Solar Term Temperature Changes",
+            "en": "Line Chart Infographic: Spring Solar Term Temperature Changes"
+          }
         }
       ]
     }
