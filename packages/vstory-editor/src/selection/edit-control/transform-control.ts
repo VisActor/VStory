@@ -140,6 +140,20 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
   // snap的时候会修改rect，导致rect不跟手，所以需要一个最真实的bounds
   protected _actualSnapBounds: IAABBBounds | null = null;
 
+  /**
+   * 根据视图的缩放比例计算出snapThreshold
+   */
+  get transformedSnapThreshold() {
+    let snapThreshold = this._snapThreshold;
+    const globalTransMatrix = this.globalTransMatrix;
+    if (globalTransMatrix) {
+      const scaleX = globalTransMatrix.a;
+      const scaleY = globalTransMatrix.d;
+      snapThreshold = snapThreshold / Math.max(scaleX, scaleY);
+    }
+    return snapThreshold;
+  }
+
   // state: {
   //   actionMode: EditorActionMode;
   // };
@@ -820,7 +834,7 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
             { x: item[0] * width, y: item[1] * height },
             { x: item[2] * width, y: item[3] * height }
           ],
-          pickStrokeBuffer: 2,
+          pickStrokeBuffer: 2 / ((scaleX + scaleY) / 2),
           boundsPadding: 1,
           cursor,
           ...resizeBorder
@@ -1049,12 +1063,13 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
       (this as any)[k].setAttributes({ visible: false });
     });
 
+    const transformedSnapThreshold = this.transformedSnapThreshold;
     const snapLines = lines.filter(item => {
       const d1 = abs(item.value - bounds[`${orient}1`]);
       const d2 = abs(item.value - bounds[`${orient}2`]);
       // 中间的线
       const d3 = abs(item.value - (bounds[`${orient}1`] + bounds[`${orient}2`]) / 2);
-      return d1 < this._snapThreshold || d2 < this._snapThreshold || d3 < this._snapThreshold;
+      return d1 < transformedSnapThreshold || d2 < transformedSnapThreshold || d3 < transformedSnapThreshold;
     });
     if (!snapLines.length) {
       return false;
