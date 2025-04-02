@@ -17,6 +17,9 @@ export class RectComponent extends BaseComponentWithText {
       bottom: 0,
       left: 0,
       right: 0
+    },
+    graphic: {
+      keepStrokeScale: true
     }
   };
 

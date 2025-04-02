@@ -123,6 +123,25 @@ export const ComponentsEdit = () => {
         }
       }
     });
+    story.addCharacterWithAppear({
+      type: 'Shape',
+      id: 'shape1',
+      zIndex: 1,
+      position: {
+        top: 300,
+        left: 300,
+        width: 60,
+        height: 60
+      },
+      options: {
+        graphic: {
+          symbolType: 'star',
+          fill: 'red',
+          stroke: 'blue',
+          lineWidth: 6
+        }
+      }
+    });
 
     player.play(-1);
 

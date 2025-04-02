@@ -11,6 +11,9 @@ export class LineComponent extends BaseComponentWithText {
     width: 100,
     height: 100,
     clip: true,
+    graphic: {
+      keepStrokeScale: true
+    },
     padding: {
       top: 0,
       bottom: 0,

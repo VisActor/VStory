@@ -16,7 +16,8 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
       fontSize: 12,
       fill: '#000',
       textAlign: 'center',
-      textBaseline: 'middle'
+      textBaseline: 'middle',
+      keepStrokeScale: true
     },
     padding: {
       top: 0,
