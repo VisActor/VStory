@@ -99,7 +99,9 @@ export const ComponentsEdit = () => {
       },
       options: {
         graphic: {
-          fill: 'red'
+          fill: 'red',
+          stroke: 'blue',
+          lineWidth: 20
         }
       }
     });
@@ -115,7 +117,9 @@ export const ComponentsEdit = () => {
       },
       options: {
         graphic: {
-          fill: 'red'
+          fill: 'red',
+          stroke: 'blue',
+          lineWidth: 20
         }
       }
     });

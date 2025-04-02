@@ -8,7 +8,7 @@ import type { ICharacterPickInfo, IStoryEvent } from '../interface/event';
 import type { IStory } from '../interface/story';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IConfigProcess } from './config-transform/interface';
-import { getLayoutLine } from '../utils/layout';
+import { getLayoutFromWidget, getLayoutLine } from '../utils/layout';
 import { foreachAllConstructor } from '../utils/type';
 import { ThemeManager } from '../theme/theme-manager';
 import { RuntimeStore } from '../store';
@@ -135,10 +135,21 @@ export abstract class CharacterBase<T> implements ICharacter {
     return this as ICharacterRuntimeConfig;
   }
 
+  getLayoutViewBox() {
+    const layout = getLayoutFromWidget(this._config.position, this);
+    const viewBox = {
+      x1: layout.x,
+      x2: layout.x + layout.width,
+      y1: layout.y,
+      y2: layout.y + layout.height
+    };
+    return { layout, viewBox, angle: layout.angle ?? 0 };
+  }
+
   getLayoutGuideLine(): ILayoutLine[] {
-    const bounds = this._graphic.AABBBounds;
+    const { viewBox } = this.getLayoutViewBox();
     return getLayoutLine(
-      bounds,
+      viewBox,
       {
         id: this.id
       },

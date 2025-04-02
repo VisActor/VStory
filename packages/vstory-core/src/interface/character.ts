@@ -6,7 +6,8 @@ import type { IReleaseable } from './releaseable';
 import type { IStory } from './story';
 import type { IConfigProcess } from '../character/config-transform/interface';
 import type { IStoryCanvas } from './canvas';
-import type { IAABBBounds } from '@visactor/vutils';
+import type { IAABBBounds, IAABBBoundsLike } from '@visactor/vutils';
+import type { ILayoutAttribute } from '../utils/layout';
 
 export interface ILayoutLine {
   orient: 'x' | 'y';
@@ -60,6 +61,12 @@ export interface ICharacter extends IReleaseable {
 
   // 获取所有辅助线
   getLayoutGuideLine: () => ILayoutLine[];
+
+  getLayoutViewBox: () => {
+    layout: Partial<ILayoutAttribute>;
+    viewBox: IAABBBoundsLike;
+    angle: number;
+  };
 }
 
 export interface ICharacterRuntimeConfig {

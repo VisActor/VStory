@@ -1043,9 +1043,10 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
 
     if (resizeX) {
       // 如果有从吸附到未吸附，就重置回去
-      if ((!_snappedX.snap1 && this.lastSnapX.snap1) || (!_snappedX.snap2 && this.lastSnapX.snap2)) {
+      if ((!_snappedX.snap1 && this.lastSnapX?.snap1) || (!_snappedX.snap2 && this.lastSnapX?.snap2)) {
         out.x = actualSnapBounds.x1;
-        // out.width = actualSnapBounds.width();
+        // 需要设置width，否则会跳变
+        out.width = actualSnapBounds.width();
       }
     } else {
       // 从吸附到未吸附，将实际的bounds重置回去
@@ -1057,14 +1058,15 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
 
     if (resizeY) {
       // 如果有从吸附到未吸附，就重置回去
-      if ((!_snappedY.snap1 && this.lastSnapY.snap1) || (!_snappedY.snap2 && this.lastSnapY.snap2)) {
+      if ((!_snappedY.snap1 && this.lastSnapY?.snap1) || (!_snappedY.snap2 && this.lastSnapY?.snap2)) {
         out.y = actualSnapBounds.y1;
-        // out.height = actualSnapBounds.height();
+        out.height = actualSnapBounds.height();
       }
     } else {
       // 从吸附到未吸附，将实际的bounds重置回去
       if (!allSnapY) {
         out.y = actualSnapBounds.y1;
+        // 需要设置height，否则会跳变
         out.height = actualSnapBounds.height();
       }
     }

@@ -175,12 +175,9 @@ export abstract class BaseSelection implements IEditSelection {
     if (!(actionInfo && actionInfo.character && activeCharacter)) {
       return;
     }
-    const component = actionInfo.character.graphic;
-    const graphic = component.mainGraphic;
-    const bounds = graphic.AABBBounds.clone();
-    const { angle, x, y } = component.attribute;
-    bounds.translate(x, y);
-    this._layoutController.updateBoundsAndAngle(bounds, angle);
+    const character = actionInfo.character;
+    const { viewBox, angle } = character.getLayoutViewBox();
+    this._layoutController.updateBoundsAndAngle(viewBox, angle);
     return;
   }
 
@@ -214,12 +211,12 @@ export abstract class BaseSelection implements IEditSelection {
   }
 
   protected createHoverController(character: ICharacter): IHoverController | undefined {
-    const bounds = character.graphic.AABBBounds;
+    const { viewBox } = character.getLayoutViewBox();
     const controller = new HoverController(this, {
-      x: bounds.x1,
-      y: bounds.y1,
-      width: bounds.width(),
-      height: bounds.height()
+      x: viewBox.x1,
+      y: viewBox.y1,
+      width: viewBox.x2 - viewBox.x1,
+      height: viewBox.y2 - viewBox.y1
     }) as any;
     return controller;
   }

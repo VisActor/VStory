@@ -1,7 +1,7 @@
 import type { IRect } from '@visactor/vrender-core';
 import type { IWidgetData } from '../interface/dsl/dsl';
 import type { ICharacter, ILayoutLine } from '../interface/character';
-import type { IAABBBounds } from '@visactor/vutils';
+import type { IAABBBounds, IAABBBoundsLike } from '@visactor/vutils';
 
 export interface ILayoutAttribute {
   x: number;
@@ -41,7 +41,7 @@ export function getLayoutFromWidget(w: Partial<IWidgetData> | IRect, character: 
 }
 
 export function getLayoutLine(
-  b: IAABBBounds,
+  b: IAABBBoundsLike,
   opt: any,
   orient: 'x' | 'y' | 'xy' = 'xy',
   includeMiddle: boolean = true
@@ -51,8 +51,8 @@ export function getLayoutLine(
     const commonInY: Omit<ILayoutLine, 'value' | 'type'> = {
       orient: 'y',
       start: b.x1,
-      end: b.x1 + b.width(),
-      bounds: b.clone(),
+      end: b.x2,
+      bounds: b,
       ...opt
     };
     // top
@@ -82,7 +82,7 @@ export function getLayoutLine(
       orient: 'x',
       start: b.y1,
       end: b.y2,
-      bounds: b.clone(),
+      bounds: b,
       ...opt
     };
     // left
