@@ -1,11 +1,11 @@
 import { CharacterType } from '@visactor/vstory-core';
 import type { IEditActionInfo, IEditSelection } from '../interface';
-import { RichTextSelectionCommon } from './richtext-selection-common';
 import type { ITransformController } from './edit-control/transform-control';
+import { BaseSelection } from './base-selection';
 
-export class ImageSelection extends RichTextSelectionCommon implements IEditSelection {
+export class ImageSelection extends BaseSelection implements IEditSelection {
   readonly level = 3;
-  readonly type: string = 'image';
+  readonly type: string = CharacterType.IMAGE;
   readonly editCharacterType: string = CharacterType.IMAGE;
   readonly supportedCharacterType: string[] = [CharacterType.IMAGE];
 

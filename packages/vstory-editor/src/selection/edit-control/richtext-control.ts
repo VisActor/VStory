@@ -3,6 +3,8 @@ import type { IRichText, RichTextEditPlugin } from '@visactor/vrender';
 import type { Edit } from '../../edit';
 import { EditActionEnum } from '../../const';
 import type { ICharacter } from '@visactor/vstory-core';
+import type { RichTextControlAttributes } from '../../theme';
+
 export class RichTextControl {
   protected _character: ICharacter;
   protected _richText: IRichText;
@@ -10,10 +12,13 @@ export class RichTextControl {
 
   emitter: EventEmitter = new EventEmitter();
 
+  richTextControlTheme: RichTextControlAttributes;
+
   constructor(edit: Edit, character: ICharacter, richText: IRichText) {
     this._character = character;
     this._richText = richText;
     this._edit = edit;
+    this.richTextControlTheme = edit.theme.richTextControl;
     this._initPlugin();
   }
 
@@ -30,7 +35,7 @@ export class RichTextControl {
     }
     if (msg.type === 'change' && this._character) {
       this._character.setConfig({
-        options: { text: { text: '', textConfig: [...this._richText.attribute.textConfig] } } as any
+        options: { graphic: { text: '', textConfig: [...this._richText.attribute.textConfig] } } as any
       });
     }
     // do noting 富文本编辑消息的处理
@@ -38,21 +43,49 @@ export class RichTextControl {
   };
 
   startEdit() {
-    this._richText.setAttributes({ editable: true });
+    this._richText.setAttributes({ editable: true, editOptions: this.richTextControlTheme });
   }
 
   // 聚焦到富文本上
   focus(e: PointerEvent) {
+    if (!this._richText) {
+      return;
+    }
     // 找到plugin
     const stage = this._richText.stage;
     if (!stage) {
       return;
     }
-    const plugin = (stage.pluginService.findPluginsByName('RichTextEditPlugin') || [])[0];
+    const plugin = stage.pluginService.findPluginsByName('RichTextEditPlugin')[0] as any;
+    plugin &&
+      plugin.forceFocus({
+        e: e,
+        target: this._richText,
+        cursorIndex: e ? undefined : -0.1
+      } as any);
+
+    return plugin;
+  }
+
+  focusAndSelectAll(e: any) {
+    const plugin = this.focus(e);
+    plugin && plugin.fullSelection(e);
+    return plugin;
+  }
+
+  defocus() {
+    if (!this._richText) {
+      return;
+    }
+
+    const plugin = this._richText.stage?.pluginService?.findPluginsByName('RichTextEditPlugin')?.[0] as any;
     if (!plugin) {
       return;
     }
-    (plugin as any).forceFocus && (plugin as any).forceFocus(e);
+    if (plugin.currRt === this._richText) {
+      plugin.deFocus(true);
+    }
+    return plugin;
   }
 
   endEdit() {

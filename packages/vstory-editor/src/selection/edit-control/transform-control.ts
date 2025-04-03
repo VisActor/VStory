@@ -1246,6 +1246,14 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     this._dragger.pauseDrag();
   }
 
+  hide() {
+    this.setAttributes({ visibleAll: false });
+  }
+
+  show() {
+    this.setAttributes({ visibleAll: true });
+  }
+
   resumeDragger() {
     if (!this._dragger) {
       return;

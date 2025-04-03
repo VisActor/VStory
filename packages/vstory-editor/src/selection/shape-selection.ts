@@ -1,10 +1,10 @@
 import { CharacterType } from '@visactor/vstory-core';
 import type { IEditActionInfo, IEditSelection } from '../interface';
-import { RichTextSelectionCommon } from './richtext-selection-common';
+import { BaseSelection } from './base-selection';
 
-export class ShapeSelection extends RichTextSelectionCommon implements IEditSelection {
+export class ShapeSelection extends BaseSelection implements IEditSelection {
   readonly level = 3;
-  readonly type: string = 'shape';
+  readonly type: string = CharacterType.SHAPE;
   readonly editCharacterType: string = CharacterType.SHAPE;
   readonly supportedCharacterType: string[] = [CharacterType.SHAPE];
 

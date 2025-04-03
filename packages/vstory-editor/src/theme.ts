@@ -3,8 +3,17 @@ import { SHAPE_SELECT_COLOR } from './const';
 import { DRAG_ANCHOR_COLOR } from './selection/edit-control/constants';
 import type { ControllerAttributes } from './selection/edit-control/transform-control';
 
+export interface RichTextControlAttributes {
+  placeholder: string;
+  placeholderColor: string;
+  keepHeightWhileEmpty: boolean;
+  boundsStrokeWhenInput: string;
+  syncPlaceholderToTextConfig: boolean;
+  stopPropagation: boolean;
+}
 export class Theme {
   layoutTransformerControl: ControllerAttributes;
+  richTextControl: RichTextControlAttributes;
 
   constructor() {
     this.layoutTransformerControl = {
@@ -49,9 +58,21 @@ export class Theme {
         endAngle: Math.PI * 2
       }
     };
+    this.richTextControl = {
+      placeholder: '请输入文本',
+      placeholderColor: '#b088ff',
+      keepHeightWhileEmpty: true,
+      boundsStrokeWhenInput: '#8249f3',
+      syncPlaceholderToTextConfig: false,
+      stopPropagation: true
+    };
   }
 
   setLayoutTransformerControlTheme(theme: Partial<ControllerAttributes>) {
     merge(this.layoutTransformerControl, theme);
+  }
+
+  setRichTextControlTheme(theme: Partial<RichTextControlAttributes>) {
+    merge(this.richTextControl, theme);
   }
 }

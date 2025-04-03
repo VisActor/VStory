@@ -10,13 +10,15 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
   type: GraphicType = 'vstory-component-group' as any;
   numberType: number = COMPONENT_NUMBER_TYPE;
 
+  mainGraphic: IRichText;
+
   static defaultAttributes: Partial<ITextComponentAttributes> = {
     visible: true,
     textStyle: {
       fontSize: 12,
       fill: '#000',
-      textAlign: 'center',
-      textBaseline: 'middle',
+      textAlign: 'left',
+      textBaseline: 'top',
       keepStrokeScale: true
     },
     padding: {
@@ -36,11 +38,10 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
     // 如果没有给定宽高的话，就按照文本的宽高进行布局，同时要加上padding
     const { textStyle, padding, width, height } = this.attribute as ITextComponentAttributes;
 
-    const { textAlign, textBaseline } = textStyle;
-    const { align = textAlign, baseline = textBaseline } = textStyle;
+    const { align = 'left', baseline = 'top' } = textStyle;
 
-    const boxAlign = align === 'start' ? 'left' : align === 'end' ? 'right' : align;
-    const boxBaseline = baseline;
+    const boxAlign = 'left';
+    const boxBaseline = 'top';
     let textConfig = this.transformTextAttrsToRichTextConfig(textStyle, 'left');
 
     // 先设置一个初始richtext，用于计算bounds
@@ -57,6 +58,7 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
       },
       'richtext'
     ) as IRichText;
+    this.mainGraphic = richtext;
 
     // 测量宽高
     let boxWidth = width;
@@ -69,13 +71,10 @@ export class TextComponent extends AbstractComponent<ITextComponentAttributes> {
     }
 
     // 重新设置richtext的位置，align设置在textConfig中，baseline设置到verticalDirection
-    textConfig = this.transformTextAttrsToRichTextConfig(
-      textStyle,
-      textAlign === 'start' ? 'left' : textAlign === 'end' ? 'right' : textAlign
-    );
+    textConfig = this.transformTextAttrsToRichTextConfig(textStyle, align as any);
     richtext.setAttributes({
       textConfig,
-      verticalDirection: textBaseline === 'alphabetic' ? 'middle' : textBaseline,
+      verticalDirection: baseline,
       width: boxWidth,
       height: boxHeight
       // x: boxWidth / 2,

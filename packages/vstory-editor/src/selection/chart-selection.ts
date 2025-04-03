@@ -2,11 +2,11 @@ import { CharacterType } from '@visactor/vstory-core';
 import type { IEditActionInfo, IEditSelection } from '../interface';
 import { BaseSelection } from './base-selection';
 
-export class RectSelection extends BaseSelection implements IEditSelection {
+export class ChartSelection extends BaseSelection implements IEditSelection {
   readonly level = 3;
-  readonly type: string = CharacterType.RECT;
-  readonly editCharacterType: string = CharacterType.RECT;
-  readonly supportedCharacterType: string[] = [CharacterType.RECT];
+  readonly type: string = CharacterType.VCHART;
+  readonly editCharacterType: string = CharacterType.VCHART;
+  readonly supportedCharacterType: string[] = [CharacterType.VCHART];
 
   startEdit(actionInfo: IEditActionInfo) {
     super.startEdit(actionInfo);

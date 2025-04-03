@@ -130,6 +130,11 @@ export class StoryCanvas implements IStoryCanvas {
     background: string,
     pluginList: string[]
   ) {
+    if (!pluginList) {
+      pluginList = ['RichTextEditPlugin'];
+    } else if (!pluginList.includes('RichTextEditPlugin')) {
+      pluginList.push('RichTextEditPlugin');
+    }
     const stage = createStage({
       canvas: canvas,
       width,
@@ -141,7 +146,7 @@ export class StoryCanvas implements IStoryCanvas {
       autoRender: false,
       disableDirtyBounds: true,
       ticker: new ManualTicker([]),
-      pluginList: pluginList ?? ['RichTextEditPlugin'],
+      pluginList,
       event: {
         clickInterval: 300
       }
