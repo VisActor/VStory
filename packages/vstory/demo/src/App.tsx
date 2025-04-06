@@ -79,6 +79,7 @@ import { TableTheme } from './demos/table/runtime/theme';
 import { TableStyle } from './demos/table/runtime/style';
 import { TableVisible } from './demos/table/runtime/visible';
 import { SpecMarker } from './demos/chart/runtime/spec-marker';
+import { News } from './demos/works/News/News';
 
 type MenuItem = {
   name: string;
@@ -180,6 +181,10 @@ const App = () => {
         {
           name: 'VScreen',
           component: VScreen
+        },
+        {
+          name: 'News',
+          component: News
         },
         {
           name: 'LabelComponent',
