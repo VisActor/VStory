@@ -944,6 +944,9 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
 
   // moveBy或者scale，导致形状变化，走这里设置
   protected _doUpdateRectXYWH(x: number, y: number, width: number, height: number) {
+    // 如果等比缩放，那么吸附的时候另一边也要变化
+    const ratio = width / height;
+
     // console.log(x, y, width, height);
     const snappedRect = this._checkSnap(x, y, width, height);
     // 精度问题，保留3位小数
@@ -951,6 +954,23 @@ export class TransformController extends AbstractComponent<Required<ControllerAt
     snappedRect.y = keepDecimal(snappedRect.y, 3);
     snappedRect.width = keepDecimal(snappedRect.width, 3);
     snappedRect.height = keepDecimal(snappedRect.height, 3);
+
+    // 如果是等比缩放，并且发生了吸附（snappedRect和原始宽高有较大差别）
+    if (
+      this.proportionalScaling &&
+      (Math.abs(snappedRect.width - width) > 0.001 || Math.abs(snappedRect.height - height) > 0.001)
+    ) {
+      // 判断吸附的方向
+      if (Math.abs(snappedRect.width - width) > 0.001) {
+        // 吸附方向为宽度
+        snappedRect.height = keepDecimal(snappedRect.width / ratio, 3);
+      } else {
+        // 吸附方向为高度
+        snappedRect.width = keepDecimal(snappedRect.height * ratio, 3);
+      }
+      // TODO 重置，否则会抖动
+      this._actualSnapBounds = null;
+    }
 
     this.rect.setAttributes({
       ...snappedRect
