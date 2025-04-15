@@ -11,7 +11,7 @@ import type { IComponentCharacterConfig } from '../../../interface/dsl/component
 export interface IImageComponentAttributes extends IGroupGraphicAttribute {
   // 结合富文本textConfig的文本配置
   textStyle?: Partial<ITextGraphicAttribute & { textConfig: IRichTextAttribute['textConfig'] }>;
-  graphic?: IImageGraphicAttribute;
+  graphic?: IImageGraphicAttribute & { subType?: 'image' | 'gif' };
   /**
    * 内部边距
    */

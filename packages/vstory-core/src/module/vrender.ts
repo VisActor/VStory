@@ -31,7 +31,8 @@ import {
   registerShadowRoot,
   registerSymbol,
   registerText,
-  registerWrapText
+  registerWrapText,
+  registerGifImage
 } from '@visactor/vrender-kits';
 
 let _registered = false;
@@ -70,6 +71,7 @@ export function initVR(
   registerSymbol();
   registerText();
   registerWrapText();
+  registerGifImage();
 
   registerFlexLayoutPlugin();
   registerViewTransform3dPlugin();
