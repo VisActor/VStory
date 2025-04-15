@@ -423,6 +423,13 @@
             "zh": "信息图模板-饼图: Banana Composition by Percentage",
             "en": "Pie Chart Infographic: Banana Composition by Percentage"
           }
+        },
+        {
+          "path": "tax",
+          "title": {
+            "zh": "信息图模板-Tax",
+            "en": "Infographic: Tax"
+          }
         }
       ]
     }
