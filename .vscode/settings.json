@@ -23,6 +23,6 @@
   // Typescript
   "typescript.preferences.importModuleSpecifier": "project-relative",
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   }
 }

@@ -53,9 +53,45 @@ export const ImageComponent = () => {
       }
     );
 
-    player.tickTo(0);
-    player.tickTo(1600);
-
+    story.addCharacter(
+      {
+        type: 'Image',
+        id: 'gif',
+        zIndex: 1,
+        position: {
+          top: 200,
+          left: 300,
+          width: 500,
+          height: 372
+        },
+        options: {
+          graphic: {
+            subType: 'gif',
+            stroke: false,
+            gifImage: 'https://tosv.byted.org/obj/bit-cloud/11847e8a384ff808a7fd2a317.gif'
+          }
+        }
+      },
+      {
+        sceneId: 'defaultScene',
+        actions: [
+          {
+            action: 'appear',
+            payload: [
+              {
+                animation: {
+                  duration: 2000,
+                  easing: 'linear',
+                  effect: 'wipe'
+                }
+              }
+            ]
+          }
+        ]
+      }
+    );
+    player.play(-1);
+    window.story = story;
     return () => {
       story.release();
     };
