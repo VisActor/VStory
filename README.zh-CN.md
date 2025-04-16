@@ -13,7 +13,7 @@
 
 <div align="center">
 
-VStory，整合 VisActor 底层能力，提供开箱即用的数据叙事解决方案。
+VStory，用数字讲故事。一个智能数据叙事研发框架。
 
 </div>
 
@@ -23,19 +23,15 @@ VStory，整合 VisActor 底层能力，提供开箱即用的数据叙事解决�
 
 </div>
 
-<div align="center">
 
-（演示视频）
-
-</div>
 
 ## 简介
 
-VStory 是 VisActor 可视化体系中的图表组件库，基于可视化图表库[VChart](https://github.com/VisActor/VChart) ，可视化语法库[VGrammar](https://github.com/VisActor/VGrammar)，可视化渲染引擎 [VRender](https://github.com/VisActor/VRender) 进行组件封装。核心能力如下：
+VStory 是 VisActor 可视化体系中的叙事可视化研发框架，基于可视化图表库[VChart](https://github.com/VisActor/VChart) ，可视化语法库[VGrammar](https://github.com/VisActor/VGrammar)，可视化渲染引擎 [VRender](https://github.com/VisActor/VRender) 进行组件封装。核心能力如下：
 
 1. **一码多端**：自动适配桌面、H5、多个小程序环境
 2. **面向叙事**：综合应用标注、动画、流程控制、叙事模板等一系列增强功能进行叙事可视化创作。
-3. **场景沉淀**：面向最终用户沉淀可视化能力，解放开发者生产力
+3. **场景沉淀**：面向数据大屏，信息图，数据视频，数据播报等场景，沉淀叙事可视化能力，解放开发者生产力
 
 ## 仓库简介
 
@@ -44,9 +40,9 @@ VStory 是 VisActor 可视化体系中的图表组件库，基于可视化图表
 1. [`vstory`](./packages/vstory/)：核心包，VStory 编辑器
 2. [`docs`](./docs/): VStory 站点源码，同时也包含站点所有的中英文文档、示例代码等内容。
 
-## 🔨 使用
+## 🔨 demo
 
-正在构建中...
+[demo](https://www.visactor.io/vstory/example)
 
 ## ⌨️ 开发
 
@@ -90,7 +86,7 @@ $ rush start
 
 ## 🤝 参与贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/VisActor/VChart/blob/main/CONTRIBUTING.md#your-first-pull-request)
 
-如想参与贡献，请先阅读[行为准则](./CODE_OF_CONDUCT.md) 和[贡献指南](./CONTRIBUTING.zh-CN.md)。
+如想参与贡献，请先阅读[行为准则](./CODE_OF_CONDUCT.md) 和[贡献指南](https://www.visactor.io/vstory/contributing/)。
 
 细流成河，终成大海！
 

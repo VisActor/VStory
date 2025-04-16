@@ -1,7 +1,7 @@
 import type { GraphicType, IRectGraphicAttribute, ITicker, IStage } from '@visactor/vrender-core';
 import { genNumberType, parsePadding, Rect } from '@visactor/vrender-core';
 import type { IAABBBounds, IBoundsLike, Bounds } from '@visactor/vutils';
-import { pointInAABB, transformBoundsWithMatrix } from '@visactor/vutils';
+import { isValid, pointInAABB, transformBoundsWithMatrix } from '@visactor/vutils';
 import { isBoundsLikeEqual } from '../../../utils/equal';
 import * as VTable from '@visactor/vtable';
 import { VChart, type IInitOption } from '@visactor/vchart';
@@ -36,6 +36,8 @@ export interface ITableGraphicAttribute {
   tableType: string;
   // ClassType: any;
   TableConstructor?: ITableConstructor;
+  mode: IInitOption['mode'];
+  modeParams?: any;
   dpr: number;
   interactive?: boolean;
   animation?: boolean;
@@ -150,6 +152,16 @@ export class VTableGraphic extends Rect {
       this._vTable.scenegraph.stage.resumeRender();
     };
 
+    filledOption.mode = params.mode;
+    filledOption.dpr = params.dpr;
+    isValid(params.modeParams) && (filledOption.modeParams = params.modeParams);
+    isValid(params.interactive) && (filledOption.interactive = params.interactive);
+    isValid(params.animation) && (filledOption.animation = params.animation);
+    isValid(params.chartOption) && (filledOption.chartOption = params.chartOption);
+    isValid(params.ticker) && (filledOption.ticker = params.ticker);
+    isValid(params.autoRender) && (filledOption.autoRender = params.autoRender);
+    isValid(params.enablePickBounds) && (filledOption.enablePickBounds = params.enablePickBounds);
+
     return filledOption;
   }
 
@@ -183,6 +195,9 @@ export class VTableGraphic extends Rect {
       super.setAttribute('x', value.x1);
       super.setAttribute('y', value.y1);
       this.updateVTableGraphicViewBox(value);
+    }
+    if (key === 'spec') {
+      (this._vTable as any).updateOption(value);
     } else {
       super.setAttribute(key, value);
     }
@@ -193,6 +208,9 @@ export class VTableGraphic extends Rect {
     if (attrs.viewBox) {
       this.attribute.viewBox = lastedViewBox;
       this.updateVTableGraphicViewBox(attrs.viewBox);
+    }
+    if (attrs.spec) {
+      (this._vTable as any).updateOption(this._createOption(attrs));
     }
   }
 

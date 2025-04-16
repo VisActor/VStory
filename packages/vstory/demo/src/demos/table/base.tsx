@@ -1,17 +1,12 @@
 import React, { useEffect } from 'react';
-import { Player, Story, initVR, registerGraphics, registerCharacters, IStoryDSL } from '../../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction, registerVTableAction } from '../../../../../vstory-player/src';
+import { Player, Story, IStoryDSL } from '../../../../../vstory-core/src';
 import { pivotTableOption } from './option-pivot-table';
 import { listTableOption } from './option-list-table';
 import { pivotChartOption } from './option-pivot-chart';
 import { cloneDeep } from '@visactor/vutils';
+import { registerAll } from '../../../../src';
 
-registerGraphics();
-registerCharacters();
-registerVChartAction();
-registerVComponentAction();
-registerVTableAction();
-initVR();
+registerAll();
 
 function loadDSL() {
   const tableSpec0 = cloneDeep(listTableOption);

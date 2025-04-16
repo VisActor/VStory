@@ -109,9 +109,9 @@ const dsl = {
           shadowOffsetX: 4,
           shadowOffsetY: 4,
           cornerRadius: 8
-        }
+        },
+        spec
       },
-      spec
     }
   ],
   // Specific animation arrangement for the chart

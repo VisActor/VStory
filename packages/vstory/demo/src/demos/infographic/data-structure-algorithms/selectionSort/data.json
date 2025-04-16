@@ -1,0 +1,2270 @@
+{
+  "characters": [
+    {
+      "id": "array1187318904",
+      "type": "VChart",
+      "zIndex": 1,
+      "position": {
+        "top": 0,
+        "left": 0,
+        "width": 960,
+        "height": 600
+      },
+      "options": {
+        "panel": {
+          "fill": "#ffffff",
+          "shadowColor": "rgba(0, 0, 0, 0.05)",
+          "shadowBlur": 10,
+          "shadowOffsetX": 4,
+          "shadowOffsetY": 4,
+          "cornerRadius": 8
+        },
+        "spec": {
+          "data": [
+            {
+              "id": "array-bar-array1187318904",
+              "values": [
+                {
+                  "key": "30-0",
+                  "value": 30
+                },
+                {
+                  "key": "29-1",
+                  "value": 29
+                },
+                {
+                  "key": "28-2",
+                  "value": 28
+                },
+                {
+                  "key": "27-3",
+                  "value": 27
+                },
+                {
+                  "key": "26-4",
+                  "value": 26
+                },
+                {
+                  "key": "25-5",
+                  "value": 25
+                },
+                {
+                  "key": "24-6",
+                  "value": 24
+                },
+                {
+                  "key": "23-7",
+                  "value": 23
+                },
+                {
+                  "key": "22-8",
+                  "value": 22
+                },
+                {
+                  "key": "21-9",
+                  "value": 21
+                },
+                {
+                  "key": "20-10",
+                  "value": 20
+                },
+                {
+                  "key": "19-11",
+                  "value": 19
+                },
+                {
+                  "key": "18-12",
+                  "value": 18
+                },
+                {
+                  "key": "17-13",
+                  "value": 17
+                },
+                {
+                  "key": "16-14",
+                  "value": 16
+                },
+                {
+                  "key": "15-15",
+                  "value": 15
+                },
+                {
+                  "key": "14-16",
+                  "value": 14
+                },
+                {
+                  "key": "13-17",
+                  "value": 13
+                },
+                {
+                  "key": "12-18",
+                  "value": 12
+                },
+                {
+                  "key": "11-19",
+                  "value": 11
+                },
+                {
+                  "key": "10-20",
+                  "value": 10
+                },
+                {
+                  "key": "9-21",
+                  "value": 9
+                },
+                {
+                  "key": "8-22",
+                  "value": 8
+                },
+                {
+                  "key": "7-23",
+                  "value": 7
+                },
+                {
+                  "key": "6-24",
+                  "value": 6
+                },
+                {
+                  "key": "5-25",
+                  "value": 5
+                },
+                {
+                  "key": "4-26",
+                  "value": 4
+                },
+                {
+                  "key": "3-27",
+                  "value": 3
+                },
+                {
+                  "key": "2-28",
+                  "value": 2
+                },
+                {
+                  "key": "1-29",
+                  "value": 1
+                }
+              ]
+            }
+          ],
+          "dataKey": "key",
+          "axes": [
+            {
+              "orient": "bottom",
+              "type": "band",
+              "label": {
+                "visible": false
+              }
+            },
+            {
+              "orient": "left",
+              "type": "linear",
+              "visible": true,
+              "zero": true,
+              "max": 30,
+              "nice": true
+            }
+          ],
+          "type": "bar",
+          "xField": "key",
+          "yField": "value",
+          "label": {
+            "visible": true,
+            "smartInvert": true,
+            "offset": -20,
+            "position": "inside-bottom",
+            "overlap": {
+              "clampForce": false
+            },
+            "style": {
+              "fontSize": 14
+            }
+          },
+          "animation": true,
+          "animationAppear": false
+        }
+      }
+    }
+  ],
+  "acts": [
+    {
+      "id": "default-chapter",
+      "scenes": [
+        {
+          "id": "scene",
+          "actions": [
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "appear",
+                  "startTime": 0,
+                  "payload": {
+                    "animation": {
+                      "duration": 200
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 200,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 400,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 600,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 800,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 1000,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 1200,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 1400,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 1600,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 1800,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 2000,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 2200,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 2400,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 2600,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 2800,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array1187318904",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 3000,
+                  "payload": {
+                    "id": "array-bar-array1187318904",
+                    "animation": {
+                      "duration": 200
+                    },
+                    "values": [
+                      {
+                        "key": "1-29",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-28",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-27",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-26",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-25",
+                        "value": 5
+                      },
+                      {
+                        "key": "6-24",
+                        "value": 6
+                      },
+                      {
+                        "key": "7-23",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-22",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-21",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-20",
+                        "value": 10
+                      },
+                      {
+                        "key": "11-19",
+                        "value": 11
+                      },
+                      {
+                        "key": "12-18",
+                        "value": 12
+                      },
+                      {
+                        "key": "13-17",
+                        "value": 13
+                      },
+                      {
+                        "key": "14-16",
+                        "value": 14
+                      },
+                      {
+                        "key": "15-15",
+                        "value": 15
+                      },
+                      {
+                        "key": "16-14",
+                        "value": 16
+                      },
+                      {
+                        "key": "17-13",
+                        "value": 17
+                      },
+                      {
+                        "key": "18-12",
+                        "value": 18
+                      },
+                      {
+                        "key": "19-11",
+                        "value": 19
+                      },
+                      {
+                        "key": "20-10",
+                        "value": 20
+                      },
+                      {
+                        "key": "21-9",
+                        "value": 21
+                      },
+                      {
+                        "key": "22-8",
+                        "value": 22
+                      },
+                      {
+                        "key": "23-7",
+                        "value": 23
+                      },
+                      {
+                        "key": "24-6",
+                        "value": 24
+                      },
+                      {
+                        "key": "25-5",
+                        "value": 25
+                      },
+                      {
+                        "key": "26-4",
+                        "value": 26
+                      },
+                      {
+                        "key": "27-3",
+                        "value": 27
+                      },
+                      {
+                        "key": "28-2",
+                        "value": 28
+                      },
+                      {
+                        "key": "29-1",
+                        "value": 29
+                      },
+                      {
+                        "key": "30-0",
+                        "value": 30
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

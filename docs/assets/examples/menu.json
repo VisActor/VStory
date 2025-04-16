@@ -42,6 +42,20 @@
             "zh": "标注展示",
             "en": "annotation show"
           }
+        },
+        {
+          "path": "Programming-Language-Popularity",
+          "title": {
+            "zh": "编程语言排名",
+            "en": "Programming Language Popularity"
+          }
+        },
+        {
+          "path": "piano-tiles",
+          "title": {
+            "zh": "别踩白块",
+            "en": "piano-tiles"
+          }
         }
       ]
     },
@@ -408,6 +422,48 @@
           "title": {
             "zh": "信息图模板-面积图: Top 10 Podcasts",
             "en": "Bar chart Infographic: Top 10 Podcasts"
+          }
+        },
+        {
+          "path": "pie-chart-banana",
+          "title": {
+            "zh": "信息图模板-饼图: Banana Composition by Percentage",
+            "en": "Pie Chart Infographic: Banana Composition by Percentage"
+          }
+        },
+        {
+          "path": "line-chart-temperatureChanges",
+          "title": {
+            "zh": "信息图模板-折线图: Spring Solar Term Temperature Changes",
+            "en": "Line Chart Infographic: Spring Solar Term Temperature Changes"
+          }
+        },
+        {
+          "path": "harry-potter-wands",
+          "title": {
+            "zh": "信息图模板: 哈利波特魔杖使用情况",
+            "en": "Infographic: Usage of Wands in Harry Potter"
+          }
+        },
+        {
+          "path": "qingming-rain",
+          "title": {
+            "zh": "信息图模板: 节气",
+            "en": "Chart Infographic: JieQi"
+          }
+        },
+        {
+          "path": "tax",
+          "title": {
+            "zh": "信息图模板-Tax",
+            "en": "Infographic: Tax"
+          }
+        },
+        {
+          "path": "ultraman",
+          "title": {
+            "zh": "信息图模板-Ultraman",
+            "en": "Infographic: Ultraman"
           }
         }
       ]

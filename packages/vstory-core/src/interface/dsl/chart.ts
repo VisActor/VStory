@@ -1,5 +1,5 @@
 import type { ITextGraphicAttribute } from '@visactor/vrender-core';
-import type { IInitOption, ISpec } from '@visactor/vchart';
+import type { ChartSpecMap, IInitOption, IMarkAreaSpec, IMarkLineSpec, IMarkPointSpec, ISpec } from '@visactor/vchart';
 import type { ICharacterConfigBase } from './dsl';
 import type { IFormatConfig } from './common';
 
@@ -13,11 +13,14 @@ export interface IComponentMatch {
 
 export type ITextAttribute = ITextGraphicAttribute;
 
+// 数据匹配  至少存在 value 或者 scaleIndex 其中之一
+export type IDatumMatch = { value: any; scaleIndex?: number } | { value?: any; scaleIndex: number };
+
 export interface IMarkStyle<T> {
   seriesMatch: { type: string } & IComponentMatch;
   markName: string;
   itemKeys: string[]; // 数据匹配维度
-  itemKeyMap: { [key: string]: number }; // 匹配维度值
+  itemKeyMap: { [key: string]: IDatumMatch }; // 匹配维度值
   style: T; // 样式
 }
 
@@ -57,7 +60,7 @@ export interface ITotalLabelConfig {
     // 使用 维度key_维度值_&_维度key_维度值 这样的格式构建key，保证唯一性
     [key: string]: {
       itemKeys: string[]; // 数据匹配维度
-      itemKeyMap: { [key: string]: number }; // 匹配维度值
+      itemKeyMap: { [key: string]: IDatumMatch }; // 匹配维度值
       formatConfig?: IFormatConfig;
       style?: ITextAttribute;
     };
@@ -66,6 +69,10 @@ export interface ITotalLabelConfig {
 
 export interface IChartCharacterConfig extends ICharacterConfigBase {
   options: {
+    /**
+     * 指定图表类型，如果不指定，会根据 spec 自动推断
+     */
+    chartType?: keyof ChartSpecMap;
     /**
      * 图表spec
      */
@@ -148,5 +155,13 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
      * 直接合并的配置
      */
     rootConfig?: Record<string, any>;
+    /**
+     * 图表标注
+     */
+    marker?: {
+      markLine?: IMarkLineSpec[];
+      markArea?: IMarkAreaSpec[];
+      markPoint?: IMarkPointSpec[];
+    };
   };
 }
