@@ -49,6 +49,13 @@
             "zh": "编程语言排名",
             "en": "Programming Language Popularity"
           }
+        },
+        {
+          "path": "piano-tiles",
+          "title": {
+            "zh": "别踩白块",
+            "en": "piano-tiles"
+          }
         }
       ]
     },
@@ -429,6 +436,27 @@
           "title": {
             "zh": "信息图模板-折线图: Spring Solar Term Temperature Changes",
             "en": "Line Chart Infographic: Spring Solar Term Temperature Changes"
+          }
+        },
+        {
+          "path": "harry-potter-wands",
+          "title": {
+            "zh": "信息图模板: 哈利波特魔杖使用情况",
+            "en": "Infographic: Usage of Wands in Harry Potter"
+          }
+        },
+        {
+          "path": "qingming-rain",
+          "title": {
+            "zh": "信息图模板: 节气",
+            "en": "Chart Infographic: JieQi"
+          }
+        },
+        {
+          "path": "tax",
+          "title": {
+            "zh": "信息图模板-Tax",
+            "en": "Infographic: Tax"
           }
         }
       ]

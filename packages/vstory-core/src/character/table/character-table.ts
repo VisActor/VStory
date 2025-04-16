@@ -182,10 +182,11 @@ export class CharacterTable<T extends ITableGraphicAttribute>
       panel: {},
       ticker: this._ticker,
       zIndex: this._config.zIndex ?? 0,
+      mode: this._story.option.mode,
+      modeParams: this._story.option.modeParams,
       chartOption: {
         disableTriggerEvent: true,
-        disableDirtyBounds: true,
-        mode: 'desktop-browser'
+        disableDirtyBounds: true
       }
     };
   }

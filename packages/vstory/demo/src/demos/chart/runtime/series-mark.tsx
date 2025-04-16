@@ -493,10 +493,10 @@ function loadDSL() {
               seriesMatch: { type: 'bar' },
               itemKeys: ['type', 'range', 'type2', 'color'],
               itemKeyMap: {
-                type: 1,
-                range: 1,
-                type2: 1,
-                color: 1
+                type: { scaleIndex: 1 },
+                range: { scaleIndex: 1 },
+                type2: { scaleIndex: 1 },
+                color: { scaleIndex: 1 }
               },
               style: {
                 fill: 'black'
