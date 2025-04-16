@@ -458,6 +458,13 @@
             "zh": "信息图模板-Tax",
             "en": "Infographic: Tax"
           }
+        },
+        {
+          "path": "ultraman",
+          "title": {
+            "zh": "信息图模板-Ultraman",
+            "en": "Infographic: Ultraman"
+          }
         }
       ]
     }
