@@ -49,6 +49,13 @@
             "zh": "编程语言排名",
             "en": "Programming Language Popularity"
           }
+        },
+        {
+          "path": "piano-tiles",
+          "title": {
+            "zh": "别踩白块",
+            "en": "piano-tiles"
+          }
         }
       ]
     },
