@@ -432,6 +432,13 @@
           }
         },
         {
+          "path": "harry-potter-wands",
+          "title": {
+            "zh": "信息图模板: 哈利波特魔杖使用情况",
+            "en": "Infographic: Usage of Wands in Harry Potter"
+          }
+        },
+        {
           "path": "qingming-rain",
           "title": {
             "zh": "信息图模板: 节气",
