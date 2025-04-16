@@ -432,6 +432,13 @@
           }
         },
         {
+          "path": "qingming-rain",
+          "title": {
+            "zh": "信息图模板: 节气",
+            "en": "Chart Infographic: JieQi"
+          }
+        },
+        {
           "path": "tax",
           "title": {
             "zh": "信息图模板-Tax",
