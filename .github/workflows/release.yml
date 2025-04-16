@@ -78,7 +78,7 @@ jobs:
         run: node --max-old-space-size=8192000 --max_semi_space_size=8192000 common/scripts/install-run-rush.js build --only @visactor/vstory
 
       - name: Build bugserver
-        run: node --max-old-space-size=65536 --max_semi_space_size=65536 common/scripts/install-run-rush.js build --only @internal/bugserver-trigger
+        run: node --max-old-space-size=8192 common/scripts/install-run-rush.js build --only @internal/bugserver-trigger
 
       # - name: Run CI
       #   working-directory: ./tools/bugserver-trigger
