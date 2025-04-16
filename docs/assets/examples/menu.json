@@ -432,6 +432,13 @@
           }
         },
         {
+          "path": "line-chart-temperatureChanges",
+          "title": {
+            "zh": "信息图模板-折线图: Spring Solar Term Temperature Changes",
+            "en": "Line Chart Infographic: Spring Solar Term Temperature Changes"
+          }
+        },
+        {
           "path": "harry-potter-wands",
           "title": {
             "zh": "信息图模板: 哈利波特魔杖使用情况",
