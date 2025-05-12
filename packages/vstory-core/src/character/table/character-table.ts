@@ -10,7 +10,7 @@ import { getLayoutFromWidget } from '../../utils/layout';
 import type { ITableCharacterRuntime } from './interface/runtime';
 import { TableConfigProcess } from './table-config-process';
 import type { ICharacterTable, IVTable } from './interface/character-table';
-import { isArray } from '@visactor/vutils';
+import { isArray, isObject } from '@visactor/vutils';
 
 export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>
@@ -170,9 +170,20 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   }
 
   getDefaultAttribute(): Partial<ITableGraphicAttribute> {
+    let records = this._config.options.spec?.records;
+    if (isArray(records)) {
+      records = records.slice();
+    } else if (isObject(records)) {
+      records = { ...records };
+      Object.keys(records).forEach(key => {
+        records[key] = records[key].slice();
+      });
+    } else {
+      records = [];
+    }
     return {
       spec: Object.assign({}, this._config.options.spec, {
-        records: (this._config.options.spec?.records ?? []).slice()
+        records
       }),
       dpr: this._canvas.getDpr(),
       autoRender: false,
