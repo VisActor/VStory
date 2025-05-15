@@ -225,6 +225,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
       ticker: this._ticker,
       zIndex: this._config.zIndex ?? 0,
       vchartBoundsMode: this._config.options.initOption?.vchartBoundsMode ?? 'clip',
+      updateSpecMorphConfig: this._config.options.initOption?.updateSpecMorphConfig ?? {},
       chartInitOptions: mergeChartOption(
         {
           performanceHook: {
