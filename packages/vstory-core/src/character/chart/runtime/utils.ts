@@ -74,6 +74,9 @@ export function matchDatumWithScaleMap(
     datum = datum[0];
   }
   return keys.every(key => {
+    if (!isValid(keyValueMap[key])) {
+      return false;
+    }
     // 首先使用 value 匹配
     if (isValid(keyValueMap[key].value)) {
       if (keyValueMap[key].value === datum[key]) {
