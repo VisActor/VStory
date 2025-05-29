@@ -19,4 +19,7 @@ export interface IStoryCanvas extends IReleaseable {
   addGraphic: (g: IGraphic) => void;
   removeGraphic: (g: IGraphic) => void;
   getLayoutGuideLine: () => ILayoutLine[];
+
+  setLayerBackground: (background: string, opacity: number) => void;
+  getLayerBackground: () => { value: string; opacity: number };
 }

@@ -102,11 +102,14 @@ export class Story extends EventEmitter implements IStory {
     this._characterTree.initCharacters(this._dsl.characters);
     // 初始化Actions
     this.player.initActions(this._dsl.acts);
+    // 初始化背景
+    this._canvas.setLayerBackground(dsl.background.value, dsl.background.opacity);
   }
   toDSL(): IStoryDSL {
     return {
       acts: this._player.toDSL(),
-      characters: this._characterTree.toDSL()
+      characters: this._characterTree.toDSL(),
+      background: this._canvas.getLayerBackground()
     };
   }
   getCharacters(): { [key: string]: ICharacter } {

@@ -80,6 +80,21 @@ export class StoryCanvas implements IStoryCanvas {
     this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 
+  setLayerBackground(background: string, opacity: number) {
+    this._stage.defaultLayer.setAttributes({
+      background,
+      backgroundOpacity: opacity,
+      fill: 'transparent'
+    });
+  }
+
+  getLayerBackground(): { value: string; opacity: number } {
+    return {
+      value: this._stage.defaultLayer.getAttributes().background ?? 'transparent',
+      opacity: this._stage.defaultLayer.getAttributes().backgroundOpacity ?? 1
+    };
+  }
+
   protected _initCanvasByContainer(
     width: number,
     height: number,

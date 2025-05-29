@@ -103,4 +103,8 @@ export interface ICharacterConstructor {
 export interface IStoryDSL {
   acts: IActSpec[]; // 作品的章节
   characters: ICharacterConfig[]; // 作品中的元素
+  background: {
+    value: string;
+    opacity: number;
+  };
 }
