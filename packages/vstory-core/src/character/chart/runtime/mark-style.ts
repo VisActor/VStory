@@ -136,23 +136,49 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
           const styleKeys =
             SeriesMarkStyleMap[s.type]?.[m.name]?.style ?? CommonMarkAttributeMap[m.type] ?? fillMarkAttribute;
 
+          // 找到所有的 函数属性
+          const functionAttributeName: { [key: string]: boolean } = {};
+          // 任一 groupValue 下是函数，就认为是函数属性
+          groupValueList?.forEach(value => {
+            // 只考虑允许设置的key
+            styleKeys.forEach(key => {
+              const seriesGroupSpec = dataGroupStyle[value]?.[m.name]?.style?.[key];
+              if (seriesGroupSpec && functionAttributeName[key] !== true && isFunction(seriesGroupSpec)) {
+                functionAttributeName[key] = true;
+              }
+            });
+          });
+
           // 多组数据在同一个系列，使用后处理
           styleKeys.forEach(key => {
             if (!m.stateStyle.normal?.[key]) {
               // TODO VChart bug。如果直接设置属性为 undefined 会报错
               // 默认值 还必须这样写
               m.setAttribute(key, (): any => undefined);
-            } else if (dataGroupStyle[groupValue]) {
+            } else if (functionAttributeName[key] === true) {
+              const rawStyle = m.stateStyle.normal[key];
               // 兼容dataGroup是callback的场景
-              const seriesGroupSpec = dataGroupStyle[groupValue]?.[m.name]?.style?.[key];
-              if (seriesGroupSpec && isFunction(seriesGroupSpec)) {
-                m.setAttribute(key, seriesGroupSpec, 'normal', 999);
+              if (typeof rawStyle.style !== 'function') {
+                // 忽略原本就是函数的情况
+                m.setAttribute(
+                  key,
+                  (datum: any, opt: any) => {
+                    // @ts-ignore 返回原始内容即可
+                    return m._computeStateAttribute(rawStyle.style, key, 'normal')(datum, opt);
+                  },
+                  'normal',
+                  999
+                );
               }
             }
 
             m.setPostProcess(key, (result, datum) => {
-              const temp =
+              let temp =
                 MarkStyleRuntime.getMarkStyle(m as unknown as IMark, dataGroupStyle, key, datum, seriesField) ?? result;
+              if (isFunction(temp)) {
+                // @ts-ignore
+                temp = temp(datum, m._attributeContext);
+              }
               if (s.type === 'area' && key === 'stroke' && m.name === 'area') {
                 if (!isArray(temp)) {
                   return [temp, false, false, false];
