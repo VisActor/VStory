@@ -13,7 +13,7 @@ import {
   SeriesMarkStyleMap,
   UseDefaultSeriesStyle
 } from './const';
-import { isArray, merge, isValid } from '@visactor/vutils';
+import { isArray, merge, isValid, isFunction } from '@visactor/vutils';
 import type { IChart } from '@visactor/vchart-types/types/chart/interface';
 
 export class MarkStyleRuntime implements IChartCharacterRuntime {
@@ -142,6 +142,12 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
               // TODO VChart bug。如果直接设置属性为 undefined 会报错
               // 默认值 还必须这样写
               m.setAttribute(key, (): any => undefined);
+            } else if (dataGroupStyle[groupValue]) {
+              // 兼容dataGroup是callback的场景
+              const seriesGroupSpec = dataGroupStyle[groupValue]?.[m.name]?.style?.[key];
+              if (seriesGroupSpec && isFunction(seriesGroupSpec)) {
+                m.setAttribute(key, seriesGroupSpec, 'normal', 999);
+              }
             }
 
             m.setPostProcess(key, (result, datum) => {
