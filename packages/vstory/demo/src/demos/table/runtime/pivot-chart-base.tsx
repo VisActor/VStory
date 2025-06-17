@@ -54,58 +54,59 @@ function loadDSL() {
                     bar: {
                       style: {
                         stroke: 'black',
+                        cornerRadius: 20,
                         lineWidth: 4
                       }
                     }
                   }
                 }
               }
-            },
-            '5_2': {
-              col: 5,
-              row: 2,
-              options: {
-                dataGroupStyle: {
-                  [StroyAllDataGroup]: {
-                    label: {
-                      visible: true,
-                      style: {
-                        fill: 'green',
-                        stroke: 'yellow',
-                        lineWidth: 2
-                      }
-                    },
-                    bar: {
-                      style: {
-                        cornerRadius: 20
-                      }
-                    }
-                  },
-                  'Home Office-Quantity': {
-                    bar: {
-                      style: {
-                        fill: 'red'
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            '6_2': {
-              col: 6,
-              row: 2,
-              options: {
-                series: {
-                  0: {
-                    bar: {
-                      style: {
-                        cornerRadius: 5
-                      }
-                    }
-                  }
-                }
-              }
             }
+            // '5_2': {
+            //   col: 5,
+            //   row: 2,
+            //   options: {
+            //     dataGroupStyle: {
+            //       [StroyAllDataGroup]: {
+            //         label: {
+            //           visible: true,
+            //           style: {
+            //             fill: 'green',
+            //             stroke: 'yellow',
+            //             lineWidth: 2
+            //           }
+            //         },
+            //         bar: {
+            //           style: {
+            //             cornerRadius: 20
+            //           }
+            //         }
+            //       },
+            //       'Home Office-Quantity': {
+            //         bar: {
+            //           style: {
+            //             fill: 'red'
+            //           }
+            //         }
+            //       }
+            //     }
+            //   }
+            // },
+            // '6_2': {
+            //   col: 6,
+            //   row: 2,
+            //   options: {
+            //     series: {
+            //       0: {
+            //         bar: {
+            //           style: {
+            //             cornerRadius: 5
+            //           }
+            //         }
+            //       }
+            //     }
+            //   }
+            // }
           }
         }
       }

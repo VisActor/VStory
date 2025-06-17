@@ -52,10 +52,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       const { col, row } = chart.attribute;
       const hasOption = !!this._getVChartOption(col, row);
       const key = hasOption ? `${col}_${row}` : 'no';
-      const needFormatSpec =
-        key !== 'no'
-          ? chartInstance._story_render_key !== key
-          : chartInstance._story_render_key !== key && chartInstance._story_render_key !== undefined;
+      const needFormatSpec = chartInstance._story_render_key !== key;
       chartInstance._story_render_key = key;
       return {
         needFormatSpec,
