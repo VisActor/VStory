@@ -50,4 +50,5 @@ export interface IStory extends IReleaseable, EventEmitter {
   addCharacterWithAppear: (config: ICharacterConfig) => ICharacter;
   removeCharacter: (cId: string) => void;
   addAction: (cId: string, actionParams: IActionParams) => void;
+  setPlayer: (player: IPlayer) => void;
 }

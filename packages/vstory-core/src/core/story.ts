@@ -83,7 +83,12 @@ export class Story extends EventEmitter implements IStory {
     });
   }
 
-  init(player: IPlayer) {
+  init(player?: IPlayer) {
+    this._player = player ?? this._player;
+    this.load(this._dsl);
+  }
+
+  setPlayer(player: IPlayer) {
     this._player = player;
     this.load(this._dsl);
   }

@@ -1,5 +1,5 @@
 import type { ITicker, ITimeline } from '@visactor/vrender-core';
-import { DefaultTicker, DefaultTimeline } from '@visactor/vrender-core';
+import { DefaultTicker, DefaultTimeline } from '@visactor/vrender-animate';
 
 // let globalTimeline: ITimeline;
 
@@ -9,7 +9,7 @@ export class GlobalTickerStore {
 
   init() {
     const defaultGlobalTimeline = new DefaultTimeline();
-    const globalTicker = new DefaultTicker([]);
+    const globalTicker = new DefaultTicker();
     globalTicker.addTimeline(defaultGlobalTimeline);
     globalTicker.autoStop = false;
     const TICKER_FPS = 60;

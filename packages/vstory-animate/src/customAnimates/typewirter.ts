@@ -1,7 +1,6 @@
-import { ACustomAnimate, createLine, getTextBounds, registerShadowRootGraphic } from '@visactor/vrender';
-import type { EasingType, IGraphic, IRichText, IRichTextCharacter, ITextGraphicAttribute } from '@visactor/vrender';
+import { ACustomAnimate, registerShadowRootGraphic, Easing } from '@visactor/vrender';
+import type { EasingType, IRichText, IRichTextCharacter } from '@visactor/vrender';
 import { clone, cloneDeep, isArray } from '@visactor/vutils';
-import { Easing } from '@visactor/vrender';
 registerShadowRootGraphic();
 
 type ITypeWriterParams = {

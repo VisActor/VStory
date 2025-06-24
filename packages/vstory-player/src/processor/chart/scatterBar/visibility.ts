@@ -1,5 +1,5 @@
 import type { ICharacter } from '@visactor/vstory-core';
-import { CharacterType, globalProcessorRegistry, globalTickerStore } from '@visactor/vstory-core';
+import { CharacterType, globalProcessorRegistry } from '@visactor/vstory-core';
 import { ACTION_TYPE } from '../../constants/action';
 import { VChartVisibilityActionProcessor } from '../visibility';
 import type { IChartVisibilityAction } from '../interface';

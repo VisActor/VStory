@@ -286,10 +286,10 @@ const App = () => {
           name: 'infographic',
           component: Infographic
         },
-        {
-          name: 'table',
-          component: TableInfographic
-        },
+        // {
+        //   name: 'table',
+        //   component: TableInfographic
+        // },
         {
           name: 'Dapanji',
           component: Dapanji

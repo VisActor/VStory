@@ -1,4 +1,5 @@
-import { ACustomAnimate, createLine } from '@visactor/vrender-core';
+import { createLine } from '@visactor/vrender-core';
+import { ACustomAnimate } from '@visactor/vrender-animate';
 
 export class SymbolThrow extends ACustomAnimate<{ x?: number; y?: number }> {
   static label: string = 'symbol-throw';

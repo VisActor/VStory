@@ -1,5 +1,5 @@
 import { merge } from '@visactor/vutils';
-import { ACustomAnimate } from '@visactor/vrender-core';
+import { ACustomAnimate } from '@visactor/vrender-animate';
 import type { IChartCharacterRuntime } from '../interface/runtime';
 import type { ICharacterChart } from '../interface/character-chart';
 
@@ -21,7 +21,7 @@ export class WaveAnimate extends ACustomAnimate<any> {
   }
 
   onUpdate(end: boolean, ratio: number, out: Record<string, any>): void {
-    out.textureRatio = ratio;
+    this.target.attribute.textureRatio = ratio;
   }
 }
 

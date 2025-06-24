@@ -9,4 +9,5 @@ export function createStory(dsl: IStoryDSL | null, option: IStoryInitOption) {
 
 export * from '../core/story';
 export * from '../core/player';
+export * from '../core/empty-player';
 // export * from '../character/component';

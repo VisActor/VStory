@@ -1,5 +1,5 @@
 import React, { createRef, useEffect } from 'react';
-import { Player, Story } from '../../../../../vstory-core/src';
+import { EmptyPlayer, Story } from '../../../../../vstory-core/src';
 import { registerAllSelection, SnapshotPlugin } from '../../../../../vstory-editor/src';
 import { Edit, registerAll } from '../../../../src';
 
@@ -24,7 +24,7 @@ export const ComponentsEdit = () => {
       scaleX,
       scaleY
     });
-    const player = new Player(story);
+    const player = new EmptyPlayer(story);
     story.init(player);
 
     window.addEventListener('resize', () => {
@@ -114,8 +114,6 @@ export const ComponentsEdit = () => {
     edit.on('resize', msg => {
       // console.log('resize', msg);
     });
-
-    story.pluginService.register(new SnapshotPlugin());
 
     return () => {
       story.release();

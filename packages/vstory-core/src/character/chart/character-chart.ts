@@ -1,5 +1,5 @@
 import type { ITicker, ITimeline } from '@visactor/vrender-core';
-import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
+import { DefaultTimeline, ManualTicker } from '@visactor/vrender-animate';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
 import type { IChartGraphicAttribute } from './graphic/vchart-graphic';
@@ -37,7 +37,8 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     super(config, option);
     this._timeline = new DefaultTimeline();
-    this._ticker = new ManualTicker([this._timeline]);
+    this._ticker = new ManualTicker();
+    this._ticker.addTimeline(this._timeline);
     this.configProcess = new ChartConfigProcess(this);
   }
 

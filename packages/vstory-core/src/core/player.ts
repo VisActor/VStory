@@ -31,6 +31,7 @@ export class Player implements IPlayer {
     this._scheduler = new Scheduler(actionProcessor);
     this._currTime = 0;
     this.initTicker();
+    story.setPlayer(this);
   }
 
   initTicker() {
