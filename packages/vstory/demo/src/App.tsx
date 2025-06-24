@@ -63,6 +63,7 @@ import { RuntimeSeriesMark } from './demos/chart/runtime/series-mark';
 import { RuntimeLabelStyle } from './demos/chart/runtime/label-style';
 import { TableBase } from './demos/table/base';
 import { CellStyle } from './demos/table/runtime/cell-style';
+import { ConditionFormat } from './demos/table/runtime/condition-format';
 import { ColWidth } from './demos/table/runtime/col-width';
 import { RowHeight } from './demos/table/runtime/row-height';
 import { PivotChartBase } from './demos/table/runtime/pivot-chart-base';
@@ -386,6 +387,10 @@ const App = () => {
         {
           name: 'Cell Style',
           component: CellStyle
+        },
+        {
+          name: 'Condition Format',
+          component: ConditionFormat
         },
         {
           name: 'Col Width',

@@ -24,7 +24,8 @@ export const DefaultTheme: {
             'RowStyle',
             'ContentColStyle',
             'ContentRowStyle',
-            'CellStyle'
+            'CellStyle',
+            'ConditionFormat'
           ]
         }
       },

@@ -1,6 +1,38 @@
 import type { IChartCharacterConfig } from './chart';
 import type { ICharacterConfigBase } from './dsl';
 
+export interface IBaseConditionFormat {
+  type: string;
+  condition: any;
+  format: any;
+  range:
+    | 'all'
+    | {
+        startRow: number;
+        startCol: number;
+        endRow: number;
+        endCol: number;
+      };
+}
+
+export interface IStyleConditionFormat extends IBaseConditionFormat {
+  type: 'style';
+  // TODO: unite the filter type with DataFilter
+  condition: {
+    operator: 'EQUAL' | 'NOT_EQUAL' | 'GREATER' | 'LESS' | 'GREATER_EQUAL' | 'LESS_EQUAL' | 'BETWEEN' | 'NOT_BETWEEN';
+    value: number | string | [number | string, number | string];
+  };
+  format: {
+    fontSize?: number;
+    bold?: boolean;
+    italic?: boolean;
+    underline?: boolean;
+    fill?: string;
+    stroke?: string;
+    backgroundColor?: string;
+  };
+}
+
 interface ITableCharacterConfigOptionsType {
   // 表格spec
   spec?: any;
@@ -59,6 +91,10 @@ interface ITableCharacterConfigOptionsType {
   contentRowStyle?: {
     [key: number]: any;
   };
+  // 条件格式
+  conditionFormat?: IStyleConditionFormat[];
+  // 启用条件格式 default is true
+  enableConditionFormat?: boolean;
 }
 
 export interface ITableCharacterConfig extends ICharacterConfigBase {

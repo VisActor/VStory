@@ -75,7 +75,16 @@ export function matchDatumWithScaleMap(
   }
   return keys.every(key => {
     if (!isValid(keyValueMap[key])) {
-      return false;
+      if (!isValid(keyValueMap[VCHART_DATA_INDEX])) {
+        return false;
+      }
+      key = VCHART_DATA_INDEX;
+    }
+    // HACK：图表助手中没有存为 value / scaleIndex  所有值统一存为了 scaleIndex
+    // 所以特殊的 VCHART_DATA_INDEX 也会需要用 scaleIndex 来匹配
+    // 特殊的key，value 或者 scaleIndex 其中一个匹配成功就认为成
+    if (key === VCHART_DATA_INDEX) {
+      return keyValueMap[key].value === datum[key] || keyValueMap[key].scaleIndex === datum[key];
     }
     // 首先使用 value 匹配
     if (isValid(keyValueMap[key].value)) {
