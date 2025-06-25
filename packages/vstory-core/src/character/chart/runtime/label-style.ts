@@ -115,20 +115,24 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       }
       array(infos).forEach(info => {
         const { series, labelMark } = info as unknown as { series: ISeries; labelMark: IMark };
+        const labelSpecKey = (info.labelSpec.id as string) ?? 'label';
         const keyScaleMap = getSeriesKeyScalesMap(series);
         // 先看当前系列是否存在单标签样式
-        const hasSingleStyle = hasLabelStyle
-          ? isValid(
-              Object.keys(config.options.labelStyle).find(k =>
-                isSeriesMatch(config.options.labelStyle[k].seriesMatch, series)
+        const hasSingleStyle =
+          labelSpecKey !== 'label'
+            ? false
+            : hasLabelStyle
+            ? isValid(
+                Object.keys(config.options.labelStyle).find(k =>
+                  isSeriesMatch(config.options.labelStyle[k].seriesMatch, series)
+                )
               )
-            )
-          : false;
+            : false;
         // 系列分组key
         const seriesField = series.getSeriesField();
         // style Map 是 能设置的样式
         const styleKeys =
-          SeriesMarkStyleMap[series.type]?.label?.style ?? CommonMarkAttributeMap.text ?? fillMarkAttribute;
+          SeriesMarkStyleMap[series.type]?.[labelSpecKey]?.style ?? CommonMarkAttributeMap.text ?? fillMarkAttribute;
 
         // 多组数据在同一个系列，使用vchart mark后处理。这里只有常规属性，如果发现某些属性设置不上，考虑styleKeys缺少
         styleKeys.forEach((key: keyof ITextAttribute) => {
@@ -148,7 +152,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
                 // 如果匹配到单标签样式
                 findSingleConfig(config.options.labelStyle, series, keyScaleMap, datum)?.style?.[key] ??
                 // 否则匹配组样式
-                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, 'label') ??
+                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, labelSpecKey) ??
                 result
               );
             });
@@ -157,7 +161,8 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             // 直接匹配组样式
             labelMark.setPostProcess(key, (result, datum) => {
               return (
-                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, 'label') ?? result
+                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, labelSpecKey) ??
+                result
               );
             });
           }
