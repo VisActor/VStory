@@ -249,20 +249,23 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         const keyScaleMap = getSeriesKeyScalesMap(series);
         const labelGraphics: IGraphic[] = [];
         findLabelGraphicWithInfo(componentMark.getProduct().graphicItem, info, labelGraphics);
-
+        const labelSpecKey = info.labelSpec.id ?? 'label';
         // 先设置分组样式
         if (dataGroupStyle) {
           const seriesField = series.getSeriesField();
           const groupValueList = series.getRawDataStatisticsByField(seriesField)?.values as string[];
           groupValueList.forEach(groupValue => {
             // 是否存在分组样式
-            if (!dataGroupStyle[groupValue]?.label?.style && !dataGroupStyle[StroyAllDataGroup]?.label?.style) {
+            if (
+              !dataGroupStyle[groupValue]?.[labelSpecKey]?.style &&
+              !dataGroupStyle[StroyAllDataGroup]?.[labelSpecKey]?.style
+            ) {
               return;
             }
             const style = merge(
               {},
-              dataGroupStyle[StroyAllDataGroup]?.label?.style ?? {},
-              dataGroupStyle[groupValue]?.label?.style ?? {}
+              dataGroupStyle[StroyAllDataGroup]?.[labelSpecKey]?.style ?? {},
+              dataGroupStyle[groupValue]?.[labelSpecKey]?.style ?? {}
             );
             // 只设置 fill 和 stroke 颜色
             if (!isValid(style.fill) && !isValid(style.stroke)) {
@@ -277,7 +280,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         }
 
         //  再设置单标签样式
-        if (labelStyle) {
+        if (labelStyle && labelSpecKey) {
           const findKeys = !!labelStyle
             ? Object.keys(labelStyle).filter(k => isSeriesMatch(labelStyle[k].seriesMatch, series))
             : null;
