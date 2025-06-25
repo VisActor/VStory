@@ -185,8 +185,16 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             }
             // 否则匹配组样式
             return (
-              getTextWithGroupFormat(datum, seriesField, series, vchart, character, dataGroupStyle, formatValue) ??
-              result
+              getTextWithGroupFormat(
+                datum,
+                seriesField,
+                series,
+                vchart,
+                character,
+                dataGroupStyle,
+                formatValue,
+                labelSpecKey
+              ) ?? result
             );
           });
         } else {
@@ -194,8 +202,16 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
           // 直接匹配组样式
           labelMark.setPostProcess('text', (result, datum) => {
             return (
-              getTextWithGroupFormat(datum, seriesField, series, vchart, character, dataGroupStyle, formatValue) ??
-              result
+              getTextWithGroupFormat(
+                datum,
+                seriesField,
+                series,
+                vchart,
+                character,
+                dataGroupStyle,
+                formatValue,
+                labelSpecKey
+              ) ?? result
             );
           });
         }
@@ -354,13 +370,15 @@ function getTextWithGroupFormat(
   vchart: IVChart,
   character: ICharacterChart,
   dataGroupStyle: IChartCharacterConfig['options']['dataGroupStyle'],
-  formatValue: FormatValueFunction
+  formatValue: FormatValueFunction,
+  markName: string
 ) {
   if (!dataGroupStyle) {
     return null;
   }
   const formatConfig =
-    dataGroupStyle[datum[seriesField]]?.label?.formatConfig ?? dataGroupStyle[StroyAllDataGroup]?.label?.formatConfig;
+    dataGroupStyle[datum[seriesField]]?.[markName]?.formatConfig ??
+    dataGroupStyle[StroyAllDataGroup]?.[markName]?.formatConfig;
 
   if (!formatConfig) {
     return null;
