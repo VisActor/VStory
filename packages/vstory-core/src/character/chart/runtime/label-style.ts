@@ -20,7 +20,7 @@ import type { IGraphic } from '@visactor/vrender-core';
 import type { IChartCharacterConfig, ITextAttribute } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
 import type { IMark } from '@visactor/vchart-types/types/mark/interface';
-import { CommonMarkAttributeMap, fillMarkAttribute, SeriesMarkStyleMap } from './const';
+import { CommonMarkAttributeMap, fillMarkAttribute, SeriesMarkStyleMap, LabelUnableSeries } from './const';
 import { formatConfigKey } from '../../../constants/format';
 import type { FormatContentType, IFormatConfig } from '../../../interface/dsl/common';
 import type { FormatValueFunction } from '../../common/utils/format';
@@ -61,6 +61,9 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       spec.label.visible = true;
     }
     spec.series?.forEach((s: any) => {
+      if (LabelUnableSeries[s.type]) {
+        return;
+      }
       if (!s.label) {
         s.label = { visible: true };
       } else {
