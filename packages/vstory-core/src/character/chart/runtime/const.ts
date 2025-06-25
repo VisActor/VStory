@@ -145,3 +145,7 @@ export enum MarkerTypeEnum {
   partitionLine = 'partition-line', // 分区标注线
   partitionArea = 'partition-area' // 分区标注面
 }
+
+export const LabelUnableSeries: { [key: string]: boolean } = {
+  map: true
+};

@@ -10,6 +10,7 @@ import {
   EDITOR_SERIES_MARK_SINGLE_LEVEL,
   EDITOR_SERIES_MARK_STYLE_LEVEL,
   fillMarkAttribute,
+  LabelUnableSeries,
   SeriesMarkStyleMap,
   UseDefaultSeriesStyle
 } from './const';
@@ -65,6 +66,9 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     if (spec.series) {
       spec.series.forEach((s: any) => {
         visibleMarkNames.forEach(name => {
+          if (name === 'label' && LabelUnableSeries[s.type]) {
+            return;
+          }
           s[name] = s[name] || { visible: true };
           s[name].visible = true;
         });
