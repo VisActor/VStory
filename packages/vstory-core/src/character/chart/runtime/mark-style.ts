@@ -71,13 +71,17 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
             return;
           }
           s[name] = s[name] || { visible: true };
-          s[name].visible = true;
+          if (s[name].visible !== false) {
+            s[name].visible = true;
+          }
         });
       });
     } else {
       visibleMarkNames.forEach(name => {
         spec[name] = spec[name] || { visible: true };
-        spec[name].visible = true;
+        if (spec[name].visible !== false) {
+          spec[name].visible = true;
+        }
       });
     }
 
