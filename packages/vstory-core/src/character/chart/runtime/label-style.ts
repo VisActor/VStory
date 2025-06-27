@@ -58,7 +58,10 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
     if (!spec.label) {
       spec.label = { visible: true };
     } else {
-      spec.label.visible = true;
+      // 如果已经设置了 visible === false，不处理，否则都设置为true
+      if (spec.label.visible !== false) {
+        spec.label.visible = true;
+      }
     }
     spec.series?.forEach((s: any) => {
       if (LabelUnableSeries[s.type]) {
@@ -67,7 +70,9 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       if (!s.label) {
         s.label = { visible: true };
       } else {
-        s.label.visible = true;
+        if (s.label.visible !== false) {
+          s.label.visible = true;
+        }
       }
     });
   }
@@ -115,7 +120,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       }
       array(infos).forEach(info => {
         const { series, labelMark } = info as unknown as { series: ISeries; labelMark: IMark };
-        const labelSpecKey = (info.labelSpec.id as string) ?? 'label';
+        const labelSpecKey = (info.labelSpec?.id as string) ?? 'label';
         const keyScaleMap = getSeriesKeyScalesMap(series);
         // 先看当前系列是否存在单标签样式
         const hasSingleStyle =
@@ -270,7 +275,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         const keyScaleMap = getSeriesKeyScalesMap(series);
         const labelGraphics: IGraphic[] = [];
         findLabelGraphicWithInfo(componentMark.getProduct().graphicItem, info, labelGraphics);
-        const labelSpecKey = info.labelSpec.id ?? 'label';
+        const labelSpecKey = info.labelSpec?.id ?? 'label';
         // 先设置分组样式
         if (dataGroupStyle) {
           const seriesField = series.getSeriesField();
