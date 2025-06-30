@@ -89,7 +89,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
     if (!labelComponent) {
       return;
     }
-    this._setDataGroupStyle(character, vchart, labelComponent);
+    // this._setDataGroupStyle(character, vchart, labelComponent);
   }
 
   private _setDataGroupStyle(character: ICharacterChart, vchart: IVChart, labelComponent: VChartLabelComponent) {
@@ -281,6 +281,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         let labelSpecKey = info.labelSpec?.id ?? 'label';
         if (labelMark.name.startsWith('transform')) {
           labelSpecKey = 'transformLabel';
+          return;
         }
         // 先设置分组样式
         if (dataGroupStyle) {
@@ -299,10 +300,11 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
               dataGroupStyle[StroyAllDataGroup]?.[labelSpecKey]?.style ?? {},
               dataGroupStyle[groupValue]?.[labelSpecKey]?.style ?? {}
             );
-            // 只设置 fill 和 stroke 颜色
-            if (!isValid(style.fill) && !isValid(style.stroke)) {
-              return;
-            }
+            // 设置全部样式
+            // // 只设置 fill 和 stroke 颜色
+            // if (!isValid(style.fill) && !isValid(style.stroke)) {
+            //   return;
+            // }
             const labels = labelGraphics.filter(l => (l.attribute as any).data[seriesField] === groupValue);
             labels.forEach(l => {
               isValid(style.fill) && l.setAttribute('fill', style.fill);
@@ -318,10 +320,11 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             : null;
           findKeys.forEach(findKey => {
             const item = labelStyle[findKey];
-            // 只设置 fill 和 stroke 颜色
-            if (!isValid(item.style.fill) && !isValid(item.style.stroke)) {
-              return;
-            }
+            // 设置全部样式
+            // // 只设置 fill 和 stroke 颜色
+            // if (!isValid(item.style.fill) && !isValid(item.style.stroke)) {
+            //   return;
+            // }
             // 找到对应的标签
             const label = labelGraphics.find(l =>
               matchDatumWithScaleMap(item.itemKeys, item.itemKeyMap, keyScaleMap, (l.attribute as any).data as any)
