@@ -120,7 +120,10 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       }
       array(infos).forEach(info => {
         const { series, labelMark } = info as unknown as { series: ISeries; labelMark: IMark };
-        const labelSpecKey = (info.labelSpec?.id as string) ?? 'label';
+        let labelSpecKey = (info.labelSpec?.id as string) ?? 'label';
+        if (labelMark.name.startsWith('transform')) {
+          labelSpecKey = 'transformLabel';
+        }
         const keyScaleMap = getSeriesKeyScalesMap(series);
         // 先看当前系列是否存在单标签样式
         const hasSingleStyle =
@@ -271,11 +274,14 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       // @ts-ignore
       const infos = labelComponent._labelComponentMap.get(componentMark)();
       array(infos).forEach(info => {
-        const { series: series } = info as unknown as { series: ISeries; labelMark: IMark };
+        const { series: series, labelMark } = info as unknown as { series: ISeries; labelMark: IMark };
         const keyScaleMap = getSeriesKeyScalesMap(series);
         const labelGraphics: IGraphic[] = [];
         findLabelGraphicWithInfo(componentMark.getProduct().graphicItem, info, labelGraphics);
-        const labelSpecKey = info.labelSpec?.id ?? 'label';
+        let labelSpecKey = info.labelSpec?.id ?? 'label';
+        if (labelMark.name.startsWith('transform')) {
+          labelSpecKey = 'transformLabel';
+        }
         // 先设置分组样式
         if (dataGroupStyle) {
           const seriesField = series.getSeriesField();
