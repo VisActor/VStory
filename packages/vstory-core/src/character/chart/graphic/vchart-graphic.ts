@@ -34,6 +34,7 @@ export interface IChartGraphicAttribute {
   zIndex?: number;
   panel?: Partial<IRectGraphicAttribute>;
   vchartBoundsMode?: 'clip' | 'auto';
+  vchartBoundsExpand?: number;
   updateSpecMorphConfig?: IMorphConfig;
 }
 
@@ -97,10 +98,12 @@ export class VChartGraphic extends Rect {
       ticker,
       chartInitOptions,
       viewBox,
-      vchartBoundsMode
+      vchartBoundsMode,
+      vchartBoundsExpand
     } = params;
     this.attribute.viewBox = viewBox;
     this.attribute.vchartBoundsMode = vchartBoundsMode;
+    this.attribute.vchartBoundsExpand = vchartBoundsExpand ?? 0;
     this._vchart = new VChart(
       spec,
       mergeChartOption(
@@ -238,7 +241,7 @@ export class VChartGraphic extends Rect {
     });
 
     bounds.translate(-(stage.defaultLayer.attribute.x ?? 0), -(stage.defaultLayer.attribute.y ?? 0));
-    return bounds;
+    return bounds.expand(this.attribute.vchartBoundsExpand);
   }
 
   updateVChartGraphicViewBox(bounds: IBoundsLike) {

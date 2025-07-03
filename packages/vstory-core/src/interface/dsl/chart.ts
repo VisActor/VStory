@@ -42,6 +42,7 @@ export interface IDataGroupStyle {
 
 export interface IChartCharacterInitOption {
   vchartBoundsMode?: 'clip' | 'auto';
+  vchartBoundsExpand?: number;
 }
 
 export interface IUpdateSpecMorphConfig {
