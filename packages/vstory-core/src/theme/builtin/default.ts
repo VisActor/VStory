@@ -20,12 +20,12 @@ export const DefaultTheme: {
             'RowHeight',
             'ColVisible',
             'RowVisible',
+            'ConditionFormat',
             'ColStyle',
             'RowStyle',
             'ContentColStyle',
             'ContentRowStyle',
-            'CellStyle',
-            'ConditionFormat'
+            'CellStyle'
           ]
         }
       },

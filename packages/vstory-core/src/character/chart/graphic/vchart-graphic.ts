@@ -241,7 +241,7 @@ export class VChartGraphic extends Rect {
     });
 
     bounds.translate(-(stage.defaultLayer.attribute.x ?? 0), -(stage.defaultLayer.attribute.y ?? 0));
-    return bounds.expand(this.attribute.vchartBoundsExpand);
+    return bounds;
   }
 
   updateVChartGraphicViewBox(bounds: IBoundsLike) {
@@ -280,7 +280,7 @@ export class VChartGraphic extends Rect {
       this.vchart.getChart()._option.viewBox = this.attribute.viewBox;
       this.vchart.resize(viewBoxSize.width, viewBoxSize.height);
     }
-    const rootBounds = this.getVChartActualBounds();
+    const rootBounds = this.getVChartActualBounds().expand(this.attribute.vchartBoundsExpand);
     // 2. 得到需要绘制全部内容时的 vchart 的 viewBox
     // 不要小于设置viewBox;
     rootBounds.union(this.attribute.viewBox);
