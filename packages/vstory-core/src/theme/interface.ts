@@ -30,6 +30,6 @@ export interface IThemeCharacterPivotChart extends IThemeCharacterBase {
 export interface ITheme {
   character?: {
     // character type
-    [key: string]: IThemeCharacterChart | IThemeCharacterComponent | IThemeCharacterTable | IPivotChartCharacterConfig;
+    [key: string]: IThemeCharacterChart | IThemeCharacterComponent | IThemeCharacterTable | IThemeCharacterPivotChart;
   };
 }
