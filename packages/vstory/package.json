@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory",
-  "version": "0.0.24-alpha.18",
+  "version": "0.0.24-alpha.27",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -24,12 +24,12 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vstory-core": "workspace:0.0.24-alpha.18",
-    "@visactor/vstory-animate": "workspace:0.0.24-alpha.18",
-    "@visactor/vstory-editor": "workspace:0.0.24-alpha.18",
-    "@visactor/vstory-player": "workspace:0.0.24-alpha.18",
-    "@visactor/vstory-templates": "workspace:0.0.24-alpha.18",
-    "@visactor/vstory-external": "workspace:0.0.24-alpha.18"
+    "@visactor/vstory-core": "workspace:0.0.24-alpha.27",
+    "@visactor/vstory-animate": "workspace:0.0.24-alpha.27",
+    "@visactor/vstory-editor": "workspace:0.0.24-alpha.27",
+    "@visactor/vstory-player": "workspace:0.0.24-alpha.27",
+    "@visactor/vstory-templates": "workspace:0.0.24-alpha.27",
+    "@visactor/vstory-external": "workspace:0.0.24-alpha.27"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",
