@@ -197,7 +197,8 @@ export class CharacterTable<T extends ITableGraphicAttribute>
       modeParams: this._story.option.modeParams,
       chartOption: {
         disableTriggerEvent: true,
-        disableDirtyBounds: true
+        disableDirtyBounds: true,
+        ...(this._config.options.chartOption ?? {})
       }
     };
   }
