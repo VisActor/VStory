@@ -95,6 +95,9 @@ interface ITableCharacterConfigOptionsType {
   conditionFormat?: IStyleConditionFormat[];
   // 启用条件格式 default is true
   enableConditionFormat?: boolean;
+
+  // 透视图透传给vchart的option
+  chartOption?: any;
 }
 
 export interface ITableCharacterConfig extends ICharacterConfigBase {
