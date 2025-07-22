@@ -212,7 +212,7 @@ export class VChartGraphic extends Rect {
       lastRect.y !== this.attribute.y ||
       lastRect.width !== this.attribute.width ||
       lastRect.height !== this.attribute.height ||
-      !isBoundsLikeEqual(lastedViewBox, attrs.viewBox)
+      !(lastedViewBox && attrs.viewBox && isBoundsLikeEqual(lastedViewBox, attrs.viewBox))
     ) {
       this.updateVChartViewBoxTransform();
     }
