@@ -1,5 +1,7 @@
+import type { IVChart } from '@visactor/vchart';
 import type { IChartCharacterConfig } from './chart';
 import type { ICharacterConfigBase } from './dsl';
+import type { ICharacterTable } from '../../character/table/interface/character-table';
 
 export interface IBaseConditionFormat {
   type: string;
@@ -126,4 +128,10 @@ interface IPivotChartCharacterConfigOptionsType extends ITableCharacterConfigOpt
 
 export interface IPivotChartCharacterConfig extends ICharacterConfigBase {
   options: IPivotChartCharacterConfigOptionsType;
+  hooks?: {
+    beforeRuntimeInitializeChart?: (character: ICharacterTable, vchart: IVChart) => void;
+    afterRuntimeInitializeChart?: (character: ICharacterTable, vchart: IVChart) => void;
+    beforeRuntimeDoRender?: (character: ICharacterTable, vchart: IVChart) => void;
+    afterRuntimeDoRender?: (character: ICharacterTable, vchart: IVChart) => void;
+  };
 }

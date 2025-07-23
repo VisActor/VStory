@@ -1,8 +1,17 @@
 import type { ITextGraphicAttribute } from '@visactor/vrender-core';
-import type { ChartSpecMap, IInitOption, IMarkAreaSpec, IMarkLineSpec, IMarkPointSpec, ISpec } from '@visactor/vchart';
+import type {
+  ChartSpecMap,
+  IInitOption,
+  IMarkAreaSpec,
+  IMarkLineSpec,
+  IMarkPointSpec,
+  ISpec,
+  IVChart
+} from '@visactor/vchart';
 import type { ICharacterConfigBase } from './dsl';
 import type { IFormatConfig } from './common';
 import type { IMorphConfig } from '@visactor/vchart-types/types/animation/spec';
+import type { ICharacterChart } from '../../character/chart/interface/character-chart';
 
 export const StroyAllDataGroup = '_STORY_ALL_DATA_GROUP';
 
@@ -169,5 +178,12 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
       markArea?: IMarkAreaSpec[];
       markPoint?: IMarkPointSpec[];
     };
+  };
+  hooks?: {
+    beforeRuntimeInitializeChart?: (character: ICharacterChart, vchart: IVChart) => void;
+    afterRuntimeInitializeChart?: (character: ICharacterChart, vchart: IVChart) => void;
+
+    beforeRuntimeDoRender?: (character: ICharacterChart, vchart: IVChart) => void;
+    afterRuntimeDoRender?: (character: ICharacterChart, vchart: IVChart) => void;
   };
 }

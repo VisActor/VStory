@@ -104,6 +104,8 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       if (!chartOption) {
         return;
       }
+
+      this._config.hooks?.beforeRuntimeInitializeChart?.(this, vchart);
       this._chartRuntime.forEach(r => {
         r.afterInitialize?.(
           {
@@ -119,6 +121,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
           vchart
         );
       });
+      this._config.hooks?.afterRuntimeInitializeChart?.(this, vchart);
     };
     option.chartOption.performanceHook.beforeDoRender = (vchart: IVChart) => {
       const col = vchart.getSpec()._stroy_pivot_chart_info.col;
@@ -127,6 +130,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       if (!chartOption) {
         return;
       }
+      this._config.hooks?.beforeRuntimeDoRender?.(this, vchart);
       this._chartRuntime.forEach(r => {
         r.beforeVRenderDraw?.(
           {
@@ -142,6 +146,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
           vchart
         );
       });
+      this._config.hooks?.afterRuntimeDoRender?.(this, vchart);
     };
     return result;
   }

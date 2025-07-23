@@ -232,11 +232,15 @@ export class CharacterChart<T extends IChartGraphicAttribute>
           performanceHook: {
             afterInitializeChart: (vchart: IVChart) => {
               this._vchart = vchart;
+              this._config.hooks?.beforeRuntimeInitializeChart?.(this, vchart);
               this._runtime.forEach(r => r.afterInitialize?.(this, vchart));
+              this._config.hooks?.afterRuntimeInitializeChart?.(this, vchart);
             },
             // @ts-ignore
             beforeDoRender: () => {
+              this._config.hooks?.beforeRuntimeDoRender?.(this, this._graphic?.vchart ?? this._vchart);
               this._runtime.forEach(r => r.beforeVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
+              this._config.hooks?.afterRuntimeDoRender?.(this, this._graphic?.vchart ?? this._vchart);
             }
           }
         },
