@@ -1,7 +1,7 @@
 import type { IChartCharacterRuntime } from '../interface/runtime';
 import type { ICharacterChart } from '../interface/character-chart';
 import type { ISeries, IVChart } from '@visactor/vchart';
-import { getSeriesKeyScalesMap, GetVChartSeriesWithMatch, matchDatumWithScaleMap } from './utils';
+import { getSeriesField, getSeriesKeyScalesMap, GetVChartSeriesWithMatch, matchDatumWithScaleMap } from './utils';
 import type { IChartCharacterConfig } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
 import type { IMark } from '@visactor/vchart-types/types/mark/interface';
@@ -109,7 +109,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     seriesList.forEach(s => {
       // 一个 series 对应一组数据
       // 系列分组key
-      const seriesField = s.getSeriesField();
+      const seriesField = getSeriesField(s);
       const groupValueList = s.getRawDataStatisticsByField(seriesField)?.values;
       const groupValue = groupValueList?.[0];
       s.getMarks().forEach(m => {

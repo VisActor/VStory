@@ -1,7 +1,8 @@
 import { isArray, isString, isValid, merge } from '@visactor/vutils';
 import type { IChart } from '@visactor/vchart-types/types/chart/interface';
 import type { ICartesianSeries } from '@visactor/vchart-types/types/series';
-import type { ISeries } from '@visactor/vchart';
+import type { HeatmapSeries } from '@visactor/vchart';
+import { type ISeries } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
 import { VCHART_DATA_INDEX, ValueLink, FieldLink, lineSymbolPathMap, LineSymbolType } from './const';
 import type { IChartCharacterConfig, IComponentMatch, IDatumMatch, IMarkStyle } from '../../../interface/dsl/chart';
@@ -52,7 +53,7 @@ export function getSeriesKeyScalesMap(series: ISeries) {
     }
   }
 
-  const seriesField = series.getSeriesField();
+  const seriesField = getSeriesField(series);
   if (!map[seriesField]) {
     if (seriesField) {
       if (series.getOption().globalScale.getScale('color')) {
@@ -199,4 +200,11 @@ export function getChartType(options: IChartCharacterConfig['options']) {
     }
   }
   return spec.type ?? 'common';
+}
+
+export function getSeriesField(series: ISeries) {
+  if (!series) {
+    return null;
+  }
+  return series.type === 'heatmap' ? (series as HeatmapSeries).getFieldValue()[0] : series.getSeriesField();
 }

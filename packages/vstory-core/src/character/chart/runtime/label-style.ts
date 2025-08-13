@@ -15,7 +15,13 @@ import {
 import type { Label as VChartLabelComponent } from '@visactor/vchart-types/types/component/label/label';
 import type { ILabelInfo } from '@visactor/vchart-types/types/component/label';
 import { MarkStyleRuntime } from './mark-style';
-import { findSingleConfig, getSeriesKeyScalesMap, isSeriesMatch, matchDatumWithScaleMap } from './utils';
+import {
+  findSingleConfig,
+  getSeriesField,
+  getSeriesKeyScalesMap,
+  isSeriesMatch,
+  matchDatumWithScaleMap
+} from './utils';
 import type { IGraphic } from '@visactor/vrender-core';
 import type { IChartCharacterConfig, ITextAttribute } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
@@ -137,7 +143,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
               )
             : false;
         // 系列分组key
-        const seriesField = series.getSeriesField();
+        const seriesField = getSeriesField(series);
         // style Map 是 能设置的样式
         const styleKeys =
           SeriesMarkStyleMap[series.type]?.[labelSpecKey]?.style ?? CommonMarkAttributeMap.text ?? fillMarkAttribute;
@@ -285,7 +291,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         }
         // 先设置分组样式
         if (dataGroupStyle) {
-          const seriesField = series.getSeriesField();
+          const seriesField = getSeriesField(series);
           const groupValueList = series.getRawDataStatisticsByField(seriesField)?.values as string[];
           groupValueList.forEach(groupValue => {
             // 是否存在分组样式
