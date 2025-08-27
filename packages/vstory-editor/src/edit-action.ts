@@ -2,7 +2,7 @@ import type { RichTextEditPlugin } from '@visactor/vrender';
 import type { IGraphic } from '@visactor/vrender';
 import { EventEmitter, isArray } from '@visactor/vutils';
 import { PickEventType, EditActionEnum } from './const';
-import type { ContinuousActionType, IEditActionInfo, IEditOverActionInfo } from './interface';
+import type { ContinuousActionType, IEditActionInfo, IEditOverActionInfo, VREvent } from './interface';
 import type { ICharacter, ICharacterPickInfo, IStoryEvent, Story } from '@visactor/vstory-core';
 
 const IgnoreEvent: { [key: string]: boolean } = {
@@ -69,7 +69,7 @@ export class EditAction extends EventEmitter {
     if (!(PickEventType as any)[type]) {
       return this.dispatchAction({
         type: type,
-        event
+        event: event as VREvent
       });
     }
 
@@ -87,7 +87,7 @@ export class EditAction extends EventEmitter {
       type: type,
       characterId: character?.id,
       character: character,
-      event,
+      event: event as VREvent,
       detail: characterInfo
     });
   }
@@ -162,7 +162,7 @@ export class EditAction extends EventEmitter {
       type: actionType,
       characterId: character?.id,
       character: character,
-      event,
+      event: event as VREvent,
       detail: characterInfo
     });
     if (actionType === EditActionEnum.pointerOverCharacter) {

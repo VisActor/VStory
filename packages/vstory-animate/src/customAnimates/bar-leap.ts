@@ -118,7 +118,7 @@ export class BarLeap extends ACustomAnimate<{
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
+  getFromProps(): Record<string, any> {
     return this.from;
   }
 
@@ -133,7 +133,7 @@ export class BarLeap extends ACustomAnimate<{
   }
 
   onUpdate(end: boolean, ratio: number, out: Record<string, any>): void {
-    this.computePath(barLeap1!(ratio), this.fromCenter, this.toCenter, this.target.pathProxy);
+    this.computePath(barLeap1!(ratio), this.fromCenter, this.toCenter, this.target.pathProxy as CustomPath2D);
     if (this.vertical) {
       out.y = this.to.y + barLeap2!(ratio) * 100;
     } else {

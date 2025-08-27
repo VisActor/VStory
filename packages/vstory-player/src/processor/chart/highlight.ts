@@ -35,6 +35,8 @@ export class VChartHighlightActionProcessor extends VChartBaseActionProcessor {
       .getAllMarks()
       .forEach(mark => {
         if (mark.getAnimationConfig()) {
+          // TODO: 等待vrender 确认
+          // @ts-expect-error
           mark.getProduct().animate?.run({
             timeSlices: {
               effects: {
@@ -43,7 +45,7 @@ export class VChartHighlightActionProcessor extends VChartBaseActionProcessor {
               },
               duration: animation?.duration ?? 0
             },
-            partitioner: datum => (inverse ? !isDatumEqual(value, datum) : isDatumEqual(value, datum))
+            partitioner: (datum: ' any') => (inverse ? !isDatumEqual(value, datum) : isDatumEqual(value, datum))
           });
         }
       });

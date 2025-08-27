@@ -278,6 +278,8 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       if (isRun) {
         // @ts-ignore
         product?.graphicItem?.setAttribute('visibleAll', true);
+        // TODO: 等待vrender 确认
+        // @ts-expect-error
         product?.animate?.run(config || {});
       } else {
         product?.graphicItem?.setAttribute('visibleAll', false);

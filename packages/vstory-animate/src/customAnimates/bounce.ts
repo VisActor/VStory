@@ -21,7 +21,7 @@ export class Bounce extends ACustomAnimate<any> {
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
+  getFromProps(): Record<string, any> {
     return this.from;
   }
 

@@ -39,6 +39,8 @@ export class TypeWriterVisibility extends BaseVisibility {
           .animate()
           .play(new TypeWriter({ text: from }, { text: to }, duration, easing as EasingType, typewriterParams as any));
         if (!appear) {
+          // TODO: 等待vrender 确认
+          // @ts-expect-error
           a.reversed(true);
         }
       }

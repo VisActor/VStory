@@ -28,11 +28,11 @@ export class WaveScatterVisibilityActionProcessor extends VChartVisibilityAction
     }
     const { duration, easing, loop, custom } = waveAnimate;
     const product = mark.getProduct();
-    const graphics = product.getAllElements().map(item => item.getGraphicItem());
+    const graphics = product.getAllElements().map((item: any) => item.getGraphicItem());
     if (!graphics.length) {
       return;
     }
-    graphics.forEach(g => {
+    graphics.forEach((g: any) => {
       // g.animate({ timeline: globalTickerStore.getTimeline('background_animate') })
       g.animate({ timeline: null })
         .play(new custom({}, {}, duration, easing, {}))

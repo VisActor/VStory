@@ -1,4 +1,4 @@
-import type { IGroup, ITicker } from '@visactor/vrender-core';
+import type { IGroup, ITicker, ITimeline } from '@visactor/vrender-core';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
 import type { ITableGraphicAttribute } from './graphic/vtable-graphic';
@@ -9,6 +9,7 @@ import { getLayoutFromWidget } from '../../utils/layout';
 import { TableConfigProcess } from './table-config-process';
 import type { ICharacterTable, IVTable } from './interface/character-table';
 import { isArray, isObject } from '@visactor/vutils';
+import type { ITableCharacterRuntime } from './interface/runtime';
 
 export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>
@@ -25,8 +26,8 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   protected _vtable: IVTable;
 
   protected _ticker: ITicker;
-  // protected _timeline: ITimeline;
-  // protected _runtime: ITableCharacterRuntime[] = [];
+  protected _timeline: ITimeline;
+  protected _runtime: ITableCharacterRuntime[] = [];
 
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     super(config, option);

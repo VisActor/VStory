@@ -37,7 +37,7 @@ export class BarBounce extends ACustomAnimate<{ y?: number; y1?: number; x?: num
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
+  getFromProps(): Record<string, any> {
     return this.from;
   }
 

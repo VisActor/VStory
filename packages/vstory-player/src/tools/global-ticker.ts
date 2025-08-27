@@ -9,7 +9,7 @@ export class GlobalTickerStore {
 
   init() {
     const defaultGlobalTimeline = new DefaultTimeline();
-    const globalTicker = new DefaultTicker([]);
+    const globalTicker = new DefaultTicker(null);
     globalTicker.addTimeline(defaultGlobalTimeline);
     globalTicker.autoStop = false;
     const TICKER_FPS = 60;
