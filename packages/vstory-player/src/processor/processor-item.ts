@@ -1,7 +1,7 @@
-import type { IActionProcessorItem } from '@visactor/vstory-core';
 import type { IActionSpec } from '@visactor/vstory-core';
 import type { ICharacter } from '@visactor/vstory-core';
 import { getPayload } from './component/common/utils';
+import type { IActionProcessorItem } from '../interface/interface';
 
 export class ActionProcessorItem implements IActionProcessorItem {
   getStartTime(action: IActionSpec): number {

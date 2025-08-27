@@ -1,4 +1,4 @@
-import type { ITicker } from '@visactor/vrender-core';
+import type { ITicker, ITimeline } from '@visactor/vrender-core';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
 import type { IChartGraphicAttribute } from './graphic/vchart-graphic';
@@ -12,6 +12,7 @@ import type { ICharacterChart } from './interface/character-chart';
 import { mergeChartOption } from '../../utils/chart';
 import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
 import { isArray } from '@visactor/vutils';
+import type { IChartCharacterRuntime } from './interface/runtime';
 
 export class CharacterChart<T extends IChartGraphicAttribute>
   extends CharacterBase<IChartGraphicAttribute>
@@ -27,8 +28,8 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   protected _vchart: IVChart;
 
   protected _ticker: ITicker;
-  // protected _timeline: ITimeline;
-  // protected _runtime: IChartCharacterRuntime[] = [];
+  protected _timeline: ITimeline;
+  protected _runtime: IChartCharacterRuntime[] = [];
 
   static RuntimeMap: { [key: string]: boolean } = {};
 

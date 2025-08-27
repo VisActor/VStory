@@ -31,11 +31,12 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
+  getFromProps(): Record<string, any> {
     return this.from;
   }
 
   onBind(): void {
+    // @ts-expect-error
     this.target && this.target.setAttributes({ ...this.from, y: this.target.attribute._layoutHeight });
     if (this.showLine) {
       const shadowRoot = this.target.attachShadow();
@@ -57,6 +58,7 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
 
   grow(ratio: number, out: Record<string, any>) {
     ratio = Math.min(ratio * 1.5, 1);
+    // @ts-expect-error
     const { _layoutHeight } = this.target.attribute;
     out.y = _layoutHeight - (_layoutHeight - this.to.y!) * ratio;
     out.x = this.to.x!;
@@ -67,6 +69,7 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
     const deltaX = this.delta * ratio;
     out.x += deltaX;
 
+    // @ts-expect-error
     const { _layoutHeight, fill } = this.target.attribute;
 
     const shadowRoot = this.target.shadowRoot;
