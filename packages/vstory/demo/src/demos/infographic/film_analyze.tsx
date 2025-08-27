@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { IStoryDSL, Player, Story } from '../../../../../vstory-core/src';
+import { IStoryDSL, Story } from '../../../../../vstory-core/src';
 import { registerAll } from '../../../../src';
+import { Player } from '../../../../../vstory-player/src';
 import 哪吒 from '../../assets/infographic/Film_analysis/哪吒.png';
 
 registerAll();

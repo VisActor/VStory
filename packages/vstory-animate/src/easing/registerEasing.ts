@@ -1,4 +1,4 @@
-import { Easing } from '@visactor/vrender-core';
+import { Easing } from '@visactor/vrender-animate';
 import { flicker } from './flicker';
 
 export function registerEasing() {

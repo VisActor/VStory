@@ -1,5 +1,5 @@
 import type { IActionSpec, ICharacter } from '@visactor/vstory-core';
-import { globalProcessorRegistry } from '@visactor/vstory-core';
+import { globalProcessorRegistry } from '@visactor/vstory-player';
 import type { IGraphic } from '@visactor/vrender-core';
 import {
   ACTION_TYPE,

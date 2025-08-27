@@ -1,6 +1,6 @@
 import { array, merge } from '@visactor/vutils';
 import type { IActionSpec, ICharacter } from '@visactor/vstory-core';
-import { globalProcessorRegistry, CharacterType } from '@visactor/vstory-core';
+import { CharacterType } from '@visactor/vstory-core';
 import { VTableBaseActionProcessor } from './base';
 import type { ITableVisibilityAction, ITableVisibilityPayload } from './interface';
 import { transformMap } from './transformFunc/transformMap';
@@ -13,6 +13,7 @@ import { scaleInstance } from '../common/scale-processor';
 import { wipeInstance } from '../common/wipe-processor';
 import { fadeInstance } from '../common/fade-processor';
 import { moveInstance } from '../common/move-processor';
+import { globalProcessorRegistry } from '../../player/processorRegistry';
 
 export class VTableVisibilityActionProcessor extends VTableBaseActionProcessor {
   name: 'appearOrDisAppear';

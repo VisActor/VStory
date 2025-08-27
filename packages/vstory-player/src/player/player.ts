@@ -1,13 +1,16 @@
 import type { ITicker } from '@visactor/vrender-core';
-import type { IPlayer, IViewSizeParams } from '../interface/player';
-import type { IStory } from '../interface/story';
-import type { IScheduler } from '../interface/scheduler';
+import type { IPlayer, IViewSizeParams } from '../interface/interface';
+import type { IStory, IActionSpec, IActSpec, ICharacter } from '@visactor/vstory-core';
+import type { IScheduler } from '../interface/interface';
 import { Scheduler } from './scheduler';
-import type { IActionProcessor } from '../interface/action-processor';
+import type { IActionProcessor } from '../interface/interface';
 import { ActionProcessor } from './action-processor';
-import type { IActionSpec, IActSpec } from '../interface/dsl/dsl';
-import type { ICharacter } from '../interface/character';
 import { globalTickerStore } from '../tools/global-ticker';
+
+interface IPlayerParams {
+  ticker?: ITicker;
+  actionProcessor?: IActionProcessor;
+}
 
 interface IPlayerParams {
   // ticker?: ITicker;

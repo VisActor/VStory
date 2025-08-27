@@ -1,4 +1,4 @@
-import { globalProcessorRegistry } from '@visactor/vstory-core';
+import { globalProcessorRegistry } from '@visactor/vstory-player';
 import type { IArc } from '@visactor/vrender-core';
 import {
   ACTION_TYPE,

@@ -1,5 +1,4 @@
-import type { IGroup, ITicker, ITimeline } from '@visactor/vrender-core';
-import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
+import type { IGroup, ITicker } from '@visactor/vrender-core';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
 import type { ITableGraphicAttribute } from './graphic/vtable-graphic';
@@ -7,7 +6,6 @@ import { VTableGraphic } from './graphic/vtable-graphic';
 import type { ICharacterConfig, ICharacterInitOption, IUpdateConfigParams } from '../../interface/dsl/dsl';
 import type { ITableCharacterConfig } from '../../interface/dsl/table';
 import { getLayoutFromWidget } from '../../utils/layout';
-import type { ITableCharacterRuntime } from './interface/runtime';
 import { TableConfigProcess } from './table-config-process';
 import type { ICharacterTable, IVTable } from './interface/character-table';
 import { isArray, isObject } from '@visactor/vutils';
@@ -27,13 +25,13 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   protected _vtable: IVTable;
 
   protected _ticker: ITicker;
-  protected _timeline: ITimeline;
-  protected _runtime: ITableCharacterRuntime[] = [];
+  // protected _timeline: ITimeline;
+  // protected _runtime: ITableCharacterRuntime[] = [];
 
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     super(config, option);
-    this._timeline = new DefaultTimeline();
-    this._ticker = new ManualTicker([this._timeline]);
+    // this._timeline = new DefaultTimeline();
+    // this._ticker = new ManualTicker([this._timeline]);
     this.configProcess = new TableConfigProcess(this);
   }
 
@@ -140,17 +138,17 @@ export class CharacterTable<T extends ITableGraphicAttribute>
 
     this.canvas.addGraphic(this._graphic);
     // 完成spec设置
-    this._runtime.forEach(r => r.afterInitialize?.(this, this._graphic.vTable));
+    this._runtime?.forEach(r => r.afterInitialize?.(this, this._graphic.vTable));
   }
 
   protected _setAttributes(attr: T): void {
     super._setAttributes(attr);
     // 完成spec更新也需要调用 afterInitialize
-    this._runtime.forEach(r => r.afterInitialize?.(this, this._graphic.vTable));
+    this._runtime?.forEach(r => r.afterInitialize?.(this, this._graphic.vTable));
   }
 
   protected _clearRuntime(): void {
-    this._runtime.length = 0;
+    this._runtime && (this._runtime.length = 0);
   }
 
   protected getViewBoxFromSpec() {
@@ -166,7 +164,7 @@ export class CharacterTable<T extends ITableGraphicAttribute>
 
   protected applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void {
     this._attribute = this.getDefaultAttribute() as any;
-    this._runtime.forEach(r => r.applyConfigToAttribute?.(this));
+    this._runtime?.forEach(r => r.applyConfigToAttribute?.(this));
   }
 
   getDefaultAttribute(): Partial<ITableGraphicAttribute> {

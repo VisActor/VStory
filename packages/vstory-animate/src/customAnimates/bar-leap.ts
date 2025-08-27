@@ -1,5 +1,6 @@
 import type { EasingType } from '@visactor/vrender';
-import { ACustomAnimate, CustomPath2D, generatorPathEasingFunc } from '@visactor/vrender';
+import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender-animate';
+import { CustomPath2D } from '@visactor/vrender-core';
 import type { IPointLike } from '@visactor/vutils';
 
 export const barLeap1Str = 'M0,0 C0.083,0.163 0.179,1 0.6,1 0.814,1 0.898,1 1,1';

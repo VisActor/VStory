@@ -1,10 +1,8 @@
+import type { ICharacter } from '@visactor/vstory-core';
+import { CharacterType, type IActionSpec, type IStory } from '@visactor/vstory-core';
+import type { IActionProcessor, IActionProcessorItem } from '../interface/interface';
 import type { IProcessorRegistry } from './processorRegistry';
 import { globalProcessorRegistry } from './processorRegistry';
-import type { IActionProcessor, IActionProcessorItem } from '../interface/action-processor';
-import type { ICharacter } from '../interface/character';
-import type { IActionSpec } from '../interface/dsl/dsl';
-import type { IStory } from '../interface/story';
-import { CharacterType } from '../constants/character';
 
 export type IProcessorMap = Record<string, Record<string, IActionProcessorItem>>;
 

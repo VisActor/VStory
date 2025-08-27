@@ -15,4 +15,9 @@ export * from './processor/chart/visibility';
 export * from './processor/table/visibility';
 export * from './processor/table/base';
 
+export * from './player/player';
+export * from './player/action-processor';
+export * from './player/processorRegistry';
+export * from './player/scheduler';
+
 // export * from './encode';

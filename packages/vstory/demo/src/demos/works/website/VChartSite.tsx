@@ -1,5 +1,5 @@
 import React, { act, useEffect } from 'react';
-import { IStoryDSL, Player, Story } from '../../../../../../vstory-core/src';
+import { IStoryDSL, Story } from '../../../../../../vstory-core/src';
 import { scene1, scene1Characters } from './scene1';
 import { scene2, scene2Characters } from './scene2';
 import { scene3, scene3Characters } from './scene3';
@@ -14,6 +14,7 @@ import { scene11, scene11Characters } from './scene11';
 import { scene12, scene12Characters } from './scene12';
 import { scene12_2, scene12_2_Characters } from './scene12-2';
 import { scene13, scene13Characters } from './scene13';
+import { Player } from '../../../../../../vstory-player/src';
 export const VChartSiteDemo = () => {
   const id = 'storyBar';
 

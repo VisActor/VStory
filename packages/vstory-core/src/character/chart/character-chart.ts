@@ -1,5 +1,4 @@
-import type { ITicker, ITimeline } from '@visactor/vrender-core';
-import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
+import type { ITicker } from '@visactor/vrender-core';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
 import type { IChartGraphicAttribute } from './graphic/vchart-graphic';
@@ -8,7 +7,6 @@ import { getChartModelWithEvent } from './utils/vchart-pick';
 import type { ICharacterConfig, ICharacterInitOption, IUpdateConfigParams } from '../../interface/dsl/dsl';
 import type { IChartCharacterConfig } from '../../interface/dsl/chart';
 import { getLayoutFromWidget } from '../../utils/layout';
-import type { IChartCharacterRuntime } from './interface/runtime';
 import { ChartConfigProcess } from './chart-config-process';
 import type { ICharacterChart } from './interface/character-chart';
 import { mergeChartOption } from '../../utils/chart';
@@ -29,15 +27,15 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   protected _vchart: IVChart;
 
   protected _ticker: ITicker;
-  protected _timeline: ITimeline;
-  protected _runtime: IChartCharacterRuntime[] = [];
+  // protected _timeline: ITimeline;
+  // protected _runtime: IChartCharacterRuntime[] = [];
 
   static RuntimeMap: { [key: string]: boolean } = {};
 
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     super(config, option);
-    this._timeline = new DefaultTimeline();
-    this._ticker = new ManualTicker([this._timeline]);
+    // this._timeline = new DefaultTimeline();
+    // this._ticker = new ManualTicker([this._timeline]);
     this.configProcess = new ChartConfigProcess(this);
   }
 
@@ -187,7 +185,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   }
 
   protected _clearRuntime(): void {
-    this._runtime.length = 0;
+    this._runtime && (this._runtime.length = 0);
   }
 
   protected getViewBoxFromSpec() {
@@ -203,7 +201,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
 
   protected applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void {
     this._attribute = this.getDefaultAttribute() as any;
-    this._runtime.forEach(r => r.applyConfigToAttribute?.(this));
+    this._runtime?.forEach(r => r.applyConfigToAttribute?.(this));
     // 设置locked
     this.locked = !!config.locked;
   }
@@ -233,13 +231,13 @@ export class CharacterChart<T extends IChartGraphicAttribute>
             afterInitializeChart: (vchart: IVChart) => {
               this._vchart = vchart;
               this._config.hooks?.beforeRuntimeInitializeChart?.(this, vchart);
-              this._runtime.forEach(r => r.afterInitialize?.(this, vchart));
+              this._runtime?.forEach(r => r.afterInitialize?.(this, vchart));
               this._config.hooks?.afterRuntimeInitializeChart?.(this, vchart);
             },
             // @ts-ignore
             beforeDoRender: () => {
               this._config.hooks?.beforeRuntimeDoRender?.(this, this._graphic?.vchart ?? this._vchart);
-              this._runtime.forEach(r => r.beforeVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
+              this._runtime?.forEach(r => r.beforeVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
               this._config.hooks?.afterRuntimeDoRender?.(this, this._graphic?.vchart ?? this._vchart);
             }
           }

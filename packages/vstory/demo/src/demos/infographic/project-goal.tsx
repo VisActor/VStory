@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Player, Story } from '../../../../../vstory-core/src';
+import { Story } from '../../../../../vstory-core/src';
+import { Player } from '../../../../../vstory-player/src';
 import { registerAll } from '../../../../src';
 
 registerAll();

@@ -17,7 +17,7 @@ import { PivotChartCharacter } from '../character/table/character/pivot-chart';
 import { RuntimeStore } from '../store';
 import { CommonSpecRuntimeInstance as ChartCommonSpecRuntimeInstance } from '../character/chart/runtime/common-spec';
 import { RankingBarRuntimeInstance } from '../character/chart/runtime/ranking-bar';
-import { WaveScatterRuntimeInstance } from '../character/chart/runtime/wave-scatter';
+// import { WaveScatterRuntimeInstance } from '../character/chart/runtime/wave-scatter';
 import { TextRuntimeInstance } from '../character/component/runtime/text';
 import { LineRuntimeInstance } from '../character/component/runtime/line';
 import { BaseGraphicRuntimeInstance } from '../character/component/runtime/base';
@@ -89,7 +89,7 @@ export function registerRuntime() {
 
   // 图表相关运行时
   RuntimeStore.register(RankingBarRuntimeInstance);
-  RuntimeStore.register(WaveScatterRuntimeInstance);
+  // RuntimeStore.register(WaveScatterRuntimeInstance);
 
   // 组件相关运行时
   RuntimeStore.register(BaseGraphicRuntimeInstance);

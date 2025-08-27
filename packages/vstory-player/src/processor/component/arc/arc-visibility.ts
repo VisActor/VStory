@@ -1,6 +1,6 @@
 import type { IArc } from '@visactor/vrender-core';
 import type { IAnimationParams } from '@visactor/vstory-core';
-import { globalProcessorRegistry, CharacterType } from '@visactor/vstory-core';
+import { CharacterType } from '@visactor/vstory-core';
 import { CommonVisibilityActionProcessor } from '../common/visibility';
 import { ACTION_TYPE } from '../../constants/action';
 import { CommonStyleActionProcessor } from '../common/style';
@@ -8,6 +8,7 @@ import { CommonMoveToActionProcessor } from '../common/move';
 import { CommonScaleToActionProcessor } from '../common/scale';
 import { CommonBounceActionProcessor } from '../common/bounce';
 import { BaseVisibility } from '../../common/base-visibility-processor';
+import { globalProcessorRegistry } from '../../../player/processorRegistry';
 
 export interface IAngleParams extends IAnimationParams {
   from?: {
