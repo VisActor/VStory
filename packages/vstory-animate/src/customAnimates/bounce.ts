@@ -1,4 +1,4 @@
-import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender-core';
+import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender-animate';
 import type { EasingType } from '@visactor/vrender-core';
 
 export class Bounce extends ACustomAnimate<any> {

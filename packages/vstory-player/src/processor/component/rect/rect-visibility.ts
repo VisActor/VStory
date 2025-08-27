@@ -1,10 +1,11 @@
-import { CharacterType, globalProcessorRegistry } from '@visactor/vstory-core';
+import { CharacterType } from '@visactor/vstory-core';
 import { CommonVisibilityActionProcessor } from '../common/visibility';
 import { ACTION_TYPE } from '../../constants/action';
 import { CommonStyleActionProcessor } from '../common/style';
 import { CommonMoveToActionProcessor } from '../common/move';
 import { CommonScaleToActionProcessor } from '../common/scale';
 import { CommonBounceActionProcessor } from '../common/bounce';
+import { globalProcessorRegistry } from '../../../player/processorRegistry';
 
 export class RectVisibilityActionProcessor extends CommonVisibilityActionProcessor {
   name: 'appearOrDisAppear' = 'appearOrDisAppear';

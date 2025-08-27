@@ -1,9 +1,10 @@
-import { globalProcessorRegistry, type ICharacter, CharacterType } from '@visactor/vstory-core';
+import { type ICharacter, CharacterType } from '@visactor/vstory-core';
 import type { IVChart } from '@visactor/vchart';
 import { cloneDeep, isArray } from '@visactor/vutils';
 import type { IChartAddAction, IChartAddPayload } from './interface';
 import { VChartBaseActionProcessor } from './base';
 import { ACTION_TYPE } from '../constants/action';
+import { globalProcessorRegistry } from '../../player/processorRegistry';
 
 export class VChartAddActionProcessor extends VChartBaseActionProcessor {
   name: 'add';

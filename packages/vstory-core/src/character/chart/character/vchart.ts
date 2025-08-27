@@ -1,5 +1,7 @@
-import { registerLiquidChart, registerMosaicChart, registerVennChart, registerPictogramChart } from '@visactor/vchart';
-export { registerLiquidChart, registerMosaicChart, registerVennChart, registerPictogramChart } from '@visactor/vchart';
+import { registerLiquidChart, registerMosaicChart, registerVennChart } from '@visactor/vchart';
+import { registerPictogramChart } from '@visactor/vchart-extension';
+export { registerLiquidChart, registerMosaicChart, registerVennChart } from '@visactor/vchart';
+export { registerPictogramChart } from '@visactor/vchart-extension';
 
 import { CharacterType } from '../../../constants/character';
 import { CharacterChart } from '../character-chart';

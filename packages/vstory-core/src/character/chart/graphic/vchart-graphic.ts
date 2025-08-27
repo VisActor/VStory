@@ -310,7 +310,7 @@ export class VChartGraphic extends Rect {
     // 注意不要更新到 vchart，更新到vchart会触发vchart重新布局，但是我们不需要vchart按照 viewBox_display 重新布局
     this._vchart.getStage().defaultLayer.translateTo(-this.vchartAutoTranslate.x, -this.vchartAutoTranslate.y);
     // @ts-ignore
-    this._vchart._compiler._view.renderer.setViewBox(rootBounds, true);
+    this._vchart.getStage().setViewBox(rootBounds, true);
   }
 
   updateVChartViewBoxTransform() {

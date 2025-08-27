@@ -1,6 +1,6 @@
 import type { EasingType, IGraphic, IText } from '@visactor/vrender-core';
 import type { ICharacter } from '@visactor/vstory-core';
-import { CharacterType, globalProcessorRegistry } from '@visactor/vstory-core';
+import { CharacterType } from '@visactor/vstory-core';
 import { TypeWriter } from '@visactor/vstory-animate';
 import { isString } from '@visactor/vutils';
 import type { ITypeWriterParams } from './interface';
@@ -12,6 +12,7 @@ import { CommonMoveToActionProcessor } from '../common/move';
 import { CommonScaleToActionProcessor } from '../common/scale';
 import { CommonBounceActionProcessor } from '../common/bounce';
 import { BaseVisibility } from '../../common/base-visibility-processor';
+import { globalProcessorRegistry } from '../../../player/processorRegistry';
 
 export class TypeWriterVisibility extends BaseVisibility {
   protected _setInitAttributes(graphic: IGraphic, params: ITypeWriterParams, appear: boolean) {

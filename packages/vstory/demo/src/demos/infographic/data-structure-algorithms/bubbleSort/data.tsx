@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { IStoryDSL, Player, Story } from '../../../../../../../vstory-core/src';
+import { IStoryDSL, Story } from '../../../../../../../vstory-core/src';
+import { Player } from '../../../../../../../vstory-player/src';
 import { registerAll } from '../../../../../../src';
 
 registerAll();

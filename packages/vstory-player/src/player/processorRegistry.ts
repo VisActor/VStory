@@ -1,4 +1,4 @@
-import type { IActionProcessorItem } from '../interface/action-processor';
+import type { IActionProcessorItem } from '../interface/interface';
 
 export interface IProcessorRegistry {
   registerProcessor: (characterType: string, processor: Record<string, any>) => void;

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Player, Story } from '../../../../../vstory-core/src';
+import { Story } from '../../../../../vstory-core/src';
+import { Player } from '../../../../../vstory-player/src';
 import { Easing, generatorPathEasingFunc, registerAll } from '../../../../../vstory/src';
 import darkBg from '../../assets/nationalMemory/dark.jpeg';
 import candle from '../../assets/nationalMemory/candle.png';

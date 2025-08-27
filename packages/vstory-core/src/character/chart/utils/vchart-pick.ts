@@ -41,7 +41,7 @@ export const seriesMarkPick = {
       return null;
     }
     const series = chart.getChart().getSeriesInIds([seriesId])[0];
-    const datum = graphicPath[graphicPath.length - 1].__vgrammar_scene_item__.data;
+    const datum = graphicPath[graphicPath.length - 1].context.data;
     return {
       type: 'seriesMark',
       model: series,
@@ -66,7 +66,7 @@ export const axisMarkPick = {
     let axisGraphic = graphicPath.find(g => g.name === 'axis');
     if (axisGraphic) {
       // @ts-ignore
-      const axis = axisModel.find(a => a._axisMark && a._axisMark.getProduct().graphicItem === axisGraphic.parent);
+      const axis = axisModel.find(a => a._axisMark && a._axisMark.getProduct() === axisGraphic.parent);
       if (axis) {
         return commonModelInfo(axis);
       }
@@ -74,7 +74,7 @@ export const axisMarkPick = {
     axisGraphic = graphicPath.find(g => g.name === 'axis-grid');
     if (axisGraphic) {
       // @ts-ignore
-      const axis = axisModel.find(a => a._gridMark && a._gridMark.getProduct().graphicItem === axisGraphic.parent);
+      const axis = axisModel.find(a => a._gridMark && a._gridMark.getProduct() === axisGraphic.parent);
       if (axis) {
         return commonModelInfo(axis);
       }
