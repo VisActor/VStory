@@ -1,16 +1,10 @@
 import React, { useEffect } from 'react';
-import {
-  Player,
-  Story,
-  initVR,
-  registerGraphics,
-  registerCharacters,
-  IStoryDSL
-} from '../../../../../../vstory-core/src';
+import { Story, initVR, registerGraphics, registerCharacters, IStoryDSL } from '../../../../../../vstory-core/src';
 import {
   registerVComponentAction,
   registerVChartAction,
-  registerVTableAction
+  registerVTableAction,
+  Player
 } from '../../../../../../vstory-player/src';
 import { cloneDeep } from '@visactor/vutils';
 import { pivotTableOption } from '../option-pivot-table';

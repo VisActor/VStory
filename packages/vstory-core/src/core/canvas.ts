@@ -140,7 +140,7 @@ export class StoryCanvas implements IStoryCanvas {
       // 得开启自动渲染，否则编辑场景中无法触发视图更新
       autoRender: false,
       disableDirtyBounds: true,
-      ticker: new ManualTicker([]),
+      ticker: new ManualTicker(null),
       pluginList: pluginList ?? ['RichTextEditPlugin'],
       event: {
         clickInterval: 300

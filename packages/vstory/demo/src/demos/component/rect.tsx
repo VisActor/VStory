@@ -1,7 +1,8 @@
 import React, { createRef, useEffect } from 'react';
-import { Player, Story } from '../../../../../vstory-core/src';
+import { Story } from '../../../../../vstory-core/src';
 import { registerAllSelection } from '../../../../../vstory-editor/src';
 import { Edit, registerAll } from '../../../../src';
+import { Player } from '../../../../../vstory-player/src';
 
 registerAll();
 registerAllSelection();

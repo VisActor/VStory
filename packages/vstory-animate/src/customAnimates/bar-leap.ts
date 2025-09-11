@@ -1,5 +1,6 @@
 import type { EasingType } from '@visactor/vrender';
-import { ACustomAnimate, CustomPath2D, generatorPathEasingFunc } from '@visactor/vrender';
+import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender-animate';
+import { CustomPath2D } from '@visactor/vrender-core';
 import type { IPointLike } from '@visactor/vutils';
 
 export const barLeap1Str = 'M0,0 C0.083,0.163 0.179,1 0.6,1 0.814,1 0.898,1 1,1';
@@ -117,7 +118,7 @@ export class BarLeap extends ACustomAnimate<{
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
+  getFromProps(): Record<string, any> {
     return this.from;
   }
 
@@ -132,7 +133,7 @@ export class BarLeap extends ACustomAnimate<{
   }
 
   onUpdate(end: boolean, ratio: number, out: Record<string, any>): void {
-    this.computePath(barLeap1!(ratio), this.fromCenter, this.toCenter, this.target.pathProxy);
+    this.computePath(barLeap1!(ratio), this.fromCenter, this.toCenter, this.target.pathProxy as CustomPath2D);
     if (this.vertical) {
       out.y = this.to.y + barLeap2!(ratio) * 100;
     } else {

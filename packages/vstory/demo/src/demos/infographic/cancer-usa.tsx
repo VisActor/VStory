@@ -1,6 +1,7 @@
 import React, { createRef, useEffect } from 'react';
-import { Player, Story, VChart } from '../../../../../vstory-core/src';
+import { Story, VChart } from '../../../../../vstory-core/src';
 import { registerAll } from '../../../../../vstory/src';
+import { Player } from '../../../../../vstory-player/src';
 
 registerAll();
 

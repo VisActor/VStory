@@ -1,4 +1,4 @@
-import { CharacterType, globalProcessorRegistry } from '@visactor/vstory-core';
+import { CharacterType } from '@visactor/vstory-core';
 import { CommonVisibilityActionProcessor } from '../common/visibility';
 import { ACTION_TYPE } from '../../constants/action';
 import type { IGraphic } from '@visactor/vrender-core';
@@ -8,6 +8,7 @@ import { CommonScaleToActionProcessor } from '../common/scale';
 import { CommonBounceActionProcessor } from '../common/bounce';
 import { BaseVisibility } from '../../common/base-visibility-processor';
 import { canDoGraphicAnimation } from '../../common/utils';
+import { globalProcessorRegistry } from '../../../player/processorRegistry';
 
 export class DefaultVisibility extends BaseVisibility {
   protected _setInitAttributes(graphic: IGraphic, params: any, appear: boolean) {

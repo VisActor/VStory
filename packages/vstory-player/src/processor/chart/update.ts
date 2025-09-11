@@ -1,11 +1,12 @@
 import type { ICharacter } from '@visactor/vstory-core';
-import { globalProcessorRegistry, CharacterType } from '@visactor/vstory-core';
+import { CharacterType } from '@visactor/vstory-core';
 import { VChartBaseActionProcessor } from './base';
 import type { IChartUpdateAction, IChartUpdatePayload } from './interface';
 import type { IVChart } from '@visactor/vchart';
 import { cloneDeep, isArray } from '@visactor/vutils';
 import { isMatch } from '../../utils/isMatch';
 import { ACTION_TYPE } from '../constants/action';
+import { globalProcessorRegistry } from '../../player/processorRegistry';
 
 export class VChartUpdateActionProcessor extends VChartBaseActionProcessor {
   name: 'update';

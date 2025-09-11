@@ -1,14 +1,6 @@
 import React, { useEffect } from 'react';
-import {
-  Player,
-  Story,
-  initVR,
-  registerGraphics,
-  registerCharacters,
-  IStoryDSL
-} from '../../../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction } from '../../../../../../vstory-player/src';
-import { StroyAllDataGroup } from '../../../../../../vstory-core/src/interface/dsl/chart';
+import { Story, initVR, registerGraphics, registerCharacters, IStoryDSL } from '../../../../../../vstory-core/src';
+import { Player, registerVComponentAction, registerVChartAction } from '../../../../../../vstory-player/src';
 
 registerGraphics();
 registerCharacters();

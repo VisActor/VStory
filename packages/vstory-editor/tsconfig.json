@@ -5,9 +5,14 @@
     "rootDir": "./src",
     "outDir": "./es",
     "typeRoots": ["./node_modules/@types", "./src/types"],
-    "composite": true,
-    "lib": ["es2017"],
+    "types": ["jest"],
+    "lib": ["es2017", "dom"],
+    "composite": true
   },
   "include": ["src"],
-  "references": []
+  "references": [
+    {
+      "path": "../vstory-core"
+    }
+  ]
 }

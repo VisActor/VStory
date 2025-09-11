@@ -1,7 +1,6 @@
-import { cloneDeep, isNumber, isString } from '@visactor/vutils';
-import type { IActionSpec, IActSpec, ISceneSpec } from '../interface/dsl/dsl';
-import type { IScheduler } from '../interface/scheduler';
-import type { IActionProcessor } from '../interface/action-processor';
+import type { IActionSpec, IActSpec, ISceneSpec } from '@visactor/vstory-core';
+import { cloneDeep, isString } from '@visactor/vutils';
+import type { IActionProcessor, IScheduler } from '../interface/interface';
 
 interface IActInfo {
   startTime: number;

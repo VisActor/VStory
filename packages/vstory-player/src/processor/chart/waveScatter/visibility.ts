@@ -1,9 +1,10 @@
 import type { ICharacter } from '@visactor/vstory-core';
-import { CharacterType, globalProcessorRegistry, globalTickerStore } from '@visactor/vstory-core';
+import { CharacterType } from '@visactor/vstory-core';
 import { ACTION_TYPE } from '../../constants/action';
 import { VChartVisibilityActionProcessor } from '../visibility';
 import type { IChartVisibilityAction } from '../interface';
 import type { IVChart } from '@visactor/vchart';
+import { globalProcessorRegistry } from '../../../player/processorRegistry';
 
 export class WaveScatterVisibilityActionProcessor extends VChartVisibilityActionProcessor {
   run(character: ICharacter, actionSpec: IChartVisibilityAction): void {
@@ -27,12 +28,13 @@ export class WaveScatterVisibilityActionProcessor extends VChartVisibilityAction
     }
     const { duration, easing, loop, custom } = waveAnimate;
     const product = mark.getProduct();
-    const graphics = product.getAllElements().map(item => item.getGraphicItem());
+    const graphics = product.getAllElements().map((item: any) => item.getGraphicItem());
     if (!graphics.length) {
       return;
     }
-    graphics.forEach(g => {
-      g.animate({ timeline: globalTickerStore.getTimeline('background_animate') })
+    graphics.forEach((g: any) => {
+      // g.animate({ timeline: globalTickerStore.getTimeline('background_animate') })
+      g.animate({ timeline: null })
         .play(new custom({}, {}, duration, easing, {}))
         .loop(loop ? Infinity : 1);
     });

@@ -1,5 +1,5 @@
 import type { ICharacter } from '@visactor/vstory-core';
-import { globalProcessorRegistry } from '@visactor/vstory-core';
+import { globalProcessorRegistry } from '@visactor/vstory-player';
 import type { IArc } from '@visactor/vrender-core';
 import { ACTION_TYPE, VChartBaseActionProcessor } from '@visactor/vstory-player';
 import type { IAngleParams } from './interface';

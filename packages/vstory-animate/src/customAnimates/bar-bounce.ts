@@ -1,5 +1,5 @@
 import type { EasingType } from '@visactor/vrender';
-import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender';
+import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender-animate';
 
 export const barBounce1Str =
   'M0,0 C0.126,0.382 0.06,0.254 0.105,0.467 0.159,0.729 0.3,1.173 0.38,1.173 0.476,1.173 0.512,0.909 0.578,0.9 0.632,0.892 0.685,1.084 0.735,1.085 0.784,1.085 0.843,0.966 0.887,0.966 0.94,0.966 0.984,1 1,1';
@@ -37,7 +37,7 @@ export class BarBounce extends ACustomAnimate<{ y?: number; y1?: number; x?: num
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
+  getFromProps(): Record<string, any> {
     return this.from;
   }
 

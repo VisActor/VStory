@@ -1,4 +1,5 @@
-import { ACustomAnimate, createLine, generatorPathEasingFunc } from '@visactor/vrender-core';
+import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender-animate';
+import { createLine } from '@visactor/vrender-core';
 
 const swingEaseStr =
   'M 0 0 C 0.078 0.204 0.05 0.291 0.152 0.363 C 0.291 0.295 0.236 -0.224 0.334 -0.24 C 0.486 -0.224 0.48 0.202 0.566 0.217 C 0.696 0.183 0.622 -0.113 0.751 -0.138 C 0.873 -0.09 0.798 0.085 0.903 0.109 C 0.989 0.097 0.983 0.049 1 0';
@@ -30,11 +31,12 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
+  getFromProps(): Record<string, any> {
     return this.from;
   }
 
   onBind(): void {
+    // @ts-expect-error
     this.target && this.target.setAttributes({ ...this.from, y: this.target.attribute._layoutHeight });
     if (this.showLine) {
       const shadowRoot = this.target.attachShadow();
@@ -56,6 +58,7 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
 
   grow(ratio: number, out: Record<string, any>) {
     ratio = Math.min(ratio * 1.5, 1);
+    // @ts-expect-error
     const { _layoutHeight } = this.target.attribute;
     out.y = _layoutHeight - (_layoutHeight - this.to.y!) * ratio;
     out.x = this.to.x!;
@@ -66,6 +69,7 @@ export class SymbolSwing extends ACustomAnimate<{ x?: number; y?: number }> {
     const deltaX = this.delta * ratio;
     out.x += deltaX;
 
+    // @ts-expect-error
     const { _layoutHeight, fill } = this.target.attribute;
 
     const shadowRoot = this.target.shadowRoot;

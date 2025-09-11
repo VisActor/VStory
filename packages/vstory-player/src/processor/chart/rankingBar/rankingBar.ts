@@ -4,7 +4,6 @@ import { vglobal } from '@visactor/vrender';
 import { isValid } from '@visactor/vutils';
 import {
   CharacterType,
-  globalProcessorRegistry,
   type IAction,
   type IActionPayload,
   type IActionSpec,
@@ -13,6 +12,7 @@ import {
 import { ActionProcessorItem } from '../../processor-item';
 import { ACTION_TYPE } from '../../constants/action';
 import { VChartVisibilityActionProcessor } from '../visibility';
+import { globalProcessorRegistry } from '../../../player/processorRegistry';
 
 // TODO: move to interface folder
 // export type IRankingBarPlayPayload = Omit<IActionPayload, 'animation'>;

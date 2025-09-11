@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
-import { registerVComponentAction, registerVChartAction } from '../../../../../vstory-player/src';
+import { Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
+import { Player, registerVComponentAction, registerVChartAction } from '../../../../../vstory-player/src';
 import { merge } from '@visactor/vutils';
 
 registerGraphics();
@@ -554,9 +554,10 @@ async function loadDSL() {
         options: {
           spec: rankingBarSpec,
           initOption: {
+            // vchartBoundsMode: 'auto',
             interactive: true,
             animation: false,
-            disableTriggerEvent: true,
+            disableTriggerEvent: false,
             disableDirtyBounds: true
           }
         }
@@ -628,31 +629,9 @@ export const BaseChart = () => {
 
       const chart1 = story.getCharacterById('chart1');
 
-      // setTimeout(() => {
-      //   chart1?.setConfig(
-      //     merge(chart1?.config, {
-      //       position: {
-      //         top: 100,
-      //         left: 200,
-      //         width: 400,
-      //         height: 300
-      //       }
-      //     })
-      //   );
-      // }, 1000);
-
-      // setTimeout(() => {
-      //   chart1?.setConfig(
-      //     merge(chart1?.config, {
-      //       position: {
-      //         top: 150,
-      //         left: 200,
-      //         width: 300,
-      //         height: 200
-      //       }
-      //     })
-      //   );
-      // }, 2000);
+      story.canvas.getStage().on('click', e => {
+        console.log(chart1?.checkEvent(e));
+      });
     });
 
     return () => {

@@ -1,20 +1,13 @@
 import React, { useEffect } from 'react';
-import {
-  Player,
-  Story,
-  initVR,
-  registerGraphics,
-  registerCharacters,
-  IStoryDSL
-} from '../../../../../../vstory-core/src';
+import { Story, initVR, registerGraphics, registerCharacters, IStoryDSL } from '../../../../../../vstory-core/src';
 import {
   registerVComponentAction,
   registerVChartAction,
-  registerVTableAction
+  registerVTableAction,
+  Player
 } from '../../../../../../vstory-player/src';
 import { pivotChartOption } from '../option-pivot-chart';
 import { cloneDeep } from '@visactor/vutils';
-import { StroyAllDataGroup } from '../../../../../../vstory-core/src/interface/dsl/chart';
 
 registerGraphics();
 registerCharacters();

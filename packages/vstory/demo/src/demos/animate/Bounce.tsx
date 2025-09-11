@@ -1,9 +1,10 @@
 import React, { createRef, useEffect } from 'react';
-import { Player, Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
+import { Story, initVR, registerGraphics, registerCharacters } from '../../../../../vstory-core/src';
 import {
   registerCommonBounceAction,
   registerVComponentAction,
-  registerVChartAction
+  registerVChartAction,
+  Player
 } from '../../../../../vstory-player/src';
 
 registerGraphics();

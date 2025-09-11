@@ -1,5 +1,5 @@
 import type { EasingType } from '@visactor/vrender';
-import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender';
+import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender-animate';
 
 export const pieLeap1Str =
   'M0,0 C0,0.301 0.256,1.032 0.607,1.033 0.763,1.033 0.752,0.983 0.86,0.983 0.978,0.983 0.972,1 1,1';
@@ -36,7 +36,7 @@ export class PieLeap extends ACustomAnimate<{ y: number; x: number; innerRadius:
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
+  getFromProps(): Record<string, any> {
     return this.from;
   }
 

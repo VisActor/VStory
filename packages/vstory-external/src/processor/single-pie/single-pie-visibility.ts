@@ -1,4 +1,4 @@
-import { globalProcessorRegistry } from '@visactor/vstory-core';
+import { globalProcessorRegistry } from '@visactor/vstory-player';
 import {
   ACTION_TYPE,
   CommonBounceActionProcessor,

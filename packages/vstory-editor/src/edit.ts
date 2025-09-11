@@ -48,7 +48,7 @@ export class Edit extends EventEmitter {
     super();
     this.editAction = new EditAction(story);
     this.editAction.on('dispatchAction', this.onAction);
-    this.story.canvas.getStage().addEventListener('*', this.onStoryEvent);
+    this.story.canvas.getStage().addEventListener('*' as any, this.onStoryEvent as any);
     this._initEditGroup();
     this._initComponent();
   }

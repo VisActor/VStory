@@ -1,8 +1,9 @@
-import { globalProcessorRegistry, type ICharacter, CharacterType } from '@visactor/vstory-core';
+import { type ICharacter, CharacterType } from '@visactor/vstory-core';
 import type { IVChart } from '@visactor/vchart';
 import type { IChartHighlightPayload, IChartHighlightAction } from './interface';
 import { VChartBaseActionProcessor } from './base';
 import { ACTION_TYPE } from '../constants/action';
+import { globalProcessorRegistry } from '../../player/processorRegistry';
 
 export class VChartHighlightActionProcessor extends VChartBaseActionProcessor {
   name: 'highlight';
@@ -34,6 +35,8 @@ export class VChartHighlightActionProcessor extends VChartBaseActionProcessor {
       .getAllMarks()
       .forEach(mark => {
         if (mark.getAnimationConfig()) {
+          // TODO: 等待vrender 确认
+          // @ts-expect-error
           mark.getProduct().animate?.run({
             timeSlices: {
               effects: {
@@ -42,7 +45,7 @@ export class VChartHighlightActionProcessor extends VChartBaseActionProcessor {
               },
               duration: animation?.duration ?? 0
             },
-            partitioner: datum => (inverse ? !isDatumEqual(value, datum) : isDatumEqual(value, datum))
+            partitioner: (datum: ' any') => (inverse ? !isDatumEqual(value, datum) : isDatumEqual(value, datum))
           });
         }
       });

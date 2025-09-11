@@ -1,7 +1,7 @@
 import type { IComponent, ISeries, IVChart } from '@visactor/vchart';
-import { array, cloneDeep, isArray, isFunction, merge } from '@visactor/vutils';
+import { array, isFunction, merge } from '@visactor/vutils';
 import type { IActionSpec, ICharacter } from '@visactor/vstory-core';
-import { globalProcessorRegistry, CharacterType } from '@visactor/vstory-core';
+import { CharacterType } from '@visactor/vstory-core';
 import { VChartBaseActionProcessor } from './base';
 import type { IChartVisibilityAction, IChartVisibilityPayload } from './interface';
 import { transformMap } from './transformFunc/transformMap';
@@ -10,9 +10,8 @@ import { checkArrayOrder } from '../../utils/checkArrayOrder';
 import type { IGroup } from '@visactor/vrender-core';
 import { ACTION_TYPE } from '../constants/action';
 import { CommonBounceActionProcessor } from '../component/common/bounce';
-import { VChartUpdateActionProcessor } from './update';
-import { VChartAddActionProcessor } from './add';
 import { CommonStyleActionProcessor } from '../component/common/style';
+import { globalProcessorRegistry } from '../../player/processorRegistry';
 
 export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
   name: 'appearOrDisAppear' = 'appearOrDisAppear';
@@ -279,6 +278,8 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       if (isRun) {
         // @ts-ignore
         product?.graphicItem?.setAttribute('visibleAll', true);
+        // TODO: 等待vrender 确认
+        // @ts-expect-error
         product?.animate?.run(config || {});
       } else {
         product?.graphicItem?.setAttribute('visibleAll', false);

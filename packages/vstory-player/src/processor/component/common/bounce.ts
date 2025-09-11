@@ -1,11 +1,12 @@
 import type { IActionSpec, ICharacter } from '@visactor/vstory-core';
-import { CharacterType, globalProcessorRegistry } from '@visactor/vstory-core';
+import { CharacterType } from '@visactor/vstory-core';
 import { ActionProcessorItem } from '../../processor-item';
 import { getPayload } from './utils';
 import type { IComponentBounceAction } from '../../common/bounce-processor';
 import { bounce } from '../../common/bounce-processor';
 import { ACTION_TYPE } from '../../constants/action';
 import { getCharacterParentGraphic } from '../../common/common';
+import { globalProcessorRegistry } from '../../../player/processorRegistry';
 
 export class CommonBounceActionProcessor extends ActionProcessorItem {
   name: 'bounce';
