@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory-editor",
-  "version": "0.0.24-alpha.31",
+  "version": "0.1.0-alpha.2",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -34,7 +34,7 @@
     "@visactor/vchart-extension": "2.0.3",
     "@visactor/vdataset": "~1.0.6",
     "@visactor/vscale": "~1.0.6",
-    "@visactor/vstory-core": "workspace:0.0.24-alpha.31"
+    "@visactor/vstory-core": "workspace:0.1.0-alpha.2"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",

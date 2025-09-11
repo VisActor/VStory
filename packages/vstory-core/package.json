@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory-core",
-  "version": "0.0.24-alpha.31",
+  "version": "0.1.0-alpha.2",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
