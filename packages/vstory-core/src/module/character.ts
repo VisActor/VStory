@@ -1,4 +1,4 @@
-import { RankingBarCharacter, registerRankingBarTemp } from '../character/chart/character/rankingBar';
+// import { RankingBarCharacter, registerRankingBarTemp } from '../character/chart/character/rankingBar';
 import { ScatterBarCharacter } from '../character/chart/character/scatter-bar';
 import { VChartCharacter, registerAllVChart } from '../character/chart/character/vchart';
 import { WaveScatterCharacter } from '../character/chart/character/wave-scatter';
@@ -51,9 +51,9 @@ export function registerCharacters() {
   _register = true;
   // chart
   StoryFactory.registerCharacter(VChartCharacter.type, VChartCharacter);
-  registerRankingBarTemp();
+  // registerRankingBarTemp();
   registerAllVChart();
-  StoryFactory.registerCharacter(RankingBarCharacter.type, RankingBarCharacter);
+  // StoryFactory.registerCharacter(RankingBarCharacter.type, RankingBarCharacter);
   StoryFactory.registerCharacter(WaveScatterCharacter.type, WaveScatterCharacter);
   StoryFactory.registerCharacter(ScatterBarCharacter.type, ScatterBarCharacter);
   // component

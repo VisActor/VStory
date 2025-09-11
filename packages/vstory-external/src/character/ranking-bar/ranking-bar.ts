@@ -1,7 +1,7 @@
 import { registerRankingBarChart } from '@visactor/vchart-extension';
 import VChart from '@visactor/vchart';
-import { CharacterChart } from '../character-chart';
-import type { IChartGraphicAttribute } from '../graphic/vchart-graphic';
+import { CharacterChart } from '@visactor/vstory-core';
+import type { IChartGraphicAttribute } from '@visactor/vstory-core';
 
 export function registerRankingBarTemp() {
   registerRankingBarChart({ VChart });
