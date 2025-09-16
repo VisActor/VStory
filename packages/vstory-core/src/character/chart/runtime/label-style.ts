@@ -283,7 +283,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         const { series: series, labelMark } = info as unknown as { series: ISeries; labelMark: IMark };
         const keyScaleMap = getSeriesKeyScalesMap(series);
         const labelGraphics: IGraphic[] = [];
-        findLabelGraphicWithInfo(componentMark.getProduct().graphicItem as unknown as IGraphic, info, labelGraphics);
+        findLabelGraphicWithInfo(componentMark.getProduct() as IGraphic, info, labelGraphics);
         let labelSpecKey = (info.labelSpec as any)?.id ?? 'label';
         if (labelMark.name.startsWith('transform')) {
           labelSpecKey = 'transformLabel';
@@ -374,7 +374,7 @@ function _collectAllLabelGraphic(g: IGraphic, list: IGraphic[]) {
 function findLabelGraphicWithInfo(g: IGraphic, info: ILabelInfo, list: IGraphic[]) {
   const matchLabel = g.children[0].children.find(
     // @ts-ignore
-    (c: IGraphic) => c.attribute.baseMarkGroupName === info.baseMark.getProduct().graphicItem.name
+    (c: IGraphic) => c.attribute.baseMarkGroupName === info.baseMark.getProduct().name
   );
   if (!matchLabel) {
     return;

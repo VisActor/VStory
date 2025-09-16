@@ -24,7 +24,7 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vchart": "2.0.3",
+    "@visactor/vchart": "2.0.5-alpha.4",
     "@visactor/vtable": "1.19.7",
     "@visactor/vrender": "1.0.9",
     "@visactor/vrender-core": "1.0.9",
@@ -32,7 +32,7 @@
     "@visactor/vrender-components": "1.0.9",
     "@visactor/vrender-animate": "1.0.9",
     "@visactor/vutils": "~1.0.6",
-    "@visactor/vchart-extension": "2.0.3",
+    "@visactor/vchart-extension": "2.0.5-alpha.4",
     "@visactor/vdataset": "~1.0.6",
     "@visactor/vscale": "~1.0.6",
     "@visactor/vstory-core": "workspace:0.0.24-alpha.31",
