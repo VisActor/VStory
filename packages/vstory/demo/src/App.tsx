@@ -81,6 +81,7 @@ import { TableVisible } from './demos/table/runtime/visible';
 import { SpecMarker } from './demos/chart/runtime/spec-marker';
 import { News } from './demos/works/News/News';
 import { TariffWar } from './demos/works/tariff-war';
+import { Altraman } from './demos/works/altraman';
 
 type MenuItem = {
   name: string;
@@ -206,6 +207,10 @@ const App = () => {
         {
           name: 'TariffWar',
           component: TariffWar
+        },
+        {
+          name: 'Altraman',
+          component: Altraman
         }
       ]
     },

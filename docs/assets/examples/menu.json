@@ -36,13 +36,7 @@
             "en": "charts join"
           }
         },
-        {
-          "path": "annotation-show",
-          "title": {
-            "zh": "标注展示",
-            "en": "annotation show"
-          }
-        },
+       
         {
           "path": "Programming-Language-Popularity",
           "title": {
@@ -55,6 +49,13 @@
           "title": {
             "zh": "别踩白块",
             "en": "piano-tiles"
+          }
+        },
+        {
+          "path": "ultraman",
+          "title": {
+            "zh": "信息图模板-Ultraman",
+            "en": "Infographic: Ultraman"
           }
         }
       ]
@@ -96,6 +97,13 @@
         "en": "character element"
       },
       "children": [
+        {
+          "path": "annotation-show",
+          "title": {
+            "zh": "标注展示",
+            "en": "annotation show"
+          }
+        },
         {
           "path": "ranking-bar",
           "title": {
@@ -458,14 +466,9 @@
             "zh": "信息图模板-Tax",
             "en": "Infographic: Tax"
           }
-        },
-        {
-          "path": "ultraman",
-          "title": {
-            "zh": "信息图模板-Ultraman",
-            "en": "Infographic: Ultraman"
-          }
         }
+      
+        
       ]
     }
   ]
