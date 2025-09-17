@@ -5,6 +5,7 @@ Please read [the definition of DSL](./DSL) and [character](./character) first, a
 Once we have defined the `character` array, we can define the behaviors of these `character` through `actions`. The definition of actions is done in the `act`.
 
 Our act definition is inspired by the structure of drama: in drama, "Act" and "Scene" are two very important concepts used to divide and organize the structure of the script.
+
 1. Act: In drama, an Act is the main part of the script, used to divide the drama into major sections. A play usually contains two or more acts, each with its unique theme and conflict. The division of acts can help the audience understand the development of the plot and the changes in characters. In actual performances, there is usually a brief break between each act to change stage settings or allow actors to change costumes.
 2. Scene: A Scene is a subset of an Act, further refining the structure of the script. An act typically contains multiple scenes, each happening at a specific time and place. The transition between scenes usually signifies a change in characters, location, or time. In the script, the division of scenes can help readers or viewers better understand the flow of the plot.
 
@@ -53,6 +54,7 @@ export interface IAnimationParams {
 After defining the `character` array, these `character` elements are initially invisible. We can use `appear` to make them appear. When they are no longer needed, we can use `disappear` to make them disappear. `appear` has various forms, common ones include `fade`, `scale`, `wipe`, etc. If you are using special characters like `VChart`, there are more `appear` forms available.
 
 Common Appear and DisAppear effects include:
+
 - `fade`: Fade in and out
 - `scale`: Scale
 - `wipe`: Slide
@@ -72,7 +74,7 @@ const rect = {
     text: 'This is a rectangle',
     textBaseline: 'middle',
     textAlign: 'center',
-    fill: 'white',
+    fill: 'white'
   }
 };
 
@@ -80,57 +82,60 @@ const characterList = [
   { type: 'Rect', options: rect, effect: 'fade' },
   { type: 'Rect', options: rect, effect: 'scale' },
   { type: 'Rect', options: rect, effect: 'wipe' },
-  { type: 'Rect', options: rect, effect: 'move' },
-]
+  { type: 'Rect', options: rect, effect: 'move' }
+];
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
 characterList.forEach((item, index) => {
-  story.addCharacter({
-    type: item.type,
-    id: `${item.type}-${index}`,
-    zIndex: 1,
-    position: {
-      top: 50 + Math.floor(index / 2) * 150,
-      left: 50 + Math.floor(index % 2) * 150,
-      width: 100,
-      height: 100
-    },
-    options: item.options
-  }, {
-    sceneId: 'defaultScene',
-    actions: [
-      {
-        action: 'appear',
-        startTime: 1000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
-            }
-          }
-        ]
+  story.addCharacter(
+    {
+      type: item.type,
+      id: `${item.type}-${index}`,
+      zIndex: 1,
+      position: {
+        top: 50 + Math.floor(index / 2) * 150,
+        left: 50 + Math.floor(index % 2) * 150,
+        width: 100,
+        height: 100
       },
-      {
-        action: 'disappear',
-        startTime: 2000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
+      options: item.options
+    },
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
             }
-          }
-        ]
-      }
-    ]
-  });
-})
+          ]
+        },
+        {
+          action: 'disappear',
+          startTime: 2000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
+            }
+          ]
+        }
+      ]
+    }
+  );
+});
 
 player.play(1);
 window.vstory = story;
@@ -139,6 +144,7 @@ window['vstory'] = story;
 ```
 
 ### Style
+
 `style` can change the style of a `character`, such as `fill`, `stroke`, etc. The usage of `style` is similar to `appear` and `disappear`, but the `payload` of `style` needs to include fields like `graphic`, `text`, etc.
 
 ```javascript livedemo template=vstory
@@ -153,65 +159,66 @@ const rect = {
     text: 'This is a rectangle',
     textBaseline: 'middle',
     textAlign: 'center',
-    fill: 'white',
+    fill: 'white'
   }
 };
 
-const characterList = [
-  { type: 'Rect', options: rect, effect: 'fade' },
-]
+const characterList = [{ type: 'Rect', options: rect, effect: 'fade' }];
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
 characterList.forEach((item, index) => {
-  story.addCharacter({
-    type: item.type,
-    id: `${item.type}-${index}`,
-    zIndex: 1,
-    position: {
-      top: 50 + Math.floor(index / 2) * 150,
-      left: 50 + Math.floor(index % 2) * 150,
-      width: 100,
-      height: 100
-    },
-    options: item.options
-  }, {
-    sceneId: 'defaultScene',
-    actions: [
-      {
-        action: 'appear',
-        startTime: 1000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
-            }
-          }
-        ]
+  story.addCharacter(
+    {
+      type: item.type,
+      id: `${item.type}-${index}`,
+      zIndex: 1,
+      position: {
+        top: 50 + Math.floor(index / 2) * 150,
+        left: 50 + Math.floor(index % 2) * 150,
+        width: 100,
+        height: 100
       },
-      {
-        action: 'style',
-        startTime: 2000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
-            },
-            graphic: {
-              fill: 'blue'
+      options: item.options
+    },
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
             }
-          }
-        ]
-      }
-    ]
-  });
-})
+          ]
+        },
+        {
+          action: 'style',
+          startTime: 2000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              },
+              graphic: {
+                fill: 'blue'
+              }
+            }
+          ]
+        }
+      ]
+    }
+  );
+});
 
 player.play(1);
 window.vstory = story;
@@ -235,66 +242,67 @@ const rect = {
     text: 'This is a rectangle',
     textBaseline: 'middle',
     textAlign: 'center',
-    fill: 'white',
+    fill: 'white'
   }
 };
 
-const characterList = [
-  { type: 'Rect', options: rect, effect: 'fade' },
-]
+const characterList = [{ type: 'Rect', options: rect, effect: 'fade' }];
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
 characterList.forEach((item, index) => {
-  story.addCharacter({
-    type: item.type,
-    id: `${item.type}-${index}`,
-    zIndex: 1,
-    position: {
-      top: 50 + Math.floor(index / 2) * 150,
-      left: 50 + Math.floor(index % 2) * 150,
-      width: 100,
-      height: 100
-    },
-    options: item.options
-  }, {
-    sceneId: 'defaultScene',
-    actions: [
-      {
-        action: 'appear',
-        startTime: 1000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
-            }
-          }
-        ]
+  story.addCharacter(
+    {
+      type: item.type,
+      id: `${item.type}-${index}`,
+      zIndex: 1,
+      position: {
+        top: 50 + Math.floor(index / 2) * 150,
+        left: 50 + Math.floor(index % 2) * 150,
+        width: 100,
+        height: 100
       },
-      {
-        action: 'moveTo',
-        startTime: 2000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
-            },
-            destination: {
-              x: 250,
-              y: 80
-            },
-          }
-        ]
-      }
-    ]
-  });
-})
+      options: item.options
+    },
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
+            }
+          ]
+        },
+        {
+          action: 'moveTo',
+          startTime: 2000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              },
+              destination: {
+                x: 250,
+                y: 80
+              }
+            }
+          ]
+        }
+      ]
+    }
+  );
+});
 
 player.play(1);
 window.vstory = story;
@@ -318,66 +326,67 @@ const rect = {
     text: 'This is a rectangle',
     textBaseline: 'middle',
     textAlign: 'center',
-    fill: 'white',
+    fill: 'white'
   }
 };
 
-const characterList = [
-  { type: 'Rect', options: rect, effect: 'fade' },
-]
+const characterList = [{ type: 'Rect', options: rect, effect: 'fade' }];
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
 characterList.forEach((item, index) => {
-  story.addCharacter({
-    type: item.type,
-    id: `${item.type}-${index}`,
-    zIndex: 1,
-    position: {
-      top: 50 + Math.floor(index / 2) * 150,
-      left: 50 + Math.floor(index % 2) * 150,
-      width: 100,
-      height: 100
-    },
-    options: item.options
-  }, {
-    sceneId: 'defaultScene',
-    actions: [
-      {
-        action: 'appear',
-        startTime: 1000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
-            }
-          }
-        ]
+  story.addCharacter(
+    {
+      type: item.type,
+      id: `${item.type}-${index}`,
+      zIndex: 1,
+      position: {
+        top: 50 + Math.floor(index / 2) * 150,
+        left: 50 + Math.floor(index % 2) * 150,
+        width: 100,
+        height: 100
       },
-      {
-        action: 'scaleTo',
-        startTime: 2000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
-            },
-            scale: {
-              scaleX: 0.3,
-              scaleY: 0.3
-            },
-          }
-        ]
-      }
-    ]
-  });
-})
+      options: item.options
+    },
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
+            }
+          ]
+        },
+        {
+          action: 'scaleTo',
+          startTime: 2000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              },
+              scale: {
+                scaleX: 0.3,
+                scaleY: 0.3
+              }
+            }
+          ]
+        }
+      ]
+    }
+  );
+});
 
 player.play(1);
 window.vstory = story;
@@ -401,62 +410,63 @@ const rect = {
     text: 'This is a rectangle',
     textBaseline: 'middle',
     textAlign: 'center',
-    fill: 'white',
+    fill: 'white'
   }
 };
 
-const characterList = [
-  { type: 'Rect', options: rect, effect: 'fade' },
-]
+const characterList = [{ type: 'Rect', options: rect, effect: 'fade' }];
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
 characterList.forEach((item, index) => {
-  story.addCharacter({
-    type: item.type,
-    id: `${item.type}-${index}`,
-    zIndex: 1,
-    position: {
-      top: 50 + Math.floor(index / 2) * 150,
-      left: 50 + Math.floor(index % 2) * 150,
-      width: 100,
-      height: 100
-    },
-    options: item.options
-  }, {
-    sceneId: 'defaultScene',
-    actions: [
-      {
-        action: 'appear',
-        startTime: 1000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
-            }
-          }
-        ]
+  story.addCharacter(
+    {
+      type: item.type,
+      id: `${item.type}-${index}`,
+      zIndex: 1,
+      position: {
+        top: 50 + Math.floor(index / 2) * 150,
+        left: 50 + Math.floor(index % 2) * 150,
+        width: 100,
+        height: 100
       },
-      {
-        action: 'bounce',
-        startTime: 2000,
-        payload: [
-          {
-            animation: {
-              duration: 1000,
-              easing: 'linear',
-              effect: item.effect
-            },
-          }
-        ]
-      }
-    ]
-  });
-})
+      options: item.options
+    },
+    {
+      sceneId: 'defaultScene',
+      actions: [
+        {
+          action: 'appear',
+          startTime: 1000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
+            }
+          ]
+        },
+        {
+          action: 'bounce',
+          startTime: 2000,
+          payload: [
+            {
+              animation: {
+                duration: 1000,
+                easing: 'linear',
+                effect: item.effect
+              }
+            }
+          ]
+        }
+      ]
+    }
+  );
+});
 
 player.play(1);
 window.vstory = story;
@@ -469,71 +479,74 @@ window['vstory'] = story;
 Above, we introduced some basic `action` content. Due to the complexity of `VChart` content, we have designed a more complex syntax to support its special `Appear` or `DisAppear` effects. For example, in a chart, we want bars to have a `leap` animation while others use default animations. In this case, we need to use `selector` to select the bars that need special animations and configure them with specific animations. We have also designed default `Appear` animations for `VChart`, where each series and component will execute its own `Appear` animation.
 
 Selector is a chart filter, where you can configure several formats:
+
 - `*`: Select all components
 - `def`: Select components with type `abc`, e.g., `bar`
 - `#abc`: Select elements with name `abc`, e.g., `#abc`
 - `:not(selector)`: Select elements other than the selector, where the selector can be `type` or `name`
-Multiple selectors can be configured in the same string, separated by spaces, e.g., `def #abc`, which means selecting components of type `def` and elements with name `abc`.
+  Multiple selectors can be configured in the same string, separated by spaces, e.g., `def #abc`, which means selecting components of type `def` and elements with name `abc`.
 
 ```ts
 // Items in the same payload array of the same Action have a covering relationship, with later items overriding earlier ones
 // Payloads of different Actions are parallel to each other
 [
-    {
-      action: 'appear',
-      startTime: 10, // start time
-      payload: [
-          {
-            selector: '*',
-            style: {},
-            animation: {
-              duration: 10000,
-              easing: 'linear'
-            } as any
-          },
-          {
-            selector: ':not(label)',
-            style: {},
-            animation: {
-              duration: 10000,
-              easing: 'linear'
-            } as any
-          },
-          {
-            selector: 'x-axes',
-            style: {},
-            animation: {
-              duration: 10000,
-              easing: 'linear'
-            } as any
-          },
-          {
-            selector: '#label1',
-            style: {},
-            animation: {
-              duration: 10000,
-              easing: 'linear'
-            } as any
-          }
-      ]
-    },
-    {
-      action: 'appear',
-      startTime: 100, // start time
-      payload: [
-          {
-            selector: '*', // selector 0
-            style: {},
-            animation: {
-              duration: 10000,
-              easing: 'linear'
-            } as any
-          }
-      ]
-    }
-]
+  {
+    action: 'appear',
+    startTime: 10, // start time
+    payload: [
+      {
+        selector: '*',
+        style: {},
+        animation: {
+          duration: 10000,
+          easing: 'linear'
+        } as any
+      },
+      {
+        selector: ':not(label)',
+        style: {},
+        animation: {
+          duration: 10000,
+          easing: 'linear'
+        } as any
+      },
+      {
+        selector: 'x-axes',
+        style: {},
+        animation: {
+          duration: 10000,
+          easing: 'linear'
+        } as any
+      },
+      {
+        selector: '#label1',
+        style: {},
+        animation: {
+          duration: 10000,
+          easing: 'linear'
+        } as any
+      }
+    ]
+  },
+  {
+    action: 'appear',
+    startTime: 100, // start time
+    payload: [
+      {
+        selector: '*', // selector 0
+        style: {},
+        animation: {
+          duration: 10000,
+          easing: 'linear'
+        } as any
+      }
+    ]
+  }
+];
 ```
+
 Here is an example where bars use the `leap` animation and other components use default animations:
+
 ```javascript livedemo template=vchart
 // Register all necessary content
 VStory.registerAll();
@@ -602,7 +615,7 @@ const dsl = {
                       animation: { duration: 3000, effect: 'barLeap', oneByOne: true, dimensionCount: 5 }
                     }
                   ]
-                },
+                }
               ]
             }
           ]
@@ -610,9 +623,9 @@ const dsl = {
       ]
     }
   ]
-}
+};
 
-const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
