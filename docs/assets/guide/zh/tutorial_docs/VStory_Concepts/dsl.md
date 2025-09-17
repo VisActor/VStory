@@ -259,7 +259,7 @@ const characterList = [
   { type: 'Line', options: line, effect: 'clipRange' }
 ];
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
