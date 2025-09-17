@@ -6,6 +6,7 @@ import type { IAABBBounds, IBoundsLike } from '@visactor/vutils';
 import { Bounds, pointInAABB, transformBoundsWithMatrix } from '@visactor/vutils';
 import { mergeChartOption } from '../../../utils/chart';
 import { isBoundsLikeEqual } from '../../../utils/equal';
+import type { IMorphConfig } from '@visactor/vchart-types/types/animation/spec';
 
 export interface IChartGraphicAttribute {
   renderCanvas: HTMLCanvasElement;
@@ -33,6 +34,7 @@ export interface IChartGraphicAttribute {
   zIndex?: number;
   panel?: Partial<IRectGraphicAttribute>;
   vchartBoundsMode?: 'clip' | 'auto';
+  updateSpecMorphConfig?: IMorphConfig;
 }
 
 export const CHART_NUMBER_TYPE = genNumberType();
@@ -189,7 +191,12 @@ export class VChartGraphic extends Rect {
       this.updateVChartGraphicViewBox(attrs.viewBox);
     }
     if (attrs.spec) {
-      this._vchart.updateSpecSync(attrs.spec, false, {}, { reMake: true, change: true });
+      this._vchart.updateSpecSync(
+        attrs.spec,
+        false,
+        { ...(this.attribute.updateSpecMorphConfig ?? {}) },
+        { reMake: true, change: true }
+      );
     }
   }
 

@@ -2,6 +2,7 @@ import type { ITextGraphicAttribute } from '@visactor/vrender-core';
 import type { ChartSpecMap, IInitOption, IMarkAreaSpec, IMarkLineSpec, IMarkPointSpec, ISpec } from '@visactor/vchart';
 import type { ICharacterConfigBase } from './dsl';
 import type { IFormatConfig } from './common';
+import type { IMorphConfig } from '@visactor/vchart-types/types/animation/spec';
 
 export const StroyAllDataGroup = '_STORY_ALL_DATA_GROUP';
 
@@ -43,6 +44,10 @@ export interface IChartCharacterInitOption {
   vchartBoundsMode?: 'clip' | 'auto';
 }
 
+export interface IUpdateSpecMorphConfig {
+  updateSpecMorphConfig?: IMorphConfig;
+}
+
 // 模块选择器
 // number => model.getSpecIndex(); 模块的 specIndex
 // * => chart.getAllModelInType(); 所有模块
@@ -80,7 +85,7 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     /**
      * 初始化参数
      */
-    initOption?: IInitOption & IChartCharacterInitOption;
+    initOption?: IInitOption & IChartCharacterInitOption & IUpdateSpecMorphConfig;
     /**
      * 边距
      */
