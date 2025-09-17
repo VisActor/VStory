@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@microsoft/rush": "^5.148.0",
     "number-flip": "^1.2.3"
   }
 }
