@@ -1,9 +1,10 @@
-import { array, isArray, isString, isValid, merge } from '@visactor/vutils';
-import type { IChart } from '@visactor/vchart/esm/chart/interface';
-import type { ICartesianSeries, ISeries } from '@visactor/vchart';
+import { isArray, isString, isValid, merge } from '@visactor/vutils';
+import type { IChart } from '@visactor/vchart-types/types/chart/interface';
+import type { ICartesianSeries } from '@visactor/vchart-types/types/series';
+import type { ISeries } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
 import { VCHART_DATA_INDEX, ValueLink, FieldLink, lineSymbolPathMap, LineSymbolType } from './const';
-import type { IChartCharacterConfig, IComponentMatch, IMarkStyle } from '../../../interface/dsl/chart';
+import type { IChartCharacterConfig, IComponentMatch, IDatumMatch, IMarkStyle } from '../../../interface/dsl/chart';
 
 export function GetVChartSeriesWithMatch(vchart: IChart, seriesMatch: IComponentMatch & { type: string }) {
   if (!isValid(seriesMatch.specIndex) && seriesMatch.type) {
@@ -36,13 +37,13 @@ export function getSeriesKeyScalesMap(series: ISeries) {
   let axisHelper: any;
   let fields: string[];
   const map: { [key: string]: any } = {};
-  if ((<ICartesianSeries>series).direction) {
-    if ((<ICartesianSeries>series).direction === 'vertical') {
-      axisHelper = (<ICartesianSeries>series).getXAxisHelper();
-      fields = (<ICartesianSeries>series).fieldX;
+  if ((<ICartesianSeries>(<unknown>series)).direction) {
+    if ((<ICartesianSeries>(<unknown>series)).direction === 'vertical') {
+      axisHelper = (<ICartesianSeries>(<unknown>series)).getXAxisHelper();
+      fields = (<ICartesianSeries>(<unknown>series)).fieldX;
     } else {
-      axisHelper = (<ICartesianSeries>series).getYAxisHelper();
-      fields = (<ICartesianSeries>series).fieldY;
+      axisHelper = (<ICartesianSeries>(<unknown>series)).getYAxisHelper();
+      fields = (<ICartesianSeries>(<unknown>series)).fieldY;
     }
     if (axisHelper?.getScale) {
       fields.forEach((f, i) => {
@@ -65,7 +66,7 @@ export function getSeriesKeyScalesMap(series: ISeries) {
 
 export function matchDatumWithScaleMap(
   keys: string[],
-  keyValueMap: { [key: string]: number },
+  keyValueMap: { [key: string]: IDatumMatch },
   scaleMap: { [key: string]: any } = {},
   datum: any
 ) {
@@ -73,14 +74,26 @@ export function matchDatumWithScaleMap(
     datum = datum[0];
   }
   return keys.every(key => {
-    const scale = scaleMap[key];
-    if (!scale) {
-      return keyValueMap[key] === datum[key];
+    // 首先使用 value 匹配
+    if (isValid(keyValueMap[key].value)) {
+      if (keyValueMap[key].value === datum[key]) {
+        return true;
+      }
     }
+    const scale = scaleMap[key];
+    // 如果没有scale 直接使用 value 匹配一次
+    if (!scale) {
+      return keyValueMap[key].value === datum[key];
+    }
+    // 连续 scale 数据 index 匹配
     if (isContinuous(scale.type)) {
       return keyValueMap[VCHART_DATA_INDEX] === datum[VCHART_DATA_INDEX];
     }
-    return keyValueMap[key] === scale._index.get(`${datum[key]}`);
+    // 离散 scale 维度序号匹配
+    if (isValid(keyValueMap[key].scaleIndex)) {
+      return keyValueMap[key].scaleIndex === scale._index.get(`${datum[key]}`);
+    }
+    return false;
   });
 }
 

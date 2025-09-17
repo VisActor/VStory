@@ -1,0 +1,3653 @@
+{
+  "characters": [
+    {
+      "id": "array2111922586",
+      "type": "VChart",
+      "zIndex": 1,
+      "position": {
+        "top": 0,
+        "left": 0,
+        "width": 960,
+        "height": 600
+      },
+      "options": {
+        "panel": {
+          "fill": "#ffffff",
+          "shadowColor": "rgba(0, 0, 0, 0.05)",
+          "shadowBlur": 10,
+          "shadowOffsetX": 4,
+          "shadowOffsetY": 4,
+          "cornerRadius": 8
+        },
+        "spec": {
+          "data": [
+            {
+              "id": "array-bar-array2111922586",
+              "values": [
+                {
+                  "key": "10-0",
+                  "value": 10
+                },
+                {
+                  "key": "9-1",
+                  "value": 9
+                },
+                {
+                  "key": "8-2",
+                  "value": 8
+                },
+                {
+                  "key": "7-3",
+                  "value": 7
+                },
+                {
+                  "key": "5-4",
+                  "value": 5
+                },
+                {
+                  "key": "3-5",
+                  "value": 3
+                },
+                {
+                  "key": "8-6",
+                  "value": 8
+                },
+                {
+                  "key": "4-7",
+                  "value": 4
+                },
+                {
+                  "key": "2-8",
+                  "value": 2
+                },
+                {
+                  "key": "1-9",
+                  "value": 1
+                },
+                {
+                  "key": "2-10",
+                  "value": 2
+                },
+                {
+                  "key": "4-11",
+                  "value": 4
+                }
+              ]
+            }
+          ],
+          "dataKey": "key",
+          "axes": [
+            {
+              "orient": "bottom",
+              "type": "band",
+              "label": {
+                "visible": false
+              }
+            },
+            {
+              "orient": "left",
+              "type": "linear",
+              "visible": true,
+              "zero": true,
+              "max": 10,
+              "nice": true
+            }
+          ],
+          "type": "bar",
+          "xField": "key",
+          "yField": "value",
+          "label": {
+            "visible": true,
+            "smartInvert": true,
+            "offset": -20,
+            "position": "inside-bottom",
+            "overlap": {
+              "clampForce": false
+            },
+            "style": {
+              "fontSize": 14
+            }
+          },
+          "animation": true,
+          "animationAppear": false
+        }
+      }
+    }
+  ],
+  "acts": [
+    {
+      "id": "default-chapter",
+      "scenes": [
+        {
+          "id": "scene",
+          "actions": [
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "appear",
+                  "startTime": 0,
+                  "payload": {
+                    "animation": {
+                      "duration": 500
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 1000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 1500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 2000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 2500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 3000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 3500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 4000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 4500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 5000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 5500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 6000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 6500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 7000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 7500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 8000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 8500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 9000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 9500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 10000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 10500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 11000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 11500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 12000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 12500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 13000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 13500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 14000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 14500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 15000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 15500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 16000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 16500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 17000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 17500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 18000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 18500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 19000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 19500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 20000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 20500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 21000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 21500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 22000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 22500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 23000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 23500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 24000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 24500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 25000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 25500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 26000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 26500,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "characterId": "array2111922586",
+              "characterActions": [
+                {
+                  "action": "update",
+                  "startTime": 27000,
+                  "payload": {
+                    "id": "array-bar-array2111922586",
+                    "animation": {
+                      "duration": 500
+                    },
+                    "values": [
+                      {
+                        "key": "1-9",
+                        "value": 1
+                      },
+                      {
+                        "key": "2-8",
+                        "value": 2
+                      },
+                      {
+                        "key": "2-10",
+                        "value": 2
+                      },
+                      {
+                        "key": "3-5",
+                        "value": 3
+                      },
+                      {
+                        "key": "4-7",
+                        "value": 4
+                      },
+                      {
+                        "key": "4-11",
+                        "value": 4
+                      },
+                      {
+                        "key": "5-4",
+                        "value": 5
+                      },
+                      {
+                        "key": "7-3",
+                        "value": 7
+                      },
+                      {
+                        "key": "8-2",
+                        "value": 8
+                      },
+                      {
+                        "key": "8-6",
+                        "value": 8
+                      },
+                      {
+                        "key": "9-1",
+                        "value": 9
+                      },
+                      {
+                        "key": "10-0",
+                        "value": 10
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

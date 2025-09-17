@@ -1,5 +1,5 @@
 import type { ICanvasLike, IGraphic, ILayer, IStage } from '@visactor/vrender-core';
-import { createStage, ManualTicker, vglobal } from '@visactor/vrender-core';
+import { createStage, vglobal, ManualTicker } from '@visactor/vrender';
 import type { IStoryCanvas } from '../interface/canvas';
 import type { IStory } from '../interface/story';
 import type { IStoryEvent } from '../interface/event';
@@ -26,6 +26,8 @@ export class StoryCanvas implements IStoryCanvas {
     return this._container;
   }
 
+  protected _layerClip: boolean = true;
+
   constructor(
     story: IStory,
     params: {
@@ -39,11 +41,14 @@ export class StoryCanvas implements IStoryCanvas {
       layerViewBox?: IAABBBoundsLike;
       scaleX?: number | 'auto';
       scaleY?: number | 'auto';
+      pluginList?: string[];
+      layerClip?: boolean;
     }
   ) {
     this._story = story;
     this._container = params.container;
     this._canvas = params.canvas as any;
+    this._layerClip = params.layerClip ?? true;
 
     const {
       canvas,
@@ -51,15 +56,16 @@ export class StoryCanvas implements IStoryCanvas {
       height: _h,
       background = 'transparent',
       layerBackground = 'transparent',
-      dpr = vglobal.devicePixelRatio,
+      dpr = params.dpr ?? vglobal.devicePixelRatio,
       layerViewBox,
       scaleX: _sx = 1,
-      scaleY: _sy = 1
+      scaleY: _sy = 1,
+      pluginList = params.pluginList ?? []
     } = params;
     const { scaleX, scaleY, width, height } = this.getScale(_w, _h, _sx, _sy);
 
-    this._container && this._initCanvasByContainer(width, height, dpr, background);
-    params.canvas && this._initCanvasByCanvas(canvas, width ?? 500, height ?? 500, dpr, background);
+    this._container && this._initCanvasByContainer(width, height, dpr, background, pluginList);
+    params.canvas && this._initCanvasByCanvas(canvas, width ?? 500, height ?? 500, dpr, background, pluginList);
 
     // this._stage.background = background;
     this._stage.defaultLayer.setAttributes({ background: layerBackground });
@@ -69,12 +75,18 @@ export class StoryCanvas implements IStoryCanvas {
       y: viewBox.y1,
       width: (viewBox.x2 - viewBox.x1) / scaleX,
       height: (viewBox.y2 - viewBox.y1) / scaleY,
-      clip: true
+      clip: this._layerClip
     });
     this._stage.defaultLayer.scale(scaleX, scaleY);
   }
 
-  protected _initCanvasByContainer(width: number, height: number, dpr: number, background: string) {
+  protected _initCanvasByContainer(
+    width: number,
+    height: number,
+    dpr: number,
+    background: string,
+    pluginList: string[]
+  ) {
     const container = this._container;
     if (!container) {
       return;
@@ -89,7 +101,8 @@ export class StoryCanvas implements IStoryCanvas {
       width ?? container.clientWidth,
       height ?? container.clientHeight,
       dpr,
-      background
+      background,
+      pluginList
     );
     // @ts-ignore
     this._stage = stage;
@@ -100,15 +113,23 @@ export class StoryCanvas implements IStoryCanvas {
     width: number,
     height: number,
     dpr: number,
-    background: string
+    background: string,
+    pluginList: string[]
   ) {
-    const stage = this._initCanvas(canvas, width, height, dpr, background);
+    const stage = this._initCanvas(canvas, width, height, dpr, background, pluginList);
     this._canvas = canvas as any;
     // @ts-ignore
     this._stage = stage;
   }
 
-  protected _initCanvas(canvas: HTMLCanvasElement, width: number, height: number, dpr: number, background: string) {
+  protected _initCanvas(
+    canvas: HTMLCanvasElement,
+    width: number,
+    height: number,
+    dpr: number,
+    background: string,
+    pluginList: string[]
+  ) {
     const stage = createStage({
       canvas: canvas,
       width,
@@ -120,7 +141,7 @@ export class StoryCanvas implements IStoryCanvas {
       autoRender: false,
       disableDirtyBounds: true,
       ticker: new ManualTicker([]),
-      pluginList: ['RichTextEditPlugin'],
+      pluginList: pluginList ?? ['RichTextEditPlugin'],
       event: {
         clickInterval: 300
       }
@@ -199,7 +220,7 @@ export class StoryCanvas implements IStoryCanvas {
       y: viewBox.y1,
       width: viewBox.x2 - viewBox.x1,
       height: viewBox.y2 - viewBox.y1,
-      clip: true
+      clip: this._layerClip
     });
   }
 

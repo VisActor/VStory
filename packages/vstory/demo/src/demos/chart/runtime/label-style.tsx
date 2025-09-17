@@ -461,8 +461,8 @@ function loadDSL() {
               seriesMatch: { type: 'bar' },
               itemKeys: ['_editor_dimension_field', '_editor_type_field'],
               itemKeyMap: {
-                _editor_dimension_field: 1,
-                _editor_type_field: 2
+                _editor_dimension_field: { scaleIndex: 1 },
+                _editor_type_field: { scaleIndex: 2 }
               },
               style: {
                 fill: 'red'
@@ -559,8 +559,8 @@ export const RuntimeLabelStyle = () => {
     // @ts-ignore
     window.player = player;
     const dsl = loadDSL();
-    // story.load(dsl);
-    story.addCharacter(dsl.characters[0]);
+    story.load(dsl);
+    // story.addCharacter(dsl.characters[0]);
     player.play(-1);
 
     const chart0 = story.getCharacterById('chart0');

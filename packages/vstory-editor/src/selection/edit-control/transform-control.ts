@@ -21,7 +21,6 @@ import { DRAG_ANCHOR_COLOR, SHAPE_SELECT_COLOR, MinSize } from './constants';
 import { DragComponent } from './transform-drag';
 import { transformDeltaWithStage, transformPointWithStage } from '../../utils/transform';
 import type { IEditSelection, VRenderPointerEvent } from '../../interface';
-import { min } from '@visactor/vchart/esm/util';
 import type { ILayoutLine } from '@visactor/vstory-core';
 
 const i = 0;

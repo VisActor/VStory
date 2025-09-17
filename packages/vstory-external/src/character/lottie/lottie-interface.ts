@@ -1,5 +1,5 @@
 import type { IGroupGraphicAttribute, IRichTextAttribute, ITextGraphicAttribute } from '@visactor/vrender-core';
-import type { ILottieGraphicAttribute } from '@visactor/vrender-kits/es/graphic/interface/lottie';
+import type { ILottieGraphicAttribute } from '@visactor/vrender-kits';
 import type { ICharacter, IComponentCharacterConfig } from '@visactor/vstory-core';
 
 // graphic 配置

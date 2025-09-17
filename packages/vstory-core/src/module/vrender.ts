@@ -9,7 +9,8 @@ import {
   registerHtmlAttributePlugin,
   registerReactAttributePlugin,
   registerDirectionalLight,
-  registerOrthoCamera
+  registerOrthoCamera,
+  vglobal
 } from '@visactor/vrender-core';
 import { loadBrowserEnv, loadNodeEnv } from '@visactor/vrender-kits';
 import {
@@ -30,21 +31,27 @@ import {
   registerShadowRoot,
   registerSymbol,
   registerText,
-  registerWrapText
+  registerWrapText,
+  registerGifImage
 } from '@visactor/vrender-kits';
 
 let _registered = false;
-export function initVR() {
+export function initVR(
+  mode: 'browser' | 'node' = 'browser',
+  nodeParams?: { createCanvas: any; createImageData: any; loadImage: any; Resvg: any }
+) {
   if (_registered) {
     return;
   }
   _registered = true;
   preLoadAllModule();
 
-  if (isBrowserEnv()) {
+  if (mode === 'browser' && isBrowserEnv()) {
     loadBrowserEnv(container);
+    vglobal.setEnv('browser');
   } else if (isNodeEnv()) {
     loadNodeEnv(container);
+    vglobal.setEnv('node', nodeParams);
   }
   registerArc();
   registerArc3d();
@@ -64,6 +71,7 @@ export function initVR() {
   registerSymbol();
   registerText();
   registerWrapText();
+  registerGifImage();
 
   registerFlexLayoutPlugin();
   registerViewTransform3dPlugin();

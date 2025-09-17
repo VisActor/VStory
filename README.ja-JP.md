@@ -13,13 +13,13 @@
 
 <div align="center">
 
-VStoryは、VisActorの基盤機能を統合し、すぐに使えるデータナラティブソリューションを提供します。
+VStoryは、データで物語を語るためのインテリジェントなデータナラティブ開発フレームワークです。
 
 </div>
 
 <div align="center">
 
-[English](./README.md) | 简体中文 | 日本語
+[English](./README.md) | [简体中文](./README.zh-CN.md) | 日本語
 
 </div>
 
@@ -31,11 +31,11 @@ VStoryは、VisActorの基盤機能を統合し、すぐに使えるデータナ
 
 ## 概要
 
-VStoryは、VisActorの可視化システムにおけるチャートコンポーネントライブラリです。可視化チャートライブラリ[VChart](https://github.com/VisActor/VChart)、可視化文法ライブラリ[VGrammar](https://github.com/VisActor/VGrammar)、および可視化レンダリングエンジン[VRender](https://github.com/VisActor/VRender)に基づいてコンポーネントをカプセル化しています。主な機能は以下の通りです：
+VStoryは、VisActorの可視化システムにおけるナラティブ可視化開発フレームワークです。可視化チャートライブラリ[VChart](https://github.com/VisActor/VChart)、可視化文法ライブラリ[VGrammar](https://github.com/VisActor/VGrammar)、および可視化レンダリングエンジン[VRender](https://github.com/VisActor/VRender)に基づいてコンポーネントをカプセル化しています。主な機能は以下の通りです：
 
 1. **一つのコードで複数のプラットフォームに対応**：デスクトップ、H5、および複数の小プログラム環境に自動適応
 2. **ナラティブ指向**：注釈、アニメーション、プロセス制御、ナラティブテンプレートなどの一連の強化機能を総合的に適用してナラティブ可視化を作成
-3. **シーンの蓄積**：最終ユーザーに向けて可視化機能を蓄積し、開発者の生産性を解放
+3. **シーンの蓄積**：データダッシュボード、インフォグラフィック、データビデオ、データレポートなどのシーンに向けて、ナラティブ可視化機能を蓄積し、開発者の生産性を解放
 
 ## リポジトリの紹介
 
@@ -44,9 +44,9 @@ VStoryは、VisActorの可視化システムにおけるチャートコンポー
 1. [`vstory`](./packages/vstory/): コアパッケージ、VStoryエディター
 2. [`docs`](./docs/): VStoryサイトのソースコード、サイト上のすべての日本語および英語のドキュメント、サンプルコードなどを含む。
 
-## 🔨 使用方法
+## 🔨 デモ
 
-構築中...
+[デモ](https://www.visactor.io/vstory/example)
 
 ## ⌨️ 開発
 
@@ -88,10 +88,10 @@ $ rush start
 - [VGrammar](https://www.visactor.io/vgrammar)
 - [VRender](https://www.visactor.io/vrender)
 
-## 🤝 貢献 [](https://github.com/VisActor/VChart/blob/main/CONTRIBUTING.md#your-first-pull-request)
+## 🤝 貢献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/VisActor/VChart/blob/main/CONTRIBUTING.md#your-first-pull-request)
 
-貢献したい場合は、[行動規範](https://sophon-ai.bytedance.net/paas/CODE_OF_CONDUCT.md)および[貢献ガイドライン](https://sophon-ai.bytedance.net/paas/CONTRIBUTING.md)をお読みください。
+貢献したい場合は、[行動規範](./CODE_OF_CONDUCT.md)および[貢献ガイドライン](https://www.visactor.io/vstory/contributing/)をお読みください。
 
 小さな流れが川となり、最終的には海となる！
 
-<a href="https://github.com/visactor/vstory/graphs/contributors"></a>
+<a href="https://github.com/visactor/vstory/graphs/contributors"><img src="https://contrib.rocks/image?repo=visactor/vstory" /></a>

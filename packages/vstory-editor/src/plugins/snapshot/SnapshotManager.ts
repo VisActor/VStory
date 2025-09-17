@@ -1,5 +1,5 @@
 import { Generator, vglobal } from '@visactor/vrender-core';
-import type { IReleaseable } from '@visactor/vstory-core/es/interface/releaseable';
+import type { IReleaseable } from '@visactor/vstory-core';
 import { isArray } from '@visactor/vutils';
 
 type ICharacterSnapShotItem = {
