@@ -87,7 +87,7 @@ export class RankingBarPlayActionProcessor extends ActionProcessorItem {
     if (!vchartPlayer) {
       return;
     }
-    const vrenderPlayer = vchartPlayer.getVRenderComponents()[0] as BasePlayer<any>;
+    const vrenderPlayer = vchartPlayer.getVRenderComponents()[0] as unknown as BasePlayer<any>;
     if (!vrenderPlayer) {
       return;
     }

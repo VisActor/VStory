@@ -176,7 +176,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       return;
     }
     const axisGrid = vrenderComponents[1];
-    const axisOrient = (axis.attribute as AxisBaseAttributes)?.orient;
+    const axisOrient = (axis.attribute as unknown as AxisBaseAttributes)?.orient;
     if (axisOrient === 'angle' || axisOrient === 'radius') {
       this.polarAxisAppear(axis, axisGrid, action, payload, isRun);
     } else {
