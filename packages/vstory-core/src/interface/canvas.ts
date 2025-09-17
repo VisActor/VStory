@@ -5,7 +5,7 @@ import type { IReleaseable } from './releaseable';
 
 export interface IStoryCanvas extends IReleaseable {
   getStage: () => IStage;
-  resize: (w: number, h: number) => void;
+  resize: (w: number, h: number, scale?: { scaleX: number; scaleY: number }) => void;
   getEventDetail: (event: IStoryEvent) => {
     character: ICharacter;
     characterInfo: undefined;
