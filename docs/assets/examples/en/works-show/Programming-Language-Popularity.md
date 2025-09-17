@@ -1,6 +1,6 @@
 ---
 category: examples
-group: animate
+group: works-show
 title: programming-language-popularity
 keywords: programming-language-popularity, ranking-bar, timeline, pie-chart
 order: 1-1
@@ -12,11 +12,11 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/program-langua
 This example demonstrates how to use VStory to create an interactive visualization story of programming language popularity. It combines a timeline, dynamic ranking bar charts, and pie charts to vividly showcase the historical trends in programming language popularity.
 
 ## Code demonstration
+
 ```javascript livedemo template=vstory
 VStory.registerAll();
 
 async function loadDSL() {
-  
   const timelineData = {
     times: [
       { label: ['Fortran', '1957'], desc: '1957' },
@@ -28,7 +28,7 @@ async function loadDSL() {
       { label: ['C#', '2000'], desc: '2000' },
       { label: ['Visual Basic NET', '2002'], desc: '2002' },
       { label: ['PHP', '2004'], desc: '2004' },
-      { label: ['Swift', '2014'], desc: '2014' },
+      { label: ['Swift', '2014'], desc: '2014' }
     ],
     labelStyle: {
       fontSize: 16,
@@ -43,196 +43,194 @@ async function loadDSL() {
     }
   };
 
-  
   const dataJson = {
     data: [
-      { "Year": 2008, "Language": "Java", "Rank": 1 },
-      { "Year": 2008, "Language": "C", "Rank": 4 },
-      { "Year": 2008, "Language": "Python", "Rank": 7 },
-      { "Year": 2008, "Language": "C++", "Rank": 5 },
-      { "Year": 2008, "Language": "C#", "Rank": 6},
-      { "Year": 2008, "Language": "Visual Basic NET", "Rank": 8 },
-      { "Year": 2008, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2008, "Language": "PHP", "Rank": 3 },
-      { "Year": 2008, "Language": "Ruby", "Rank": 9 },
-      { "Year": 2008, "Language": "Perl", "Rank": 10 },
+      { Year: 2008, Language: 'Java', Rank: 1 },
+      { Year: 2008, Language: 'C', Rank: 4 },
+      { Year: 2008, Language: 'Python', Rank: 7 },
+      { Year: 2008, Language: 'C++', Rank: 5 },
+      { Year: 2008, Language: 'C#', Rank: 6 },
+      { Year: 2008, Language: 'Visual Basic NET', Rank: 8 },
+      { Year: 2008, Language: 'Javascript', Rank: 2 },
+      { Year: 2008, Language: 'PHP', Rank: 3 },
+      { Year: 2008, Language: 'Ruby', Rank: 9 },
+      { Year: 2008, Language: 'Perl', Rank: 10 },
 
-      { "Year": 2009, "Language": "Java", "Rank": 1 },
-      { "Year": 2009, "Language": "C", "Rank": 5 },
-      { "Year": 2009, "Language": "Python", "Rank": 6 },
-      { "Year": 2009, "Language": "C++", "Rank": 4 },
-      { "Year": 2009, "Language": "C#", "Rank":7 },
-      { "Year": 2009, "Language": "Visual Basic NET", "Rank": 8 },
-      { "Year": 2009, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2009, "Language": "PHP", "Rank": 3 },
-      { "Year": 2009, "Language": "Ruby", "Rank": 9 },
-      { "Year": 2009, "Language": "Matlab", "Rank": 10 },
+      { Year: 2009, Language: 'Java', Rank: 1 },
+      { Year: 2009, Language: 'C', Rank: 5 },
+      { Year: 2009, Language: 'Python', Rank: 6 },
+      { Year: 2009, Language: 'C++', Rank: 4 },
+      { Year: 2009, Language: 'C#', Rank: 7 },
+      { Year: 2009, Language: 'Visual Basic NET', Rank: 8 },
+      { Year: 2009, Language: 'Javascript', Rank: 2 },
+      { Year: 2009, Language: 'PHP', Rank: 3 },
+      { Year: 2009, Language: 'Ruby', Rank: 9 },
+      { Year: 2009, Language: 'Matlab', Rank: 10 },
 
-      { "Year": 2010, "Language": "Java", "Rank": 1 },
-      { "Year": 2010, "Language": "C", "Rank": 5 },
-      { "Year": 2010, "Language": "Python", "Rank": 6 },
-      { "Year": 2010, "Language": "C++", "Rank": 4 },
-      { "Year": 2010, "Language": "C#", "Rank": 5 },
-      { "Year": 2010, "Language": "Visual Basic NET", "Rank": 9 },
-      { "Year": 2010, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2010, "Language": "PHP", "Rank": 3 },
-      { "Year": 2010, "Language": "Ruby", "Rank": 10 },
-      { "Year": 2010, "Language": "Objective-C", "Rank": 8 },
+      { Year: 2010, Language: 'Java', Rank: 1 },
+      { Year: 2010, Language: 'C', Rank: 5 },
+      { Year: 2010, Language: 'Python', Rank: 6 },
+      { Year: 2010, Language: 'C++', Rank: 4 },
+      { Year: 2010, Language: 'C#', Rank: 5 },
+      { Year: 2010, Language: 'Visual Basic NET', Rank: 9 },
+      { Year: 2010, Language: 'Javascript', Rank: 2 },
+      { Year: 2010, Language: 'PHP', Rank: 3 },
+      { Year: 2010, Language: 'Ruby', Rank: 10 },
+      { Year: 2010, Language: 'Objective-C', Rank: 8 },
 
-      { "Year": 2011, "Language": "Java", "Rank": 1 },
-      { "Year": 2011, "Language": "C", "Rank": 7 },
-      { "Year": 2011, "Language": "Python", "Rank": 4 },
-      { "Year": 2011, "Language": "C++", "Rank": 6 },
-      { "Year": 2011, "Language": "C#", "Rank": 5 },
-      { "Year": 2011, "Language": "Matlab", "Rank": 10 },
-      { "Year": 2011, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2011, "Language": "PHP", "Rank": 3 },
-      { "Year": 2011, "Language": "Ruby", "Rank": 9 },
-      { "Year": 2011, "Language": "Objective-C", "Rank": 8 },
+      { Year: 2011, Language: 'Java', Rank: 1 },
+      { Year: 2011, Language: 'C', Rank: 7 },
+      { Year: 2011, Language: 'Python', Rank: 4 },
+      { Year: 2011, Language: 'C++', Rank: 6 },
+      { Year: 2011, Language: 'C#', Rank: 5 },
+      { Year: 2011, Language: 'Matlab', Rank: 10 },
+      { Year: 2011, Language: 'Javascript', Rank: 2 },
+      { Year: 2011, Language: 'PHP', Rank: 3 },
+      { Year: 2011, Language: 'Ruby', Rank: 9 },
+      { Year: 2011, Language: 'Objective-C', Rank: 8 },
 
-      { "Year": 2012, "Language": "Java", "Rank": 1 },
-      { "Year": 2012, "Language": "C", "Rank": 7 },
-      { "Year": 2012, "Language": "Python", "Rank": 5 },
-      { "Year": 2012, "Language": "C++", "Rank": 4 },
-      { "Year": 2012, "Language": "C#", "Rank": 6 },
-      { "Year": 2012, "Language": "Visual Basic NET", "Rank": 10 },
-      { "Year": 2012, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2012, "Language": "PHP", "Rank": 3 },
-      { "Year": 2012, "Language": "Ruby", "Rank": 9 },
-      { "Year": 2012, "Language": "Objective-C", "Rank": 8 },
+      { Year: 2012, Language: 'Java', Rank: 1 },
+      { Year: 2012, Language: 'C', Rank: 7 },
+      { Year: 2012, Language: 'Python', Rank: 5 },
+      { Year: 2012, Language: 'C++', Rank: 4 },
+      { Year: 2012, Language: 'C#', Rank: 6 },
+      { Year: 2012, Language: 'Visual Basic NET', Rank: 10 },
+      { Year: 2012, Language: 'Javascript', Rank: 2 },
+      { Year: 2012, Language: 'PHP', Rank: 3 },
+      { Year: 2012, Language: 'Ruby', Rank: 9 },
+      { Year: 2012, Language: 'Objective-C', Rank: 8 },
 
-      { "Year": 2013, "Language": "Java", "Rank": 1 },
-      { "Year": 2013, "Language": "C", "Rank": 8 },
-      { "Year": 2013, "Language": "Python", "Rank": 4 },
-      { "Year": 2013, "Language": "C++", "Rank": 6 },
-      { "Year": 2013, "Language": "C#", "Rank": 5 },
-      { "Year": 2013, "Language": "Matlab", "Rank": 10 },
-      { "Year": 2013, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2013, "Language": "PHP", "Rank": 3 },
-      { "Year": 2013, "Language": "Objective-C", "Rank": 7 },
-      { "Year": 2013, "Language": "Ruby", "Rank": 9 },
+      { Year: 2013, Language: 'Java', Rank: 1 },
+      { Year: 2013, Language: 'C', Rank: 8 },
+      { Year: 2013, Language: 'Python', Rank: 4 },
+      { Year: 2013, Language: 'C++', Rank: 6 },
+      { Year: 2013, Language: 'C#', Rank: 5 },
+      { Year: 2013, Language: 'Matlab', Rank: 10 },
+      { Year: 2013, Language: 'Javascript', Rank: 2 },
+      { Year: 2013, Language: 'PHP', Rank: 3 },
+      { Year: 2013, Language: 'Objective-C', Rank: 7 },
+      { Year: 2013, Language: 'Ruby', Rank: 9 },
 
-      { "Year": 2014, "Language": "Java", "Rank": 1 },
-      { "Year": 2014, "Language": "C", "Rank": 7 },
-      { "Year": 2014, "Language": "Python", "Rank": 3 },
-      { "Year": 2014, "Language": "C++", "Rank": 6 },
-      { "Year": 2014, "Language": "C#", "Rank": 5 },
-      { "Year": 2014, "Language": "R", "Rank": 10 },
-      { "Year": 2014, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2014, "Language": "PHP", "Rank": 4 },
-      { "Year": 2014, "Language": "Objective-C", "Rank": 8 },
-      { "Year": 2014, "Language": "Swift", "Rank": 9 },
+      { Year: 2014, Language: 'Java', Rank: 1 },
+      { Year: 2014, Language: 'C', Rank: 7 },
+      { Year: 2014, Language: 'Python', Rank: 3 },
+      { Year: 2014, Language: 'C++', Rank: 6 },
+      { Year: 2014, Language: 'C#', Rank: 5 },
+      { Year: 2014, Language: 'R', Rank: 10 },
+      { Year: 2014, Language: 'Javascript', Rank: 2 },
+      { Year: 2014, Language: 'PHP', Rank: 4 },
+      { Year: 2014, Language: 'Objective-C', Rank: 8 },
+      { Year: 2014, Language: 'Swift', Rank: 9 },
 
-      { "Year": 2015, "Language": "Java", "Rank": 1 },
-      { "Year": 2015, "Language": "C", "Rank": 7 },
-      { "Year": 2015, "Language": "Python", "Rank": 3 },
-      { "Year": 2015, "Language": "C++", "Rank": 6 },
-      { "Year": 2015, "Language": "C#", "Rank": 5 },
-      { "Year": 2015, "Language": "R", "Rank": 10 },
-      { "Year": 2015, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2015, "Language": "PHP", "Rank": 4 },
-      { "Year": 2015, "Language": "Swift", "Rank": 9 },
-      { "Year": 2015, "Language": "Objective-C", "Rank": 8 },
+      { Year: 2015, Language: 'Java', Rank: 1 },
+      { Year: 2015, Language: 'C', Rank: 7 },
+      { Year: 2015, Language: 'Python', Rank: 3 },
+      { Year: 2015, Language: 'C++', Rank: 6 },
+      { Year: 2015, Language: 'C#', Rank: 5 },
+      { Year: 2015, Language: 'R', Rank: 10 },
+      { Year: 2015, Language: 'Javascript', Rank: 2 },
+      { Year: 2015, Language: 'PHP', Rank: 4 },
+      { Year: 2015, Language: 'Swift', Rank: 9 },
+      { Year: 2015, Language: 'Objective-C', Rank: 8 },
 
-      { "Year": 2016, "Language": "Java", "Rank": 1 },
-      { "Year": 2016, "Language": "C", "Rank": 7 },
-      { "Year": 2016, "Language": "Python", "Rank": 3 },
-      { "Year": 2016, "Language": "C++", "Rank": 6 },
-      { "Year": 2016, "Language": "C#", "Rank": 5 },
-      { "Year": 2016, "Language": "R", "Rank": 9 },
-      { "Year": 2016, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2016, "Language": "PHP", "Rank": 4 },
-      { "Year": 2016, "Language": "Swift", "Rank": 10 },
-      { "Year": 2016, "Language": "Objective-C", "Rank": 8 },
+      { Year: 2016, Language: 'Java', Rank: 1 },
+      { Year: 2016, Language: 'C', Rank: 7 },
+      { Year: 2016, Language: 'Python', Rank: 3 },
+      { Year: 2016, Language: 'C++', Rank: 6 },
+      { Year: 2016, Language: 'C#', Rank: 5 },
+      { Year: 2016, Language: 'R', Rank: 9 },
+      { Year: 2016, Language: 'Javascript', Rank: 2 },
+      { Year: 2016, Language: 'PHP', Rank: 4 },
+      { Year: 2016, Language: 'Swift', Rank: 10 },
+      { Year: 2016, Language: 'Objective-C', Rank: 8 },
 
-      { "Year": 2017, "Language": "Java", "Rank": 1 },
-      { "Year": 2017, "Language": "C", "Rank": 7 },
-      { "Year": 2017, "Language": "Python", "Rank": 3 },
-      { "Year": 2017, "Language": "C++", "Rank": 6 },
-      { "Year": 2017, "Language": "C#", "Rank": 5 },
-      { "Year": 2017, "Language": "R", "Rank": 8 },
-      { "Year": 2017, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2017, "Language": "PHP", "Rank": 4 },
-      { "Year": 2017, "Language": "Swift", "Rank": 10 },
-      { "Year": 2017, "Language": " Objective-C", "Rank": 9 },
+      { Year: 2017, Language: 'Java', Rank: 1 },
+      { Year: 2017, Language: 'C', Rank: 7 },
+      { Year: 2017, Language: 'Python', Rank: 3 },
+      { Year: 2017, Language: 'C++', Rank: 6 },
+      { Year: 2017, Language: 'C#', Rank: 5 },
+      { Year: 2017, Language: 'R', Rank: 8 },
+      { Year: 2017, Language: 'Javascript', Rank: 2 },
+      { Year: 2017, Language: 'PHP', Rank: 4 },
+      { Year: 2017, Language: 'Swift', Rank: 10 },
+      { Year: 2017, Language: ' Objective-C', Rank: 9 },
 
-      { "Year": 2018, "Language": "Java", "Rank": 1 },
-      { "Year": 2018, "Language": "C", "Rank": 7 },
-      { "Year": 2018, "Language": "Python", "Rank": 3 },
-      { "Year": 2018, "Language": "C++", "Rank": 6 },
-      { "Year": 2018, "Language": "C#", "Rank": 5 },
-      { "Year": 2018, "Language": "R", "Rank": 8 },
-      { "Year": 2018, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2018, "Language": "PHP", "Rank": 4 },
-      { "Year": 2018, "Language": "Swift", "Rank": 10 },
-      { "Year": 2018, "Language": " Objective-C", "Rank": 9 },
+      { Year: 2018, Language: 'Java', Rank: 1 },
+      { Year: 2018, Language: 'C', Rank: 7 },
+      { Year: 2018, Language: 'Python', Rank: 3 },
+      { Year: 2018, Language: 'C++', Rank: 6 },
+      { Year: 2018, Language: 'C#', Rank: 5 },
+      { Year: 2018, Language: 'R', Rank: 8 },
+      { Year: 2018, Language: 'Javascript', Rank: 2 },
+      { Year: 2018, Language: 'PHP', Rank: 4 },
+      { Year: 2018, Language: 'Swift', Rank: 10 },
+      { Year: 2018, Language: ' Objective-C', Rank: 9 },
 
-      { "Year": 2019, "Language": "Java", "Rank": 3 },
-      { "Year": 2019, "Language": "C", "Rank": 7 },
-      { "Year": 2019, "Language": "Python", "Rank": 1 },
-      { "Year": 2019, "Language": "C++", "Rank": 6 },
-      { "Year": 2019, "Language": "C#", "Rank": 4 },
-      { "Year": 2019, "Language": "Objective-C", "Rank": 10 },
-      { "Year": 2019, "Language": "Javascript", "Rank": 2 },
-      { "Year": 2019, "Language": "PHP", "Rank": 5 },
-      { "Year": 2019, "Language": "Swift", "Rank": 9 },
-      { "Year": 2019, "Language": "R", "Rank": 8 },
+      { Year: 2019, Language: 'Java', Rank: 3 },
+      { Year: 2019, Language: 'C', Rank: 7 },
+      { Year: 2019, Language: 'Python', Rank: 1 },
+      { Year: 2019, Language: 'C++', Rank: 6 },
+      { Year: 2019, Language: 'C#', Rank: 4 },
+      { Year: 2019, Language: 'Objective-C', Rank: 10 },
+      { Year: 2019, Language: 'Javascript', Rank: 2 },
+      { Year: 2019, Language: 'PHP', Rank: 5 },
+      { Year: 2019, Language: 'Swift', Rank: 9 },
+      { Year: 2019, Language: 'R', Rank: 8 },
 
-      { "Year": 2020, "Language": "Java", "Rank": 1 },
-      { "Year": 2020, "Language": "C", "Rank": 2 },
-      { "Year": 2020, "Language": "Python", "Rank": 3 },
-      { "Year": 2020, "Language": "C++", "Rank": 4 },
-      { "Year": 2020, "Language": "C#", "Rank": 5 },
-      { "Year": 2020, "Language": "Visual Basic NET", "Rank": 6 },
-      { "Year": 2020, "Language": "Javascript", "Rank": 7 },
-      { "Year": 2020, "Language": "PHP", "Rank": 8 },
-      { "Year": 2020, "Language": "Swift", "Rank": 9 },
-      { "Year": 2020, "Language": "SQL", "Rank": 10 },
+      { Year: 2020, Language: 'Java', Rank: 1 },
+      { Year: 2020, Language: 'C', Rank: 2 },
+      { Year: 2020, Language: 'Python', Rank: 3 },
+      { Year: 2020, Language: 'C++', Rank: 4 },
+      { Year: 2020, Language: 'C#', Rank: 5 },
+      { Year: 2020, Language: 'Visual Basic NET', Rank: 6 },
+      { Year: 2020, Language: 'Javascript', Rank: 7 },
+      { Year: 2020, Language: 'PHP', Rank: 8 },
+      { Year: 2020, Language: 'Swift', Rank: 9 },
+      { Year: 2020, Language: 'SQL', Rank: 10 },
 
-      { "Year": 2021, "Language": "Python", "Rank": 1 },
-      { "Year": 2021, "Language": "Java", "Rank": 2 },
-      { "Year": 2021, "Language": "C", "Rank": 3 },
-      { "Year": 2021, "Language": "C++", "Rank": 4 },
-      { "Year": 2021, "Language": "Javascript", "Rank": 5 },
-      { "Year": 2021, "Language": "C#", "Rank": 6 },
-      { "Year": 2021, "Language": "R", "Rank": 7 },
-      { "Year": 2021, "Language": "Go", "Rank": 8 },
-      { "Year": 2021, "Language": "HTML", "Rank": 9 },
-      { "Year": 2021, "Language": "Swift", "Rank": 10 },
+      { Year: 2021, Language: 'Python', Rank: 1 },
+      { Year: 2021, Language: 'Java', Rank: 2 },
+      { Year: 2021, Language: 'C', Rank: 3 },
+      { Year: 2021, Language: 'C++', Rank: 4 },
+      { Year: 2021, Language: 'Javascript', Rank: 5 },
+      { Year: 2021, Language: 'C#', Rank: 6 },
+      { Year: 2021, Language: 'R', Rank: 7 },
+      { Year: 2021, Language: 'Go', Rank: 8 },
+      { Year: 2021, Language: 'HTML', Rank: 9 },
+      { Year: 2021, Language: 'Swift', Rank: 10 },
 
-      { "Year": 2022, "Language": "Python", "Rank": 1 },
-      { "Year": 2022, "Language": "Java", "Rank": 2 },
-      { "Year": 2022, "Language": "JavaScript", "Rank": 3 },
-      { "Year": 2022, "Language": "C", "Rank": 4 },
-      { "Year": 2022, "Language": "C++", "Rank": 5 },
-      { "Year": 2022, "Language": "PHP", "Rank": 6 },
-      { "Year": 2022, "Language": "Ruby", "Rank": 7 },
-      { "Year": 2022, "Language": "Swift", "Rank": 8 },
-      { "Year": 2022, "Language": "Go", "Rank": 9 },
-      { "Year": 2022, "Language": "R", "Rank": 10 },
+      { Year: 2022, Language: 'Python', Rank: 1 },
+      { Year: 2022, Language: 'Java', Rank: 2 },
+      { Year: 2022, Language: 'JavaScript', Rank: 3 },
+      { Year: 2022, Language: 'C', Rank: 4 },
+      { Year: 2022, Language: 'C++', Rank: 5 },
+      { Year: 2022, Language: 'PHP', Rank: 6 },
+      { Year: 2022, Language: 'Ruby', Rank: 7 },
+      { Year: 2022, Language: 'Swift', Rank: 8 },
+      { Year: 2022, Language: 'Go', Rank: 9 },
+      { Year: 2022, Language: 'R', Rank: 10 },
 
-      { "Year": 2023, "Language": "Python", "Rank": 1 },
-      { "Year": 2023, "Language": "Java", "Rank": 2 },
-      { "Year": 2023, "Language": "JavaScript", "Rank": 3 },
-      { "Year": 2023, "Language": "C", "Rank": 4 },
-      { "Year": 2023, "Language": "C++", "Rank": 5 },
-      { "Year": 2023, "Language": "PHP", "Rank": 6 },
-      { "Year": 2023, "Language": "Ruby", "Rank": 7 },
-      { "Year": 2023, "Language": "Swift", "Rank": 8 },
-      { "Year": 2023, "Language": "Go", "Rank": 9 },
-      { "Year": 2023, "Language": "R", "Rank": 10 },
+      { Year: 2023, Language: 'Python', Rank: 1 },
+      { Year: 2023, Language: 'Java', Rank: 2 },
+      { Year: 2023, Language: 'JavaScript', Rank: 3 },
+      { Year: 2023, Language: 'C', Rank: 4 },
+      { Year: 2023, Language: 'C++', Rank: 5 },
+      { Year: 2023, Language: 'PHP', Rank: 6 },
+      { Year: 2023, Language: 'Ruby', Rank: 7 },
+      { Year: 2023, Language: 'Swift', Rank: 8 },
+      { Year: 2023, Language: 'Go', Rank: 9 },
+      { Year: 2023, Language: 'R', Rank: 10 },
 
-      { "Year": 2024, "Language": "Python", "Rank": 1 },
-      { "Year": 2024, "Language": "Java", "Rank": 2 },
-      { "Year": 2024, "Language": "JavaScript", "Rank": 3 },
-      { "Year": 2024, "Language": "C", "Rank": 4 },
-      { "Year": 2024, "Language": "C++", "Rank": 5 },
-      { "Year": 2024, "Language": "PHP", "Rank": 6 },
-      { "Year": 2024, "Language": "Ruby", "Rank": 7 },
-      { "Year": 2024, "Language": "Swift", "Rank": 8 },
-      { "Year": 2024, "Language": "Go", "Rank": 9 },
-      { "Year": 2024, "Language": "R", "Rank": 10 },
-
+      { Year: 2024, Language: 'Python', Rank: 1 },
+      { Year: 2024, Language: 'Java', Rank: 2 },
+      { Year: 2024, Language: 'JavaScript', Rank: 3 },
+      { Year: 2024, Language: 'C', Rank: 4 },
+      { Year: 2024, Language: 'C++', Rank: 5 },
+      { Year: 2024, Language: 'PHP', Rank: 6 },
+      { Year: 2024, Language: 'Ruby', Rank: 7 },
+      { Year: 2024, Language: 'Swift', Rank: 8 },
+      { Year: 2024, Language: 'Go', Rank: 9 },
+      { Year: 2024, Language: 'R', Rank: 10 }
     ]
   };
 
@@ -240,7 +238,7 @@ async function loadDSL() {
   const languageImage = new Map();
   const allData = [];
 
-  dataJson.data.forEach((line) => {
+  dataJson.data.forEach(line => {
     const { Language, Rank, Year } = line;
     const language_year_data = { Year, Language, Rank };
     if (!yearsData.has(Year)) {
@@ -259,9 +257,9 @@ async function loadDSL() {
     timeField: 'Year',
     xField: 'Rank',
     yField: 'Language',
-    yAxis:{
-      label:{
-        fill:'black'
+    yAxis: {
+      label: {
+        fill: 'black'
       }
     },
     //icon: Object.fromEntries(languageImage),
@@ -274,12 +272,12 @@ async function loadDSL() {
       Ruby: '#CC342D',
       PHP: '#4F5B93',
       Swift: '#F05138',
-      Go: '#00ADD8',
+      Go: '#00ADD8'
     },
     timeLabel: {
       visible: true,
       style: {
-        fontSize: 60,
+        fontSize: 60
       }
     },
     nameLabel: {
@@ -295,10 +293,9 @@ async function loadDSL() {
     }
   };
 
-  
   const chartSpec = {
     type: 'pie',
-    
+
     data: [
       {
         values: [
@@ -312,8 +309,7 @@ async function loadDSL() {
     categoryField: 'language',
     title: {
       visible: true,
-      text: 'C Language Share',
-      
+      text: 'C Language Share'
     },
     legends: {
       visible: true,
@@ -321,19 +317,17 @@ async function loadDSL() {
     },
     label: {
       visible: true,
-      formatMethod: (text, datum) => `${datum.percentage}%`, 
+      formatMethod: (text, datum) => `${datum.percentage}%`,
       style: {
-      fill: 'white', 
-      fontSize: 14, 
-      fontWeight: 'bold' 
-      },
+        fill: 'white',
+        fontSize: 14,
+        fontWeight: 'bold'
+      }
     }
   };
 
   return {
     characters: [
-
-      
       {
         type: 'Timeline',
         id: 'timeline',
@@ -342,13 +336,13 @@ async function loadDSL() {
           top: 90,
           left: 0,
           width: 1100,
-          height: 100,
+          height: 100
         },
         options: {
-          graphic: timelineData,
+          graphic: timelineData
         }
       },
-      
+
       {
         type: 'RankingBar',
         id: 'bar',
@@ -369,16 +363,16 @@ async function loadDSL() {
             shadowOffsetY: 4,
             cornerRadius: 8
           }
-        },
+        }
       },
-      
+
       {
         type: 'Text',
         id: 'title',
         zIndex: 11,
         position: {
           top: 20,
-          left: 500,
+          left: 500
         },
         options: {
           graphic: {
@@ -389,14 +383,14 @@ async function loadDSL() {
           }
         }
       },
-      
+
       {
         type: 'Text',
         id: 'wenben',
         zIndex: 11,
         position: {
           top: 170,
-          left: 850,
+          left: 850
         },
         options: {
           graphic: {
@@ -413,10 +407,10 @@ async function loadDSL() {
         id: 'fuwenben',
         zIndex: 11,
         position: {
-          top:200,
+          top: 200,
           left: 835,
-          width:426,
-          height:0,
+          width: 426,
+          height: 0
         },
         options: {
           graphic: {
@@ -425,34 +419,34 @@ async function loadDSL() {
           }
         }
       },
-      
+
       {
         type: 'Text',
         id: 'fufwenben',
         zIndex: 11,
-        startTime:10000,
+        startTime: 10000,
         position: {
           top: 315,
           left: 850,
-          width:302,
-          height:0,
+          width: 302,
+          height: 0
         },
         options: {
           graphic: {
             text: '',
-            fontWeight:'bold',
+            fontWeight: 'bold',
             fill: '#333'
           }
         }
       },
-      
+
       {
         type: 'VChart',
         id: 'cPieChart',
         zIndex: 10,
         position: {
           top: 297,
-          left: 700, 
+          left: 700,
           width: 300,
           height: 280
         },
@@ -466,10 +460,8 @@ async function loadDSL() {
             shadowOffsetY: 4,
             cornerRadius: 8
           }
-          
         }
       }
-
     ],
     acts: [
       {
@@ -478,7 +470,6 @@ async function loadDSL() {
           {
             id: 'scene0',
             actions: [
-              
               {
                 characterId: 'timeline',
                 characterActions: [
@@ -492,7 +483,7 @@ async function loadDSL() {
                       }
                     }
                   },
-                  ...(new Array(timelineData.times.length+1).fill(0).map((item, index) => {
+                  ...new Array(timelineData.times.length + 1).fill(0).map((item, index) => {
                     return {
                       startTime: 3000 + index * 3100,
                       action: 'state',
@@ -503,7 +494,7 @@ async function loadDSL() {
                         }
                       }
                     };
-                  }))
+                  })
                 ]
               },
 
@@ -517,13 +508,14 @@ async function loadDSL() {
                   {
                     action: 'bounce',
                     payload: {
-                      customEase: 'M0,0 C0,0 0,0 0.047,0 0.047,0 0.103,1 0.236,1 0.368,1 0.424,0 0.424,0 0.424,0 0.443,0 0.443,0 0.443,0 0.471,0.49 0.553,0.49 0.619,0.49 0.668,0 0.668,0 0.668,0 0.677,0 0.677,0 0.677,0 0.699,0.216 0.743,0.216 0.778,0.216 0.811,0 0.811,0 0.811,0 0.815,0 0.815,0 0.815,0 0.828,0.086 0.854,0.086 0.875,0.086 0.895,0 0.895,0 0.895,0 0.896,0 0.896,0 0.896,0 0.904,0.031 0.92,0.031 0.932,0.031 0.944,0 0.944,0 0.944,0 0.944,0 0.944,0 0.944,0 0.948,0.01 0.958,0.01 0.966,0.01 0.973,0 0.973,0 0.973,0 0.973,0 0.973,0 0.973,0 0.975,0.002 0.981,0.002 0.986,0.002 0.989,0 0.989,0 0.989,0 0.99,0 0.99,0 0.99,0 0.99,0 0.994,0 0.998,0 1,0 1,0',
+                      customEase:
+                        'M0,0 C0,0 0,0 0.047,0 0.047,0 0.103,1 0.236,1 0.368,1 0.424,0 0.424,0 0.424,0 0.443,0 0.443,0 0.443,0 0.471,0.49 0.553,0.49 0.619,0.49 0.668,0 0.668,0 0.668,0 0.677,0 0.677,0 0.677,0 0.699,0.216 0.743,0.216 0.778,0.216 0.811,0 0.811,0 0.811,0 0.815,0 0.815,0 0.815,0 0.828,0.086 0.854,0.086 0.875,0.086 0.895,0 0.895,0 0.895,0 0.896,0 0.896,0 0.896,0 0.904,0.031 0.92,0.031 0.932,0.031 0.944,0 0.944,0 0.944,0 0.944,0 0.944,0 0.944,0 0.948,0.01 0.958,0.01 0.966,0.01 0.973,0 0.973,0 0.973,0 0.973,0 0.973,0 0.973,0 0.975,0.002 0.981,0.002 0.986,0.002 0.989,0 0.989,0 0.989,0 0.99,0 0.99,0 0.99,0 0.99,0 0.994,0 0.998,0 1,0 1,0',
                       animation: { duration: 2000 }
                     }
                   }
                 ]
               },
-              
+
               {
                 characterId: 'title',
                 characterActions: [
@@ -533,7 +525,7 @@ async function loadDSL() {
                   }
                 ]
               },
-              
+
               {
                 characterId: 'wenben',
                 characterActions: [
@@ -543,7 +535,7 @@ async function loadDSL() {
                   }
                 ]
               },
-              
+
               {
                 characterId: 'fuwenben',
                 characterActions: [
@@ -554,7 +546,6 @@ async function loadDSL() {
                 ]
               },
 
-
               {
                 characterId: 'fufwenben',
                 characterActions: [
@@ -564,20 +555,19 @@ async function loadDSL() {
                   }
                 ]
               },
-              
+
               {
                 characterId: 'cPieChart',
                 characterActions: [
                   {
-                    startTime:10000,
+                    startTime: 10000,
                     action: 'appear',
                     payload: { animation: { duration: 1000, effect: 'fade' } }
                   }
                 ]
-              },
-
+              }
             ]
-          },
+          }
         ]
       }
     ]
@@ -592,7 +582,7 @@ const story = new VStory.Story(dsl, {
   height: 600,
   scaleX: 'auto',
   scaleY: 'auto',
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
 });
 const player = new VStory.Player(story);
 story.init(player);
