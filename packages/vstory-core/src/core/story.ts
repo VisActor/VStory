@@ -79,7 +79,7 @@ export class Story extends EventEmitter implements IStory {
     this._theme = theme;
     this.pluginService = new DefaultPluginService();
     this.pluginService.active(this, {
-      pluginList
+      pluginList: []
     });
   }
 
