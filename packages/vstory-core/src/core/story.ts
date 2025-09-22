@@ -78,9 +78,11 @@ export class Story extends EventEmitter implements IStory {
     this._dsl = dsl;
     this._theme = theme;
     this.pluginService = new DefaultPluginService();
-    this.pluginService.active(this, {
-      pluginList
-    });
+    if (pluginList.length > 0) {
+      this.pluginService.active(this, {
+        pluginList: pluginList.map(name => this.pluginService.findPluginsByName(name)).flat()
+      });
+    }
   }
 
   init(player: IPlayer) {
