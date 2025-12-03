@@ -1,8 +1,10 @@
+import { AttributeLevel } from '@visactor/vchart';
+
 // vchart 内置的数据序号
 export const VCHART_DATA_INDEX = '__VCHART_DEFAULT_DATA_INDEX';
 
-export const EDITOR_SERIES_MARK_STYLE_LEVEL = 90;
-export const EDITOR_SERIES_MARK_SINGLE_LEVEL = 100;
+export const EDITOR_SERIES_MARK_STYLE_LEVEL = AttributeLevel.Built_In + 10;
+export const EDITOR_SERIES_MARK_SINGLE_LEVEL = AttributeLevel.Built_In + 20;
 
 const CommonMarkAttribute = ['visible', 'stroke', 'strokeOpacity', 'lineWidth', 'lineDash', 'curveType', 'zIndex'];
 export const fillMarkAttribute = [...CommonMarkAttribute, 'fill', 'fillOpacity'];
