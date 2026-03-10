@@ -15,12 +15,18 @@ import {
 import type { Label as VChartLabelComponent } from '@visactor/vchart-types/types/component/label/label';
 import type { ILabelInfo } from '@visactor/vchart-types/types/component/label';
 import { MarkStyleRuntime } from './mark-style';
-import { findSingleConfig, getSeriesKeyScalesMap, isSeriesMatch, matchDatumWithScaleMap } from './utils';
+import {
+  findSingleConfig,
+  getSeriesField,
+  getSeriesKeyScalesMap,
+  isSeriesMatch,
+  matchDatumWithScaleMap
+} from './utils';
 import type { IGraphic } from '@visactor/vrender-core';
 import type { IChartCharacterConfig, ITextAttribute } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
 import type { IMark } from '@visactor/vchart-types/types/mark/interface';
-import { CommonMarkAttributeMap, fillMarkAttribute, SeriesMarkStyleMap } from './const';
+import { CommonMarkAttributeMap, fillMarkAttribute, LabelUnableSeries, SeriesMarkStyleMap } from './const';
 import { formatConfigKey } from '../../../constants/format';
 import type { FormatContentType, IFormatConfig } from '../../../interface/dsl/common';
 import type { FormatValueFunction } from '../../common/utils/format';
@@ -58,13 +64,20 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
     if (!spec.label) {
       spec.label = { visible: true };
     } else {
-      spec.label.visible = true;
+      if (spec.label.visible !== false) {
+        spec.label.visible = true;
+      }
     }
     spec.series?.forEach((s: any) => {
+      if (LabelUnableSeries[s.type]) {
+        return;
+      }
       if (!s.label) {
         s.label = { visible: true };
       } else {
-        s.label.visible = true;
+        if (s.label.visible !== false) {
+          s.label.visible = true;
+        }
       }
     });
   }
@@ -117,20 +130,27 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       }
       array(infos).forEach(info => {
         const { series, labelMark } = info as unknown as { series: ISeries; labelMark: IMark };
+        let labelSpecKey = ((info.labelSpec as any)?.id as string) ?? 'label';
+        if (labelMark.name.startsWith('transform')) {
+          labelSpecKey = 'transformLabel';
+        }
         const keyScaleMap = getSeriesKeyScalesMap(series);
         // 先看当前系列是否存在单标签样式
-        const hasSingleStyle = hasLabelStyle
-          ? isValid(
-              Object.keys(config.options.labelStyle).find(k =>
-                isSeriesMatch(config.options.labelStyle[k].seriesMatch, series)
+        const hasSingleStyle =
+          labelSpecKey !== 'label'
+            ? false
+            : hasLabelStyle
+            ? isValid(
+                Object.keys(config.options.labelStyle).find(k =>
+                  isSeriesMatch(config.options.labelStyle[k].seriesMatch, series)
+                )
               )
-            )
-          : false;
+            : false;
         // 系列分组key
-        const seriesField = series.getSeriesField();
+        const seriesField = getSeriesField(series);
         // style Map 是 能设置的样式
         const styleKeys =
-          SeriesMarkStyleMap[series.type]?.label?.style ?? CommonMarkAttributeMap.text ?? fillMarkAttribute;
+          SeriesMarkStyleMap[series.type]?.[labelSpecKey]?.style ?? CommonMarkAttributeMap.text ?? fillMarkAttribute;
 
         // 多组数据在同一个系列，使用vchart mark后处理。这里只有常规属性，如果发现某些属性设置不上，考虑styleKeys缺少
         styleKeys.forEach((key: keyof ITextAttribute) => {
@@ -150,7 +170,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
                 // 如果匹配到单标签样式
                 findSingleConfig(config.options.labelStyle, series, keyScaleMap, datum)?.style?.[key] ??
                 // 否则匹配组样式
-                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, 'label') ??
+                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, labelSpecKey) ??
                 result
               );
             });
@@ -159,7 +179,8 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             // 直接匹配组样式
             labelMark.setPostProcess(key, (result, datum) => {
               return (
-                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, 'label') ?? result
+                MarkStyleRuntime.getMarkStyle(labelMark, dataGroupStyle, key, datum, seriesField, labelSpecKey) ??
+                result
               );
             });
           }
@@ -182,8 +203,16 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
             }
             // 否则匹配组样式
             return (
-              getTextWithGroupFormat(datum, seriesField, series, vchart, character, dataGroupStyle, formatValue) ??
-              result
+              getTextWithGroupFormat(
+                datum,
+                seriesField,
+                series,
+                vchart,
+                character,
+                dataGroupStyle,
+                formatValue,
+                labelSpecKey
+              ) ?? result
             );
           });
         } else {
@@ -191,8 +220,16 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
           // 直接匹配组样式
           labelMark.setPostProcess('text', (result, datum) => {
             return (
-              getTextWithGroupFormat(datum, seriesField, series, vchart, character, dataGroupStyle, formatValue) ??
-              result
+              getTextWithGroupFormat(
+                datum,
+                seriesField,
+                series,
+                vchart,
+                character,
+                dataGroupStyle,
+                formatValue,
+                labelSpecKey
+              ) ?? result
             );
           });
         }
@@ -247,7 +284,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
       // @ts-ignore
       const infos = labelComponent._labelComponentMap.get(componentMark)();
       array(infos).forEach(info => {
-        const { series: series } = info as unknown as { series: ISeries; labelMark: IMark };
+        const { series: series, labelMark } = info as unknown as { series: ISeries; labelMark: IMark };
         const keyScaleMap = getSeriesKeyScalesMap(series);
         const labelGraphics: IGraphic[] = [];
         const productGraphic = getProductGraphic(componentMark.getProduct());
@@ -255,20 +292,28 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
           return;
         }
         findLabelGraphicWithInfo(productGraphic, info, labelGraphics);
+        let labelSpecKey = (info.labelSpec as any)?.id ?? 'label';
+        if (labelMark.name.startsWith('transform')) {
+          labelSpecKey = 'transformLabel';
+          return;
+        }
 
         // 先设置分组样式
         if (dataGroupStyle) {
-          const seriesField = series.getSeriesField();
+          const seriesField = getSeriesField(series);
           const groupValueList = series.getRawDataStatisticsByField(seriesField)?.values as string[];
           groupValueList.forEach(groupValue => {
             // 是否存在分组样式
-            if (!dataGroupStyle[groupValue]?.label?.style && !dataGroupStyle[StroyAllDataGroup]?.label?.style) {
+            if (
+              !dataGroupStyle[groupValue]?.[labelSpecKey]?.style &&
+              !dataGroupStyle[StroyAllDataGroup]?.[labelSpecKey]?.style
+            ) {
               return;
             }
             const style = merge(
               {},
-              dataGroupStyle[StroyAllDataGroup]?.label?.style ?? {},
-              dataGroupStyle[groupValue]?.label?.style ?? {}
+              dataGroupStyle[StroyAllDataGroup]?.[labelSpecKey]?.style ?? {},
+              dataGroupStyle[groupValue]?.[labelSpecKey]?.style ?? {}
             );
             // 只设置 fill 和 stroke 颜色
             if (!isValid(style.fill) && !isValid(style.stroke)) {
@@ -283,7 +328,7 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         }
 
         //  再设置单标签样式
-        if (labelStyle) {
+        if (labelStyle && labelSpecKey) {
           const findKeys = !!labelStyle
             ? Object.keys(labelStyle).filter(k => isSeriesMatch(labelStyle[k].seriesMatch, series))
             : null;
@@ -384,13 +429,15 @@ function getTextWithGroupFormat(
   vchart: IVChart,
   character: ICharacterChart,
   dataGroupStyle: IChartCharacterConfig['options']['dataGroupStyle'],
-  formatValue: FormatValueFunction
+  formatValue: FormatValueFunction,
+  markName: string
 ) {
   if (!dataGroupStyle) {
     return null;
   }
   const formatConfig =
-    dataGroupStyle[datum[seriesField]]?.label?.formatConfig ?? dataGroupStyle[StroyAllDataGroup]?.label?.formatConfig;
+    dataGroupStyle[datum[seriesField]]?.[markName]?.formatConfig ??
+    dataGroupStyle[StroyAllDataGroup]?.[markName]?.formatConfig;
 
   if (!formatConfig) {
     return null;

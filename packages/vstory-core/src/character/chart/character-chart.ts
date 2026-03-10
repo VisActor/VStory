@@ -188,7 +188,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
   }
 
   protected _clearRuntime(): void {
-    this._runtime.length = 0;
+    this._runtime && (this._runtime.length = 0);
   }
 
   protected getViewBoxFromSpec() {
@@ -204,7 +204,7 @@ export class CharacterChart<T extends IChartGraphicAttribute>
 
   protected applyConfigToAttribute(diffConfig: IUpdateConfigParams, config: IUpdateConfigParams): void {
     this._attribute = this.getDefaultAttribute() as any;
-    this._runtime.forEach(r => r.applyConfigToAttribute?.(this));
+    this._runtime?.forEach(r => r.applyConfigToAttribute?.(this));
     // 设置locked
     this.locked = !!config.locked;
   }
@@ -226,17 +226,22 @@ export class CharacterChart<T extends IChartGraphicAttribute>
       ticker: this._ticker,
       zIndex: this._config.zIndex ?? 0,
       vchartBoundsMode: this._config.options.initOption?.vchartBoundsMode ?? 'clip',
+      vchartBoundsExpand: this._config.options.initOption?.vchartBoundsExpand ?? 0,
       updateSpecMorphConfig: this._config.options.initOption?.updateSpecMorphConfig ?? {},
       chartInitOptions: mergeChartOption(
         {
           performanceHook: {
             afterInitializeChart: (vchart: IVChart) => {
               this._vchart = vchart;
-              this._runtime.forEach(r => r.afterInitialize?.(this, vchart));
+              this._config.hooks?.beforeRuntimeInitializeChart?.(this, vchart);
+              this._runtime?.forEach(r => r.afterInitialize?.(this, vchart));
+              this._config.hooks?.afterRuntimeInitializeChart?.(this, vchart);
             },
             // @ts-ignore
             beforeDoRender: () => {
-              this._runtime.forEach(r => r.beforeVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
+              this._config.hooks?.beforeRuntimeDoRender?.(this, this._graphic?.vchart ?? this._vchart);
+              this._runtime?.forEach(r => r.beforeVRenderDraw?.(this, this._graphic?.vchart ?? this._vchart));
+              this._config.hooks?.afterRuntimeDoRender?.(this, this._graphic?.vchart ?? this._vchart);
             }
           }
         },
