@@ -17,7 +17,13 @@ export class CharacterTree implements ICharacterTree {
   }
 
   getCharacterList(): ICharacter[] {
-    return Array.from(Object.values(this._characters));
+    const list: ICharacter[] = [];
+    for (const key in this._characters) {
+      if (Object.prototype.hasOwnProperty.call(this._characters, key)) {
+        list.push(this._characters[key]);
+      }
+    }
+    return list;
   }
 
   getCharactersByType(type: string) {

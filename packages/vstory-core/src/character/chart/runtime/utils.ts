@@ -118,9 +118,16 @@ export function findSingleConfig(
   if (!config) {
     return null;
   }
-  return Object.values(config).find(v => {
-    return isSingleMarkMatch(v, series, scaleMap, datum);
-  });
+  for (const key in config) {
+    if (!Object.prototype.hasOwnProperty.call(config, key)) {
+      continue;
+    }
+    const candidate = config[key];
+    if (isSingleMarkMatch(candidate, series, scaleMap, datum)) {
+      return candidate;
+    }
+  }
+  return null;
 }
 
 export function getMarkStyleId(markName: string, itemKeys: string[], itemKeyMap: { [key: string]: any }) {

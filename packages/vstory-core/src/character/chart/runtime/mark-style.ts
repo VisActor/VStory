@@ -54,13 +54,17 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     const { spec } = rawAttribute;
     const visibleMarkNames: string[] = [];
     // 得到全部被设置过 visible 的 markName
-    Object.values(dataGroupStyle).forEach(groupConfig => {
+    for (const groupKey in dataGroupStyle) {
+      if (!Object.prototype.hasOwnProperty.call(dataGroupStyle, groupKey)) {
+        continue;
+      }
+      const groupConfig = dataGroupStyle[groupKey];
       Object.keys(groupConfig).forEach(markName => {
         if (isValid(groupConfig[markName]?.visible)) {
           visibleMarkNames.push(markName);
         }
       });
-    });
+    }
     // 设置到 spec 上
     if (spec.series) {
       spec.series.forEach((s: any) => {

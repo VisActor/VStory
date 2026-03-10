@@ -1,5 +1,5 @@
 import { merge } from '@visactor/vutils';
-import { ACustomAnimate } from '@visactor/vrender-core';
+import { ACustomAnimate } from '@visactor/vrender';
 import type { IChartCharacterRuntime } from '../interface/runtime';
 import type { ICharacterChart } from '../interface/character-chart';
 
@@ -16,7 +16,7 @@ export class WaveAnimate extends ACustomAnimate<any> {
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
+  getFromProps(): Record<string, any> {
     return this.from;
   }
 

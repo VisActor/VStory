@@ -277,11 +277,10 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       const config = this.getMarkAnimateConfig(vchart, mark, markIndex, action, series, payload);
       const product = mark.getProduct();
       if (isRun) {
-        // @ts-ignore
-        product?.graphicItem?.setAttribute('visibleAll', true);
-        product?.animate?.run(config || {});
+        product?.setAttribute?.('visibleAll', true);
+        (product as any)?.executeAnimation?.(config || {});
       } else {
-        product?.graphicItem?.setAttribute('visibleAll', false);
+        product?.setAttribute?.('visibleAll', false);
       }
     });
   }

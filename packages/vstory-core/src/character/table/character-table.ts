@@ -1,5 +1,5 @@
 import type { IGroup, ITicker, ITimeline } from '@visactor/vrender-core';
-import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
+import { DefaultTimeline, ManualTicker } from '@visactor/vrender';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
 import type { ITableGraphicAttribute } from './graphic/vtable-graphic';
@@ -33,7 +33,8 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     super(config, option);
     this._timeline = new DefaultTimeline();
-    this._ticker = new ManualTicker([this._timeline]);
+    this._ticker = new ManualTicker();
+    this._ticker.addTimeline(this._timeline);
     this.configProcess = new TableConfigProcess(this);
   }
 

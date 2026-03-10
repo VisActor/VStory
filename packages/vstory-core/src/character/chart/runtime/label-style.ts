@@ -99,9 +99,14 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
     const singleLabelStyleKeys: { [key: string]: boolean } = {};
     const hasLabelStyle = !!config.options?.labelStyle;
     if (hasLabelStyle) {
-      Object.values(config.options?.labelStyle).forEach(ls => {
+      const labelStyle = config.options?.labelStyle ?? {};
+      for (const labelStyleKey in labelStyle) {
+        if (!Object.prototype.hasOwnProperty.call(labelStyle, labelStyleKey)) {
+          continue;
+        }
+        const ls = labelStyle[labelStyleKey];
         Object.keys(ls.style).forEach(k => (singleLabelStyleKeys[k] = true));
-      });
+      }
     }
 
     labelComponent.getMarks().forEach(componentMark => {
@@ -245,7 +250,11 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
         const { series: series } = info as unknown as { series: ISeries; labelMark: IMark };
         const keyScaleMap = getSeriesKeyScalesMap(series);
         const labelGraphics: IGraphic[] = [];
-        findLabelGraphicWithInfo(componentMark.getProduct().graphicItem, info, labelGraphics);
+        const productGraphic = getProductGraphic(componentMark.getProduct());
+        if (!productGraphic) {
+          return;
+        }
+        findLabelGraphicWithInfo(productGraphic, info, labelGraphics);
 
         // 先设置分组样式
         if (dataGroupStyle) {
@@ -308,6 +317,9 @@ export class LabelStyleRuntime implements IChartCharacterRuntime {
  * @returns
  */
 function _collectAllLabelGraphic(g: IGraphic, list: IGraphic[]) {
+  if (!g) {
+    return;
+  }
   if (g.type === 'text' || g.type === 'richtext') {
     list.push(g);
     return;
@@ -325,14 +337,43 @@ function _collectAllLabelGraphic(g: IGraphic, list: IGraphic[]) {
  * @returns
  */
 function findLabelGraphicWithInfo(g: IGraphic, info: ILabelInfo, list: IGraphic[]) {
-  const matchLabel = g.children[0].children.find(
-    // @ts-ignore
-    (c: IGraphic) => c.attribute.baseMarkGroupName === info.baseMark.getProduct().graphicItem.name
-  );
+  const baseMarkGraphic = getProductGraphic(info.baseMark?.getProduct?.());
+  const baseMarkName = baseMarkGraphic?.name;
+  if (!baseMarkName) {
+    return;
+  }
+  const matchLabel = findGraphicWithBaseMarkName(g, baseMarkName);
   if (!matchLabel) {
     return;
   }
   _collectAllLabelGraphic(matchLabel, list);
+}
+
+function findGraphicWithBaseMarkName(g: IGraphic, baseMarkName: string): IGraphic | null {
+  if (!g) {
+    return null;
+  }
+  if ((g.attribute as any)?.baseMarkGroupName === baseMarkName) {
+    return g;
+  }
+  if (!g.children?.length) {
+    return null;
+  }
+  for (let i = 0; i < g.children.length; i++) {
+    const child = g.children[i] as IGraphic;
+    const match = findGraphicWithBaseMarkName(child, baseMarkName);
+    if (match) {
+      return match;
+    }
+  }
+  return null;
+}
+
+function getProductGraphic(product: any): IGraphic | null {
+  if (!product) {
+    return null;
+  }
+  return product as IGraphic;
 }
 
 // 得到标签经过分组配置中的 format 处理后的值

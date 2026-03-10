@@ -34,7 +34,8 @@ export class VChartHighlightActionProcessor extends VChartBaseActionProcessor {
       .getAllMarks()
       .forEach(mark => {
         if (mark.getAnimationConfig()) {
-          mark.getProduct().animate?.run({
+          const product = mark.getProduct() as any;
+          product.executeAnimation?.({
             timeSlices: {
               effects: {
                 channel,
@@ -42,7 +43,7 @@ export class VChartHighlightActionProcessor extends VChartBaseActionProcessor {
               },
               duration: animation?.duration ?? 0
             },
-            partitioner: datum => (inverse ? !isDatumEqual(value, datum) : isDatumEqual(value, datum))
+            partitioner: (datum: any) => (inverse ? !isDatumEqual(value, datum) : isDatumEqual(value, datum))
           });
         }
       });
