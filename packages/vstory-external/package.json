@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory-external",
-  "version": "0.0.24",
+  "version": "0.0.25-none",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -34,9 +34,9 @@
     "@visactor/vchart-extension": "~2.0.19",
     "@visactor/vdataset": "~1.0.22",
     "@visactor/vscale": "~1.0.22",
-    "@visactor/vstory-core": "workspace:0.0.24",
-    "@visactor/vstory-animate": "workspace:0.0.24",
-    "@visactor/vstory-player": "workspace:0.0.24"
+    "@visactor/vstory-core": "workspace:0.0.25-none",
+    "@visactor/vstory-animate": "workspace:0.0.25-none",
+    "@visactor/vstory-player": "workspace:0.0.25-none"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",
