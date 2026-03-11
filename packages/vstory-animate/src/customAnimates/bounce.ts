@@ -1,5 +1,5 @@
-import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender-core';
-import type { EasingType } from '@visactor/vrender-core';
+import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender';
+import type { EasingType } from '@visactor/vrender';
 
 export class Bounce extends ACustomAnimate<any> {
   declare valid: boolean;
@@ -21,8 +21,8 @@ export class Bounce extends ACustomAnimate<any> {
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
-    return this.from;
+  getFromProps(): Record<string, any> {
+    return this.from ?? {};
   }
 
   onBind(): void {

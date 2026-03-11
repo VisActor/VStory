@@ -131,7 +131,17 @@ export class TotalLabelRuntime implements IChartCharacterRuntime {
     if (!totalLabel) {
       return;
     }
-    if (Object.values(totalLabel).every(v => !v.single)) {
+    let hasSingle = false;
+    for (const totalLabelKey in totalLabel) {
+      if (!Object.prototype.hasOwnProperty.call(totalLabel, totalLabelKey)) {
+        continue;
+      }
+      if (totalLabel[totalLabelKey]?.single) {
+        hasSingle = true;
+        break;
+      }
+    }
+    if (!hasSingle) {
       return;
     }
 
@@ -147,7 +157,12 @@ export class TotalLabelRuntime implements IChartCharacterRuntime {
       component.getVRenderComponents().forEach(dataLabel => {
         dataLabel.getElementsByName('label').forEach(label => {
           (label.getElementsByType('text') as IText[]).forEach(text => {
-            Object.values(totalLabelConfig.single).forEach(singleConfig => {
+            const singleConfigMap = totalLabelConfig.single ?? {};
+            for (const singleConfigKey in singleConfigMap) {
+              if (!Object.prototype.hasOwnProperty.call(singleConfigMap, singleConfigKey)) {
+                continue;
+              }
+              const singleConfig = singleConfigMap[singleConfigKey];
               if (
                 matchDatumWithScaleMap(
                   singleConfig.itemKeys,
@@ -158,7 +173,7 @@ export class TotalLabelRuntime implements IChartCharacterRuntime {
               ) {
                 text.setAttributes(singleConfig.style);
               }
-            });
+            }
           });
         });
       });

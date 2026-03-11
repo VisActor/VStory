@@ -13,6 +13,7 @@ By the end of this tutorial, we will achieve the effect shown in the image below
 A dashboard will contain various charts, as well as modules such as titles and tables. Some of these modules can be implemented using specific characters provided by VStory, while others can be configured using VChart. In this tutorial, we will simplify the material preparation process and provide all the chart specs needed.
 
 1. A simple bar chart based on `VChart`
+
 ```javascript livedemo template=vchart
 const mockData = [];
 const types = ['A', 'B', 'C'];
@@ -45,6 +46,7 @@ window['vchart'] = vchart;
 ```
 
 2. A simple area chart based on `VChart`
+
 ```javascript livedemo template=vchart
 const mockData = [];
 const types = ['A', 'B', 'C'];
@@ -60,12 +62,12 @@ const spec = {
   data: [
     {
       id: 'id0',
-      values: mockData.filter((item) => item.type !== 'C')
+      values: mockData.filter(item => item.type !== 'C')
     }
   ],
   xField: 'month',
   yField: 'value',
-  seriesField:  'type',
+  seriesField: 'type',
   line: {
     style: {
       curveType: 'monotone'
@@ -81,8 +83,8 @@ vchart.renderSync();
 window['vchart'] = vchart;
 ```
 
-
 3. A simple radar chart based on `VChart`
+
 ```javascript livedemo template=vchart
 const mockData = [];
 const types = ['A', 'B', 'C'];
@@ -135,6 +137,7 @@ window['vchart'] = vchart;
 ```
 
 4. A simple rose chart based on `VChart`
+
 ```javascript livedemo template=vchart
 const mockData = [];
 const types = ['A', 'B', 'C'];
@@ -162,7 +165,7 @@ const spec = {
     {
       orient: 'angle',
       bandPadding: 0.02
-    },
+    }
   ]
 };
 
@@ -174,6 +177,7 @@ window['vchart'] = vchart;
 ```
 
 5. A simple gauge chart based on `VChart`
+
 ```javascript livedemo template=vchart
 const mockData = [];
 const types = ['A', 'B', 'C'];
@@ -202,7 +206,7 @@ const spec = {
   outerRadius: 0.8,
   innerRadius: 0.5,
   startAngle: -225,
-  endAngle: 45,
+  endAngle: 45
 };
 
 const vchart = new VChart(spec, { dom: CONTAINER_ID });
@@ -213,11 +217,12 @@ window['vchart'] = vchart;
 ```
 
 6. Use a `Text` type from `VStory` as the title
+
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
@@ -239,7 +244,7 @@ story.addCharacterWithAppear({
       textAlign: 'left',
       textBaseline: 'top',
       fill: 'black',
-      fontWeight: 200,
+      fontWeight: 200
     }
   }
 });
@@ -249,6 +254,7 @@ window.vstory = story;
 ```
 
 7. Use a `WaveScatter` chart type from `VStory`
+
 ```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
@@ -261,7 +267,7 @@ types.forEach(type => {
   }
 });
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
@@ -277,7 +283,7 @@ story.addCharacterWithAppear({
   },
   options: {
     data: {
-      values: mockData.filter((item) => item.type === 'A')
+      values: mockData.filter(item => item.type === 'A')
     },
     categoryField: 'month',
     valueField: 'value',
@@ -306,7 +312,7 @@ window.vstory = story;
 
 ## 2. Assembly
 
-Next, we will assemble these materials into a large canvas of `VStory`, forming a complete work. We will use a canvas size of 1920 * 1080, with a margin of 30px between the charts and a margin of 30px from the left and right borders. The specific layout is shown in the image below:
+Next, we will assemble these materials into a large canvas of `VStory`, forming a complete work. We will use a canvas size of 1920 \* 1080, with a margin of 30px between the charts and a margin of 30px from the left and right borders. The specific layout is shown in the image below:
 
 ![](https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/dashboard_layout_detail.png)
 
@@ -325,7 +331,7 @@ type ICharacterConfig = {
   zIndex: number;
   extra?: any; // 带着的额外信息
   options?: any; // 具体的配置信息
-}
+};
 
 /* act定义 */
 interface IActSpec {
@@ -336,9 +342,10 @@ interface ISceneSpec {
   id: string; // 这个场景的id
   delay?: number; // 场景的入场延迟，可以是正数或者负数
   actions: IActions[]; // 这个场景包含的动作
-};
+}
 
-interface IActions { // 行为定义，角色和行为都可以配数组，可以定义多个角色执行多个行为
+interface IActions {
+  // 行为定义，角色和行为都可以配数组，可以定义多个角色执行多个行为
   characterId: string | string[]; // 执行行为的角色id
   characterActions: IActionSpec[]; // 执行的具体行为
 }
@@ -347,16 +354,17 @@ interface IActions { // 行为定义，角色和行为都可以配数组，可�
 interface IAction {
   action: string; // 行为名称
   startTime?: number; // 开始时间
-  payload?: { // 行为的参数
+  payload?: {
+    // 行为的参数
     animation?: IAnimationParams;
     selector?: string;
     [key?: string]: any;
   };
 }
-
 ```
 
 ### 2.1 Configuration of the `characters` array
+
 Based on the provided configuration for each `character` and the interface definition, we can assemble our `characters` array.
 
 ```ts
@@ -395,7 +403,7 @@ const characters = [
     },
     options: {
       data: {
-        values: mockData.filter((item) => item.type === 'A')
+        values: mockData.filter(item => item.type === 'A')
       },
       categoryField: 'month',
       valueField: 'value',
@@ -532,11 +540,12 @@ const characters = [
         cornerRadius: 20
       }
     }
-  },
-]
+  }
+];
 ```
 
 ### 2.2 Configuration of the `acts` array
+
 The `characters` array only defines the elements available in the work, but the specific actions are not defined yet. If actions are not defined, the elements will not be displayed. Therefore, we will define the `acts` array next. We expect the elements in the work to have the following actions:
 
 1. The bar chart and rose chart will have an `appear` animation effect with `oneByOne` (one by one) for the elements, while other charts will have the default `appear` animation effect.
@@ -596,7 +605,7 @@ const acts = [
                     easing: 'quadOut'
                   },
                   type: 'bounce4',
-                  flipY: true,
+                  flipY: true
                 }
               }
             ]
@@ -605,7 +614,7 @@ const acts = [
       }
     ]
   }
-]
+];
 ```
 
 ## 3. Playback
@@ -662,12 +671,12 @@ function loadDSL() {
     data: [
       {
         id: 'id0',
-        values: mockData.filter((item) => item.type !== 'C')
+        values: mockData.filter(item => item.type !== 'C')
       }
     ],
     xField: 'month',
     yField: 'value',
-    seriesField:  'type',
+    seriesField: 'type',
     line: {
       style: {
         curveType: 'monotone'
@@ -727,7 +736,7 @@ function loadDSL() {
       {
         orient: 'angle',
         bandPadding: 0.02
-      },
+      }
     ]
   };
 
@@ -749,7 +758,7 @@ function loadDSL() {
     outerRadius: 0.8,
     innerRadius: 0.5,
     startAngle: -225,
-    endAngle: 45,
+    endAngle: 45
   };
 
   return {
@@ -788,7 +797,7 @@ function loadDSL() {
         },
         options: {
           data: {
-            values: mockData.filter((item) => item.type === 'A')
+            values: mockData.filter(item => item.type === 'A')
           },
           categoryField: 'month',
           valueField: 'value',
@@ -925,7 +934,7 @@ function loadDSL() {
             cornerRadius: 20
           }
         }
-      },
+      }
     ],
     acts: [
       {
@@ -975,7 +984,7 @@ function loadDSL() {
                         easing: 'quadOut'
                       },
                       type: 'bounce4',
-                      flipY: true,
+                      flipY: true
                       // dy: 30,
                     }
                   }
@@ -991,7 +1000,14 @@ function loadDSL() {
 
 const dsl = loadDSL();
 
-const story = new VStory.Story(dsl, { dom: CONTAINER_ID, width: 1920 / 3, height: 1080 / 3, background: '#ebecf0', scaleX: 1/3, scaleY: 1/3 });
+const story = new VStory.Story(dsl, {
+  dom: CONTAINER_ID,
+  width: 1920 / 3,
+  height: 1080 / 3,
+  background: '#ebecf0',
+  scaleX: 1 / 3,
+  scaleY: 1 / 3
+});
 const player = new VStory.Player(story);
 story.init(player);
 

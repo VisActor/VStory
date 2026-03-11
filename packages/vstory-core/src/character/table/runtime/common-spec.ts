@@ -40,7 +40,7 @@ export class CommonSpecRuntime implements ITableCharacterRuntime {
     delete spec.customConfig;
     // 部分属性继续设置
     spec.customConfig = {
-      disableBuildInChartActive: lastCustomConfig.disableBuildInChartActive
+      ...lastCustomConfig
     };
 
     isValid(config.options.spec.animation)

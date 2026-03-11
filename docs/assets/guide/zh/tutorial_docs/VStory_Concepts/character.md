@@ -138,7 +138,7 @@ interface IChartCharacterConfig extends ICharacterConfigBase {
 
 我们看一个 VChart 的例子：
 
-```javascript livedemo template=vchart
+```javascript livedemo template=vstory
 // 注册所有需要的内容
 VStory.registerAll();
 // 需要用到的图表，一个普通柱状图就可以
@@ -216,7 +216,7 @@ const dsl = {
   ]
 };
 
-const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
@@ -780,26 +780,26 @@ const listTableOption = {
 // 定义故事的dsl
 const dsl = {
   characters: [
-      {
-        type: 'VTable',
-        id: 'table0',
-        zIndex: 10,
-        position: {
-          top: 20,
-          left: 20,
-          width: 500,
-          height: 300
-        },
-        options: {
-          spec: listTableOption,
-          initOption: {
-            interactive: true,
-            animation: false,
-            disableTriggerEvent: true,
-            disableDirtyBounds: true
-          }
+    {
+      type: 'VTable',
+      id: 'table0',
+      zIndex: 10,
+      position: {
+        top: 20,
+        left: 20,
+        width: 500,
+        height: 300
+      },
+      options: {
+        spec: listTableOption,
+        initOption: {
+          interactive: true,
+          animation: false,
+          disableTriggerEvent: true,
+          disableDirtyBounds: true
         }
       }
+    }
   ],
   acts: [
     {
@@ -822,7 +822,7 @@ const dsl = {
                     flipY: true
                     // dy: 30,
                   }
-                },
+                }
               ]
             }
           ]
@@ -926,7 +926,7 @@ const characterList = [
   { type: 'Line', options: line, effect: 'clipRange' }
 ];
 
-const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(null, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
@@ -1091,7 +1091,7 @@ const dsl = {
   ]
 };
 
-const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 
@@ -1310,7 +1310,7 @@ const dsl = {
   ]
 };
 
-const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0' });
+const story = new VStory.Story(dsl, { dom: CONTAINER_ID, background: '#ebecf0', width: 400, height: 400 });
 const player = new VStory.Player(story);
 story.init(player);
 

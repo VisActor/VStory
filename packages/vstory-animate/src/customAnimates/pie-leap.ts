@@ -36,8 +36,8 @@ export class PieLeap extends ACustomAnimate<{ y: number; x: number; innerRadius:
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
-    return this.from;
+  getFromProps(): Record<string, any> {
+    return this.from ?? {};
   }
 
   onBind(): void {

@@ -17,7 +17,18 @@ export class ColWidthRuntime implements ITableCharacterRuntime {
 
     if (options.colWidth && Object.keys(options.colWidth).length > 0) {
       // record visible indexes
-      const lastColVisible = Object.values(options.colVisible ?? {}) ?? [];
+      const colVisible = options.colVisible ?? {};
+      const lastColVisible: boolean[] = [];
+      for (const colVisibleKey in colVisible) {
+        if (!Object.prototype.hasOwnProperty.call(colVisible, colVisibleKey)) {
+          continue;
+        }
+        const keyAsNumber = Number.parseInt(colVisibleKey, 10);
+        if (Number.isNaN(keyAsNumber)) {
+          continue;
+        }
+        lastColVisible[keyAsNumber] = colVisible[colVisibleKey];
+      }
       const visibleIndexes: number[] = [];
       for (let i = 0; i <= lastColVisible.length + spec.columns.length; i += 1) {
         const colVisible = lastColVisible[i];

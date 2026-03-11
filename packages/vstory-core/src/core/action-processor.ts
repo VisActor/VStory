@@ -52,7 +52,17 @@ export class ActionProcessor implements IActionProcessor {
   }
 
   getProcessorList(name: string): IActionProcessorItem[] {
-    return Object.values(this._processorRegistry.getProcessors(name));
+    const processors = this._processorRegistry.getProcessors(name);
+    if (!processors) {
+      return [];
+    }
+    const list: IActionProcessorItem[] = [];
+    for (const key in processors) {
+      if (Object.prototype.hasOwnProperty.call(processors, key)) {
+        list.push(processors[key]);
+      }
+    }
+    return list;
   }
 
   getProcessor(name: string, actionName: string): IActionProcessorItem {

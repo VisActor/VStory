@@ -1,5 +1,5 @@
 import type { IGroup, ITicker, ITimeline } from '@visactor/vrender-core';
-import { DefaultTimeline, ManualTicker } from '@visactor/vrender-core';
+import { DefaultTimeline, ManualTicker } from '@visactor/vrender';
 import type { ICharacterPickInfo, IStoryEvent } from '../../interface/event';
 import { CharacterBase } from '../character-base';
 import type { ITableGraphicAttribute } from './graphic/vtable-graphic';
@@ -10,7 +10,7 @@ import { getLayoutFromWidget } from '../../utils/layout';
 import type { ITableCharacterRuntime } from './interface/runtime';
 import { TableConfigProcess } from './table-config-process';
 import type { ICharacterTable, IVTable } from './interface/character-table';
-import { isArray } from '@visactor/vutils';
+import { isArray, isObject } from '@visactor/vutils';
 
 export class CharacterTable<T extends ITableGraphicAttribute>
   extends CharacterBase<ITableGraphicAttribute>
@@ -33,7 +33,8 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   constructor(config: ICharacterConfig, option: ICharacterInitOption) {
     super(config, option);
     this._timeline = new DefaultTimeline();
-    this._ticker = new ManualTicker([this._timeline]);
+    this._ticker = new ManualTicker();
+    this._ticker.addTimeline(this._timeline);
     this.configProcess = new TableConfigProcess(this);
   }
 
@@ -170,9 +171,20 @@ export class CharacterTable<T extends ITableGraphicAttribute>
   }
 
   getDefaultAttribute(): Partial<ITableGraphicAttribute> {
+    let records = this._config.options.spec?.records;
+    if (isArray(records)) {
+      records = records.slice();
+    } else if (isObject(records)) {
+      records = { ...records };
+      Object.keys(records).forEach(key => {
+        records[key] = records[key].slice();
+      });
+    } else {
+      records = [];
+    }
     return {
       spec: Object.assign({}, this._config.options.spec, {
-        records: (this._config.options.spec?.records ?? []).slice()
+        records
       }),
       dpr: this._canvas.getDpr(),
       autoRender: false,
@@ -186,7 +198,8 @@ export class CharacterTable<T extends ITableGraphicAttribute>
       modeParams: this._story.option.modeParams,
       chartOption: {
         disableTriggerEvent: true,
-        disableDirtyBounds: true
+        disableDirtyBounds: true,
+        ...(this._config.options.chartOption ?? {})
       }
     };
   }

@@ -1,6 +1,6 @@
 {
   "name": "@visactor/vstory",
-  "version": "0.0.24",
+  "version": "0.0.25-none",
   "description": "",
   "sideEffects": true,
   "main": "cjs/index.js",
@@ -24,12 +24,12 @@
     "test-watch": "DEBUG_MODE=1 jest --watch"
   },
   "dependencies": {
-    "@visactor/vstory-core": "workspace:0.0.24",
-    "@visactor/vstory-animate": "workspace:0.0.24",
-    "@visactor/vstory-editor": "workspace:0.0.24",
-    "@visactor/vstory-player": "workspace:0.0.24",
-    "@visactor/vstory-templates": "workspace:0.0.24",
-    "@visactor/vstory-external": "workspace:0.0.24"
+    "@visactor/vstory-core": "workspace:0.0.25-none",
+    "@visactor/vstory-animate": "workspace:0.0.25-none",
+    "@visactor/vstory-editor": "workspace:0.0.25-none",
+    "@visactor/vstory-player": "workspace:0.0.25-none",
+    "@visactor/vstory-templates": "workspace:0.0.25-none",
+    "@visactor/vstory-external": "workspace:0.0.25-none"
   },
   "devDependencies": {
     "@internal/bundler": "workspace:*",
@@ -39,7 +39,7 @@
     "@ffmpeg/core": "^0.11.0",
     "@ffmpeg/ffmpeg": "^0.11.6",
     "@douyinfe/semi-ui": "^2.62.1",
-    "@visactor/vutils": "~0.18.17",
+    "@visactor/vutils": "~1.0.22",
     "canvas": "2.11.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

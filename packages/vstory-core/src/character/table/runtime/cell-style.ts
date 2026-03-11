@@ -17,9 +17,14 @@ export class CellStyleRuntime implements ITableCharacterRuntime {
 
     spec.customCellStyle = spec.customCellStyle ?? [];
     spec.customCellStyleArrangement = spec.customCellStyleArrangement ?? [];
-    Object.values(config.options.cellStyle).forEach(({ col, row, style }) => {
+    const cellStyleConfig = config.options.cellStyle ?? {};
+    for (const cellStyleKey in cellStyleConfig) {
+      if (!Object.prototype.hasOwnProperty.call(cellStyleConfig, cellStyleKey)) {
+        continue;
+      }
+      const { col, row, style } = cellStyleConfig[cellStyleKey];
       if (!style) {
-        return;
+        continue;
       }
       const customStyleId = `__story_cell_Style_${col}_${row}`;
       vTable.registerCustomCellStyle(customStyleId, style);
@@ -30,7 +35,7 @@ export class CellStyleRuntime implements ITableCharacterRuntime {
         },
         customStyleId
       );
-    });
+    }
   }
 }
 

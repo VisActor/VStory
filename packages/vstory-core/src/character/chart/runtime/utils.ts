@@ -1,7 +1,8 @@
 import { isArray, isString, isValid, merge } from '@visactor/vutils';
 import type { IChart } from '@visactor/vchart-types/types/chart/interface';
 import type { ICartesianSeries } from '@visactor/vchart-types/types/series';
-import type { ISeries } from '@visactor/vchart';
+import type { HeatmapSeries } from '@visactor/vchart';
+import { type ISeries } from '@visactor/vchart';
 import { isContinuous } from '@visactor/vscale';
 import { VCHART_DATA_INDEX, ValueLink, FieldLink, lineSymbolPathMap, LineSymbolType } from './const';
 import type { IChartCharacterConfig, IComponentMatch, IDatumMatch, IMarkStyle } from '../../../interface/dsl/chart';
@@ -52,7 +53,7 @@ export function getSeriesKeyScalesMap(series: ISeries) {
     }
   }
 
-  const seriesField = series.getSeriesField();
+  const seriesField = getSeriesField(series);
   if (!map[seriesField]) {
     if (seriesField) {
       if (series.getOption().globalScale.getScale('color')) {
@@ -74,6 +75,16 @@ export function matchDatumWithScaleMap(
     datum = datum[0];
   }
   return keys.every(key => {
+    if (!isValid(keyValueMap[key])) {
+      if (!isValid(keyValueMap[VCHART_DATA_INDEX])) {
+        return false;
+      }
+      key = VCHART_DATA_INDEX;
+    }
+    // 图表助手历史数据里会把 value/scaleIndex 都按 scaleIndex 存，兼容这一格式。
+    if (key === VCHART_DATA_INDEX) {
+      return keyValueMap[key].value === datum[key] || keyValueMap[key].scaleIndex === datum[key];
+    }
     // 首先使用 value 匹配
     if (isValid(keyValueMap[key].value)) {
       if (keyValueMap[key].value === datum[key]) {
@@ -118,9 +129,16 @@ export function findSingleConfig(
   if (!config) {
     return null;
   }
-  return Object.values(config).find(v => {
-    return isSingleMarkMatch(v, series, scaleMap, datum);
-  });
+  for (const key in config) {
+    if (!Object.prototype.hasOwnProperty.call(config, key)) {
+      continue;
+    }
+    const candidate = config[key];
+    if (isSingleMarkMatch(candidate, series, scaleMap, datum)) {
+      return candidate;
+    }
+  }
+  return null;
 }
 
 export function getMarkStyleId(markName: string, itemKeys: string[], itemKeyMap: { [key: string]: any }) {
@@ -187,4 +205,11 @@ export function getChartType(options: IChartCharacterConfig['options']) {
     }
   }
   return spec.type ?? 'common';
+}
+
+export function getSeriesField(series: ISeries) {
+  if (!series) {
+    return null;
+  }
+  return series.type === 'heatmap' ? (series as HeatmapSeries).getFieldValue()[0] : series.getSeriesField();
 }

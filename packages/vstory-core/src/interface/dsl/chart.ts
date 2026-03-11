@@ -1,7 +1,17 @@
 import type { ITextGraphicAttribute } from '@visactor/vrender-core';
-import type { ChartSpecMap, IInitOption, IMarkAreaSpec, IMarkLineSpec, IMarkPointSpec, ISpec } from '@visactor/vchart';
+import type {
+  ChartSpecMap,
+  IInitOption,
+  IMarkAreaSpec,
+  IMarkLineSpec,
+  IMarkPointSpec,
+  ISpec,
+  IVChart
+} from '@visactor/vchart';
 import type { ICharacterConfigBase } from './dsl';
 import type { IFormatConfig } from './common';
+import type { IMorphConfig } from '@visactor/vchart-types/types/animation/spec';
+import type { ICharacterChart } from '../../character/chart/interface/character-chart';
 
 export const StroyAllDataGroup = '_STORY_ALL_DATA_GROUP';
 
@@ -41,6 +51,11 @@ export interface IDataGroupStyle {
 
 export interface IChartCharacterInitOption {
   vchartBoundsMode?: 'clip' | 'auto';
+  vchartBoundsExpand?: number;
+}
+
+export interface IUpdateSpecMorphConfig {
+  updateSpecMorphConfig?: IMorphConfig;
 }
 
 // 模块选择器
@@ -80,7 +95,7 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
     /**
      * 初始化参数
      */
-    initOption?: IInitOption & IChartCharacterInitOption;
+    initOption?: IInitOption & IChartCharacterInitOption & IUpdateSpecMorphConfig;
     /**
      * 边距
      */
@@ -163,5 +178,12 @@ export interface IChartCharacterConfig extends ICharacterConfigBase {
       markArea?: IMarkAreaSpec[];
       markPoint?: IMarkPointSpec[];
     };
+  };
+  hooks?: {
+    beforeRuntimeInitializeChart?: (character: ICharacterChart, vchart: IVChart) => void;
+    afterRuntimeInitializeChart?: (character: ICharacterChart, vchart: IVChart) => void;
+
+    beforeRuntimeDoRender?: (character: ICharacterChart, vchart: IVChart) => void;
+    afterRuntimeDoRender?: (character: ICharacterChart, vchart: IVChart) => void;
   };
 }
