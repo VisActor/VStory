@@ -29,6 +29,7 @@ import { CommonLayoutRuntimeInstance } from '../character/common/runtime/common-
 
 import { CommonSpecRuntimeInstance as TableCommonSpecRuntimeInstance } from '../character/table/runtime/common-spec';
 import { CellStyleRuntimeInstance } from '../character/table/runtime/cell-style';
+import { ConditionFormatRuntimeInstance } from '../character/table/runtime/condition-format';
 import { ColWidthRuntimeInstance } from '../character/table/runtime/col-width';
 import { RowHeightRuntimeInstance } from '../character/table/runtime/row-height';
 import { TableTypeRuntimeInstance } from '../character/table/runtime/table-type';
@@ -109,4 +110,5 @@ export function registerRuntime() {
   RuntimeStore.register(ContentColStyleRuntimeInstance);
   RuntimeStore.register(ContentRowStyleRuntimeInstance);
   RuntimeStore.register(CellStyleRuntimeInstance);
+  RuntimeStore.register(ConditionFormatRuntimeInstance);
 }

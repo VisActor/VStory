@@ -1,4 +1,4 @@
-import type { EasingType } from '@visactor/vrender';
+import type { EasingType, ICustomPath2D } from '@visactor/vrender';
 import { ACustomAnimate, CustomPath2D, generatorPathEasingFunc } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
 
@@ -47,7 +47,7 @@ export class BarLeap extends ACustomAnimate<{
     }
   }
 
-  computePath(percent: number, fromCenter: IPointLike, toCenter: IPointLike, pathProxy: CustomPath2D) {
+  computePath(percent: number, fromCenter: IPointLike, toCenter: IPointLike, pathProxy: ICustomPath2D) {
     const center = {
       x: fromCenter.x + (toCenter.x - fromCenter.x) * percent,
       y: fromCenter.y + (toCenter.y - fromCenter.y) * percent
@@ -117,8 +117,8 @@ export class BarLeap extends ACustomAnimate<{
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
-    return this.from;
+  getFromProps(): Record<string, any> {
+    return this.from ?? {};
   }
 
   onEnd(): void {
@@ -132,7 +132,11 @@ export class BarLeap extends ACustomAnimate<{
   }
 
   onUpdate(end: boolean, ratio: number, out: Record<string, any>): void {
-    this.computePath(barLeap1!(ratio), this.fromCenter, this.toCenter, this.target.pathProxy);
+    const targetPath = this.target.pathProxy;
+    if (targetPath) {
+      const pathProxy = typeof targetPath === 'function' ? targetPath(this.target.attribute) : targetPath;
+      this.computePath(barLeap1!(ratio), this.fromCenter, this.toCenter, pathProxy);
+    }
     if (this.vertical) {
       out.y = this.to.y + barLeap2!(ratio) * 100;
     } else {

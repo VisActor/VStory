@@ -79,9 +79,13 @@ export class Story extends EventEmitter implements IStory {
     this._theme = theme;
     this.pluginService = new DefaultPluginService();
     if (pluginList.length > 0) {
+      const activatedPlugins = pluginList.reduce((list, name) => {
+        this.pluginService.findPluginsByName(name).forEach(plugin => list.push(plugin));
+        return list;
+      }, [] as any[]);
       // 激活插件
       this.pluginService.active(this, {
-        pluginList: pluginList.map(name => this.pluginService.findPluginsByName(name)).flat()
+        pluginList: activatedPlugins
       });
     }
   }

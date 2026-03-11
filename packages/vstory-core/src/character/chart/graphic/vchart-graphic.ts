@@ -34,6 +34,7 @@ export interface IChartGraphicAttribute {
   zIndex?: number;
   panel?: Partial<IRectGraphicAttribute>;
   vchartBoundsMode?: 'clip' | 'auto';
+  vchartBoundsExpand?: number;
   updateSpecMorphConfig?: IMorphConfig;
 }
 
@@ -97,10 +98,12 @@ export class VChartGraphic extends Rect {
       ticker,
       chartInitOptions,
       viewBox,
-      vchartBoundsMode
+      vchartBoundsMode,
+      vchartBoundsExpand
     } = params;
     this.attribute.viewBox = viewBox;
     this.attribute.vchartBoundsMode = vchartBoundsMode;
+    this.attribute.vchartBoundsExpand = vchartBoundsExpand ?? 0;
     this._vchart = new VChart(
       spec,
       mergeChartOption(
@@ -185,6 +188,12 @@ export class VChartGraphic extends Rect {
   }
   setAttributes(attrs: IChartGraphicAttribute) {
     const lastedViewBox = this.attribute.viewBox;
+    const lastRect = {
+      x: this.attribute.x,
+      y: this.attribute.y,
+      width: this.attribute.width,
+      height: this.attribute.height
+    };
     super.setAttributes(attrs);
     if (attrs.viewBox) {
       this.attribute.viewBox = lastedViewBox;
@@ -197,6 +206,15 @@ export class VChartGraphic extends Rect {
         { ...(this.attribute.updateSpecMorphConfig ?? {}) },
         { reMake: true, change: true }
       );
+    }
+    if (
+      lastRect.x !== this.attribute.x ||
+      lastRect.y !== this.attribute.y ||
+      lastRect.width !== this.attribute.width ||
+      lastRect.height !== this.attribute.height ||
+      !(lastedViewBox && attrs.viewBox && isBoundsLikeEqual(lastedViewBox, attrs.viewBox))
+    ) {
+      this.updateVChartViewBoxTransform();
     }
   }
 
@@ -277,7 +295,7 @@ export class VChartGraphic extends Rect {
       this.vchart.getChart()._option.viewBox = this.attribute.viewBox;
       this.vchart.resize(viewBoxSize.width, viewBoxSize.height);
     }
-    const rootBounds = this.getVChartActualBounds();
+    const rootBounds = this.getVChartActualBounds().expand(this.attribute.vchartBoundsExpand);
     // 2. 得到需要绘制全部内容时的 vchart 的 viewBox
     // 不要小于设置viewBox;
     rootBounds.union(this.attribute.viewBox);
@@ -292,6 +310,26 @@ export class VChartGraphic extends Rect {
     // 注意不要更新到 vchart，更新到vchart会触发vchart重新布局，但是我们不需要vchart按照 viewBox_display 重新布局
     this._vchart.getStage().defaultLayer.translateTo(-this.vchartAutoTranslate.x, -this.vchartAutoTranslate.y);
     // @ts-ignore
-    this._vchart._compiler._view.renderer.setViewBox(rootBounds, true);
+    this._vchart.getStage().setViewBox(rootBounds, true);
+  }
+
+  updateVChartViewBoxTransform() {
+    if (!this.stage?.window) {
+      return;
+    }
+    const matrix = this.globalTransMatrix.clone();
+    matrix.translate(this.vchartAutoTranslate.x, this.vchartAutoTranslate.y);
+    const stageMatrix = this.stage.window.getViewBoxTransform().clone();
+    stageMatrix.multiply(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
+    this._vchart
+      .getStage()
+      .window.setViewBoxTransform(
+        stageMatrix.a,
+        stageMatrix.b,
+        stageMatrix.c,
+        stageMatrix.d,
+        stageMatrix.e,
+        stageMatrix.f
+      );
   }
 }

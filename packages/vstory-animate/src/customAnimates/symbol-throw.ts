@@ -1,4 +1,4 @@
-import { ACustomAnimate, createLine } from '@visactor/vrender-core';
+import { ACustomAnimate, createLine } from '@visactor/vrender';
 
 export class SymbolThrow extends ACustomAnimate<{ x?: number; y?: number }> {
   static label: string = 'symbol-throw';
@@ -29,8 +29,8 @@ export class SymbolThrow extends ACustomAnimate<{ x?: number; y?: number }> {
     return this.to;
   }
 
-  getFromProps(): void | Record<string, any> {
-    return this.from;
+  getFromProps(): Record<string, any> {
+    return this.from ?? {};
   }
 
   onBind(): void {
@@ -61,7 +61,7 @@ export class SymbolThrow extends ACustomAnimate<{ x?: number; y?: number }> {
 
   throw(ratio: number, out: Record<string, any>) {
     ratio = Math.min(ratio * 2, 1);
-    const { _layoutHeight } = this.target.attribute;
+    const { _layoutHeight } = this.target.attribute as any;
     const ratioY = SymbolThrow.cubicIn(ratio);
     const x = this.from.x! + (this.to.x! - this.from.x!) * ratio;
     const y = this.from.y! + (_layoutHeight! - this.from.y!) * ratioY;
@@ -72,7 +72,7 @@ export class SymbolThrow extends ACustomAnimate<{ x?: number; y?: number }> {
 
   bounce(ratio: number, out: Record<string, any>) {
     ratio = Math.max((ratio - 0.5) * 2, 0);
-    const { _layoutHeight, fill } = this.target.attribute;
+    const { _layoutHeight, fill } = this.target.attribute as any;
     out.y = _layoutHeight - (_layoutHeight - this.to.y!) * ratio;
     const shadowRoot = this.target.shadowRoot;
     if (shadowRoot) {

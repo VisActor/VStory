@@ -1,7 +1,7 @@
 import type { IChartCharacterRuntime } from '../interface/runtime';
 import type { ICharacterChart } from '../interface/character-chart';
 import type { ISeries, IVChart } from '@visactor/vchart';
-import { getSeriesKeyScalesMap, GetVChartSeriesWithMatch, matchDatumWithScaleMap } from './utils';
+import { getSeriesField, getSeriesKeyScalesMap, GetVChartSeriesWithMatch, matchDatumWithScaleMap } from './utils';
 import type { IChartCharacterConfig } from '../../../interface/dsl/chart';
 import { StroyAllDataGroup } from '../../../interface/dsl/chart';
 import type { IMark } from '@visactor/vchart-types/types/mark/interface';
@@ -10,10 +10,11 @@ import {
   EDITOR_SERIES_MARK_SINGLE_LEVEL,
   EDITOR_SERIES_MARK_STYLE_LEVEL,
   fillMarkAttribute,
+  LabelUnableSeries,
   SeriesMarkStyleMap,
   UseDefaultSeriesStyle
 } from './const';
-import { isArray, merge, isValid } from '@visactor/vutils';
+import { isArray, isFunction, merge, isValid } from '@visactor/vutils';
 import type { IChart } from '@visactor/vchart-types/types/chart/interface';
 
 export class MarkStyleRuntime implements IChartCharacterRuntime {
@@ -54,25 +55,37 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     const { spec } = rawAttribute;
     const visibleMarkNames: string[] = [];
     // 得到全部被设置过 visible 的 markName
-    Object.values(dataGroupStyle).forEach(groupConfig => {
-      Object.keys(groupConfig).forEach(markName => {
-        if (isValid(groupConfig[markName]?.visible)) {
-          visibleMarkNames.push(markName);
-        }
-      });
-    });
+    for (const groupKey in dataGroupStyle) {
+      if (!Object.prototype.hasOwnProperty.call(dataGroupStyle, groupKey)) {
+        continue;
+      }
+      const groupConfig = dataGroupStyle[groupKey];
+      groupConfig &&
+        Object.keys(groupConfig).forEach(markName => {
+          if (isValid(groupConfig[markName]?.visible)) {
+            visibleMarkNames.push(markName);
+          }
+        });
+    }
     // 设置到 spec 上
     if (spec.series) {
       spec.series.forEach((s: any) => {
         visibleMarkNames.forEach(name => {
+          if (name === 'label' && LabelUnableSeries[s.type]) {
+            return;
+          }
           s[name] = s[name] || { visible: true };
-          s[name].visible = true;
+          if (s[name].visible !== false) {
+            s[name].visible = true;
+          }
         });
       });
     } else {
       visibleMarkNames.forEach(name => {
         spec[name] = spec[name] || { visible: true };
-        spec[name].visible = true;
+        if (spec[name].visible !== false) {
+          spec[name].visible = true;
+        }
       });
     }
 
@@ -100,7 +113,7 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
     seriesList.forEach(s => {
       // 一个 series 对应一组数据
       // 系列分组key
-      const seriesField = s.getSeriesField();
+      const seriesField = getSeriesField(s);
       const groupValueList = s.getRawDataStatisticsByField(seriesField)?.values;
       const groupValue = groupValueList?.[0];
       s.getMarks().forEach(m => {
@@ -136,17 +149,45 @@ export class MarkStyleRuntime implements IChartCharacterRuntime {
           const styleKeys =
             SeriesMarkStyleMap[s.type]?.[m.name]?.style ?? CommonMarkAttributeMap[m.type] ?? fillMarkAttribute;
 
+          // 任一分组下是函数属性，则按函数方式处理该 key。
+          const functionAttributeName: { [key: string]: boolean } = {};
+          groupValueList?.forEach(value => {
+            styleKeys.forEach(key => {
+              const seriesGroupSpec = dataGroupStyle[value]?.[m.name]?.style?.[key];
+              if (seriesGroupSpec && functionAttributeName[key] !== true && isFunction(seriesGroupSpec)) {
+                functionAttributeName[key] = true;
+              }
+            });
+          });
+
           // 多组数据在同一个系列，使用后处理
           styleKeys.forEach(key => {
             if (!m.stateStyle.normal?.[key]) {
               // TODO VChart bug。如果直接设置属性为 undefined 会报错
               // 默认值 还必须这样写
               m.setAttribute(key, (): any => undefined);
+            } else if (functionAttributeName[key] === true) {
+              const rawStyle = m.stateStyle.normal[key];
+              if (typeof rawStyle.style !== 'function') {
+                m.setAttribute(
+                  key,
+                  (datum: any, opt: any) => {
+                    // @ts-ignore
+                    return m._computeStateAttribute(rawStyle.style, key, 'normal')(datum, opt);
+                  },
+                  'normal',
+                  999
+                );
+              }
             }
 
             m.setPostProcess(key, (result, datum) => {
-              const temp =
+              let temp =
                 MarkStyleRuntime.getMarkStyle(m as unknown as IMark, dataGroupStyle, key, datum, seriesField) ?? result;
+              if (isFunction(temp)) {
+                // @ts-ignore
+                temp = temp(datum, m._attributeContext);
+              }
               if (s.type === 'area' && key === 'stroke' && m.name === 'area') {
                 if (!isArray(temp)) {
                   return [temp, false, false, false];

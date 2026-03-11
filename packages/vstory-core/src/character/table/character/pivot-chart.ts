@@ -52,14 +52,11 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       const { col, row } = chart.attribute;
       const hasOption = !!this._getVChartOption(col, row);
       const key = hasOption ? `${col}_${row}` : 'no';
-      const needFormatSpec =
-        key !== 'no'
-          ? chartInstance._story_render_key !== key
-          : chartInstance._story_render_key !== key && chartInstance._story_render_key !== undefined;
+      const needFormatSpec = chartInstance._story_render_key !== key;
       chartInstance._story_render_key = key;
       return {
         needFormatSpec,
-        spec: spec,
+        spec: { ...spec, [`__vstory_${key}`]: key },
         updateSpec: false
       };
     };
@@ -107,6 +104,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       if (!chartOption) {
         return;
       }
+      this._config.hooks?.beforeRuntimeInitializeChart?.(this, vchart);
       this._chartRuntime.forEach(r => {
         r.afterInitialize?.(
           {
@@ -122,6 +120,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
           vchart
         );
       });
+      this._config.hooks?.afterRuntimeInitializeChart?.(this, vchart);
     };
     option.chartOption.performanceHook.beforeDoRender = (vchart: IVChart) => {
       const col = vchart.getSpec()._stroy_pivot_chart_info.col;
@@ -130,6 +129,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
       if (!chartOption) {
         return;
       }
+      this._config.hooks?.beforeRuntimeDoRender?.(this, vchart);
       this._chartRuntime.forEach(r => {
         r.beforeVRenderDraw?.(
           {
@@ -145,6 +145,7 @@ export class PivotChartCharacter extends CharacterTable<ITableGraphicAttribute> 
           vchart
         );
       });
+      this._config.hooks?.afterRuntimeDoRender?.(this, vchart);
     };
     return result;
   }

@@ -1,6 +1,6 @@
 import type { IGraphic } from '@visactor/vrender';
 import type { IAABBBounds, IPointLike } from '@visactor/vutils';
-import type { ICharacter, ICharacterPickInfo } from '@visactor/vstory-core';
+import type { ICharacter, ICharacterPickInfo, IStoryEvent } from '@visactor/vstory-core';
 import type { EditActionEnum } from './const';
 import type { Edit } from './edit';
 
@@ -42,7 +42,7 @@ export type VRenderPointerEvent = PointerEvent & { target: Partial<IGraphic> } &
 
 export interface IEditActionInfoBase {
   type: keyof typeof EditActionEnum | string;
-  event: VREvent;
+  event: VREvent | IStoryEvent;
 }
 
 export type IEditActionInfo = IEditSelectionInfo | IEditOverActionInfo;

@@ -66,7 +66,9 @@ export const axisMarkPick = {
     let axisGraphic = graphicPath.find(g => g.name === 'axis');
     if (axisGraphic) {
       // @ts-ignore
-      const axis = axisModel.find(a => a._axisMark && a._axisMark.getProduct().graphicItem === axisGraphic.parent);
+      const axis = axisModel.find(
+        a => (a as any)._axisMark && getProductGraphic((a as any)._axisMark.getProduct()) === axisGraphic.parent
+      );
       if (axis) {
         return commonModelInfo(axis);
       }
@@ -74,7 +76,9 @@ export const axisMarkPick = {
     axisGraphic = graphicPath.find(g => g.name === 'axis-grid');
     if (axisGraphic) {
       // @ts-ignore
-      const axis = axisModel.find(a => a._gridMark && a._gridMark.getProduct().graphicItem === axisGraphic.parent);
+      const axis = axisModel.find(
+        a => (a as any)._gridMark && getProductGraphic((a as any)._gridMark.getProduct()) === axisGraphic.parent
+      );
       if (axis) {
         return commonModelInfo(axis);
       }
@@ -82,6 +86,13 @@ export const axisMarkPick = {
     return null;
   }
 };
+
+function getProductGraphic(product: any): IGraphic | null {
+  if (!product) {
+    return null;
+  }
+  return product as IGraphic;
+}
 
 const MarkerClassName: { [key: string]: boolean } = {
   MarkLine: true,
