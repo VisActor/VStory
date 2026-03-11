@@ -1,17 +1,9 @@
-# v0.0.25
-
-2026-03-11
-
-**🆕 新增功能**
-
-- TODO：补充 v0.0.25 的更新内容。
-
 # v0.0.23
 
 2025-01-21
 
 
-**🆕 新增功能**
+**🆕 New feature**
 
 - **@visactor/vstory**: support selector array
 - **@visactor/vstory-core**: support highlight inverse select
@@ -22,14 +14,14 @@
 
 
 
-[更多详情请查看 v0.0.23](https://github.com/VisActor/VStory/releases/tag/v0.0.23)
+[more detail about v0.0.23](https://github.com/VisActor/VStory/releases/tag/v0.0.23)
 
 # v0.0.22
 
 2024-12-26
 
 
-**🆕 新增功能**
+**🆕 New feature**
 
 - **@visactor/vstory**: change runtime logic about get the character config
 - **@visactor/vstory-core**: enhance vchart animate arrange
@@ -39,7 +31,7 @@
 - **@visactor/vstory-animate**: add arrange demo, support line growPoint animate
 - **@visactor/vstory-player**: support highlight action for vchart
 
-**🐛 功能修复**
+**🐛 Bug fix**
 
 - **@visactor/vstory**: fix issue with image background
 - **@visactor/vstory-core**: fix issue with image background
@@ -47,10 +39,10 @@
 
 
 
-[更多详情请查看 v0.0.22](https://github.com/VisActor/VStory/releases/tag/v0.0.22)
+[more detail about v0.0.22](https://github.com/VisActor/VStory/releases/tag/v0.0.22)
 - **@visactor/vstory-core**: support `auto` for scaleX/scaleY in initParams
 
-[更多详情请查看 v0.0.21](https://github.com/VisActor/VStory/releases/tag/v0.0.21)
+[more detail about v0.0.21](https://github.com/VisActor/VStory/releases/tag/v0.0.21)
 
 # v0.0.20
 
@@ -68,7 +60,7 @@
 
 
 
-[更多详情请查看 v0.0.20](https://github.com/VisActor/VStory/releases/tag/v0.0.20)
+[more detail about v0.0.20](https://github.com/VisActor/VStory/releases/tag/v0.0.20)
 
 
 # v0.0.19
@@ -83,9 +75,7 @@
 
 # v0.0.17
 
-
 2024-12-13
-
 
 
 **What's Changed**
@@ -111,25 +101,25 @@
 
 
 
-[更多详情请查看 v0.0.19](https://github.com/VisActor/VStory/releases/tag/v0.0.19)
+[more detail about v0.0.19](https://github.com/VisActor/VStory/releases/tag/v0.0.19)
 
 # v0.0.16
 
 2024-12-10
 
 
-**🆕 新增功能**
+**🆕 New feature**
 
 
 
-[更多详情请查看 v0.0.18](https://github.com/VisActor/VStory/releases/tag/v0.0.18)
+[more detail about v0.0.18](https://github.com/VisActor/VStory/releases/tag/v0.0.18)
 
-**🐛 功能修复**
+**🐛 Bug fix**
 
 - **@visactor/vstory**: issue with unit-template animate caused by time
 - **@visactor/vstory-templates**: issue with unit-template animate caused by time
 
-[更多详情请查看 v0.0.17](https://github.com/VisActor/VStory/releases/tag/v0.0.17)
+[more detail about v0.0.17](https://github.com/VisActor/VStory/releases/tag/v0.0.17)
 
 
 # v0.0.16
@@ -137,13 +127,14 @@
 2024-12-10
 
 
-**🆕 新增功能**
+**🆕 New feature**
+
 
 - **@visactor/vstory-external**: support dynamic line chart and single pie
 
 
 
-[更多详情请查看 v0.0.16](https://github.com/VisActor/VStory/releases/tag/v0.0.16)
+[more detail about v0.0.16](https://github.com/VisActor/VStory/releases/tag/v0.0.16)
 
 # v0.0.14
 
@@ -263,6 +254,6 @@
 
 
 
-[更多详情请查看 v0.0.14](https://github.com/VisActor/VStory/releases/tag/v0.0.14)
+[more detail about v0.0.14](https://github.com/VisActor/VStory/releases/tag/v0.0.14)
 
 # building
