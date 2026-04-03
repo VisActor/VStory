@@ -10,6 +10,7 @@ export * from './interface/action-processor';
 export * from './interface/dsl/dsl';
 export * from './interface/character';
 export * from './interface/story';
+export * from './interface/player';
 export * from './interface/event';
 export * from './interface/plugin-service';
 export * from './interface/releaseable';

@@ -130,4 +130,23 @@ player.play(1);
 player.play(-1);
 ```
 
+`Player` 现在也提供了公开的播放控制和状态查询接口，不需要再访问私有字段来暂停播放或监听进度。
+
+```ts
+player.pause();
+player.resume();
+
+console.log(player.state); // 'idle' | 'playing' | 'paused' | 'ended'
+console.log(player.currentTime);
+console.log(player.totalTime);
+
+player.on('stateChange', event => {
+  console.log(event.state, event.previousState);
+});
+
+player.on('end', event => {
+  console.log('playback finished', event.currentTime, event.totalTime);
+});
+```
+
 到这里，`story`和`player`的定义就介绍完了，大家可以自己动手试一下，或者去[examples](/vstory/examples)里去改一改试一试。

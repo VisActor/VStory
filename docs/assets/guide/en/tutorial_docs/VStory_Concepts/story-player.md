@@ -130,4 +130,23 @@ player.play(1);
 player.play(-1);
 ```
 
+The `Player` also exposes public playback controls and state, so you no longer need to access private fields for pause or progress tracking.
+
+```ts
+player.pause();
+player.resume();
+
+console.log(player.state); // 'idle' | 'playing' | 'paused' | 'ended'
+console.log(player.currentTime);
+console.log(player.totalTime);
+
+player.on('stateChange', event => {
+  console.log(event.state, event.previousState);
+});
+
+player.on('end', event => {
+  console.log('playback finished', event.currentTime, event.totalTime);
+});
+```
+
 That's all for the definitions of `story` and `player`. You can try it out yourself or make changes in the [examples](/vstory/examples) to see how it works.
