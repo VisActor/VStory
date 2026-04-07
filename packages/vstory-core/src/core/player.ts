@@ -23,7 +23,7 @@ interface IPlayerParams {
 
 export class Player extends EventEmitter implements IPlayer {
   protected _story: IStory | null;
-  protected _ticker: ITicker;
+  protected _ticker: ITicker | null;
   protected _scheduler: IScheduler;
   protected _currTime: number;
   protected _actionProcessor: IActionProcessor;
@@ -115,7 +115,7 @@ export class Player extends EventEmitter implements IPlayer {
 
   reset() {
     this._scheduler.clearState();
-    this._ticker.getTimelines().forEach(tl => tl.clear());
+    this._ticker?.getTimelines().forEach(tl => tl.clear());
     this._currTime = 0;
 
     if (!this._preserveStateOnReset) {
@@ -127,6 +127,10 @@ export class Player extends EventEmitter implements IPlayer {
   }
 
   play(loop: number = 0) {
+    if (this._state !== 'idle' || this._currTime !== 0) {
+      this._resetStoryForRestart();
+    }
+
     const totalTime = this.totalTime;
     this._loop = loop;
     this._currTime = 0;
@@ -139,7 +143,7 @@ export class Player extends EventEmitter implements IPlayer {
       this._finishPlayback();
     } else {
       // 其他环境都需要走ticker
-      this._ticker.start(true);
+      this._ticker?.start(true);
     }
   }
 
@@ -158,7 +162,7 @@ export class Player extends EventEmitter implements IPlayer {
     }
     this._lastFrameTime = -1;
     this._attachTickerListener();
-    this._ticker.start(true);
+    this._ticker?.start(true);
     this._setState('playing');
   }
 
@@ -256,6 +260,18 @@ export class Player extends EventEmitter implements IPlayer {
       totalTime: this.totalTime
     };
     this.emit('stateChange', event);
+  }
+
+  protected _resetStoryForRestart() {
+    if (!this._story) {
+      return;
+    }
+    this._preserveStateOnReset = true;
+    try {
+      this._story.reset();
+    } finally {
+      this._preserveStateOnReset = false;
+    }
   }
 
   protected _finishPlayback() {

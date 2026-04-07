@@ -167,4 +167,34 @@ describe('Player', () => {
     expect(endEvents).toEqual([{ currentTime: 100, totalTime: 100 }]);
     expect(ticker.getListenerCount('tick')).toBe(0);
   });
+
+  it('should restart story and scheduler state when play is called after pause or end', () => {
+    const { story } = createStory();
+    const actionProcessor = createActionProcessor();
+    const player = new Player(story, { actionProcessor });
+    (story.reset as jest.Mock).mockImplementation(() => player.reset());
+    player.initActions(createActions());
+
+    player.play(0);
+    ticker.emit('tick', 50);
+
+    player.pause();
+    expect(player.state).toBe('paused');
+
+    player.play(0);
+    expect(story.reset).toHaveBeenCalledTimes(1);
+    ticker.emit('tick', 100);
+
+    expect(player.state).toBe('ended');
+    expect(actionProcessor.applyAppearAttrs).toHaveBeenCalledTimes(2);
+    expect(actionProcessor.doAction).toHaveBeenCalledTimes(4);
+
+    player.play(0);
+    expect(story.reset).toHaveBeenCalledTimes(2);
+    ticker.emit('tick', 100);
+
+    expect(player.state).toBe('ended');
+    expect(actionProcessor.applyAppearAttrs).toHaveBeenCalledTimes(3);
+    expect(actionProcessor.doAction).toHaveBeenCalledTimes(6);
+  });
 });
