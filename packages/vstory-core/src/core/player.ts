@@ -1,5 +1,12 @@
 import type { ITicker } from '@visactor/vrender-core';
-import type { IPlayer, IViewSizeParams } from '../interface/player';
+import { EventEmitter } from '@visactor/vutils';
+import type {
+  IPlayer,
+  IPlayerEndEvent,
+  IPlayerState,
+  IPlayerStateChangeEvent,
+  IViewSizeParams
+} from '../interface/player';
 import type { IStory } from '../interface/story';
 import type { IScheduler } from '../interface/scheduler';
 import { Scheduler } from './scheduler';
@@ -14,34 +21,59 @@ interface IPlayerParams {
   actionProcessor?: IActionProcessor;
 }
 
-export class Player implements IPlayer {
+export class Player extends EventEmitter implements IPlayer {
   protected _story: IStory | null;
-  protected _ticker: ITicker;
+  protected _ticker: ITicker | null;
   protected _scheduler: IScheduler;
   protected _currTime: number;
   protected _actionProcessor: IActionProcessor;
   protected _loop: number;
+  protected _state: IPlayerState;
+  protected _tickerListening: boolean;
+  protected _preserveStateOnReset: boolean;
   protected _lastFrameTime: number = -1;
 
   constructor(story: IStory, params: IPlayerParams = {}) {
+    super();
     const { actionProcessor = new ActionProcessor(story) } = params;
     this._story = story;
     this._ticker = globalTickerStore.getGlobalTicker();
     this._actionProcessor = actionProcessor;
     this._scheduler = new Scheduler(actionProcessor);
     this._currTime = 0;
+    this._loop = 0;
+    this._state = 'idle';
+    this._tickerListening = false;
+    this._preserveStateOnReset = false;
     this.initTicker();
   }
 
+  get state(): IPlayerState {
+    return this._state;
+  }
+
+  get currentTime(): number {
+    return this._currTime;
+  }
+
+  get totalTime(): number {
+    return this._scheduler.getTotalTime();
+  }
+
   initTicker() {
-    this._ticker.addListener('tick', this.handlerTick);
+    this._attachTickerListener();
   }
 
   tickTo(t: number) {
     const lastTime = this._currTime;
     // 如果时间倒退，那就重置，从头开始（需要上层场景树也重置）
     if (lastTime > t) {
-      this._story.reset();
+      this._preserveStateOnReset = true;
+      try {
+        this._story.reset();
+      } finally {
+        this._preserveStateOnReset = false;
+      }
     }
 
     // 初始化 appear 的属性
@@ -83,25 +115,62 @@ export class Player implements IPlayer {
 
   reset() {
     this._scheduler.clearState();
-    this._ticker.getTimelines().forEach(tl => tl.clear());
+    this._ticker?.getTimelines().forEach(tl => tl.clear());
     this._currTime = 0;
-  }
 
-  play(loop: number = 0) {
-    const totalTime = this._scheduler.getTotalTime();
-    this._loop = loop;
-    if (totalTime <= 0 && !this._loop) {
-      // 没有动画，且不循环也不持续，直接定位到0s
-      this._currTime = 0;
-      this.tickTo(0);
-    } else {
-      // 其他环境都需要走ticker
-      this._currTime = 0;
-      this._ticker.start(true);
+    if (!this._preserveStateOnReset) {
+      this._loop = 0;
+      this._lastFrameTime = -1;
+      this._detachTickerListener();
+      this._setState('idle');
     }
   }
 
+  play(loop: number = 0) {
+    if (this._state !== 'idle' || this._currTime !== 0) {
+      this._resetStoryForRestart();
+    }
+
+    const totalTime = this.totalTime;
+    this._loop = loop;
+    this._currTime = 0;
+    this._lastFrameTime = -1;
+    this._attachTickerListener();
+    this._setState('playing');
+    if (totalTime <= 0 && !this._loop) {
+      // 没有动画，且不循环也不持续，直接定位到0s
+      this.tickTo(0);
+      this._finishPlayback();
+    } else {
+      // 其他环境都需要走ticker
+      this._ticker?.start(true);
+    }
+  }
+
+  pause() {
+    if (this._state !== 'playing') {
+      return;
+    }
+    this._lastFrameTime = -1;
+    this._detachTickerListener();
+    this._setState('paused');
+  }
+
+  resume() {
+    if (this._state !== 'paused') {
+      return;
+    }
+    this._lastFrameTime = -1;
+    this._attachTickerListener();
+    this._ticker?.start(true);
+    this._setState('playing');
+  }
+
   protected handlerTick = (delta?: number) => {
+    if (this._state !== 'playing') {
+      return;
+    }
+
     const time = Date.now();
     if (delta === void 0) {
       if (this._lastFrameTime >= 0) {
@@ -112,28 +181,29 @@ export class Player implements IPlayer {
     }
     this._lastFrameTime = time;
 
-    const totalTime = this._scheduler.getTotalTime();
-    let currTime = this._currTime;
+    const totalTime = this.totalTime;
+    const currTime = this._currTime;
+    let nextTime = currTime + delta;
 
     // 如果是循环播放，_currTime按周期计算
     if (this._loop > 0) {
       if (totalTime <= 0) {
-        currTime = 0;
-      } else {
-        if (currTime + delta > totalTime) {
-          currTime = currTime + delta;
-          while (currTime > totalTime) {
-            currTime = currTime - totalTime;
-          }
-        }
+        nextTime = 0;
+      } else if (nextTime > totalTime) {
+        nextTime = nextTime % totalTime;
       }
     }
 
     if (!this._loop && currTime === totalTime) {
+      this._finishPlayback();
       return;
     }
 
-    this.tickTo(this._loop >= 0 ? Math.min(currTime + delta, totalTime) : currTime + delta);
+    this.tickTo(this._loop >= 0 ? Math.min(nextTime, totalTime) : nextTime);
+
+    if (!this._loop && this._currTime >= totalTime) {
+      this._finishPlayback();
+    }
   };
 
   setViewScale(offsetX: number, offsetY: number, scaleX: number, scaleY: number, params: IViewSizeParams) {
@@ -153,10 +223,68 @@ export class Player implements IPlayer {
   }
 
   release() {
+    this._detachTickerListener();
+    this.removeAllListeners();
     this._actionProcessor.release();
     this._scheduler.release();
-    this._ticker.removeListener('tick', this.handlerTick);
     this._ticker = null;
     // globalTickerStore.releaseGlobalTicker();
+  }
+
+  protected _attachTickerListener() {
+    if (!this._ticker || this._tickerListening) {
+      return;
+    }
+    this._ticker.addListener('tick', this.handlerTick);
+    this._tickerListening = true;
+  }
+
+  protected _detachTickerListener() {
+    if (!this._ticker || !this._tickerListening) {
+      return;
+    }
+    this._ticker.removeListener('tick', this.handlerTick);
+    this._tickerListening = false;
+  }
+
+  protected _setState(state: IPlayerState) {
+    if (this._state === state) {
+      return;
+    }
+    const previousState = this._state;
+    this._state = state;
+    const event: IPlayerStateChangeEvent = {
+      state,
+      previousState,
+      currentTime: this.currentTime,
+      totalTime: this.totalTime
+    };
+    this.emit('stateChange', event);
+  }
+
+  protected _resetStoryForRestart() {
+    if (!this._story) {
+      return;
+    }
+    this._preserveStateOnReset = true;
+    try {
+      this._story.reset();
+    } finally {
+      this._preserveStateOnReset = false;
+    }
+  }
+
+  protected _finishPlayback() {
+    if (this._state === 'ended') {
+      return;
+    }
+    this._lastFrameTime = -1;
+    this._detachTickerListener();
+    this._setState('ended');
+    const event: IPlayerEndEvent = {
+      currentTime: this.currentTime,
+      totalTime: this.totalTime
+    };
+    this.emit('end', event);
   }
 }
