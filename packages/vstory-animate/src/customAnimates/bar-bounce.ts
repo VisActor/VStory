@@ -1,6 +1,6 @@
 import type { EasingType } from '@visactor/vrender';
 import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender';
-import { createCollapsedBarRect, isVerticalBarRect, normalizeBarRect } from './bar-utils';
+import { createCollapsedBarRect, isVerticalBarRect, normalizeBarRect, type IBarRectAnimateProps } from './bar-utils';
 
 export const barBounce1Str =
   'M0,0 C0.126,0.382 0.06,0.254 0.105,0.467 0.159,0.729 0.3,1.173 0.38,1.173 0.476,1.173 0.512,0.909 0.578,0.9 0.632,0.892 0.685,1.084 0.735,1.085 0.784,1.085 0.843,0.966 0.887,0.966 0.94,0.966 0.984,1 1,1';
@@ -10,17 +10,18 @@ export const barBounce2Str =
 const barBounce1 = generatorPathEasingFunc(barBounce1Str);
 const barBounce2 = generatorPathEasingFunc(barBounce2Str);
 
-export class BarBounce extends ACustomAnimate<{ y?: number; y1?: number; x?: number; x1?: number }> {
+export class BarBounce extends ACustomAnimate<IBarRectAnimateProps> {
   static label: string = 'bar-bounce';
 
   static delayPerTime: number = 50;
   static enterPerTime: number = 300;
 
   declare valid: boolean;
+  protected vertical: boolean;
 
   constructor(
-    from: { y?: number; y1?: number; x?: number; x1?: number } | null,
-    to: { y?: number; y1?: number; x?: number; x1?: number } | null,
+    from: IBarRectAnimateProps | null,
+    to: IBarRectAnimateProps | null,
     duration: number,
     easing: EasingType,
     params: any
@@ -29,6 +30,7 @@ export class BarBounce extends ACustomAnimate<{ y?: number; y1?: number; x?: num
     const target = normalizeBarRect(to, from);
     const f = createCollapsedBarRect(target, vertical);
     super(f, target, duration, easing, params);
+    this.vertical = vertical;
   }
 
   getEndProps(): Record<string, any> {
@@ -49,7 +51,7 @@ export class BarBounce extends ACustomAnimate<{ y?: number; y1?: number; x?: num
     const r1 = barBounce1!(ratio);
     const r2 = barBounce2!(ratio);
     // const
-    if (to.y1 != null) {
+    if (this.vertical) {
       out.y = from.y! + (to.y! - from.y!) * r1;
       const height = to.y1! - to.y!;
       const dh = height * r2;

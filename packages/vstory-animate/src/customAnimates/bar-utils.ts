@@ -52,14 +52,20 @@ export function normalizeBarRect(
 export function createCollapsedBarRect(rect: IBarRectAnimateProps, vertical: boolean): IBarRectAnimateProps {
   if (vertical) {
     return {
-      ...rect,
+      x: rect.x,
+      x1: rect.x1,
+      width: rect.width,
+      cornerRadius: rect.cornerRadius,
       y: rect.y1 ?? rect.y ?? 0,
       y1: rect.y1 ?? rect.y ?? 0
     };
   }
 
   return {
-    ...rect,
+    y: rect.y,
+    y1: rect.y1,
+    height: rect.height,
+    cornerRadius: rect.cornerRadius,
     x: rect.x1 ?? rect.x ?? 0,
     x1: rect.x1 ?? rect.x ?? 0
   };
