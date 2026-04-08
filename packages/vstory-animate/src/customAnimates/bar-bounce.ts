@@ -56,13 +56,21 @@ export class BarBounce extends ACustomAnimate<IBarRectAnimateProps> {
       const height = to.y1! - to.y!;
       const dh = height * r2;
       out.y1 = Math.min(out.y + dh, this.to.y1!);
+      out.height = Math.max(out.y1 - out.y, 0);
     } else {
       out.x = from.x! + (to.x! - from.x!) * r1;
       const width = to.x! - to.x1!;
       const dw = width * r2;
       out.x1 = Math.max(out.x - dw, this.to.x1!);
+      out.width = Math.max(out.x - out.x1, 0);
     }
 
-    // out.y1 = from.y1 + (to.y1 - from.y1) * r;
+    if (!this.target) {
+      return;
+    }
+
+    Object.assign(this.target.attribute, out);
+    this.target.addUpdatePositionTag();
+    this.target.addUpdateShapeAndBoundsTag();
   }
 }

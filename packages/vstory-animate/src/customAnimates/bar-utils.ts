@@ -55,6 +55,7 @@ export function createCollapsedBarRect(rect: IBarRectAnimateProps, vertical: boo
       x: rect.x,
       x1: rect.x1,
       width: rect.width,
+      height: 0,
       cornerRadius: rect.cornerRadius,
       y: rect.y1 ?? rect.y ?? 0,
       y1: rect.y1 ?? rect.y ?? 0
@@ -65,6 +66,7 @@ export function createCollapsedBarRect(rect: IBarRectAnimateProps, vertical: boo
     y: rect.y,
     y1: rect.y1,
     height: rect.height,
+    width: 0,
     cornerRadius: rect.cornerRadius,
     x: rect.x1 ?? rect.x ?? 0,
     x1: rect.x1 ?? rect.x ?? 0
