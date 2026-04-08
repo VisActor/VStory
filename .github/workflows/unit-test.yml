@@ -26,6 +26,10 @@ jobs:
           cache: 'npm'
           cache-dependency-path: './common/config/rush/pnpm-lock.yaml'
 
+      # Add this step before Rush install
+      - name: Install canvas system dependencies
+        run: brew install pkg-config cairo pango libpng jpeg giflib librsvg
+
       # # 查看字体
       # - name: View Fonts
       #   run: |
