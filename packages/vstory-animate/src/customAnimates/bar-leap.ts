@@ -1,6 +1,7 @@
 import type { EasingType, ICustomPath2D } from '@visactor/vrender';
 import { ACustomAnimate, CustomPath2D, generatorPathEasingFunc } from '@visactor/vrender';
 import type { IPointLike } from '@visactor/vutils';
+import { isVerticalBarRect, normalizeBarRect } from './bar-utils';
 
 export const barLeap1Str = 'M0,0 C0.083,0.163 0.179,1 0.6,1 0.814,1 0.898,1 1,1';
 export const barLeap2Str = 'M0,0 C0.27,0 0.179,0 0.6,0 0.632,0 0.782,-0.132 0.818,-0.132 0.868,-0.132 0.972,0 1,0';
@@ -29,21 +30,23 @@ export class BarLeap extends ACustomAnimate<{
   protected vertical: boolean;
 
   constructor(
-    from: { y: number; y1?: number; x: number; x1?: number; width?: number; height?: number },
-    to: { y: number; y1?: number; x: number; x1?: number; width?: number; height?: number },
+    from: { y: number; y1?: number; x: number; x1?: number; width?: number; height?: number } | null,
+    to: { y: number; y1?: number; x: number; x1?: number; width?: number; height?: number } | null,
     duration: number,
     easing: EasingType,
     params: any
   ) {
-    super({ ...from, cornerRadius: 0 }, to, duration, easing, params);
-    this.vertical = to.y1 != null;
-    const centerX = to.x1 != null ? (to.x + to.x1) / 2 : to.x + to.width! / 2;
-    const centerY = to.y1 != null ? (to.y + to.y1) / 2 : to.y + to.height! / 2;
-    this.toCenter = { x: centerX - to.x, y: centerY - to.y };
+    const target = normalizeBarRect(to, from);
+    const start = normalizeBarRect(from, target);
+    super({ ...start, cornerRadius: 0 }, target, duration, easing, params);
+    this.vertical = isVerticalBarRect(from, to);
+    const centerX = (target.x! + target.x1!) / 2;
+    const centerY = (target.y! + target.y1!) / 2;
+    this.toCenter = { x: centerX - target.x!, y: centerY - target.y! };
     if (this.vertical) {
-      this.fromCenter = { x: centerX + 200 - to.x, y: centerY - 600 - to.y };
+      this.fromCenter = { x: centerX + 200 - target.x!, y: centerY - 600 - target.y! };
     } else {
-      this.fromCenter = { x: centerX + 600 - to.x, y: centerY - 200 - to.y };
+      this.fromCenter = { x: centerX + 600 - target.x!, y: centerY - 200 - target.y! };
     }
   }
 
