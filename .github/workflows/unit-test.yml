@@ -10,11 +10,11 @@ on:
 jobs:
   build:
     runs-on:
-      - macOS-13
+      - macOS-latest
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -25,6 +25,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: './common/config/rush/pnpm-lock.yaml'
+
+      # Add this step before Rush install
+      - name: Install canvas system dependencies
+        run: brew install pkg-config cairo pango libpng jpeg giflib librsvg
 
       # # 查看字体
       # - name: View Fonts
@@ -37,6 +41,8 @@ jobs:
       - name: Install rush
         run: node common/scripts/install-run-rush.js update --bypass-policy
       - run: node common/scripts/install-run-rush.js build --only tag:package
+        env:
+          NODE_OPTIONS: '--max-old-space-size=8192'
       - name: Pre unit test
         run: cd packages/vstory && node ../../common/scripts/install-run-rushx.js test && cd ../..
       - run: node common/scripts/install-run-rush.js test --only tag:package
