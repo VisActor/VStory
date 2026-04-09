@@ -1,6 +1,20 @@
 import type { EasingType } from '@visactor/vrender';
 import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender';
 
+interface IPieLeapAnimateProps {
+  y?: number;
+  x?: number;
+  innerRadius?: number;
+  outerRadius?: number;
+}
+
+interface INormalizedPieLeapAnimateProps extends IPieLeapAnimateProps {
+  y: number;
+  x: number;
+  innerRadius: number;
+  outerRadius: number;
+}
+
 export const pieLeap1Str =
   'M0,0 C0,0.301 0.256,1.032 0.607,1.033 0.763,1.033 0.752,0.983 0.86,0.983 0.978,0.983 0.972,1 1,1';
 export const pieLeap2Str =
@@ -8,6 +22,26 @@ export const pieLeap2Str =
 
 const pieLeap1 = generatorPathEasingFunc(pieLeap1Str);
 const pieLeap2 = generatorPathEasingFunc(pieLeap2Str);
+
+function normalizePieLeapProps(
+  arc?: IPieLeapAnimateProps | null,
+  fallback?: IPieLeapAnimateProps | null
+): INormalizedPieLeapAnimateProps {
+  const source = arc ?? {};
+  const ref = fallback ?? {};
+
+  const innerRadius = source.innerRadius ?? ref.innerRadius ?? 0;
+  const outerRadius = source.outerRadius ?? ref.outerRadius ?? innerRadius;
+
+  return {
+    ...ref,
+    ...source,
+    x: source.x ?? ref.x ?? 0,
+    y: source.y ?? ref.y ?? 0,
+    innerRadius,
+    outerRadius
+  };
+}
 
 export class PieLeap extends ACustomAnimate<{ y: number; x: number; innerRadius: number; outerRadius: number }> {
   static label: string = 'pie-leap';
@@ -17,19 +51,21 @@ export class PieLeap extends ACustomAnimate<{ y: number; x: number; innerRadius:
   declare valid: boolean;
 
   constructor(
-    from: { y: number; x: number; innerRadius: number; outerRadius: number },
-    to: { y: number; x: number; innerRadius: number; outerRadius: number },
+    from: { y: number; x: number; innerRadius: number; outerRadius: number } | null,
+    to: { y: number; x: number; innerRadius: number; outerRadius: number } | null,
     duration: number,
     easing: EasingType,
     params: any
   ) {
+    const target = normalizePieLeapProps(to, from);
+    const start = normalizePieLeapProps(from, target);
     const f = {
-      y: from.y - 500,
-      x: from.x + 500,
-      innerRadius: from.innerRadius,
-      outerRadius: (from.innerRadius + from.outerRadius) / 2
+      y: start.y - 500,
+      x: start.x + 500,
+      innerRadius: start.innerRadius,
+      outerRadius: (start.innerRadius + start.outerRadius) / 2
     };
-    super(f, to, duration, easing, params);
+    super(f, target, duration, easing, params);
   }
 
   getEndProps(): Record<string, any> {
