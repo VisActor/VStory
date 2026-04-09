@@ -2,7 +2,7 @@ import { BarBounce } from '../../src/customAnimates/bar-bounce';
 import { BarLeap } from '../../src/customAnimates/bar-leap';
 import { PieLeap } from '../../src/customAnimates/pie-leap';
 
-describe('custom bar animates', () => {
+describe('custom animates', () => {
   it('should not crash when BarBounce receives a null from rect', () => {
     const animate = new BarBounce(null, { x: 20, x1: 60, y: 10, y1: 110 }, 1000, 'linear' as any, {});
     const out: Record<string, any> = {};
