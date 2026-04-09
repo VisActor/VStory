@@ -1,5 +1,12 @@
 import { VChartVisibilityActionProcessor } from '../../src/processor/chart/visibility';
 
+jest.mock('@visactor/vstory-core', () => ({
+  globalProcessorRegistry: { registerProcessor: jest.fn() },
+  CharacterType: {}
+}));
+
+jest.mock('@visactor/vstory-animate', () => ({}));
+
 function createPayload() {
   return {
     animation: {
@@ -23,7 +30,7 @@ describe('VChartVisibilityActionProcessor', () => {
       type: 'group',
       setAttribute: jest.fn(),
       executeAnimation: jest.fn(),
-      forEachChildren: cb => cb(childRect, 0)
+      forEachChildren: (cb: any) => cb(childRect, 0)
     };
     const mark = {
       type: 'rect',
@@ -36,7 +43,7 @@ describe('VChartVisibilityActionProcessor', () => {
 
     jest.spyOn(processor, 'getMarkAnimateConfig').mockReturnValue({ type: 'growHeightIn' });
 
-    processor.commonSeriesAppear({}, series, 'appear', createPayload(), true);
+    (processor as any).commonSeriesAppear({}, series, 'appear', createPayload(), true);
 
     expect(product.setAttribute).toHaveBeenCalledWith('visibleAll', true);
     expect(product.executeAnimation).toHaveBeenCalledWith({ type: 'growHeightIn' });
@@ -62,7 +69,7 @@ describe('VChartVisibilityActionProcessor', () => {
 
     jest.spyOn(processor, 'getMarkAnimateConfig').mockReturnValue({ type: 'growHeightIn' });
 
-    processor.commonSeriesAppear({}, series, 'appear', createPayload(), true);
+    (processor as any).commonSeriesAppear({}, series, 'appear', createPayload(), true);
 
     expect(product.executeAnimation).toHaveBeenCalledWith({ type: 'growHeightIn' });
     expect(product.getFinalAttribute()).toEqual(product.attribute);

@@ -277,7 +277,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       const config = this.getMarkAnimateConfig(vchart, mark, markIndex, action, series, payload);
       const product = mark.getProduct();
       if (isRun) {
-        if (mark.type === 'rect') {
+        if (mark.type === 'rect' || mark.type === 'rect3d') {
           this.ensureRectMarkFinalAttributes(product as IGraphic | IGroup | null);
         }
         product?.setAttribute?.('visibleAll', true);
@@ -336,7 +336,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
 
     if (typeof targetGraphic.forEachChildren === 'function') {
       targetGraphic.forEachChildren(child => {
-        this.ensureRectMarkFinalAttributes(child);
+        this.ensureRectMarkFinalAttributes(child as IGraphic | IGroup);
       });
     }
   }
