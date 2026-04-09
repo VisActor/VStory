@@ -1,5 +1,6 @@
 import { BarBounce } from '../../src/customAnimates/bar-bounce';
 import { BarLeap } from '../../src/customAnimates/bar-leap';
+import { PieLeap } from '../../src/customAnimates/pie-leap';
 
 describe('custom bar animates', () => {
   it('should not crash when BarBounce receives a null from rect', () => {
@@ -44,5 +45,18 @@ describe('custom bar animates', () => {
 
     expect(pathProxy.clear).toHaveBeenCalled();
     expect(pathProxy.moveTo).toHaveBeenCalled();
+  });
+
+  it('should not crash when PieLeap receives a null from arc', () => {
+    const animate = new PieLeap(null, { x: 40, y: 60, innerRadius: 20, outerRadius: 80 }, 1000, 'linear' as any, {});
+    const out: Record<string, any> = {};
+
+    animate.onUpdate(false, 0.5, out);
+
+    expect(animate.getFromProps()).toMatchObject({ x: 540, y: -440, innerRadius: 20, outerRadius: 50 });
+    expect(animate.getEndProps()).toMatchObject({ x: 40, y: 60, innerRadius: 20, outerRadius: 80 });
+    expect(Number.isFinite(out.x)).toBe(true);
+    expect(Number.isFinite(out.y)).toBe(true);
+    expect(Number.isFinite(out.outerRadius)).toBe(true);
   });
 });
