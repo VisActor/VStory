@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   testTimeout: 30000,
   testRegex: '/__tests__/.*test\\.ts?$',
@@ -11,7 +9,7 @@ module.exports = {
       resolveJsonModule: true,
       esModuleInterop: true,
       experimentalDecorators: true,
-      module: 'ESNext',
+      module: 'CommonJS',
       tsconfig: './tsconfig.test.json'
     },
     __DEV__: true
