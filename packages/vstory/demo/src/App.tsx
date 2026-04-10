@@ -73,6 +73,7 @@ import { RectComponent } from './demos/component/rect';
 import { TableInfographic } from './demos/infographic/infographic-table';
 import { ComponentsEdit } from './demos/edit/components';
 import { ImageComponent } from './demos/component/image';
+import { PathComponent } from './demos/component/path';
 import { ShapeComponent } from './demos/component/shape';
 import { ShowHeader } from './demos/table/runtime/show-header';
 import { TableTheme } from './demos/table/runtime/theme';
@@ -83,7 +84,6 @@ import { DeepseekShockwave } from './demos/infographic/deepseek-shockwave';
 import { News } from './demos/works/News/News';
 import { TariffWar } from './demos/works/tariff-war';
 import { Altraman } from './demos/works/altraman';
-
 
 type MenuItem = {
   name: string;
@@ -271,6 +271,10 @@ const App = () => {
         {
           name: 'ShapeComponent',
           component: ShapeComponent
+        },
+        {
+          name: 'PathComponent',
+          component: PathComponent
         }
       ]
     },
@@ -356,7 +360,6 @@ const App = () => {
         {
           name: 'FilmAnalysis',
           component: FilmAnalysis
-
         }
       ]
     },

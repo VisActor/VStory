@@ -90,6 +90,11 @@ export const DefaultTheme: {
           list: ['BaseGraphic']
         }
       },
+      Path: {
+        runtime: {
+          list: ['BaseGraphic']
+        }
+      },
       Timeline: {
         runtime: {
           list: ['BaseGraphic']

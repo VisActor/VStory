@@ -1,5 +1,6 @@
 import { registerImageAction } from './image';
 import { registerLineAction } from './line';
+import { registerPathAction } from './path';
 import { registerRectAction } from './rect';
 import { registerShapeAction } from './shape';
 import { registerTextAction } from './text';
@@ -10,6 +11,7 @@ import { registerArcAction } from './arc';
 
 export * from './image';
 export * from './line';
+export * from './path';
 export * from './polygon';
 export * from './rect';
 export * from './shape';
@@ -23,6 +25,7 @@ export function registerVComponentAction() {
   registerRectAction();
   registerImageAction();
   registerLineAction();
+  registerPathAction();
   registerShapeAction();
   registerTimelineAction();
   registerUnitAction();

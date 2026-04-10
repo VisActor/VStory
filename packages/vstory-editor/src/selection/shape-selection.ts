@@ -6,7 +6,7 @@ export class ShapeSelection extends RichTextSelectionCommon implements IEditSele
   readonly level = 3;
   readonly type: string = 'shape';
   readonly editCharacterType: string = CharacterType.SHAPE;
-  readonly supportedCharacterType: string[] = [CharacterType.SHAPE];
+  readonly supportedCharacterType: string[] = [CharacterType.SHAPE, 'Path'];
 
   startEdit(actionInfo: IEditActionInfo) {
     super.startEdit(actionInfo);
