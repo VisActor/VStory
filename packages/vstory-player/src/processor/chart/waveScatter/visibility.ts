@@ -27,7 +27,12 @@ export class WaveScatterVisibilityActionProcessor extends VChartVisibilityAction
     }
     const { duration, easing, loop, custom } = waveAnimate;
     const product = mark.getProduct();
-    const graphics = product.getAllElements().map((item: any) => item.getGraphicItem());
+    const graphics: any[] = [];
+    if (product && typeof (product as any).forEachChildren === 'function') {
+      (product as any).forEachChildren((child: any) => {
+        graphics.push(child);
+      });
+    }
     if (!graphics.length) {
       return;
     }
