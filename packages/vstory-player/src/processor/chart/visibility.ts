@@ -7,7 +7,7 @@ import type { IChartVisibilityAction, IChartVisibilityPayload } from './interfac
 import { transformMap } from './transformFunc/transformMap';
 import type { AxisBaseAttributes } from '@visactor/vrender-components';
 import { checkArrayOrder } from '../../utils/checkArrayOrder';
-import type { IGroup } from '@visactor/vrender-core';
+import type { IGraphic, IGroup } from '@visactor/vrender-core';
 import { ACTION_TYPE } from '../constants/action';
 import { CommonBounceActionProcessor } from '../component/common/bounce';
 import { VChartUpdateActionProcessor } from './update';
@@ -277,6 +277,9 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       const config = this.getMarkAnimateConfig(vchart, mark, markIndex, action, series, payload);
       const product = mark.getProduct();
       if (isRun) {
+        if (mark.type === 'rect' || mark.type === 'rect3d') {
+          this.ensureRectMarkFinalAttributes(product as IGraphic | IGroup | null);
+        }
         product?.setAttribute?.('visibleAll', true);
         (product as any)?.executeAnimation?.(config || {});
       } else {
@@ -314,6 +317,43 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
         character: this.character
       })
     );
+  }
+
+  private ensureRectMarkFinalAttributes(graphic: IGraphic | IGroup | null | undefined) {
+    if (!graphic) {
+      return;
+    }
+
+    const targetGraphic = graphic as IGraphic & {
+      type?: string;
+      forEachChildren?: (cb: (child: IGraphic | IGroup, index: number) => void | boolean) => void;
+      __vstoryGetFinalAttributeFallbackPatched?: boolean;
+    };
+
+    if (targetGraphic.type === 'rect' || targetGraphic.type === 'rect3d') {
+      this.patchGraphicFinalAttribute(targetGraphic);
+    }
+
+    if (typeof targetGraphic.forEachChildren === 'function') {
+      targetGraphic.forEachChildren(child => {
+        this.ensureRectMarkFinalAttributes(child as IGraphic | IGroup);
+      });
+    }
+  }
+
+  private patchGraphicFinalAttribute(
+    graphic: IGraphic & {
+      __vstoryGetFinalAttributeFallbackPatched?: boolean;
+      getFinalAttribute?: () => Record<string, any>;
+    }
+  ) {
+    if (graphic.__vstoryGetFinalAttributeFallbackPatched || typeof graphic.getFinalAttribute !== 'function') {
+      return;
+    }
+
+    const originalGetFinalAttribute = graphic.getFinalAttribute.bind(graphic);
+    graphic.getFinalAttribute = () => originalGetFinalAttribute() ?? (graphic.attribute as Record<string, any>);
+    graphic.__vstoryGetFinalAttributeFallbackPatched = true;
   }
 
   static rectPayload = (seriesType: string) => {
