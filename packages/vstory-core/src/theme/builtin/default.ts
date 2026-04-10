@@ -1,4 +1,5 @@
 import { formatValue } from '../../character/common/utils/format';
+import { CharacterType } from '../../constants/character';
 import type { ITheme } from '../interface';
 
 export const DefaultTheme: {
@@ -90,7 +91,7 @@ export const DefaultTheme: {
           list: ['BaseGraphic']
         }
       },
-      Path: {
+      [CharacterType.PATH]: {
         runtime: {
           list: ['BaseGraphic']
         }

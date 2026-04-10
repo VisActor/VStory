@@ -1,4 +1,5 @@
 import { createCanvas, createImageData, loadImage } from 'canvas';
+import { CharacterType } from '../../src/constants/character';
 import { Player } from '../../src/core/player';
 import { Story } from '../../src/core/story';
 import { registerCharacters } from '../../src/module/character';
@@ -21,7 +22,7 @@ describe('PathCharacter', () => {
     story.init(player);
 
     story.addCharacter({
-      type: 'Path',
+      type: CharacterType.PATH,
       id: 'path-character',
       zIndex: 1,
       position: {

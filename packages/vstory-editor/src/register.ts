@@ -18,7 +18,7 @@ export function registerAllSelection() {
   Edit.registerEditSelection(CharacterType.RECT, RectSelection);
   Edit.registerEditSelection(CharacterType.IMAGE, ImageSelection);
   Edit.registerEditSelection(CharacterType.SHAPE, ShapeSelection);
-  Edit.registerEditSelection('Path', ShapeSelection);
+  Edit.registerEditSelection(CharacterType.PATH, ShapeSelection);
   // Edit.registerEditSelection('chart', ChartSelection);
   // Edit.registerEditSelection('box-selection', BoxSelection);
   // Edit.registerEditSelection('series-mark-selection', SeriesMarkSelection);

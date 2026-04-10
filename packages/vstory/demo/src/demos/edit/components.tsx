@@ -1,5 +1,5 @@
 import React, { createRef, useEffect } from 'react';
-import { Player, Story } from '../../../../../vstory-core/src';
+import { CharacterType, Player, Story } from '../../../../../vstory-core/src';
 import { registerAllSelection, SnapshotPlugin } from '../../../../../vstory-editor/src';
 import { Edit, registerAll } from '../../../../src';
 
@@ -95,7 +95,7 @@ export const ComponentsEdit = () => {
     });
 
     story.addCharacterWithAppear({
-      type: 'Path',
+      type: CharacterType.PATH,
       id: 'path-edit',
       zIndex: 2,
       position: {

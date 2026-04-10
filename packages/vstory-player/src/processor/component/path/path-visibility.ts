@@ -1,4 +1,4 @@
-import { globalProcessorRegistry } from '@visactor/vstory-core';
+import { CharacterType, globalProcessorRegistry } from '@visactor/vstory-core';
 import { CommonVisibilityActionProcessor } from '../common/visibility';
 import { ACTION_TYPE } from '../../constants/action';
 import { CommonStyleActionProcessor } from '../common/style';
@@ -20,7 +20,7 @@ export class PathVisibilityActionProcessor extends CommonVisibilityActionProcess
 }
 
 export function registerPathVisibilityAction() {
-  globalProcessorRegistry.registerProcessor('Path', {
+  globalProcessorRegistry.registerProcessor(CharacterType.PATH, {
     [ACTION_TYPE.APPEAR]: new PathVisibilityActionProcessor(),
     [ACTION_TYPE.DISAPPEAR]: new PathVisibilityActionProcessor(),
     [ACTION_TYPE.STYLE]: new CommonStyleActionProcessor(),

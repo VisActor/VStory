@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Player, Story } from '../../../../../vstory-core/src';
+import { CharacterType, Player, Story } from '../../../../../vstory-core/src';
 import { registerAll } from '../../../../src';
 
 registerAll();
@@ -21,7 +21,7 @@ export const PathComponent = () => {
 
     story.addCharacter(
       {
-        type: 'Path',
+        type: CharacterType.PATH,
         id: 'path-fill',
         zIndex: 1,
         position: {
@@ -69,7 +69,7 @@ export const PathComponent = () => {
 
     story.addCharacter(
       {
-        type: 'Path',
+        type: CharacterType.PATH,
         id: 'path-stroke',
         zIndex: 1,
         position: {
