@@ -33,11 +33,11 @@ export class PathComponent extends BaseComponentWithText {
     const { graphic, padding } = this.attribute as IPathComponentAttributes;
     const attrs = { ...graphic };
 
-    if (!attrs.x) {
-      attrs.x = padding.left;
+    if (attrs.x == null) {
+      attrs.x = padding?.left ?? 0;
     }
-    if (!attrs.y) {
-      attrs.y = padding.top;
+    if (attrs.y == null) {
+      attrs.y = padding?.top ?? 0;
     }
 
     // Path data keeps its own geometry. Here we only provide default placement

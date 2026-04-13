@@ -8,8 +8,6 @@ import { CommonBounceActionProcessor } from '../common/bounce';
 import { clipRangeInstance } from '../../common/clipRange-processor';
 
 export class PathVisibilityActionProcessor extends CommonVisibilityActionProcessor {
-  name: 'appearOrDisAppear';
-
   getEffectInstance(effect: string, appear: boolean) {
     switch (effect) {
       case 'clipRange':
