@@ -354,6 +354,107 @@ jobs:
           BODY="This PR merges release branch $BRANCH into main."
           gh pr create --base main --head "$BRANCH" --title "$TITLE" --body "$BODY"
 
+      - name: Create GitHub Release (release)
+        if: startsWith(github.ref_name, 'release/')
+        env:
+          VERSION: ${{ steps.package_version_release.outputs.current_version }}
+          GH_TOKEN: ${{ secrets.CREATE_TAG_RELEASE_TOKEN || github.token }}
+        run: |
+          set -euo pipefail
+          if [ -z "${VERSION}" ]; then
+            echo "Missing release version."
+            exit 1
+          fi
+
+          TAG="v${VERSION}"
+
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            echo "GitHub Release ${TAG} already exists, skip creating."
+            exit 0
+          fi
+
+          git fetch --tags --force
+          TARGET_SHA="$(git rev-parse HEAD)"
+
+          if git rev-parse "refs/tags/${TAG}" >/dev/null 2>&1; then
+            echo "Tag ${TAG} already exists, use existing tag."
+          fi
+
+          node <<'NODE'
+          const fs = require('fs');
+
+          const version = process.env.VERSION;
+          const changelogPath = 'docs/assets/changelog/en/changelog.md';
+
+          if (!fs.existsSync(changelogPath)) {
+            console.error(`Missing changelog file: ${changelogPath}`);
+            process.exit(1);
+          }
+
+          const content = fs.readFileSync(changelogPath, 'utf8');
+
+          function escapeRegExp(str) {
+            return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+
+          const headerPattern = new RegExp('^#\\s*v?' + escapeRegExp(version) + '\\b', 'm');
+          const match = headerPattern.exec(content);
+
+          if (!match) {
+            console.error('No changelog block for version', version, 'found in release changelog.');
+            process.exit(1);
+          }
+
+          const startIndex = match.index;
+          const rest = content.slice(startIndex);
+          const nextHeaderPattern = /^#\s*v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?[^\n]*$/gm;
+          let nextIndex = rest.length;
+          let m;
+
+          while ((m = nextHeaderPattern.exec(rest)) !== null) {
+            if (m.index > 0) {
+              nextIndex = m.index;
+              break;
+            }
+          }
+
+          const block = rest.slice(0, nextIndex).trimEnd() + '\n';
+          if (!block.trim()) {
+            console.error('Extracted changelog block is empty for version', version);
+            process.exit(1);
+          }
+
+          if (!new RegExp('^#\\s*v?' + escapeRegExp(version) + '\\b').test(block)) {
+            console.error('Extracted release body does not start with expected version header v' + version + '.');
+            process.exit(1);
+          }
+
+          const headerCount = (block.match(/^#\s*v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?[^\n]*$/gm) || []).length;
+          if (headerCount !== 1) {
+            console.error(`Extracted release body contains ${headerCount} release headers, expected exactly 1.`);
+            process.exit(1);
+          }
+
+          fs.writeFileSync('release-body.md', block, 'utf8');
+          NODE
+
+          if [ ! -s "release-body.md" ]; then
+            echo "Error: release-body.md is missing or empty."
+            exit 1
+          fi
+
+          echo "Creating GitHub Release ${TAG}."
+          if git rev-parse "refs/tags/${TAG}" >/dev/null 2>&1; then
+            gh release create "${TAG}" \
+              --title "${TAG}" \
+              --notes-file "release-body.md"
+          else
+            gh release create "${TAG}" \
+              --target "${TARGET_SHA}" \
+              --title "${TAG}" \
+              --notes-file "release-body.md"
+          fi
+
       - name: Parse semver (hotfix)
         if: startsWith(github.ref_name, 'hotfix/')
         id: semver_hotfix
