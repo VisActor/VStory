@@ -277,9 +277,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       const config = this.getMarkAnimateConfig(vchart, mark, markIndex, action, series, payload);
       const product = mark.getProduct();
       if (isRun) {
-        if (mark.type === 'rect' || mark.type === 'rect3d') {
-          this.ensureRectMarkFinalAttributes(product as IGraphic | IGroup | null);
-        }
+        this.ensureMarkFinalAttributes(product as IGraphic | IGroup | null);
         product?.setAttribute?.('visibleAll', true);
         (product as any)?.executeAnimation?.(config || {});
       } else {
@@ -319,7 +317,7 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
     );
   }
 
-  private ensureRectMarkFinalAttributes(graphic: IGraphic | IGroup | null | undefined) {
+  private ensureMarkFinalAttributes(graphic: IGraphic | IGroup | null | undefined) {
     if (!graphic) {
       return;
     }
@@ -330,13 +328,11 @@ export class VChartVisibilityActionProcessor extends VChartBaseActionProcessor {
       __vstoryGetFinalAttributeFallbackPatched?: boolean;
     };
 
-    if (targetGraphic.type === 'rect' || targetGraphic.type === 'rect3d') {
-      this.patchGraphicFinalAttribute(targetGraphic);
-    }
+    this.patchGraphicFinalAttribute(targetGraphic);
 
     if (typeof targetGraphic.forEachChildren === 'function') {
       targetGraphic.forEachChildren(child => {
-        this.ensureRectMarkFinalAttributes(child as IGraphic | IGroup);
+        this.ensureMarkFinalAttributes(child as IGraphic | IGroup);
       });
     }
   }

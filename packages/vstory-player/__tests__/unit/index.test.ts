@@ -74,4 +74,43 @@ describe('VChartVisibilityActionProcessor', () => {
     expect(product.executeAnimation).toHaveBeenCalledWith({ type: 'growHeightIn' });
     expect(product.getFinalAttribute()).toEqual(product.attribute);
   });
+
+  it('should patch line graphic final attrs to prevent growPoints crash', () => {
+    const childLine = {
+      type: 'line',
+      attribute: {
+        points: [
+          { x: 0, y: 100 },
+          { x: 50, y: 50 },
+          { x: 100, y: 80 }
+        ]
+      },
+      getFinalAttribute: jest.fn(() => undefined)
+    };
+    const product = {
+      type: 'group',
+      setAttribute: jest.fn(),
+      executeAnimation: jest.fn(),
+      forEachChildren: (cb: any) => cb(childLine, 0)
+    };
+    const mark = {
+      type: 'line',
+      getProduct: () => product
+    };
+    const series = {
+      getMarksWithoutRoot: () => [mark]
+    };
+    const processor = new VChartVisibilityActionProcessor();
+
+    jest.spyOn(processor, 'getMarkAnimateConfig').mockReturnValue({ type: 'growPointsYIn' });
+
+    (processor as any).commonSeriesAppear({}, series, 'appear', createPayload(), true);
+
+    expect(product.executeAnimation).toHaveBeenCalledWith({ type: 'growPointsYIn' });
+    // After patching, getFinalAttribute should fall back to attribute (which has points)
+    const finalAttr = childLine.getFinalAttribute();
+    expect(finalAttr).toEqual(childLine.attribute);
+    expect(finalAttr.points).toBeDefined();
+    expect(finalAttr.points).toHaveLength(3);
+  });
 });
