@@ -5,6 +5,7 @@ import { WaveScatterCharacter } from '../character/chart/character/wave-scatter'
 import { ArcCharacter } from '../character/component/character/arc';
 import { ImageCharacter } from '../character/component/character/image';
 import { LineCharacter } from '../character/component/character/line';
+import { PathCharacter } from '../character/component/character/path';
 import { PolygonCharacter } from '../character/component/character/polygon';
 import { RectCharacter } from '../character/component/character/rect';
 import { ShapeCharacter } from '../character/component/character/shape';
@@ -63,6 +64,7 @@ export function registerCharacters() {
   StoryFactory.registerCharacter(LineCharacter.type, LineCharacter);
   StoryFactory.registerCharacter(ShapeCharacter.type, ShapeCharacter);
   StoryFactory.registerCharacter(PolygonCharacter.type, PolygonCharacter);
+  StoryFactory.registerCharacter(PathCharacter.type, PathCharacter);
   StoryFactory.registerCharacter(ArcCharacter.type, ArcCharacter);
 
   StoryFactory.registerCharacter(TimelineCharacter.type, TimelineCharacter);

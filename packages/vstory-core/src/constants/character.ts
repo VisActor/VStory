@@ -17,6 +17,7 @@ export const enum CharacterType {
   IMAGE = 'Image',
   LINE = 'Line',
   POLYGON = 'Polygon',
+  PATH = 'Path',
   ARC = 'Arc',
   TIMELINE = 'Timeline',
   UNIT = 'Unit',
