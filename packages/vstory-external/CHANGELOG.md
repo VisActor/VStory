@@ -1,6 +1,11 @@
 # Change Log - @visactor/vstory-external
 
-This log was last generated on Wed, 11 Mar 2026 12:56:48 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Apr 2026 03:36:29 GMT and should not be manually modified.
+
+## 0.0.26
+Mon, 13 Apr 2026 03:36:29 GMT
+
+_Version update only_
 
 ## 0.0.25
 Wed, 11 Mar 2026 12:56:48 GMT

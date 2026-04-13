@@ -40,7 +40,7 @@ function writePrereleaseVersion(nextBump, preReleaseName, nextVersionStr) {
 
   let nextVersion = nextVersionStr ? `${nextVersionStr}` : `${curVersion.major}.${curVersion.minor}.${curVersion.patch}`;
 
-  if (preReleaseName) {
+  if (preReleaseName && preReleaseName !== 'none') {
     nextVersion = `${nextVersion}-${preReleaseName}`;
   }
   const published = projects.filter(project => project.shouldPublish).map(project => project.packageName);
