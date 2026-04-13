@@ -1,4 +1,5 @@
 import { formatValue } from '../../character/common/utils/format';
+import { CharacterType } from '../../constants/character';
 import type { ITheme } from '../interface';
 
 export const DefaultTheme: {
@@ -86,6 +87,11 @@ export const DefaultTheme: {
         }
       },
       Polygon: {
+        runtime: {
+          list: ['BaseGraphic']
+        }
+      },
+      [CharacterType.PATH]: {
         runtime: {
           list: ['BaseGraphic']
         }

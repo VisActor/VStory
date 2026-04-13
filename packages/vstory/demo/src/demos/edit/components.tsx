@@ -1,10 +1,12 @@
 import React, { createRef, useEffect } from 'react';
-import { Player, Story } from '../../../../../vstory-core/src';
+import { CharacterType, Player, Story } from '../../../../../vstory-core/src';
 import { registerAllSelection, SnapshotPlugin } from '../../../../../vstory-editor/src';
 import { Edit, registerAll } from '../../../../src';
 
 registerAll();
 registerAllSelection();
+
+const editorPath = 'M60,0 L120,60 L60,120 L0,60 Z';
 
 export const ComponentsEdit = () => {
   const id = 'ComponentsEdit';
@@ -92,6 +94,40 @@ export const ComponentsEdit = () => {
       }
     });
 
+    story.addCharacterWithAppear({
+      type: CharacterType.PATH,
+      id: 'path-edit',
+      zIndex: 2,
+      position: {
+        top: 220,
+        left: 260,
+        width: 160,
+        height: 160
+      },
+      options: {
+        padding: {
+          top: 20,
+          right: 20,
+          bottom: 20,
+          left: 20
+        },
+        graphic: {
+          path: editorPath,
+          fill: '#f59e0b',
+          stroke: '#7c2d12',
+          lineWidth: 4
+        },
+        text: {
+          text: 'path',
+          textAlign: 'center',
+          textBaseline: 'middle',
+          fill: '#ffffff',
+          fontSize: 24,
+          fontWeight: 'bold'
+        }
+      }
+    });
+
     player.play(-1);
 
     let selectedCharacter: any = null;
@@ -118,6 +154,7 @@ export const ComponentsEdit = () => {
     story.pluginService.register(new SnapshotPlugin());
 
     return () => {
+      edit.release();
       story.release();
     };
   }, []);

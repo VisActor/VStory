@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vgraphic.gif
 
 # 图元元素
 
-我们提供了丰富的图元元素，包括文字，矩形，线段，shape 等。在使用这些图元元素时，您可以通过配置属性来自定义图表的样式和行为，以满足您的需求。
+我们提供了丰富的图元元素，包括文字、矩形、线段、shape、polygon、arc、path 等。在使用这些图元元素时，您可以通过配置属性来自定义图表的样式和行为，以满足您的需求。
 
 ## 代码演示
 
@@ -53,6 +53,22 @@ const shape = {
   graphic: {
     stroke: 'red',
     symbolType: 'star'
+  }
+};
+const path = {
+  padding: { top: 16, right: 16, bottom: 16, left: 16 },
+  graphic: {
+    path: 'M60,0 L120,60 L60,120 L0,60 Z',
+    fill: '#c84c2f',
+    stroke: '#4d1d12',
+    lineWidth: 4
+  },
+  text: {
+    text: 'Path',
+    textAlign: 'center',
+    textBaseline: 'middle',
+    fill: '#fff8f1',
+    fontWeight: 'bold'
   }
 };
 
@@ -110,6 +126,7 @@ const characterList = [
   { type: 'Text', options: text, effect: 'typewriter' },
   { type: 'Image', options: image, effect: 'wipe' },
   { type: 'Shape', options: shape, effect: 'clipRange' },
+  { type: 'Path', options: path, effect: 'clipRange' },
   { type: 'Polygon', options: polygon, effect: 'fade' },
   { type: 'Arc', options: arc, effect: 'growAngle' }
 ];
@@ -117,7 +134,7 @@ const characterList = [
 const story = new VStory.Story(null, {
   dom: CONTAINER_ID,
   width: 500,
-  height: 400,
+  height: 520,
   scaleX: 'auto',
   scaleY: 'auto',
   background: '#ebecf0'

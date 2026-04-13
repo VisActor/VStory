@@ -16,7 +16,7 @@ importers:
         specifier: 2.46.1
         version: 2.46.1(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@visactor/vstory':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../packages/vstory
       '@visactor/vutils':
         specifier: ~1.0.22
@@ -89,22 +89,22 @@ importers:
   ../../packages/vstory:
     dependencies:
       '@visactor/vstory-animate':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-animate
       '@visactor/vstory-core':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-core
       '@visactor/vstory-editor':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-editor
       '@visactor/vstory-external':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-external
       '@visactor/vstory-player':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-player
       '@visactor/vstory-templates':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-templates
     devDependencies:
       '@douyinfe/semi-ui':
@@ -210,7 +210,7 @@ importers:
         specifier: ~1.0.22
         version: 1.0.22
       '@visactor/vstory-core':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-core
       '@visactor/vtable':
         specifier: ~1.23.3
@@ -431,7 +431,7 @@ importers:
         specifier: ~1.0.22
         version: 1.0.22
       '@visactor/vstory-core':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-core
       '@visactor/vtable':
         specifier: ~1.23.3
@@ -540,13 +540,13 @@ importers:
         specifier: ~1.0.22
         version: 1.0.22
       '@visactor/vstory-animate':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-animate
       '@visactor/vstory-core':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-core
       '@visactor/vstory-player':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-player
       '@visactor/vtable':
         specifier: ~1.23.3
@@ -655,10 +655,10 @@ importers:
         specifier: ~1.0.22
         version: 1.0.22
       '@visactor/vstory-animate':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-animate
       '@visactor/vstory-core':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-core
       '@visactor/vtable':
         specifier: ~1.23.3
@@ -767,7 +767,7 @@ importers:
         specifier: ~1.0.22
         version: 1.0.22
       '@visactor/vstory-core':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../vstory-core
       '@visactor/vtable':
         specifier: ~1.23.3
@@ -901,7 +901,7 @@ importers:
   ../../tools/bugserver-trigger:
     dependencies:
       '@visactor/vstory':
-        specifier: workspace:0.0.25-none
+        specifier: workspace:0.0.26
         version: link:../../packages/vstory
     devDependencies:
       '@internal/bundler':

@@ -78,16 +78,14 @@ export class Story extends EventEmitter implements IStory {
     this._dsl = dsl;
     this._theme = theme;
     this.pluginService = new DefaultPluginService();
-    if (pluginList.length > 0) {
-      const activatedPlugins = pluginList.reduce((list, name) => {
-        this.pluginService.findPluginsByName(name).forEach(plugin => list.push(plugin));
-        return list;
-      }, [] as any[]);
-      // 激活插件
-      this.pluginService.active(this, {
-        pluginList: activatedPlugins
-      });
-    }
+    const activatedPlugins = pluginList.reduce((list, name) => {
+      this.pluginService.findPluginsByName(name).forEach(plugin => list.push(plugin));
+      return list;
+    }, [] as any[]);
+    // 插件服务需要始终持有 story，上层也可能在构造后手动 register 插件。
+    this.pluginService.active(this, {
+      pluginList: activatedPlugins
+    });
   }
 
   init(player: IPlayer) {
@@ -148,6 +146,7 @@ export class Story extends EventEmitter implements IStory {
   }
 
   release(): void {
+    this.pluginService.release();
     this._player.release();
     this._canvas.release();
   }

@@ -1,47 +1,19 @@
-// const path = require('path');
+const path = require('path');
+const base = require('../../share/jest-config/jest.base');
+const tsJestTransform = base.transform['^.+\\.ts?$'];
 
-// module.exports = {
-//   runner: 'jest-electron/runner',
-//   testEnvironment: 'jest-electron/environment',
-//   testTimeout: 30000,
-//   testRegex: '/__tests__/.*test\\.ts?$',
-//   moduleFileExtensions: ['ts', 'js', 'json'],
-//   setupFilesAfterEnv: ['jest-extended/all'],
-//   preset: 'ts-jest',
-//   silent: true,
-//   globals: {
-//     'ts-jest': {
-//       resolveJsonModule: true,
-//       esModuleInterop: true,
-//       experimentalDecorators: true,
-//       module: 'ESNext',
-//       tsconfig: './tsconfig.test.json'
-//     },
-//     __DEV__: true
-//   },
-//   setupFiles: ['./setup-mock.js'],
-//   verbose: true,
-//   coverageReporters: ['json-summary', 'lcov', 'text'],
-//   coveragePathIgnorePatterns: ['node_modules', 'demo', 'interface.ts', '.d.ts', 'typings'],
-//   testPathIgnorePatterns: ['demo'],
-//   collectCoverageFrom: [
-//     '**/src/**',
-//     '!**/cjs/**',
-//     '!**/dist/**',
-//     '!**/es/**',
-//     '!**/node_modules/**',
-//     '!**/demo/**',
-//     '!**/interface/**',
-//     '!**/interface.ts',
-//     '!**/**.d.ts'
-//   ],
-//   coverageThreshold: {
-//     global: {
-//       branches: 80,
-//       functions: 80,
-//       lines: 80,
-//       statements: 80
-//     }
-//   },
-//   moduleNameMapper: {}
-// };
+module.exports = {
+  ...base,
+  rootDir: __dirname,
+  setupFiles: ['./setup-mock.js'],
+  transform: {
+    '^.+\\.ts?$': 'ts-jest'
+  },
+  globals: {
+    ...base.globals,
+    'ts-jest': {
+      ...tsJestTransform[1],
+      tsconfig: path.resolve(__dirname, './tsconfig.test.json')
+    }
+  }
+};

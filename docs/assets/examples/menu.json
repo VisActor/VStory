@@ -189,6 +189,13 @@
           }
         },
         {
+          "path": "path",
+          "title": {
+            "zh": "Path 图元",
+            "en": "path graphic"
+          }
+        },
+        {
           "path": "clipped-image",
           "title": {
             "zh": "图片裁剪",

@@ -1,5 +1,6 @@
 import type { EasingType } from '@visactor/vrender';
 import { ACustomAnimate, generatorPathEasingFunc } from '@visactor/vrender';
+import { createCollapsedBarRect, isVerticalBarRect, normalizeBarRect, type IBarRectAnimateProps } from './bar-utils';
 
 export const barBounce1Str =
   'M0,0 C0.126,0.382 0.06,0.254 0.105,0.467 0.159,0.729 0.3,1.173 0.38,1.173 0.476,1.173 0.512,0.909 0.578,0.9 0.632,0.892 0.685,1.084 0.735,1.085 0.784,1.085 0.843,0.966 0.887,0.966 0.94,0.966 0.984,1 1,1';
@@ -9,28 +10,27 @@ export const barBounce2Str =
 const barBounce1 = generatorPathEasingFunc(barBounce1Str);
 const barBounce2 = generatorPathEasingFunc(barBounce2Str);
 
-export class BarBounce extends ACustomAnimate<{ y?: number; y1?: number; x?: number; x1?: number }> {
+export class BarBounce extends ACustomAnimate<IBarRectAnimateProps> {
   static label: string = 'bar-bounce';
 
   static delayPerTime: number = 50;
   static enterPerTime: number = 300;
 
   declare valid: boolean;
+  protected vertical: boolean;
 
   constructor(
-    from: { y?: number; y1?: number; x?: number; x1?: number },
-    to: { y?: number; y1?: number; x?: number; x1?: number },
+    from: IBarRectAnimateProps | null,
+    to: IBarRectAnimateProps | null,
     duration: number,
     easing: EasingType,
     params: any
   ) {
-    const f = {
-      y: from.y1,
-      y1: from.y1,
-      x: from.x1,
-      x1: from.x1
-    };
-    super(f, { y: from.y, y1: from.y1, x: from.x, x1: from.x1 }, duration, easing, params);
+    const vertical = isVerticalBarRect(from, to);
+    const target = normalizeBarRect(to, from);
+    const f = createCollapsedBarRect(target, vertical);
+    super(f, target, duration, easing, params);
+    this.vertical = vertical;
   }
 
   getEndProps(): Record<string, any> {
@@ -51,18 +51,26 @@ export class BarBounce extends ACustomAnimate<{ y?: number; y1?: number; x?: num
     const r1 = barBounce1!(ratio);
     const r2 = barBounce2!(ratio);
     // const
-    if (from.y1) {
+    if (this.vertical) {
       out.y = from.y! + (to.y! - from.y!) * r1;
       const height = to.y1! - to.y!;
       const dh = height * r2;
       out.y1 = Math.min(out.y + dh, this.to.y1!);
+      out.height = Math.max(out.y1 - out.y, 0);
     } else {
       out.x = from.x! + (to.x! - from.x!) * r1;
       const width = to.x! - to.x1!;
       const dw = width * r2;
       out.x1 = Math.max(out.x - dw, this.to.x1!);
+      out.width = Math.max(out.x - out.x1, 0);
     }
 
-    // out.y1 = from.y1 + (to.y1 - from.y1) * r;
+    if (!this.target) {
+      return;
+    }
+
+    Object.assign(this.target.attribute, out);
+    this.target.addUpdatePositionTag();
+    this.target.addUpdateShapeAndBoundsTag();
   }
 }

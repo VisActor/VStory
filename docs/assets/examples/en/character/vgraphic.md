@@ -9,7 +9,7 @@ cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/vstory/vgraphic.gif
 
 # Graphic Elements
 
-We provide a variety of graphic elements, including text, rectangles, line segments, shapes, etc. When using these graphic elements, you can customize the style and behavior of the chart by configuring properties to meet your needs.
+We provide a variety of graphic elements, including text, rectangles, line segments, shapes, polygons, arcs, and paths. When using these graphic elements, you can customize their styles and behaviors through configuration.
 
 ## Code Demonstration
 
@@ -53,6 +53,22 @@ const shape = {
   graphic: {
     stroke: 'red',
     symbolType: 'star'
+  }
+};
+const path = {
+  padding: { top: 16, right: 16, bottom: 16, left: 16 },
+  graphic: {
+    path: 'M60,0 L120,60 L60,120 L0,60 Z',
+    fill: '#c84c2f',
+    stroke: '#4d1d12',
+    lineWidth: 4
+  },
+  text: {
+    text: 'Path',
+    textAlign: 'center',
+    textBaseline: 'middle',
+    fill: '#fff8f1',
+    fontWeight: 'bold'
   }
 };
 
@@ -110,6 +126,7 @@ const characterList = [
   { type: 'Text', options: text, effect: 'typewriter' },
   { type: 'Image', options: image, effect: 'wipe' },
   { type: 'Shape', options: shape, effect: 'clipRange' },
+  { type: 'Path', options: path, effect: 'clipRange' },
   { type: 'Polygon', options: polygon, effect: 'fade' },
   { type: 'Arc', options: arc, effect: 'growAngle' }
 ];
@@ -117,7 +134,7 @@ const characterList = [
 const story = new VStory.Story(null, {
   dom: CONTAINER_ID,
   width: 500,
-  height: 400,
+  height: 520,
   scaleX: 'auto',
   scaleY: 'auto',
   background: '#ebecf0'

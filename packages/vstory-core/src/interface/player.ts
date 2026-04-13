@@ -1,3 +1,4 @@
+import type { EventEmitter } from '@visactor/vutils';
 import type { IActionSpec, IActSpec } from './dsl/dsl';
 import type { IReleaseable } from './releaseable';
 import type { IStory } from './story';
@@ -6,7 +7,21 @@ export interface IViewSizeParams {
   keepFrame?: boolean; // 是否保持画幅不变，如果正常情况下是裁剪了，那么缩放后裁剪的地方依然不显示
 }
 
-export interface IPlayer extends IReleaseable {
+export type IPlayerState = 'idle' | 'playing' | 'paused' | 'ended';
+
+export interface IPlayerStateChangeEvent {
+  state: IPlayerState;
+  previousState: IPlayerState;
+  currentTime: number;
+  totalTime: number;
+}
+
+export interface IPlayerEndEvent {
+  currentTime: number;
+  totalTime: number;
+}
+
+export interface IPlayer extends IReleaseable, EventEmitter {
   bindStory: (story: IStory) => void;
   tickTo: (t: number) => void;
 
@@ -16,6 +31,12 @@ export interface IPlayer extends IReleaseable {
   setViewScale: (offsetX: number, offsetY: number, scaleX: number, scaleY: number, params: IViewSizeParams) => void;
   // loop小于0的话，不循环持续播放，loop等于0的话，仅放一次，loop大于0的话，持续循环播放
   play: (loop?: number) => void;
+  pause: () => void;
+  resume: () => void;
+
+  readonly state: IPlayerState;
+  readonly currentTime: number;
+  readonly totalTime: number;
 
   reset: () => void;
 
